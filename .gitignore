@@ -1,4 +1,7 @@
 .env
 .idea
+public/commit.php
+public/pull.php
+public/update.html
 vendor
 
