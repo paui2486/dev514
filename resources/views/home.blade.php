@@ -19,7 +19,33 @@
     </div>
     <div class="row">
         <div class="panel-filter">
-            {{--還沒想到怎麼做，待續--}}
+            <select name="type" id="types" >
+                <option style="display:none">想和誰去</option>
+                @foreach( $home->filter->who as $key_with => $with_who )
+                    <option value="{{ $key_with }}"> {{ $with_who }} </option>
+                @endforeach
+            </select>
+
+            <select name="type" id="types" >
+                <option style="display:none">想玩什麼</option>
+                @foreach( $home->filter->what as $key_play => $play_what )
+                    <option value="{{ $key_play }}"> {{ $play_what }} </option>
+                @endforeach
+            </select>
+
+            <select name="type" id="types" >
+                <option style="display:none">想去哪兒</option>
+                @foreach( $home->filter->where as $key_where => $go_where )
+                    <option value="{{ $key_where }}"> {{ $go_where }} </option>
+                @endforeach
+            </select>
+
+            <select name="type" id="types" >
+                <option style="display:none">預算多少</option>
+                @foreach( $home->filter->price as $key_price => $price )
+                    <option value="{{ $key_price }}"> {{ $price }} </option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="row">

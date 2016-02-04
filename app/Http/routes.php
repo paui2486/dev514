@@ -10,10 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::group(['middleware' => 'web'], function () {
-    Route::get('/', 'HomeController@index');
-});
+Route::pattern('id'         , '[0-9]+'      );
+Route::pattern('slug'       , '[0-9a-z-_]+' );
+Route::pattern('category'   , '[0-9a-z-_]+' );
+Route::pattern('username'   , '[0-9a-z-_]+' );
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +25,48 @@ Route::group(['middleware' => 'web'], function () {
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+Route::group(['middleware' => 'web'], function () {
 
 /*
-Route::group(['middleware' => 'web'], function () {
+|--------------------------------------------------------------------------
+| Static Page
+|--------------------------------------------------------------------------
+*/
+    Route::get('/'              , 'HomeController@index'        );
+    Route::get('about'          , 'PageController@about'        );
+    Route::get('join'           , 'PageController@join'         );
+    Route::get('advertising'    , 'PageController@advertising'  );
+    Route::get('media-report'   , 'PageController@media_report' );
+    Route::get('privacy'        , 'PageController@privacy'      );
+    Route::get('faq'            , 'PageController@faq'          );
+    Route::get('partner'        , 'PageController@partner'      );
+    Route::get('host-guide'     , 'PageController@host-guide'   );
+    Route::get('play-guide'     , 'PageController@play-guide'   );
+
+/*
+|--------------------------------------------------------------------------
+| Dynamic Routes
+|--------------------------------------------------------------------------
+*/
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('members/{username}'         , 'UserController@index'    );
+
+    Route::get('activity'                   , 'ActivityController@index');
+    Route::get('activity/{category}/{slug}' , 'ActivityController@index');
+
+    Route::get('blog'                       , 'BlogController@index'    );
+    Route::get('blog/{category}'            , 'BlogController@index'    );
+    Route::get('blog/{category}/{slug}'     , 'BlogController@index'    );
+
+    Route::get('order/{id}'                 , 'CartController@index'    );
+
+    Route::get('master'                     , 'UserController@index'    );
 });
-*/
+
+/*
+ * issue
+ *    read more: 1.new blogs. 2. activities by category. 3. IM chat
+ */
+
+

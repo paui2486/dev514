@@ -46,7 +46,28 @@ class HomeController extends Controller
             array_push($homeBanner, $bannerTemplate);
         }
 
-        $homeFilter = 0;
+        $homeFilter = array(
+                        'who'   => array(
+                                        1 => '父母',
+                                        2 => '親友',
+                                        3 => '男女'
+                                    ),
+                        'what'  => array(
+                                        1 => '遊樂園',
+                                        2 => '國外',
+                                        3 => '旅遊'
+                                    ),
+                        'where' => array(
+                                        1 => '台北',
+                                        2 => '屏東'
+                                    ),
+                        'when'  => array('日曆'),
+                        'price' => array(
+                                        1 => '100',
+                                        2 => '1000',
+                                        3 => '3000'
+                                    ),
+                    );
 
         $newBlog = array();
         $blogTemplate = (object) array(
