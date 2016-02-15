@@ -161,6 +161,7 @@ return [
          * for develop
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -208,6 +209,7 @@ return [
         'View'       => Illuminate\Support\Facades\View::class,
 
         'Datatables' => Yajra\Datatables\Datatables::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
         // for develop
         'Debugbar'   => Barryvdh\Debugbar\Facade::class,

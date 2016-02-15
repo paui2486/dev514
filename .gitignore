@@ -1,7 +1,8 @@
 .env
 .idea
+vendor
+composer.lock
 public/commit.php
 public/pull.php
 public/update.html
-vendor
 

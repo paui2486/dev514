@@ -50,18 +50,21 @@ Route::group(['middleware' => 'web'], function () {
 */
     Route::auth();
 
-    Route::get('members/{username}'         , 'UserController@index'    );
+    Route::get('members/{username}'         , 'UserController@index'                    );
 
-    Route::get('activity'                   , 'ActivityController@index');
-    Route::get('activity/{category}/{slug}' , 'ActivityController@index');
+    Route::get('activity'                   , 'ActivityController@index'                );
+    Route::get('activity/{category}/{slug}' , 'ActivityController@index'                );
 
-    Route::get('blog'                       , 'BlogController@index'    );
-    Route::get('blog/{category}'            , 'BlogController@index'    );
-    Route::get('blog/{category}/{slug}'     , 'BlogController@index'    );
+    Route::get('blog'                       , 'BlogController@index'                    );
+    Route::get('blog/{category}'            , 'BlogController@index'                    );
+    Route::get('blog/{category}/{slug}'     , 'BlogController@index'                    );
 
-    Route::get('order/{id}'                 , 'CartController@index'    );
+    Route::get('order/{id}'                 , 'CartController@index'                    );
 
-    Route::get('master'                     , 'UserController@index'    );
+    Route::get('master'                     , 'UserController@index'                    );
+
+    Route::get('redirect'                   , 'SocialAuthController@redirect'           );
+    Route::get('callback'                   , 'SocialAuthController@callback'           );
 });
 
 /*
