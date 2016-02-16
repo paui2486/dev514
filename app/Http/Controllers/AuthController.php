@@ -26,4 +26,29 @@ class AuthController extends Controller
     {
         return view('home');
     }
+
+    public function profile()
+    {
+        return view('auth.pages.profile');
+    }
+
+    public function follows()
+    {
+        return view('auth.pages.follows');
+    }
+
+    public function friends()
+    {
+        return view('auth.pages.friends');
+    }
+
+    public function activitys()
+    {
+        return view('auth.pages.activitys');
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard.index');
+    }
 }

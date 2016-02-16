@@ -65,11 +65,33 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('redirect'                   , 'SocialAuthController@redirect'           );
     Route::get('callback'                   , 'SocialAuthController@callback'           );
+
+    Route::get('profile'                    , 'AuthController@profile'                  );
+    // Route::get('profile/edit');
+
+    Route::get('follows'                    , 'AuthController@follows'                  );
+    Route::get('friends'                    , 'AuthController@friends'                  );
+    Route::get('activitys'                  , 'AuthController@activitys'                );
+
+    Route::group(['prefix' => 'dashboard'], function() {
+
+        Route::get('/'                      , 'AdminController@dashboard'               );
+        // Route::resource('banner');
+        // Route::resource('event');
+        // Route::resource('member');
+        // Route::resource('supplier');
+        // Route::resource('category');
+        // Route::resource('activity');
+        // Route::resource('blogger');
+        // Route::resource('customer');
+        // Route::resource('coupon');
+        // Route::resource('point');
+        // Route::resource('analysis');
+        // Route::resource('system');
+    });
 });
 
 /*
  * issue
  *    read more: 1.new blogs. 2. activities by category. 3. IM chat
  */
-
-
