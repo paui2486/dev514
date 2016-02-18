@@ -38,13 +38,24 @@ class HomeController extends Controller
                       );
 
         $homeBanner = array();
-        $bannerTemplate = (object) array(
-                            'image'     => 'img/flags.png',
+        $bannerTemplate1 = (object) array(
+                            'image'     => 'img/1920/homebanner_01.jpg',
                             'caption'   => 'GG拉',
                         );
-        for ($x=0; $x<3; $x++) {
-            array_push($homeBanner, $bannerTemplate);
-        }
+        
+        $bannerTemplate2 = (object) array(
+                            'image'     => 'img/1920/homebanner_02.png',
+                            'caption'   => 'GG拉',
+                        );
+        
+        $bannerTemplate3 = (object) array(
+                            'image'     => 'img/1920/homebanner_03.jpg',
+                            'caption'   => 'GG拉',
+                        );
+        
+            array_push($homeBanner, $bannerTemplate1);
+            array_push($homeBanner, $bannerTemplate2);
+            array_push($homeBanner, $bannerTemplate3);
 
         $homeFilter = array(
                         'who'   => array(
@@ -71,12 +82,12 @@ class HomeController extends Controller
 
         $newBlog = array();
         $blogTemplate = (object) array(
-                            'thumbnail'     => 'img/flags.png',
+                            'thumbnail'     => 'img/pics/iwine_14.png',
                             'title'         => 'L`age 熟成餐廳-最愛的秘密基地',
                             'created_at'    => '2016/01/28',
                             'category'      => '食記',
                             'author'        => 'iwine',
-                            'description'   => 'Emma 對於灑在水波蛋上的食材太好奇了，所以先來試試原味猜猜看是什麼？？吃起來脆脆的...有烤過＃！％！＃＄！“＃！”＃！“＃這邊開始要縮囉',
+                            'description'   => 'Emma 對於灑在水波蛋上的食材太好奇了，所以先來試試原味猜猜看是什麼？？吃起來脆脆的...有烤過＃！％！＃＄！“＃！”＃！“＃這邊開始要縮囉123123123132',
                         );
         for ($x=0; $x<4; $x++) {
             array_push($newBlog, $blogTemplate);
@@ -87,8 +98,8 @@ class HomeController extends Controller
                                 'activity_id'   => '1',
                                 'title'         => '阿里山神木群，大自然的鬼斧神工',
                                 'count'         => '475',
-                                'thumbnail'     => 'img/flags.png',
-                                'description'   => '說到嘉義的知名景點，不得不提到名揚國際的阿里山，尤其是什麼鬼。。。。。％”＃＄“＃＄”＃＄！這邊要開始縮囉',
+                                'thumbnail'     => 'img/pics/4107948484_f8ee6d4b6d_z.jpg',
+                                'description'   => '說到嘉義的知名景點，不得不提到名揚國際的阿里山，尤其是什麼鬼。。。。。％”＃＄“＃＄”＃＄！這邊要開始縮fddfgdgfdggdgddf囉',
                                 'price'         => money_format("%n", 1200),
                                 'date'          => '2016//02/23',
                                 'location'      => '嘉義縣竹崎鄉',
@@ -101,7 +112,7 @@ class HomeController extends Controller
         $totalActivity  = array();
         $totalActivityTemplate = (object) array(
                                     'cat_id'        => '1',
-                                    'cat_thumbnail' => 'img/flags.png',
+                                    'cat_thumbnail' => 'img/pics/food.png',
                                     'cat_title'     => '美食美酒',
                                     'cat_logo'      => 'img/controls.png',
                                     'cat_content'   => (object) $newActivity,

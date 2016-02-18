@@ -1,0 +1,286 @@
+.home-navbar {
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    min-height: 50px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+}
+
+.home-navbar-brand img {
+    height:60px;
+    z-index: 200;
+    margin: 20px;
+}
+
+.navbar-right {
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.navbar-right > li > a {
+    color: white;
+    text-shadow: 0px 0px 4px #000;
+}
+
+.navbar-right > li :hover{
+    background-color: rgba(255,255,255,0.5)!important;
+}
+
+.home_banner1 {
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.home_bntitle {
+    z-index: 200;
+    position: relative;
+    float: left;
+    top: 230px;
+    left: 440px;
+}
+
+.home_bntitle img {
+    height: 50px;
+}
+
+.panel-filter {
+    position: initial;
+    margin: 20px;
+    text-align: center;
+}
+
+.home-title {
+    padding-bottom: 10px;
+    position: inherit;
+    text-align: center;
+}
+
+.home-title img {
+    width: 120px;
+}
+
+
+@media screen and (min-width: 1920px) {
+    .home-navbar {
+        width: 1920px;
+        margin: 0 50px;
+    }
+    
+}
+
+.home-blog {
+    background-color: #f4eee9;
+    padding:20px;
+}
+
+.home-blog-contain {
+    padding: 0px 135px;
+}
+
+.home-blog-panel {
+    margin: 10px 0px;
+    padding: 0;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 20px;
+    width: 48%;
+}
+
+.home-blog-thumbnail {
+    height: 175px;
+    width: 175px;
+    float: left;
+    margin-right: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.home-blog-title {
+    font-size: 20px;
+    color: #60574e;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 320px;
+
+}
+
+.home-blog-category,
+.home-blog-author,
+.home-blog-created_at {
+    margin-right: 20px;
+    font-size: 15px;
+    color: #998675;
+    line-height: 22px;
+    letter-spacing: 1px;
+}
+
+.home-blog-description {
+    width: 62%;
+    font-size: 16px;
+    color: #82766c;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.home-blog-description :after {
+    content:"...";
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding: 0 5px;
+    background-color: #fff;
+}
+
+.home-read-more {
+    text-align: center;
+    border: 1px solid #60574e;
+    padding: 5px;
+    font-size: 16px;
+    width: 100px;
+    margin: 15px auto;
+}
+
+.home-new-activity {
+    background-image: url(/img/pics/woodbg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding:20px;
+    padding-bottom: 50px;
+}
+
+.home-new-activity-contain {
+    margin: auto;
+    width: 80%;
+}
+
+.newact_panel_bg {
+    background-color: white;
+    box-shadow: 3px 3px 10px #666666;
+}
+
+.home-new-activity-id,
+.activity-category-id,
+.activity-id {
+    display: none;
+    padding: 0;
+    margin: 12px;
+}
+
+.home-new-activity-thumbnail {
+    height: 200px;
+    width:auto;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 3px 3px 10px #666666;
+}
+
+.home-new-activity-count {
+    border: 1px solid white;
+    width: auto;
+    position: absolute;
+    top:0;
+    margin: 10px;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 0 10px;
+    background-color: rgba(0,0,0,0.7)
+}
+
+.home-new-activity-title {
+    font-size: 20px;
+    color: black;
+    padding: 10px 0 0 15px;;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width:95%;
+    width:95%;
+}
+
+.home-new-activity-description {
+    font-size: 16px;
+    color:#666666;
+    padding-left:15px;;
+    width: 95%;
+}
+
+.word-indent {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient: vertical;
+    position:relative;
+    line-height:1.5em;
+    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+    height:4.5em;
+}
+
+.home-new-activity-price img,
+.home-new-activity-date img,
+.home-new-activity-location img {
+    width:30px;
+}
+
+.home-new-activity-price,
+.home-new-activity-date,
+.home-new-activity-location {
+    font-size: 16px;
+    line-height: 30px;
+    color: #998d7e;
+    padding-left: 12px;
+    letter-spacing: 1px;
+} 
+
+.home-new-activity-orginizer {
+    text-align: center;
+    color: #666666;
+    font-size: 15px;
+    padding:  5px 0 10px 0; 
+}
+
+.total-activity {
+    background-image: url(/img/pics/258216-151001212S870.jpg);
+    background-repeat: repeat;
+    padding: 20px;
+}
+
+.activity-category-thumbnail {
+    width: 240px;
+    height: 480px;
+    background-position: center;
+    float: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
