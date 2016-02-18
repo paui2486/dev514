@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+use Log;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -11,18 +13,18 @@ class maincontroller extends controller
 {
     public function index()
     {
-        $home   = (object) array(
+        $home   = (object)array(
             'meta'          => (object) $this->getMeta(),
             'banner'        => (object) $this->getBanner(),
             'filter'        => (object) $this->getFilter(),
-            'newBlog'       => (object) $this->getNewblog(),
-            'newActivity'   => (object) $this->getNewactivity(),
-            'totalActivity' => (object) $this->getTotalactivity(),
+            'newBlog'       => (object) $this->getNewBlog(),
+            'newActivity'   => (object) $this->getNewActivity(),
+            'totalActivity' => (object) $this->getTotalActivity(),
         );
         return view('home', compact('home'));
     }
 
-    private function getmeta()
+    private function getMeta()
     {
         $meta   = array(
             'name = title'              => '514 生活頻道 - 讓生活更有意思',
@@ -41,21 +43,114 @@ class maincontroller extends controller
 
     private function getBanner()
     {
-        $banner = 
+        $home_banner = DB::table('galleries')
+                        ->where('position', 1)
+                        ->select(
+                            'title', 'source as image', 'caption'
+                        )
+                        ->orderBy('priority', 'desc')
+                        ->get();
+        return $home_banner;
     }
 
     private function getFilter()
     {
+        $filters = array();
 
+        // its match filter_options tables position
+        $data_match = array(
+            'who'   => 1,
+            'what'  => 2,
+            'where' => 3,
+            'price' => 4,
+        );
+
+        foreach ($data_match as $key => $value)
+        {
+            $filters[$key] = DB::table('filter_options')
+                                ->where('position', $value)
+                                ->lists('name');
+        }
+        return $filters;
     }
 
-    private function getNewactivity()
+    private function getNewBlog()
     {
-
+        $newBlogs = DB::table('articles')
+                        ->where('articles.status', 2)
+                        ->leftJoin('users',             'users.id',      '=',   'articles.author_id')
+                        ->leftJoin('categories',        'categories.id', '=',   'articles.category_id')
+                        ->select(
+                            'articles.thumbnail',       'articles.title',       'articles.content',
+                            'articles.description',     'articles.created_at',  'users.name as author',
+                            'categories.name as category')
+                        ->orderBy('articles.created_at', 'desc')
+                        ->take(4)
+                        ->get();
+        return $newBlogs;
     }
 
-    private function getTotalactivity()
+    private function getNewActivity()
     {
+        $newActivity = DB::table('activities')
+                        ->where('activities.status', '>', 2)
+                        ->leftJoin('users',                 'users.id',      '=',   'activities.host_id')
+                        ->leftJoin('act_tickets',           'activities.id', '=',   'act_tickets.activity_id')
+                        ->select(
+                            'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
+                            'activities.description',       'activities.counter as count',
+                            'act_tickets.price',            'act_tickets.location',
+                            'act_tickets.run_time as date', 'users.nick as orginizer'
+                        )
+                        ->orderBy('activities.created_at', 'desc')
+                        ->take(7)
+                        ->get();
+        return $newActivity;
+    }
 
+    private function getTotalActivity()
+    {
+        $totalActivity = array();
+
+        $categories = DB::table('activities')
+            ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+            ->where('activities.status', '>', 2)
+            ->select(
+                'categories.id', DB::raw('count(*) as count'),
+                'categories.thumbnail', 'categories.name', 'categories.logo'
+            )
+            ->groupBy('activities.category_id')
+            ->get();
+
+        foreach ($categories as $category)
+        {
+            if ($category->count >= 3){
+
+                $eachActivity = DB::table('activities')
+                    ->where('activities.status', '>', 2)
+                    ->where('activities.category_id', $category->id)
+                    ->rightJoin('users',             'users.id',      '=',   'activities.host_id')
+                    ->leftJoin('act_tickets',        'activities.id', '=',   'act_tickets.activity_id')
+                    ->select(
+                        'activities.id as activity_id', 'activities.thumbnail',         'activities.title',
+                        'activities.description',       'activities.counter as count',  'act_tickets.price',
+                        'act_tickets.location',         'act_tickets.run_time as date', 'users.nick as orginizer'
+                    )
+                    ->orderBy('activities.created_at', 'desc')
+                    ->take(3)
+                    ->get();
+
+                $topicActivity = (object) array(
+                    'cat_id'        => $category->id,
+                    'cat_thumbnail' => $category->thumbnail,
+                    'cat_title'     => $category->name,
+                    'cat_logo'      => $category->logo,
+                    'cat_content'   => $eachActivity,
+                );
+
+                array_push($totalActivity, $topicActivity);
+            }
+        }
+        return $totalActivity;
     }
 }
