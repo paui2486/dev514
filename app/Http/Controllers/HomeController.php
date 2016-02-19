@@ -114,10 +114,10 @@ class HomeController extends Controller
                                     'cat_id'        => '1',
                                     'cat_thumbnail' => 'img/pics/food.png',
                                     'cat_title'     => '美食美酒',
-                                    'cat_logo'      => 'img/controls.png',
+                                    'cat_logo'      => 'img/pics/allacttitle-01.png',
                                     'cat_content'   => (object) $newActivity,
                                 );
-        for ($x=0; $x<3; $x++) {
+        for ($x=0; $x<5; $x++) {
             array_push($totalActivity, $totalActivityTemplate);
         }
 
