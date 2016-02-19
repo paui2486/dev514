@@ -32,7 +32,7 @@ Route::group(['middleware' => 'web'], function () {
 | Static Page
 |--------------------------------------------------------------------------
 */
-    Route::get('/'              , 'HomeController@index'        );
+    Route::get('/'              , 'MainController@index'        );
     Route::get('about'          , 'PageController@about'        );
     Route::get('join'           , 'PageController@join'         );
     Route::get('advertising'    , 'PageController@advertising'  );
