@@ -7,21 +7,19 @@
 
     <title>514 管理後台</title>
 
-    <!-- Styles -->
-    {{--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">--}}
-
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reset.css">
     <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
     <!--  right slidebar -->
-    <link href="css/slidebars.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/slidebars.css">
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-responsive.css"/>
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 </head>
@@ -36,20 +34,30 @@
     @include('admin.partials.footer')
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-    <script src="js/owl.carousel.js" ></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
     <!--right slidebar-->
-    <script src="js/slidebars.min.js"></script>
+    <script type="text/javascript" src="js/slidebars.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+
+    <!-- scroll -->
+    <script type="text/javascript" src="js/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.js"></script>
+
+    <!-- analysis -->
+    <!-- <script type="text/javascript" src="js/jquery.sparkline.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script> -->
+
+    <script type="text/javascript" src="assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+
+    <!-- slider -->
+    <!-- <script type="text/javascript" src="js/owl.carousel.js" ></script> -->
+
     <!--common script for all pages-->
-    <script src="js/common-scripts.js"></script>
+    <script type="text/javascript" src="js/common-scripts.js"></script>
     <!--script for this page only-->
-    <script src="js/sparkline-chart.js"></script>
-    <script src="js/easy-pie-chart.js"></script>
+    <script type="text/javascript" src="js/external-dragging-calendar.js"></script>
+
 </body>
 </html>

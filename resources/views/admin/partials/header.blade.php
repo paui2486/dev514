@@ -1,11 +1,11 @@
 <header class="header white-bg">
     <div class="sidebar-toggle-box">
-        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="縮放 Slider"></div>
     </div>
     <!--logo start-->
-    <a href="index.html" class="logo">Flat8<span>lab1</span></a>
+    <a href="{{URL::to('dashboard')}}" class="logo">514 <span>後台管理系統</span></a>
     <!--logo end-->
-    <div class="nav notify-row" id="top_menu">
+    <div class="nav notify-row" id="top_menu" hidden>
         <!--  notification start -->
         <ul class="nav top-menu">
             <!-- settings start -->
@@ -222,16 +222,12 @@
             <!-- user login dropdown start-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                    <img alt="" src="img/avatar1_small.jpg">
+                    <img alt="" src="{{ Auth::user()->avatar }}">
                     <span class="username">{{ Auth::user()->name }}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">
-                    <div class="log-arrow-up"></div>
-                    <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                    <li><a href="#"><i class="fa fa-bell-o"></i> Notification</a></li>
-                    <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                    <li><a href="{{URL::to('logout')}}"><i class="fa fa-key"></i> 登出</a></li>
                 </ul>
             </li>
             {{--<li class="sb-toggle-right">--}}

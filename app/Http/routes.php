@@ -75,7 +75,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['prefix' => 'dashboard'], function() {
 
-        Route::get('/'                      , 'AdminController@dashboard'               );
+        Route::get('/'                      , 'AdminController@index'               );
         // Route::resource('banner');
         // Route::resource('event');
         // Route::resource('member');

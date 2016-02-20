@@ -536,8 +536,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .top-nav ul.top-menu > li .dropdown-menu.logout {
-    width: 268px !important;
-
+    width: 60px !important;
 }
 
 .top-nav li.dropdown .dropdown-menu {
