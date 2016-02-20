@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @foreach( $meta as $metaKey => $metaValue )
+        <meta {{ $metaKey }} content="{{ $metaValue }}">
+    @endforeach
 
     <title>514生活頻道 - 讓生活更有意思</title>
-
-    {{--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">--}}
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,19 +22,19 @@
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
-    
+
     <link href="css/project.css" rel="stylesheet">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 </head>
 <body id="app-layout">
-    
+
     @include('partials.header')
-    
+
     @yield('content')
-    
+
     @include('partials.footer')
-    
+
     <!-- JavaScripts -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>

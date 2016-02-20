@@ -4,7 +4,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a class="active" href="dashboard">
+                <a class="active" href="{{URL::to('dashboard')}}">
                     <i class="fa fa-dashboard"></i>
                     <span>控制台首頁</span>
                 </a>
@@ -14,10 +14,10 @@
                     <i class="fa fa-user"></i>
                     <span>系統會員管理</span>
                 </a>
-                <ul class="sub active">
-                    <li><a href="#">新增會員</a></li>
-                    <li><a href="#">查詢會員</a></li>
-                    <li><a href="#">會員列表</a></li>
+                <ul class="sub">
+                    <li><a href="{{URL::to('member/create')}}">新增會員</a></li>
+                    <li><a href="{{URL::to('member/search')}}">查詢會員</a></li>
+                    <li><a href="{{URL::to('member')}}">會員列表</a></li>
                 </ul>
             </li>
 
@@ -26,14 +26,14 @@
                     <i class="fa fa-cogs"></i>
                     <span>網站管理系統</span>
                 </a>
-                <ul class="sub active">
-                    <li><a href="#">Filter 設定</a></li>
-                    <li><a href="#">Banner 設定</a></li>
-                    <li><a href="#">廣告模組設定</a></li>
-                    <li><a href="#">特殊點數管理</a></li>
-                    <li><a href="#">優惠代碼管理</a></li>
-                    <li><a href="#">支出收入管理</a></li>
-                    <li><a href="#">網站分析軟體</a></li>
+                <ul class="sub">
+                    <li><a href="{{URL::to('filter')}}">Filter 設定</a></li>
+                    <li><a href="{{URL::to('banner')}}">Banner 設定</a></li>
+                    <li><a href="{{URL::to('ad')}}">廣告模組設定</a></li>
+                    <li><a href="{{URL::to('point')}}">特殊點數管理</a></li>
+                    <li><a href="{{URL::to('coupon')}}">優惠代碼管理</a></li>
+                    <li><a href="{{URL::to('invoice')}}">支出收入管理</a></li>
+                    <li><a href="{{URL::to('analysis')}}">網站分析軟體</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -42,9 +42,9 @@
                     <span>文章管理系統</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="#">文章分類列表</a></li>
-                    <li><a href="#">全部文章列表</a></li>
-                    <li><a href="#">全部達人列表</a></li>
+                    <li><a href="{{URL::to('blog/category')}}">文章分類列表</a></li>
+                    <li><a href="{{URL::to('blog')}}">全部文章列表</a></li>
+                    <li><a href="{{URL::to('blog/expert')}}">全部達人列表</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -53,11 +53,11 @@
                     <span>活動管理系統</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="#">活動分類列表</a></li>
-                    <li><a href="#">全部活動列表</a></li>
-                    <li><a href="#">活動廠商管理</a></li>
-                    <li><a href="#">優惠代碼管理</a></li>
-                    <li><a href="#">支出收入管理</a></li>
+                    <li><a href="{{URL::to('activity/category')}}">活動分類列表</a></li>
+                    <li><a href="{{URL::to('activity')}}">全部活動列表</a></li>
+                    <li><a href="{{URL::to('activity/hoster')}}">活動廠商管理</a></li>
+                    <li><a href="{{URL::to('activity/coupon')}}">優惠代碼管理</a></li>
+                    <li><a href="{{URL::to('activity/invoice')}}">支出收入管理</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -66,10 +66,10 @@
                     <span>客服與聯絡紀錄</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="#">過往客服全紀錄</a></li>
-                    <li><a href="#">待處理客服事件</a></li>
-                    <li><a href="#">處理中客服事件</a></li>
-                    <li><a href="#">已處理客服事件</a></li>
+                    <li><a href="{{URL::to('customer')}}">過往客服全紀錄</a></li>
+                    <li><a href="{{URL::to('customer/wait')}}">待處理客服事件</a></li>
+                    <li><a href="{{URL::to('customer/handle')}}">處理中客服事件</a></li>
+                    <li><a href="{{URL::to('customer/finish')}}">已處理客服事件</a></li>
                 </ul>
             </li>
         </ul>
