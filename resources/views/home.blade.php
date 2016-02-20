@@ -1,8 +1,4 @@
-@extends('layouts.app') 
-
-@foreach( $home->meta as $metaKey => $metaValue )
-    <meta {{ $metaKey }} content="{{ $metaValue }}"> 
-@endforeach 
+@extends('layouts.app')
 
 @section('content')
 
@@ -126,24 +122,24 @@
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
                 <div class="col-lg-6 col-md-6 col-sm-12 home-blog-panel">
-                    <div class="home-blog-thumbnail" 
+                    <div class="home-blog-thumbnail"
                          style="background-image:url({{ $blog->thumbnail }})">
                     </div>
                     <div class="home-blog-panelright">
-                        <div class="home-blog-title"> 
-                            {{ $blog->title }} 
+                        <div class="home-blog-title">
+                            {{ $blog->title }}
                         </div>
-                        <div class="home-blog-created_at"> 
-                            {{ $blog->created_at }} 
+                        <div class="home-blog-created_at">
+                            {{ $blog->created_at }}
                         </div>
                         <div class="glyphicon glyphicon-folder-open home-blog-category">
-                            {{ $blog->category }} 
+                            {{ $blog->category }}
                         </div>
                         <div class="glyphicon glyphicon-user home-blog-author">
-                            {{ $blog->author }} 
+                            {{ $blog->author }}
                         </div>
                         <div class="home-blog-description word-indent">
-                            {{ $blog->description }} 
+                            {{ $blog->description }}
                         </div>
                     </div>
                 </div>
@@ -165,22 +161,22 @@
                         <div class="home-new-activity-id">
                             {{ $newActivity->activity_id }}
                         </div>
-                        <div class="home-new-activity-thumbnail" 
+                        <div class="home-new-activity-thumbnail"
                              style="background-image:url({{ $newActivity->thumbnail }})">
                         </div>
 
                         <div class="home-new-activity-title">
-                            {{ $newActivity->title }} 
+                            {{ $newActivity->title }}
                         </div>
-                        <div class="home-new-activity-count"> 
-                            {{ $newActivity->count }} 人 
+                        <div class="home-new-activity-count">
+                            {{ $newActivity->count }} 人
                         </div>
                         <div class="home-new-activity-description word-indent">
-                            {{ $newActivity->description }} 
+                            {{ $newActivity->description }}
                         </div>
-                        <div class="home-new-activity-price"> 
-                            <img src="img/pics/money-icon-02.png"> 
-                            {{ $newActivity->price }} 元 
+                        <div class="home-new-activity-price">
+                            <img src="img/pics/money-icon-02.png">
+                            {{ $newActivity->price }} 元
                         </div>
                         <div class="home-new-activity-date">
                             <img src="img/pics/calendar-icon-02.png">
@@ -210,7 +206,7 @@
                          style="background-image:url({{ $eachTypeActivity->cat_thumbnail }})">
                     </div>
                     <div class="activity-category-content">
-                        <div class="activity-category-id"> 
+                        <div class="activity-category-id">
                             {{ $eachTypeActivity->cat_id }}
                         </div>
                         <div class="activity-category-title">
@@ -221,26 +217,26 @@
                         </div>
                         @foreach( $eachTypeActivity->cat_content as $activity )
                         <div class="inter-panel">
-                            <div class="activity-thumbnail" 
+                            <div class="activity-thumbnail"
                                  style="background-image:url({{ $newActivity->thumbnail }})">
                             </div>
-                            <div class="activity-id"> 
+                            <div class="activity-id">
                                 {{ $newActivity->activity_id }}
                             </div>
                             <div class="home-new-activity-title activity-title">
                                 {{ $newActivity->title }}
                             </div>
-                            <div class="activity-count"> 
+                            <div class="activity-count">
                                 {{ $newActivity->count }} 人
                             </div>
-                            <div class="home-new-activity-description word-indent-02"> 
-                                {{ $newActivity->description }} 
+                            <div class="home-new-activity-description word-indent-02">
+                                {{ $newActivity->description }}
                             </div>
-                            <div class="home-new-activity-price activity-price"> 
-                                <img src="img/pics/money-icon-02.png"> 
+                            <div class="home-new-activity-price activity-price">
+                                <img src="img/pics/money-icon-02.png">
                                 {{ $newActivity->price }} 元
                             </div>
-                            <div class="home-new-activity-date activity-date"> 
+                            <div class="home-new-activity-date activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{ $newActivity->date }}
                             </div>
@@ -248,7 +244,7 @@
                                 <img src="img/pics/location-icon-02.png">
                                 {{ $newActivity->location }}
                             </div>
-                            <div class="home-new-activity-orginizer activity-orginizer"> 
+                            <div class="home-new-activity-orginizer activity-orginizer">
                                 --- {{ $newActivity->orginizer }} ---
                             </div>
                         </div>

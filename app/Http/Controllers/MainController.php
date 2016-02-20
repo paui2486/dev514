@@ -13,15 +13,16 @@ class maincontroller extends controller
 {
     public function index()
     {
+        $meta   = (object) $this->getMeta();
+
         $home   = (object)array(
-            'meta'          => (object) $this->getMeta(),
             'banner'        => (object) $this->getBanner(),
             'filter'        => (object) $this->getFilter(),
             'newBlog'       => (object) $this->getNewBlog(),
             'newActivity'   => (object) $this->getNewActivity(),
             'totalActivity' => (object) $this->getTotalActivity(),
         );
-        return view('home', compact('home'));
+        return view('home', compact('home', 'meta'));
     }
 
     private function getMeta()

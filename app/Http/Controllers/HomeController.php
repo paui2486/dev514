@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $homeMeta   = array(
+        $meta   = array(
                         'name = title'              => '514 生活頻道 - 讓生活更有意思',
                         'name = author'             => '514 生活頻道',
                         'name = copyright'          => 'Copyright © 514 All rights reserved.',
@@ -42,17 +42,17 @@ class HomeController extends Controller
                             'image'     => 'img/1920/homebanner_01.jpg',
                             'caption'   => 'GG拉',
                         );
-        
+
         $bannerTemplate2 = (object) array(
                             'image'     => 'img/1920/homebanner_02.png',
                             'caption'   => 'GG拉',
                         );
-        
+
         $bannerTemplate3 = (object) array(
                             'image'     => 'img/1920/homebanner_03.jpg',
                             'caption'   => 'GG拉',
                         );
-        
+
             array_push($homeBanner, $bannerTemplate1);
             array_push($homeBanner, $bannerTemplate2);
             array_push($homeBanner, $bannerTemplate3);
@@ -129,6 +129,6 @@ class HomeController extends Controller
                         'newActivity'   => (object) $newActivity,
                         'totalActivity' => (object) $totalActivity,
                       );
-        return view('home', compact('home'));
+        return view('home', compact('home', 'meta'));
     }
 }
