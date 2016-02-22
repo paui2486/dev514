@@ -9,180 +9,152 @@
     <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
     <!-- use jssor.slider.debug.js instead for debug -->
+    
     <script>
+
         jQuery(document).ready(function ($) {
 
-            var jssor_1_SlideoTransitions = [
-
+            var _SlideshowTransitions = [
+            //Fade
+            { $Duration: 1200, $Opacity: 2 }
             ];
 
-            var jssor_1_options = {
-                $AutoPlay: true,
-                $SlideDuration: 2000,
-                $SlideEasing: $Jease$.$OutQuint,
-                $CaptionSliderOptions: {
-                    $Class: $JssorCaptionSlideo$,
-                    $Transitions: jssor_1_SlideoTransitions
+            var options = {
+                $AutoPlay: true,                                    
+                $AutoPlaySteps: 1,                       
+                $PauseOnHover: 1, 
+                $ArrowKeyNavigation: true,
+                $SlideDuration: 500,                              
+                $MinDragOffsetToSlide: 20,                       
+                $SlideSpacing: 0, 					              
+                $Cols: 1,                                 
+                $ParkingPosition: 0,                            
+                $UISearchMode: 1,                                   
+                $PlayOrientation: 1,                               
+                $DragOrientation: 3,  
+                
+                $SlideshowOptions: {                             
+                    $Class: $JssorSlideshowRunner$,                
+                    $Transitions: _SlideshowTransitions,           
+                    $TransitionsOrder: 1,                           
+                    $ShowLink: true                                   
                 },
+
+                $BulletNavigatorOptions: {                              
+                    $Class: $JssorBulletNavigator$,                      
+                    $ChanceToShow: 2,                              
+                    $AutoCenter: 1,                                 
+                    $Steps: 1,                                     
+                    $Rows: 1,                                      
+                    $SpacingX: 10,                                  
+                    $SpacingY: 10,                                
+                    $Orientation: 1                              
+                },
+
                 $ArrowNavigatorOptions: {
-                    $Class: $JssorArrowNavigator$
-                },
-                $BulletNavigatorOptions: {
-                    $Class: $JssorBulletNavigator$
+                    $Class: $JssorArrowNavigator$,             
+                    $ChanceToShow: 2,                               
+                    $Steps: 1                                      
                 }
             };
-
-            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
-            //responsive code begin
-            //you can remove responsive code if you don't want the slider scales while window resizing
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
             function ScaleSlider() {
-                var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-                if (refSize) {
-                    refSize = Math.min(refSize, 2440);
-                    jssor_1_slider.$ScaleWidth(refSize);
-                }
-                else {
+                var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+                if (parentWidth)
+                    jssor_slider1.$ScaleWidth(parentWidth);
+                else
                     window.setTimeout(ScaleSlider, 30);
-                }
             }
             ScaleSlider();
+
             $(window).bind("load", ScaleSlider);
             $(window).bind("resize", ScaleSlider);
             $(window).bind("orientationchange", ScaleSlider);
-            //responsive code end
         });
     </script>
 
-    <style>
-        /* jssor slider bullet navigator skin 05 css */
-        /*
-        .jssorb05 div           (normal)
-        .jssorb05 div:hover     (normal mouseover)
-        .jssorb05 .av           (active)
-        .jssorb05 .av:hover     (active mouseover)
-        .jssorb05 .dn           (mousedown)
-        */
-        .jssorb05 {
-            position: absolute;
-        }
+    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 1280px; height:480px; overflow: hidden; ">
 
-        .jssorb05 div, .jssorb05 div:hover, .jssorb05 .av {
-            position: absolute;
-            /* size of bullet elment */
-            width: 16px;
-            height: 16px;
-            background: url('img/b14.png') no-repeat;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .jssorb05 div {
-            background-position: -7px -7px;
-        }
-
-        .jssorb05 div:hover, .jssorb05 .av:hover {
-            background-position: -37px -7px;
-        }
-
-        .jssorb05 .av {
-            background-position: -67px -7px;
-        }
-
-        .jssorb05 .dn, .jssorb05 .dn:hover {
-            background-position: -97px -7px;
-        }
-
-        /* jssor slider arrow navigator skin 22 css */
-        /*
-        .jssora22l                  (normal)
-        .jssora22r                  (normal)
-        .jssora22l:hover            (normal mouseover)
-        .jssora22r:hover            (normal mouseover)
-        .jssora22l.jssora22ldn      (mousedown)
-        .jssora22r.jssora22rdn      (mousedown)
-        */
-        .jssora22l, .jssora22r {
-            display: block;
-            position: absolute;
-            /* size of arrow element */
-            width: 40px;
-            height: 58px;
-            cursor: pointer;
-            background: url('img/a16.png') center center no-repeat;
-            overflow: hidden;
-        }
-
-        .jssora22l {
-            background-position: -10px -31px;
-        }
-
-        .jssora22r {
-            background-position: -70px -31px;
-        }
-
-        .jssora22l:hover {
-            background-position: -130px -31px;
-        }
-
-        .jssora22r:hover {
-            background-position: -190px -31px;
-        }
-
-        .jssora22l.jssora22ldn {
-            background-position: -250px -31px;
-        }
-
-        .jssora22r.jssora22rdn {
-            background-position: -310px -31px;
-        }
-    </style>
-
-
-    <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden; visibility: hidden;">
         <!-- Loading Screen -->
-        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('../public/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
         </div>
 
-        <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
+        <!-- Slides Container -->
+        <div u="slides" style="cursor:pointer; position: absolute; left: 0px; top: 0px; width: 1280px; height: 480px; overflow: hidden;">
             @foreach( $blogHome->banner as $banner )
-                <div data-p="225.00" style="display: none;">
-                    <div style="backgroung:url('{{ $banner->image }}');"></div>
-                    <div>{{ $banner->title }}</div>
-                    <div>{{ $banner->author }}</div>
-                    <div>{{ $banner->time  }}</div>
+                <div data-p="225.00">
+                     <div class="bolg-banner-text">
+                        <div class="blog-banner-title">{{ $banner->title }}</div>
+                        <div class="blog-banner-date">{{ $banner->time  }}</div>
+                        <div class="blog-banner-auth">by {{ $banner->author }}</div>
+                    </div>
+                    <div class="blog-banner-image" style="background:url('{{ $banner->image }}');">
+                    </div>
+                   
                 </div>
             @endforeach
         </div>
-        <!-- Bullet Navigator -->
-        <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
-            <!-- bullet navigator item prototype -->
-            <div data-u="prototype" style="width:16px;height:16px;"></div>
-        </div>
-        <!-- Arrow Navigator -->
-        <span data-u="arrowleft" class="jssora22l" style="top:0px;left:12px;width:40px;height:58px;" data-autocenter="2"></span>
-        <span data-u="arrowright" class="jssora22r" style="top:0px;right:12px;width:40px;height:58px;" data-autocenter="2"></span>
-    </div>
 
-    <div class="container">
-        @foreach ( $blogHome->categories as $category )
-        <div class="category">
-            <h1>{{ $category->cat_title }}</h1>
-            <div>{{ $category->cat_id }}</div>
-            <div>{{ $category->cat_logo }}</div>
-            @foreach ( $category->cat_content as $article )
-            <div class="article">
-                <div>{{ $article->id }}</div>
-                <div>{{ $article->title }}</div>
-                <div>{{ $article->time }}</div>
-                <div>{{ $article->author }}</div>
-                <div>{{ $article->info }}</div>
+        <div u="navigator" class="jssorb05-1">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype"></div>
+        </div>
+
+        <span u="arrowleft" class="jssora12l-1" style="top: 220px; left: 0px;">
+        </span>
+
+        <span u="arrowright" class="jssora12r-1" style="top: 220px; right: 0px;">
+        </span>
+    </div>
+    <div class="blog-background">
+        <div class="blog-container">
+            @foreach ( $blogHome->categories as $category )
+            <div class="blog-category">
+                <div class="blog-cat-header">
+                    <div class="blog-cat-title">
+                        {{ $category->cat_title }}
+                    </div>
+                    <div style="display:none;">
+                        {{ $category->cat_id }}
+                    </div>
+                    <div class="blog-cat-logo"> 
+                        <img src="{{ $category->cat_logo }}">
+                    </div>
+                    <div class="blog-readmore">閱讀更多</div>
+                </div>
+                <div class="blog-cat-article">
+                    @foreach ( $category->cat_content as $article )
+                    <div class="col-md-3 blog-cat-panel">
+                        <div style="display:none;">
+                            {{ $article->id }}
+                        </div>
+                        <div class="blog-thumbnail" 
+                             style="background-image:url('{{ $article->thumbnail }}')">
+                        </div>
+                        <div class="blog-panel-title word-indent-02 ">
+                            {{ $article->title }}
+                        </div>
+                        <div class="blog-panel-time">
+                            {{ $article->time }}
+                        </div>
+                        <div class="blog-panel-author">
+                            by {{ $article->author }}
+                        </div>
+                        <div class="blog-panel-info word-indent">
+                            {{ $article->info }}
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
             @endforeach
         </div>
-        @endforeach
-    </div>
 
-    @endsection
+        @endsection
+    </div>
