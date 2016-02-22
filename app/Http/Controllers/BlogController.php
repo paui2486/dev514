@@ -42,8 +42,8 @@ class BlogController extends Controller
         $blogBanner = array();
 
         $bannerTemplate = (object) array(
-            'image'     => 'img/1920/homebanner_01.jpg',
-            'title'     => '今天好煩躁 什麼都失敗',
+            'image'     => 'img/pics/table-690892_1280.jpg',
+            'title'     => '寧靜的午後，在夕陽餘輝中享受生活',
             'author'     => 'Grace',
             'time'     => '2015.01.02',
         );
@@ -57,19 +57,20 @@ class BlogController extends Controller
             'id'            => 1,
             'time'          => '2015.01.03',
             'author'        => 'Grace',
-            'title'         => '今天好煩躁 什麼都失敗',
+            'thumbnail'     => 'img/pics/oldman.jpg',
+            'title'         => '公園裡的白鴿伯伯',
             'info'          => '健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保健保',
         );
 
         $threeTopicNewBlogs = array();
-        for ($x=0; $x<3; $x++) {
+        for ($x=0; $x<4; $x++) {
             array_push($threeTopicNewBlogs, $eachTopicNewBlogs);
         }
 
         $totalBlogTemplate = (object) array(
             'cat_id'        => '1',
             'cat_title'     => '人物',
-            'cat_logo'      => 'img/controls.png',
+            'cat_logo'      => 'img/pics/somebody.png',
             'cat_content'   => $threeTopicNewBlogs,
         );
 
