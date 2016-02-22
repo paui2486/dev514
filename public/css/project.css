@@ -38,7 +38,7 @@ body {
 
 .navbar-right,
 .other-navbar-right {
-    margin-top: 20px;
+    margin-top: 15px;
     cursor: pointer;
     float: right;
 }
@@ -77,7 +77,7 @@ body {
     /* size of bullet elment */
     width: 16px;
     height: 16px;
-    background: url('img/b14.png') no-repeat;
+    background: url('../img/b14.png') no-repeat;
     overflow: hidden;
     cursor: pointer;
 }
@@ -108,7 +108,7 @@ body {
     width: 40px;
     height: 58px;
     cursor: pointer;
-    background: url('img/a16.png') center center no-repeat;
+    background: url('../img/a16.png') center center no-repeat;
     overflow: hidden;
 }
 
@@ -600,9 +600,9 @@ body {
 }
 
 .panel-body {
-    padding: 15px;
-    width: 90%;
-    margin: auto;
+    padding: 25px;
+    width: 100%;
+    margin: 20px auto;
 }
 
 .facebook-login {
@@ -650,14 +650,186 @@ body {
     margin-top: 20px;
 }
 
+.jssorb05-1 {
+    position: absolute;
+    top:93%;
+}
 
+.jssorb05-1 div,
+.jssorb05-1 div:hover,
+.jssorb05-1 .av {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: url(../img/b21.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+}
 
+.jssorb05-1 div {
+    background-position: -7px -7px;
+}
 
+.jssorb05-1 div:hover,
+.jssorb05-1 .av:hover {
+    background-position: -37px -7px;
+}
 
+.jssorb05-1 .av {
+    background-position: -67px -7px;
+}
 
+.jssorb05-1 .dn,
+.jssorb05-1 .dn:hover {
+    background-position: -97px -7px;
+}
 
+.jssora12l-1,
+.jssora12r-1 {
+    display: block;
+    position: absolute;
+    /* size of arrow element */
+    width: 30px;
+    height: 46px;
+    cursor: pointer;
+    background: url(../img/a12.png) no-repeat;
+    overflow: hidden;
+}
 
+.jssora12l-1 {
+    background-position: -16px -37px;
+}
 
+.jssora12r-1 {
+    background-position: -75px -37px;
+}
+
+.jssora12l-1:hover {
+    background-position: -136px -37px;
+}
+
+.jssora12r-1:hover {
+    background-position: -195px -37px;
+}
+
+.jssora12l-1.jssora12l-1dn {
+    background-position: -256px -37px;
+}
+
+.jssora12r-1.jssora12r-1dn {
+    background-position: -315px -37px;
+}
+
+.blog-banner-image {
+    height:500px;
+    background-size: cover;
+    z-index: 1;
+    background-repeat: no-repeat;
+}
+
+.bolg-banner-text {
+    z-index: 200;
+    position: relative;
+    float: left;
+    top: 210px;
+    left: 25%;
+    color: white;
+    text-align: center;
+    width: 650px;
+}
+
+.blog-banner-title {
+    font-size:36px;
+    text-shadow: 3px 3px 5px #000;
+    letter-spacing: 2px;
+}
+
+.blog-banner-auth,
+.blog-banner-date {
+    font-size: 18px;
+    float: right;
+    text-shadow: 2px 2px 3px #000;
+    letter-spacing: 1px;
+    padding: 0 10px;
+}
+
+.blog-background {
+    background-color: #f2f2f2;
+}
+
+.blog-container {
+    width: 70%;
+    margin: auto;
+    padding: 30px 0px;
+}
+
+.blog-category {
+    margin: 20px auto;
+}
+
+.blog-cat-header {
+    display: block;
+    padding-left: 16px;
+}
+
+.blog-cat-title {
+    font-size: 32px;
+    color:  #60574e;
+}
+
+.blog-cat-title,
+.blog-cat-logo {
+    float: left;
+}
+
+.blog-readmore {
+    float: right;
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid #60574e;
+    color: #60574e;
+}
+
+.blog-cat-logo img {
+    margin: 12px;
+    width: 150px;
+}
+
+.blog-thumbnail {
+    height: 120px;
+    width: auto;
+    background-size:100% auto;
+}
+
+.blog-cat-article {
+    display: inline-block;
+}
+
+.blog-cat-panel {
+    height: 250px;
+}
+
+.blog-panel-title {
+    font-size: 16px;
+    height: auto;
+    color:  #60574e;
+}
+
+.blog-panel-time {
+    float: left;
+    padding-right: 15px;
+}
+
+.blog-panel-author,
+.blog-panel-time {
+    font-size: 13px;
+    color: #808080;
+}
+
+.blog-panel-info {
+    font-size: 14px;
+    color: #998675;
+}
 
 
 
