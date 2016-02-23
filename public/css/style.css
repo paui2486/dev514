@@ -22,6 +22,10 @@ body {
     -moz-font-smoothing: antialiased;
 }
 
+td {
+    vertical-align:middle !important;
+}
+
 ul li {
     list-style: none;
 }
@@ -332,6 +336,7 @@ ul.sidebar-menu li a.active i {
 
 #main-content {
     margin-left: 210px;
+    padding-bottom: 15px;
 }
 
 .header, .footer {
@@ -4739,6 +4744,9 @@ tr.odd.gradeX td.sorting_1, tr.even.gradeX td.sorting_1, table.display tr.even.g
     background: #5b6e84;
     color: #fff;
     padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 
 .site-footer #siteurl{
@@ -6219,4 +6227,50 @@ header.blue-bg .search:focus {
 .note-editor .note-statusbar {
     background: #fff;
     border-radius:4px;
+}
+
+.dt-buttons.btn-group {
+    padding-top: 14px;
+    float: left;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    float: right;
+}
+
+.wrapper-title {
+    padding-left: 10px;
+    position: relative;
+}
+
+.wrapper-create {
+    position: absolute;
+    height: 30px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.btn-default {
+    background-color: #BEC37F;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+table.dataTable tbody>tr.selected, table.dataTable tbody>tr>.selected {
+    background-color: #39A;
+}
+
+table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.dataTable tbody td.selected a {
+    color: #FFF;
+}
+
+.blue_border_example {
+    border: 10px solid blue;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0 0 25px blue;
 }

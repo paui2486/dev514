@@ -15,9 +15,9 @@
                     <span>系統會員管理</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('member/create')}}">新增會員</a></li>
-                    <li><a href="{{URL::to('member/search')}}">查詢會員</a></li>
-                    <li><a href="{{URL::to('member')}}">會員列表</a></li>
+                    <li><a href="{{URL::to('dashboard/member/create')}}">新增會員</a></li>
+                    <li><a href="{{URL::to('dashboard/member/search')}}">查詢會員</a></li>
+                    <li><a href="{{URL::to('dashboard/member')}}">會員列表</a></li>
                 </ul>
             </li>
 
@@ -27,13 +27,13 @@
                     <span>網站管理系統</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('filter')}}">Filter 設定</a></li>
-                    <li><a href="{{URL::to('banner')}}">Banner 設定</a></li>
-                    <li><a href="{{URL::to('ad')}}">廣告模組設定</a></li>
-                    <li><a href="{{URL::to('point')}}">特殊點數管理</a></li>
-                    <li><a href="{{URL::to('coupon')}}">優惠代碼管理</a></li>
-                    <li><a href="{{URL::to('invoice')}}">支出收入管理</a></li>
-                    <li><a href="{{URL::to('analysis')}}">網站分析軟體</a></li>
+                    <li><a href="{{URL::to('dashboard/filter')}}">Filter 設定</a></li>
+                    <li><a href="{{URL::to('dashboard/banner')}}">Banner 設定</a></li>
+                    <li><a href="{{URL::to('dashboard/ad')}}">廣告模組設定</a></li>
+                    <li><a href="{{URL::to('dashboard/point')}}">特殊點數管理</a></li>
+                    <li><a href="{{URL::to('dashboard/coupon')}}">優惠代碼管理</a></li>
+                    <li><a href="{{URL::to('dashboard/invoice')}}">支出收入管理</a></li>
+                    <li><a href="{{URL::to('dashboard/analysis')}}">網站分析軟體</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -42,9 +42,10 @@
                     <span>文章管理系統</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('blog/category')}}">文章分類列表</a></li>
-                    <li><a href="{{URL::to('blog')}}">全部文章列表</a></li>
-                    <li><a href="{{URL::to('blog/expert')}}">全部達人列表</a></li>
+                    <li><a href="{{URL::to('dashboard/blog/create')}}">代為新增文章</a></li>
+                    <li><a href="{{URL::to('dashboard/blog/category')}}">文章分類列表</a></li>
+                    <li><a href="{{URL::to('dashboard/blog')}}">全部文章列表</a></li>
+                    <li><a href="{{URL::to('dashboard/blog/expert')}}">全部達人列表</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -53,11 +54,12 @@
                     <span>活動管理系統</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('activity/category')}}">活動分類列表</a></li>
-                    <li><a href="{{URL::to('activity')}}">全部活動列表</a></li>
-                    <li><a href="{{URL::to('activity/hoster')}}">活動廠商管理</a></li>
-                    <li><a href="{{URL::to('activity/coupon')}}">優惠代碼管理</a></li>
-                    <li><a href="{{URL::to('activity/invoice')}}">支出收入管理</a></li>
+                    <li><a href="{{URL::to('dashboard/activity/create')}}">代為新增活動</a></li>
+                    <li><a href="{{URL::to('dashboard/activity/category')}}">活動分類列表</a></li>
+                    <li><a href="{{URL::to('dashboard/activity')}}">全部活動列表</a></li>
+                    <li><a href="{{URL::to('dashboard/activity/hoster')}}">活動廠商管理</a></li>
+                    <li><a href="{{URL::to('dashboard/activity/coupon')}}">優惠代碼管理</a></li>
+                    <li><a href="{{URL::to('dashboard/activity/invoice')}}">支出收入管理</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -66,10 +68,10 @@
                     <span>客服與聯絡紀錄</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="{{URL::to('customer')}}">過往客服全紀錄</a></li>
-                    <li><a href="{{URL::to('customer/wait')}}">待處理客服事件</a></li>
-                    <li><a href="{{URL::to('customer/handle')}}">處理中客服事件</a></li>
-                    <li><a href="{{URL::to('customer/finish')}}">已處理客服事件</a></li>
+                    <li><a href="{{URL::to('dashboard/customer')}}">過往客服全紀錄</a></li>
+                    <li><a href="{{URL::to('dashboard/customer/wait')}}">待處理客服事件</a></li>
+                    <li><a href="{{URL::to('dashboard/customer/handle')}}">處理中客服事件</a></li>
+                    <li><a href="{{URL::to('dashboard/customer/finish')}}">已處理客服事件</a></li>
                 </ul>
             </li>
         </ul>

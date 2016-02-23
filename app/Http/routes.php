@@ -50,32 +50,63 @@ Route::group(['middleware' => 'web'], function () {
 */
     Route::auth();
 
-    Route::get('members/{username}'         , 'UserController@index'                    );
+    Route::get('members/{username}'         , 'UserController@index'          );
 
-    Route::get('activity'                   , 'ActivityController@index'                );
-    Route::get('activity/{category}/{slug}' , 'ActivityController@index'                );
+    Route::get('activity'                   , 'ActivityController@index'      );
+    Route::get('activity/{category}/{slug}' , 'ActivityController@index'      );
 
-    Route::get('blog'                       , 'BlogController@index'                    );
-    Route::get('blog/{category}'            , 'BlogController@index'                    );
-    Route::get('blog/{category}/{slug}'     , 'BlogController@index'                    );
+    Route::get('blog'                       , 'BlogController@index'          );
+    Route::get('blog/{category}'            , 'BlogController@index'          );
+    Route::get('blog/{category}/{slug}'     , 'BlogController@index'          );
 
-    Route::get('order/{id}'                 , 'CartController@index'                    );
+    Route::get('order/{id}'                 , 'CartController@index'          );
 
-    Route::get('master'                     , 'UserController@index'                    );
+    Route::get('master'                     , 'UserController@index'          );
 
-    Route::get('redirect'                   , 'SocialAuthController@redirect'           );
-    Route::get('callback'                   , 'SocialAuthController@callback'           );
+    Route::get('redirect'                   , 'SocialAuthController@redirect' );
+    Route::get('callback'                   , 'SocialAuthController@callback' );
 
-    Route::get('profile'                    , 'AuthController@profile'                  );
+    Route::get('profile'                    , 'AuthController@profile'        );
     // Route::get('profile/edit');
 
-    Route::get('follows'                    , 'AuthController@follows'                  );
-    Route::get('friends'                    , 'AuthController@friends'                  );
-    Route::get('activitys'                  , 'AuthController@activitys'                );
+    Route::get('follows'                    , 'AuthController@follows'        );
+    Route::get('friends'                    , 'AuthController@friends'        );
+    Route::get('activitys'                  , 'AuthController@activitys'      );
 
-    Route::group(['prefix' => 'dashboard'], function() {
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
 
-        Route::get('/'                      , 'AdminController@index'               );
+        Route::get('/'                      , 'AdminController@index'         );
+        Route::get('member/search'          , 'MemberController@searchMember' );
+        Route::get('member/data/reorder'    , 'MemberController@getReorder'   );
+        Route::get('member/data'            , 'MemberController@data'         );
+        Route::post('member/{id}/update'            , 'MemberController@update'         );
+        Route::resource('member'            , 'MemberController'              );
+
+// no yet
+        Route::get('filter'                 , 'AdminController@showMember'    );
+        Route::get('banner'                 , 'AdminController@showMember'    );
+        Route::get('ad'                     , 'AdminController@showMember'    );
+        Route::get('point'                  , 'AdminController@showMember'    );
+        Route::get('coupon'                 , 'AdminController@showMember'    );
+        Route::get('invoice'                , 'AdminController@showMember'    );
+        Route::get('analysis'               , 'AdminController@showMember'    );
+
+        Route::get('blog'                   , 'AdminController@showMember'    );
+        Route::get('blog/create'            , 'AdminController@showMember'    );
+        Route::get('blog/category'          , 'AdminController@showMember'    );
+        Route::get('blog/expert'            , 'AdminController@showMember'    );
+
+        Route::get('activity'               , 'AdminController@showMember'    );
+        Route::get('activity/create'        , 'AdminController@showMember'    );
+        Route::get('activity/category'      , 'AdminController@showMember'    );
+        Route::get('activity/hoster'        , 'AdminController@showMember'    );
+        Route::get('activity/coupon'        , 'AdminController@showMember'    );
+        Route::get('activity/invoice'       , 'AdminController@showMember'    );
+
+        Route::get('customer'               , 'AdminController@showMember'    );
+        Route::get('customer/wait'          , 'AdminController@showMember'    );
+        Route::get('customer/handle'        , 'AdminController@showMember'    );
+        Route::get('customer/finish'        , 'AdminController@showMember'    );
         // Route::resource('banner');
         // Route::resource('event');
         // Route::resource('member');

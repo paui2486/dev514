@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->share('copyright', '這是版權宣告.');
     }
 
     /**
