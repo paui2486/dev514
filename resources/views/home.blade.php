@@ -3,9 +3,7 @@
 @section('script')
 <script>
     jQuery(document).ready(function ($) {
-
-        var jssor_1_SlideoTransitions = [
-
+        var SlideoTransitions = [
         ];
 
         var jssor_1_options = {
@@ -14,7 +12,7 @@
             $SlideEasing: $Jease$.$OutQuint,
             $CaptionSliderOptions: {
                 $Class: $JssorCaptionSlideo$,
-                $Transitions: jssor_1_SlideoTransitions
+                $Transitions: SlideoTransitions
             },
             $ArrowNavigatorOptions: {
                 $Class: $JssorArrowNavigator$
@@ -24,14 +22,14 @@
             }
         };
 
-        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+        var HomeBanner = new $JssorSlider$("jssor_1", jssor_1_options);
 
         //responsive code begin
         //you can remove responsive code if you don't want the slider scales while window resizing
         function ScaleSlider() {
-            var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+            var parentWidth = HomeBanner.$Elmt.parentNode.clientWidth;
             if (parentWidth)
-                jssor_slider1.$ScaleWidth(parentWidth);
+                HomeBanner.$ScaleWidth(parentWidth);
             else
                 window.setTimeout(ScaleSlider, 30);
         }
