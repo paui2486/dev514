@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\MemberRequest;
+use App\Http\Requests\CreateMemberRequest;
+use App\Http\Requests\UpdateMemberRequest;
 
+use Validator;
 use Log;
 use DB;
 use Datatables;
@@ -31,6 +33,7 @@ class MemberController extends Controller
     public function create()
     {
         //
+        return view('admin.member.create_edit');
     }
 
     /**
@@ -38,9 +41,24 @@ class MemberController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(CreateMemberRequest $request)
     {
-        //
+        $permission = (array) $request->permission;
+        DB::table('users')->insert([
+            'name'          => $request->name,
+            'password'      => bcrypt($request->password),
+            'address'       => $request->address,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'bank_name'     => $request->bank_name,
+            'bank_account'  => $request->bank_account,
+            'adminer'       => in_array('adminer', $permission),
+            'author'        => in_array('author', $permission),
+            'hoster'        => in_array('hoster', $permission),
+            'status'        => $request->status,
+            'created_at'    => date("Y-m-d H:i:s"),
+            'updated_at'    => date("Y-m-d H:i:s"),
+        ]);
     }
 
     /**
@@ -54,8 +72,6 @@ class MemberController extends Controller
           $member = DB::table('users')->find($id);
 
           return view('admin.member.create_edit', compact('member'));
-          // return view('admin.newscategory.create_edit',compact('newscategory','languages','language'));
-          // return json_encode($member);
     }
 
     /**
@@ -66,6 +82,7 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
+
     }
 
     /**
@@ -73,11 +90,28 @@ class MemberController extends Controller
      *
      * @param  int  $id
      * @return Response
+     會有一樣的email情況
      */
-    public function update(MemberRequest $request)
+    public function update(UpdateMemberRequest $request, $id)
     {
-        Log::error($request);
-        // return 1;
+        $user = DB::table('users')->where('id', $id);
+
+        $permission = (array) $request->permission;
+
+        $user->update([
+            'name'          => $request->name,
+            'password'      => bcrypt($request->password),
+            'address'       => $request->address,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'bank_name'     => $request->bank_name,
+            'bank_account'  => $request->bank_account,
+            'adminer'       => in_array('adminer', $permission),
+            'author'        => in_array('author', $permission),
+            'hoster'        => in_array('hoster', $permission),
+            'status'        => $request->status,
+            'updated_at'    => date("Y-m-d H:i:s"),
+        ]);
     }
 
     /**
@@ -88,7 +122,8 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-
+        $user = DB::table('users')->where('id', $id);
+        $user->delete();
     }
 
     public function data()
@@ -99,13 +134,19 @@ class MemberController extends Controller
 
         return Datatables::of($members)
             // ->remove_column('id')
+            ->edit_column('hoster', '@if($hoster == 1) <span class="fa-stack fa-lg">
+                  <i class="fa fa-flag fa-stack-1x"></i>
+                  </span> @endif')
+            ->edit_column('author', '@if($author == 1) <span class="fa-stack fa-lg">
+                  <i class="fa fa-flag fa-stack-1x"></i>
+                  </span> @endif')
+            ->edit_column('status', '@if($status == 0) 未認證 @elseif($status == 1) 已認證 @else 封鎖中  @endif')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
-                  <a href="{{{ URL::to(\'dashboard/member/\' . $id ) }}}" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                  <a href="{{{ URL::to(\'dashboard/member/\' . $id ) }}}?view=colorbox" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
                   <a href="{{{ URL::to(\'dashboard/member/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')
-
             ->make();
     }
 
@@ -127,4 +168,16 @@ class MemberController extends Controller
         }
         return $list;
     }
+
+    public function getDelete($id) {
+
+        $member = DB::table('users')->find($id);
+
+        return view('admin.member.delete', compact('member'));
+    }
+
+    public function searchMember() {
+        return view('admin.member.index');
+    }
+
 }

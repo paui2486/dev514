@@ -7,7 +7,7 @@
          <h4 class="wrapper-title">
              會員列表
              <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('admin/news/create') }}}"
+                 <a href="{{{ URL::to('dashboard/member/create') }}}?view=1"
                     class="btn btn-sm  btn-primary iframe">
                       <span class="glyphicon glyphicon-plus-sign"></span> 新增
                   </a>
@@ -16,15 +16,15 @@
 
          <table id="table" class="table table-striped table-hover">
              <thead>
-             <tr>
-                 <th>ID</th>
-                 <th>名字</th>
-                 <th>Email</th>
-                 <th>活動主</th>
-                 <th>達人</th>
-                 <th>狀態</th>
-                 <th>設定</th>
-             </tr>
+                 <tr>
+                     <th>ID</th>
+                     <th>名字</th>
+                     <th>Email</th>
+                     <th>活動主</th>
+                     <th>達人</th>
+                     <th>狀態</th>
+                     <th>設定</th>
+                 </tr>
              </thead>
              <tbody></tbody>
          </table>
@@ -71,6 +71,12 @@
                     },
                     'csvHtml5',
                 ],
+                "aoColumnDefs": [
+                    {
+                        "bSortable": false,
+                        "aTargets": [ 6 ]
+                    },
+                ],
                 // "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "processing": true,
                 "responsive": true,
@@ -90,27 +96,6 @@
                     });
                 }
             });
-
-            //
-            // var startPosition;
-            // var endPosition;
-            // $("#table tbody").sortable({
-            //     cursor: "move",
-            //     start: function (event, ui) {
-            //         startPosition = ui.item.prevAll().length + 1;
-            //     },
-            //     update: function (event, ui) {
-            //         endPosition = ui.item.prevAll().length + 1;
-            //         var navigationList = "";
-            //         $('#table #row').each(function (i) {
-            //             navigationList = navigationList + ',' + $(this).val();
-            //         });
-            //         $.getJSON("{{ URL::to('dashboard/member/reorder') }}", {
-            //             list: navigationList
-            //         }, function (data) {
-            //         });
-            //     }
-            // });
         });
     </script>
 @stop
