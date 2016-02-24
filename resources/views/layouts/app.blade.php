@@ -30,6 +30,8 @@
 
     @include('partials.header')
 
+    @yield('banner')
+
     @yield('content')
 
     @include('partials.footer')
@@ -37,6 +39,7 @@
     <!-- JavaScripts -->
     <script src="{{asset('js/jquery.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
     <script src="{{asset('js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
     <script src="{{asset('js/jquery.nicescroll.js')}}" type="text/javascript"></script>
@@ -50,5 +53,8 @@
     <script src="{{asset('js/sparkline-chart.js')}}"></script>
     <script src="{{asset('js/easy-pie-chart.js')}}"></script>
 {{--     <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    @yield('script')
+
 </body>
 </html>

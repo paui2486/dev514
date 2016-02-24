@@ -58,7 +58,7 @@ return [
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => '請務必填寫此欄位 ',
+    'required'             => '請務必填寫此欄位 :attribute',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
