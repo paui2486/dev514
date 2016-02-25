@@ -11,9 +11,9 @@
         <img src="img/pics/youtubeicon.png">
     </div>
     <div class="footer-info">
-        <div class="col-md-12 col-lg-12">
+        <div class="col-md-12">
             <div class="footer-center">
-                <div class="funtion-intro col-md-3 col-lg-3">
+                <div class="funtion-intro col-md-3">
                     <p>功能介紹</p>
                     <div class="funtion-intro-content">
                         <a href="FAQ"><li>常見問題</li></a>
@@ -22,7 +22,7 @@
                         <a href="PointUse"><li>如何使用點數</li></a>
                     </div>
                 </div>
-                <div class="about-us col-md-3 col-lg-3">
+                <div class="about-us col-md-3">
                     <p>關於我們</p>
                     <div class="about-us-content">
                         <a href="About"><li>關於 514</li></a>
