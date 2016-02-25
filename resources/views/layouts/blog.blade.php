@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/project.css" rel="stylesheet">
+    <link href="{{asset('css/mobile.css')}}" rel="stylesheet" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 </head>
 <body id="app-layout">

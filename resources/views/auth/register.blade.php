@@ -43,7 +43,7 @@
                     </label>
 
                     <div class="col-md-7">
-                        <input type="password" class="form-control" name="password" placeholder="含有英文或數字之密碼（ 4 ~ 12  字元 ）">
+                        <input type="password" class="form-control" name="password" placeholder="含有英文或數字之密碼">
 
                         @if ($errors->has('password'))
                             <span class="help-block">

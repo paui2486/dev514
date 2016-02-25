@@ -32,17 +32,18 @@ Route::group(['middleware' => 'web'], function () {
 | Static Page
 |--------------------------------------------------------------------------
 */
-    Route::get('/'              , 'MainController@index'        );
-    Route::get('about'          , 'PageController@about'        );
-    Route::get('join'           , 'PageController@join'         );
-    Route::get('advertising'    , 'PageController@advertising'  );
-    Route::get('media-report'   , 'PageController@media_report' );
-    Route::get('privacy'        , 'PageController@privacy'      );
-    Route::get('faq'            , 'PageController@faq'          );
-    Route::get('partner'        , 'PageController@partner'      );
-    Route::get('host-guide'     , 'PageController@host-guide'   );
-    Route::get('play-guide'     , 'PageController@play-guide'   );
-
+    Route::get('/'              , 'HomeController@index'        );
+    Route::get('About'          , 'PageController@About'        );
+    Route::get('Join'           , 'PageController@Joinus'       );
+    Route::get('Advertising'    , 'PageController@Advertising'  );
+    Route::get('Privacy'        , 'PageController@Privacy'      );
+    Route::get('FAQ'            , 'PageController@FAQ'          );
+    Route::get('HostGuide'      , 'PageController@HostGuide'   );
+    Route::get('PlayGuide'      , 'PageController@PlayGuide'   );
+    Route::get('PointUse'       , 'PageController@PointUse'   );
+    
+    Route::get('MediaReport'    , 'PageController@media-report' );
+    Route::get('Partner'        , 'PageController@partner'      );
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
