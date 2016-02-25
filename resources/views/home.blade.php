@@ -43,8 +43,8 @@
 @endsection
 
 @section('banner')
-    <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden; visibility: hidden;">
-        <!-- Loading Screen -->
+    <div id="jssor_1" class="banner-1">
+        <!-- Loading Screen --> 
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
             <div style="position:absolute;display:block;background:url('../img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
@@ -112,11 +112,11 @@
             </div>
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
-                <div class="col-lg-6 col-md-6 col-sm-12 home-blog-panel">
+                <div class="row home-blog-panel">
                     <div class="home-blog-thumbnail"
                          style="background-image:url({{ $blog->thumbnail }})">
                     </div>
-                    <div class="home-blog-panelright">
+                    <div class="home-blog-panel-right">
                         <div class="home-blog-title">
                             {{ $blog->title }}
                         </div>
@@ -141,44 +141,45 @@
             </div>
         </div>
 
-        <div class="home-new-activity">
+        <div class="new-activity">
             <div class="row home-title">
                 <img src="/img/pics/new_activities-02.png">
             </div>
-            <div class="row home-new-activity-contain">
+            <div class="row new-activity-content">
                 @foreach( $home->newActivity as $newActivity )
-                <div class="col-lg-4 col-md-6 col-sm-12 home-new-activity-panel">
+                <div class="new-activity-panel">
                     <div class="newact_panel_bg">
-                        <div class="home-new-activity-id">
+                        <div class="new-activity-id">
                             {{ $newActivity->activity_id }}
                         </div>
-                        <div class="home-new-activity-thumbnail"
+                        <div class="new-activity-thumbnail"
                              style="background-image:url({{ $newActivity->thumbnail }})">
                         </div>
-
-                        <div class="home-new-activity-title">
-                            {{ $newActivity->title }}
-                        </div>
-                        <div class="home-new-activity-count">
-                            {{ $newActivity->count }} 人
-                        </div>
-                        <div class="home-new-activity-description word-indent">
-                            {{ $newActivity->description }}
-                        </div>
-                        <div class="home-new-activity-price">
-                            <img src="img/pics/money-icon-02.png">
-                            {{ $newActivity->price }} 元
-                        </div>
-                        <div class="home-new-activity-date">
-                            <img src="img/pics/calendar-icon-02.png">
-                            {{ $newActivity->date }}
-                        </div>
-                        <div class="home-new-activity-location">
-                            <img src="img/pics/location-icon-02.png">
-                            {{ $newActivity->location }}
-                        </div>
-                        <div class="home-new-activity-orginizer">
-                            --- {{ $newActivity->orginizer }} ---
+                        <div class="new-activity-right">
+                            <div class="new-activity-title">
+                                {{ $newActivity->title }}
+                            </div>
+                            <div class="new-activity-count">
+                                {{ $newActivity->count }} 人
+                            </div>
+                            <div class="new-activity-description word-indent">
+                                {{ $newActivity->description }}
+                            </div>
+                            <div class="new-activity-price">
+                                <img src="img/pics/money-icon-02.png">
+                                {{ $newActivity->price }} 元
+                            </div>
+                            <div class="new-activity-date">
+                                <img src="img/pics/calendar-icon-02.png">
+                                {{ $newActivity->date }}
+                            </div>
+                            <div class="new-activity-location">
+                                <img src="img/pics/location-icon-02.png">
+                                {{ $newActivity->location }}
+                            </div>
+                            <div class="new-activity-orginizer">
+                                --- {{ $newActivity->orginizer }} ---
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -186,56 +187,56 @@
             </div>
         </div>
 
-        <div class="total-activity">
+        <div class="Act-category">
             <div class="row home-title">
                 <img src="/img/pics/act_category-02.png">
             </div>
-            <div class="total-activity-contain">
+            <div class="row Act-category-content">
                 @foreach( $home->totalActivity as $eachTypeActivity )
                 <div class="outer-panel">
-                    <div class="activity-category-thumbnail"
+                    <div class="outer-panel-left"
                          style="background-image:url({{ $eachTypeActivity->cat_thumbnail }})">
                     </div>
-                    <div class="activity-category-content">
-                        <div class="activity-category-id">
+                    <div class="outer-panel-right">
+                        <div class="Act-category-id">
                             {{ $eachTypeActivity->cat_id }}
                         </div>
-                        <div class="activity-category-title">
+                        <div class="Act-category-title">
                             {{ $eachTypeActivity->cat_title }}
                         </div>
-                        <div class="activity-category-logo">
+                        <div class="Act-category-logo">
                             <img src="{{ $eachTypeActivity->cat_logo }}">
                         </div>
                         @foreach( $eachTypeActivity->cat_content as $activity )
                         <div class="inter-panel">
-                            <div class="activity-thumbnail"
+                            <div class="inter-panel-thumbnail"
                                  style="background-image:url({{ $newActivity->thumbnail }})">
                             </div>
-                            <div class="activity-id">
+                            <div class="inter-panel-id">
                                 {{ $newActivity->activity_id }}
                             </div>
-                            <div class="home-new-activity-title activity-title">
+                            <div class="new-activity-title">
                                 {{ $newActivity->title }}
                             </div>
-                            <div class="activity-count">
+                            <div class="inter-panel-count">
                                 {{ $newActivity->count }} 人
                             </div>
-                            <div class="home-new-activity-description word-indent-02">
+                            <div class="inter-panel-description new-activity-description word-indent">
                                 {{ $newActivity->description }}
                             </div>
-                            <div class="home-new-activity-price activity-price">
+                            <div class="new-activity-price">
                                 <img src="img/pics/money-icon-02.png">
                                 {{ $newActivity->price }} 元
                             </div>
-                            <div class="home-new-activity-date activity-date">
+                            <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{ $newActivity->date }}
                             </div>
-                            <div class="home-new-activity-location activity-location">
+                            <div class="new-activity-location">
                                 <img src="img/pics/location-icon-02.png">
                                 {{ $newActivity->location }}
                             </div>
-                            <div class="home-new-activity-orginizer activity-orginizer">
+                            <div class="new-activity-orginizer">
                                 --- {{ $newActivity->orginizer }} ---
                             </div>
                         </div>
