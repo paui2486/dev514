@@ -1,8 +1,8 @@
-<nav class="navbar {{ Request::is('/') ? 'home-navbar' : 'other-navbar' }}">
-    <div class="container">
+<nav class="{{ Request::is('/') ? 'home-navbar' : 'other-navbar' }}">
+    <div class="container-header">
         <div class="navbar-header">
             <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+            <button type="button" class="{{ Request::is('/') ? 'navbar-toggle' : 'other-navbar-toggle' }} collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="glyphicon glyphicon-list"></span>
                 <span class="sr-only">選單</span>
                 <span class="icon-bar"></span>
@@ -16,12 +16,12 @@
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+        <div class="{{ Request::is('/') ? 'navbar-collapse' : 'other-navbar-collapse' }} collapse" id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
             <ul class="{{ Request::is('/') ? 'navbar-right' : 'other-navbar-right' }} nav navbar-nav">
                 <!-- Authentication Links -->
                 <li><a href="{{ url('blog') }}">部落格</a></li>
-                <li><a href="{{ url('') }}">辦活動</a></li>
+                <li class="navbarr-host"><a href="{{ url('') }}">辦活動</a></li>
 
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">登入</a></li>
@@ -29,7 +29,7 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            gggg <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -43,5 +43,8 @@
                 @endif
             </ul>
         </div>
+        <div class="sb-slidebar sb-right">
+			<!-- Your right Slidebar content. -->
+		</div>
     </div>
 </nav>
