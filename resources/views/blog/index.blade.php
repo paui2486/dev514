@@ -115,8 +115,8 @@
     <div class="blog-background">
         <div class="blog-container">
             @foreach ( $blogHome->categories as $category )
-            <div class="blog-category">
-                <div class="blog-cat-header">
+            <div class="row blog-category">
+                <div class="row blog-cat-header">
                     <div class="blog-cat-title">
                         {{ $category->cat_title }}
                     </div>
@@ -128,9 +128,9 @@
                     </div>
                     <div class="blog-readmore">閱讀更多</div>
                 </div>
-                <div class="blog-cat-article">
+                <div class="row blog-cat-article">
                     @foreach ( $category->cat_content as $article )
-                    <div class="col-md-3 blog-cat-panel">
+                    <div class="col-sm-3 blog-cat-panel">
                         <div style="display:none;">
                             {{ $article->id }}
                         </div>
@@ -152,6 +152,7 @@
                     </div>
                     @endforeach
                 </div>
+                <div class="mobile-blog-readmore">閱讀更多</div>
             </div>
             @endforeach
         </div>
