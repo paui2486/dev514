@@ -1,0 +1,625 @@
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+    .home-blog-content,
+    .new-activity-content,
+    .Act-category-content,
+    .blog-container {
+        max-width: 768px;
+        margin: auto;
+    }
+    
+    .new-activity-content {
+        display: flex;
+    }
+    .home-blog-panel {
+        width: 340px;
+        padding: 0;
+        margin: 10px;
+    }
+    .home-blog-panel-right {
+        width: 180px;
+        height: 180px;
+        background-color: white;
+        float: right;
+        padding: 0 10px;
+    }
+    .home-blog-thumbnail {
+        width: 160px;
+        height: 180px;
+        float: left;
+        background-size: cover;
+        background-position: center;
+    }
+    .home-blog-title {
+        width: 160px;
+        font-size: 20px;
+        color: #60574e;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .home-blog-category,
+    .home-blog-author,
+    .home-blog-created_at {
+        width: 160px;
+        overflow: hidden;
+        margin-right: 20px;
+        font-size: 15px;
+        color: #998675;
+        line-height: 22px;
+        letter-spacing: 1px;
+    }
+    .word-indent {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        position: relative;
+        line-height: 1.5em;
+        /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+        height: 3em;
+    }
+    .home-blog-description {
+        width: 160px;
+        font-size: 16px;
+        color: #82766c;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .new-activity-panel {
+        width: 248px;
+        padding: 5px;
+    }
+    .new-activity-thumbnail {
+        height: 160px;
+        width: auto;
+        background-size: cover;
+        background-position: center;
+        box-shadow: 3px 3px 10px #666666;
+    }
+    .new-activity-count {
+        width: auto;
+        position: absolute;
+        top: 110px;
+        margin: 15px;
+        color: white;
+        font-size: 15px;
+        border-radius: 20px;
+        padding: 3px 15px;
+        background-color: rgba(0, 0, 0, 0.7)
+    }
+    .new-activity-price,
+    .new-activity-date,
+    .new-activity-location {
+        width: 100%;
+        overflow: hidden;
+    }
+    .outer-panel,
+    .outer-panel-left {
+        height: 440px;
+    }
+    .outer-panel {
+        width: 750px;
+    }
+    .inter-panel {
+        display: inline-block;
+        width: 160px;
+        border: 1px solid #ccc;
+        position: relative;
+        margin: 4px;
+    }
+    .inter-panel-thumbnail {
+        height: 120px;
+    }
+    .inter-panel-count {
+        top: 70px;
+    }
+    .inter-panel-description {
+        width: 150px;
+    }
+    
+    .blog-category
+    {
+        max-width: 700px;
+    }
+    
+    .blog-cat-panel {
+        height: 250px;
+        width: 50%;
+        padding:15px;
+        margin: 0px;
+        float: left;
+    }
+    
+    .contact-us {
+        width: 35%;
+        float: left;
+    }
+    .funtion-intro, .about-us {
+        width: 30%;
+        float: left;
+    }
+    
+    
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-collapse,
+    .navbar-collapse.in,
+    .mega-menu ul li a {
+        width:80%;
+        background-color: black;
+        position: absolute;
+        right: 0;
+        text-align: left;
+        z-index: 999;
+        top: 60px;
+    }
+    
+    .other-navbar-brand img {
+        height: 40px;
+    }
+    
+    .other-navbar {
+        background-color: white;
+        height: 60px;
+    }
+    
+    .navbar-toggle {
+        position: relative;
+        float: right;
+        background-color: black;
+        border-radius: 4px;
+        border: 1px solid #000;
+        color: white;
+        height: 40px;
+        padding: 10px;
+        margin: 10px;
+    }
+    
+    .other-navbar-toggle {
+        position: relative;
+        float: right;
+        background-color: white;
+        border-radius: 4px;
+        border:  2px solid #736357;
+        color:#736357;
+        height: 40px;
+        padding: 10px;
+        margin: 10px;
+    }
+    
+    .navbar-right,
+    .other-navbar-right {
+        margin-top: 15px;
+        cursor: pointer;
+        float: none;
+        text-align: center;
+    }
+    
+    .home-navbar {
+        position: relative;
+        font-size: 16px;
+        height: 60px;
+        background-color: #000;
+        position: fixed;
+    }
+    
+    .home-navbar-brand img {
+        height: 42px;
+        z-index: 200;
+        margin: 10px;
+    }
+    
+    .home_bntitle,
+    .panel-filter {
+        display: none;
+    }
+    
+    .banner-1 {
+        top: 60px;
+    }
+    
+    .home-container {
+        margin-top: 60px;
+    }
+    
+    .home-blog-content,
+    .new-activity-content,
+    .Act-category-content {
+        max-width: 400px;
+        margin: auto;
+    }
+    
+    .home-blog-panel {
+        width: 380px;
+        padding: 0;
+        margin: 10px;
+    }
+    
+    .home-blog-panel-right {
+        width: 260px;
+        height: 120px;
+        background-color: white;
+        float: right;
+        padding: 10px;
+    }
+    
+    .home-blog-thumbnail {
+        width: 120px;
+        height: 120px;
+        float: left;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .home-blog-author,
+    .home-blog-created_at {
+        display: none;
+    }
+    
+    .home-blog-title {
+        width: 240px;
+        font-size: 20px;
+        color: #60574e;
+        margin-top: 0px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .word-indent {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        position: relative;
+        line-height: 1.5em;
+        /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+        height: 3em;
+    }
+    
+    .home-blog-description {
+        width: 240px;
+        font-size: 16px;
+        color: #82766c;
+        margin: 0;
+    }
+
+    .new-activity-panel {
+        width: 400px;
+        margin: 10px 0px;
+    }
+    
+    .new-activity-right {
+        background-color: white;
+        float: right;
+        width: 260px;
+        height: 160px;
+        padding: 0;
+    }
+    
+    .new-activity-thumbnail {
+        height: 160px;
+        width: 140px;
+        float: left;
+        box-shadow: none;
+    }
+    
+    .new-activity-orginizer,
+    .new-activity-count,
+    .new-activity-description,
+    .inter-panel,
+    .Act-category-logo,
+    .outer-panel-left,
+    .funtion-intro,
+    .about-us,   
+    .blog-banner-auth,
+    .blog-banner-date  {
+        display: none;
+    }
+    
+    .new-activity-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        position: relative;
+        line-height: 1.5em;
+        /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+        height: 70px;
+        width: 260px;
+        white-space: normal;
+        font-size: 18px;
+        padding: 10px;
+    }
+    
+    .outer-panel {
+        width: 168px;
+        height: 168px;
+        background-image: url(../img/pics/food.png);
+        background-position: center;
+        background-size: 100 auto;
+        float: left;
+        margin: 15px;
+    }
+    .outer-panel-right {
+        float: none;
+        padding: 0px;
+        width: 100%;
+    }
+    
+    .Act-category-title {
+        text-align: center;
+        line-height: 168px;
+        font-size: 24px;
+        color: white;
+        text-shadow: 1px 1px 3px #000;
+        padding-left: 0px;
+    }
+    
+    .blog-header-container {
+        height: 50px;
+    }
+    
+    .blog-banner-title {
+        font-size: 60px;
+    }
+    
+    .bolg-banner-text {
+    z-index: 200;
+    position: relative;
+    float: left;
+    top:35%;
+    left: 25%;
+    color: white;
+    text-align: center;
+    width: 650px;
+    }
+    
+    .blog-container,
+    .blog-category {
+        width:100%;
+    }
+
+    .blog-cat-panel {
+        height: 250px;
+        width: 50%;
+        padding: 15px;
+        margin: 0px;
+        float: left;
+    }
+    
+    .login-container,
+    .register-container {
+        padding: 60px 0px;
+    }
+    
+    .login-panel,
+    .register-panel {
+        width:60%;
+    }
+    
+    .panel-body {
+        padding:10px; 
+    }
+}
+
+@media screen and (max-width: 440px) {
+
+    .home-navbar {
+        position: relative;
+        font-size: 16px;
+        height: 60px;
+        background-color: #000;
+        position: fixed;
+    }
+    .home-navbar-brand img {
+        height: 42px;
+        z-index: 200;
+        margin: 10px;
+    }
+    
+    .home_bntitle,
+    .panel-filter {
+        display: none;
+    }
+    
+    .banner-1 {
+        top: 60px;
+    }
+    
+    .home-container {
+        margin-top: 60px;
+    }
+    
+    .home-title {
+        padding-bottom: 0px;
+    }
+        
+    .home-blog-content,
+    .new-activity-content,
+    .Act-category-content {
+        max-width: 325px;
+        margin: auto;
+    }
+    .home-blog-panel {
+        width: 300px;
+        padding: 0;
+        margin: 10px;
+    }
+    .home-blog-panel-right {
+        width: 200px;
+        height: 100px;
+        background-color: white;
+        float: right;
+        padding: 10px;
+    }
+    .home-blog-thumbnail {
+        width: 100px;
+        height: 100px;
+        float: left;
+        background-size: cover;
+        background-position: center;
+    }
+    .home-blog-author,
+    .home-blog-created_at {
+        display: none;
+    }
+    .home-blog-title {
+        width: 175px;
+        font-size: 16px;
+        color: #60574e;
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .word-indent {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        position: relative;
+        line-height: 1.5em;
+        /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+        height: 3em;
+    }
+    .home-blog-category {
+        font-size: 13px;
+        s
+    }
+    .home-blog-description {
+        width: 175px;
+        font-size: 14px;
+        color: #82766c;
+        margin: 0;
+    }
+    /*-------------------------------------*/
+    .new-activity-panel {
+        width: 325px;
+        margin: 10px 0px;
+    }
+    .new-activity-right {
+        background-color: white;
+        float: right;
+        width: 200px;
+        height: 140px;
+        padding: 0;
+    }
+    .new-activity-thumbnail {
+        height: 140px;
+        width: 125px;
+        float: left;
+        box-shadow: none;
+    }
+    .new-activity-orginizer,
+    .new-activity-count,
+    .new-activity-description,
+    .inter-panel,
+    .Act-category-logo,
+    .outer-panel-left,
+    .funtion-intro,
+    .about-us {
+        display: none;
+    }
+    .new-activity-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        position: relative;
+        line-height: 1.5em;
+        /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+        height: auto;
+        width: 200px;
+        white-space: normal;
+        font-size: 16px;
+        padding: 10px;
+        padding-bottom: 5px;
+    }
+    .new-activity-price img,
+    .new-activity-date img,
+    .new-activity-location img {
+        width: 23px;
+    }
+    .new-activity-price,
+    .new-activity-date,
+    .new-activity-location {
+        font-size: 15px;
+    }
+    .outer-panel {
+        width: 295px;
+        height: 65px;
+        background-image: url(../img/pics/food.png);
+        background-position: center;
+        background-size: cover;
+        float: none;
+        margin: 15px;
+    }
+    .outer-panel-right {
+        float: none;
+        padding: 0px;
+        width: 100%;
+    }
+    .Act-category-title {
+        text-align: center;
+        line-height: 65px;
+        font-size: 24px;
+        color: white;
+        text-shadow: 1px 1px 3px #000;
+        padding-left: 0px;
+        letter-spacing: 2px;
+        box-shadow: 1px 1px 60px rgba(0, 0, 0, 0.8) inset;
+    }
+    
+    .blog-category {
+        max-width:80%;
+    }
+    
+    .blog-cat-panel {
+        height: 250px;
+        width:100%;
+        padding: 0px;
+        margin: 15px 0px;
+        float: none;
+        border-bottom: 1px dashed #998675;
+    }
+    
+    .blog-readmore {
+        display: none;
+    }
+    
+    .login-panel,
+    .register-panel{
+        width:80%;
+    }
+    
+    .mobile-blog-readmore {
+        float: none; 
+        padding: 10px;
+        border: 1px solid #998675;
+        color: #998675;
+        margin: auto;
+        text-align: center;
+        width: 90%;
+    }
+ 
+
+}
+    
+    
+    
+    
+    
+    
+    
+    
