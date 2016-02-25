@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 
-use Validator;
-use Log;
 use DB;
+use Log;
+use Redirect;
 use Datatables;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -32,7 +32,6 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
         return view('admin.member.create_edit');
     }
 
@@ -44,21 +43,22 @@ class MemberController extends Controller
     public function store(CreateMemberRequest $request)
     {
         $permission = (array) $request->permission;
-        DB::table('users')->insert([
-            'name'          => $request->name,
-            'password'      => bcrypt($request->password),
-            'address'       => $request->address,
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-            'bank_name'     => $request->bank_name,
-            'bank_account'  => $request->bank_account,
-            'adminer'       => in_array('adminer', $permission),
-            'author'        => in_array('author', $permission),
-            'hoster'        => in_array('hoster', $permission),
-            'status'        => $request->status,
-            'created_at'    => date("Y-m-d H:i:s"),
-            'updated_at'    => date("Y-m-d H:i:s"),
+        $store = DB::table('users')->insert([
+          'name'          => $request->name,
+          'password'      => bcrypt($request->password),
+          'address'       => $request->address,
+          'email'         => $request->email,
+          'phone'         => $request->phone,
+          'bank_name'     => $request->bank_name,
+          'bank_account'  => $request->bank_account,
+          'adminer'       => in_array('adminer', $permission),
+          'author'        => in_array('author', $permission),
+          'hoster'        => in_array('hoster', $permission),
+          'status'        => $request->status,
+          'created_at'    => date("Y-m-d H:i:s"),
+          'updated_at'    => date("Y-m-d H:i:s"),
         ]);
+        return Redirect::to('dashboard/member');
     }
 
     /**
@@ -69,9 +69,8 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-          $member = DB::table('users')->find($id);
-
-          return view('admin.member.create_edit', compact('member'));
+        $member = DB::table('users')->find($id);
+        return view('admin.member.create_edit', compact('member'));
     }
 
     /**
@@ -90,27 +89,25 @@ class MemberController extends Controller
      *
      * @param  int  $id
      * @return Response
-     會有一樣的email情況
+     * 會有一樣的email情況
      */
     public function update(UpdateMemberRequest $request, $id)
     {
-        $user = DB::table('users')->where('id', $id);
-
         $permission = (array) $request->permission;
-
+        $user = DB::table('users')->where('id', $id);
         $user->update([
-            'name'          => $request->name,
-            'password'      => bcrypt($request->password),
-            'address'       => $request->address,
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-            'bank_name'     => $request->bank_name,
-            'bank_account'  => $request->bank_account,
-            'adminer'       => in_array('adminer', $permission),
-            'author'        => in_array('author', $permission),
-            'hoster'        => in_array('hoster', $permission),
-            'status'        => $request->status,
-            'updated_at'    => date("Y-m-d H:i:s"),
+          'name'          => $request->name,
+          'password'      => bcrypt($request->password),
+          'address'       => $request->address,
+          'email'         => $request->email,
+          'phone'         => $request->phone,
+          'bank_name'     => $request->bank_name,
+          'bank_account'  => $request->bank_account,
+          'adminer'       => in_array('adminer', $permission),
+          'author'        => in_array('author', $permission),
+          'hoster'        => in_array('hoster', $permission),
+          'status'        => $request->status,
+          'updated_at'    => date("Y-m-d H:i:s"),
         ]);
     }
 
@@ -124,8 +121,15 @@ class MemberController extends Controller
     {
         $user = DB::table('users')->where('id', $id);
         $user->delete();
+        return Redirect::to('dashboard/member');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
     public function data()
     {
         $members = DB::table('users')
@@ -169,13 +173,23 @@ class MemberController extends Controller
         return $list;
     }
 
+    /**
+     *
+     *
+     * @param
+     * @return items from @param
+     */
     public function getDelete($id) {
-
         $member = DB::table('users')->find($id);
-
         return view('admin.member.delete', compact('member'));
     }
 
+    /**
+     *
+     *
+     * @param
+     * @return items from @param
+     */
     public function searchMember() {
         return view('admin.member.index');
     }

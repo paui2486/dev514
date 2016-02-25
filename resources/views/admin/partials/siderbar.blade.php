@@ -11,18 +11,6 @@
             </li>
             <li class="sub-menu">
                 <a href="javascript:;" >
-                    <i class="fa fa-user"></i>
-                    <span>系統會員管理</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="{{URL::to('dashboard/member/create')}}">新增會員</a></li>
-                    <li><a href="{{URL::to('dashboard/member/search')}}">查詢會員</a></li>
-                    <li><a href="{{URL::to('dashboard/member')}}">會員列表</a></li>
-                </ul>
-            </li>
-
-            <li class="sub-menu">
-                <a href="javascript:;" >
                     <i class="fa fa-cogs"></i>
                     <span>網站管理系統</span>
                 </a>
@@ -34,6 +22,17 @@
                     <li><a href="{{URL::to('dashboard/coupon')}}">優惠代碼管理</a></li>
                     <li><a href="{{URL::to('dashboard/invoice')}}">支出收入管理</a></li>
                     <li><a href="{{URL::to('dashboard/analysis')}}">網站分析軟體</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-user"></i>
+                    <span>系統會員管理</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{URL::to('dashboard/member/create')}}">新增會員</a></li>
+                    <li><a href="{{URL::to('dashboard/member/search')}}">查詢會員</a></li>
+                    <li><a href="{{URL::to('dashboard/member')}}">會員列表</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

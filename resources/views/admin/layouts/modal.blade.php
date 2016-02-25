@@ -10,6 +10,8 @@
     <title>514 管理後台</title>
 
     <link rel="stylesheet" href="{{asset('css/bootstrap-reset.css')}}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!--external css-->
     <link rel="stylesheet" href="{{asset('assets/font-awesome/css/font-awesome.css')}}"/>
     <!-- <link rel="stylesheet" href="{{asset('assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css')}}"/> -->
@@ -19,13 +21,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/owl.carousel.css')}}">
     <!-- Right Slidebar -->
     <link rel="stylesheet" href="{{asset('css/slidebars.css')}}">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <!-- ColorBox CSS -->
     <link rel="stylesheet" href="{{asset('css/colorbox.css')}}">
-    <link href="{{ asset('css/summernote.css')}}" rel="stylesheet" type="text/css">
+    <!-- <link href="{{ asset('css/summernote.css')}}" rel="stylesheet" type="text/css"> -->
     <!-- Custom styles for this template -->
     <link href="{{{ asset('css/select2.css') }}}" rel="stylesheet" type="text/css">
+    @yield('style')
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/style-responsive.css')}}"/>
 </head>
@@ -50,6 +51,7 @@
   <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery-migrate-1.2.1.min.js')}}"></script>
+
   <!--right slidebar-->
   <script type="text/javascript" src="{{asset('js/slidebars.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery.dcjqaccordion.2.7.js')}}"></script>
@@ -62,6 +64,10 @@
   <!-- <script type="text/javascript" src="{{asset('js/jquery.sparkline.js')}}"></script> -->
   <!-- <script type="text/javascript" src="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script> -->
 
+  <!-- Data Range Picker -->
+  <script type="text/javascript" src="{{asset('js/moment.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/daterangepicker.js')}}"></script>
+
   <!-- DataTables -->
   <script type="text/javascript" src="{{asset('js/dataTables.min.js')}}"></script>
   <!-- <script type="text/javascript" src="{{asset('assets/data-tables/DT_bootstrap.js')}}"></script> -->
@@ -69,7 +75,12 @@
 
   <script type="text/javascript" src="{{asset('assets/fullcalendar/fullcalendar/fullcalendar.min.js')}}"></script>
 
-	<script src="{{  asset('js/summernote.js')}}"></script>
+  <!-- Editor -->
+	<!-- <script src="{{  asset('js/summernote.js')}}"></script> -->
+  <script type="text/javascript" src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+  <script type="text/javascript" src="{{asset('assets/ckfinder/ckfinder.js')}}"></script>
+
+
 	<script src="{{  asset('js/select2.js') }}"></script>
   <!-- slider -->
   <!-- <script type="text/javascript" src="{{asset('js/owl.carousel.js')}}" ></script> -->
@@ -82,7 +93,7 @@
 
 	<script type="text/javascript">
 			$(function() {
-				$('textarea').summernote({height: 250});
+				// $('textarea').summernote({height: 250});
 				$('form').submit(function(event) {
 					event.preventDefault();
 					var form = $(this);

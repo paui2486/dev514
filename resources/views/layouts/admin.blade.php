@@ -7,8 +7,8 @@
 
     <title>514 管理後台</title>
 
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/bootstrap-reset.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/bootstrap-reset.css')}}"/>
     <!--external css-->
     <link rel="stylesheet" href="{{asset('assets/font-awesome/css/font-awesome.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css')}}"/>
@@ -16,13 +16,16 @@
     <link rel="stylesheet" href="{{asset('css/dataTables.min.css')}}"/>
     <!-- <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}"/> -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css')}}" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/owl.carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/owl.carousel.css')}}"/>
+    <!-- Data Range Picker -->
+    <link rel="stylesheet" type="text/css" href="{{asset('css/daterangepicker.css')}}" />
     <!--  Right slidebar -->
-    <link rel="stylesheet" href="{{asset('css/slidebars.css')}}">
+    <link rel="stylesheet" href="{{asset('css/slidebars.css')}}"/>
     <!-- ColorBox CSS -->
-    <link rel="stylesheet" href="{{asset('css/colorbox.css')}}">
+    <link rel="stylesheet" href="{{asset('css/colorbox.css')}}"/>
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    @yield('style')
+    <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/style-responsive.css')}}"/>
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
@@ -42,6 +45,11 @@
     <script type="text/javascript" src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jquery-migrate-1.2.1.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    <!-- editor -->
+    <script type="text/javascript" src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/ckfinder/ckfinder.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{asset('assets/tinymce/tinymce.min.js')}}"></script> -->
+
     <!--right slidebar-->
     <script type="text/javascript" src="{{asset('js/slidebars.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jquery.dcjqaccordion.2.7.js')}}"></script>
@@ -58,6 +66,15 @@
     <script type="text/javascript" src="{{asset('js/dataTables.min.js')}}"></script>
     <!-- <script type="text/javascript" src="{{asset('assets/data-tables/DT_bootstrap.js')}}"></script> -->
     <script type="text/javascript" src="{{asset('js/jquery.colorbox.js')}}"></script>
+
+    <!-- Data Range Picker -->
+    <script type="text/javascript" src="{{asset('js/moment.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/daterangepicker.js')}}"></script>
+
+    <!-- tagsinput -->
+    <script type="text/javascript" src="{{asset('js/jquery.tagsinput.js')}}"></script>
+    <!-- Inputmask -->
+    <script type="text/javascript" src="{{asset('assets/bootstrap-inputmask/bootstrap-inputmask.min.js')}}"></script>
 
     <script type="text/javascript" src="{{asset('assets/fullcalendar/fullcalendar/fullcalendar.min.js')}}"></script>
 

@@ -77,12 +77,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
 
         Route::get('/'                      , 'AdminController@index'         );
-        Route::get('member/search'          , 'MemberController@searchMember' );
-        Route::get('member/data/reorder'    , 'MemberController@getReorder'   );
-        Route::get('member/data'            , 'MemberController@data'         );
-        Route::get('member/{id}/delete'     , 'MemberController@getDelete'    );
-        Route::post('member/{id}/update'    , 'MemberController@update'       );
-        Route::resource('member'            , 'MemberController'              );
 
 // no yet
         Route::get('filter'                 , 'AdminController@showMember'    );
@@ -93,10 +87,29 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('invoice'                , 'AdminController@showMember'    );
         Route::get('analysis'               , 'AdminController@showMember'    );
 
-        Route::get('blog'                   , 'AdminController@showMember'    );
-        Route::get('blog/create'            , 'AdminController@showMember'    );
-        Route::get('blog/category'          , 'AdminController@showMember'    );
-        Route::get('blog/expert'            , 'AdminController@showMember'    );
+
+        Route::get('member/search'          , 'MemberController@searchMember' );
+        // Route::get('member/data/reorder'    , 'MemberController@getReorder'   );
+        Route::get('member/data'            , 'MemberController@data'         );
+        Route::get('member/{id}/delete'     , 'MemberController@getDelete'    );
+        Route::post('member/{id}/update'    , 'MemberController@update'       );
+        Route::resource('member'            , 'MemberController'              );
+
+        Route::get('blog/data'                  , 'BlogController@data'           );
+        Route::get('blog/category'              , 'BlogController@showCategory'   );
+        Route::post('blog/category'             , 'BlogController@storeCategory'  );
+        Route::get('blog/category/{id}'         , 'BlogController@getCategory'    );
+        Route::post('blog/category/{id}/update' , 'BlogController@updateCategory' );
+        Route::get('blog/category/{id}/delete'  , 'BlogController@deleteCategory' );
+        Route::post('blog/category/{id}/delete' , 'BlogController@destoryCategory');
+        Route::get('blog/category/data'         , 'BlogController@getCategoryData');
+        Route::get('blog/category/create'       , 'BlogController@createCategory' );
+
+        Route::get('blog/expert'                , 'BlogController@showExpert'     );
+        Route::get('blog/expert/data'           , 'BlogController@getExpert'      );
+        Route::get('blog/{id}/delete'           , 'BlogController@getDelete'      );
+        Route::post('blog/{id}/update'          , 'BlogController@update'         );
+        Route::resource('blog'                  , 'BlogController'                );
 
         Route::get('activity'               , 'AdminController@showMember'    );
         Route::get('activity/create'        , 'AdminController@showMember'    );
