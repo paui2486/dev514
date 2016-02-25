@@ -1,8 +1,8 @@
 <nav class="navbar {{ Request::is('/') ? 'home-navbar' : 'other-navbar' }}">
-    <div class="container">
+    <div class="blog-header-container">
         <div class="navbar-header">
             <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+            <button type="button" class="navbar-toggle other-navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="glyphicon glyphicon-list"></span>
                 <span class="sr-only">選單</span>
                 <span class="icon-bar"></span>
@@ -16,7 +16,7 @@
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+        <div class="collapse other-navbar-collapse" id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
             <ul class="{{ Request::is('/') ? 'navbar-right' : 'other-navbar-right' }} nav navbar-nav">
                 <!-- Authentication Links -->
