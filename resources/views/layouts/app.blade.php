@@ -21,8 +21,8 @@
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/style-responsive.css')}}" rel="stylesheet" />
-
     <link href="{{asset('css/project.css')}}" rel="stylesheet">
+    <link href="{{asset('css/mobile.css')}}" rel="stylesheet" />
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 </head>
