@@ -29,15 +29,15 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                            gggg <span class="caret"></span>
+                            會員中心 <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('profile') }}"><i class="fa fa-user-md"></i>個人資料</a></li>
-                            <li><a href="{{ url('follows') }}"><i class="fa fa-refresh fa-spin"></i>我的關注(0)</a></li>
-                            <li><a href="{{ url('friends') }}"><i class="fa fa-refresh fa-spin"></i>我的朋友(0)</a></li>
-                            <li><a href="{{ url('activitys') }}"><i class="fa fa-cog fa-spin"></i>我的活動</a></li>
-                            <li><a href="{{ url('logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li><a href="{{ url('profile') }}">個人資料</a></li>
+                            <li><a href="{{ url('follows') }}">我的關注</a></li>
+                            <li><a href="{{ url('friends') }}">我的朋友</a></li>
+                            <li><a href="{{ url('activitys') }}">我的活動</a></li>
+                            <li><a href="{{ url('logout') }}">登出</a></li>
                         </ul>
                     </li>
                 @endif
