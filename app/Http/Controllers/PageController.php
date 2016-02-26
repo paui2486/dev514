@@ -12,6 +12,47 @@ class PageController extends Controller
     //
     public function index()
     {
-        return view('page.error');
     }
+      
+    public function HostGuide()
+    {
+        return view("page.host-guide");
+    }
+        
+    public function About()
+    {
+        return view("page.about");
+    }
+    
+    public function Joinus()
+    {
+        return view("page.joinus");
+    }
+    
+    public function Advertising()
+    {
+        return view("page.advertising");
+    }
+    
+    public function Privacy()
+    {
+        return view("page.privacy");
+    }
+    
+    public function FAQ()
+    {
+        return view("page.faq");
+    }
+    
+    public function PlayGuide()
+    {
+        return view("page.play-guide");
+    }
+    
+    public function PointUse()
+    {
+        return view("page.point-use");
+    }
+
 }
+
