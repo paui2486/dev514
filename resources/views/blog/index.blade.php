@@ -134,12 +134,17 @@
                         <div style="display:none;">
                             {{ $article->id }}
                         </div>
-                        <div class="blog-thumbnail" 
+                        
+                        <a href="{{asset ('blog/article')}}">
+                            <div class="blog-thumbnail" 
                              style="background-image:url('{{ $article->thumbnail }}')">
-                        </div>
+                            </div>
+                        </a>
+                        
                         <div class="blog-panel-title word-indent-02 ">
-                            {{ $article->title }}
+                            <a href="{{asset ('blog/article')}}">{{ $article->title }}</a>
                         </div>
+                        
                         <div class="blog-panel-time">
                             {{ $article->time }}
                         </div>
