@@ -13,6 +13,8 @@ body {
     font-size: 16px;
     letter-spacing: 2px;
     width: 100%;
+    padding: 10px 20px;
+
 }
 
 .other-navbar {
@@ -21,6 +23,9 @@ body {
     font-size: 16px;
     letter-spacing: 2px;
     margin-bottom: 0px;
+    box-shadow: 1px 0px 5px #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
 }
 
 .home-navbar-brand img {
@@ -46,6 +51,11 @@ body {
     margin-top: 15px;
     cursor: pointer;
     float: right;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
 }
 
 .navbar-right > li > a {
@@ -564,7 +574,7 @@ body {
     position:relative;
     line-height:1.5em;
     /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
-    height:3em;
+    height:auto;
 }
 
 /*footer*/
@@ -834,8 +844,13 @@ body {
 .blog-thumbnail {
     height: 150px;
     width: auto;
-    background-size:100% auto;
+    background-size:cover;
     background-repeat: no-repeat;
+    box-shadow: 0px 0px 60px #60574e inset;
+}
+
+.blog-thumbnail:hover {
+    box-shadow: none;
 }
 
 .blog-cat-article {
@@ -843,19 +858,33 @@ body {
     margin: 0;
 }
 
+/*
+.blog-cat-panel:hover{
+    box-shadow: 0px 0px 8px #000;
+}
+*/
+
 .blog-cat-panel {
-    height: 250px;
+    height: auto;
     width: 23%;
-    padding: 0px 12px;
     margin: 10px;
+    padding:10px;
     float: left;
 }
 
-.blog-panel-title {
-    font-size: 16px;
+.blog-panel-title  {
+    margin-top:5px;
     height: auto;
+}
+
+.blog-panel-title a {
+    font-size: 16px;
     color:  #60574e;
-    margin-top: 5px;
+}
+
+.blog-panel-title a:hover {
+    text-decoration: none;
+    color:#000;
 }
 
 .blog-panel-time {
@@ -873,6 +902,122 @@ body {
     font-size: 14px;
     color: #998675;
 }
+
+/*blog-rticle（文章內容頁）*/
+
+.article-container {
+    background-color: #FFFEFD;
+}
+
+.article-content {
+    width: 85%;
+    margin: auto;
+    display: table;
+}
+
+.article-left {
+    width:70%;
+    padding: 20px;
+    margin: 25px 0px;
+    float: left;
+}
+
+.article-right {
+    width: 30%;
+    float: left;
+    padding:20px;
+    margin: 25px 0px;
+}
+
+.article-left-title {
+    font-size: 24px;
+    color:#60574e;
+    width: 70%;
+    float: left;
+}
+
+.article-share {
+    width: 30%;
+    float: right;
+    text-align: right;
+}
+
+.article-left-header {
+    margin: 0px;
+}
+
+ul.share-buttons {
+    list-style: none;
+    padding: 0;
+    margin: 0px
+}
+
+ul.share-buttons li{
+  display: inline;
+} 
+
+.article-left-info {
+    margin: 0px;
+    margin: 10px 0;
+}
+
+.article-left-info > p {
+    float: left;
+    padding: 5px 10px;
+    border: 1px solid #9C816B;
+    color: #9C816B;
+    margin-right: 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.article-thumnail {
+    height: 400px;
+    max-width:600px;
+    margin: 10px 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img/pics/macaron.jpg");
+}
+
+.article-relative-art ,
+.article-relative-act {
+    margin: 0;
+}
+
+.article-relative-art p,
+.article-relative-act p {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #9C816B;
+    color: #9C816B;
+    padding: 5px 10px;
+}
+
+.article-relative-thumnail {
+    width: 40%;
+    height: 80px;
+    margin-bottom: 10px;
+    background-image: url(../img/pics/macaron.jpg);
+    background-size: cover;
+    float: left;
+}
+
+.article-relative-text {
+    
+}
+
+.banner-3 {
+    background-image: url(../img/pics/iwineee.JPG);
+    width:100%;
+    height: 150px;
+    margin: 10px 0;
+    background-size: cover;
+}
+
+/*靜態頁面*/
 
 .page-container {
     background-color: #f4eee9;
