@@ -6,9 +6,9 @@
     </div>
 -->
     <div class="bottom-linkout">
-        <img src="img/pics/igicon.png">
-        <img src="img/pics/fbicon.png">
-        <img src="img/pics/youtubeicon.png">
+        <img src="{{asset('img/pics/igicon.png')}}">
+        <img src="{{asset('img/pics/fbicon.png')}}">
+        <img src="{{asset('img/pics/youtubeicon.png')}}">
     </div>
     <div class="footer-info">
         <div class="col-md-12">
@@ -39,17 +39,17 @@
                     <p>聯絡我們</p>
                     <p class="contact-info">
                         <a href="mailto:mis@514.com.tw">
-                            <img src="img/pics/email.png">
+                            <img src="{{asset('img/pics/email.png')}}">
                             <span>mis@514.com.tw</span>
                         </a>
                     </p>
                     <p class="contact-info">
                         <a href="tel:+886 2-2767-514-6">
-                            <img src="img/pics/phoneicon.png">
+                            <img src="{{asset('img/pics/phoneicon.png')}}">
                             <span>+886 2-2767-514-6</span>
                         </a>
                     </p>
-                    <div class="day-to-day"><img src="img/pics/footer-time.png"></div>
+                    <div class="day-to-day"><img src="{{asset('img/pics/footer-time.png')}}"></div>
                 </div>
             </div>
         </div>
