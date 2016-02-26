@@ -122,7 +122,6 @@ class HomeController extends Controller
         }
 
         $home       = (object) array(
-                        'meta'          => (object) $homeMeta,
                         'banner'        => (object) $homeBanner,
                         'filter'        => (object) $homeFilter,
                         'newBlog'       => (object) $newBlog,
