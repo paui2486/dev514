@@ -76,6 +76,7 @@
 @section('content')
 
     <div class="home-container">
+<!--
         <div class="panel-filter">
             <select name="type" id="types">
                 <option style="display:none">想和誰去</option>
@@ -105,6 +106,7 @@
                 @endforeach
             </select>
         </div>
+-->
 
         <div class="home-blog">
             <div class="row home-title">
