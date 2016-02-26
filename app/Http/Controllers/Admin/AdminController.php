@@ -47,6 +47,6 @@ class AdminController extends Controller
 
     public function showMember()
     {
-        return 'hi';
+        return view('page.error');
     }
 }
