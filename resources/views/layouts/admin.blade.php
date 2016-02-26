@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('assets/font-awesome/css/font-awesome.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css')}}"/>
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{asset('css/dataTables.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}"/>
     <!-- <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}"/> -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css')}}" media="screen"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/owl.carousel.css')}}"/>
@@ -63,7 +63,7 @@
     <script type="text/javascript" src="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>
 
     <!-- DataTables -->
-    <script type="text/javascript" src="{{asset('js/dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/datatables.min.js')}}"></script>
     <!-- <script type="text/javascript" src="{{asset('assets/data-tables/DT_bootstrap.js')}}"></script> -->
     <script type="text/javascript" src="{{asset('js/jquery.colorbox.js')}}"></script>
 
