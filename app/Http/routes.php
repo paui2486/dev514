@@ -32,7 +32,7 @@ Route::group(['middleware' => 'web'], function () {
 | Static Page
 |--------------------------------------------------------------------------
 */
-    Route::get('/'              , 'HomeController@index'        );
+    Route::get('/'              , 'MainController@index'        );
     Route::get('About'          , 'PageController@About'        );
     Route::get('Join'           , 'PageController@Joinus'       );
     Route::get('Advertising'    , 'PageController@Advertising'  );
@@ -41,7 +41,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('HostGuide'      , 'PageController@HostGuide'   );
     Route::get('PlayGuide'      , 'PageController@PlayGuide'   );
     Route::get('PointUse'       , 'PageController@PointUse'   );
-    
+
     Route::get('MediaReport'    , 'PageController@media-report' );
     Route::get('Partner'        , 'PageController@partner'      );
 /*
@@ -78,9 +78,17 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/'                      , 'AdminController@index'         );
 
-// no yet
-        Route::get('filter'                 , 'AdminController@showMember'    );
-        Route::get('banner'                 , 'AdminController@showMember'    );
+        Route::get('banner/data'            , 'BannerController@data'         );
+        Route::get('banner/{id}/delete'     , 'BannerController@getDelete'    );
+        Route::post('banner/{id}/update'    , 'BannerController@update'       );
+        Route::resource('banner'            , 'BannerController'              );
+
+        // no yet
+        Route::get('filter/data'            , 'FilterController@data'         );
+        Route::get('filter/{id}/delete'     , 'FilterController@getDelete'    );
+        Route::post('filter/{id}/update'    , 'FilterController@update'       );
+        Route::resource('filter'            , 'FilterController'              );
+
         Route::get('ad'                     , 'AdminController@showMember'    );
         Route::get('point'                  , 'AdminController@showMember'    );
         Route::get('coupon'                 , 'AdminController@showMember'    );
