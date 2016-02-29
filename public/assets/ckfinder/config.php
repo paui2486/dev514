@@ -64,12 +64,12 @@ $config['images'] = array(
 /*=================================== Backends ========================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_backends
 
-$user_id = (isset($_SESSION['user'])) ? $_SESSION['user'] : 0 ;
+$user_id = (isset($_COOKIE['current_user'])) ? $_COOKIE['current_user'] : 0 ;
 
 $config['backends'][] = array(
     'name'         => 'default',
     'adapter'      => 'local',
-    'baseUrl'      => '/back/' . $user_id,
+    'baseUrl'      => '/uploads/' . $user_id,
 //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles'   => 0777,
     'chmodFolders' => 0755,
