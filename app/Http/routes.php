@@ -57,7 +57,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activity/{category}/{slug}' , 'ActivityController@index'      );
 
     Route::get('blog'                       , 'BlogController@index'          );
-    Route::get('blog/{category}'            , 'ArticleController@article'          );
+    Route::get('blog/{category}'            , 'ArticleController@show'          );
     Route::get('blog/{category}/{slug}'     , 'BlogController@index'          );
 
     Route::get('order/{id}'                 , 'CartController@index'          );

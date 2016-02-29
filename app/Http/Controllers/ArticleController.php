@@ -13,6 +13,14 @@ class ArticleController extends Controller
     {
         return view("blog.article");
     }
-      
-   
+
+    public function show($id)
+    {
+        $article = DB::table('articles')
+                    ->where('articles.id', $id)
+                    ->leftJoin('users', 'users.id', '=', 'articles.author_id')->first();
+                    // return $article;
+        return view("blog.blog", ['article' => $article]);
+    }
+
 }
