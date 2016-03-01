@@ -10,10 +10,10 @@
         <img src="{{asset('img/pics/fbicon.png')}}">
         <img src="{{asset('img/pics/youtubeicon.png')}}">
     </div>
-    <div class="footer-info">
-        <div class="col-md-12">
-            <div class="footer-center">
-                <div class="funtion-intro col-md-3">
+    <div class="row  footer-info">
+        
+            <div class="row footer-center">
+                <div class="funtion-intro">
                     <p>功能介紹</p>
                     <div class="funtion-intro-content">
                         <a href="FAQ"><li>常見問題</li></a>
@@ -22,7 +22,7 @@
                         <a href="PointUse"><li>如何使用點數</li></a>
                     </div>
                 </div>
-                <div class="about-us col-md-3">
+                <div class="about-us">
                     <p>關於我們</p>
                     <div class="about-us-content">
                         <a href="About"><li>關於 514</li></a>
@@ -35,7 +35,7 @@
                         <a href="Privacy"><li>服務與隱私權條款</li></a>
                     </div>
                 </div>
-                <div class="contact-us col-md-2 col-lg-2">
+                <div class="contact-us">
                     <p>聯絡我們</p>
                     <p class="contact-info">
                         <a href="mailto:mis@514.com.tw">
@@ -49,10 +49,10 @@
                             <span>+886 2-2767-514-6</span>
                         </a>
                     </p>
-                    <div class="day-to-day"><img src="{{asset('img/pics/footer-time.png')}}"></div>
+                    <div class="day-to-day">週一到週日10:00~18:00</div>
                 </div>
             </div>
-        </div>
+       
         <div class="online-secretary">
             <p>線上客服小秘書</p>
         </div>
