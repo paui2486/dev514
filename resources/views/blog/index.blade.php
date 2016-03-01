@@ -126,7 +126,7 @@
                     <div class="blog-cat-logo"> 
                         <img src="{{ $category->cat_logo }}">
                     </div>
-                    <div class="blog-readmore">閱讀更多</div>
+                    <div class="blog-readmore"><a href="#">閱讀更多</a></div>
                 </div>
                 <div class="row blog-cat-article">
                     @foreach ( $category->cat_content as $article )
@@ -135,7 +135,7 @@
                             {{ $article->id }}
                         </div>
                         
-                        <a href="{{asset ('blog/article')}}">
+                        <a href="{{asset ('blog/1')}}">
                             <div class="blog-thumbnail" 
                              style="background-image:url('{{ $article->thumbnail }}')">
                             </div>
