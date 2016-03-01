@@ -1,4 +1,4 @@
-<nav class="navbar {{ Request::is('/') ? 'home-navbar' : 'other-navbar' }}">
+<nav class="{{ Request::is('/') ? 'home-navbar' : 'other-navbar' }}">
     <div class="blog-header-container">
         <div class="navbar-header">
             <!-- Collapsed Hamburger -->
