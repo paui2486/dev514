@@ -213,11 +213,6 @@
         margin: 10px;
     }
     
-    .home_bntitle,
-    .panel-filter {
-        display: none;
-    }
-    
     .banner-1 {
         top: 60px;
     }
@@ -254,12 +249,7 @@
         background-size: cover;
         background-position: center;
     }
-    
-    .home-blog-author,
-    .home-blog-created_at {
-        display: none;
-    }
-    
+      
     .home-blog-title {
         width: 240px;
         font-size: 20px;
@@ -315,11 +305,14 @@
     .new-activity-description,
     .inter-panel,
     .Act-category-logo,
-    .outer-panel-left,
-    .funtion-intro,
-    .about-us,   
+    .outer-panel-left,  
     .blog-banner-auth,
-    .blog-banner-date  {
+    .blog-banner-date, 
+    .home_bntitle,
+    .panel-filter,
+    .home-blog-author,
+    .home-blog-created_at,
+    .online-secretary {
         display: none;
     }
     
@@ -409,6 +402,7 @@
         padding:10px; 
     }
 }
+
 
 @media screen and (max-width: 440px) {
 
@@ -530,6 +524,7 @@
     .about-us {
         display: none;
     }
+    
     .new-activity-title {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -612,7 +607,18 @@
         text-align: center;
         width: 90%;
     }
- 
+    
+    .contact-us {
+        width: 100%;
+        margin-bottom: 30px;
+        margin: auto;
+        text-align: center;
+    }
+    
+    .day-to-day {
+        width:50%;
+        margin: auto;
+    }
 
 }
     
