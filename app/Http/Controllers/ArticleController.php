@@ -52,7 +52,7 @@ class ArticleController extends Controller
     {
         $relate = DB::table('articles')
                     ->where('id', '!=', $from_id)
-                    ->where('status', 1)
+                    ->where('status', 2)
                     ->orderBy('created_at', 'ASC')
                     ->take($number)->get();
         return $relate;
