@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class ArticleController extends Controller
 {
     //
-    public function article()
+    public function article($id)
     {
         $relate_articles = $this->getRelateArticle(3, $id);
         $relate_activities = $this->getRelateActivity(3, $id);

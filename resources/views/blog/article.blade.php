@@ -41,7 +41,9 @@
         <div class="article-right">
             <div class="row relative-art">
                 <p>相關文章</p>
+                @if(count($relate_articles) == 0)
                 <img src="/img/icons/noart.png">
+                @else
                 <div class="row article-relative-content">
                     @foreach ($relate_articles as $relate_article)
                     <div class="row">
@@ -56,11 +58,13 @@
                     </div>
                     @endforeach
                 </div>
-
+                @endif
             </div>
             <div class="row relative-act">
                 <p>相關活動</p>
-                <!--                <img src="/img/icons/noact.png">-->
+                @if(count($relate_activities) == 0)
+                <img src="/img/icons/noact.png">
+                @else
                 <div class="row activity-relative-content">
                     @foreach ($relate_activities as $relate_activity)
                     <div class="row">
@@ -75,6 +79,7 @@
                     </div>
                     @endforeach
                 </div>
+                @endif
             </div>
             <div class="banner-3">
             </div>
@@ -100,4 +105,3 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 @endsection
-
