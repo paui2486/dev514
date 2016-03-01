@@ -43,41 +43,54 @@
             <div class="article-left-comment">
             </div>
             <div id="disqus_thread"></div>
-            <script>
-            /**
-            * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-            */
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
 
-            s.src = '//514life.disqus.com/embed.js';
-
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-            </script>
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
         </div>
         <div class="article-right">
             <div class="row article-relative-art">
                 <p>相關文章</p>
-                <div class="article-relative-thumnail"></div>
-                <div class="article-relative-text">這是馬卡龍</div>
-
+                @foreach ($relate_articles as $relate_article)
+                    <div>
+                        <div> Title : {{ $relate_article -> title }}</div>
+                        <div> Image url : {{ $relate_article -> thumbnail }}</div>
+                        <div> Create time : {{ $relate_article -> created_at }}</div>
+                    </div>
+                @endforeach
             </div>
             <div class="banner-3">
             </div>
             <div class="article-relative-act">
                 <p>相關活動</p>
+                @foreach ($relate_activities as $relate_activity)
+                    <div>
+                        <div> Title : {{ $relate_activity -> title }}</div>
+                        <div> Image url : {{ $relate_activity -> thumbnail }}</div>
+                        <div> Create time : {{ $relate_activity -> created_at }}</div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@session('script')
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+var disqus_config = function () {
+this.page.url = "{{ Request::URL() }}"; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = {{ $article -> title }} ; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//514life.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+@endsession
