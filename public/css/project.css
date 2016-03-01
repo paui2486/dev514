@@ -13,7 +13,7 @@ body {
     font-size: 16px;
     letter-spacing: 2px;
     width: 100%;
-    padding: 10px 20px;
+    padding: 0px 20px;
 
 }
 
@@ -63,8 +63,21 @@ body {
     text-shadow: 1px 1px 4px #000;
 }
 
+ul.navbar-nav > li :hover, :focus {
+    background: rgba(255,255,255,0.5);
+}
+
 .navbar-right > li :hover{
-    background-color: rgba(255,255,255,0.5)!important;
+    background-color: rgba(255,255,255,0.5);
+}
+
+.dropdown-menu :hover {
+    background-color:#00dfe8 !important;
+}
+
+ul.navbar-nav > li > ul.dropdown-menu :hover {
+    background-color:#ccc;
+    color: black;
 }
 
 .other-navbar-right > li > a {
@@ -567,7 +580,6 @@ body {
 .word-indent-02 {
     overflow : hidden;
     text-overflow: ellipsis;
-    white-space : nowrap;
     display: -webkit-box;
     -webkit-line-clamp:2;
     -webkit-box-orient: vertical;
@@ -601,13 +613,13 @@ body {
 .footer-info {
     background-color: #d8d8d8;
     position: relative;
-    height:240px;
+    margin: 0px;
 }
 
 .footer-center {
     max-width: 700px;
     margin: auto;
-    padding: 40px 0px;
+    padding: 40px;
 }
 
 .footer-center > div > p {
@@ -617,11 +629,13 @@ body {
 
 .funtion-intro,
 .about-us {
-    width: 200px;
+    width: 32%;
+    float: left;
 }
 
 .contact-us {
-    width: 240px;
+    width: 36%;
+    float: left;
 }
 
 .funtion-intro-content li,
@@ -642,11 +656,6 @@ body {
     text-decoration: none;
 }
 
-.day-to-day img {
-    width:130px;
-    margin-left:50px;
-}
-
 .contact-info a {
     font-size: 16px;
     color: #998d7e;
@@ -657,6 +666,17 @@ body {
     color: #60574e;
     text-decoration: none;
 } 
+
+.day-to-day {
+    font-size:14px;
+    color: #808080;
+    list-style: none;
+    border: 1px solid #808080;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-align: center;
+    width: 70%;
+}
 
 .contact-info > span {
     padding-left: 10px;
@@ -674,7 +694,7 @@ body {
     background-color: rgba(255,255,255,0.7);
     box-shadow: 3px 3px 10px #666;
     padding: 10px 20px 0px 20px;
-    margin-right: 5%;
+    margin-right: 15%;
     font-size: 16px;
     letter-spacing: 1px;
 }
@@ -829,11 +849,18 @@ body {
     float: left;
 }
 
-.blog-readmore {
+.blog-readmore a {
     float: right;
     padding: 10px;
     border: 1px solid #60574e;
     color: #60574e;
+    letter-spacing: 1px;
+}
+
+.blog-readmore a:hover {
+    color: white;
+    background-color: #666;
+    text-decoration: none;
 }
 
 .blog-cat-logo img {
@@ -906,27 +933,28 @@ body {
 /*blog-rticle（文章內容頁）*/
 
 .article-container {
-    background-color: #FFFEFD;
+    background-color: #f4f4f4;
 }
 
 .article-content {
-    width: 85%;
+    max-width: 1050px;
     margin: auto;
     display: table;
+    line-height: 25px;
 }
 
 .article-left {
-    width:70%;
-    padding: 20px;
-    margin: 25px 0px;
+    width: 65%;
+    padding: 30px;
+    margin: 30px 20px;
     float: left;
 }
 
 .article-right {
     width: 30%;
     float: left;
-    padding:20px;
-    margin: 25px 0px;
+    padding: 30px;
+    margin: 30px 0px;
 }
 
 .article-left-title {
@@ -934,27 +962,19 @@ body {
     color:#60574e;
     width: 70%;
     float: left;
-}
-
-.article-share {
-    width: 30%;
-    float: right;
-    text-align: right;
+    margin-bottom: 10px;
+    line-height: 35px;
 }
 
 .article-left-header {
     margin: 0px;
+    border-bottom: 1px solid #60574e;
 }
 
-ul.share-buttons {
-    list-style: none;
-    padding: 0;
-    margin: 0px
+.article-share {
+    float: right;
+    padding-top: 10px;
 }
-
-ul.share-buttons li{
-  display: inline;
-} 
 
 .article-left-info {
     margin: 0px;
@@ -963,13 +983,22 @@ ul.share-buttons li{
 
 .article-left-info > p {
     float: left;
-    padding: 5px 10px;
-    border: 1px solid #9C816B;
-    color: #9C816B;
-    margin-right: 10px;
+    padding: 0px 10px;
+    border: 1px solid #c7b299;
+    color: #c7b299;
+    margin: 5px 5px 5px 0px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 1px;
+}
+
+.article-count > span img {
+    height: 15px;
+}
+
+.article-left-content {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .article-thumnail {
@@ -981,40 +1010,71 @@ ul.share-buttons li{
     background-image: url("../img/pics/macaron.jpg");
 }
 
-.article-relative-art ,
-.article-relative-act {
-    margin: 0;
-}
+.relative-art,
+.relative-act {
+    margin: 0px;
+} 
 
-.article-relative-art p,
-.article-relative-act p {
+.relative-art p,
+.relative-act p {
     margin: 0 0 10px 0;
     font-size: 16px;
-    text-align: center;
-    border: 1px solid #9C816B;
+    border-bottom: 1px solid #9C816B;
     color: #9C816B;
     padding: 5px 10px;
+    letter-spacing: 2px;
 }
 
-.article-relative-thumnail {
+.relative-act img,
+.relative-art img {
+    width: 70%;
+    margin: 0 15%;
+}
+
+.article-relative-content,
+.activity-relative-content {
+    margin: 15px;
+}
+
+.article-relative-thumnail,
+.activity-relative-thumnail{
     width: 40%;
     height: 80px;
-    margin-bottom: 10px;
-    background-image: url(../img/pics/macaron.jpg);
     background-size: cover;
+    background-position: center;
     float: left;
 }
 
-.article-relative-text {
-    
+.article-relative-text,
+.activity-relative-text {
+    font-size: 15px;
+    margin:5% 0px 0px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+    width: 55%;
+}
+
+.article-relative-time,
+.activity-relative-time {
+    font-size: 13px;
+    margin:0px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+    color: #c7b299;
+    letter-spacing: 1px;
+    float: left;
+    width: 55%;
 }
 
 .banner-3 {
-    background-image: url(../img/pics/iwineee.JPG);
+    background-image: url(../img/pics/iwinee.jpg);
     width:100%;
-    height: 150px;
-    margin: 10px 0;
+    height:200px;
+    margin: 25px 0;
     background-size: cover;
+    background-position: center;
 }
 
 /*靜態頁面*/
@@ -1024,7 +1084,7 @@ ul.share-buttons li{
 }
 
 .page-content {
-    width: 750px;
+    width:100%;
     margin: auto;
     padding:50px 0px ;
 }
