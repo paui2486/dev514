@@ -14,7 +14,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/project.css')}}" rel="stylesheet">
     <link href="{{asset('css/mobile.css')}}" rel="stylesheet" />
-    @yielf('style')
+    @yield('style')
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 </head>
 <body id="app-layout">
