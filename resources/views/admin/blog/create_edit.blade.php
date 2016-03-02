@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="{{asset('assets/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/bootstrap-timepicker/compiled/timepicker.css')}}">
 <link rel="stylesheet" href="{{asset('assets/bootstrap-colorpicker/css/colorpicker.css')}}">
+<link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+
 @stop
 
 {{-- Content --}}
@@ -43,7 +45,6 @@
                                 <div class="col-sm-10 col-md-8">
                                     <input class="form-control" type="text" name="title" id="title"
                                         value="{{{ Input::old('title', isset($article) ? $article->title : null) }}}" />
-                                        <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
                                 </div>
                             </div>
                         </div>
@@ -102,10 +103,10 @@
                     <div class="col-md-6">
                         <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="thumbnail">
+                                <label class="control-label col-sm-2 col-md-4" for="thumbnail">
                                     文章縮圖
                                 </label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-10 col-md-8">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
                                             <img src="{{{ ( isset($article) && !empty($article->thumbnail) ? asset($article->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
@@ -134,6 +135,17 @@
                                     <input class="form-control" type="text" name="description" id="description"
                                         value="{{{ Input::old('description', isset($article) ? $article->description : null) }}}" />
                                         <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group {{{ $errors->has('tag_ids') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="tag_ids">
+                                    文章標籤
+                                </label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="tag_ids" id="tag_ids" placeholder="Tag..."
+                                        value="{{{ Input::old('tag_ids', isset($article) ? $article->tag_ids : null) }}}"  data-role="tagsinput"/>
                                 </div>
                             </div>
                         </div>
@@ -226,6 +238,7 @@
     @parent
     <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -262,6 +275,11 @@
                 }
             })
         };
+
+        $(document).on("keypress", "form", function(event) {
+            return event.keyCode != 13;
+        });
+
         $('form').on('submit', function(){
             CKEDITOR.instances.content.updateElement();
         });
