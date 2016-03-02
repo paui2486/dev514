@@ -1,5 +1,5 @@
 {{-- */
-    $layouts = ( isset($_GET['view'])) ? 'admin.layouts.modal' : 'layouts.admin';
+    $layouts = 'layouts.admin';
 /* --}}
 @extends($layouts)
 
@@ -14,11 +14,8 @@
 
 @section('content')
 <!-- Tabs -->
-@if (!isset($_GET['view']))
 <section id="main-content">
     <section class="wrapper">
-@endif
-
         <ul class="nav nav-tabs">
             <li class="active">
                 <a href="#tab-general" data-toggle="tab">文章設定</a>
@@ -38,69 +35,69 @@
                 <!-- General tab -->
                 <div class="tab-pane active" id="tab-general">
                     <div class="col-md-6">
-                      <div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
-                          <div class="col-md-12">
-                              <label class="control-label col-sm-4" for="title">
-                                  文章標題
-                              </label>
-                              <div class="col-sm-8">
-                                  <input class="form-control" type="text" name="title" id="title"
-                                      value="{{{ Input::old('title', isset($article) ? $article->title : null) }}}" />
-                                      <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group {{{ $errors->has('author_id') ? 'has-error' : '' }}}">
-                          <div class="col-md-12">
-                              <label class="control-label col-sm-4" for="author_id">
-                                  文章作者
-                              </label>
-                              <div class="col-sm-8">
-                                  <select style="width: 100%" name="author_id" id="author_id" class="form-control">
+                        <div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2 col-md-4" for="title">
+                                    文章標題
+                                </label>
+                                <div class="col-sm-10 col-md-8">
+                                    <input class="form-control" type="text" name="title" id="title"
+                                        value="{{{ Input::old('title', isset($article) ? $article->title : null) }}}" />
+                                        <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group {{{ $errors->has('author_id') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2 col-md-4" for="author_id">
+                                    文章作者
+                                </label>
+                                <div class="col-sm-10 col-md-8">
+                                    <select style="width: 100%" name="author_id" id="author_id" class="form-control">
                                     @foreach($authors as $author)
-                                      <option value="{{$author->id}}"
-                                      @if(!empty($articles))
-                                          @if($articles->author_id==$author->id)
-                                      selected="selected"
-                                          @endif
-                                      @endif >{{$author->name}}
-                                      </option>
+                                        <option value="{{$author->id}}"
+                                        @if(!empty($articles))
+                                            @if($articles->author_id==$author->id)
+                                        selected="selected"
+                                            @endif
+                                        @endif >{{$author->name}}
+                                        </option>
                                     @endforeach
-                                  </select>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group {{{ $errors->has('category_id') ? 'has-error' : '' }}}">
-                          <div class="col-md-12">
-                              <label class="control-label col-sm-4" for="category_id">
-                                  文章分類
-                              </label>
-                              <div class="col-sm-8">
-                                  <select style="width: 100%" name="category_id" id="category_id" class="form-control">
-                                    @foreach($categories as $category)
-                                      <option value="{{$category->id}}"
-                                      @if(!empty($articles))
-                                          @if($articles->category_id==$category->id)
-                                      selected="selected"
-                                          @endif
-                                      @endif >{{$category->name}}
-                                      </option>
-                                    @endforeach
-                                  </select>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="form-group {{{ $errors->has('created_at') ? 'has-error' : '' }}}">
-                          <div class="col-md-12">
-                              <label class="control-label col-sm-4" for="created_at">
-                                  發布時間
-                              </label>
-                              <div class="col-sm-8">
-                                  <input class="form-control" type="text" name="created_at" id="created_at"
-                                      value="{{{ Input::old('created_at', isset($article) ? $article->created_at : null) }}}" />
-                              </div>
-                          </div>
-                      </div>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group {{{ $errors->has('category_id') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2 col-md-4" for="category_id">
+                                    文章分類
+                                </label>
+                                <div class="col-sm-10 col-md-8">
+                                    <select style="width: 100%" name="category_id" id="category_id" class="form-control">
+                                      @foreach($categories as $category)
+                                        <option value="{{$category->id}}"
+                                        @if(!empty($articles))
+                                            @if($articles->category_id==$category->id)
+                                                selected="selected"
+                                            @endif
+                                        @endif >{{$category->name}}
+                                        </option>
+                                      @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group {{{ $errors->has('created_at') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2 col-md-4" for="created_at">
+                                    發布時間
+                                </label>
+                                <div class="col-sm-10 col-md-8">
+                                    <input class="form-control" type="text" name="created_at" id="created_at"
+                                        value="{{{ Input::old('created_at', isset($article) ? $article->created_at : null) }}}" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
@@ -237,13 +234,15 @@
                 language : 'zh',
                 height : 500,
                 allowedContent : true,
-
+                extraPlugins: 'autosave',
+                autosave_SaveKey: 'autosaveKey',
+                autosave_NotOlderThen : 10,
                 filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
                 filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Image',
                 filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
                 filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Image',
 
-                removeButtons : 'Source,Save,NewPage,DocProps,Print,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,Language,Flash,Iframe,',
+                removeButtons : 'BidiLtr,BidiRtl,Anchor,Maximize,Styles,Paste,PasteText,PasteFromWord,Cut,Copy,Source,Save,NewPage,DocProps,Print,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,Language,Flash,Iframe,',
 
                 font_names : 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana;新細明體;細明體;標楷體;微軟正黑體',
                 fontSize_sizes : '8/8px;9/9px;10/10px;11/11px;12/12px;13/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;21/21px;22/22px;23/23px;24/24px;25/25px;26/26px;28/28px;36/36px;48/48px;72/72px'
@@ -253,6 +252,16 @@
                     // Your CSS changes, just in case you still need them
             });
         });
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {
+            modal_this = this
+            $(document).on('focusin.modal', function (e) {
+                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                    modal_this.$element.focus()
+                }
+            })
+        };
         $('form').on('submit', function(){
             CKEDITOR.instances.content.updateElement();
         });

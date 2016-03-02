@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use DB;
 use Log;
 use Input;
+use Response;
 use Redirect;
 use Datatables;
+use App\Library;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -52,39 +54,30 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        Log::error($request);
-        if ( $request->hasFile('thumbnail') ) {
-            $id = DB::table('articles')->insertGetId([
-              'title'         => $request->title,
-              'author_id'     => $request->author_id,
-              'category_id'   => $request->category_id,
-              'thumbnail'     => $request->thumbnail,
-              'content'       => $request->content,
-              'tag_ids'       => $request->tags,
-              'status'        => $request->status,
-              'counter'       => $request->counter,
-              'created_at'    => date("Y-m-d H:i:s"),
-              'updated_at'    => date("Y-m-d H:i:s"),
-            ]);
-            $file             = $request->file('thumbnail');
-            $destinationPath  = public_path() . '/uploads/articles/' . $id;
-            $thumbnail        = "uploads/articles/$id/" . $file->getClientOriginalName();
-            $file -> move($destinationPath, $file->getClientOriginalName());
-            $temp             = DB::table('articles')->where('id', $id)->update(array('thumbnail' => $thumbnail));
+        $storeArray = array(
+            'title'         => $request->title,
+            'author_id'     => $request->author_id,
+            'category_id'   => $request->category_id,
+            'description'   => $request->description,
+            'content'       => $request->content,
+            'tag_ids'       => $request->tags,
+            'status'        => $request->status,
+            'counter'       => $request->counter,
+            'created_at'    => date("Y-m-d H:i:s"),
+            'updated_at'    => date("Y-m-d H:i:s"),
+        );
 
-        } else {
-            $store            = DB::table('articles')->insert([
-              'title'         => $request->title,
-              'author_id'     => $request->author_id,
-              'category_id'   => $request->category_id,
-              'content'       => $request->content,
-              'tag_ids'       => $request->tags,
-              'status'        => $request->status,
-              'counter'       => $request->counter,
-              'created_at'    => date("Y-m-d H:i:s"),
-              'updated_at'    => date("Y-m-d H:i:s"),
-            ]);
-        }
+        $id                 = DB::table('articles')->insertGetId($storeArray);
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $storeArray;
+        $params['filed']    = ['thumbnail'];
+        $params['infix']    = 'articles/';
+        $params['suffix']   = "$id/";
+
+        $update             = Library::upload($params);
+        $articles           = DB::table('articles')->where('id', $id);
+        $result             = $articles->update($update['data']);
         return Redirect::to('dashboard/blog');
     }
 
@@ -128,30 +121,30 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articles = DB::table('articles')->where('id', $id);
-
         $updateArray = array(
-          'title'         => $request->title,
-          'author_id'     => $request->author_id,
-          'category_id'   => $request->category_id,
-          'thumbnail'     => $request->thumbnail,
-          'description'   => $request->description,
-          'content'       => $request->content,
-          'tag_ids'       => $request->tags,
-          'status'        => $request->status,
-          'counter'       => $request->counter,
-          'created_at'    => $request->created_at,
-          'updated_at'    => date("Y-m-d H:i:s"),
+            'title'         => $request->title,
+            'author_id'     => $request->author_id,
+            'category_id'   => $request->category_id,
+            'description'   => $request->description,
+            'content'       => $request->content,
+            'tag_ids'       => $request->tags,
+            'status'        => $request->status,
+            'counter'       => $request->counter,
+            'created_at'    => $request->created_at,
+            'updated_at'    => date("Y-m-d H:i:s"),
         );
 
-        if ( $request->hasFile('thumbnail') ) {
-            $file                     = $request->file('thumbnail');
-            $destinationPath          = public_path() . '/uploads/articles/' . $id;
-            $updateArray['thumbnail'] = "uploads/articles/$id/" . $file->getClientOriginalName();
-            $file->move($destinationPath, $file->getClientOriginalName());
-        }
+        $params            = Library::upload_param_template();
+        $params['request'] = $request;
+        $params['data']    = $updateArray;
+        $params['filed']   = ['thumbnail'];
+        $params['infix']   = 'articles/';
+        $params['suffix']  = "$id-";
 
-        $articles->update($updateArray);
+        $update            = Library::upload($params);
+        $articles          = DB::table('articles')->where('id', $id);
+        $result            = $articles->update($update['data']);
+        return Redirect::to('dashboard/blog');
     }
 
     /**
@@ -198,7 +191,7 @@ class BlogController extends Controller
              ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status == 2) 已發布 @elseif($status == 3) 已隱藏 @else 已刪除 @endif')
              ->add_column('actions', '
                    <div style="white-space: nowrap;">
-                   <a href="{{{ URL::to(\'dashboard/blog/\' . $id ) }}}?view=colorbox" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                   <a href="{{{ URL::to(\'dashboard/blog/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
                    <a href="{{{ URL::to(\'dashboard/blog/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                    <input type="hidden" name="row" value="{{$id}}" id="row">
                    </div>')
@@ -226,8 +219,8 @@ class BlogController extends Controller
      */
     public function getCategory($id)
     {
-          $category = DB::table('categories')->find($id);
-          return view('admin.category.create_edit', compact('category'));
+        $category = DB::table('categories')->find($id);
+        return view('admin.category.create_edit', compact('category'));
     }
 
     /**
@@ -238,13 +231,23 @@ class BlogController extends Controller
      */
     public function updateCategory(Request $request, $id)
     {
-          Log::error($id);
-          $blogCategory = DB::table('categories')->where('id', $id);
-          $blogCategory->update([
-            'name'      => $request->name,
-            'priority'  => $request->priority,
-            'public'    => $request->public
-          ]);
+        $updateArray = array(
+            'name'     => $request->name,
+            'priority' => $request->priority,
+            'public'   => $request->public,
+        );
+
+        $params            = Library::upload_param_template();
+        $params['request'] = $request;
+        $params['data']    = $updateArray;
+        $params['filed']   = ['thumbnail', 'logo'];
+        $params['infix']   = 'articles/';
+        $params['suffix']  = 'category/';
+
+        $update       = Library::upload($params);
+        $blogCategory = DB::table('categories')->where('id', $id);
+        $result       = $blogCategory->update($update['data']);
+        return Redirect::to('dashboard/blog/category');
     }
 
     /**
@@ -258,18 +261,20 @@ class BlogController extends Controller
         $blogCategory = DB::table('categories')
                            ->leftJoin('articles', 'articles.category_id', '=', 'categories.id')
                            ->select(array(
-                             'categories.id', 'categories.name', 'categories.priority',
-                             DB::raw('count(*) as articles_cnt'), 'categories.public',
+                             'categories.id', 'categories.name', 'categories.logo', 'categories.thumbnail', 'categories.priority',
+                             DB::raw('count(articles.category_id) as articles_cnt'), 'categories.public',
                            ))
                            ->groupBy('categories.id')
                            ->where('categories.type', '2')
                            ->orderBy('categories.id', 'ASC');
 
         return Datatables::of($blogCategory)
+            ->edit_column('logo', '<img src="{{ (trim($logo) == "")? asset("img/no-image.png") : asset($logo) }}" width="72" height="72"/>')
+            ->edit_column('thumbnail', '<img src="{{ (trim($thumbnail) == "")? asset("img/no-image.png") : asset($thumbnail) }}" width="72" height="72"/>')
             ->edit_column('public', '@if($public == 1) 顯示 @else 隱藏 @endif')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
-                  <a href="{{{ URL::to(\'dashboard/blog/category/\' . $id ) }}}?view=colorbox" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                  <a href="{{{ URL::to(\'dashboard/blog/category/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
                   <a href="{{{ URL::to(\'dashboard/blog/category/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')
@@ -293,12 +298,25 @@ class BlogController extends Controller
      */
     public function storeCategory(Request $request)
     {
-        $store = DB::table('categories')->insert([
+        $storeArray = array(
             'name'          => $request->name,
             'priority'      => $request->priority,
             'public'        => $request->public,
             'type'          => '2',
-        ]);
+        );
+
+        $id                 = DB::table('categories')->insertGetId($storeArray);
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $storeArray;
+        $params['filed']    = ['thumbnail', 'logo'];
+        $params['infix']    = 'articles/';
+        $params['suffix']   = "category/";
+
+        $update             = Library::upload($params);
+        $blogCategory       = DB::table('categories')->where('id', $id);
+        $result             = $blogCategory->update($update['data']);
+        return Redirect::to('dashboard/blog/category');
     }
 
     /**

@@ -7,8 +7,8 @@
          <h4 class="wrapper-title">
              文章分類列表
              <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/blog/category/create') }}}?view=1"
-                    class="btn btn-sm  btn-primary iframe">
+                 <a href="{{{ URL::to('dashboard/blog/category/create') }}}"
+                    class="btn btn-sm  btn-primary">
                       <span class="glyphicon glyphicon-plus-sign"></span> 新增
                   </a>
              </div>
@@ -18,6 +18,8 @@
                  <tr>
                      <th>ID</th>
                      <th>文章類別</th>
+                     <th> Logo </th>
+                     <th>大圖</th>
                      <th>優先權</th>
                      <th>統計</th>
                      <th>狀態</th>

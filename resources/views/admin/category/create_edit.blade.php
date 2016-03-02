@@ -1,7 +1,11 @@
 {{-- */
-    $layouts = ( isset($_GET['view'])) ? 'admin.layouts.modal' : 'layouts.admin';
+    $layouts = 'layouts.admin';
 /* --}}
 @extends($layouts)
+
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.css')}}" />
+@stop
 
 {{-- Content --}}
 
@@ -50,6 +54,52 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="priority" id="priority"
                       							value="{{{ Input::old('avatar', isset($category) ? $category->priority : null) }}}" />
+                            </div>
+                        </div>
+            				</div>
+                    <div class="form-group {{{ $errors->has('logo') ? 'has-error' : '' }}}">
+              					<div class="col-md-12">
+                						<label class="control-label col-sm-2" for="logo">
+                                類別 logo
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                        <img src="{{{ ( isset($category) && trim($category->logo) != "" )? asset($category->logo) : asset('img/no-image.png') }}}" alt="" />
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                    <div>
+                                        <span class="btn btn-white btn-file">
+                                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
+                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
+                                            <input id="logo" class="file"  name="logo" type="file" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            				</div>
+                    <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
+              					<div class="col-md-12">
+                						<label class="control-label col-sm-2" for="thumbnail">
+                                類別主圖
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                        <img src="{{{ ( isset($category) && trim($category->thumbnail) != "" ) ? asset($category->thumbnail) : asset('img/no-image.png') }}}" alt="" />
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                    <div>
+                                        <span class="btn btn-white btn-file">
+                                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
+                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
+                                            <input id="thumbnail" class="file"  name="thumbnail" type="file" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
             				</div>
@@ -102,4 +152,9 @@
     </section>
 </section>
 
+@stop
+
+@section('scripts')
+    @parent
+    <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
 @stop

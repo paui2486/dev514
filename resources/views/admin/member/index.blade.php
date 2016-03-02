@@ -7,8 +7,8 @@
          <h4 class="wrapper-title">
              會員列表
              <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/member/create') }}}?view=1"
-                    class="btn btn-sm  btn-primary iframe">
+                 <a href="{{{ URL::to('dashboard/member/create') }}}"
+                    class="btn btn-sm  btn-primary">
                       <span class="glyphicon glyphicon-plus-sign"></span> 新增
                   </a>
              </div>
