@@ -7,8 +7,8 @@
          <h4 class="wrapper-title">
              Banner 設定
              <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/banner/create') }}}?view=1"
-                    class="btn btn-sm  btn-primary iframe">
+                 <a href="{{{ URL::to('dashboard/banner/create') }}}"
+                    class="btn btn-sm  btn-primary">
                       <span class="glyphicon glyphicon-plus-sign"></span> 新增
                   </a>
              </div>
