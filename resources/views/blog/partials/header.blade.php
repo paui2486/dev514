@@ -14,15 +14,19 @@
             <a class="{{ Request::is('/') ? 'home-navbar-brand' : 'other-navbar-brand' }}" href="{{ url('blog') }}">
                 <img src="/img/pics/logo_blog.png">
             </a>
+            <div class="navbar-blog-category">
+                <li><a href="#">人物 </a></li>
+                <li><a href="#">食記 </a></li>
+                <li><a href="#">景點 </a></li>
+                <li><a href="#">遊記 </a></li>
+                <li class="last-li"><a href="#">隨筆 </a></li>
+            </div>
         </div>
-
         <div class="collapse other-navbar-collapse" id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
             <ul class="{{ Request::is('/') ? 'navbar-right' : 'other-navbar-right' }} nav navbar-nav">
                 <!-- Authentication Links -->
-                <li><a href="{{ url('/') }}">回到514首頁</a></li>
-                <li><a href="{{ url('') }}">辦活動</a></li>
-
+               
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">登入</a></li>
                     <li><a href="{{ url('/register') }}">註冊</a></li>
@@ -40,7 +44,12 @@
                             <li><a href="{{ url('logout') }}">登出</a></li>
                         </ul>
                     </li>
-                @endif
+                @endif 
+                    <li><a href="{{ url('/') }}">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+                    </li>
+
+                
             </ul>
         </div>
     </div>

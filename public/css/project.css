@@ -48,7 +48,7 @@ body {
 
 .navbar-right,
 .other-navbar-right {
-    margin-top: 15px;
+    margin-top:9%;
     cursor: pointer;
     float: right;
 }
@@ -63,12 +63,8 @@ body {
     text-shadow: 1px 1px 4px #000;
 }
 
-ul.navbar-nav > li :hover, :focus {
-    background: rgba(255,255,255,0.5);
-}
-
-.navbar-right > li :hover{
-    background-color: rgba(255,255,255,0.5);
+ul.navbar-nav > li :hover{
+    background-color:rgba(0,0,0,0.1);
 }
 
 .dropdown-menu :hover {
@@ -127,6 +123,39 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
     border-top: 1px solid transparent;
     -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.navbar-blog-category {
+    position: absolute;
+    top: 25px;
+    left: 35%;
+}
+
+.navbar-blog-category a {
+    color: #808080;
+    padding-right: 20px;
+    border-right: 1px solid #808080;
+}
+
+.navbar-blog-category a:hover {
+    color: #51D5D1;
+    text-decoration: none;
+}
+
+.navbar-blog-category a:focus {
+    text-decoration: none;
+} 
+
+.navbar-blog-category > li {
+    list-style: none;
+    float: left;
+    margin: 10px;
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+.last-li a{
+    border: none;
 }
 
 /*Banner-01 Slider(home)*/
