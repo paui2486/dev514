@@ -6,9 +6,6 @@ Website: http://thevectorlab.net/
 */
 
 /* Import fonts */
-@import url(http://fonts.useso.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
-
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);*/
 
 body {
     color: #797979;
@@ -539,10 +536,10 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .top-nav  {
     margin-top: 7px;
 }
-
+/*
 .top-nav ul.top-menu > li .dropdown-menu.logout {
     width: 60px !important;
-}
+}*/
 
 .top-nav li.dropdown .dropdown-menu {
     float: right;
@@ -6273,4 +6270,16 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
     border-radius: 10px;
     margin: 10px;
     box-shadow: 0 0 25px blue;
+}
+
+.bootstrap-tagsinput {
+    padding: 4px;
+    width: 100%;
+    line-height: 25px;
+}
+
+.bootstrap-tagsinput .tag {
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
 }

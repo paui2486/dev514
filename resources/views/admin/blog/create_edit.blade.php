@@ -134,7 +134,6 @@
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="description" id="description"
                                         value="{{{ Input::old('description', isset($article) ? $article->description : null) }}}" />
-                                        <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
                                 </div>
                             </div>
                         </div>
@@ -155,12 +154,7 @@
                                     文章內容
                                 </label>
                                 <div class="col-sm-10">
-                                    <!-- <input class="form-control" type="text" name="content" id="content"
-                                        value="{{{ Input::old('content', isset($article) ? $article->content : null) }}}" /> -->
-                                        <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
-                                    <!-- <textarea id="content"></textarea> -->
                                     <textarea class="form-control ckeditor" id="content" name="content" rows="6">{{{ Input::old('content', isset($article) ? $article->content : null) }}}</textarea>
-                                    <!-- <textarea class="form-control ckeditor" name="content" rows="6">{{{ Input::old('content', isset($article) ? $article->content : null) }}}</textarea> -->
                                 </div>
                             </div>
                         </div>
@@ -262,7 +256,6 @@
             });
             $("#created_at").datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss'
-                    // Your CSS changes, just in case you still need them
             });
         });
         $.fn.modal.Constructor.prototype.enforceFocus = function() {
