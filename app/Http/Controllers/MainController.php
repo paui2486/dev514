@@ -97,11 +97,13 @@ class maincontroller extends controller
                         ->where('activities.status', '>', 2)
                         ->leftJoin('users',                 'users.id',      '=',   'activities.host_id')
                         ->leftJoin('act_tickets',           'activities.id', '=',   'act_tickets.activity_id')
+                        ->leftJoin('categories',            'categories.id', '=',   'activities.category_id')
                         ->select(
                             'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
                             'activities.description',       'activities.counter as count',
                             'act_tickets.price',            'act_tickets.location',
-                            'act_tickets.run_time as date', 'users.nick as orginizer'
+                            'act_tickets.run_time as date', 'users.nick as orginizer',
+                            'categories.name as category'
                         )
                         ->orderBy('activities.created_at', 'desc')
                         ->take(7)
