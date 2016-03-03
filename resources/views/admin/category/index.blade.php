@@ -86,8 +86,8 @@
                     $(".iframe").colorbox({
                         iframe: true,
                         speed: 660,
-                        width: "80%",
-                        height: "80%",
+                        width: "40%",
+                        height: "30%",
                         opacity: 0.4,
                         transition: "fade",
                         onClosed: function () {

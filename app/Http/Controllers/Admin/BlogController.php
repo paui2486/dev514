@@ -368,6 +368,7 @@ class BlogController extends Controller
                        DB::raw('count(*) as articles_cnt'),
                        DB::raw('sum(articles.counter) as view_cnt'),
                      ))
+                     ->where('users.author', 1)
                      ->groupBy('users.id')
                      ->orderBy('users.created_at', 'ASC');
 
