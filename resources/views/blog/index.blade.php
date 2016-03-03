@@ -135,7 +135,7 @@
                             {{ $article->id }}
                         </div>
                         
-                        <a href="{{asset ('blog/1')}}">
+                        <a href="{{asset ('blog/article')}}">
                             <div class="blog-thumbnail" 
                              style="background-image:url('{{ $article->thumbnail }}')">
                             </div>
