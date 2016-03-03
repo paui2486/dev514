@@ -160,20 +160,29 @@
         margin-top: 0px;
     }
     
-    .page-navbar {
+    .page-navbar,
+    .blog-navbar {
         background-color: white;
+        padding: 0px 10px;
+    }
+    
+    #app-navbar-collapse {
+        width: 50%;
     }
     
     .navbar-collapse {
         background-color: black;
         font-size: 16px;
         letter-spacing: 3px;
-        background-color: black;
         width: 50%;
         top: 60px;
-        position: fixed;
+        position: inherit;
         float: right; 
         right: 0px;
+    }
+    
+    li.navbar-host {
+        border:none;
     }
     
     .banner-1 {
