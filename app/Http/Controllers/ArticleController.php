@@ -154,7 +154,7 @@ class ArticleController extends Controller
                 $blogCategories = (object) array(
                       'cat_id'        => $category->id,
                       'cat_title'     => $category->name,
-                      'cat_logo'      => $category->thumbnail,
+                      'cat_logo'      => $category->logo,
                       'cat_content'   => $blogs,
                 );
                 array_push($allTopicBlogs, $blogCategories);
