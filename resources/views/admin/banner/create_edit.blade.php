@@ -51,7 +51,7 @@
                             <div class="col-sm-10">
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                     <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                        <img src="{{{ ( isset($article) && !empty($banners->source) ? asset($banners->source) : asset('img/no-image.png')) }}}" alt="" />
+                                        <img src="{{{ ( isset($banners) && !empty($banners->source) ? asset($banners->source) : asset('img/no-image.png')) }}}" alt="" />
                                     </div>
                                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                     <div>
@@ -66,31 +66,6 @@
                             </div>
                         </div>
             				</div>
-                    <div class="col-md-6">
-                        <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
-                            <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="thumbnail">
-                                    文章縮圖
-                                </label>
-                                <div class="col-sm-10">
-                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="{{{ ( isset($article) && !empty($article->thumbnail) ? asset($article->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
-                                        </div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                        <div>
-                                            <span class="btn btn-white btn-file">
-                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
-                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
-                                                <input id="thumbnail" class="file[]"  name="thumbnail" type="file" />
-                                            </span>
-                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group {{{ $errors->has('caption') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="caption">
@@ -123,32 +98,29 @@
                             </div>
                         </div>
             				</div>
-                    {{ Form::hidden('position', '1') }}
-        				<!-- ./ general tab -->
+                		<div class="form-group">
+                  			<div class="col-md-12">
+                    				<button type="reset" class="btn btn-sm btn-warning close_popup">
+                      					<span class="glyphicon glyphicon-ban-circle"></span>
+                                取消
+                    				</button>
+                    				<button type="reset" class="btn btn-sm btn-default">
+                      					<span class="glyphicon glyphicon-remove-circle"></span>
+                                重置
+                    				</button>
+                    				<button type="submit" class="btn btn-sm btn-success">
+                      					<span class="glyphicon glyphicon-ok-circle"></span>
+                      					@if	(isset($banners))
+                      					  變更
+                      					@else
+                      					  確定
+                      					@endif
+                    				</button>
+                  			</div>
+                    </div>
                 </div>
-          			<!-- ./ tabs content -->
+            <!-- ./ general tab -->
             </div>
-        		<!-- Form Actions -->
-        		<div class="form-group">
-          			<div class="col-md-12">
-            				<button type="reset" class="btn btn-sm btn-warning close_popup">
-              					<span class="glyphicon glyphicon-ban-circle"></span>
-                        取消
-            				</button>
-            				<button type="reset" class="btn btn-sm btn-default">
-              					<span class="glyphicon glyphicon-remove-circle"></span>
-                        重置
-            				</button>
-            				<button type="submit" class="btn btn-sm btn-success">
-              					<span class="glyphicon glyphicon-ok-circle"></span>
-              					@if	(isset($banners))
-              					  變更
-              					@else
-              					  確定
-              					@endif
-            				</button>
-          			</div>
-        		</div>
         		<!-- ./ form actions -->
         </form>
     </section>

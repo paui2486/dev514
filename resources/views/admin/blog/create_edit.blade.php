@@ -194,33 +194,35 @@
                                 </div>
                             </div>
                         </div>
+                    <div class="form-group">
+              					<div class="col-md-12">
+                            {{ Form::hidden('position', '1') }}
+                        </div>
                     </div>
-                <!-- ./ general tab -->
+                		<div class="form-group">
+                  			<div class="col-md-12">
+                    				<button type="reset" class="btn btn-sm btn-warning close_popup">
+                      					<span class="glyphicon glyphicon-ban-circle"></span>
+                                取消
+                    				</button>
+                    				<button type="reset" class="btn btn-sm btn-default">
+                      					<span class="glyphicon glyphicon-remove-circle"></span>
+                                重置
+                    				</button>
+                    				<button type="submit" class="btn btn-sm btn-success">
+                      					<span class="glyphicon glyphicon-ok-circle"></span>
+                      					@if	(isset($banners))
+                      					  變更
+                      					@else
+                      					  確定
+                      					@endif
+                    				</button>
+                  			</div>
+                    </div>
                 </div>
-            <!-- ./ tabs content -->
+            <!-- ./ general tab -->
             </div>
-            <!-- Form Actions -->
-            <div class="form-group">
-                <div class="col-md-12">
-                    <button type="reset" class="btn btn-sm btn-warning close_popup">
-                          <span class="glyphicon glyphicon-ban-circle"></span>
-                          取消
-                    </button>
-                    <button type="reset" class="btn btn-sm btn-default">
-                          <span class="glyphicon glyphicon-remove-circle"></span>
-                          重置
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-success">
-                          <span class="glyphicon glyphicon-ok-circle"></span>
-                          @if	(isset($member))
-                              變更
-                          @else
-                              確定
-                          @endif
-                    </button>
-                </div>
-            </div>
-        <!-- ./ form actions -->
+        		<!-- ./ form actions -->
         </form>
     </section>
 </section>

@@ -61,11 +61,6 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="address" id="address"
                       							value="{{{ Input::old('address', isset($member) ? $member->address : null) }}}" />
-                                    @if ($errors)
-                                        <span class="help-block">
-                                            <p>{{ $errors->first('address') }}</p>
-                                        </span>
-                                    @endif
                             </div>
                         </div>
             				</div>
@@ -182,33 +177,29 @@
                             </div>
                         </div>
                     </div>
-
-
-        				<!-- ./ general tab -->
+                    <div class="form-group">
+                  			<div class="col-md-12">
+                    				<button type="reset" class="btn btn-sm btn-warning close_popup">
+                      					<span class="glyphicon glyphicon-ban-circle"></span>
+                                取消
+                    				</button>
+                    				<button type="reset" class="btn btn-sm btn-default">
+                      					<span class="glyphicon glyphicon-remove-circle"></span>
+                                重置
+                    				</button>
+                    				<button type="submit" class="btn btn-sm btn-success">
+                      					<span class="glyphicon glyphicon-ok-circle"></span>
+                      					@if	(isset($banners))
+                      					  變更
+                      					@else
+                      					  確定
+                      					@endif
+                    				</button>
+                  			</div>
+                    </div>
                 </div>
-          			<!-- ./ tabs content -->
+            <!-- ./ general tab -->
             </div>
-        		<!-- Form Actions -->
-        		<div class="form-group">
-          			<div class="col-md-12">
-            				<button type="reset" class="btn btn-sm btn-warning close_popup">
-              					<span class="glyphicon glyphicon-ban-circle"></span>
-                        取消
-            				</button>
-            				<button type="reset" class="btn btn-sm btn-default">
-              					<span class="glyphicon glyphicon-remove-circle"></span>
-                        重置
-            				</button>
-            				<button type="submit" class="btn btn-sm btn-success">
-              					<span class="glyphicon glyphicon-ok-circle"></span>
-              					@if	(isset($member))
-              					  變更
-              					@else
-              					  確定
-              					@endif
-            				</button>
-          			</div>
-        		</div>
         		<!-- ./ form actions -->
         </form>
     </section>

@@ -20,7 +20,7 @@
                      <th>ID</th>
                      <th>標題</th>
                      <th>圖片網址</th>
-                     <th>圖片標題</th>
+                     <th>Banner 標語</th>
                      <th>設定</th>
                  </tr>
              </thead>
@@ -51,18 +51,6 @@
                         columns: ':not(:first-child)',
                         text: '顯示欄位'
                     },
-                    // {
-                    //     extend: 'colvisGroup',
-                    //     text: '活動主',
-                    //     show: [ 1, 2 ],
-                    //     hide: [ 3, 4, 5 ]
-                    // },
-                    // {
-                    //     extend: 'colvisGroup',
-                    //     text: '達人',
-                    //     show: [ 3, 4, 5 ],
-                    //     hide: [ 1, 2 ]
-                    // },
                     {
                         extend: 'pdfHtml5',
                         download: 'open'
@@ -84,8 +72,8 @@
                     $(".iframe").colorbox({
                         iframe: true,
                         speed: 660,
-                        width: "80%",
-                        height: "80%",
+                        width: "40%",
+                        height: "30%",
                         opacity: 0.4,
                         transition: "fade",
                         onClosed: function () {
