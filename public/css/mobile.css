@@ -146,71 +146,34 @@
 }
 
 @media screen and (max-width: 768px) {
-    .navbar-collapse,
-    .navbar-collapse.in,
-    .mega-menu ul li a {
-        width:80%;
+    .navbar {
+        height:60px;
         background-color: black;
-        position: absolute;
-        right: 0;
-        text-align: left;
-        z-index: 999;
-        top: 60px;
     }
     
-    .other-navbar-brand img {
+    .navbar-brand {
+        padding: 10px;
+    }
+    
+    .navbar-brand img {
         height: 40px;
+        margin-top: 0px;
     }
     
-    .other-navbar {
+    .page-navbar {
         background-color: white;
-        height: 60px;
     }
     
-    .navbar-toggle {
-        position: relative;
-        float: right;
+    .navbar-collapse {
         background-color: black;
-        border-radius: 4px;
-        border: 1px solid #000;
-        color: white;
-        height: 40px;
-        padding: 10px;
-        margin: 10px;
-    }
-    
-    .other-navbar-toggle {
-        position: relative;
-        float: right;
-        background-color: white;
-        border-radius: 4px;
-        border:  2px solid #736357;
-        color:#736357;
-        height: 40px;
-        padding: 10px;
-        margin: 10px;
-    }
-    
-    .navbar-right,
-    .other-navbar-right {
-        margin-top: 15px;
-        cursor: pointer;
-        float: none;
-        text-align: center;
-    }
-    
-    .home-navbar {
-        position: relative;
         font-size: 16px;
-        height: 60px;
-        background-color: #000;
+        letter-spacing: 3px;
+        background-color: black;
+        width: 50%;
+        top: 60px;
         position: fixed;
-    }
-    
-    .home-navbar-brand img {
-        height: 42px;
-        z-index: 200;
-        margin: 10px;
+        float: right; 
+        right: 0px;
     }
     
     .banner-1 {
@@ -406,19 +369,7 @@
 
 @media screen and (max-width: 440px) {
 
-    .home-navbar {
-        position: relative;
-        font-size: 16px;
-        height: 60px;
-        background-color: #000;
-        position: fixed;
-    }
-    .home-navbar-brand img {
-        height: 42px;
-        z-index: 200;
-        margin: 10px;
-    }
-    
+   
     .home_bntitle,
     .panel-filter {
         display: none;

@@ -3,59 +3,35 @@ body {
     padding-bottom: 0px!important;
 }
 
-/*navbar*/
+/*-----------------home navbar-----------------*/
 
-.home-navbar {
+.navbar {
     position: absolute;
     top: 0;
     z-index: 999;
-    min-height: 50px;
-    font-size: 16px;
-    letter-spacing: 2px;
+    height: 100px;
     width: 100%;
     padding: 0px 20px;
-
 }
 
-.other-navbar {
-    background-color: white;
-    height: 80px;
-    font-size: 16px;
-    letter-spacing: 2px;
-    margin-bottom: 0px;
-    box-shadow: 1px 0px 5px #ccc;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0px;
-}
-
-.home-navbar-brand img {
+.navbar-brand img {
     height:60px;
     z-index: 200;
-    margin: 20px;
+    margin:5px auto;
 }
 
-.other-navbar-brand img {
-    height: 50px;
-    z-index: 200;
-    margin: 15px;
+.navbar-collapse {
+    font-size: 16px;
+    letter-spacing: 3px;
 }
-/*
 
-.navbar-nav > li {
-    margin-right: 10px;
-}
-*/
-
-.navbar-right,
-.other-navbar-right {
-    margin-top:9%;
+.navbar-right {
+    margin-top:25px;
     cursor: pointer;
-    float: right;
 }
 
-.dropdown-menu {
-    right: 0;
-    left: auto;
+.navbar-right > li {
+    margin-right: 10px;
 }
 
 .navbar-right > li > a {
@@ -64,73 +40,99 @@ body {
 }
 
 ul.navbar-nav > li :hover{
-    background-color:rgba(0,0,0,0.1);
+    background-color:rgba(255,255,255,0.6);
 }
 
-.dropdown-menu :hover {
-    background-color:#00dfe8 !important;
+.dropdown-menu {
+    right: 0;
+    left: auto;
 }
 
-ul.navbar-nav > li > ul.dropdown-menu :hover {
-    background-color:#ccc;
-    color: black;
-}
-
-.other-navbar-right > li > a {
-    color: #736357;
-}
-
-.navbar-host {
+li.navbar-host {
     border: 1px solid #fff;
 }
 
 .navbar-toggle {
-    position: relative;
-    float: right;
-    padding:10px;
-    margin-right: 15px;
-    margin-bottom: 8px;
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 4px;
-}
-
-.other-navbar-toggle {
-    position: relative;
-    float: right;
-    background-color: black;
-    border-radius: 4px;
-    border: 1px solid #000;
     color: white;
-    height: 40px;
-    padding: 10px;
-    margin: 10px;
-    background-image: none;
+    font-size:16px; 
+    margin-right: 0px;
 }
 
-.other-navbar-collapse,
-.other-navbar-collapse.in {
-    width: 80%;
+/*-----------------page navber-----------------*/
+
+.page-navbar {
     background-color: white;
-    position: absolute;
-    right: 0;
-    text-align: left;
-    z-index: 999;
-    top: 60px;
-    padding-right: 15px;
-    padding-left: 15px;
-    overflow-x: visible;
-    -webkit-overflow-scrolling: touch;
-    border-top: 1px solid transparent;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    margin-bottom: 0px;
+    box-shadow: 1px 0px 5px #ccc;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0px;
+}
+
+.page-navbar-right > li > a  {
+    color:#60574e;
+    text-shadow: none;
+}
+
+.page-navbar-right > li > a:hover {
+    background-color: rgba(0,0,0,0.1)
+}
+
+.page-navbar-toggle {
+    background-color:white;
+    color: #736357;
+}
+
+/*-----------------blog navber-----------------*/
+
+.blog-navbar {
+    background-color: white;
+    position: inherit;
+    margin: 0px;
+    height: 80px;
+}
+
+.blog-navbar-brand img {
+    height: 45px;
+    padding-bottom: 5px;
+}
+
+li.blog-navbar-right a {
+    color:#60574e;
+    text-shadow: none;
 }
 
 .navbar-blog-category {
     position: absolute;
-    top: 25px;
+    top: 31px;
     left: 35%;
 }
 
+li.collapse-blog-category {
+    display: none;
+}
+
+@media screen and (min-width: 768px) and (max-width: 979px) {
+     .navbar-blog-category {
+        position: inherit;
+        margin: auto;
+        float: left;
+        padding-top: 5px;
+    }
+    
+    .blog-navbar {
+        border-bottom: 1px solid #ccc;
+    }
+} 
+
+@media  screen and (max-width: 768px) {
+    li.collapse-blog-category {
+        display: inline ;
+    }
+    .navbar-blog-category {
+        display: none;
+    }
+}
+    
 .navbar-blog-category a {
     color: #808080;
     padding-right: 20px;
@@ -150,12 +152,13 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
     list-style: none;
     float: left;
     margin: 10px;
-    letter-spacing: 2px;
+    letter-spacing:5px;
     font-size: 16px;
 }
 
-.last-li a{
+.last-li a {
     border: none;
+    padding-right: 0px;
 }
 
 /*Banner-01 Slider(home)*/
@@ -813,6 +816,7 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
     margin-top: 20px;
 }
 
+/*------blog------blog------blog------*/
 
 .blog-banner-image {
     height:500px;
@@ -922,9 +926,8 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
 
 .blog-cat-panel {
     height: auto;
-    width: 23%;
-    margin: 10px;
-    padding:10px;
+    min-width:240px;
+    padding:20px;
     float: left;
 }
 
@@ -958,6 +961,7 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
     font-size: 14px;
     color: #998675;
 }
+
 
 /*blog-rticle（文章內容頁）*/
 
@@ -1106,10 +1110,137 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
     background-position: center;
 }
 
+
+/*文章列表頁*/
+.blog-category-container {
+    background-color:#f4f4f4; 
+}
+
+.blog-category-logo {
+    margin: 0px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #8F693D;
+}
+
+.blog-category-logo p {
+    font-size: 24px;
+    max-width: 1050px;
+    margin-top: 40px;
+    color: #8F693D;
+    float: left;
+    letter-spacing: 3px;
+}
+
+.blog-category-logo img {
+    width: 150px;
+    margin-top:43px;
+    margin-left: 5px;
+}
+
+.blog-category-content {
+    max-width: 1050px;
+    margin: auto;
+    display: table;
+    width: 80%;
+}
+
+.blog-category-panel {
+    margin:10px;
+    border-bottom: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.blog-category-thumnail {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    float: left;
+    width: 30%;
+    margin: 20px 15px;
+}
+
+.blog-category-text {
+    float: left;
+    width:  65%;
+    margin: 20px 5px;
+}
+
+.category-title a {
+    font-size:18px;
+    color:  #60574e;
+    letter-spacing: 1.5px;
+}
+
+.category-title a:hover {
+    color:black;
+    text-decoration: none;
+}
+
+.category-info {
+    margin: 10px 0px;
+}
+
+.category-info p {
+    display: inline-block;
+    margin: 5px 0px;
+    color: #808080;
+    padding-right: 10px;
+    letter-spacing: 1px;
+}
+
+.category-info span {
+    padding-right: 5px;
+}
+
+.category-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 2em;
+    height: 6em;
+}
+
+.read-article a {
+    border: 1px solid #000;
+    float: right;
+    padding: 5px 10px;
+    margin: 15px 0px;
+    color: black;
+}
+
+.read-article a:hover {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+}
+
+.category-page-number {
+    margin: 20px auto;
+    text-align: center;
+    padding: 0px 10px;
+}
+
+.category-page-number li {
+    list-style: none;
+}
+.category-page-number li a {
+    border: 1px solid gray;
+    float: left;
+    padding: 5px 10px;
+    margin: 5px;
+    color: gray;
+}
+
+.category-page-number li a:hover {
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+}
+
 /*靜態頁面*/
 
 .page-container {
     background-color: #f4eee9;
+    margin-top: 100px;
 }
 
 .page-content {
@@ -1159,3 +1290,29 @@ ul.navbar-nav > li > ul.dropdown-menu :hover {
         padding: 0 50px;
         } 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
