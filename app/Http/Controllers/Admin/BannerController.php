@@ -8,8 +8,11 @@ use App\Http\Requests\UpdateBannerRequest;
 
 use DB;
 use Log;
+use Input;
+use Response;
 use Redirect;
 use Datatables;
+use App\Library;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -42,13 +45,25 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $store = DB::table('galleries')->insert([
-          'title'       => $request->title,
-          'source'      => $request->source,
-          'caption'     => $request->caption,
-          'position'    => $request->position,
-          'priority'    => $request->priority,
-        ]);
+        $storeArray = array(
+            'title'       => $request->title,
+            'caption'     => $request->caption,
+            'position'    => $request->position,
+            'priority'    => $request->priority,
+            'position'    => $request->position,
+        );
+
+        $id                 = DB::table('galleries')->insertGetId($storeArray);
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $storeArray;
+        $params['filed']    = ['source'];
+        $params['infix']    = 'galleries/';
+        $params['suffix']   = $request->position . "/";
+
+        $update             = Library::upload($params);
+        $banner             = DB::table('galleries')->where('id', $id);
+        $result             = $banner->update($update['data']);
         return Redirect::to('dashboard/banner');
     }
 
@@ -84,14 +99,25 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = DB::table('galleries')->where('id', $id);
-        $user->update([
-          'title'         => $request->title,
-          'source'        => $request->source,
-          'caption'       => $request->caption,
-          'position'      => $request->position,
-          'priority'      => $request->priority,
-        ]);
+        $updateArray = array(
+            'title'       => $request->title,
+            'caption'     => $request->caption,
+            'position'    => $request->position,
+            'priority'    => $request->priority,
+            'position'    => $request->position,
+        );
+
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $updateArray;
+        $params['filed']    = ['source'];
+        $params['infix']    = 'galleries/';
+        $params['suffix']   = $request->position . "/";
+
+        $update             = Library::upload($params);
+        $banner             = DB::table('galleries')->where('id', $id);
+        $result             = $banner->update($update['data']);
+        return Redirect::to('dashboard/banner');
     }
 
     /**
@@ -124,7 +150,7 @@ class BannerController extends Controller
             // ->remove_column('id')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
-                  <a href="{{{ URL::to(\'dashboard/banner/\' . $id ) }}}?view=colorbox" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                  <a href="{{{ URL::to(\'dashboard/banner/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
                   <a href="{{{ URL::to(\'dashboard/banner/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')
