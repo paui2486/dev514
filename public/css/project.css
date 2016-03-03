@@ -28,6 +28,7 @@ body {
 .navbar-right {
     margin-top:25px;
     cursor: pointer;
+    display: inline-flex;
 }
 
 .navbar-right > li {
@@ -77,9 +78,14 @@ li.navbar-host {
     background-color: rgba(0,0,0,0.1)
 }
 
-.page-navbar-toggle {
+.page-navbar-toggle,
+.blog-navbar-toggle {
     background-color:white;
     color: #736357;
+}
+
+li.page-navbar-host {
+    border-color: #60574e;
 }
 
 /*-----------------blog navber-----------------*/
@@ -103,7 +109,7 @@ li.blog-navbar-right a {
 
 .navbar-blog-category {
     position: absolute;
-    top: 31px;
+    top: 20px;
     left: 35%;
 }
 
@@ -132,12 +138,6 @@ li.collapse-blog-category {
         display: none;
     }
 }
-    
-.navbar-blog-category a {
-    color: #808080;
-    padding-right: 20px;
-    border-right: 1px solid #808080;
-}
 
 .navbar-blog-category a:hover {
     color: #51D5D1;
@@ -156,9 +156,13 @@ li.collapse-blog-category {
     font-size: 16px;
 }
 
-.last-li a {
-    border: none;
-    padding-right: 0px;
+.navbar-blog-category a {
+    color: #808080;
+}
+
+.top-line-category + .top-line-category {
+   padding-left: 20px;
+   border-left: 1px solid #808080;
 }
 
 /*Banner-01 Slider(home)*/
@@ -736,6 +740,7 @@ li.collapse-blog-category {
     padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
+    margin-top: 100px;
 }
 
 .control-label > span {
@@ -799,6 +804,7 @@ li.collapse-blog-category {
     padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
+    margin-top: 100px;
 }
 
 .register-panel {
@@ -829,7 +835,7 @@ li.collapse-blog-category {
     z-index: 200;
     position: relative;
     float: left;
-    top:45%;
+    top:200px;
     left: 25%;
     color: white;
     text-align: center;
@@ -1244,9 +1250,9 @@ li.collapse-blog-category {
 }
 
 .page-content {
-    width:100%;
+    width: 60%;
     margin: auto;
-    padding:50px 0px ;
+    padding: 20px;
 }
 
 .page-title {
