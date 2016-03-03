@@ -11,8 +11,8 @@
 |
 */
 Route::pattern('id'         , '[0-9]+'      );
-Route::pattern('slug'       , '[0-9a-z-_]+' );
-Route::pattern('category'   , '[0-9a-z-_]+' );
+// Route::pattern('slug'       , '[0-9a-z-_]+' );
+// Route::pattern('category'   , '[0-9a-z-_]+' );
 Route::pattern('username'   , '[0-9a-z-_]+' );
 
 /*
@@ -56,9 +56,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activity'                   , 'ActivityController@index'      );
     Route::get('activity/{category}/{slug}' , 'ActivityController@index'      );
 
-    Route::get('blog'                       , 'BlogController@index'          );
-    Route::get('blog/{category}'            , 'BlogController@people'          );
-    Route::get('blog/{category}/{slug}'     , 'ArticleController@article'     );
+    Route::get('blog'                       , 'ArticleController@index'       );
+    Route::get('blog/{category}'            , 'ArticleController@showCategory');
+    Route::get('blog/{category}/{slug}'     , 'ArticleController@showArticle' );
 
     Route::get('order/{id}'                 , 'CartController@index'          );
 
