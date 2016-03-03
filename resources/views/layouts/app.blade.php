@@ -28,8 +28,12 @@
 </head>
 <body id="app-layout">
 
-    @include('partials.header')
+    {{--*/ 
+        $header = (Request::is('/')) ? 'partials.header' : 'partials.page-header';
+    /*--}}
 
+    @include($header)
+    
     @yield('banner')
 
     @yield('content')
