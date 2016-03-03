@@ -24,7 +24,7 @@
                             by {{ $blog->author }}
                         </p>
                         <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                            {{ $blog->created_at }}
+                            {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}
                         </p>
                     </div>
                     <div class="category-description word-indent">

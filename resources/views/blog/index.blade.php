@@ -91,7 +91,9 @@
                 <div data-p="225.00">
                      <div class="bolg-banner-text">
                         <div class="blog-banner-title">{{ $banner->title }}</div>
-                        <div class="blog-banner-date">{{ $banner->time  }}</div>
+
+
+                        <div class="blog-banner-date">{{ preg_replace("/(.*)\s(.*)/", "$1", $banner->time)  }}</div>
                         <div class="blog-banner-auth">by {{ $banner->author }}</div>
                     </div>
                     <div class="blog-banner-image" style="background-image:url('{{ $banner->image }}');">
@@ -143,7 +145,7 @@
                             <a href="{{asset ('blog/article')}}">{{ $article->title }}</a>
                         </div>
                         <div class="blog-panel-time">
-                            {{ $article->time }}
+                            {{ preg_replace("/(.*)\s(.*)/", "$1", $article->time)  }}
                         </div>
                         <div class="blog-panel-author">
                             by {{ $article->author }}

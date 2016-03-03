@@ -9,7 +9,7 @@
 <!--                    下午茶時間到囉～一起吃點心！-->
                        {{ $article -> title }}
                 </div>
-               
+
                 <div class="article-share">
                     <div class="fb-share-button" data-href="{{ Request::URL() }}" data-layout="button_count">
                     </div>
@@ -47,16 +47,18 @@
                 @else
                 <div class="row article-relative-content">
                     @foreach ($relate_articles as $relate_article)
-                    <div class="row" style="margin:0 0 20px 0;">
-                        <div class="article-relative-thumnail" style="background-image:url('{{ asset( $relate_article -> thumbnail ) }}')">
+                    <a href="{{ URL::to( 'blog/' . $relate_article->category_name . '/' . $relate_article->title ) }}">
+                        <div class="row" style="margin:0 0 20px 0;">
+                            <div class="article-relative-thumnail" style="background-image:url('{{ asset( $relate_article -> thumbnail ) }}')">
+                            </div>
+                            <div class="article-relative-text word-indent-02">
+                               {{ $relate_article -> title }}
+                            </div>
+                            <div class="article-relative-time">
+                                {{ preg_replace("/(.*)\s(.*)/", "$1", $relate_article->created_at)  }}
+                            </div>
                         </div>
-                        <div class="article-relative-text word-indent-02">
-                           {{ $relate_article -> title }}
-                        </div>
-                        <div class="article-relative-time">
-                             {{ $relate_article -> created_at }}
-                        </div>
-                    </div>
+                    </a>
                     @endforeach
                 </div>
                 @endif
@@ -75,7 +77,7 @@
                             {{ $relate_activity -> title }}
                         </div>
                         <div class="activity-relative-time">
-                            {{ $relate_activity -> created_at }}
+                            {{ preg_replace("/(.*)\s(.*)/", "$1", $relate_activity->created_at)  }}
                         </div>
                     </div>
                     @endforeach

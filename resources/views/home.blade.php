@@ -124,7 +124,7 @@
                                 {{ $blog->title }}
                             </div>
                             <div class="home-blog-created_at">
-                                {{ $blog->created_at }}
+                                {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}
                             </div>
                             <div class="glyphicon glyphicon-folder-open home-blog-category">
                                 {{ $blog->category }}

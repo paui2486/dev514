@@ -15,15 +15,18 @@ class ArticleController extends Controller
     public function index()
     {
         $meta     = (object) $this->getBlogMeta();
+        $header_categories  = $this->getCategory();
         $blogHome = (object) array(
             'banner'        => $this->getBlogBanner(),
             'categories'    => $this->getBlogCategories(),
         );
-        return view('blog.index', compact('blogHome', 'meta'));
+        return view('blog.index', compact('blogHome', 'meta', 'header_categories'));
     }
 
     public function showCategory($category)
     {
+        $meta     = (object) $this->getBlogMeta();
+        $header_categories  = $this->getCategory();
         $blogList = DB::table('categories')
                   ->leftJoin('articles', 'articles.category_id', '=', 'categories.id')
                   ->rightJoin('users', 'users.id', '=', 'articles.author_id')
@@ -35,16 +38,18 @@ class ArticleController extends Controller
                   ->where('categories.name', '=' ,"$category")
                   ->where('public', 1)
                   ->get();
+
         if (!count($blogList)) {
             // 無此類別 轉回首頁
             return Redirect::to('blog');
         } else {
-            return view('blog.list', compact('blogList'));
+            return view('blog.list', compact('blogList', 'meta', 'header_categories'));
         }
     }
 
     public function showArticle($category, $title)
     {
+        $header_categories  = $this->getCategory();
         $article = DB::table('articles')
                   ->leftJoin('users', 'users.id', '=', 'articles.author_id')
                   ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
@@ -66,16 +71,30 @@ class ArticleController extends Controller
                             'article'           => $article,
                             'relate_articles'   => $relate_articles,
                             'relate_activities' => $relate_activities,
+                            'header_categories' => $header_categories
                           ]);
         }
+    }
+
+    public function getCategory()
+    {
+        $category = DB::table('categories')
+                      ->where('type', 2)
+                      ->get();
+        return $category;
     }
 
     public function getRelateActivity($number, $from_id)
     {
         $relate = DB::table('activities')
-                    ->where('id', '!=', $from_id)
-                    ->where('status', 3)
-                    ->orderBy('created_at', 'ASC')
+                    ->leftJoin('categories', 'categories.id', '=', 'activities.category_id')
+                    ->select(array(
+                      'activities.title', 'activities.created_at', 'categories.name as category_name',
+                      'activities.thumbnail'
+                    ))
+                    ->where('activities.id', '!=', $from_id)
+                    ->where('activities.status', 3)
+                    ->orderBy('activities.created_at', 'ASC')
                     ->take($number)->get();
         return $relate;
     }
@@ -83,9 +102,14 @@ class ArticleController extends Controller
     public function getRelateArticle($number, $from_id)
     {
         $relate = DB::table('articles')
-                    ->where('id', '!=', $from_id)
-                    ->where('status', 2)
-                    ->orderBy('created_at', 'ASC')
+                    ->leftJoin('categories', 'categories.id', '=', 'articles.category_id')
+                    ->select(array(
+                      'articles.title', 'articles.created_at', 'categories.name as category_name',
+                      'articles.thumbnail'
+                    ))
+                    ->where('articles.id', '!=', $from_id)
+                    ->where('articles.status', 2)
+                    ->orderBy('articles.created_at', 'ASC')
                     ->take($number)->get();
         return $relate;
     }
