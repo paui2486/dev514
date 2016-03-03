@@ -94,7 +94,7 @@
                         <div class="blog-banner-date">{{ $banner->time  }}</div>
                         <div class="blog-banner-auth">by {{ $banner->author }}</div>
                     </div>
-                    <div class="blog-banner-image" style="background:url('{{ $banner->image }}');">
+                    <div class="blog-banner-image" style="background-image:url('{{ $banner->image }}');">
                     </div>
                    
                 </div>
