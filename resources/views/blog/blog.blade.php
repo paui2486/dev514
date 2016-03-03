@@ -80,7 +80,7 @@ this.page.url = "{{ Request::URL() }}";
 this.page.identifier = {{ $article -> title }};
 };
 (function() {
-var d = document, s = d.createElement('script');
+var d = document,w s = d.createElement('script');
 
 s.src = '//514life.disqus.com/embed.js';
 
