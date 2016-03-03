@@ -26,7 +26,7 @@ class ArticleController extends Controller
     {
         $blogList = DB::table('categories')
                   ->leftJoin('articles', 'articles.category_id', '=', 'categories.id')
-                  ->leftJoin('users', 'users.id', '=', 'articles.author_id')
+                  ->rightJoin('users', 'users.id', '=', 'articles.author_id')
                   ->select(array(
                     'articles.id',  'articles.title',   'articles.thumbnail',   'categories.name as category_name',
                     'categories.logo as category_logo', 'users.name as author', 'articles.description',

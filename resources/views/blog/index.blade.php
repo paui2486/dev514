@@ -9,7 +9,7 @@
     <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="js/jssor.slider.mini.js"></script>
     <!-- use jssor.slider.debug.js instead for debug -->
-    
+
     <script>
 
         jQuery(document).ready(function ($) {
@@ -20,41 +20,41 @@
             ];
 
             var options = {
-                $AutoPlay: true,                                    
-                $AutoPlaySteps: 1,                       
-                $PauseOnHover: 1, 
+                $AutoPlay: true,
+                $AutoPlaySteps: 1,
+                $PauseOnHover: 1,
                 $ArrowKeyNavigation: true,
-                $SlideDuration: 500,                              
-                $MinDragOffsetToSlide: 20,                       
-                $SlideSpacing: 0, 					              
-                $Cols: 1,                                 
-                $ParkingPosition: 0,                            
-                $UISearchMode: 1,                                   
-                $PlayOrientation: 1,                               
-                $DragOrientation: 3,  
-                
-                $SlideshowOptions: {                             
-                    $Class: $JssorSlideshowRunner$,                
-                    $Transitions: _SlideshowTransitions,           
-                    $TransitionsOrder: 1,                           
-                    $ShowLink: true                                   
+                $SlideDuration: 500,
+                $MinDragOffsetToSlide: 20,
+                $SlideSpacing: 0,
+                $Cols: 1,
+                $ParkingPosition: 0,
+                $UISearchMode: 1,
+                $PlayOrientation: 1,
+                $DragOrientation: 3,
+
+                $SlideshowOptions: {
+                    $Class: $JssorSlideshowRunner$,
+                    $Transitions: _SlideshowTransitions,
+                    $TransitionsOrder: 1,
+                    $ShowLink: true
                 },
 
-                $BulletNavigatorOptions: {                              
-                    $Class: $JssorBulletNavigator$,                      
-                    $ChanceToShow: 2,                              
-                    $AutoCenter: 1,                                 
-                    $Steps: 1,                                     
-                    $Rows: 1,                                      
-                    $SpacingX: 10,                                  
-                    $SpacingY: 10,                                
-                    $Orientation: 1                              
+                $BulletNavigatorOptions: {
+                    $Class: $JssorBulletNavigator$,
+                    $ChanceToShow: 2,
+                    $AutoCenter: 1,
+                    $Steps: 1,
+                    $Rows: 1,
+                    $SpacingX: 10,
+                    $SpacingY: 10,
+                    $Orientation: 1
                 },
 
                 $ArrowNavigatorOptions: {
-                    $Class: $JssorArrowNavigator$,             
-                    $ChanceToShow: 2,                               
-                    $Steps: 1                                      
+                    $Class: $JssorArrowNavigator$,
+                    $ChanceToShow: 2,
+                    $Steps: 1
                 }
             };
             var jssor_slider1 = new $JssorSlider$("slider1_container", options);
@@ -96,7 +96,7 @@
                     </div>
                     <div class="blog-banner-image" style="background-image:url('{{ $banner->image }}');">
                     </div>
-                   
+
                 </div>
             @endforeach
         </div>
@@ -123,10 +123,10 @@
                     <div style="display:none;">
                         {{ $category->cat_id }}
                     </div>
-                    <div class="blog-cat-logo"> 
+                    <div class="blog-cat-logo">
                         <img src="{{ $category->cat_logo }}">
                     </div>
-                    <div class="blog-readmore"><a href="#">閱讀更多</a></div>
+                    <div class="blog-readmore"><a href="{{asset ('blog/' . $category->cat_title)}}">閱讀更多</a></div>
                 </div>
                 <div class="row blog-cat-article">
                     @foreach ( $category->cat_content as $article )
@@ -134,17 +134,14 @@
                         <div style="display:none;">
                             {{ $article->id }}
                         </div>
-                        
-                        <a href="{{asset ('blog/article')}}">
-                            <div class="blog-thumbnail" 
+                        <a href="{{asset ('blog/' . $category->cat_title . '/' . $article->title )}}">
+                            <div class="blog-thumbnail"
                              style="background-image:url('{{ $article->thumbnail }}')">
                             </div>
                         </a>
-                        
                         <div class="blog-panel-title word-indent-02 ">
                             <a href="{{asset ('blog/article')}}">{{ $article->title }}</a>
                         </div>
-                        
                         <div class="blog-panel-time">
                             {{ $article->time }}
                         </div>
