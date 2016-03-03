@@ -1,8 +1,8 @@
-<nav class="navbar">
+<nav class="navbar page-navbar">
     <div class="navbar-container">
             <!-- Collapsed Hamburger -->
             <button type="button" 
-                    class="navbar-toggle collapsed" 
+                    class="navbar-toggle page-navbar-toggle collapsed" 
                     data-toggle="collapse" 
                     data-target="#app-navbar-collapse">
                 <span class="glyphicon glyphicon-list"></span>
@@ -10,13 +10,13 @@
             <!-- Branding Image -->
             <div class="navbar-brand">
                 <a  href="{{ url('/') }}">
-                    <img src="/img/pics/logofin_white.png">
+                    <img src="/img/pics/514logobrown.png">
                 </a>
             </div>
     
         <div class="navbar-collapse collapse" id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-right nav navbar-nav">
+            <ul class="navbar-right nav navbar-nav page-navbar-right">
                 <!-- Authentication Links -->
                 <li><a href="{{ url('blog') }}">部落格</a></li>
                 <li class="navbar-host"><a href="{{ url('') }}">辦活動</a></li>
