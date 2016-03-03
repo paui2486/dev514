@@ -83,21 +83,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('banner/{id}/update'    , 'BannerController@update'       );
         Route::resource('banner'            , 'BannerController'              );
 
-        // no yet
-        Route::get('filter/data'            , 'FilterController@data'         );
-        Route::get('filter/{id}/delete'     , 'FilterController@getDelete'    );
-        Route::post('filter/{id}/update'    , 'FilterController@update'       );
-        Route::resource('filter'            , 'FilterController'              );
-
-        Route::get('ad'                     , 'AdminController@showMember'    );
-        Route::get('point'                  , 'AdminController@showMember'    );
-        Route::get('coupon'                 , 'AdminController@showMember'    );
-        Route::get('invoice'                , 'AdminController@showMember'    );
-        Route::get('analysis'               , 'AdminController@showMember'    );
-
-
         Route::get('member/search'          , 'MemberController@searchMember' );
-        // Route::get('member/data/reorder'    , 'MemberController@getReorder'   );
         Route::get('member/data'            , 'MemberController@data'         );
         Route::get('member/{id}/delete'     , 'MemberController@getDelete'    );
         Route::post('member/{id}/update'    , 'MemberController@update'       );
@@ -118,6 +104,19 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('blog/{id}/delete'           , 'BlogController@getDelete'      );
         Route::post('blog/{id}/update'          , 'BlogController@update'         );
         Route::resource('blog'                  , 'BlogController'                );
+
+        // no yet
+        Route::get('filter/data'            , 'AdminController@showMember'         );
+        Route::get('filter/{id}/delete'     , 'AdminController@showMember'    );
+        Route::post('filter/{id}/update'    , 'AdminController@showMember'       );
+        Route::resource('filter'            , 'AdminController@showMember'              );
+
+        Route::get('ad'                     , 'AdminController@showMember'    );
+        Route::get('point'                  , 'AdminController@showMember'    );
+        Route::get('coupon'                 , 'AdminController@showMember'    );
+        Route::get('invoice'                , 'AdminController@showMember'    );
+        Route::get('analysis'               , 'AdminController@showMember'    );
+
 
         Route::get('activity'               , 'AdminController@showMember'    );
         Route::get('activity/create'        , 'AdminController@showMember'    );

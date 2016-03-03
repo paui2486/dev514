@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 
 use DB;
+use Session;
+use Cookie;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -45,8 +47,10 @@ class AdminController extends Controller
         return view('admin.dashboard.index', compact('state'));
     }
 
-    public function showMember()
+    public function showMember(Request $request)
     {
+        // setcookie
+        // setcookie("current_user", 'gg',0,"/");
         return view('page.error');
     }
 }
