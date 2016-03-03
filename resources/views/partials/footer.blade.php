@@ -40,7 +40,7 @@
                     <p class="contact-info">
                         <a href="mailto:mis@514.com.tw">
                             <img src="{{asset('img/pics/email.png')}}">
-                            <span>mis@514.com.tw</span>
+                            <span>service@514.com.tw</span>
                         </a>
                     </p>
                     <p class="contact-info">
