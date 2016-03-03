@@ -19,7 +19,7 @@
             <ul class="navbar-right nav navbar-nav page-navbar-right">
                 <!-- Authentication Links -->
                 <li><a href="{{ url('blog') }}">部落格</a></li>
-                <li class="navbar-host"><a href="{{ url('') }}">辦活動</a></li>
+                <li class="navbar-host page-navbar-host"><a href="{{ url('') }}">辦活動</a></li>
 
                 @if (Auth::guest())
                 <li><a href="{{ url('/login') }}">登入</a></li>
