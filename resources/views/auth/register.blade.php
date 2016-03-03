@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <label class="col-md-5 control-label"> 
+                    <label class="col-md-5 control-label">
                         <span>*</span>
                         密碼 Password
                     </label>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                    <label class="col-md-5 control-label"> 
+                    <label class="col-md-5 control-label">
                         <span>*</span>
                         確認密碼 Comfirm Password
                     </label>
@@ -71,10 +71,11 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="register-button">
+                    <div class="login-button col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            加入會員
+                            註冊
                         </button>
+                        <a class="btn btn-primary facebook-login" href="redirect">使用Facebook註冊</a>
                     </div>
                 </div>
             </form>
