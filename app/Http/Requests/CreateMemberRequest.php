@@ -26,9 +26,9 @@ class CreateMemberRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'address' => 'required|min:6',
+            // 'address' => 'required|min:6',
             'email' => 'required|unique:users,email|max:255',
-            'phone' => 'required|integer',
+            // 'phone' => 'required|integer',
         ];
     }
 }
