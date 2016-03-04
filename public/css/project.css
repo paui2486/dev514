@@ -102,14 +102,18 @@ li.page-navbar-host {
     padding-bottom: 5px;
 }
 
-li.blog-navbar-right a {
+.blog-navbar-right {
+    margin-top: 17px;
+}
+
+li.blog-right-text a {
     color:#60574e;
     text-shadow: none;
 }
 
 .navbar-blog-category {
     position: absolute;
-    top: 20px;
+    top: 21px;
     left: 35%;
 }
 
@@ -389,7 +393,7 @@ li.collapse-blog-category {
     float: right;
     width: 325px;
     height: 180px;
-    padding: 0 10px;
+    padding:5px 20px;
 }
 
 .home-blog-thumbnail {
@@ -398,10 +402,17 @@ li.collapse-blog-category {
     float: left;
     background-size: cover;
     background-position: center;
+    -webkit-filter: sepia(0.5);
+    filter: sepia(0.5);
+}
+
+.home-blog-thumbnail:hover{
+    -webkit-filter: none;
+    filter: none;
 }
 
 .home-blog-title {
-    font-size: 20px;
+    font-size: 18px;
     color: #60574e;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -410,33 +421,62 @@ li.collapse-blog-category {
     white-space: nowrap;
     max-width: 300px;
 }
+.home-blog-title:hover{
+    color: #00bcd4;
+}
 
+.home-blog-info {
+    margin: 0;
+    padding: 0;
+}
 .home-blog-category,
 .home-blog-author,
 .home-blog-created_at {
-    margin-right: 20px;
-    font-size: 15px;
-    color: #998675;
+    margin-right: 5px;
+    font-size: 13px;
+    color:#c7b299;
     line-height: 22px;
-    letter-spacing: 1px;
+    float: left;
+    border:1px solid #c7b299;
+    border-radius: 20px;
+    padding: 0px 10px;
+}
+
+.home-blog-author {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    height: 22px;
 }
 
 .home-blog-description {
     max-width: 295px;
-    font-size: 16px;
+    font-size: 14px;
     color: #82766c;
     margin-top:10px;
     margin-bottom: 10px;
+    letter-spacing: 1px;
 }
 
 .home-read-more {
+    margin: 30px auto;
+    margin-top: 45px;
+    width: 91px;
+}
+
+.home-read-more a {
+    color:#60574e;
     text-align: center;
     border: 1px solid #60574e;
-    padding: 5px;
-    font-size: 16px;
-    width: 100px;
-    margin: 15px auto;
-    margin-top: 25px;
+    padding: 10px 15px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.home-read-more a:hover {
+    background-color: #60574e;
+    color: white;
 }
 
 /* New Activities 最新活動*/
@@ -462,7 +502,7 @@ li.collapse-blog-category {
 .new-activity-panel {
     width: 320px;
     float: left;
-    margin: 0px 10px;
+    margin: 0px 15px;
     position: relative;
 }
 
@@ -492,6 +532,12 @@ li.collapse-blog-category {
     border-radius: 20px;
     padding: 3px 15px;
     background-color: rgba(0,0,0,0.7)
+}
+
+.new-activity-count img {
+    width: 20px;
+    padding-bottom: 3px;
+    margin-right: 7px;
 }
 
 .new-activity-title {
@@ -623,6 +669,18 @@ li.collapse-blog-category {
     line-height:1.5em;
     /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
     height:auto;
+}
+
+.word-indent-04 {
+    overflow : hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient: vertical;
+    position:relative;
+    line-height:1.5em;
+    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+    height:6em;
 }
 
 /*footer*/
