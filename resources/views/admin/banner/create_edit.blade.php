@@ -98,6 +98,11 @@
                             </div>
                         </div>
             				</div>
+                    <div class="form-group">
+              					<div class="col-md-12">
+                            {{ Form::hidden('position', '1') }}
+                        </div>
+                    </div>
                 		<div class="form-group">
                   			<div class="col-md-12">
                     				<button type="reset" class="btn btn-sm btn-warning close_popup">
