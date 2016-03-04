@@ -15,7 +15,7 @@
 
         <div class="navbar-collapse collapse " id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-right nav navbar-nav ">
+            <ul class="navbar-right blog-navbar-right  nav navbar-nav ">
                 <!-- Authentication Links -->
 
                 @foreach ($header_categories as $header_category)
@@ -27,10 +27,10 @@
                 @endforeach
 
                 @if (Auth::guest())
-                    <li class="blog-navbar-right"><a href="{{ url('/login') }}">登入</a></li>
-                    <li class="blog-navbar-right"><a href="{{ url('/register') }}">註冊</a></li>
+                    <li class="blog-right-text"><a href="{{ url('/login') }}">登入</a></li>
+                    <li class="blog-right-text"><a href="{{ url('/register') }}">註冊</a></li>
                 @else
-                 <li class="blog-navbar-right dropdown">
+                 <li class="blog-right-text dropdown">
                     <a href="#"
                        class=" dropdown-toggle"
                        data-toggle="dropdown"
@@ -48,7 +48,7 @@
                     </ul>
                 </li>
                 @endif
-                    <li class="blog-navbar-right"><a href="{{ url('/') }}">
+                    <li class="blog-right-text"><a href="{{ url('/') }}">
                     <span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
                     </li>
 
@@ -57,7 +57,7 @@
         </div>
         <div class="row navbar-blog-category">
             @foreach ($header_categories as $header_category)
-                <li class="topline-category" >
+                <li class="top-line-category" >
                     <a href="{{ URL('blog/'.$header_category->name ) }}">
                         {{ $header_category->name }}
                     </a>
