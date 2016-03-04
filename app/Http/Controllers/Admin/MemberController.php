@@ -94,10 +94,8 @@ class MemberController extends Controller
     public function update(UpdateMemberRequest $request, $id)
     {
         $permission = (array) $request->permission;
-        $user = DB::table('users')->where('id', $id);
-        $user->update([
+        $update = array(
           'name'          => $request->name,
-          'password'      => bcrypt($request->password),
           'address'       => $request->address,
           'email'         => $request->email,
           'phone'         => $request->phone,
@@ -108,7 +106,15 @@ class MemberController extends Controller
           'hoster'        => in_array('hoster', $permission),
           'status'        => $request->status,
           'updated_at'    => date("Y-m-d H:i:s"),
-        ]);
+        );
+
+        if (!empty($request->password)) {
+            $update['password'] = bcrypt($request->password);
+        }
+
+        $user = DB::table('users')->where('id', $id);
+        $user->update($update);
+        return Redirect::to('dashboard/member');
     }
 
     /**
@@ -147,7 +153,7 @@ class MemberController extends Controller
             ->edit_column('status', '@if($status == 0) 未認證 @elseif($status == 1) 已認證 @else 封鎖中  @endif')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
-                  <a href="{{{ URL::to(\'dashboard/member/\' . $id ) }}}?view=colorbox" class="btn btn-success btn-sm iframe" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                  <a href="{{{ URL::to(\'dashboard/member/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
                   <a href="{{{ URL::to(\'dashboard/member/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')
