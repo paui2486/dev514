@@ -36,6 +36,15 @@
             <div class="tab-content">
                 <!-- General tab -->
                 <div class="tab-pane active" id="tab-general">
+                      @if (count($errors) > 0)
+                      <div class="alert alert-danger">
+                          <ul>
+                              @foreach ($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                              @endforeach
+                          </ul>
+                      </div>
+                    @endif
                     <div class="col-md-6">
                         <div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
                             <div class="col-md-12">

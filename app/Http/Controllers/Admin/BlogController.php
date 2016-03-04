@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-// use App\Http\Requests\CreateBlogRequest;
-// use App\Http\Requests\UpdateBlogRequest;
+use App\Http\Requests\BlogRequest;
 
 use DB;
 use Log;
@@ -52,7 +51,7 @@ class BlogController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
         $storeArray = array(
             'title'         => $request->title,
@@ -119,7 +118,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogRequest $request, $id)
     {
         $updateArray = array(
             'title'         => $request->title,

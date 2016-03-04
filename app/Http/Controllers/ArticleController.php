@@ -65,6 +65,7 @@ class ArticleController extends Controller
         if (!count($article)) {
             return Redirect::to('blog');
         } else {
+            DB::table('articles')->where('title', $title)->increment('counter');
             $relate_articles = $this->getRelateArticle(3, $article->id);
             $relate_activities = $this->getRelateActivity(3, $article->id);
             return view( "blog.article", [
