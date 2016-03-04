@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,9 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return view('auth.pages.profile');
+        $member = Auth::user();
+        // $banners = DB::table('galleries')->find($id);
+        return view('admin.member.create_edit', compact('member'));
     }
 
     public function follows()

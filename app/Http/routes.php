@@ -67,16 +67,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('redirect'                   , 'SocialAuthController@redirect' );
     Route::get('callback'                   , 'SocialAuthController@callback' );
 
-    Route::get('profile'                    , 'AuthController@profile'        );
-    // Route::get('profile/edit');
-
     Route::get('follows'                    , 'AuthController@follows'        );
     Route::get('friends'                    , 'AuthController@friends'        );
     Route::get('activitys'                  , 'AuthController@activitys'      );
+    Route::get('dashboard'                  , 'Admin\AdminController@index'         );
+    Route::get('dashboard/profile'          , 'AuthController@profile'        );
 
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
-
-        Route::get('/'                      , 'AdminController@index'         );
 
         Route::get('banner/data'            , 'BannerController@data'         );
         Route::get('banner/{id}/delete'     , 'BannerController@getDelete'    );

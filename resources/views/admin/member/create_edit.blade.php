@@ -128,7 +128,7 @@
                             </div>
                         </div>
             				</div>
-
+                    @if ( $member->adminer )
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label col-sm-2" for="password">
@@ -177,6 +177,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group">
                   			<div class="col-md-12">
                     				<button type="reset" class="btn btn-sm btn-warning close_popup">
