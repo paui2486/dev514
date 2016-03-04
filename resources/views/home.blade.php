@@ -114,35 +114,44 @@
             </div>
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
-                <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
+               
                     <div class="row home-blog-panel">
+                         <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="home-blog-thumbnail"
                              style="background-image:url({{ $blog->thumbnail }})">
                         </div>
+                        </a>
                         <div class="home-blog-panel-right">
+                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                             <div class="home-blog-title">
                                 {{ $blog->title }}
                             </div>
+                            </a>
+                            <div class="row home-blog-info">
                             <div class="home-blog-created_at">
-                                {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}
+                                 {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}
                             </div>
-                            <div class="glyphicon glyphicon-folder-open home-blog-category">
+                            <div class="home-blog-category">
                                 {{ $blog->category }}
                             </div>
-                            <div class="glyphicon glyphicon-user home-blog-author">
-                                {{ $blog->author }}
+                            <div class="home-blog-author">
+                                By {{ $blog->author }}
                             </div>
-                            <div class="home-blog-description word-indent">
+                            </div>
+                            <div class="home-blog-description word-indent-04">
                                 {{ $blog->description }}
                             </div>
                         </div>
                     </div>
-                </a>
                 @endforeach
             </div>
+            
             <div class="row home-read-more">
+               <a href="blog">
                 閱讀更多
+                    </a>
             </div>
+           
         </div>
 
         <div class="new-activity">
@@ -151,21 +160,25 @@
             </div>
             <div class="row new-activity-content">
                 @foreach( $home->newActivity as $newActivity )
-                <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
+               
                     <div class="new-activity-panel">
                         <div class="newact_panel_bg">
                             <div class="new-activity-id">
                                 {{ $newActivity->activity_id }}
                             </div>
+                             <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
                             <div class="new-activity-thumbnail"
                                  style="background-image:url({{ $newActivity->thumbnail }})">
                             </div>
+                            </a>
                             <div class="new-activity-right">
+                                 <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
                                 <div class="new-activity-title">
                                     {{ $newActivity->title }}
                                 </div>
+                                </a>
                                 <div class="new-activity-count">
-                                    {{ $newActivity->count }} 人
+                                    <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                                 </div>
                                 <div class="new-activity-description word-indent">
                                     {{ $newActivity->description }}
@@ -188,7 +201,7 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                
                 @endforeach
             </div>
         </div>
