@@ -30,7 +30,13 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/style-responsive.css')}}"/>
 </head>
-
+<style>
+.page-header {
+    padding-bottom: 9px;
+    margin: 20px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+</style>
 <body>
 	<!-- Container -->
 	<div class="container">
