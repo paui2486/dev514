@@ -102,6 +102,25 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('blog/{id}/update'          , 'BlogController@update'         );
         Route::resource('blog'                  , 'BlogController'                );
 
+
+
+        Route::get('activity/data'                  , 'ActivityController@data'           );
+        Route::get('activity/category'              , 'ActivityController@showCategory'   );
+        Route::post('activity/category'             , 'ActivityController@storeCategory'  );
+        Route::get('activity/category/{id}'         , 'ActivityController@getCategory'    );
+        Route::post('activity/category/{id}/update' , 'ActivityController@updateCategory' );
+        Route::get('activity/category/{id}/delete'  , 'ActivityController@deleteCategory' );
+        Route::post('activity/category/{id}/delete' , 'ActivityController@destoryCategory');
+        Route::get('activity/category/data'         , 'ActivityController@getCategoryData');
+        Route::get('activity/category/create'       , 'ActivityController@createCategory' );
+
+        Route::get('activity/hoster'                , 'ActivityController@showExpert'     );
+        Route::get('activity/hoster/data'           , 'ActivityController@getExpert'      );
+        Route::get('activity/{id}/delete'           , 'ActivityController@getDelete'      );
+        Route::post('activity/{id}/update'          , 'ActivityController@update'         );
+        Route::resource('activity'                  , 'ActivityController'                );
+
+
         // no yet
         Route::get('filter/data'            , 'AdminController@showMember'         );
         Route::get('filter/{id}/delete'     , 'AdminController@showMember'    );
