@@ -10,4 +10,8 @@ use App\Http\Controllers\Controller;
 class ActivityController extends Controller
 {
     //
+    public function Activity()
+    {
+        return view("activity");
+    }
 }

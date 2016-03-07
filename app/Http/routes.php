@@ -53,8 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('members/{username}'         , 'UserController@index'          );
 
-    Route::get('activity'                   , 'ActivityController@index'      );
-    Route::get('activity/{category}/{slug}' , 'ActivityController@index'      );
+    Route::get('activity'                   , 'ActivityController@Activity'      );
+    Route::get('activity/{category}/{slug}' , 'ActivityController@Activity'      );
 
     Route::get('blog'                       , 'ArticleController@index'       );
     Route::get('blog/{category}'            , 'ArticleController@showCategory');
