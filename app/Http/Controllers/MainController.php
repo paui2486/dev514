@@ -46,10 +46,10 @@ class maincontroller extends controller
             'property = og:type'        => 'website',
             'property = og:description' => '',
             'property = og:site_name'   => '514 活動頻道',
-            'property = og:page_id'     => '514 Life',
-            'property = og:app_id'      => '509584332499899',
-            'property = og:admins'      => '1910444804523',
             'property = og:image'       => asset('/uploads/galleries/1/source-1457072725.png'),
+            'property = fb:page_id'     => '514 Life',
+            'property = fb:app_id'      => '509584332499899',
+            'property = fb:admins'      => '1910444804523',
         );
         return $meta;
     }
