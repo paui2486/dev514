@@ -131,12 +131,12 @@
                             <div class="home-blog-created_at">
                                  {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}
                             </div>
-                            <div class="home-blog-category">
+                            <a href="#"><div class="home-blog-category">
                                 {{ $blog->category }}
-                            </div>
-                            <div class="home-blog-author">
+                                </div></a>
+                            <a href="#"><div class="home-blog-author">
                                 By {{ $blog->author }}
-                            </div>
+                                </div></a>
                             </div>
                             <div class="home-blog-description word-indent-04">
                                 {{ $blog->description }}
