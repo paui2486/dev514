@@ -128,7 +128,7 @@
                             </div>
                         </div>
             				</div>
-                    @if ( $member->adminer )
+                    @if ( Auth::user()->adminer )
                     <div class="form-group">
                         <div class="col-md-12">
                             <label class="control-label col-sm-2" for="password">
