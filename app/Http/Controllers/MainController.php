@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use URL;
 use Log;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -28,16 +29,27 @@ class maincontroller extends controller
     private function getMeta()
     {
         $meta   = array(
-            'name = title'              => '514 生活頻道 - 讓生活更有意思',
-            'name = author'             => '514 生活頻道',
-            'name = copyright'          => 'Copyright © 514 All rights reserved.',
+            'name = title'              => '514 活動頻道 - 讓生活更有意思',
+            'name = author'             => '514 活動頻道',
+            'name = publisher'          => '514 活動頻道',
+            'name = rating'             => 'general',
+            'name = robots'             => 'all',
+            'name = spiders'            => 'all',
+            'name = webcrawlers'        => 'all',
+            'name = copyright'          => 'Copyright ©2016 514 Life Inc. All rights reserved.',
+            'name = company'            => '共盈科技股份有限公司: 514 Life',
+            'name = abstract'           => '514 活動頻道，辦活動超簡單，收款超級快，精準統計報名人數，省去您的金流義務麻煩',
             'name = description'        => '',
+            'name = fragment'           => '!',
             'property = og:title'       => '514 生活頻道 - 讓生活更有意思',
-            'property = og:url'         => 'http://www.514.com.tw/',
-            'property = og:image'       => '',
+            'property = og:url'         => URL::current(),
+            'property = og:type'        => 'website',
             'property = og:description' => '',
-            'property = og:app_id'      => '',
-            'property = og:admins'      => '',
+            'property = og:site_name'   => '514 活動頻道',
+            'property = og:page_id'     => '514 Life',
+            'property = og:app_id'      => '509584332499899',
+            'property = og:admins'      => '1910444804523',
+            'property = og:image'       => asset('/uploads/galleries/1/source-1457072725.png'),
         );
         return $meta;
     }

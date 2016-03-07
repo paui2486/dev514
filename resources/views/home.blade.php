@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('meta')
+    @foreach($meta as $key => $value)
+        <meta {{ $key }} content="{{ $value }}">
+    @endforeach
+@endsection
+
 @section('script')
 <script>
     jQuery(document).ready(function ($) {
@@ -114,7 +120,7 @@
             </div>
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
-               
+
                     <div class="row home-blog-panel">
                          <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="home-blog-thumbnail"
@@ -145,13 +151,13 @@
                     </div>
                 @endforeach
             </div>
-            
+
             <div class="row home-read-more">
                <a href="blog">
                 閱讀更多
                     </a>
             </div>
-           
+
         </div>
 
         <div class="new-activity">
@@ -160,7 +166,7 @@
             </div>
             <div class="row new-activity-content">
                 @foreach( $home->newActivity as $newActivity )
-               
+
                     <div class="new-activity-panel">
                         <div class="newact_panel_bg">
                             <div class="new-activity-id">
@@ -201,7 +207,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                 @endforeach
             </div>
         </div>
