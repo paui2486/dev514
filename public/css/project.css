@@ -442,6 +442,12 @@ li.collapse-blog-category {
     padding: 0px 10px;
 }
 
+.home-blog-category:hover,
+.home-blog-author:hover {
+    background-color:#c7b299;
+    color: white;
+}
+
 .home-blog-author {
     max-width: 120px;
     overflow: hidden;
@@ -1355,23 +1361,127 @@ li.collapse-blog-category {
         } 
 }
 
+/*activity-page活動內容頁*/
 
+.act-page-container {
+    margin-top: 100px;
+}
 
+.act-page-blur {
+    z-index: 1;
+}
 
+.act-page-blur {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    height: 500px;
+    width: 100%;
+    top: 0px;
+    background-size: cover; 
+}
 
+.actpage-main-image {
+    height: 500px;
+    background-size: cover;
+    max-width: 1050px;
+    width: 80%;
+    position: absolute;
+    left: 10%;
+    top:100px; 
+}
 
+.actpage-panel {
+    background-color: white;
+    max-width: 1050px;
+    width: 80%;
+    z-index: 999;
+    margin: auto;
+    padding: 20px 30px;
+    display: flex;
+    box-shadow: 1px 1px 10px #ccc;
+    margin-bottom: 20px;
+}
 
+.actpage-title {
+    font-size: 24px;
+    color: black;
+    margin-bottom: 20px;
+}
 
+.actpage-left-content {
+    width: 60%;
+    float: left;
+}
 
+.actpage-right-content {
+    width: 300px;
+    float: right;
+    margin-left: 30px;
+    background-color:rgba(0,0,0,0.8);
+    position: absolute;
+    top: 520px;
+    border-radius: 5px;
+}
 
+.actpage-header {
+    margin: 10px 0px;
+    padding: 0px;
+}
 
+.actpage-header-left {
+    font-size: 16px;
+    border: 1px solid;
+    padding: 5px 10px;
+    width: 20%;
+    text-align: center;
+    float: left
+}
 
+.actpage-header-right {
+    float: right;
+    width: 80%;
+    height: 18px;
+    border-bottom: 1px dashed;
+}
 
+.actpage-introduce,
+.actpage-ticket {
+    padding-bottom: 10px;
+    line-height: 26px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
 
+.actpage-cart-title {
+    font-size: 18px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 0px;
+    background-color: black;
+}
 
+.actpage-cart-content {
+    padding: 15px;
+}
 
+.actpage-cart-content > p {
+    color: #ccc;
+    font-size: 14px;
+}
 
+.actpage-cart-content > p >span {
+    border: 1px solid;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+}
 
+.actpage-cart-time {
+    margin-bottom: 10px;
+    color: #00bcd4;
+    font-size: 14px;
+}
 
 
 
