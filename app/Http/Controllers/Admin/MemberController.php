@@ -8,8 +8,10 @@ use App\Http\Requests\UpdateMemberRequest;
 
 use DB;
 use Log;
+use Image;
 use Redirect;
 use Datatables;
+use App\Library;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -94,7 +96,7 @@ class MemberController extends Controller
     public function update(UpdateMemberRequest $request, $id)
     {
         $permission = (array) $request->permission;
-        $update = array(
+        $updateArray = array(
           'name'          => $request->name,
           'address'       => $request->address,
           'email'         => $request->email,
@@ -112,8 +114,22 @@ class MemberController extends Controller
             $update['password'] = bcrypt($request->password);
         }
 
-        $user = DB::table('users')->where('id', $id);
-        $user->update($update);
+        $user              = DB::table('users')->where('id', $id);
+        if (!empty($request->avatar)) {
+            $params            = Library::upload_param_template();
+            $params['request'] = $request;
+            $params['data']    = $updateArray;
+            $params['filed']   = ['avatar'];
+            $params['infix']   = 'avatar/';
+            // $params['suffix']  = "$id-";
+            $update            = Library::upload($params);
+            $avatar            = public_path($update['data']['avatar']);
+
+            $result            = $user->update($update['data']);
+        } else {
+            $result            = $user->update($updateArray);
+        }
+
         return Redirect::to('dashboard/member');
     }
 

@@ -3,6 +3,10 @@
 /* --}}
 @extends($layouts)
 
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.css')}}" />
+@stop
+
 {{-- Content --}}
 
 @section('content')
@@ -30,6 +34,15 @@
           	<div class="tab-content">
             		<!-- General tab -->
             		<div class="tab-pane active" id="tab-general">
+                    @if (count($errors) > 0)
+                      <div class="alert alert-danger">
+                          <ul>
+                              @foreach ($errors->all() as $error)
+                                  <li>{{ $error }}</li>
+                              @endforeach
+                          </ul>
+                      </div>
+                    @endif
             				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="name">
@@ -45,11 +58,23 @@
                     <div class="form-group {{{ $errors->has('avatar') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="avatar">
-                                頭像網址
+                                個人頭像
                             </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="text" name="avatar" id="avatar"
-                      							value="{{{ Input::old('avatar', isset($member) ? $member->avatar : null) }}}" />
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                        <img src="{{{ ( isset($member) && !empty($member->avatar) ? asset($member->avatar) : asset('img/no-image.png')) }}}" alt="" />
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                    <div>
+                                        <span class="btn btn-white btn-file">
+                                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
+                                            <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
+                                            <input id="avatar" class="file"  name="avatar" type="file" />
+                                        </span>
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
             				</div>
@@ -206,4 +231,9 @@
     </section>
 </section>
 
+@stop
+
+@section('scripts')
+    @parent
+    <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
 @stop
