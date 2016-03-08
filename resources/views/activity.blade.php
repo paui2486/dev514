@@ -32,14 +32,45 @@
             <div class="actpage-right-content">
                 <p class="actpage-cart-title">辦公室療癒手做植栽DIY</p>
                 <div class="actpage-cart-content">
-                <p>活動時間</p>
-                    <div class="actpage-cart-time">
-                    2016-04-29（五）13:00~15:00
+                    <div class="actpage-cart-info actpage-time-block">
+                        <div class="row" style="margin:0px;">
+                        <img src="/img/icons/carttime.png">
+                        <p>活動時間</p>
+                        </div>
+                        <p class="actpage-cart-time">2016-04-29（五）13:00~15:00
+                            <span>剩 5 位</span></p>
+                        <p class="actpage-cart-time">2016-04-29（五）13:00~15:00
+                            <span>剩 5 位</span></p>
                     </div>
-                <p>1,000元～1,500元</p>
-                <p>台北市信義區基隆路一段199號</p>
-                <p>無供應餐點</p>
-                <p><span>中文</span><span>英文</span><span>台語</span></p>
+                    
+                    <div class="actpage-cart-info">
+                        <div class="row" style="margin:0px;">
+                        <img src="/img/icons/cartprice.png">
+                        <p>1,000元～1,500元</p>
+                        </div>
+                    </div>
+                    
+                    <div class="actpage-cart-info">
+                        <div class="row" style="margin:0px;">
+                        <img src="/img/icons/cartlocation.png">
+                        <p>台北市信義區基隆路一段199號</p>
+                        </div>
+                    </div>
+                    
+                    <div class="actpage-cart-info">
+                        <div class="row" style="margin:0px;">
+                        <img src="/img/icons/cartmeal.png">
+                        <p>無供應餐點</p>
+                        </div>
+                    </div>
+                    
+                    <div class="actpage-cart-info actpage-lan-block">
+                        <div class="row" style="margin:0px;padding-bottom:10px;">
+                        <img src="/img/icons/cartlanguage.png">
+                        <p class="actpage-cart-lan"><span>中文</span><span>英文</span><span>台語</span></p>
+                        </div>
+                    </div>
+                    <div class="actpage-purchase">前往訂購</div>
                 </div>
             </div>
         </div>
