@@ -9,15 +9,15 @@ body {
     position: absolute;
     top: 0;
     z-index: 999;
-    height: 100px;
+    height: 80px;
     width: 100%;
     padding: 0px 20px;
 }
 
 .navbar-brand img {
-    height:60px;
+    height:50px;
     z-index: 200;
-    margin:5px auto;
+    margin:auto;
 }
 
 .navbar-collapse {
@@ -26,7 +26,7 @@ body {
 }
 
 .navbar-right {
-    margin-top:25px;
+    margin-top:15px;
     cursor: pointer;
     display: inline-flex;
 }
@@ -665,6 +665,18 @@ li.collapse-blog-category {
     height:4.5em;
 }
 
+.word-indent-01 {
+    overflow : hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient: vertical;
+    position:relative;
+    line-height:1.5em;
+    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+    height:1.5em;
+}
+
 .word-indent-02 {
     overflow : hidden;
     text-overflow: ellipsis;
@@ -804,7 +816,7 @@ li.collapse-blog-category {
     padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .control-label > span {
@@ -868,7 +880,7 @@ li.collapse-blog-category {
     padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .register-panel {
@@ -1310,7 +1322,7 @@ li.collapse-blog-category {
 
 .page-container {
     background-color: #f4eee9;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .page-content {
@@ -1364,7 +1376,7 @@ li.collapse-blog-category {
 /*activity-page活動內容頁*/
 
 .act-page-container {
-    margin-top: 100px;
+    margin-top:80px;
 }
 
 .act-page-blur {
@@ -1384,10 +1396,10 @@ li.collapse-blog-category {
     height: 500px;
     background-size: cover;
     max-width: 1050px;
-    width: 80%;
+    width: 100%;
     position: absolute;
     left: 10%;
-    top:100px; 
+    top:80px; 
 }
 
 .actpage-panel {
@@ -1400,6 +1412,7 @@ li.collapse-blog-category {
     display: flex;
     box-shadow: 1px 1px 10px #ccc;
     margin-bottom: 20px;
+    height:1000px;
 }
 
 .actpage-title {
@@ -1417,7 +1430,6 @@ li.collapse-blog-category {
     width: 300px;
     float: right;
     margin-left: 30px;
-    background-color:rgba(0,0,0,0.8);
     position: absolute;
     top: 520px;
     border-radius: 5px;
@@ -1437,11 +1449,16 @@ li.collapse-blog-category {
     float: left
 }
 
-.actpage-header-right {
+.actpage-header-dash {
     float: right;
     width: 80%;
     height: 18px;
     border-bottom: 1px dashed;
+}
+
+.actpage-cart-content {
+    padding: 15px;
+    background-color:rgba(0,0,0,0.8);
 }
 
 .actpage-introduce,
@@ -1452,18 +1469,38 @@ li.collapse-blog-category {
     letter-spacing: 1px;
 }
 
+.actpage-recommend {
+    margin: 10px 0px 20px 0px;
+}
+
+.actpage-recommend-panel {
+    border: 1px solid #ccc;
+    width:30%;
+    float: left;
+    margin: 0px 8px;
+    letter-spacing: 1px;
+}
+
+.actpage-recommend-thumnail {
+    width: 100%;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+}
+
+.actpage-recommend-info {
+    padding:10px;
+}
+
 .actpage-cart-title {
     font-size: 18px;
     color: white;
-    padding: 10px;
+    padding:10px 0px;
     text-align: center;
     margin: 0px;
     background-color: black;
-    border-radius: 5px;
-}
-
-.actpage-cart-content {
-    padding: 15px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
 }
 
 .actpage-cart-info {
@@ -1517,16 +1554,100 @@ li.collapse-blog-category {
 }
 
 .actpage-purchase {
-    background-color:#f37e7e;
+    margin:10px auto;
+    width:125px;
+}
+
+.actpage-purchase {
+    background: -webkit-linear-gradient(#FF6D5F,#CC404C);
+    background: -o-linear-gradient(#FF6D5F,#CC404C);
+    background: -moz-linear-gradient(#FF6D5F,#CC404C);
+    background: linear-gradient(#FF6D5F,#CC404C);
     border-radius: 20px;
-    width: 50%;
+    text-align: center;
+    padding:10px 30px;
+    color: white;
+    font-size: 14px;
+    letter-spacing:2px;
+}
+
+.actpage-purchase:hover {
+    background-color: #CC404C;
+    box-shadow: 1x 1px 10px rgb(255,255,255);
+}
+
+.actpage-holder-content {
+    background-color: white;
+    padding: 15px;
+    margin: 20px auto;
+    box-shadow: 1px 1px 10px #666;
+}
+
+.actpage-holder-thumnail {
+    border-radius: 200px;
+    width:150px;
+    height: 150px;
+    margin: auto;
+    background-size: cover;
+    background-position: center; 
+}
+
+.actpage-holder-name {
+    margin:10px auto;
+    text-align: center;
+    font-size: 16px;
+    color: #736357;
+}
+
+.actpage-holder-intro {
+    margin:10px auto;
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 0px 15px;
+    font-size: 14px;
+}
+
+.actpage-connect {
+    border-radius: 8px;
+    width:140px;
     margin: auto;
     text-align: center;
-    padding: 10px 5px;
-    color: white;
-    font-size: 15px;
+    font-size: 14px;
     letter-spacing: 1px;
+    padding: 10px;
+    color: #998675;
+    border: 1px solid #c7b299;
 }
+
+.actpage-connect:hover {
+    background-color: #c7b299;
+    color: white;
+}
+
+.actpage-bought-content {
+    background-color: white;
+    padding: 15px;
+    margin:auto;
+    box-shadow: 1px 1px 10px #666;
+}
+
+.actpage-bought-title {
+    background-color: #998675;
+    color: white;
+    padding:10px 0px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    box-shadow: 1px 1px 10px #666;
+}
+
+
+
+
+
 
 
 
