@@ -102,8 +102,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('blog/{id}/update'          , 'BlogController@update'         );
         Route::resource('blog'                  , 'BlogController'                );
 
-
-
         Route::get('activity/data'                  , 'ActivityController@data'           );
         Route::get('activity/category'              , 'ActivityController@showCategory'   );
         Route::post('activity/category'             , 'ActivityController@storeCategory'  );
@@ -132,14 +130,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('coupon'                 , 'AdminController@showMember'    );
         Route::get('invoice'                , 'AdminController@showMember'    );
         Route::get('analysis'               , 'AdminController@showMember'    );
-
-
-        Route::get('activity'               , 'AdminController@showMember'    );
-        Route::get('activity/create'        , 'AdminController@showMember'    );
-        Route::get('activity/category'      , 'AdminController@showMember'    );
-        Route::get('activity/hoster'        , 'AdminController@showMember'    );
-        Route::get('activity/coupon'        , 'AdminController@showMember'    );
-        Route::get('activity/invoice'       , 'AdminController@showMember'    );
 
         Route::get('customer'               , 'AdminController@showMember'    );
         Route::get('customer/wait'          , 'AdminController@showMember'    );
