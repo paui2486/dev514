@@ -102,7 +102,7 @@
                                 </label>
                                 <div class="col-sm-10 col-md-9">
                                     <input class="form-control time-picker" type="text" name="activity_range" id="activity_range"
-                                        value="{{{ Input::old('created_at', isset($activity) ? $activity->activity_range : date("Y-m-d 00:00:00") . " - " . date("Y-m-d 00:00:00") ) }}}" />
+                                        value="{{{ Input::old('activity_range', isset($activity) ? $activity->activity_start . " - " . $activity->activity_end : date("Y-m-d 00:00:00") . " - " . date("Y-m-d 00:00:00") ) }}}" />
                                 </div>
                             </div>
                         </div>
@@ -214,26 +214,27 @@
                                 </div>
                             </div>
                         </div>
+                        @if ( Request::segment(3) == "create" )
                         <div class="form-group {{{ $errors->has('tickets') ? 'has-error' : '' }}}">
                             <div class="col-sm-12 ticket-area">
                                 <div id="ticket1" class="form-ticket">
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket-name">票卷名稱</label>
                                         <div class="col-sm-2">
-                                            <input class="form-control" type="text" name="ticket[0]['name']"/>
+                                            <input class="form-control" type="text" name="ticket[0][name]"/>
                                         </div>
                                         <label class="control-label col-sm-1" for="ticket-price">單價</label>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                             <div class="input-group">
                                               <span class="input-group-btn">
-                                                  <button class="btn btn-white" type="button">NT $</button>
+                                                  <button class="btn btn-white" type="button">$</button>
                                               </span>
-                                              <input class="form-control" type="text" name="ticket[0]['price']"/>
+                                              <input class="form-control" type="number" name="ticket[0][price]"/>
                                             </div>
                                         </div>
                                         <label class="control-label col-sm-1" for="ticket-count">張數</label>
-                                        <div class="col-sm-1">
-                                            <input class="form-control" type="text" name="ticket[0]['numbers']"/>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="number" name="ticket[0][numbers]"/>
                                         </div>
                                         <div class="col-sm-2 t-function">
                                             <button type="button" class="btn btn-shadow btn-info btn-xs btn-clone">複製</button>
@@ -243,25 +244,26 @@
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket-time">售票狀態</label>
                                         <div class="col-sm-2">
-                                            <select style="width: 100%" name="ticket[0]['status']" class="form-control">
+                                            <select style="width: 100%" name="ticket[0][status]" class="form-control">
                                                 <option value="1">發售</option>
                                                 <option value="2">停售</option>
                                             </select>
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket-time">售票期間</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0]['time']"/>
+                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0][time]"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket-description">票種說明</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="text" name="ticket[0]['description']"/>
+                                            <input class="form-control" type="text" name="ticket[0][description]"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endif
                         <div class="form-group">
                   					<div class="col-md-12">
                                 {{ Form::hidden('position', '1') }}

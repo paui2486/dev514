@@ -73,23 +73,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('dashboard'                  , 'Admin\AdminController@index'         );
     Route::get('dashboard/profile'          , 'AuthController@profile'        );
 
-    // for author
-    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'author'], function() {
-        Route::get('blog/data'                  , 'BlogController@data'           );
-        Route::get('blog/{id}/delete'           , 'BlogController@getDelete'      );
-        Route::post('blog/{id}/update'          , 'BlogController@update'         );
-        Route::resource('blog'                  , 'BlogController'                );
-    });
-
-    // for host
-    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
-        Route::get('activity/data'              , 'ActivityController@data'       );
-        Route::get('activity/{id}/delete'       , 'ActivityController@getDelete'  );
-        Route::post('activity/{id}/update'      , 'ActivityController@update'     );
-        Route::resource('activity'              , 'ActivityController'            );
-
-    });
-
     // for admin
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
 
@@ -156,6 +139,24 @@ Route::group(['middleware' => 'web'], function () {
         // Route::resource('analysis');
         // Route::resource('system');
     });
+
+    // for author
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'author'], function() {
+        Route::get('blog/data'                  , 'BlogController@data'           );
+        Route::get('blog/{id}/delete'           , 'BlogController@getDelete'      );
+        Route::post('blog/{id}/update'          , 'BlogController@update'         );
+        Route::resource('blog'                  , 'BlogController'                );
+    });
+
+    // for host
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
+        Route::get('activity/data'              , 'ActivityController@data'       );
+        Route::get('activity/{id}/delete'       , 'ActivityController@getDelete'  );
+        Route::post('activity/{id}/update'      , 'ActivityController@update'     );
+        Route::resource('activity'              , 'ActivityController'            );
+        Route::resource('activity/{id}/tickets' , 'TicketController'              );
+    });
+
 });
 
 /*

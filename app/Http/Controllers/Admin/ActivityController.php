@@ -7,6 +7,7 @@ use App\Http\Requests\ActivityRequest;
 
 use DB;
 use Log;
+use Auth;
 use Input;
 use Response;
 use Redirect;
@@ -34,16 +35,21 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        $authors    = DB::table('users')
-                    ->where('author', 1)
-                    ->select('id', 'name')
-                    ->get();
-        $categories = DB::table('categories')
+        if (Auth::user()->adminer) {
+            $hosters  = DB::table('users')
+                            ->where('hoster', 1)
+                            ->select('id', 'name')
+                            ->get();
+        } else {
+            $hosters  = array();
+        }
+
+        $categories   = DB::table('categories')
                         ->where('public', 1)
                         ->where('type', 1)
                         ->select('id', 'name')
                         ->get();
-        return view('admin.activity.create_edit', compact('authors', 'categories'));
+        return view('admin.activity.create_edit', compact('hosters', 'categories'));
     }
 
     /**
@@ -52,34 +58,66 @@ class ActivityController extends Controller
      * @return Response
      */
     //  public function store(ActivityRequest $request)
-     public function store(Request $request)
+     public function store(ActivityRequest $request)
     {
-        return Response::json($request);
+        $activity_range = array();
+        preg_match("/(.*)\s-\s(.*)/", $request->activity_range, $activity_range);
 
         $storeArray = array(
             'title'         => $request->title,
-            'author_id'     => $request->author_id,
             'category_id'   => $request->category_id,
             'description'   => $request->description,
+            'location'      => $request->location,
             'content'       => $request->content,
             'tag_ids'       => $request->tag_ids,
             'status'        => $request->status,
-            'counter'       => $request->counter,
+            'activity_start'=> $activity_range[1],
+            'activity_end'  => $activity_range[2],
             'created_at'    => date("Y-m-d H:i:s"),
             'updated_at'    => date("Y-m-d H:i:s"),
         );
 
-        $id                 = DB::table('articles')->insertGetId($storeArray);
+        if( Auth::user()->adminer )
+        {
+            $storeArray['host_id'] = $request->host_id;
+            $storeArray['counter'] = $request->counter;
+        } else {
+            $storeArray['host_id'] = Auth::id();
+        }
+
+        $activity_id        = DB::table('activities')->insertGetId($storeArray);
         $params             = Library::upload_param_template();
         $params['request']  = $request;
         $params['data']     = $storeArray;
         $params['filed']    = ['thumbnail'];
-        $params['infix']    = 'articles/';
-        $params['suffix']   = "$id/";
+        $params['infix']    = 'activities/';
+        $params['suffix']   = "$activity_id/";
 
         $update             = Library::upload($params);
-        $articles           = DB::table('articles')->where('id', $id);
-        $result             = $articles->update($update['data']);
+        $activity           = DB::table('activities')->where('id', $activity_id);
+        $result             = $activity->update($update['data']);
+
+        $tickets            = array();
+        foreach ($request->ticket as $act_ticket) {
+            $ticket_range   = array();
+            $act_ticket     = (object) $act_ticket;
+            preg_match("/(.*)\s-\s(.*)/", $act_ticket->time, $ticket_range);
+            $insert = array(
+                        'activity_id'   => $activity_id,
+                        'ticket_start'  => $ticket_range[1],
+                        'ticket_end'    => $ticket_range[2],
+                        'location'      => $request->location,
+                        'name'          => $act_ticket->name,
+                        'condition'     => $act_ticket->status,
+                        'price'         => $act_ticket->price,
+                        'total_numbers' => $act_ticket->numbers,
+                        'left_over'     => $act_ticket->numbers,
+                        'description'   => $act_ticket->description,
+                      );
+            array_push($tickets, $insert);
+        }
+        $results            = DB::table('act_tickets')->insert($tickets);
+
         return Redirect::to('dashboard/activity');
     }
 
@@ -91,17 +129,33 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        $article = DB::table('articles')->find($id);
-        $authors = DB::table('users')
-                    ->where('author', 1)
-                    ->select('id', 'name')
-                    ->get();
+        if (Auth::user()->adminer) {
+            $activity = DB::table('activities')->find($id);
+            $hosters  = DB::table('users')
+                        ->where('author', 1)
+                        ->select('id', 'name')
+                        ->get();
+        } else {
+            $activity = DB::table('activities')
+                          ->where('id', $id)
+                          ->where('host_id', Auth::id())
+                          ->first();
+
+            if ( empty($activity) ) {
+                Log::error( 'UserID :' . Auth::id() . " 想做壞事, 偷看不屬於他的活動！！" );
+                return Redirect::to('dashboard/activity');
+            } else {
+                $hosters  = array();
+            }
+        }
         $categories = DB::table('categories')
                         ->where('public', 1)
                         ->where('type', 2)
                         ->select('id', 'name')
                         ->get();
-        return view('admin.activity.create_edit', compact('article', 'authors', 'categories'));
+
+        // tickets 尚未實作
+        return view('admin.activity.create_edit', compact('activity', 'hosters', 'tickets', 'categories'));
     }
 
     /**
@@ -123,30 +177,65 @@ class ActivityController extends Controller
      */
     public function update(ActivityRequest $request, $id)
     {
+        $activity_range = array();
+        preg_match("/(.*)\s-\s(.*)/", $request->activity_range, $activity_range);
+
         $updateArray = array(
             'title'         => $request->title,
-            'author_id'     => $request->author_id,
             'category_id'   => $request->category_id,
             'description'   => $request->description,
+            'location'      => $request->location,
             'content'       => $request->content,
             'tag_ids'       => $request->tag_ids,
             'status'        => $request->status,
-            'counter'       => $request->counter,
-            'created_at'    => $request->created_at,
+            'activity_start'=> $activity_range[1],
+            'activity_end'  => $activity_range[2],
             'updated_at'    => date("Y-m-d H:i:s"),
         );
 
-        $params            = Library::upload_param_template();
-        $params['request'] = $request;
-        $params['data']    = $updateArray;
-        $params['filed']   = ['thumbnail'];
-        $params['infix']   = 'articles/';
-        $params['suffix']  = "$id-";
+        if( Auth::user()->adminer )
+        {
+            $storeArray['host_id'] = $request->host_id;
+            $storeArray['counter'] = $request->counter;
+        } else {
+            $storeArray['host_id'] = Auth::id();
+        }
 
-        $update            = Library::upload($params);
-        $articles          = DB::table('articles')->where('id', $id);
-        $result            = $articles->update($update['data']);
+        $activity_id        = $id;
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $storeArray;
+        $params['filed']    = ['thumbnail'];
+        $params['infix']    = 'activities/';
+        $params['suffix']   = "$activity_id/";
+
+        $update             = Library::upload($params);
+        $activity           = DB::table('activities')->where('id', $activity_id);
+        $result             = $activity->update($update['data']);
+
+        // $tickets            = array();
+        // foreach ($request->ticket as $act_ticket) {
+        //     $ticket_range   = array();
+        //     $act_ticket     = (object) $act_ticket;
+        //     preg_match("/(.*)\s-\s(.*)/", $act_ticket->time, $ticket_range);
+        //     $insert = array(
+        //                 'activity_id'   => $activity_id,
+        //                 'ticket_start'  => $ticket_range[1],
+        //                 'ticket_end'    => $ticket_range[2],
+        //                 'location'      => $request->location,
+        //                 'name'          => $act_ticket->name,
+        //                 'condition'     => $act_ticket->status,
+        //                 'price'         => $act_ticket->price,
+        //                 'total_numbers' => $act_ticket->numbers,
+        //                 'left_over'     => $act_ticket->numbers,
+        //                 'description'   => $act_ticket->description,
+        //               );
+        //     array_push($tickets, $insert);
+        // }
+        // $results            = DB::table('act_tickets')->insert($tickets);
+
         return Redirect::to('dashboard/activity');
+
     }
 
     /**
@@ -156,8 +245,8 @@ class ActivityController extends Controller
      * @return items from @param
      */
     public function getDelete($id) {
-        $articles = DB::table('articles')->find($id);
-        return view('admin.activity.delete', compact('articles'));
+        $activities = DB::table('activities')->find($id);
+        return view('admin.activity.delete', compact('activities'));
     }
 
     /**
@@ -168,8 +257,8 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        $articles = DB::table('articles')->where('id', $id);
-        $articles->delete();
+        $activities = DB::table('activities')->where('id', $id);
+        $activities->delete();
         return Redirect::to('dashboard/activity');
     }
 
@@ -179,28 +268,39 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return Response
      */
-     public function data()
-     {
-         $activities = DB::table('activities')
-                      ->leftJoin('users', 'activities.host_id', '=', 'users.id')
-                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                      ->select(array(
-                        'activities.id',    'users.name',         'categories.name as category',
-                        'activities.title', 'activities.counter', 'activities.targets', 'activities.status'))
-                      ->orderBy('activities.created_at', 'ASC');
+    public function data()
+    {
+        if (Auth::user()->adminer){
+            $activities = DB::table('activities')
+                        ->leftJoin('users', 'activities.host_id', '=', 'users.id')
+                        ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                        ->select(array(
+                          'activities.id',    'users.name',         'categories.name as category',
+                          'activities.title', 'activities.counter', 'activities.targets', 'activities.status'))
+                        ->orderBy('activities.created_at', 'ASC');
+        } else {
+            $activities = DB::table('activities')
+                        ->leftJoin('users', 'activities.host_id', '=', 'users.id')
+                        ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                        ->select(array(
+                          'activities.id',    'users.name',         'categories.name as category',
+                          'activities.title', 'activities.counter', 'activities.targets', 'activities.status'))
+                        ->orderBy('activities.created_at', 'ASC')
+                        ->where('users.id', Auth::id());
+        }
+       // need to change targets to processing bar
 
-         // need to change targets to processing bar
-
-         return Datatables::of($activities)
-             ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status == 2) 已發布 @elseif($status == 3) 已隱藏 @else 已刪除 @endif')
-             ->add_column('actions', '
-                   <div style="white-space: nowrap;">
-                   <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
-                   <a href="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
-                   <input type="hidden" name="row" value="{{$id}}" id="row">
-                   </div>')
-             ->make();
-     }
+       return Datatables::of($activities)
+           ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status == 2) 已發布 @elseif($status == 3) 已隱藏 @else 已刪除 @endif')
+           ->add_column('actions', '
+                 <div style="white-space: nowrap;">
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets\') }}}" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 票卷</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+                 <input type="hidden" name="row" value="{{$id}}" id="row">
+                 </div>')
+           ->make();
+    }
 
 
 
@@ -269,7 +369,7 @@ class ActivityController extends Controller
                              DB::raw('count(articles.category_id) as articles_cnt'), 'categories.public',
                            ))
                            ->groupBy('categories.id')
-                           ->where('categories.type', '2')
+                           ->where('categories.type', '1')
                            ->orderBy('categories.id', 'ASC');
 
         return Datatables::of($activityCategory)
