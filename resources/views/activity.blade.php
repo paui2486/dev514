@@ -69,17 +69,34 @@
             <div class="actpage-right-content">
                 <p class="actpage-cart-title">辦公室療癒手做植栽DIY</p>
                 <div class="actpage-cart-content">
-                    <div class="actpage-cart-info actpage-time-block">
+                    <div class="row actpage-cart-info actpage-time-block">
                         <div class="row" style="margin:0px;">
                         <img src="/img/icons/carttime.png">
                         <p>活動時間</p>
                         </div>
-                        <p class="actpage-cart-time">2016-04-29（五）13:00~15:00
-                            <span>剩 5 位</span></p>
-                        <p class="actpage-cart-time">2016-04-29（五）13:00~15:00
-                            <span>剩 5 位</span></p>
+                        <div class="actpage-cart-time">
+                            <div class="actpage-cart-time01">
+                                <p>2016-04-29（五）  <span>13:00</span> 
+                                </p>
+                            </div>
+                            <div>～</div>
+                            <div class="actpage-cart-time02">
+                                <p>2016-04-30（六）<span>15:00</span> 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="actpage-surplus"><span>剩18位</span></div>
+<!--                        <div class="actpage-surplus">剩 5 位</div>-->
                     </div>
-                    
+                     <div class="actpage-cart-info">
+                        <div class="row" style="margin:0px;">
+                        <img src="/img/icons/carttimelong.png">
+                        <p>活動長度</p>
+                            <div class="actpage-cart-timelength">
+                            3 小時 30 分
+                            </div>
+                        </div>
+                    </div>
                     <div class="actpage-cart-info">
                         <div class="row" style="margin:0px;">
                         <img src="/img/icons/cartprice.png">
@@ -93,7 +110,13 @@
                         <p>台北市信義區基隆路一段199號</p>
                         </div>
                     </div>
-                    
+                    <div class="actpage-cart-info actpage-last-block">
+                        <div class="row" style="margin:0px;">
+                        <img src="/img/icons/cartlanguage.png">
+                        <p>備註</p>
+                        </div>
+                    </div>
+<!--
                     <div class="actpage-cart-info">
                         <div class="row" style="margin:0px;">
                         <img src="/img/icons/cartmeal.png">
@@ -101,12 +124,13 @@
                         </div>
                     </div>
                     
-                    <div class="actpage-cart-info actpage-lan-block">
+                    <div class="actpage-cart-info actpage-last-block">
                         <div class="row" style="margin:0px;padding-bottom:10px;">
                         <img src="/img/icons/cartlanguage.png">
                         <p class="actpage-cart-lan"><span>中文</span><span>英文</span><span>台語</span></p>
                         </div>
                     </div>
+-->
                     <a href="#"><div class="row actpage-purchase">前往訂購</div></a>
                 </div>
                 <div class="actpage-holder-content">

@@ -1396,7 +1396,7 @@ li.collapse-blog-category {
     height: 500px;
     background-size: cover;
     max-width: 1050px;
-    width: 100%;
+    width: 80%;
     position: absolute;
     left: 10%;
     top:80px; 
@@ -1508,7 +1508,7 @@ li.collapse-blog-category {
 }
 
 .actpage-time-block,
-.actpage-lan-block{
+.actpage-last-block{
     border-bottom: 1px solid #666;
     margin-bottom: 20px;
 }
@@ -1526,7 +1526,7 @@ li.collapse-blog-category {
     padding-left: 5px;
 }
 
-.actpage-cart-lan > span {
+.actpage-cart-last > span {
     border: 1px solid;
     padding: 5px 10px;
     margin-right: 5px;
@@ -1539,14 +1539,38 @@ li.collapse-blog-category {
     color: #00bcd4;
     font-size: 15px;
     padding-left:5px;
+    text-align: center;
+    width: 80%;
+    float: left;
 }
 
-.actpage-cart-time > span {
-    font-size: 11px;
+.actpage-cart-time > div > p {
+    margin-bottom: 0px;
+}
+
+.actpage-surplus {
+    width: 20%;
+    float: left;
+    font-size: 12px;
+    margin-top: 24px;
+}
+
+.actpage-surplus span {
     color:#000;
     background-color:#00bcd4;
-    padding: 5px;
-    margin-left: 5px;
+    padding: 5px; 
+    text-align: center;
+    border-radius: 5px;
+}
+
+.actpage-cart-timelength {
+    float: left;
+    margin: 0px 10px;
+    font-size: 15px;
+    color: #333333;
+    background-color: rgba(255,255,255,0.8);
+    padding: 0px 10px;
+    border-radius: 5px;
 }
 
 .actpage-cart-content > span img {
