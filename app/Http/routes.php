@@ -150,11 +150,15 @@ Route::group(['middleware' => 'web'], function () {
 
     // for host
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
-        Route::get('activity/data'              , 'ActivityController@data'       );
-        Route::get('activity/{id}/delete'       , 'ActivityController@getDelete'  );
-        Route::post('activity/{id}/update'      , 'ActivityController@update'     );
-        Route::resource('activity'              , 'ActivityController'            );
-        Route::resource('activity/{id}/tickets' , 'TicketController'              );
+        Route::get('activity/data'                          , 'ActivityController@data'       );
+        Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'  );
+        Route::post('activity/{id}/update'                  , 'ActivityController@update'     );
+        Route::resource('activity'                          , 'ActivityController'            );
+
+        Route::get('activity/{id}/tickets/data'             , 'TicketController@data'         );
+        Route::post('activity/{id}/tickets/update'          , 'TicketController@update'       );
+        Route::get('activity/{id}/tickets/{tickets}/delete' , 'TicketController@getDelete'    );
+        Route::resource('activity/{id}/tickets'             , 'TicketController'              );
     });
 
 });
