@@ -55,6 +55,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('activity'                   , 'ActivityController@Activity'      );
     Route::get('activity/{category}/{slug}' , 'ActivityController@Activity'      );
+    Route::get('purchase'                   , 'ActivityController@purchase'      );
 
     Route::get('blog'                       , 'ArticleController@index'       );
     Route::get('blog/{category}'            , 'ArticleController@showCategory');

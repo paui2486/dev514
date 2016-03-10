@@ -14,4 +14,9 @@ class ActivityController extends Controller
     {
         return view("activity");
     }
+    
+    public function purchase()
+    {
+        return view("purchase");
+    }
 }
