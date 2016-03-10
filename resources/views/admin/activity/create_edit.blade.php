@@ -54,20 +54,20 @@
                             </div>
                         </div>
                         @if (Auth::user()->adminer)
-                        <div class="form-group {{{ $errors->has('author_id') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('host_id') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="author_id">
+                                <label class="control-label col-sm-2 col-md-3" for="host_id">
                                     活動主辦
                                 </label>
                                 <div class="col-sm-10 col-md-9">
-                                    <select style="width: 100%" name="author_id" id="author_id" class="form-control">
-                                    @foreach($authors as $author)
-                                        <option value="{{$author->id}}"
+                                    <select style="width: 100%" name="host_id" id="host_id" class="form-control">
+                                    @foreach($hosters as $hoster)
+                                        <option value="{{$hoster->id}}"
                                         @if(!empty($activitys))
-                                            @if($activitys->author_id==$author->id)
+                                            @if($activitys->host_id==$hoster->id)
                                         selected="selected"
                                             @endif
-                                        @endif >{{$author->name}}
+                                        @endif >{{$hoster->name}}
                                         </option>
                                     @endforeach
                                     </select>
@@ -95,14 +95,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group {{{ $errors->has('created_at') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('activity_range') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="created_at">
+                                <label class="control-label col-sm-2 col-md-3" for="activity_range">
                                     活動時間
                                 </label>
                                 <div class="col-sm-10 col-md-9">
-                                    <input class="form-control time-picker" type="text" name="created_at" id="created_at"
-                                        value="{{{ Input::old('created_at', isset($activity) ? $activity->created_at : null) }}}" />
+                                    <input class="form-control time-picker" type="text" name="activity_range" id="activity_range"
+                                        value="{{{ Input::old('created_at', isset($activity) ? $activity->activity_range : date("Y-m-d 00:00:00") . " - " . date("Y-m-d 00:00:00") ) }}}" />
                                 </div>
                             </div>
                         </div>
@@ -133,14 +133,14 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('location') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="description">
+                                <label class="control-label col-sm-2" for="location">
                                     活動地點
                                 </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="description" id="description" placeholder=""
-                                        value="{{{ Input::old('description', isset($activity) ? $activity->description : null) }}}" />
+                                    <input class="form-control" type="text" name="location" id="location" placeholder=""
+                                        value="{{{ Input::old('description', isset($activity) ? $activity->location : null) }}}" />
                                 </div>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
                                         </div>
                                         <label class="control-label col-sm-1" for="ticket-count">張數</label>
                                         <div class="col-sm-1">
-                                            <input class="form-control" type="text" name="ticket[0]['count']"/>
+                                            <input class="form-control" type="text" name="ticket[0]['numbers']"/>
                                         </div>
                                         <div class="col-sm-2 t-function">
                                             <button type="button" class="btn btn-shadow btn-info btn-xs btn-clone">複製</button>
@@ -343,7 +343,7 @@
                 })
             };
 
-            $("#created_at").change(function() {
+            $("#activity_range").change(function() {
                 date = $(this).attr("value");
                 maxDate = date.match(/-\s(.*)/i)[1];
             })
@@ -376,16 +376,16 @@
                 .on('click', 'button.btn-del', remove);
         }
 
-        var maxDate = "2016-03-22 11:59 PM";
+        var maxDate = null;
         function picker() {
             var maxday = null;
-            if($(this).attr('name') != "created_at"){
+            if($(this).attr('name') != "activity_range"){
                 maxday = maxDate;
             }
             $(this).daterangepicker({
                 timePickerIncrement: 30,
                 locale: {
-                    format: 'YYYY-MM-DD h:mm A'
+                    format: 'YYYY-MM-DD H:mm:ss'
                 },
                 minDate: 'today',
                 maxDate: maxday

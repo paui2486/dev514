@@ -18,10 +18,11 @@
              <thead>
                  <tr>
                      <th>ID</th>
-                     <th>活動主</th>
+                     <th>主辦</th>
                      <th>分類</th>
                      <th>標題</th>
-                     <th>觀看次數</th>
+                     <th>觀看</th>
+                     <th>票卷</th>
                      <th>狀態</th>
                      <th>設定</th>
                  </tr>
@@ -62,7 +63,7 @@
                 "aoColumnDefs": [
                     {
                         "bSortable": false,
-                        "aTargets": [ 6 ]
+                        "aTargets": [ 7 ]
                     },
                 ],
                 "processing": true,
