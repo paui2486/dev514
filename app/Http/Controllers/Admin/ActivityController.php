@@ -51,8 +51,11 @@ class ActivityController extends Controller
      *
      * @return Response
      */
-    public function store(ActivityRequest $request)
+    //  public function store(ActivityRequest $request)
+     public function store(Request $request)
     {
+        return Response::json($request);
+
         $storeArray = array(
             'title'         => $request->title,
             'author_id'     => $request->author_id,
@@ -178,15 +181,17 @@ class ActivityController extends Controller
      */
      public function data()
      {
-         $articles = DB::table('articles')
-                      ->leftJoin('users', 'articles.author_id', '=', 'users.id')
-                      ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+         $activities = DB::table('activities')
+                      ->leftJoin('users', 'activities.host_id', '=', 'users.id')
+                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                       ->select(array(
-                        'articles.id', 'users.name', 'categories.name as category',
-                        'articles.title', 'articles.counter', 'articles.status'))
-                      ->orderBy('articles.created_at', 'ASC');
+                        'activities.id',    'users.name',         'categories.name as category',
+                        'activities.title', 'activities.counter', 'activities.targets', 'activities.status'))
+                      ->orderBy('activities.created_at', 'ASC');
 
-         return Datatables::of($articles)
+         // need to change targets to processing bar
+
+         return Datatables::of($activities)
              ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status == 2) 已發布 @elseif($status == 3) 已隱藏 @else 已刪除 @endif')
              ->add_column('actions', '
                    <div style="white-space: nowrap;">

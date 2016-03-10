@@ -73,38 +73,48 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('dashboard'                  , 'Admin\AdminController@index'         );
     Route::get('dashboard/profile'          , 'AuthController@profile'        );
 
-    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
-
-        Route::get('banner/data'            , 'BannerController@data'         );
-        Route::get('banner/{id}/delete'     , 'BannerController@getDelete'    );
-        Route::post('banner/{id}/update'    , 'BannerController@update'       );
-        Route::resource('banner'            , 'BannerController'              );
-
-        Route::get('member/search'          , 'MemberController@searchMember' );
-        Route::get('member/data'            , 'MemberController@data'         );
-        Route::get('member/{id}/delete'     , 'MemberController@getDelete'    );
-        Route::post('member/{id}/update'    , 'MemberController@update'       );
-        Route::resource('member'            , 'MemberController'              );
-
+    // for author
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'author'], function() {
         Route::get('blog/data'                  , 'BlogController@data'           );
-        Route::get('blog/category'              , 'BlogController@showCategory'   );
-        Route::post('blog/category'             , 'BlogController@storeCategory'  );
-        Route::get('blog/category/{id}'         , 'BlogController@getCategory'    );
-        Route::post('blog/category/{id}/update' , 'BlogController@updateCategory' );
-        Route::get('blog/category/{id}/delete'  , 'BlogController@deleteCategory' );
-        Route::post('blog/category/{id}/delete' , 'BlogController@destoryCategory');
-        Route::get('blog/category/data'         , 'BlogController@getCategoryData');
-        Route::get('blog/category/create'       , 'BlogController@createCategory' );
-
-        Route::get('blog/expert'                , 'BlogController@showExpert'     );
-        Route::get('blog/expert/data'           , 'BlogController@getExpert'      );
         Route::get('blog/{id}/delete'           , 'BlogController@getDelete'      );
         Route::post('blog/{id}/update'          , 'BlogController@update'         );
         Route::resource('blog'                  , 'BlogController'                );
+    });
 
+    // for host
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
+        Route::get('activity/data'              , 'ActivityController@data'       );
+        Route::get('activity/{id}/delete'       , 'ActivityController@getDelete'  );
+        Route::post('activity/{id}/update'      , 'ActivityController@update'     );
+        Route::resource('activity'              , 'ActivityController'            );
 
+    });
 
-        Route::get('activity/data'                  , 'ActivityController@data'           );
+    // for admin
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
+
+        Route::get('banner/data'                    , 'BannerController@data'             );
+        Route::get('banner/{id}/delete'             , 'BannerController@getDelete'        );
+        Route::post('banner/{id}/update'            , 'BannerController@update'           );
+        Route::resource('banner'                    , 'BannerController'                  );
+
+        Route::get('member/search'                  , 'MemberController@searchMember'     );
+        Route::get('member/data'                    , 'MemberController@data'             );
+        Route::get('member/{id}/delete'             , 'MemberController@getDelete'        );
+        Route::post('member/{id}/update'            , 'MemberController@update'           );
+        Route::resource('member'                    , 'MemberController'                  );
+
+        Route::get('blog/category'                  , 'BlogController@showCategory'       );
+        Route::post('blog/category'                 , 'BlogController@storeCategory'      );
+        Route::get('blog/category/{id}'             , 'BlogController@getCategory'        );
+        Route::post('blog/category/{id}/update'     , 'BlogController@updateCategory'     );
+        Route::get('blog/category/{id}/delete'      , 'BlogController@deleteCategory'     );
+        Route::post('blog/category/{id}/delete'     , 'BlogController@destoryCategory'    );
+        Route::get('blog/category/data'             , 'BlogController@getCategoryData'    );
+        Route::get('blog/category/create'           , 'BlogController@createCategory'     );
+        Route::get('blog/expert'                    , 'BlogController@showExpert'         );
+        Route::get('blog/expert/data'               , 'BlogController@getExpert'          );
+
         Route::get('activity/category'              , 'ActivityController@showCategory'   );
         Route::post('activity/category'             , 'ActivityController@storeCategory'  );
         Route::get('activity/category/{id}'         , 'ActivityController@getCategory'    );
@@ -113,33 +123,21 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('activity/category/{id}/delete' , 'ActivityController@destoryCategory');
         Route::get('activity/category/data'         , 'ActivityController@getCategoryData');
         Route::get('activity/category/create'       , 'ActivityController@createCategory' );
-
         Route::get('activity/hoster'                , 'ActivityController@showExpert'     );
         Route::get('activity/hoster/data'           , 'ActivityController@getExpert'      );
-        Route::get('activity/{id}/delete'           , 'ActivityController@getDelete'      );
-        Route::post('activity/{id}/update'          , 'ActivityController@update'         );
-        Route::resource('activity'                  , 'ActivityController'                );
 
 
         // no yet
-        Route::get('filter/data'            , 'AdminController@showMember'         );
+        Route::get('filter/data'            , 'AdminController@showMember'    );
         Route::get('filter/{id}/delete'     , 'AdminController@showMember'    );
-        Route::post('filter/{id}/update'    , 'AdminController@showMember'       );
-        Route::resource('filter'            , 'AdminController@showMember'              );
+        Route::post('filter/{id}/update'    , 'AdminController@showMember'    );
+        Route::resource('filter'            , 'AdminController@showMember'    );
 
         Route::get('ad'                     , 'AdminController@showMember'    );
         Route::get('point'                  , 'AdminController@showMember'    );
         Route::get('coupon'                 , 'AdminController@showMember'    );
         Route::get('invoice'                , 'AdminController@showMember'    );
         Route::get('analysis'               , 'AdminController@showMember'    );
-
-
-        Route::get('activity'               , 'AdminController@showMember'    );
-        Route::get('activity/create'        , 'AdminController@showMember'    );
-        Route::get('activity/category'      , 'AdminController@showMember'    );
-        Route::get('activity/hoster'        , 'AdminController@showMember'    );
-        Route::get('activity/coupon'        , 'AdminController@showMember'    );
-        Route::get('activity/invoice'       , 'AdminController@showMember'    );
 
         Route::get('customer'               , 'AdminController@showMember'    );
         Route::get('customer/wait'          , 'AdminController@showMember'    );
