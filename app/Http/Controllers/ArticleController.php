@@ -45,24 +45,8 @@ class ArticleController extends Controller
                           ))
                           ->where('articles.category_id', '=' , $category->id )
                           ->paginate(5);
-
-            // $blogList = DB::table('categories')
-            //           ->leftJoin('articles', 'articles.category_id', '=', 'categories.id')
-            //           ->rightJoin('users', 'users.id', '=', 'articles.author_id')
-            //           ->select(array(
-            //             'articles.id',  'articles.title',   'articles.thumbnail',   'categories.name as category_name',
-            //             'users.name as author', 'articles.description', 'articles.created_at',
-            //           ))
-            //           ->where('categories.name', '=' ,"$category")
-            //           ->where('type', 2)
-            //           ->where('public', 1)
-            //           ->paginate(5);
             return view('blog.list', compact('meta', 'header_categories', 'category', 'blogList'));
         }
-        //
-        // if (!count($blogList)) {
-        // } else {
-        // }
     }
 
     public function showArticle($category, $title)
