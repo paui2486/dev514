@@ -99,16 +99,20 @@ class ActivityController extends Controller
 
         $tickets            = array();
         foreach ($request->ticket as $act_ticket) {
-            $ticket_range   = array();
+            $sale_range   = array();
+            $event_range  = array();
             $act_ticket     = (object) $act_ticket;
-            preg_match("/(.*)\s-\s(.*)/", $act_ticket->time, $ticket_range);
+            preg_match("/(.*)\s-\s(.*)/", $act_ticket->sale_time,  $sale_range);
+            preg_match("/(.*)\s-\s(.*)/", $act_ticket->event_time, $event_range);
             $insert = array(
                         'activity_id'   => $activity_id,
-                        'ticket_start'  => $ticket_range[1],
-                        'ticket_end'    => $ticket_range[2],
+                        'ticket_start'  => $event_range[1],
+                        'ticket_end'    => $event_range[2],
+                        'sale_start'    => $sale_range[1],
+                        'sale_end'      => $sale_range[2],
                         'location'      => $request->location,
                         'name'          => $act_ticket->name,
-                        'condition'     => $act_ticket->status,
+                        'status'        => $act_ticket->status,
                         'price'         => $act_ticket->price,
                         'total_numbers' => $act_ticket->numbers,
                         'left_over'     => $act_ticket->numbers,
@@ -224,7 +228,7 @@ class ActivityController extends Controller
         //                 'ticket_end'    => $ticket_range[2],
         //                 'location'      => $request->location,
         //                 'name'          => $act_ticket->name,
-        //                 'condition'     => $act_ticket->status,
+        //                 'status'        => $act_ticket->status,
         //                 'price'         => $act_ticket->price,
         //                 'total_numbers' => $act_ticket->numbers,
         //                 'left_over'     => $act_ticket->numbers,
