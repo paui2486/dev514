@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use URL;
 use Log;
+use Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -23,6 +24,7 @@ class maincontroller extends controller
             'newActivity'   => (object) $this->getNewActivity(),
             'totalActivity' => (object) $this->getTotalActivity(),
         );
+        // return Response::json($home);
         return view('home', compact('home', 'meta'));
     }
 
@@ -106,7 +108,7 @@ class maincontroller extends controller
     private function getNewActivity()
     {
         $newActivity = DB::table('activities')
-                        ->where('activities.status', '>', 2)
+                        ->where('activities.status', '>=', 2)
                         ->leftJoin('users',                 'users.id',      '=',   'activities.host_id')
                         ->leftJoin('act_tickets',           'activities.id', '=',   'act_tickets.activity_id')
                         ->leftJoin('categories',            'categories.id', '=',   'activities.category_id')
@@ -114,11 +116,12 @@ class maincontroller extends controller
                             'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
                             'activities.description',       'activities.counter as count',
                             'act_tickets.price',            'act_tickets.location',
-                            'act_tickets.run_time as date', 'users.nick as orginizer',
+                            'activities.activity_start as date', 'users.nick as orginizer',
                             'categories.name as category'
                         )
                         ->orderBy('activities.created_at', 'desc')
-                        ->take(7)
+                        ->groupBy('activities.id')
+                        ->take(3)
                         ->get();
         return $newActivity;
     }
@@ -129,7 +132,7 @@ class maincontroller extends controller
 
         $categories = DB::table('activities')
             ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-            ->where('activities.status', '>', 2)
+            ->where('activities.status', '>=', 2)
             ->select(
                 'categories.id', DB::raw('count(*) as count'),
                 'categories.thumbnail', 'categories.name', 'categories.logo'
@@ -142,7 +145,7 @@ class maincontroller extends controller
             if ($category->count >= 3){
 
                 $eachActivity = DB::table('activities')
-                    ->where('activities.status', '>', 2)
+                    ->where('activities.status', '>=', 2)
                     ->where('activities.category_id', $category->id)
                     ->rightJoin('users',             'users.id',      '=',   'activities.host_id')
                     ->leftJoin('act_tickets',        'activities.id', '=',   'act_tickets.activity_id')
