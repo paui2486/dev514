@@ -227,8 +227,8 @@ class ActivityController extends Controller
      * @return items from @param
      */
     public function getDelete($id) {
-        $activities = DB::table('activities')->find($id);
-        return view('admin.activity.delete', compact('activities'));
+        $activity = DB::table('activities')->find($id);
+        return view('admin.activity.delete', compact('activity'));
     }
 
     /**
