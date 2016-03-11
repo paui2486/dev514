@@ -372,7 +372,8 @@ li.collapse-blog-category {
 /*Content-Blog 最新文章*/
 
 .home-blog {
-    background-color: #f4eee9;
+    background-image: url(/img/pics/258216-151001212S870.jpg);
+    background-repeat: repeat;
     padding:20px;
 }
 
@@ -392,12 +393,12 @@ li.collapse-blog-category {
     background-color:white;
     float: right;
     width: 325px;
-    height: 180px;
+    max-height: 180px;
     padding:5px 20px;
 }
 
 .home-blog-thumbnail {
-    height: 180px;
+    max-height: 180px;
     width: 175px;
     float: left;
     background-size: cover;
@@ -488,9 +489,7 @@ li.collapse-blog-category {
 /* New Activities 最新活動*/
 
 .new-activity {
-    background-image: url(/img/pics/woodbg.png);
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #f4eee9;
     padding:20px;
     padding-bottom: 50px;
 }
@@ -588,8 +587,9 @@ li.collapse-blog-category {
 /* Act. Category 活動類別 */
 
 .Act-category {
-    background-image: url(/img/pics/258216-151001212S870.jpg);
-    background-repeat: repeat;
+    background-image: url(/img/pics/woodbg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
     padding: 20px;
 }
 
