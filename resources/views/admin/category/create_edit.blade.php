@@ -129,7 +129,7 @@
         		<!-- Form Actions -->
         		<div class="form-group">
           			<div class="col-md-12">
-            				<button type="reset" class="btn btn-sm btn-warning close_popup">
+            				<button type="reset" class="btn btn-sm btn-warning close_popup" onclick="history.go(-1);">
               					<span class="glyphicon glyphicon-ban-circle"></span>
                         取消
             				</button>

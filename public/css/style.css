@@ -6292,12 +6292,12 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 }
 
 .form-ticket .row {
-    padding: 5px 6% 5px 1%;
+    padding: 5px 5% 5px 5%;
 }
 
 .form-ticket .control-label {
-    padding-right: 0;
-    text-align: left;
+    padding-left: 0;
+    text-align: right;
 }
 
 .form-ticket > .row > div {

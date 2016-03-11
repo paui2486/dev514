@@ -157,7 +157,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::resource('activity'                          , 'ActivityController'            );
 
         Route::get('activity/{id}/tickets/data'             , 'TicketController@data'         );
-        Route::post('activity/{id}/tickets/update'          , 'TicketController@update'       );
+        Route::post('activity/{id}/tickets/{tickets}/update'          , 'TicketController@update'       );
         Route::get('activity/{id}/tickets/{tickets}/delete' , 'TicketController@getDelete'    );
         Route::resource('activity/{id}/tickets'             , 'TicketController'              );
     });

@@ -79,9 +79,10 @@
                     @endif
                     @if ( Auth::user()->adminer || Auth::user()->hoster )
                         <li><a href="{{URL::to('dashboard/activity/create')}}">我要新增活動</a></li>
-                        <li><a href="{{URL::to('dashboard/activity')}}">我活動的列表</a></li>
+                        <li><a href="{{URL::to('dashboard/activity')}}">我主辦的活動</a></li>
                         <li><a href="{{URL::to('dashboard/activity/invoice')}}">支出收入管理</a></li>
                     @endif
+                    <li><a href="{{URL::to('dashboard/activity')}}">我的活動列表</a></li>
                     <li><a href="{{URL::to('dashboard/activity')}}">我過往的活動</a></li>
                     <li><a href="{{URL::to('dashboard/activity')}}">我關注的活動</a></li>
                     <li><a href="{{URL::to('dashboard/activity')}}">我要舉辦活動</a></li>

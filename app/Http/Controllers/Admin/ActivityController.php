@@ -217,29 +217,7 @@ class ActivityController extends Controller
         $activity           = DB::table('activities')->where('id', $activity_id);
         $result             = $activity->update($update['data']);
 
-        // $tickets            = array();
-        // foreach ($request->ticket as $act_ticket) {
-        //     $ticket_range   = array();
-        //     $act_ticket     = (object) $act_ticket;
-        //     preg_match("/(.*)\s-\s(.*)/", $act_ticket->time, $ticket_range);
-        //     $insert = array(
-        //                 'activity_id'   => $activity_id,
-        //                 'ticket_start'  => $ticket_range[1],
-        //                 'ticket_end'    => $ticket_range[2],
-        //                 'location'      => $request->location,
-        //                 'name'          => $act_ticket->name,
-        //                 'status'        => $act_ticket->status,
-        //                 'price'         => $act_ticket->price,
-        //                 'total_numbers' => $act_ticket->numbers,
-        //                 'left_over'     => $act_ticket->numbers,
-        //                 'description'   => $act_ticket->description,
-        //               );
-        //     array_push($tickets, $insert);
-        // }
-        // $results            = DB::table('act_tickets')->insert($tickets);
-
         return Redirect::to('dashboard/activity');
-
     }
 
     /**

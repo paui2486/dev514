@@ -98,7 +98,7 @@
                         <div class="form-group {{{ $errors->has('activity_range') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2 col-md-3" for="activity_range">
-                                    活動時間
+                                    活動總期間
                                 </label>
                                 <div class="col-sm-10 col-md-9">
                                     <input class="form-control time-picker" type="text" name="activity_range" id="activity_range"
@@ -223,8 +223,8 @@
                                         <div class="col-sm-2">
                                             <input class="form-control" type="text" name="ticket[0][name]"/>
                                         </div>
-                                        <label class="control-label col-sm-1" for="ticket-price">單價</label>
-                                        <div class="col-sm-2">
+                                        <label class="control-label col-sm-2" for="ticket-price">票卷單價</label>
+                                        <div class="col-sm-4">
                                             <div class="input-group">
                                               <span class="input-group-btn">
                                                   <button class="btn btn-white" type="button">$</button>
@@ -232,13 +232,19 @@
                                               <input class="form-control" type="number" name="ticket[0][price]"/>
                                             </div>
                                         </div>
-                                        <label class="control-label col-sm-1" for="ticket-count">張數</label>
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="number" name="ticket[0][numbers]"/>
-                                        </div>
                                         <div class="col-sm-2 t-function">
                                             <button type="button" class="btn btn-shadow btn-info btn-xs btn-clone">複製</button>
                                             <button type="button" class="btn btn-shadow btn-danger btn-xs btn-del">刪除</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label col-sm-2" for="ticket-numbers">票卷張數</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="number" name="ticket[0][numbers]"/>
+                                        </div>
+                                        <label class="control-label col-sm-2" for="ticket-time">活動時間</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0][event_time]"/>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -249,9 +255,9 @@
                                                 <option value="2">停售</option>
                                             </select>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket-time">售票期間</label>
+                                        <label class="control-label col-sm-2" for="ticket-time">售票區間</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0][time]"/>
+                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0][sale_time]"/>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -272,10 +278,10 @@
                     		<div class="form-group">
                             請閱讀建立活動及販售票券同意書＊  我已閱讀且同意 建立活動及販售票券同意書 。
                       			<div class="col-md-12">
-                        				<button type="reset" class="btn btn-sm btn-warning close_popup">
+                        				<div type="reset" class="btn btn-sm btn-warning close_popup" onclick="history.go(-1);">
                           					<span class="glyphicon glyphicon-ban-circle"></span>
                                     取消
-                        				</button>
+                        				</div>
                         				<button type="reset" class="btn btn-sm btn-default">
                           					<span class="glyphicon glyphicon-remove-circle"></span>
                                     重置
