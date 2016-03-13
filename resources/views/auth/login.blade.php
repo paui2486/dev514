@@ -5,9 +5,11 @@
     <div class="login-panel col-md-8 col-md-offset-2">
         <div class="panel-heading">會員登入 Login</div>
         <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+              @if (Session::has('flashmessage'))
+                  <div class="alert alert-danger">{{ Session::get('flashmessage') }}</div>
+              @endif
+              <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                 {!! csrf_field() !!}
-
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">
                         <span>*</span>
@@ -48,7 +50,7 @@
                              <span>
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">忘記密碼？</a>
                             </span>
-                            
+
                         </div>
                 </div>
                 <div class="login-button col-md-6 col-md-offset-4">

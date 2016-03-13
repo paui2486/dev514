@@ -54,7 +54,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('members/{username}'         , 'UserController@index'          );
 
     Route::get('activity'                   , 'ActivityController@Activity'      );
-    Route::get('activity/{category}/{slug}' , 'ActivityController@Activity'      );
+    Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
+    Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     Route::get('purchase'                   , 'ActivityController@purchase'      );
 
     Route::get('blog'                       , 'ArticleController@index'       );
@@ -73,6 +74,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activitys'                  , 'AuthController@activitys'      );
     Route::get('dashboard'                  , 'Admin\AdminController@index'         );
     Route::get('dashboard/profile'          , 'AuthController@profile'        );
+
+    Route::get('pay2go', 'PageController@testpay2go');
 
     // for admin
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {

@@ -4,19 +4,102 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
+use Log;
+use Auth;
+use Response;
+use Redirect;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class ActivityController extends Controller
 {
     //
+    public function index()
+    {
+        return view("activity.index");
+    }
+
     public function Activity()
     {
         return view("activity");
     }
-    
+
     public function purchase()
     {
         return view("purchase");
+    }
+
+    public function getCategory()
+    {
+
+    }
+
+    public function showCategory($category)
+    {
+        // unfinish
+        $header_categories  = $this->getCategory();
+        $category = DB::table('categories')
+                      ->where('name', $category)
+                      ->where('type', 1)
+                      ->where('public', 1)
+                      ->first();
+
+        if (empty($category)) {
+            // 無此類別 轉回首頁
+            return Redirect::to('blog');
+        } else {
+            $blogList = DB::table('activities')
+                          ->rightJoin('users', 'users.id', '=', 'articles.author_id')
+                          ->select(array(
+                            'activities.id',  'activities.title',   'activities.thumbnail',
+                            'users.name as author', 'activities.description', 'activities.created_at',
+                          ))
+                          ->where('activities.category_id', '=' , $category->id )
+                          ->paginate(5);
+            return view('blog.list', compact('meta', 'header_categories', 'category', 'blogList'));
+        }
+    }
+
+    public function showActivity($category, $title)
+    {
+
+        $activity = DB::table('activities')
+                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                      ->leftJoin('users', 'users.id', '=', 'activities.host_id')
+                      ->where('categories.name', $category)
+                      ->where('activities.title', $title)
+                      ->select(array(
+                        'activities.id' ,       'activities.title',           'activities.tag_ids',
+                        'activities.thumbnail', 'activities.description',     'activities.location',
+                        'activities.content',   'activities.activity_start',  'activities.activity_end',
+                        'activities.counter',   'activities.category_id',     'categories.name as category',
+                        'users.name as hoster', 'users.avatar as host_photo', 'users.description as host_destricption'
+                      ))
+                      ->where('activities.status', '>=', '2')
+                      ->first();
+
+        $tickets = DB::table('act_tickets')
+                    ->where('activity_id', $activity->id)
+                    ->select(array(
+                        'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                    ))
+                    ->get();
+
+        $suggests = DB::table('activities')
+                      ->rightJoin('act_tickets', 'act_tickets.activity_id', '=', 'activities.id')
+                      ->where('activities.status', '>=', 2)
+                      ->where('act_tickets.left_over', '>', 0)
+                      ->where('activities.category_id', $activity->category_id)
+                      ->where('activities.id', '!=', $activity->id)
+                      ->select(array(
+                        'activities.thumbnail', 'activities.title',     'activities.description',
+                        'act_tickets.price',    'act_tickets.location', 'act_tickets.ticket_start'
+                      ))
+                      ->groupBy('activities.title')
+                      ->orderBy('activities.created_at', 'ASC')
+                      ->get();
+
+        return view('activity.index', compact('activity', 'tickets', 'suggests'));
     }
 }

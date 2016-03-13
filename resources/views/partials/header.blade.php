@@ -19,11 +19,11 @@
             <ul class="navbar-right nav navbar-nav">
                 <!-- Authentication Links -->
                 <li><a href="{{ url('blog') }}">部落格</a></li>
-                <li class="navbar-host"><a href="{{ url('') }}">辦活動</a></li>
+                <li class="navbar-host"><a href="{{ url('dashboard/activity/create') }}">辦活動</a></li>
 
                 @if (Auth::guest())
-                <li><a href="{{ url('/login') }}">登入</a></li>
-                <li><a href="{{ url('/register') }}">註冊</a></li>
+                <li><a href="{{ url('login') }}">登入</a></li>
+                <li><a href="{{ url('register') }}">註冊</a></li>
                 @else
                 <li class="dropdown">
                     <a href="#"
@@ -37,9 +37,9 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ url('dashboard/profile') }}">個人設定</a></li>
                         <li><a href="{{ url('dashboard') }}">我的後台</a></li>
-                        <li><a href="{{ url('follows') }}">我的關注</a></li>
-                        <li><a href="{{ url('friends') }}">我的朋友</a></li>
-                        <li><a href="{{ url('activitys') }}">我的活動</a></li>
+                        <li><a href="{{ url('dashboard/follows') }}">我的關注</a></li>
+                        <li><a href="{{ url('dashboard/friends') }}">我的朋友</a></li>
+                        <li><a href="{{ url('dashboard/activitys') }}">我的活動</a></li>
                         <li><a href="{{ url('logout') }}">登出</a></li>
                     </ul>
                 </li>

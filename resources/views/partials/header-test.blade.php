@@ -21,15 +21,15 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-right nav navbar-nav">
                 <!-- Authentication Links -->
-                
-                <li><a href="{{ url('blog') }}">部落格</a></li>
-                <li class="navbar-host"><a href="{{ url('') }}">辦活動</a></li>
-                
+
+                <li><a href="{{ url('/blog') }}">部落格</a></li>
+                <li class="navbar-host"><a href="{{ url('/dashboard/activity/create') }}">辦活動</a></li>
+
                 @if (Auth::guest())
                 <li><a href="{{ url('/login') }}">登入</a></li>
                 <li><a href="{{ url('/register') }}">註冊</a></li>
                 @else
-                
+
                 <select id="cd-dropdown" class="cd-select">
                     <option value="-1" selected>會員中心</option>
                     <option value="1" class="icon-tux">個人資料</option>

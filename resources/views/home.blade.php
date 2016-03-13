@@ -125,7 +125,7 @@
                             <div class="new-activity-id">
                                 {{ $newActivity->activity_id }}
                             </div>
-                             <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
+                            <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
                             <div class="new-activity-thumbnail"
                                  style="background-image:url({{ $newActivity->thumbnail }})">
                             </div>

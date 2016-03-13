@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Redirect;
 use Illuminate\Support\Facades\Auth;
 
 class AuthorMiddleware
@@ -34,12 +35,13 @@ class AuthorMiddleware
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                return redirect()->guest('login')->withFlashmessage('請先加入會員');
             }
         } elseif ( Auth::user()->author == 1 || Auth::user()->adminer ) {
             return $next($request);
         } else {
-            return redirect('/');
+            // return redirect('/');
+            return redirect()->guest('login')->withFlashmessage('請申請成為部落客');
         }
     }
 }
