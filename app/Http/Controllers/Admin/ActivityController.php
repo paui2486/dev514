@@ -388,7 +388,7 @@ class ActivityController extends Controller
             'name'          => $request->name,
             'priority'      => $request->priority,
             'public'        => $request->public,
-            'type'          => '2',
+            'type'          => '1',
         );
 
         $id                 = DB::table('categories')->insertGetId($storeArray);
