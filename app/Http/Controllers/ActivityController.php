@@ -91,14 +91,12 @@ class ActivityController extends Controller
                         ->get();
 
             $suggests = DB::table('activities')
-                          ->rightJoin('act_tickets', 'act_tickets.activity_id', '=', 'activities.id')
                           ->where('activities.status', '>=', 2)
-                          ->where('act_tickets.left_over', '>', 0)
                           ->where('activities.category_id', $activity->category_id)
                           ->where('activities.id', '!=', $activity->id)
                           ->select(array(
                             'activities.thumbnail', 'activities.title',     'activities.description',
-                            'act_tickets.price',    'act_tickets.location', 'act_tickets.ticket_start'
+                            'activities.location',  'activities.min_price', 'activities.activity_start',
                           ))
                           ->groupBy('activities.title')
                           ->orderBy('activities.created_at', 'ASC')

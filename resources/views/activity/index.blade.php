@@ -37,8 +37,8 @@
                                 <div class="actpage-recommend-info">
                                     <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
                                     <p class="word-indent-02">{{ $suggest->description }}</p>
-                                    <li>{{ $suggest->price }} 元</li>
-                                    <li>{{ preg_replace("/(.*)\s(.*)/", "$1", $suggest->ticket_start) }}</li>
+                                    <li>{{ $suggest->min_price }} 元 ~</li>
+                                    <li>{{ preg_replace("/(.*)\s(.*)/", "$1", $suggest->activity_start) }}</li>
                                     <li>{{ $suggest->location }}</li>
                                 </div>
                             </div>
