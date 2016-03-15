@@ -57,6 +57,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     Route::get('purchase'                   , 'ActivityController@purchase'      );
+    Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
+    Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
 
     Route::get('blog'                       , 'ArticleController@index'       );
     Route::get('blog/{category}'            , 'ArticleController@showCategory');
@@ -72,8 +74,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('follows'                    , 'AuthController@follows'        );
     Route::get('friends'                    , 'AuthController@friends'        );
     Route::get('activitys'                  , 'AuthController@activitys'      );
-    Route::get('dashboard'                  , 'Admin\AdminController@index'         );
-    Route::get('dashboard/profile'          , 'AuthController@profile'        );
+
+
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('dashboard'                  , 'Admin\AdminController@index'           );
+        Route::get('dashboard/profile'          , 'AuthController@profile'                );
+    });
 
     Route::get('pay2go', 'PageController@testpay2go');
 
