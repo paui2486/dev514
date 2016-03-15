@@ -63,7 +63,6 @@ class ActivityController extends Controller
 
     public function showActivity($category, $title)
     {
-
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                       ->leftJoin('users', 'users.id', '=', 'activities.host_id')
@@ -73,33 +72,41 @@ class ActivityController extends Controller
                         'activities.id' ,       'activities.title',           'activities.tag_ids',
                         'activities.thumbnail', 'activities.description',     'activities.location',
                         'activities.content',   'activities.activity_start',  'activities.activity_end',
-                        'activities.counter',   'activities.category_id',     'categories.name as category',
-                        'users.name as hoster', 'users.avatar as host_photo', 'users.description as host_destricption'
+                        'activities.counter',   'activities.category_id',     'activities.max_price',
+                        'activities.min_price', 'activities.remark',          'activities.time_range',
+                        'categories.name as category',  'users.name as hoster',
+                        'users.avatar as host_photo',   'users.description as host_destricption'
                       ))
                       ->where('activities.status', '>=', '2')
                       ->first();
 
-        $tickets = DB::table('act_tickets')
-                    ->where('activity_id', $activity->id)
-                    ->select(array(
-                        'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
-                    ))
-                    ->get();
+        if (empty($activity)){
+            return Redirect::to('');
+        } else {
+            $tickets = DB::table('act_tickets')
+                        ->where('activity_id', $activity->id)
+                        ->select(array(
+                            'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                        ))
+                        ->get();
 
-        $suggests = DB::table('activities')
-                      ->rightJoin('act_tickets', 'act_tickets.activity_id', '=', 'activities.id')
-                      ->where('activities.status', '>=', 2)
-                      ->where('act_tickets.left_over', '>', 0)
-                      ->where('activities.category_id', $activity->category_id)
-                      ->where('activities.id', '!=', $activity->id)
-                      ->select(array(
-                        'activities.thumbnail', 'activities.title',     'activities.description',
-                        'act_tickets.price',    'act_tickets.location', 'act_tickets.ticket_start'
-                      ))
-                      ->groupBy('activities.title')
-                      ->orderBy('activities.created_at', 'ASC')
-                      ->get();
+            $suggests = DB::table('activities')
+                          ->rightJoin('act_tickets', 'act_tickets.activity_id', '=', 'activities.id')
+                          ->where('activities.status', '>=', 2)
+                          ->where('act_tickets.left_over', '>', 0)
+                          ->where('activities.category_id', $activity->category_id)
+                          ->where('activities.id', '!=', $activity->id)
+                          ->select(array(
+                            'activities.thumbnail', 'activities.title',     'activities.description',
+                            'act_tickets.price',    'act_tickets.location', 'act_tickets.ticket_start'
+                          ))
+                          ->groupBy('activities.title')
+                          ->orderBy('activities.created_at', 'ASC')
+                          ->get();
 
-        return view('activity.index', compact('activity', 'tickets', 'suggests'));
+            DB::table('activities')->where('id', $activity->id)->increment('counter');
+
+            return view('activity.index', compact('activity', 'tickets', 'suggests'));
+        }
     }
 }
