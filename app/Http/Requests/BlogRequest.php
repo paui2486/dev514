@@ -25,7 +25,8 @@ class BlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'       => 'required|unique:articles,title|min:3|max:255|regex:/^[(\x{4E00}-\x{9FA5})A-Za-z0-9\-,!@\.\(\)]+$/u',
+          // unique:articles,title| 無法實作
+            'title'       => 'required|min:3|max:255|regex:/^[(\x{4E00}-\x{9FA5})A-Za-z0-9\-,!@\.\(\)]+$/u',
             'created_at'  => 'required|date',
             'thumbnail'   => 'required|mimes:jpeg,bmp,png',
         ];
