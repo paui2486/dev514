@@ -77,8 +77,9 @@ Route::group(['middleware' => 'web'], function () {
 
 
     Route::group(['middleware' => 'auth'], function() {
-        Route::get('dashboard'                  , 'Admin\AdminController@index'           );
-        Route::get('dashboard/profile'          , 'AuthController@profile'                );
+        Route::get('dashboard'                      , 'Admin\AdminController@index'           );
+        Route::get('dashboard/profile'              , 'AuthController@profile'                );
+        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'           );
     });
 
     Route::get('pay2go', 'PageController@testpay2go');
@@ -94,7 +95,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('member/search'                  , 'MemberController@searchMember'     );
         Route::get('member/data'                    , 'MemberController@data'             );
         Route::get('member/{id}/delete'             , 'MemberController@getDelete'        );
-        Route::post('member/{id}/update'            , 'MemberController@update'           );
         Route::resource('member'                    , 'MemberController'                  );
 
         Route::get('blog/category'                  , 'BlogController@showCategory'       );

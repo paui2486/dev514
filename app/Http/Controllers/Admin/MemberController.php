@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateMemberRequest;
 
 use DB;
 use Log;
+use Auth;
 use Image;
+use Input;
 use Redirect;
 use Datatables;
 use App\Library;
@@ -96,43 +98,51 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request, $id)
     {
-        $permission = (array) $request->permission;
-        $updateArray = array(
-          'name'          => $request->name,
-          'nick'          => $request->nick,
-          'address'       => $request->address,
-          'email'         => $request->email,
-          'phone'         => $request->phone,
-          'bank_name'     => $request->bank_name,
-          'bank_account'  => $request->bank_account,
-          'adminer'       => in_array('adminer', $permission),
-          'author'        => in_array('author', $permission),
-          'hoster'        => in_array('hoster', $permission),
-          'status'        => $request->status,
-          'updated_at'    => date("Y-m-d H:i:s"),
-        );
+        if( Auth::user()->adminer || Auth::user()->id == $id) {
+            $permission = (array) $request->permission;
+            $updateArray = array(
+              'name'          => $request->name,
+              'nick'          => $request->nick,
+              'address'       => $request->address,
+              'email'         => $request->email,
+              'phone'         => $request->phone,
+              'bank_name'     => $request->bank_name,
+              'bank_account'  => $request->bank_account,
+              'adminer'       => in_array('adminer', $permission),
+              'author'        => in_array('author', $permission),
+              'hoster'        => in_array('hoster', $permission),
+              'status'        => $request->status,
+              'updated_at'    => date("Y-m-d H:i:s"),
+            );
 
-        if (!empty($request->password)) {
-            $update['password'] = bcrypt($request->password);
-        }
+            if (!empty($request->password)) {
+                $update['password'] = bcrypt($request->password);
+            }
+            // return Input::all();
+            $user              = DB::table('users')->where('id', $id);
+            if (!empty($request->avatar)) {
+                $params            = Library::upload_param_template();
+                $params['request'] = $request;
+                $params['data']    = $updateArray;
+                $params['filed']   = ['avatar'];
+                $params['infix']   = 'avatar/';
+                // $params['suffix']  = "$id-";
+                $update            = Library::upload($params);
+                $avatar            = public_path($update['data']['avatar']);
+                // return $update['data'];
+                $result            = $user->update($update['data']);
+            } else {
+                $result            = $user->update($updateArray);
+            }
 
-        $user              = DB::table('users')->where('id', $id);
-        if (!empty($request->avatar)) {
-            $params            = Library::upload_param_template();
-            $params['request'] = $request;
-            $params['data']    = $updateArray;
-            $params['filed']   = ['avatar'];
-            $params['infix']   = 'avatar/';
-            // $params['suffix']  = "$id-";
-            $update            = Library::upload($params);
-            $avatar            = public_path($update['data']['avatar']);
-
-            $result            = $user->update($update['data']);
+            if ( Auth::user()->adminer ) {
+                return Redirect::back();
+            }
+            return Redirect::to('dashboard/member');
         } else {
-            $result            = $user->update($updateArray);
+            return Redirect::to();
         }
 
-        return Redirect::to('dashboard/member');
     }
 
     /**
