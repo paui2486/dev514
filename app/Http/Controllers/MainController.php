@@ -144,7 +144,6 @@ class maincontroller extends controller
             )
             ->groupBy('activities.category_id')
             ->get();
-
         foreach ($categories as $category)
         {
             if ($category->count >= 1){
@@ -152,12 +151,11 @@ class maincontroller extends controller
                 $eachActivity = DB::table('activities')
                     ->where('activities.status', '>=', 2)
                     ->where('activities.category_id', $category->id)
-                    ->rightJoin('users',             'users.id',      '=',   'activities.host_id')
-                    ->leftJoin('act_tickets',        'activities.id', '=',   'act_tickets.activity_id')
+                    ->leftJoin('users', 'users.id', '=', 'activities.host_id')
                     ->select(
-                        'activities.id as activity_id', 'activities.thumbnail',         'activities.title',
-                        'activities.description',       'activities.counter as count',  'act_tickets.price',
-                        'act_tickets.location',         'act_tickets.run_time as date', 'users.nick as orginizer'
+                        'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
+                        'activities.description',       'activities.counter as count',       'activities.min_price as price',
+                        'activities.location',          'activities.activity_start as date', 'users.nick as orginizer'
                     )
                     ->orderBy('activities.created_at', 'desc')
                     ->take(3)

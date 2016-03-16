@@ -19,6 +19,8 @@
     <!--  right slidebar -->
     <link rel="stylesheet" href="{{asset('css/slidebars.css')}}"/>
     <!-- Custom styles for this template -->
+    @yield('style')
+    
     <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/style-responsive.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/project.css')}}"/>

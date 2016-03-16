@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="new-activity-date">
                                     <img src="img/pics/calendar-icon-02.png">
-                                    {{ preg_replace("/(.*)\s(.*)/", "$1", $newActivity->date) }}
+                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                                 </div>
                                 <div class="new-activity-location">
                                     <img src="img/pics/location-icon-02.png">
@@ -190,37 +190,37 @@
                             </div>
                         </a>
                         @foreach( $eachTypeActivity->cat_content as $activity )
-                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $newActivity->title ) }}">
+                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
                             <div class="inter-panel">
                                 <div class="inter-panel-thumbnail"
-                                     style="background-image:url({{ $newActivity->thumbnail }})">
+                                     style="background-image:url({{ $activity->thumbnail }})">
                                 </div>
                                 <div class="inter-panel-id">
-                                    {{ $newActivity->activity_id }}
+                                    {{ $activity->activity_id }}
                                 </div>
                                 <div class="new-activity-title">
-                                    {{ $newActivity->title }}
+                                    {{ $activity->title }}
                                 </div>
                                 <div class="inter-panel-count">
-                                    {{ $newActivity->count }} 人
+                                    {{ $activity->count }} 人
                                 </div>
                                 <div class="inter-panel-description new-activity-description word-indent">
-                                    {{ $newActivity->description }}
+                                    {{ $activity->description }}
                                 </div>
                                 <div class="new-activity-price">
                                     <img src="img/pics/money-icon-02.png">
-                                    {{ $newActivity->price }} 元
+                                    {{ $activity->price }} 元
                                 </div>
                                 <div class="new-activity-date">
                                     <img src="img/pics/calendar-icon-02.png">
-                                    {{ preg_replace("/(.*)\s(.*)/", "$1", $newActivity->date) }}
+                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
                                 </div>
                                 <div class="new-activity-location">
                                     <img src="img/pics/location-icon-02.png">
-                                    {{ $newActivity->location }}
+                                    {{ $activity->location }}
                                 </div>
                                 <div class="new-activity-orginizer">
-                                    --- {{ $newActivity->orginizer }} ---
+                                    --- {{ $activity->orginizer }} ---
                                 </div>
                             </div>
                         </a>
@@ -249,7 +249,7 @@
                         </a>
                         <div class="row home-blog-info">
                             <div class="home-blog-created_at">
-                                 {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}
                             </div>
                             <a href="{{ url('/blog/'. $blog->category) }}">
                                 <div class="home-blog-category">
