@@ -6324,3 +6324,7 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
     height: 100%;
     /*width: 100%;*/
 }
+
+.actpage-ticket img {
+    width: 100%;
+}
