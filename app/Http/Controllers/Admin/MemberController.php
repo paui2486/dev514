@@ -108,12 +108,15 @@ class MemberController extends Controller
               'phone'         => $request->phone,
               'bank_name'     => $request->bank_name,
               'bank_account'  => $request->bank_account,
-              'adminer'       => in_array('adminer', $permission),
-              'author'        => in_array('author', $permission),
-              'hoster'        => in_array('hoster', $permission),
               'status'        => $request->status,
               'updated_at'    => date("Y-m-d H:i:s"),
             );
+
+            if ( Auth::user()->adminer ) {
+               $updateArray['adminer'] = in_array('adminer', $permission);
+               $updateArray['author']  = in_array('author', $permission);
+               $updateArray['hoster']  = in_array('hoster', $permission);
+            }
 
             if (!empty($request->password)) {
                 $update['password'] = bcrypt($request->password);
@@ -136,9 +139,9 @@ class MemberController extends Controller
             }
 
             if ( Auth::user()->adminer ) {
-                return Redirect::back();
+                return Redirect::to('dashboard/member');
             }
-            return Redirect::to('dashboard/member');
+            return Redirect::back();
         } else {
             return Redirect::to();
         }
