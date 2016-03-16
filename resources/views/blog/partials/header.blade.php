@@ -9,11 +9,11 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand blog-navbar-brand" href="{{ url('blog') }}">
+            <a class="navbar-brand blog-navbar-brand" href="{{ url('/') }}">
                 <img src="/img/pics/logo_blog.png">
             </a>
 
-        <div class="navbar-collapse collapse " id="app-navbar-collapse">
+        <div class="navbar-collapse collapse blog-navbar-collapse" id="app-navbar-collapse">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-right blog-navbar-right  nav navbar-nav ">
                 <!-- Authentication Links -->
@@ -48,9 +48,6 @@
                     </ul>
                 </li>
                 @endif
-                    <li class="blog-right-text"><a href="{{ url('/') }}">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
-                    </li>
 
 
             </ul>
