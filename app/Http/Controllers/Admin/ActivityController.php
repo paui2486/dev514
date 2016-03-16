@@ -166,7 +166,7 @@ class ActivityController extends Controller
         }
         $categories = DB::table('categories')
                         ->where('public', 1)
-                        ->where('type', 2)
+                        ->where('type', 1)
                         ->select('id', 'name')
                         ->get();
 
@@ -220,7 +220,7 @@ class ActivityController extends Controller
         $activity_id        = $id;
         $params             = Library::upload_param_template();
         $params['request']  = $request;
-        $params['data']     = $storeArray;
+        $params['data']     = $updateArray;
         $params['filed']    = ['thumbnail'];
         $params['infix']    = 'activities/';
         $params['suffix']   = "$activity_id/";
@@ -360,8 +360,8 @@ class ActivityController extends Controller
                            ->leftJoin('articles',    'articles.category_id', '=', 'categories.id')
                            ->select(array(
                              'categories.id',        'categories.name',      'categories.logo',
-                             'categories.thumbnail', 'categories.priority',  'categories.public',
-                             DB::raw('count(articles.category_id) as articles_cnt'),
+                             'categories.thumbnail', 'categories.priority',
+                             DB::raw('count(articles.category_id) as articles_cnt'), 'categories.public',
                            ))
                            ->groupBy('categories.id')
                            ->where('categories.type', '1')

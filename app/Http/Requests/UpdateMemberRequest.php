@@ -28,7 +28,7 @@ class UpdateMemberRequest extends FormRequest
             'name' => 'required|min:3',
             'address' => 'required|min:6',
             'email' => 'required|email|max:255',
-            'phone' => 'required|integer',
+            // 'phone' => 'required|integer',
         ];
     }
 }

@@ -47,6 +47,7 @@ class MemberController extends Controller
         $permission = (array) $request->permission;
         $store = DB::table('users')->insert([
           'name'          => $request->name,
+          'nick'          => $request->nick,
           'password'      => bcrypt($request->password),
           'address'       => $request->address,
           'email'         => $request->email,
@@ -98,6 +99,7 @@ class MemberController extends Controller
         $permission = (array) $request->permission;
         $updateArray = array(
           'name'          => $request->name,
+          'nick'          => $request->nick,
           'address'       => $request->address,
           'email'         => $request->email,
           'phone'         => $request->phone,
