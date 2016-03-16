@@ -360,8 +360,8 @@ class ActivityController extends Controller
                            ->leftJoin('articles',    'articles.category_id', '=', 'categories.id')
                            ->select(array(
                              'categories.id',        'categories.name',      'categories.logo',
-                             'categories.thumbnail', 'categories.priority',  'categories.public',
-                             DB::raw('count(articles.category_id) as articles_cnt'),
+                             'categories.thumbnail', 'categories.priority',
+                             DB::raw('count(articles.category_id) as articles_cnt'), 'categories.public',
                            ))
                            ->groupBy('categories.id')
                            ->where('categories.type', '1')

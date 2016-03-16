@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="new-activity-date">
                                     <img src="img/pics/calendar-icon-02.png">
-                                    {{ $newActivity->date }}
+                                    {{ preg_replace("/(.*)\s(.*)/", "$1", $newActivity->date) }}
                                 </div>
                                 <div class="new-activity-location">
                                     <img src="img/pics/location-icon-02.png">
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="new-activity-date">
                                     <img src="img/pics/calendar-icon-02.png">
-                                    {{ $newActivity->date }}
+                                    {{ preg_replace("/(.*)\s(.*)/", "$1", $newActivity->date) }}
                                 </div>
                                 <div class="new-activity-location">
                                     <img src="img/pics/location-icon-02.png">
