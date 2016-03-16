@@ -28,7 +28,7 @@ body {
 .navbar-right {
     margin-top:15px;
     cursor: pointer;
-    display: inline-flex;
+    text-align: center;
 }
 
 .navbar-right > li {
@@ -37,20 +37,26 @@ body {
 
 .navbar-right > li > a {
     color: white;
-    text-shadow: 1px 1px 4px #000;
+    text-shadow: 0px 0px 3px #000;
 }
 
 ul.navbar-nav > li :hover{
     background-color:rgba(255,255,255,0.6);
 }
 
-.dropdown-menu {
-    right: 0;
-    left: auto;
-}
-
 li.navbar-host {
     border: 1px solid #fff;
+}
+
+ul.dropdown-menu > li :hover {
+    background-color: white;
+    color: black;
+}
+
+ul.dropdown-menu {
+    background-color:rgba(255,255,255,0.6);
+    border-radius: 8px;
+    margin-top: 10px !important;
 }
 
 .navbar-toggle {
@@ -104,6 +110,7 @@ li.page-navbar-host {
 
 .blog-navbar-right {
     margin-top: 17px;
+    width: 20%;
 }
 
 li.blog-right-text a {
@@ -1844,3 +1851,25 @@ li.collapse-blog-category {
 	color: #f37e7e;
 }
 
+.ticket-info {
+    margin:5px auto;
+    text-align: right;
+}
+
+.ticket-info span {
+    margin:0px 27px;
+}
+
+.ticket-option {
+    padding:20px 0px;
+    display: inline;
+    font-size: 16px;
+}
+
+.ticket-option-right {
+    float: right;
+}
+
+.ticket-option-right span {
+    margin: 0px 20px;
+}
