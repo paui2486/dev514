@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="register-button">
                     <div class="login-button col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
                             註冊
