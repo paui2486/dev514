@@ -5,9 +5,10 @@
         <div class="act-page-blur" style="background-image:url('img/pics/activity-photo.jpg')">
 <!--            <img src="/img/pics/activity-photo.jpg">-->
         </div>
-        <div class="actpage-main-image" style="background-image:url('img/pics/activity-photo.jpg')">
-        </div>
+       
         <div class="actpage-panel">
+             <div class="actpage-main-image" style="background-image:url('img/pics/activity-photo.jpg')">
+        </div>
             <div class="actpage-left-content">
                 <p class="actpage-title">辦公室療癒手做植栽DIY</p>
                 <div class="actpage-activity-content">
@@ -74,19 +75,38 @@
                         <img src="/img/icons/carttime.png">
                         <p>活動時間</p>
                         </div>
-                        <div class="actpage-cart-time">
-                            <div class="actpage-cart-time01">
-                                <p>2016-04-29（五）  <span>13:00</span> 
-                                </p>
+                        <div class="row cart-time-info">
+                            <div class="actpage-cart-time">
+                                <div class="actpage-cart-time01">
+                                    <p>2016-04-29（五）  <span>13:00</span> 
+                                    </p>
+                                </div>
+                                <div>～</div>
+                                <div class="actpage-cart-time02">
+                                    <p>2016-04-30（六）<span>15:00</span> 
+                                    </p>
+                                </div>
                             </div>
-                            <div>～</div>
-                            <div class="actpage-cart-time02">
-                                <p>2016-04-30（六）<span>15:00</span> 
-                                </p>
-                            </div>
+                            <div class="actpage-surplus"><span>剩1468位</span></div>
+    <!--                        <div class="actpage-surplus">剩 5 位</div>-->
                         </div>
-                        <div class="actpage-surplus"><span>剩18位</span></div>
-<!--                        <div class="actpage-surplus">剩 5 位</div>-->
+                        
+                        <div class="row cart-time-info">
+                            <div class="actpage-cart-time">
+                                <div class="actpage-cart-time01">
+                                    <p>2016-04-29（五）  <span>13:00</span> 
+                                    </p>
+                                </div>
+                                <div>～</div>
+                                <div class="actpage-cart-time02">
+                                    <p>2016-04-30（六）<span>15:00</span> 
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="actpage-surplus"><span>剩188位</span></div>
+    <!--                        <div class="actpage-surplus">剩 5 位</div>-->
+                        </div>
+                        
                     </div>
                      <div class="actpage-cart-info">
                         <div class="row" style="margin:0px;">
