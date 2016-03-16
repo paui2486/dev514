@@ -43,18 +43,6 @@
                           </ul>
                       </div>
                     @endif
-            				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="name">
-                                使用者名稱
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="name" id="name"
-                      							value="{{{ Input::old('name', isset($member) ? $member->name : null) }}}" />
-                    						    <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
-                            </div>
-                        </div>
-            				</div>
                     <div class="form-group {{{ $errors->has('avatar') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="avatar">
@@ -62,10 +50,10 @@
                             </label>
                             <div class="col-sm-10">
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
-                                    <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                    <div class="fileupload-new thumbnail" style="width: 100%; height: 300px;">
                                         <img src="{{{ ( isset($member) && !empty($member->avatar) ? asset($member->avatar) : asset('img/no-image.png')) }}}" alt="" />
                                     </div>
-                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>
                                     <div>
                                         <span class="btn btn-white btn-file">
                                             <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
@@ -75,6 +63,28 @@
                                         <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+            				</div>
+            				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
+              					<div class="col-md-12">
+                						<label class="control-label col-sm-2" for="name">
+                                使用者名稱
+                            </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="name" id="name"
+                      							value="{{{ Input::old('name', isset($member) ? $member->name : null) }}}" />
+                            </div>
+                        </div>
+            				</div>
+                    <div class="form-group {{{ $errors->has('nick') ? 'has-error' : '' }}}">
+              					<div class="col-md-12">
+                						<label class="control-label col-sm-2" for="nick">
+                                使用者暱稱
+                            </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="nick" id="nick"
+                      							value="{{{ Input::old('name', isset($member) ? $member->nick : null) }}}" />
                             </div>
                         </div>
             				</div>
@@ -97,11 +107,6 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="email" id="email"
                       							value="{{{ Input::old('email', isset($member) ? $member->email : null) }}}" />
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <p>{{ $errors->first('email') }}</p>
-                                        </span>
-                                    @endif
                             </div>
                         </div>
             				</div>
@@ -113,7 +118,6 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="phone" id="phone"
                       							value="{{{ Input::old('phone', isset($member) ? $member->phone : null) }}}" />
-                    						    {!!$errors->first('phone', '<label class="control-label">:message</label>')!!}
                             </div>
                         </div>
             				</div>
@@ -125,7 +129,6 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="bank_name" id="bank_name"
                       							value="{{{ Input::old('bank_name', isset($member) ? $member->bank_name : null) }}}" />
-                    						    {!!$errors->first('bank_name', '<label class="control-label">:message</label>')!!}
                             </div>
                         </div>
             				</div>
@@ -137,7 +140,6 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="bank_account" id="bank_account"
                       							value="{{{ Input::old('bank_account', isset($member) ? $member->bank_account : null) }}}" />
-                    						    {!!$errors->first('bank_account', '<label class="control-label">:message</label>')!!}
                             </div>
                         </div>
             				</div>
@@ -147,9 +149,7 @@
                                 登入密碼
                             </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="password" name="password" id="password"
-                      							value="" />
-                    						    {!!$errors->first('password', '<label class="control-label">:message</label>')!!}
+                                <input class="form-control" type="password" name="password" id="password" value="" />
                             </div>
                         </div>
             				</div>
