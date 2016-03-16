@@ -120,7 +120,7 @@ class maincontroller extends controller
                         ->select(
                             'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
                             'activities.description',       'activities.counter as count',
-                            'act_tickets.price',            'act_tickets.location',
+                            'act_tickets.price',            'activities.location',
                             'activities.activity_start as date', 'users.nick as orginizer',
                             'categories.name as category'
                         )

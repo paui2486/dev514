@@ -166,7 +166,7 @@ class ActivityController extends Controller
         }
         $categories = DB::table('categories')
                         ->where('public', 1)
-                        ->where('type', 2)
+                        ->where('type', 1)
                         ->select('id', 'name')
                         ->get();
 
