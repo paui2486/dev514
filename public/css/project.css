@@ -1393,7 +1393,6 @@ li.collapse-blog-category {
 .actpage-main-image {
     height: 500px;
     background-size: cover;
-    max-width: 1050px;
     width: 80%;
     position: absolute;
     left: 10%;
@@ -1508,6 +1507,7 @@ li.collapse-blog-category {
 .actpage-last-block{
     border-bottom: 1px solid #666;
     margin-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 .actpage-cart-info img {
