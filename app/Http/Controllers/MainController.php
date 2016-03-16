@@ -147,7 +147,7 @@ class maincontroller extends controller
 
         foreach ($categories as $category)
         {
-            if ($category->count >= 3){
+            if ($category->count >= 1){
 
                 $eachActivity = DB::table('activities')
                     ->where('activities.status', '>=', 2)
