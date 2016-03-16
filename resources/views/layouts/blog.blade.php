@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="google-site-verification" content="1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY" />
     <title>514生活頻道 - 讓生活更有意思</title>
 
     <!-- Fonts -->

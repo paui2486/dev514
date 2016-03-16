@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ActivityRequest;
+use App\Http\Requests\UpdateActivityRequest;
 
 use DB;
 use Log;
@@ -37,18 +38,16 @@ class ActivityController extends Controller
     {
         if (Auth::user()->adminer) {
             $hosters  = DB::table('users')
-                            ->where('hoster', 1)
-                            ->select('id', 'name')
-                            ->get();
-        } else {
-            $hosters  = array();
+                          ->where('hoster', 1)
+                          ->select('id', 'name')
+                          ->get();
         }
 
         $categories   = DB::table('categories')
-                        ->where('public', 1)
-                        ->where('type', 1)
-                        ->select('id', 'name')
-                        ->get();
+                          ->where('public', 1)
+                          ->where('type', 1)
+                          ->select('id', 'name')
+                          ->get();
         return view('admin.activity.create_edit', compact('hosters', 'categories'));
     }
 
@@ -60,8 +59,15 @@ class ActivityController extends Controller
     //  public function store(ActivityRequest $request)
      public function store(ActivityRequest $request)
     {
+        $tickets    = array();
+        $prices     = array();
+        $array_key  = "price";
+        $prices     = array_map(function($item) use($array_key) {
+                        return ($item[$array_key] === "")? 0 : $item[$array_key];
+                      }, $request->ticket);
+
         $activity_range = array();
-        preg_match("/(.*)\s-\s(.*)/", $request->activity_range, $activity_range);
+        preg_match_all("/(\d+-\d+-\d+\s\d+:\d+)/", $request->activity_range, $activity_range);
 
         $storeArray = array(
             'title'         => $request->title,
@@ -71,8 +77,10 @@ class ActivityController extends Controller
             'content'       => $request->content,
             'tag_ids'       => $request->tag_ids,
             'status'        => $request->status,
-            'activity_start'=> $activity_range[1],
-            'activity_end'  => $activity_range[2],
+            'max_price'     => max($prices),
+            'min_price'     => min($prices),
+            'activity_start'=> $activity_range[0][0],
+            'activity_end'  => $activity_range[1][0],
             'created_at'    => date("Y-m-d H:i:s"),
             'updated_at'    => date("Y-m-d H:i:s"),
         );
@@ -97,22 +105,26 @@ class ActivityController extends Controller
         $activity           = DB::table('activities')->where('id', $activity_id);
         $result             = $activity->update($update['data']);
 
-        $tickets            = array();
         foreach ($request->ticket as $act_ticket) {
-            $sale_range   = array();
-            $event_range  = array();
-            $act_ticket     = (object) $act_ticket;
-            preg_match("/(.*)\s-\s(.*)/", $act_ticket->sale_time,  $sale_range);
-            preg_match("/(.*)\s-\s(.*)/", $act_ticket->event_time, $event_range);
+            $act_ticket  = (object) $act_ticket;
+
+            $sale_range  = array();
+            $sale_time   = ($act_ticket->sale_time === "")? date("Y-m-d H:i") . ' - ' . ("Y-m-d H:i") : $act_ticket->sale_time;
+            preg_match_all("/(\d+-\d+-\d+\s\d+:\d+)/", $sale_time,  $sale_range);
+
+            $event_range = array();
+            $event_time  = ($act_ticket->event_time === "")? date("Y-m-d H:i") . ' - ' . ("Y-m-d H:i") : $act_ticket->event_time;
+            preg_match_all("/(\d+-\d+-\d+\s\d+:\d+)/", $event_time, $event_range);
+
             $insert = array(
                         'activity_id'   => $activity_id,
-                        'ticket_start'  => $event_range[1],
-                        'ticket_end'    => $event_range[2],
-                        'sale_start'    => $sale_range[1],
-                        'sale_end'      => $sale_range[2],
+                        'ticket_start'  => $event_range[0][0],
+                        'ticket_end'    => $event_range[1][0],
+                        'sale_start'    => $sale_range[0][0],
+                        'sale_end'      => $sale_range[1][0],
                         'location'      => $request->location,
                         'name'          => $act_ticket->name,
-                        'status'        => $act_ticket->status,
+                        'status'        => $act_ticket->ticket_status,
                         'price'         => $act_ticket->price,
                         'total_numbers' => $act_ticket->numbers,
                         'left_over'     => $act_ticket->numbers,
@@ -179,7 +191,7 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(ActivityRequest $request, $id)
+    public function update(UpdateActivityRequest $request, $id)
     {
         $activity_range = array();
         preg_match("/(.*)\s-\s(.*)/", $request->activity_range, $activity_range);
@@ -254,19 +266,19 @@ class ActivityController extends Controller
     {
         if (Auth::user()->adminer){
             $activities = DB::table('activities')
-                        ->leftJoin('users', 'activities.host_id', '=', 'users.id')
+                        ->leftJoin('users',      'activities.host_id',     '=', 'users.id')
                         ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                         ->select(array(
-                          'activities.id',    'users.name',         'categories.name as category',
-                          'activities.title', 'activities.counter', 'activities.targets', 'activities.status'))
+                          'activities.id',       'users.name',             'categories.name as category',
+                          'activities.title',    'activities.counter',     'activities.targets',          'activities.status'))
                         ->orderBy('activities.created_at', 'ASC');
         } else {
             $activities = DB::table('activities')
-                        ->leftJoin('users', 'activities.host_id', '=', 'users.id')
+                        ->leftJoin('users',      'activities.host_id',     '=', 'users.id')
                         ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                         ->select(array(
-                          'activities.id',    'users.name',         'categories.name as category',
-                          'activities.title', 'activities.counter', 'activities.targets', 'activities.status'))
+                          'activities.id',       'users.name',             'categories.name as category',
+                          'activities.title',    'activities.counter',     'activities.targets',          'activities.status'))
                         ->orderBy('activities.created_at', 'ASC')
                         ->where('users.id', Auth::id());
         }
@@ -276,9 +288,9 @@ class ActivityController extends Controller
            ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status == 2) 已發布 @elseif($status == 3) 已隱藏 @else 已刪除 @endif')
            ->add_column('actions', '
                  <div style="white-space: nowrap;">
-                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"                class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets\') }}}" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 票卷</a>
-                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}"  class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                  <input type="hidden" name="row" value="{{$id}}" id="row">
                  </div>')
            ->make();
@@ -330,9 +342,9 @@ class ActivityController extends Controller
         $params['infix']   = 'articles/';
         $params['suffix']  = 'category/';
 
-        $update       = Library::upload($params);
-        $activityCategory = DB::table('categories')->where('id', $id);
-        $result       = $activityCategory->update($update['data']);
+        $update            = Library::upload($params);
+        $activityCategory  = DB::table('categories')->where('id', $id);
+        $result            = $activityCategory->update($update['data']);
         return Redirect::to('dashboard/activity/category');
     }
 
@@ -345,10 +357,11 @@ class ActivityController extends Controller
     public function getCategoryData()
     {
         $activityCategory = DB::table('categories')
-                           ->leftJoin('articles', 'articles.category_id', '=', 'categories.id')
+                           ->leftJoin('articles',    'articles.category_id', '=', 'categories.id')
                            ->select(array(
-                             'categories.id', 'categories.name', 'categories.logo', 'categories.thumbnail', 'categories.priority',
-                             DB::raw('count(articles.category_id) as articles_cnt'), 'categories.public',
+                             'categories.id',        'categories.name',      'categories.logo',
+                             'categories.thumbnail', 'categories.priority',  'categories.public',
+                             DB::raw('count(articles.category_id) as articles_cnt'),
                            ))
                            ->groupBy('categories.id')
                            ->where('categories.type', '1')
@@ -360,7 +373,7 @@ class ActivityController extends Controller
             ->edit_column('public', '@if($public == 1) 顯示 @else 隱藏 @endif')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
-                  <a href="{{{ URL::to(\'dashboard/activity/category/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                  <a href="{{{ URL::to(\'dashboard/activity/category/\' . $id ) }}}"               class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
                   <a href="{{{ URL::to(\'dashboard/activity/category/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')

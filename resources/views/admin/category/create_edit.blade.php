@@ -15,17 +15,28 @@
 <section id="main-content">
     <section class="wrapper">
 @endif
-
-<ul class="nav nav-tabs">
-            <li class="active">
-                <a href="#tab-general" data-toggle="tab">會員設定</a>
+        <ul class="nav nav-tabs">
+            <li class="">
+                <a href="#tab-general" data-toggle="tab">類別設定</a>
             </li>
-        </ul>
+            <li class="">
+                <a href="{{ url("/") }}" data-toggle="tab">類別設定</a>
+            </li>
+            <li class="">
+                <a href="#tab-3" data-toggle="tab">類別設定</a>
+            </li>
+            <li class="">
+                <a href="#tab-3" data-toggle="tab">類別設定</a>
+            </li>
+            <li class="">
+                <a href="#tab-3" data-toggle="tab">類別設定</a>
+            </li>
 
+        </ul>
         <form class="form-horizontal" enctype="multipart/form-data"
           	method="post" autocomplete="off" role="form"
-          	action="@if(isset($category)){{ URL::to('dashboard/blog/category/'.$category->id.'/update') }}
-        	        @else{{ URL::to('dashboard/blog/category') }}@endif">
+          	action="@if(isset($category)){{ URL::to('dashboard/'. Request::segment(2) .'/category/'.$category->id.'/update') }}
+        	        @else{{ URL::to('dashboard/'.  Request::segment(2) .'/category') }}@endif">
             {!! csrf_field() !!}
           	<!-- CSRF Token -->
           	<!-- <input type="hidden" name="_token" value="{{{ csrf_token() }}}" /> -->
@@ -37,7 +48,7 @@
             				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="name">
-                                文章類別
+                                類別名稱
                             </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="name" id="name"

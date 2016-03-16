@@ -36,7 +36,7 @@ class AdminMiddleware
             } else {
                 return redirect()->guest('login');
             }
-        } elseif ( Auth::user()->adminer == 1) {
+        } elseif ( Auth::user()->adminer ) {
             return $next($request);
         } else {
             return redirect('/');

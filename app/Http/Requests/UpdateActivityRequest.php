@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Request;
 
-class ActivityRequest extends FormRequest
+class UpdateActivityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,9 @@ class ActivityRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'       => 'required|unique:activities,title|min:3|max:255|regex:/^[(\x{4E00}-\x{9FA5})A-Za-z0-9\-,!@\.\(\)]+$/u',
-            'thumbnail'   => 'required|mimes:jpeg,bmp,png',
-            'location'    => 'required|min:3',
-            'ticket'      => 'required',
+            'title'       => 'required|min:3|max:255|regex:/^[(\x{4E00}-\x{9FA5})A-Za-z0-9\-,!@\.\(\)]+$/u',
+            'thumbnail'   => 'mimes:jpeg,bmp,png',
+            'location'    => 'required|min:3'
         ];
     }
 
@@ -43,7 +42,6 @@ class ActivityRequest extends FormRequest
             'location.min'        => '活動地點 最少 :min 字元',
             'thumbnail.required'  => '請選擇圖片作為 活動縮圖',
             'thumbnail.mimes'     => '縮圖的型態請為: :values.',
-            'ticket'              => '請至少新增一個票種',
         ];
     }
 }

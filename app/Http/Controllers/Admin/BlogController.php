@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 
 use DB;
 use Log;
@@ -118,7 +119,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(BlogRequest $request, $id)
+    public function update(UpdateBlogRequest $request, $id)
     {
         $updateArray = array(
             'title'         => $request->title,

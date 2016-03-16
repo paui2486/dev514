@@ -6315,3 +6315,12 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 .form-ticket .control-label {
     padding-top: 12px;
 }*/
+
+.fileupload .thumbnail {
+    background-color: #ECECEC;
+}
+
+.fileupload .thumbnail > img {
+    height: 100%;
+    /*width: 100%;*/
+}

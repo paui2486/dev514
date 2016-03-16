@@ -37,7 +37,7 @@ class HostMiddleware
             } else {
                 return redirect()->guest('login')->withFlashmessage('請先登入會員');
             }
-        } elseif ( Auth::user()->hoster == 1 || Auth::user()->adminer == 1 ) {
+        } elseif ( Auth::user()->hoster == 1 || Auth::user()->adminer ) {
             return $next($request);
         } else {
             // return redirect('/');

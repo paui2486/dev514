@@ -32,7 +32,7 @@
             <div class="tab-content">
                 <!-- General tab -->
                 <div class="tab-pane active" id="tab-general">
-                      @if (count($errors) > 0)
+                    @if (count($errors) > 0)
                       <div class="alert alert-danger">
                           <ul>
                               @foreach ($errors->all() as $error)
@@ -40,14 +40,44 @@
                               @endforeach
                           </ul>
                       </div>
+                    @elseif (Session::has('message'))
+                      <div class="alert alert-danger">
+                          <ul>
+                              <li>{{ Session::get('message') }}</li>
+                          </ul>
+                      </div>
                     @endif
-                    <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="thumbnail">
+                                    活動縮圖
+                                </label>
+                                <div class="col-sm-10">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload-new thumbnail" style="width: 100%; height: 300px;">
+                                            <img src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
+                                        </div>
+                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>
+                                        <div>
+                                            <span class="btn btn-white btn-file">
+                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
+                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
+                                                <input id="thumbnail" class="file"  name="thumbnail" type="file"
+                                                    value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
+                                            </span>
+                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="title">
+                                <label class="control-label col-sm-2" for="title">
                                     活動名稱
                                 </label>
-                                <div class="col-sm-10 col-md-9">
+                                <div class="col-sm-10">
                                     <input class="form-control" type="text" name="title" id="title"
                                         value="{{{ Input::old('title', isset($activity) ? $activity->title : null) }}}" />
                                 </div>
@@ -56,10 +86,10 @@
                         @if (Auth::user()->adminer)
                         <div class="form-group {{{ $errors->has('host_id') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="host_id">
+                                <label class="control-label col-sm-2" for="host_id">
                                     活動主辦
                                 </label>
-                                <div class="col-sm-10 col-md-9">
+                                <div class="col-sm-10">
                                     <select style="width: 100%" name="host_id" id="host_id" class="form-control">
                                     @foreach($hosters as $hoster)
                                         <option value="{{$hoster->id}}"
@@ -77,10 +107,10 @@
                         @endif
                         <div class="form-group {{{ $errors->has('category_id') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="category_id">
+                                <label class="control-label col-sm-2" for="category_id">
                                     活動分類
                                 </label>
-                                <div class="col-sm-10 col-md-9">
+                                <div class="col-sm-10">
                                     <select style="width: 100%" name="category_id" id="category_id" class="form-control">
                                       @foreach($categories as $category)
                                         <option value="{{$category->id}}"
@@ -97,42 +127,15 @@
                         </div>
                         <div class="form-group {{{ $errors->has('activity_range') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="activity_range">
-                                    活動總期間
+                                <label class="control-label col-sm-2" for="activity_range">
+                                    活動期間
                                 </label>
-                                <div class="col-sm-10 col-md-9">
+                                <div class="col-sm-10">
                                     <input class="form-control time-picker" type="text" name="activity_range" id="activity_range"
-                                        value="{{{ Input::old('activity_range', isset($activity) ? $activity->activity_start . " - " . $activity->activity_end : date("Y-m-d 00:00:00") . " - " . date("Y-m-d 00:00:00") ) }}}" />
+                                        value="{{{ Input::old('activity_range', isset($activity) ? preg_replace("/(.*):(.*)/", "$1", $activity->activity_start)  . "   -   " . preg_replace("/(.*):(.*)/", "$1", $activity->activity_end) : date("Y-m-d 00:00") . "   -   " . date("Y-m-d 00:00") ) }}}" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
-                            <div class="col-md-12">
-                                <label class="control-label col-sm-2 col-md-3" for="thumbnail">
-                                    活動縮圖
-                                </label>
-                                <div class="col-sm-10 col-md-9">
-                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
-                                        </div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                        <div>
-                                            <span class="btn btn-white btn-file">
-                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
-                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
-                                                <input id="thumbnail" class="file"  name="thumbnail" type="file" />
-                                            </span>
-                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
                         <div class="form-group {{{ $errors->has('location') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="location">
@@ -140,7 +143,21 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="location" id="location" placeholder=""
-                                        value="{{{ Input::old('description', isset($activity) ? $activity->location : null) }}}" />
+                                        value="{{{ Input::old('location', isset($activity) ? $activity->location : null) }}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group {{{ $errors->has('time_range') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="time_range">
+                                    活動長度
+                                </label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="time_range" id="time_range" placeholder=""
+                                            value="{{{ Input::old('time_range', isset($activity) ? $activity->time_range : null) }}}" />
+                                        <span class="input-group-addon">小時</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +202,6 @@
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="counter" id="counter"
                                         value="{{{ Input::old('counter', isset($activity) ? $activity->counter : null) }}}" />
-                                        <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
                                 </div>
                             </div>
                         </div>
@@ -229,7 +245,7 @@
                                               <span class="input-group-btn">
                                                   <button class="btn btn-white" type="button">$</button>
                                               </span>
-                                              <input class="form-control" type="number" name="ticket[0][price]"/>
+                                              <input class="form-control" type="number" name="ticket[0][price]" min="0"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-2 t-function">
@@ -240,7 +256,7 @@
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket-numbers">票卷張數</label>
                                         <div class="col-sm-2">
-                                            <input class="form-control" type="number" name="ticket[0][numbers]"/>
+                                            <input class="form-control" type="number" name="ticket[0][numbers]" min="0"/>
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket-time">活動時間</label>
                                         <div class="col-sm-6">
@@ -250,7 +266,7 @@
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket-time">售票狀態</label>
                                         <div class="col-sm-2">
-                                            <select style="width: 100%" name="ticket[0][status]" class="form-control">
+                                            <select style="width: 100%" name="ticket[0][ticket_status]" class="form-control">
                                                 <option value="1">發售</option>
                                                 <option value="2">停售</option>
                                             </select>
@@ -270,11 +286,6 @@
                             </div>
                         </div>
                         @endif
-                        <div class="form-group">
-                  					<div class="col-md-12">
-                                {{ Form::hidden('position', '1') }}
-                            </div>
-                        </div>
                     		<div class="form-group">
                             請閱讀建立活動及販售票券同意書＊  我已閱讀且同意 建立活動及販售票券同意書 。
                       			<div class="col-md-12">
@@ -391,9 +402,11 @@
                 maxday = maxDate;
             }
             $(this).daterangepicker({
+                timePicker: true,
                 timePickerIncrement: 30,
                 locale: {
-                    format: 'YYYY-MM-DD H:mm:ss'
+                    format: 'YYYY-MM-DD H:mm',
+                    separator: '   -   '
                 },
                 minDate: 'today',
                 maxDate: maxday
