@@ -220,7 +220,7 @@ class ActivityController extends Controller
         $activity_id        = $id;
         $params             = Library::upload_param_template();
         $params['request']  = $request;
-        $params['data']     = $storeArray;
+        $params['data']     = $updateArray;
         $params['filed']    = ['thumbnail'];
         $params['infix']    = 'activities/';
         $params['suffix']   = "$activity_id/";
