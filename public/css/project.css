@@ -1409,7 +1409,6 @@ li.collapse-blog-category {
     display: flex;
     box-shadow: 1px 1px 10px #ccc;
     margin-bottom: 20px;
-    height:1000px;
 }
 
 .actpage-title {
@@ -1421,6 +1420,10 @@ li.collapse-blog-category {
 .actpage-left-content {
     width: 60%;
     float: left;
+}
+
+.actpage-activity-content {
+    overflow: auto;
 }
 
 .actpage-right-content {
