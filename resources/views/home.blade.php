@@ -171,27 +171,22 @@
             </div>
             <div class="row Act-category-content">
                 @foreach( $home->totalActivity as $eachTypeActivity )
-                <div class="outer-panel">
-                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                        <div class="outer-panel-left"
-                             style="background-image:url({{ $eachTypeActivity->cat_thumbnail }})">
-                        </div>
-                    </a>
-                    <div class="outer-panel-right">
-                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                    <div class="row Act-category-panel">
                             <div class="Act-category-id">
                                 {{ $eachTypeActivity->cat_id }}
                             </div>
+                       
                             <div class="Act-category-title">
-                                {{ $eachTypeActivity->cat_title }}
-                            </div>
-                            <div class="Act-category-logo">
+                            <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                                <span>{{ $eachTypeActivity->cat_title }}</span> 
                                 <img src="{{ $eachTypeActivity->cat_logo }}">
+                            </a>
                             </div>
-                        </a>
+                        
                         @foreach( $eachTypeActivity->cat_content as $activity )
-                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
-                            <div class="inter-panel">
+                        
+                            <div class="col-md-3 inter-panel">
+                                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
                                 <div class="inter-panel-thumbnail"
                                      style="background-image:url({{ $activity->thumbnail }})">
                                 </div>
@@ -201,10 +196,11 @@
                                 <div class="new-activity-title">
                                     {{ $activity->title }}
                                 </div>
-                                <div class="inter-panel-count">
-                                    {{ $activity->count }} 人
+                                 </a>
+                                <div class="new-activity-count inter-panel-count">
+                                     <img src="/img/icons/eye-03.png">{{ $activity->count }} 人
                                 </div>
-                                <div class="inter-panel-description new-activity-description word-indent">
+                                <div class="inter-panel-description new-activity-description word-indent-02">
                                     {{ $activity->description }}
                                 </div>
                                 <div class="new-activity-price">
@@ -223,10 +219,9 @@
                                     --- {{ $activity->orginizer }} ---
                                 </div>
                             </div>
-                        </a>
+                       
                         @endforeach
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -242,23 +237,24 @@
                         </div>
                     </a>
                     <div class="home-blog-panel-right">
-                        <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
-                            <div class="home-blog-title">
-                                {{ $blog->title }}
-                            </div>
-                        </a>
+                        <div class="home-blog-title">
+                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
+                        </div>
                         <div class="row home-blog-info">
                             <div class="home-blog-created_at">
-                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}
+                              
+                                <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
                             </div>
                             <a href="{{ url('/blog/'. $blog->category) }}">
                                 <div class="home-blog-category">
-                                    {{ $blog->category }}
+                                   
+                                    <li>{{ $blog->category }}</li>
                                 </div>
                             </a>
                             <a href="{{ url('/member/'. $blog->author)}}">
                                 <div class="home-blog-author">
-                                By {{ $blog->author }}
+                                
+                                    <li> By {{ $blog->author }}</li>
                                 </div>
                             </a>
                         </div>
