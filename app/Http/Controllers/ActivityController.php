@@ -49,15 +49,15 @@ class ActivityController extends Controller
             // 無此類別 轉回首頁
             return Redirect::to('blog');
         } else {
-            $blogList = DB::table('activities')
-                          ->rightJoin('users', 'users.id', '=', 'articles.author_id')
+            $activity_list = DB::table('activities')
+                          ->rightJoin('users', 'users.id', '=', 'activities.host_id')
                           ->select(array(
                             'activities.id',  'activities.title',   'activities.thumbnail',
                             'users.name as author', 'activities.description', 'activities.created_at',
                           ))
                           ->where('activities.category_id', '=' , $category->id )
                           ->paginate(5);
-            return view('blog.list', compact('meta', 'header_categories', 'category', 'blogList'));
+            return view('activity.list', compact('meta', 'header_categories', 'category', 'activity_list'));
         }
     }
 
@@ -74,7 +74,7 @@ class ActivityController extends Controller
                         'activities.content',   'activities.activity_start',  'activities.activity_end',
                         'activities.counter',   'activities.category_id',     'activities.max_price',
                         'activities.min_price', 'activities.remark',          'activities.time_range',
-                        'categories.name as category',  'users.name as hoster',
+                        'categories.name as category',  'users.name as hoster', 'users.nick as nick',
                         'users.avatar as host_photo',   'users.description as host_destricption'
                       ))
                       ->where('activities.status', '>=', '2')
@@ -107,4 +107,5 @@ class ActivityController extends Controller
             return view('activity.index', compact('activity', 'tickets', 'suggests'));
         }
     }
+
 }
