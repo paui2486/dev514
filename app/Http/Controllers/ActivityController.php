@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
+use URL;
 use Log;
 use Auth;
 use Response;
@@ -57,6 +58,36 @@ class ActivityController extends Controller
                           ))
                           ->where('activities.category_id', '=' , $category->id )
                           ->paginate(5);
+
+            $meta   = array(
+                'charset = UTF-8'           => 'text/html',
+                'http-equiv = refresh'      => '200;url='.URL::current(),
+                'name = google-site-verification' => '1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY',
+                'name = google'             => 'notranslate',
+                'name = URL'                => URL::current(),
+                'name = title'              => "活動列表 - ".$category->name." - 514 活動頻道",
+                'name = author'             => '514 活動頻道',
+                'name = publisher'          => '514 活動頻道',
+                'name = rating'             => 'general',
+                'name = robots'             => 'index,follow',
+                'name = spiders'            => 'all',
+                'name = webcrawlers'        => 'all',
+                'name = copyright'          => 'Copyright ©2016 514 Life Inc. All rights reserved.',
+                'name = company'            => '共盈科技股份有限公司: 514 Life',
+                'name = abstract'           => "活動列表 - ".$category->name." - 514 活動頻道",
+                'name = description'        => "活動列表 - ".$category->name." - 514 活動頻道",
+                'name = fragment'           => '!',
+                'property = og:title'       => "活動列表 - ".$category->name." - 514 活動頻道",
+                'property = og:url'         => URL::current(),
+                'property = og:type'        => 'website',
+                'property = og:description' => "活動列表 - ".$category->name." - 514 活動頻道",
+                'property = og:site_name'   => '514 活動頻道',
+                'property = og:image'       => asset('/uploads/galleries/1/source-1457072725.png'),
+                'property = fb:page_id'     => '514 Life',
+                'property = fb:app_id'      => '509584332499899',
+                'property = fb:admins'      => '1910444804523',
+            );
+
             return view('activity.list', compact('meta', 'header_categories', 'category', 'activity_list'));
         }
     }
@@ -104,7 +135,36 @@ class ActivityController extends Controller
 
             DB::table('activities')->where('id', $activity->id)->increment('counter');
 
-            return view('activity.index', compact('activity', 'tickets', 'suggests'));
+            $meta   = array(
+                'charset = UTF-8'           => 'text/html',
+                'http-equiv = refresh'      => '200;url='.URL::current(),
+                'name = google-site-verification' => '1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY',
+                'name = google'             => 'notranslate',
+                'name = URL'                => URL::current(),
+                'name = title'              => $activity->title,
+                'name = author'             => $activity->hoster,
+                'name = publisher'          => '514 活動頻道',
+                'name = rating'             => 'general',
+                'name = robots'             => 'index,follow',
+                'name = spiders'            => 'all',
+                'name = webcrawlers'        => 'all',
+                'name = copyright'          => 'Copyright ©2016 514 Life Inc. All rights reserved.',
+                'name = company'            => '共盈科技股份有限公司: 514 Life',
+                'name = abstract'           => $activity->description,
+                'name = description'        => $activity->description,
+                'name = fragment'           => '!',
+                'property = og:title'       => $activity->title,
+                'property = og:url'         => URL::current(),
+                'property = og:type'        => 'website',
+                'property = og:description' => $activity->description,
+                'property = og:site_name'   => '514 活動頻道',
+                'property = og:image'       => asset($activity->thumbnail),
+                'property = fb:page_id'     => '514 Life',
+                'property = fb:app_id'      => '509584332499899',
+                'property = fb:admins'      => '1910444804523',
+            );
+
+            return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests'));
         }
     }
 

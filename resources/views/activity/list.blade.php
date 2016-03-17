@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('meta')
+    @foreach($meta as $key => $value)
+        <meta {{ $key }} content="{{ $value }}">
+    @endforeach
+    <title>活動列表 - {{$category->name}} - 514 活動頻道</title>
+@endsection
+
 @section('content')
 <div class="blog-category-container">
     <div class="row blog-category-content">

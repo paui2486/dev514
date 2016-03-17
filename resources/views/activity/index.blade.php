@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('meta')
+    @foreach($meta as $key => $value)
+        <meta {{ $key }} content="{{ $value }}">
+    @endforeach
+    <title>514生活頻道 - {{ $activity->title }}</title>
+@endsection
+
 @section('content')
     <div class="act-page-container">
         <div class="act-page-blur" style="background-image:url('{{ asset($activity->thumbnail )}}')">

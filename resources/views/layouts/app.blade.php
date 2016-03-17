@@ -7,7 +7,6 @@
 
     @yield('meta')
 
-    <title>514生活頻道 - 讓生活更有意思</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
@@ -20,7 +19,7 @@
     <link rel="stylesheet" href="{{asset('css/slidebars.css')}}"/>
     <!-- Custom styles for this template -->
     @yield('style')
-    
+
     <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/style-responsive.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/project.css')}}"/>
