@@ -613,6 +613,7 @@ li.collapse-blog-category {
     box-shadow: 0px 0px 5px #ccc;
     height: auto;
     padding: 10px;
+    margin-bottom: 20px;
 }
 
 .Act-category-title {
@@ -660,6 +661,10 @@ li.collapse-blog-category {
 
 .inter-panel-description {
     margin-bottom: 10px;
+}
+
+.inter-panel-info {
+    padding-right:5px;
 }
 
 .word-indent {

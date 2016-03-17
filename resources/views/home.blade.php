@@ -203,6 +203,7 @@
                                 <div class="inter-panel-description new-activity-description word-indent-02">
                                     {{ $activity->description }}
                                 </div>
+                                <div class="inter-panel-info">
                                 <div class="new-activity-price">
                                     <img src="img/pics/money-icon-02.png">
                                     {{ $activity->price }} 元
@@ -211,12 +212,13 @@
                                     <img src="img/pics/calendar-icon-02.png">
                                     {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
                                 </div>
-                                <div class="new-activity-location">
+                                <div class="new-activity-location word-indent-01">
                                     <img src="img/pics/location-icon-02.png">
-                                    {{ $activity->location }}
+                                    <span>{{ $activity->location }}</span>
                                 </div>
                                 <div class="new-activity-orginizer">
                                     --- {{ $activity->orginizer }} ---
+                                </div>
                                 </div>
                             </div>
                        
