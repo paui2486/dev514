@@ -158,7 +158,7 @@ class maincontroller extends controller
                         'activities.location',          'activities.activity_start as date', 'users.nick as orginizer'
                     )
                     ->orderBy('activities.created_at', 'desc')
-                    ->take(3)
+                    ->take(4)
                     ->get();
 
                 $topicActivity = (object) array(
