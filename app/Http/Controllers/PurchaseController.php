@@ -27,30 +27,49 @@ class PurchaseController extends controller
     {
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                      ->leftJoin('users', 'users.id', '=', 'activities.host_id')
                       ->where('categories.name', $category)
                       ->where('activities.title', $title)
                       ->select(array(
-                        'activities.id' ,       'activities.title',           'activities.tag_ids',
-                        'activities.thumbnail', 'activities.description',     'activities.location',
-                        'activities.content',   'activities.activity_start',  'activities.activity_end',
-                        'activities.counter',   'activities.category_id',     'categories.name as category',
-                        'users.name as hoster', 'users.avatar as host_photo', 'users.description as host_destricption'
+                        'activities.id' ,               'activities.title',           'activities.thumbnail',         'activities.description',     'activities.activity_start',  'activities.activity_end',
+                        'activities.category_id',       'activities.remark',          'activities.time_range',
+                        'categories.name as category',  'activities.description',
                       ))
                       ->where('activities.status', '>=', '2')
                       ->first();
 
         if (empty($activity)){
-            return Redirect::to('');
+            return Redirect::back();
         } else {
             $tickets = DB::table('act_tickets')
                         ->where('activity_id', $activity->id)
                         ->select(array(
-                            'id',   'name', 'left_over',  'run_time', 'price',
-                            'ticket_start', 'ticket_end', 'location', 'description'
+                            'id', 'name',   'left_over',  'price', 'location',
+                            'ticket_start', 'ticket_end', 'description',
                         ))
                         ->get();
-            return view('activity.purchase', compact('activity', 'tickets'));
+
+
+            $weekday=['日', '一', '二', '三', '四', '五', '六'];
+            $eventData = array();
+            foreach ($tickets as $key => $ticket) {
+                $data = array(
+                  'date'         => preg_replace("/(.*)\s(.*)/", "$1", $ticket->ticket_start),
+                  'badge'        => true,
+                  'title'        => $ticket->id,
+                  'name'         => $ticket->name,
+                  'price'        => $ticket->price,
+                  'location'     => $ticket->location,
+                  'left_over'    => $ticket->left_over,
+                  'weekday'      => $weekday[date('w', strtotime($activity->activity_start))],
+                  'ticket_start' => $ticket->ticket_start,
+                  'ticket_end'   => $ticket->ticket_end,
+                  'description'  => $ticket->description,
+                );
+                array_push($eventData, $data);
+            }
+
+
+            return view('activity.purchase', compact('activity', 'eventData', 'tickets'));
         }
     }
 
