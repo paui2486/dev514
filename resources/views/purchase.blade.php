@@ -1,23 +1,77 @@
-@extends('layouts.app') 
-
-@section('content')
+@extends('layouts.app')
+ 
+ @section('content')
 <div class="row purchase-content">
-    <div class="purchase-left">
-        <div class="purchase-thumnail" style="background-image:url('/img/pics/activity-photo.jpg')">
+    <div class="purchase-left"  style="background-image:url('/img/pics/purchase-ticket.png')">
+        <div class="purchase-ticket">
+            <p>您的票券</p>
+            <div class="purchase-ticket-title">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>活動時間<span class="glyphicon glyphicon-star" aria-hidden="true"></span><br>
+            </div>
+            2016-04-02<br>
+            13:00~16:00
+                <p class="dashed"></p>
+            <div class="purchase-ticket-title">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>票券名稱<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </div>
+            早鳥優惠票65折 x 1<br>
+                <p class="dashed"></p>
+        
         </div>
-        <p>綠色植物不僅可以綠化空氣，還能給人帶來生氣，很多人都喜歡在家中或者是辦公室里擺放幾盆綠植。</p>
+           
     </div>
     <div class="purchase-right">
-    <img src="/img/pics/514purchase1-02.png">
         <div class="purchase-panel">
-            <div class="purchase-title">辦公室療癒植栽DIY</div>
-            <div class="row" style="margin:10px 0px;">
-            <p>選擇活動時間</p><span class="purchase-line"></span>
+            <div class="purchase-title-1">辦公室療癒植栽DIY</div>
+            <div class="purchase-title-2 row" style="margin:10px 0px;">
+            <p class="col-md-2">填寫聯絡資料</p><span class="col-md-10 purchase-line"></span>
             </div>
-            <div class="row purchase-time">
-                <div class="purchase-calendar">
-                <img src="/img/pics/canlendar-03.png">
+            <div class="row purchase-attention">
+                建議您<a href="#">登入</a>或<a href="#">加入會員</a>，方便日後查詢訂單紀錄。
+            </div>
+            <div class="row purchase-form">
+             <div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <label class="col-md-3 control-label"> <span>*</span>聯絡人姓名</label>
+
+                    <div class="col-md-9">
+                        <input type="text" class="form-control purchase-form-control" name="name" value="{{ old('name') }}" placeholder="建議輸入真實姓名">
+
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                <p>{{ $errors->first('name') }}</p>
+                            </span>
+                        @endif
+                    </div>
                 </div>
+                 <div class="row form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label class="col-md-3 control-label"> <span>*</span>聯絡人手機</label>
+
+                    <div class="col-md-9">
+                        <input type="mobile" class="form-control purchase-form-control" name="mobile" value="{{ old('mobile') }}" placeholder="0932-514-123">
+
+                        @if ($errors->has('mobile'))
+                            <span class="help-block">
+                                <p>{{ $errors->first('mobile') }}</p>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                 <div class="row form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label class="col-md-3 control-label"> <span>*</span>電子郵件</label>
+
+                    <div class="col-md-9">
+                        <input type="email" class="form-control purchase-form-control" name="email" value="{{ old('email') }}" placeholder="mis@514.com.tw">
+
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                <p>{{ $errors->first('email') }}</p>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
+            </div>
+<!--
                 <div class="purchase-choose-time">
                     <h5>您選擇的活動日期</h5>
                     <strong>2016-04-02（六）</strong>
@@ -37,21 +91,14 @@
                         <div class="purchase-surplus">剩123位</div>
                         </div>  
                 </div>
+-->
             </div>
-            <div class="row" style="margin:10px 0px;">
-            <p>選擇票券種類</p><span class="purchase-line"></span>
-                 </div>
-              <div class="row">
-                  <input type="radio" name="gender" value="male" checked>早鳥優惠票65折<br>
-              </div>
-                <div class="row">
-              <input type="radio" name="gender" value="female">雙人超值套票<br></div>
-                    <div class="row">
-              <input type="radio" name="gender" value="other">單人獨享優惠票<br> </div>
-                
-           
-        </div>
-    </div>
+
+       </div>
+  </div>
 </div>
 
-@endsection 
+
+
+
+@endsection
