@@ -636,7 +636,7 @@ li.collapse-blog-category {
 }
 
 .Act-category-title img {
-    width: 150px;
+    height: 40px;
     padding-bottom: 5px;
 }
 
@@ -1423,6 +1423,7 @@ li.collapse-blog-category {
     display: flex;
     box-shadow: 1px 1px 10px #ccc;
     margin-bottom: 20px;
+    min-height: 1000px;
 }
 
 .actpage-title {
