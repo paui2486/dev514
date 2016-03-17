@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('meta')
+    @foreach($meta as $key => $value)
+        <meta {{ $key }} content="{{ $value }}">
+    @endforeach
+    <title>514生活頻道 - {{ $activity->title }}</title>
+@endsection
+
 @section('content')
     <div class="act-page-container">
         <div class="act-page-blur" style="background-image:url('{{ asset($activity->thumbnail )}}')">
@@ -122,7 +129,7 @@
                 <div class="actpage-holder-content">
                     <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
                     </div>
-                    <div class="actpage-holder-name">{{ $activity->hoster }}</div>
+                    <div class="actpage-holder-name">@if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif</div>
                     <div class="actpage-holder-intro word-indent-04">{{ $activity->host_destricption }}</div>
                     <a href="{{ URL('member/'. $activity->hoster ) }}">
                         <div class="actpage-connect">連絡主辦單位</div>
