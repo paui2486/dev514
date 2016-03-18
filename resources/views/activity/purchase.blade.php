@@ -8,17 +8,21 @@
 
 @section('content')
 <div class="row purchase-content">
-    <div class="col-sm-4 purchase-left"><!-- purchase-left 給我重寫！！！ -->
-        <img class="purchase-thumnail" width="100%" src="{{asset('/uploads/avatar/avatar-1458133642.jpg')}}"/>
+<!--
+    <div class="col-sm-4 col-md-3 purchase-left">
+        <img class="purchase-thumnail" width="100%" src="{{asset('/img/pics/activity-photo.jpg')}}"/>
         <p>{{ $activity->description }}</p>
     </div>
-    <div class="col-sm-8 purchase-right"><!-- purchase-right -->
-        <form id="wizard" action="#">
+-->
+    <div class="col-sm-12 col-md-12 purchase-top"><!-- purchase-right -->
+        <form id="wizard" action="#" style="display:none;" >
+            {!! csrf_field() !!}
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <h1>選擇票卷</h1>
             <div class="purchase-panel">
-                <div class="purchase-title">{{ $activity->title }}</div>
+                <div class="purchase-act-title">{{ $activity->title }}</div>
                 <div class="row" style="margin:10px 0px;">
-                    <p>選擇活動時間</p><span class="purchase-line"></span>
+                    <p class="purchase-choose-title  col-md-2">選擇活動時間</p><span class="col-md-10 purchase-line"></span>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -27,21 +31,21 @@
                     <div class="col-md-6">
                         <div class="purchase-choose-time">
                             <h5>您選擇的活動日期</h5><strong></strong>
-                            <h5>您選擇的活動場次</h5>
+                            <h5>您選擇的活動時間</h5>
                             <div class="purchase-time-option"></div>
                         </div>
                     </div>
                 </div>
-                <div id="purchase-detail" class="row">
+                <div id="purchase-detail" class="row purchase-detail">
 
                 </div>
             </div>
 
             <h1>填寫資料</h1>
             <div class="purchase-panel">
-                <div class="purchase-title-1">辦公室療癒植栽DIY</div>
-                <div class="purchase-title-2 row" style="margin:10px 0px;">
-                <p class="col-md-2">填寫聯絡資料</p><span class="col-md-10 purchase-line"></span>
+                <div class="purchase-act-title">{{ $activity->title }}</div>
+                <div class="row" style="margin:10px 0px;">
+                    <p class="purchase-choose-title  col-md-2">填寫聯絡資料</p><span class="col-md-10 purchase-line"></span>
                 </div>
                 <div class="row purchase-attention">
                     建議您<a href="{{url('login')}}">登入</a>或<a href="{{url('register')}}">加入會員</a>，方便日後查詢訂單紀錄。
@@ -70,26 +74,56 @@
 
             <h1>確認訂單</h1>
             <div class="purchase-panel">
-                <label class="col-md-3 control-label"> 訂閱人姓名</label>
-                <div class="col-md-9"></div>
+                <div class="purchase-confirm">
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 活動名稱 </label>
+                        <div class="col-md-9">{{ $activity->title }}</div>
+                    </div>
 
-                <label class="col-md-3 control-label"> 訂閱人電話</label>
-                <div class="col-md-9"></div>
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 活動日期 </label>
+                        <div id="confirm-act-date" class="col-md-9"></div>
+                    </div>
+                    
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 活動時間 </label>
+                        <div id="confirm-act-time" class="col-md-9"></div>
+                    </div>
+                    
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 活動地點 </label>
+                        <div id="confirm-location" class="col-md-9"></div>
+                    </div>
 
-                <label class="col-md-3 control-label"> 訂閱人 email</label>
-                <div class="col-md-9"></div>
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 訂購人姓名</label>
+                        <div id="confirm-name" class="col-md-9"></div>
+                    </div>
 
-                <label class="col-md-3 control-label"> 活動名稱 </label>
-                <div class="col-md-9"></div>
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 訂購人電話</label>
+                        <div id="confirm-mobile" class="col-md-9"></div>
+                    </div>
 
-                <label class="col-md-3 control-label"> 活動時間 </label>
-                <div class="col-md-9"></div>
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 訂購人 email</label>
+                        <div id="confirm-email" class="col-md-9"></div>
+                    </div>
 
-                <label class="col-md-3 control-label"> 票卷費用 </label>
-                <div class="col-md-9"></div>
+                    <div class="row">
+                        <label class="col-md-3 control-label"> 票券內容 </label>
+                        <div class="col-md-9">
+                            <p><span id="confirm-ticket-content"></span> x <span id="confirm-ticket-number"></span> 張 </p>
+                        </div>
+                    </div>
 
-                <label class="col-md-3 control-label"> 票卷詳細 </label>
-                <div class="col-md-9"></div>
+                    <div class="confirm-price-row row">
+                        <label class="col-md-3 control-label"> 總計 </label>
+                         <div class="confirm-price col-md-9">
+                             <p>$<span id="confirm-ticket-price"></span></p>
+                         </div>
+                    </div>
+                </div>
             </div>
 
             <h1>填寫資料</h1>
@@ -99,23 +133,29 @@
 
         </form>
     </div>
+
 </div>
 @endsection
 
 @section('script')
 <script type="text/javascript" src="{{asset('js/jquery.steps.min.js')}}" ></script>
 <script type="text/javascript" src="{{asset('js/zabuto_calendar.min.js')}}" ></script>
+<script type="text/javascript" src="{{asset('js/jquery.validate.min.js')}}" ></script>
+
 <script type="application/javascript">
+
 var eventData = {!! json_encode($eventData) !!};
 
 function getDetail(id) {
-    document.getElementById('purchase-detail').innerHTML = '<p>設定票券張數</p> \
-        <span class="purchase-line"></span></div> \
-        <div class="col-sm-6"><h5>票卷資訊</h5> <div> '+ eventData[id]['description'] +' </div> \
-        <h5>票卷單價</h5> <div> '+ eventData[id]['price'] +' </div> \
-        <h5>活動地點</h5> <div> '+ eventData[id]['location'] +' </div> \
-        </div><div class="col-sm-6"><h5>票卷張數</h5> <input type=numbers onchange="getPrice('+ id +', this.value)"> \
-        <h5>票卷金額</h5> <div id="purchase_result"></div><input id="purchase" name="purchase_result" style="display: none;"> \
+    document.getElementById('purchase-detail').innerHTML = ' \
+        <div class="row" style="margin:10px auto"><p class="purchase-choose-title col-md-2">設定票券張數</p> \
+            <span class="col-md-10 purchase-line"></span></div> \
+        <div class="purchase-detail-info col-sm-8"><p>票券名稱 <span> '+ eventData[id]['description'] +' </span></p> \
+            <p>票券單價 <span> '+ eventData[id]['price'] +' 元</span></p> \
+            <p>活動地點 <span> '+ eventData[id]['location'] +' </span></p></div> \
+        <div class="purchase-detail-result col-sm-4"><h5>票券張數</h5>  \
+            <input id="purchase_number" name="purchase_number" type="number" placeholder="0" onchange="getPrice('+ id +', this.value)" min="1"> \
+            <p>總計 <span>＄</span><span id="purchase_result"></span></p><input id="purchase" name="purchase_result" type="hidden"></div> \
     ';
 }
 
@@ -125,17 +165,81 @@ function getPrice(id, count) {
 }
 
 $(document).ready(function () {
-    var wizard = $("#wizard").steps({
-        // forceMoveForward: false,
-        // saveState: true,
-        // autoFocus: true,
-        // enablePagination: false,
-        // transitionEffect: "slideLeft",
-        // onStepChanged: function (event, current, next) {
-        //     if (current > 0) {
-        //         $("#wizard .actions a[href='#previous']").hide();
-        //     }
-        // },
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('input[name=_token]').attr('content') }
+    });
+    
+    var form = $("#wizard");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+            rules: {
+            }
+    });
+
+    var first_event_day = eventData[0]['date'];
+    getInputRow(first_event_day);
+    
+    form.show();
+
+    var wizard = form.steps({
+        labels: {
+            current:    "current step:",
+            pagination: "Pagination",
+            finish:     "GG",
+            next:       "下一步",
+            previous:   "上一步",
+            loading:    "Loading ...",
+        },
+        onStepChanging: function (event, currentIndex, newIndex)
+        {
+            var number = Number($("#purchase_number").val());
+            var event_id = $('input[name=ticket]:checked').val();
+            if (newIndex === 1)
+            {
+                if (isNaN(number)) {
+                    alert('請選擇活動日期與活動票卷');
+                    return false;
+                } else if (number <= 0) {
+                    alert('請輸入您的正確票卷張數');
+                    return false;
+                }
+            } else if (newIndex === 2) {
+                getPurchaseDetail( event_id );
+            } else if (newIndex === 3) {
+                $.ajax({
+                    url: "{{ url('')}}",
+                    type: "post",
+                    data: {
+                        '_token'          : $('input[name=_token]').val(),
+                        'ticket'          : eventData[event_id]['name'],
+                        'ticket_id'       : eventData[event_id]['title'],
+                        'ticket_date'     : eventData[event_id]['date'],
+                        'ticket_price'    : eventData[event_id]['price'],
+                        'ticket_dest'     : eventData[event_id]['description'],
+                        'user_name'       : $('input[name=name]').val(),
+                        'user_phone'      : $('input[name=mobile]').val(),
+                        'user_email'      : $('input[name=email]').val(),
+                        'purchase_number' : $('input[name=purchase_number]').val(),
+                        'purchase_result' : $('input[name=purchase_result]').val(),
+                    },
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            }
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function (event, currentIndex)
+        {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function (event, currentIndex)
+        {
+            alert("感謝您的購買，您將會體驗到一個美好的活動!");
+            // append result ticket data
+        }
     });
 
     $("#calendar").zabuto_calendar({
@@ -154,28 +258,57 @@ $(document).ready(function () {
 
     function clickDate(id, fromModal) {
         var event_date = $("#" + id).data("date");
+        getInputRow(event_date);
+        return true;
+    }
+    
+    function getInputRow( someday )
+    {
         var inputRow = "";
         var check = null;
         var day_list = ['日', '一', '二', '三', '四', '五', '六'];
-        var weekday = new Date(event_date).getDay();
+        var weekday = new Date(someday).getDay();
         var week_event = ' ('+ day_list[weekday] +')';
+        
         for ( var eventIndex in eventData) {
             var ticket = eventData[eventIndex];
-            if ( ticket['date'] === event_date ) {
-                inputRow += '<div class="row"> \
-                    <input type="radio" name="ticket" id="'+ eventData[eventIndex]['title'] +'" class="time-option" onchange="getDetail('+ eventIndex +');" /> \
-                    <label for="' + eventData[eventIndex]['title'] + '">'+ eventData[eventIndex]['name'] + '</label> \
-                    <div class="purchase-surplus">剩 ' +  eventData[eventIndex]['left_over'] + ' 位</div></div>';
+            if ( ticket['date'] === someday ) {
+                 inputRow += '<div class="row time-option-panel"> \
+                    <input type="radio" name="ticket" id="'+ eventData[eventIndex]['title'] +'" value="'+ eventIndex +'" class="time-option" onchange="getDetail('+ eventIndex +'); " /> \
+                    <label class="col-md-8" for="' + eventData[eventIndex]['title'] + '"><p>'+ eventData[eventIndex]['name'] + '</p></label> \
+                    <div class="col-md-3 purchase-surplus">剩 ' +  eventData[eventIndex]['left_over'] + ' 位</div></div>';
                 check = true;
             }
         }
         if (!check) {
             document.getElementById('purchase-detail').innerHTML = "" ;
         }
-        $(".purchase-choose-time").find("strong").text(event_date + week_event);
+        $(".purchase-choose-time").find("strong").text(someday + week_event);
         $(".purchase-time-option").html(inputRow);
-        return true;
+    }
+    
+    function getPurchaseDetail( event_id )
+    {
+        $("#confirm-act-date").text(eventData[event_id]['date']);
+        $("#confirm-act-time").text(eventData[event_id]['name']);
+        $("#confirm-name").text($('input[name=name]').val());
+        $("#confirm-location").text(eventData[event_id]['location']);
+        $("#confirm-mobile").text($('input[name=mobile]').val());
+        $("#confirm-email").text($('input[name=email]').val());
+        $("#confirm-ticket-content").text(eventData[event_id]['description']);
+        $("#confirm-ticket-number").text($('input[name=purchase_number]').val());
+        $("#confirm-ticket-price").text(eventData[event_id]['price']);
+//        'ticket'          : eventData[event_id]['name'],
+//        'ticket_id'       : eventData[event_id]['title'],
+//        'ticket_date'     : eventData[event_id]['date'],
+//        'ticket_price'    : eventData[event_id]['price'],
+//        'ticket_dest'     : eventData[event_id]['description'],
+//        'user_name'       : $('input[name=name]').val(),
+//        'user_phone'      : $('input[name=mobile]').val(),
+//        'user_email'      : $('input[name=email]').val(),
+//        'purchase_number' :
     }
 });
 </script>
+
 @endsection
