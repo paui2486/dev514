@@ -1699,45 +1699,57 @@ li.collapse-blog-category {
     padding: 20px;
 }
 
-.purchase-left,
-.purchase-right {
-    float: left;
-    margin: 0px 10px;
-}
+li.current > a{
+    background-color: #00bcd4;
+} 
 
+/*
 .purchase-left {
-    width: 25%;
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: top;
-    height: 500px;
+}
+*/
+
+div.zabuto_calendar .table {
+    font-size: 16px;
 }
 
-.purchase-right {
-    width: 70%;
+.wizard > .content {
+    background:white;
+    border:none; 
+    -webkit-border-radius: 10px;
+    -moz-border-radius:10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px #ccc;
+    margin-top: 15px;
+}
+
+.calendar-dow {
+    height: 50px;
+}
+
+.badge-today {
+    font-size: 16px;
+    padding: 6px;
+}
+
+.wizard > .steps .current a {
+    background-color:#00bcd4 !important;
 }
 
 .purchase-panel {
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 1px 1px 10px #ccc;
+    position: inherit !important;
+    width: 100% !important;
+    padding: 0px 30px;
 }
 
-.purchase-title-1 {
+.purchase-act-title {
     font-size: 20px;
+    color: #736357;
 }
-.purchase-attention {
-    background-color: rgba(102,204,204,0.3);
-    margin: 5px 0px;
-    line-height: 30px;
-    padding:15px 20px;
-    font-size: 16px;
-}
-.purchase-attention a {
-    color: #f37e7e;
-}
-.purchase-title-2 p {
+
+.purchase-choose-title {
     color: #998675;
     font-size: 14px;
     border: 1px solid #998675;
@@ -1750,7 +1762,23 @@ li.collapse-blog-category {
 .purchase-line {
     float: left;
     border-bottom: 1px solid #998675;
-    padding-top: 17px;
+    padding-top: 16px;
+}
+
+.time-option-panel {
+    margin: 0px;
+}
+
+.purchase-attention {
+    background-color: rgba(102,204,204,0.3);
+    margin: 5px 0px;
+    line-height: 30px;
+    padding:15px 20px;
+    font-size: 16px;
+}
+
+.purchase-attention a {
+    color: #f37e7e;
 }
 
 .purchase-time {
@@ -1802,15 +1830,6 @@ li.collapse-blog-category {
     margin: 15px auto;
 }
 
-.purchase-calendar,
-.purchase-choose-time {
-    float: left;
-}
-
-.purchase-calendar img {
-    width: 300px;
-}
-
 .purchase-choose-time {
     padding: 0px 20px;
 }
@@ -1821,23 +1840,19 @@ li.collapse-blog-category {
 }
 
 .purchase-surplus {
-    margin:5px;
+    margin: 4px 15px;
     background-color: #00bcd4;
     border-radius: 10px;
     padding: 5px 10px;
     color: white;
     font-size: 12px;
+    text-align: center;
+    width: 80px;
 }
 
-.purchase-surplus,
-.purchase-time-option {
-    float: left;
-}
-
-.purchase-time-option label {
-  width: 200px;
-  border-radius: 3px;
-  border: 1px solid #D1D3D4;
+.purchase-time-option label p {
+    font-size: 14px;
+    margin-bottom: 6px;
 }
 
 /* hide input */
@@ -1849,14 +1864,16 @@ li.collapse-blog-category {
 .purchase-time-option input.time-option:empty ~ label {
 	position: relative;
 	float: left;
-	line-height:37px;
-    margin-bottom: 20px;
+	line-height:20px;;
+    margin-bottom: 10px;
 	text-indent: 3.25em;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+    border: 1px solid #D1D3D4;
+    border-radius: 10px;
 }
 
 .purchase-time-option input.time-option:empty ~ label:before {
@@ -1866,32 +1883,133 @@ li.collapse-blog-category {
 	bottom: 0;
 	left: 0;
 	content: '';
-	width: 2.5em;
+	width:40px;
 	background: #D1D3D4;
-	border-radius: 3px 0 0 3px;
+	border-radius:10px 0 0 10px;
 }
 
 /* toggle hover */
 .purchase-time-option input.time-option:hover:not(:checked) ~ label:before {
 	content:'\2714';
-	text-indent: .9em;
-	color: #C2C2C2;
+	text-indent: 15px;
+    padding-top: 6px;
+	color: #666666;
 }
 
 .purchase-time-option input.time-option:hover:not(:checked) ~ label {
-	color: #888;
+	color:#666666;
 }
 
 /* toggle on */
 .purchase-time-option input.time-option:checked ~ label:before {
 	content:'\2714';
-	text-indent: .9em;
+	text-indent: 15px;
+    padding-top: 6px;
 	color: #f2c4c4;
 	background-color: #f37e7e;
+    border: 1px solid #f37e7e;
 }
 
 .purchase-time-option input.time-option:checked ~ label {
 	color: #f37e7e;
+    border: 1px solid #f37e7e;
+}
+
+.purchase-detail {
+    margin: 15px auto;
+}
+
+.purchase-detail-info p {
+    font-size: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #b3b3b3;
+}
+
+.purchase-detail-info p > span {
+    font-size: 16px;
+    margin-left: 15px;
+    color: #736357;
+}
+
+.purchase-detail-result {
+    text-align: center;
+}
+
+.purchase-detail-result input {
+    width: 50%;
+    border-radius: 8px;
+    text-align: center;
+    margin: auto;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.purchase-detail-result p {
+    padding-top: 10px;
+    text-align: right;
+    font-size: 16px;
+    border-top: 1px solid #e6e6e6;
+    width: 70%;
+    margin: 20px auto;
+} 
+
+.purchase-detail-result span {
+    font-size: 20px;
+    color: #f37e7e;
+}
+
+.wizard > .actions a {
+    background-color: #00bcd4;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.wizard > .actions a:hover {
+    background-color: #02a1ad;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.wizard > .actions {
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.purchase-confirm {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.purchase-confirm > div {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #8e8e8e;
+    padding-top: 5px;
+}
+
+.purchase-confirm > div >label {
+    font-size: 14px;
+}
+
+.purchase-confirm > div >div {
+    font-size: 15px;
+    color: #736357;
+}
+
+.confirm-price-row {
+    border-bottom: none !important;
+    text-align: right;
+    width: 45%;
+    float: right;
+}
+
+.confirm-price p {
+    margin: 0px;
+    font-size: 24px;
+    color: #f37e7e;
 }
 
 .ticket-info {
