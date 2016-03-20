@@ -29,7 +29,7 @@ class TicketController extends Controller
         } else {
             $act_info = DB::table('activities')
                           ->where('id', $id)
-                          ->where('host_id', Auth::id())
+                          ->where('hoster_id', Auth::id())
                           ->first();
             if (empty($act_info)) {
                 return Redirect::to('/');
@@ -50,7 +50,7 @@ class TicketController extends Controller
         if ( empty($act_info) ) {
             return Redirect::to('/');
         } else {
-            if ( Auth::user()->adminer || $act_info->host_id === Auth::id() ) {
+            if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
                 return view('admin.ticket.create_edit', compact('id', 'act_info'));
             } else {
                 return Redirect::to('/');
@@ -69,7 +69,7 @@ class TicketController extends Controller
         if ( empty($act_info) ) {
             return Redirect::to('/');
         } else {
-            if ( Auth::user()->adminer || $act_info->host_id === Auth::id() ) {
+            if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
                 $sale_range   = array();
                 $event_range  = array();
                 preg_match("/(.*)\s-\s(.*)/", $request->sale_time,  $sale_range);
@@ -109,7 +109,7 @@ class TicketController extends Controller
         if ( empty($act_info) ) {
             return Redirect::to('/');
         } else {
-            if ( Auth::user()->adminer || $act_info->host_id === Auth::id() ) {
+            if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
                 $ticket = DB::table('act_tickets')->find($ticket_id);
                 return view('admin.ticket.create_edit', compact('id', 'act_info', 'ticket'));
             } else {
@@ -141,7 +141,7 @@ class TicketController extends Controller
         if ( empty($act_info) ) {
             return Redirect::to('/');
         } else {
-            if ( Auth::user()->adminer || $act_info->host_id === Auth::id() ) {
+            if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
                 $sale_range   = array();
                 $event_range  = array();
                 preg_match("/(.*)\s-\s(.*)/", $request->sale_time,  $sale_range);

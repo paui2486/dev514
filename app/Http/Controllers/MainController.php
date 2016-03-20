@@ -186,7 +186,7 @@ class maincontroller extends controller
     {
         $newActivity = DB::table('activities')
                         ->where('activities.status', '>=', 2)
-                        ->leftJoin('users',                 'users.id',      '=',   'activities.host_id')
+                        ->leftJoin('users',                 'users.id',      '=',   'activities.hoster_id')
                         ->leftJoin('act_tickets',           'activities.id', '=',   'act_tickets.activity_id')
                         ->leftJoin('categories',            'categories.id', '=',   'activities.category_id')
                         ->select(
@@ -223,7 +223,7 @@ class maincontroller extends controller
                 $eachActivity = DB::table('activities')
                     ->where('activities.status', '>=', 2)
                     ->where('activities.category_id', $category->id)
-                    ->leftJoin('users', 'users.id', '=', 'activities.host_id')
+                    ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                     ->select(
                         'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
                         'activities.description',       'activities.counter as count',       'activities.min_price as price',

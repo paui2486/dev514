@@ -51,7 +51,7 @@ class ActivityController extends Controller
             return Redirect::to('blog');
         } else {
             $activity_list = DB::table('activities')
-                          ->rightJoin('users', 'users.id', '=', 'activities.host_id')
+                          ->rightJoin('users', 'users.id', '=', 'activities.hoster_id')
                           ->select(array(
                             'activities.id',  'activities.title',   'activities.thumbnail',
                             'users.name as author', 'activities.description', 'activities.created_at',
@@ -97,7 +97,7 @@ class ActivityController extends Controller
     {
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                      ->leftJoin('users', 'users.id', '=', 'activities.host_id')
+                      ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                       ->where('categories.name', $category)
                       ->where('activities.title', $title)
                       ->select(array(
