@@ -121,7 +121,7 @@ li.blog-right-text a {
 .navbar-blog-category {
     position: absolute;
     top: 21px;
-    left: 35%;
+    left:25%;
 }
 
 li.collapse-blog-category {
@@ -1913,6 +1913,7 @@ div.zabuto_calendar .table {
 .purchase-time-option input.time-option:checked ~ label {
 	color: #f37e7e;
     border: 1px solid #f37e7e;
+    height: 35px;
 }
 
 .purchase-detail {
