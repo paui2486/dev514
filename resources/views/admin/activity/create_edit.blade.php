@@ -84,17 +84,17 @@
                             </div>
                         </div>
                         @if (Auth::user()->adminer)
-                        <div class="form-group {{{ $errors->has('host_id') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('hoster_id') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="host_id">
+                                <label class="control-label col-sm-2" for="hoster_id">
                                     活動主辦
                                 </label>
                                 <div class="col-sm-10">
-                                    <select style="width: 100%" name="host_id" id="host_id" class="form-control">
+                                    <select style="width: 100%" name="hoster_id" id="hoster_id" class="form-control">
                                     @foreach($hosters as $hoster)
                                         <option value="{{$hoster->id}}"
                                         @if(!empty($activitys))
-                                            @if($activitys->host_id==$hoster->id)
+                                            @if($activitys->hoster_id==$hoster->id)
                                         selected="selected"
                                             @endif
                                         @endif >{{$hoster->name}}

@@ -87,10 +87,10 @@ class ActivityController extends Controller
 
         if( Auth::user()->adminer )
         {
-            $storeArray['host_id'] = $request->host_id;
+            $storeArray['hoster_id'] = $request->hoster_id;
             $storeArray['counter'] = $request->counter;
         } else {
-            $storeArray['host_id'] = Auth::id();
+            $storeArray['hoster_id'] = Auth::id();
         }
 
         $activity_id        = DB::table('activities')->insertGetId($storeArray);
@@ -154,7 +154,7 @@ class ActivityController extends Controller
         } else {
             $activity = DB::table('activities')
                           ->where('id', $id)
-                          ->where('host_id', Auth::id())
+                          ->where('hoster_id', Auth::id())
                           ->first();
 
             if ( empty($activity) ) {
@@ -211,10 +211,10 @@ class ActivityController extends Controller
 
         if( Auth::user()->adminer )
         {
-            $storeArray['host_id'] = $request->host_id;
+            $storeArray['hoster_id'] = $request->hoster_id;
             $storeArray['counter'] = $request->counter;
         } else {
-            $storeArray['host_id'] = Auth::id();
+            $storeArray['hoster_id'] = Auth::id();
         }
 
         $activity_id        = $id;
@@ -266,7 +266,7 @@ class ActivityController extends Controller
     {
         if (Auth::user()->adminer){
             $activities = DB::table('activities')
-                        ->leftJoin('users',      'activities.host_id',     '=', 'users.id')
+                        ->leftJoin('users',      'activities.hoster_id',     '=', 'users.id')
                         ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                         ->select(array(
                           'activities.id',       'users.name',             'categories.name as category',
@@ -274,7 +274,7 @@ class ActivityController extends Controller
                         ->orderBy('activities.created_at', 'ASC');
         } else {
             $activities = DB::table('activities')
-                        ->leftJoin('users',      'activities.host_id',     '=', 'users.id')
+                        ->leftJoin('users',      'activities.hoster_id',     '=', 'users.id')
                         ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                         ->select(array(
                           'activities.id',       'users.name',             'categories.name as category',

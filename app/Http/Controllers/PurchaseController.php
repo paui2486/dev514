@@ -82,7 +82,7 @@ class PurchaseController extends controller
                     ->where('act_tickets.left_over', '>=', $request->purchase_number)
                     ->select(array(
                       'act_tickets.id', 'act_tickets.price', 'act_tickets.left_over', 'act_tickets.name',  'act_tickets.activity_id',
-                      'activities.title', 'activities.host_id', 'activities.location', 'activities.remark'
+                      'activities.title', 'activities.hoster_id', 'activities.location', 'activities.remark'
                     ))
                     ->first();
 
@@ -150,7 +150,7 @@ class PurchaseController extends controller
                             'user_id'         => Auth::id(),
                             'user_email'      => $request->email,
                             'user_phone'      => $request->mobile,
-                            'hoster_id'       => $ticket->host_id,
+                            'hoster_id'       => $ticket->hoster_id,
                             'activity_id'     => $ticket->activity_id,
                             'activity_name'   => $ticket->title,
                             'ticket_id'       => $ticket->id,
