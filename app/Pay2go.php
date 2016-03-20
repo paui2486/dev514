@@ -69,7 +69,7 @@ class Pay2go {
             //  自動送出時, 會自動清除 $submitButtonStyle
             $submitButtonStyle = ($autoSubmit == TRUE) ? "" : $submitButtonStyle;
 
-            $form   =   "<form action='".$this->form_url($isTest)."' method='POST' id='Pay2goMPGForm' name='Pay2goMPGForm'>";
+            $form   =   "<form action='".$this->form_url($isTest)."' method='POST' id='Pay2goMPGForm' name='Pay2goMPGForm' accept-charset='utf-8' >";
 
             //  MPG 參數
             if (!empty($paymentParams) && is_array($paymentParams)) {

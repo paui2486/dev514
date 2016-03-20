@@ -46,7 +46,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('MediaReport'    , 'PageController@media-report' );
     Route::get('Partner'        , 'PageController@partner'      );
 
-    Route::get('pay2go/callback', 'MainController@test2');
+    Route::post('pay2go/callback', 'MainController@test2');
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
@@ -60,6 +60,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     Route::get('purchase'                   , 'ActivityController@purchase'      );
+    Route::get('purchase/result'           , 'MainController@test2'  );
+    Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
     Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
     Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
 

@@ -26,15 +26,17 @@ class maincontroller extends controller
                     ->first();
 
         if (empty($ticket)) {
-            return Response::json(Array(
-              'code'    => 403,
+          //  return some view about error message
+            $result = Response::json(Array(
+              'code'    => 402,
               'message' => 'Tickets is not enough!',
-            ), 403);
+            ), 402);
+            return $result;
         } else {
             $Pay2go     = new Pay2go();
-            $merID      = env('Pay2go_ID', '11606075');
+            $merID      = env('Pay2go_ID',  11606075);
             $merKey     = env('Pay2go_Key', "7CPtmx1zm86jpLfWndymKbPmlyqP7oye");
-            $merIV      = env('Pay2go_IV', "1oInVJXhR3BhOQeb");
+            $merIV      = env('Pay2go_IV',  "1oInVJXhR3BhOQeb");
             $autoSubmit = TRUE;
             $title      = urldecode($request->segment(3));
             $ticketInfo = $request->activity . " - " . $ticket->name . " x " . $request->purchase_number;
@@ -48,7 +50,9 @@ class maincontroller extends controller
                                 "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
                                 "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                 'Email'             =>  $request->user_email,
-                                'OrderComment'      =>  'test comment'
+                                'OrderComment'      =>  'test comment',
+                                'BARCODE'           =>  '1',
+                                'ReturnURL'         =>  url('purchase/result'),
                                 // "NotifyURL"         =>  url('pay2go/callback'),
                             );
 
@@ -66,7 +70,15 @@ class maincontroller extends controller
 
     public function test2()
     {
-        return Response::json(Input::all());
+        $result_sample = array (
+          'Status' => 'SUCCESS',
+          'Message' => '授權成功',
+          'Result' => '{"MerchantID":"11606075","Amt":100,"TradeNo":"16032012483184990","MerchantOrderNo":"20160320044815","RespondType":"JSON","CheckCode":"797C09DDCEB509036BC938CEC607F8F41267AD26A7BDFAB208AB597D95A66A1B","IP":"220.137.4.149","EscrowBank":"KGI","ItemDesc":"\\u842c\\u8056\\u4e4b\\u591c -  x 1","IsLogin":false,"PaymentType":"CREDIT","PayTime":"2016-03-20 12:48:31","RespondCode":"00","Auth":"930637","Card6No":"400022","Card4No":"2222","Exp":"1903","TokenUseStatus":0,"InstFirst":100,"InstEach":0,"Inst":0,"ECI":""}',
+        );
+
+        $result = json_decode($result_sample['Result']);
+        // return Response::json(Input::all());
+        return Response::json($result);
     }
 
     public function index()

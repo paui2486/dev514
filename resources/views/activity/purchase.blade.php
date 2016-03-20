@@ -15,7 +15,7 @@
     </div>
 -->
     <div class="col-sm-12 col-md-12 purchase-top"><!-- purchase-right -->
-        <form id="wizard" action="#" style="display:none;" >
+        <form id="wizard" action="{{ url('') }}" style="display:none;" method='POST'>
             {!! csrf_field() !!}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <h1>選擇票卷</h1>
@@ -125,12 +125,6 @@
                     </div>
                 </div>
             </div>
-
-            <h1>填寫資料</h1>
-            <div class="purchase-panel">
-              result
-            </div>
-
         </form>
     </div>
 
@@ -176,16 +170,24 @@ $(document).ready(function () {
             }
     });
 
+    $.fn.addHidden = function (name, value) {
+        return this.each(function () {
+            var input = $("<input>").attr("type", "hidden").attr("name", name).val(value);
+            form.append(input);
+        });
+    };
+
     var first_event_day = eventData[0]['date'];
     getInputRow(first_event_day);
 
     form.show();
 
     var wizard = form.steps({
+
         labels: {
             current:    "current step:",
             pagination: "Pagination",
-            finish:     "GG",
+            finish:     "確認送出",
             next:       "下一步",
             previous:   "上一步",
             loading:    "Loading ...",
@@ -205,35 +207,6 @@ $(document).ready(function () {
                 }
             } else if (newIndex === 2) {
                 getPurchaseDetail( event_id );
-            } else if (newIndex === 3) {
-                $.ajax({
-                    url: "{{ url('')}}",
-                    type: "post",
-                    data: {
-                        '_token'          : $('input[name=_token]').val(),
-                        'activity'        : "{{ $activity->title }}",
-                        'ticket'          : eventData[event_id]['name'],
-                        'ticket_id'       : eventData[event_id]['title'],
-                        'ticket_date'     : eventData[event_id]['date'],
-                        'ticket_price'    : eventData[event_id]['price'],
-                        'ticket_dest'     : eventData[event_id]['description'],
-                        'user_name'       : $('input[name=name]').val(),
-                        'user_phone'      : $('input[name=mobile]').val(),
-                        'user_email'      : $('input[name=email]').val(),
-                        'purchase_number' : $('input[name=purchase_number]').val(),
-                        'purchase_result' : $('input[name=purchase_result]').val(),
-                    },
-                    success: function(pay2go) {
-                        console.log(pay2go);
-                        var newWindows = window.open("about:blank", "new window", "width=600, height=600");
-                        // $(newWindows.document.body).html(pay2go);
-                        newWindows.document.write('<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head></body>'+pay2go+'</body></html>');
-                    },
-                    error: function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        console.log("Error: "+ err.Message);
-                    }
-                });
             }
             form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
@@ -245,8 +218,13 @@ $(document).ready(function () {
         },
         onFinished: function (event, currentIndex)
         {
-            alert("感謝您的購買，您將會體驗到一個美好的活動!");
-            // append result ticket data
+            var event_id = $('input[name=ticket]:checked').val();
+            form.addHidden('activity',      '{{ $activity->title }}')
+                .addHidden('ticket_id',     eventData[event_id]['title'])
+                .addHidden('ticket_date',   eventData[event_id]['date'])
+                .addHidden('ticket_price',  eventData[event_id]['price'])
+                .addHidden('ticket_dest',   eventData[event_id]['description'])
+                .submit();
         }
     });
 
