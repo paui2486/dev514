@@ -541,6 +541,10 @@ li.collapse-blog-category {
     box-shadow: 3px 3px 10px #666666;
 }
 
+.new-activity-right {
+    padding-right: 10px;
+}
+
 .new-activity-count {
     width: auto;
     position: absolute;
@@ -573,7 +577,7 @@ li.collapse-blog-category {
     font-size: 16px;
     color:#666666;
     padding-left:15px;
-    width: 95%;
+    width: 100%;
 }
 
 .new-activity-price img,
@@ -713,6 +717,18 @@ li.collapse-blog-category {
     line-height:1.5em;
     /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
     height:6em;
+}
+
+.word-indent-newact {
+    overflow : hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient: vertical;
+    position:relative;
+    line-height:1.5em;
+    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
+    height:1.6em;
 }
 
 /*footer*/
@@ -1446,7 +1462,7 @@ li.collapse-blog-category {
     float: right;
     margin-left: 30px;
     position: absolute;
-    top: 520px;
+    top: 535px;
     border-radius: 5px;
 }
 
@@ -1473,7 +1489,8 @@ li.collapse-blog-category {
 
 .actpage-cart-content {
     padding: 15px;
-    background-color:rgba(0,0,0,0.8);
+    background-color:rgba(102,204,204,0.3);
+    box-shadow:0px 2px 5px #666;
 }
 
 .actpage-introduce,
@@ -1513,7 +1530,8 @@ li.collapse-blog-category {
     padding:10px 0px;
     text-align: center;
     margin: 0px;
-    background-color: black;
+    background-color:rgba(0,188,212,1);
+    box-shadow: 0px 0px 5px #666;
     border-top-left-radius:5px;
     border-top-right-radius:5px;
 }
@@ -1522,6 +1540,17 @@ li.collapse-blog-category {
     margin: 10px 0px;
 }
 
+.actpage-cart-location {
+    width: 245px;
+    overflow : hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:1;
+    -webkit-box-orient: vertical;
+    position:relative;
+    line-height:1.5em;
+    height:1.5em;
+}
 .actpage-last-block{
     border-bottom: 1px solid #666;
     margin-bottom: 20px;
@@ -1534,7 +1563,7 @@ li.collapse-blog-category {
 }
 
 .actpage-cart-info > div > p {
-    color: #ccc;
+    color: #736357;
     font-size: 15px;
     line-height: 24px;
     float: left;
@@ -1551,18 +1580,21 @@ li.collapse-blog-category {
 
 .cart-time-info {
     padding: 5px;
-    border: 1px solid #a5c9d6;
     margin: 5px;
     margin-bottom: 15px;
     border-radius: 10px;
 }
 
 .actpage-cart-time {
-    color: #c4e9f7;
+    color: #00bcd4;
     font-size: 15px;
     text-align: center;
-    width: 73%;
+    width: 70%;
     float: left;
+    border: 1px solid rgba(0,188,212,0.4);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 14px;
 }
 
 .actpage-cart-time > div > p {
@@ -1570,29 +1602,30 @@ li.collapse-blog-category {
 }
 
 .actpage-surplus {
-    width: 27%;
+    width: 30%;
     float: left;
     font-size: 12px;
     margin-top: 26px;
     padding-left: 5px;
+    text-align: center;
 }
 
 .actpage-surplus span {
-    color:#000;
+    color:#fff;
     background-color:#00bcd4;
-    padding: 5px; 
+    padding:5px 8px; 
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .actpage-cart-timelength {
     float: left;
     margin: 0px 10px;
     font-size: 15px;
-    color: #333333;
-    background-color: rgba(255,255,255,0.8);
-    padding: 0px 10px;
-    border-radius: 5px;
+    color:#fff;
+    background-color:#736357;
+    padding: 3px 10px;
+    border-radius: 10px;
 }
 
 .actpage-cart-content > span img {
