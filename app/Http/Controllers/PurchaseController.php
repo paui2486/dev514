@@ -165,9 +165,62 @@ class PurchaseController extends controller
 
     public function postByPay2Go(Request $request)
     {
+        if( $request->Status != "SUCCESS" ) {
+            Log::error('交易失敗');
+            Log::info(Response::json(Input::all()));
+            return Redirect::to('/');
+        } else {
+            $result = json_decode($request->Result,true);
+        }
 
+        $updateArray = array(
+            'TradeNo'         => $result->TradeNo,
+            'MerchantOrderNo' => $result->MerchantOrderNo,
+            'CheckCode'       => $result->CheckCode,
+            'EscrowBank'      => $reuslt->EscrowBank,
+            'Card6No'         => $result->Card6No,
+            'Card4No'         => $result->Card4No,
+            'InstFirst'       => $result->InstFirst,
+            'InstEach'        => $result->InstEach,
+            'Inst'            => $result->Inst,
+            'IP'              => $result->IP,
+            'PayTime'         => $result->PayTime,
+            'OrderResult'     => $result,
+            'updated_at'      => date("Y-m-d H:i:s"),
+        );
 
-        Log::error(Input::all());
-        return true;
+        $info = DB::table('orders')
+                  ->leftJoin('users', 'orders.user_id', '=', 'users.id')
+                  ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
+                  ->leftJoin('act_tickets', 'orders.ticket_id',   '=', 'act_tickets.id')
+                  ->select(array(
+                      'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice',
+                      'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location',
+                      'act_tickets.name as ticket_name',  'act_tickets.ticket_start', 'act_tickets.ticket_end', 'orders.ticket_id'
+                  ))
+                  ->where('MerchantOrderNo', $result->MerchantOrderNo)
+                  ->first();
+
+        DB::table('orders')->where('id', $info->id)->update($updateArray);
+        // 需要再設計交易失敗回流機制
+        DB::table('act_tickets')->where('id', $info->ticket_id)->decrement('left_over');
+
+        $ticket = array(
+            'TradeNo'           => $result->TradeNo,
+            'TradeTime'         => $result->PayTime,
+            'TotalPrice'        => $result->Amt,
+            'user_name'         => $info->user_name,
+            'user_phone'        => $info->users_phone,
+            'user_email'        => $info->user_email,
+            'activity_name'     => $info->activity_name,
+            'activity_location' => $info->activity_location,
+            'ticket_name'       => $info->ticket_name,
+            'ticket_number'     => $info->ticket_number,
+            'ticket_day'        => preg_replace("/(.*)\s(.*):\d+/", "$1", $info->ticket_start),
+            'ticket_start'      => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_start),
+            'ticket_end'        => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_end),
+        );
+
+        return view('activity.ticket', compact('ticket'));
     }
 }
