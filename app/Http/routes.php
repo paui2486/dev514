@@ -60,10 +60,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     Route::get('purchase'                   , 'ActivityController@purchase'      );
-    Route::get('purchase/result'           , 'MainController@test2'  );
+    Route::get('purchase/result'            , 'MainController@test2'  );
     Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
     Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
     Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
+    Route::get('result'                     , 'PurchaseController@result'  );
 
     Route::get('blog'                       , 'ArticleController@index'          );
     Route::get('blog/{category}'            , 'ArticleController@showCategory'   );
