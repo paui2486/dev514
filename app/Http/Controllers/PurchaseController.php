@@ -165,12 +165,27 @@ class PurchaseController extends controller
 
     public function postByPay2Go(Request $request)
     {
+        $result = (object) json_decode($request->Result,true);
         if( $request->Status != "SUCCESS" ) {
             Log::error('交易失敗');
             Log::info(Response::json(Input::all()));
+            $updateArray = array(
+              'status' => 2,
+            );
+
+            $target = DB::table('orders')
+              ->where('MerchantOrderNo', $result->MerchantOrderNo)
+              ->get();
+
+            DB::table('orders')
+              ->where('id', $target->id)
+              ->update($updateArray);
+
+            DB::table('act_tickets')
+              ->where('id', $target->ticket_id)
+              ->increment('left_over', $target->ticket_number);
+
             return Redirect::to('/');
-        } else {
-            $result = (object) json_decode($request->Result,true);
         }
 
         $updateArray = array(
@@ -185,6 +200,7 @@ class PurchaseController extends controller
             'Inst'            => $result->Inst,
             'IP'              => $result->IP,
             'PayTime'         => $result->PayTime,
+            'status'          => 1,
             'OrderResult'     => json_encode($result),
             'updated_at'      => date("Y-m-d H:i:s"),
         );
@@ -210,7 +226,7 @@ class PurchaseController extends controller
             'TradeTime'         => $result->PayTime,
             'TotalPrice'        => $result->Amt,
             'user_name'         => $info->user_name,
-            'user_phone'        => $info->users_phone,
+            'user_phone'        => $info->user_phone,
             'user_email'        => $info->user_email,
             'activity_name'     => $info->activity_name,
             'activity_location' => $info->activity_location,
