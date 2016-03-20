@@ -16,23 +16,23 @@
                 <div class="funtion-intro">
                     <p>功能介紹</p>
                     <div class="funtion-intro-content">
-                        <a href="FAQ"><li>常見問題</li></a>
-                        <a href="HostGuide"><li>如何舉辦活動</li></a>
-                        <a href="PlayGuide"><li>如何報名活動</li></a>
-                        <a href="PointUse"><li>如何使用點數</li></a>
+                        <a href="/FAQ"><li>常見問題</li></a>
+                        <a href="/HostGuide"><li>如何舉辦活動</li></a>
+                        <a href="/PlayGuide"><li>如何報名活動</li></a>
+                        <a href="/PointUse"><li>如何使用點數</li></a>
                     </div>
                 </div>
                 <div class="about-us">
                     <p>關於我們</p>
                     <div class="about-us-content">
-                        <a href="About"><li>關於 514</li></a>
-                        <a href="Join"><li>加入我們</li></a>
-                        <a href="Advertising"><li>廣告/合作專區</li></a>
+                        <a href="/About"><li>關於 514</li></a>
+                        <a href="/Join"><li>加入我們</li></a>
+                        <a href="/Advertising"><li>廣告/合作專區</li></a>
 <!--
                         <li>媒體報導</li>
                         <li>合作夥伴</li>
 -->
-                        <a href="Privacy"><li>服務與隱私權條款</li></a>
+                        <a href="/Privacy"><li>服務與隱私權條款</li></a>
                     </div>
                 </div>
                 <div class="contact-us">
