@@ -131,11 +131,11 @@
                             </div>
                             </a>
                             <div class="new-activity-right">
-                                 <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
+                                
                                 <div class="new-activity-title">
-                                    {{ $newActivity->title }}
+                                     <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">{{ $newActivity->title }} </a>
                                 </div>
-                                </a>
+                               
                                 <div class="new-activity-count">
                                     <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                                 </div>
@@ -194,7 +194,7 @@
                                     {{ $activity->activity_id }}
                                 </div>
                                 <div class="new-activity-title">
-                                    {{ $activity->title }}
+                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">{{ $activity->title }}</a>
                                 </div>
                                  </a>
                                 <div class="new-activity-count inter-panel-count">
