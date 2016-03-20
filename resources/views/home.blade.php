@@ -150,7 +150,7 @@
                                     <img src="img/pics/calendar-icon-02.png">
                                     {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                                 </div>
-                                <div class="new-activity-location">
+                                <div class="new-activity-location word-indent-newact ">
                                     <img src="img/pics/location-icon-02.png">
                                     {{ $newActivity->location }}
                                 </div>
@@ -212,7 +212,7 @@
                                     <img src="img/pics/calendar-icon-02.png">
                                     {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
                                 </div>
-                                <div class="new-activity-location word-indent-01">
+                                <div class="new-activity-location word-indent-newact ">
                                     <img src="img/pics/location-icon-02.png">
                                     <span>{{ $activity->location }}</span>
                                 </div>
