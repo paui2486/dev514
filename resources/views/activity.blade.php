@@ -77,12 +77,12 @@
                         </div>
                         <div class="row cart-time-info">
                             <div class="actpage-cart-time">
-                                <div class="actpage-cart-time01">
+                                <div>
                                     <p>2016-04-29（五）  <span>13:00</span> 
                                     </p>
                                 </div>
                                 <div>～</div>
-                                <div class="actpage-cart-time02">
+                                <div>
                                     <p>2016-04-30（六）<span>15:00</span> 
                                     </p>
                                 </div>
@@ -127,7 +127,7 @@
                     <div class="actpage-cart-info">
                         <div class="row" style="margin:0px;">
                         <img src="/img/icons/cartlocation.png">
-                        <p>台北市信義區基隆路一段199號</p>
+                        <p class="actpage-cart-location">台北市信義區基隆路一段199號123123123a</p>
                         </div>
                     </div>
                     <div class="actpage-cart-info actpage-last-block">
