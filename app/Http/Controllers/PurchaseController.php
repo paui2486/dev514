@@ -8,8 +8,9 @@ use DB;
 use URL;
 use Log;
 use Form;
+use Auth;
+use Mail;
 use Input;
-// use Request;
 use Response;
 use Redirect;
 use App\Pay2go;
@@ -76,8 +77,13 @@ class PurchaseController extends controller
     public function postPurchase(Request $request)
     {
         $ticket = DB::table('act_tickets')
-                    ->where('id', $request->ticket_id)
-                    ->where('left_over', '>=', $request->purchase_number)
+                    ->leftJoin('activities', 'act_tickets.activity_id', '=', 'activities.id')
+                    ->where('act_tickets.id', $request->ticket_id)
+                    ->where('act_tickets.left_over', '>=', $request->purchase_number)
+                    ->select(array(
+                      'act_tickets.id', 'act_tickets.price', 'act_tickets.left_over', 'act_tickets.name',  'act_tickets.activity_id',
+                      'activities.title', 'activities.host_id', 'activities.location', 'activities.remark'
+                    ))
                     ->first();
 
         if (empty($ticket)) {
@@ -104,25 +110,63 @@ class PurchaseController extends controller
                                 "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
                                 "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                 'Email'             =>  $request->user_email,
-                                'OrderComment'      =>  'test comment',
+                                'OrderComment'      =>  $ticket->remark,
                                 'BARCODE'           =>  '1',
                                 'TradeLimit'        =>  300,
                                 'ReturnURL'         =>  url('purchase/result'),
-                                // "NotifyURL"         =>  url('pay2go/callback'),
                             );
 
-            $result["CheckValue"]	=   $Pay2go->get_check_value($result, $merKey, $merIV);
+            $result["CheckValue"]	= $Pay2go->get_check_value($result, $merKey, $merIV);
+            $submitButtonStyle    = "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
 
-            $submitButtonStyle      =   "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
+            $user = DB::table('users')->where('email', $request->email)->first();
+            if(empty($user)){
+                $confirmation_code = str_random(30);
 
-            // Log::info($result);
+                $user_id = DB::table('users')->insertGetId(
+                    array(
+                      'name'              => $request->name,
+                      'phone'             => $request->mobile,
+                      'email'             => $request->email,
+                      'confirmation_code' => $confirmation_code,
+                    )
+                );
+
+                Mail::send('auth.emails.verify', array('confirmation_code'=>$confirmation_code), function($message) {
+                    $message->from('us@example.com', 'Laravel');
+                    $message->to(Input::get('email'), Input::get('name'))
+                        ->subject('Verify your email address');
+                });
+
+                Auth::loginUsingId($user_id);
+            }
+
+            $storeOrder = array(
+                            'MerchantID'      => $merID,
+                            'MerchantOrderNo' => $result['MerchantOrderNo'],
+                            'TotalPrice'      => $result['Amt'],
+                            'ItemDesc'        => $result['ItemDesc'],
+                            'OrderComment'    => $result['OrderComment'],
+                            'user_id'         => Auth::id(),
+                            'user_email'      => $request->email,
+                            'user_phone'      => $request->mobile,
+                            'hoster_id'       => $ticket->host_id,
+                            'activity_id'     => $ticket->activity_id,
+                            'activity_name'   => $ticket->title,
+                            'ticket_id'       => $ticket->id,
+                            'ticket_price'    => $ticket->price,
+                            'created_at'      => date("Y-m-d H:i:s"),
+                          );
+
+            $insertOrder = DB::table('orders')->insert($storeOrder);
             return $Pay2go->create_form($result, NULL, TRUE, $autoSubmit, 0, $submitButtonStyle);
-            // return Input::all();
         }
     }
 
-    public function postByPay2Go()
+    public function postByPay2Go(Request $request)
     {
+
+
         Log::error(Input::all());
         return true;
     }

@@ -8,14 +8,8 @@
 
 @section('content')
 <div class="row purchase-content">
-<!--
-    <div class="col-sm-4 col-md-3 purchase-left">
-        <img class="purchase-thumnail" width="100%" src="{{asset('/img/pics/activity-photo.jpg')}}"/>
-        <p>{{ $activity->description }}</p>
-    </div>
--->
     <div class="col-sm-12 col-md-12 purchase-top"><!-- purchase-right -->
-        <form id="wizard" action="{{ url('') }}" style="display:none;" method='POST'>
+        <form id="wizard" action="{{ Request::url() }}" style="display:none;" method='POST'>
             {!! csrf_field() !!}
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <h1>選擇票卷</h1>

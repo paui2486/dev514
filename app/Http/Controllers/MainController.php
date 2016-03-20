@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use DB;
 use URL;
 use Log;
+use Auth;
 use Input;
+use Redirect;
 use Response;
-use App\pay2go;
+use App\User;
+use App\Pay2go;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -242,5 +245,29 @@ class maincontroller extends controller
             }
         }
         return $totalActivity;
+    }
+
+
+    public function confirm($confirmation_code)
+    {
+        if( ! $confirmation_code)
+        {
+            return Redirect::to("register");
+        }
+
+        $user = User::whereConfirmationCode($confirmation_code)->first();
+
+        if ( ! $user)
+        {
+            return Redirect::to("register");
+        }
+
+        $user->email_confirmed   = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+        Auth::loginUsingId($user->id);
+
+        return Redirect::to("dashboard/profile");
     }
 }
