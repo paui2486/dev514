@@ -109,7 +109,7 @@ class PurchaseController extends controller
                                 "Amt"		            =>  $request->purchase_result,          //	訂單金額
                                 "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
                                 "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
-                                'Email'             =>  $request->user_email,
+                                'Email'             =>  $request->email,
                                 'OrderComment'      =>  $ticket->remark,
                                 'BARCODE'           =>  '1',
                                 'TradeLimit'        =>  300,
@@ -170,14 +170,14 @@ class PurchaseController extends controller
             Log::info(Response::json(Input::all()));
             return Redirect::to('/');
         } else {
-            $result = json_decode($request->Result,true);
+            $result = (object) json_decode($request->Result,true);
         }
 
         $updateArray = array(
             'TradeNo'         => $result->TradeNo,
             'MerchantOrderNo' => $result->MerchantOrderNo,
             'CheckCode'       => $result->CheckCode,
-            'EscrowBank'      => $reuslt->EscrowBank,
+            'EscrowBank'      => $result->EscrowBank,
             'Card6No'         => $result->Card6No,
             'Card4No'         => $result->Card4No,
             'InstFirst'       => $result->InstFirst,
@@ -185,7 +185,7 @@ class PurchaseController extends controller
             'Inst'            => $result->Inst,
             'IP'              => $result->IP,
             'PayTime'         => $result->PayTime,
-            'OrderResult'     => $result,
+            'OrderResult'     => json_encode($result),
             'updated_at'      => date("Y-m-d H:i:s"),
         );
 
@@ -205,7 +205,7 @@ class PurchaseController extends controller
         // 需要再設計交易失敗回流機制
         DB::table('act_tickets')->where('id', $info->ticket_id)->decrement('left_over');
 
-        $ticket = array(
+        $ticket = (object) array(
             'TradeNo'           => $result->TradeNo,
             'TradeTime'         => $result->PayTime,
             'TotalPrice'        => $result->Amt,

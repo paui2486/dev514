@@ -37,7 +37,7 @@
 
             <div class="result-option row">
                 <label class="col-md-3"> 活動時間 </label>
-                <div class="col-md-9">{{ $ticket->ticket_day }} {{ $ticket_start }}~{{ $ticket_end }}</div>
+                <div class="col-md-9">{{ $ticket->ticket_day }} {{ $ticket->ticket_start }}~{{ $ticket->ticket_end }}</div>
             </div>
 
             <div class="result-option row">

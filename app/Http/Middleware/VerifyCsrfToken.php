@@ -15,7 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
      protected $except = [
          //
-         'pay2go/callback'
+         'pay2go/callback', 'purchase/result'
      ];
 
      public function handle($request, Closure $next)
