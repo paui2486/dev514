@@ -7,12 +7,68 @@ use Illuminate\Http\Request;
 use DB;
 use URL;
 use Log;
+use Input;
 use Response;
+use App\pay2go;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class maincontroller extends controller
 {
+    public function test(Request $request)
+    {
+        Log::error(Input::all());
+        // return Input::all();
+
+        $ticket = DB::table('act_tickets')
+                    ->where('id', $request->ticket_id)
+                    ->where('left_over', '>=', $request->purchase_number)
+                    ->first();
+
+        if (empty($ticket)) {
+            return Response::json(Array(
+              'code'    => 403,
+              'message' => 'Tickets is not enough!',
+            ), 403);
+        } else {
+            $Pay2go     = new Pay2go();
+            $merID      = env('Pay2go_ID', '11606075');
+            $merKey     = env('Pay2go_Key', "7CPtmx1zm86jpLfWndymKbPmlyqP7oye");
+            $merIV      = env('Pay2go_IV', "1oInVJXhR3BhOQeb");
+            $autoSubmit = TRUE;
+            $title      = urldecode($request->segment(3));
+            $ticketInfo = $request->activity . " - " . $ticket->name . " x " . $request->purchase_number;
+            $result     = array (
+                                "MerchantID"        =>  $merID,                 //	商店代號
+                                "RespondType"	      =>  "JSON",                 //  回傳格式
+                                "TimeStamp"		      =>  time(),                 //	時間戳記
+                                "Version"		        =>  "1.1",                  //	串接版本
+                                "MerchantOrderNo"	  =>  date("Ymdhis", time()), //	商店訂單編號
+                                "Amt"		            =>  $request->purchase_result,          //	訂單金額
+                                "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
+                                "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
+                                'Email'             =>  $request->user_email,
+                                'OrderComment'      =>  'test comment'
+                                // "NotifyURL"         =>  url('pay2go/callback'),
+                            );
+
+            //  檢查碼
+            $result["CheckValue"]	=   $Pay2go->get_check_value($result, $merKey, $merIV);
+
+            //  送出按鈕
+            $submitButtonStyle      =   "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
+            Log::info($result);
+            return $Pay2go->create_form($result, NULL, TRUE, $autoSubmit, 0, $submitButtonStyle);
+
+            return Input::all();
+        }
+    }
+
+    public function test2()
+    {
+        return Response::json(Input::all());
+    }
+
     public function index()
     {
         $meta   = (object) $this->getMeta();

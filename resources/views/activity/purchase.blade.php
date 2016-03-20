@@ -84,12 +84,12 @@
                         <label class="col-md-3 control-label"> 活動日期 </label>
                         <div id="confirm-act-date" class="col-md-9"></div>
                     </div>
-                    
+
                     <div class="row">
                         <label class="col-md-3 control-label"> 活動時間 </label>
                         <div id="confirm-act-time" class="col-md-9"></div>
                     </div>
-                    
+
                     <div class="row">
                         <label class="col-md-3 control-label"> 活動地點 </label>
                         <div id="confirm-location" class="col-md-9"></div>
@@ -168,7 +168,7 @@ $(document).ready(function () {
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('input[name=_token]').attr('content') }
     });
-    
+
     var form = $("#wizard");
     form.validate({
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
@@ -178,7 +178,7 @@ $(document).ready(function () {
 
     var first_event_day = eventData[0]['date'];
     getInputRow(first_event_day);
-    
+
     form.show();
 
     var wizard = form.steps({
@@ -211,6 +211,7 @@ $(document).ready(function () {
                     type: "post",
                     data: {
                         '_token'          : $('input[name=_token]').val(),
+                        'activity'        : "{{ $activity->title }}",
                         'ticket'          : eventData[event_id]['name'],
                         'ticket_id'       : eventData[event_id]['title'],
                         'ticket_date'     : eventData[event_id]['date'],
@@ -222,8 +223,15 @@ $(document).ready(function () {
                         'purchase_number' : $('input[name=purchase_number]').val(),
                         'purchase_result' : $('input[name=purchase_result]').val(),
                     },
-                    success: function(data){
-                        alert(data);
+                    success: function(pay2go) {
+                        console.log(pay2go);
+                        var newWindows = window.open("about:blank", "new window", "width=600, height=600");
+                        // $(newWindows.document.body).html(pay2go);
+                        newWindows.document.write('<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head></body>'+pay2go+'</body></html>');
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        console.log("Error: "+ err.Message);
                     }
                 });
             }
@@ -261,7 +269,7 @@ $(document).ready(function () {
         getInputRow(event_date);
         return true;
     }
-    
+
     function getInputRow( someday )
     {
         var inputRow = "";
@@ -269,7 +277,7 @@ $(document).ready(function () {
         var day_list = ['日', '一', '二', '三', '四', '五', '六'];
         var weekday = new Date(someday).getDay();
         var week_event = ' ('+ day_list[weekday] +')';
-        
+
         for ( var eventIndex in eventData) {
             var ticket = eventData[eventIndex];
             if ( ticket['date'] === someday ) {
@@ -286,7 +294,7 @@ $(document).ready(function () {
         $(".purchase-choose-time").find("strong").text(someday + week_event);
         $(".purchase-time-option").html(inputRow);
     }
-    
+
     function getPurchaseDetail( event_id )
     {
         $("#confirm-act-date").text(eventData[event_id]['date']);
@@ -298,15 +306,6 @@ $(document).ready(function () {
         $("#confirm-ticket-content").text(eventData[event_id]['description']);
         $("#confirm-ticket-number").text($('input[name=purchase_number]').val());
         $("#confirm-ticket-price").text(eventData[event_id]['price']);
-//        'ticket'          : eventData[event_id]['name'],
-//        'ticket_id'       : eventData[event_id]['title'],
-//        'ticket_date'     : eventData[event_id]['date'],
-//        'ticket_price'    : eventData[event_id]['price'],
-//        'ticket_dest'     : eventData[event_id]['description'],
-//        'user_name'       : $('input[name=name]').val(),
-//        'user_phone'      : $('input[name=mobile]').val(),
-//        'user_email'      : $('input[name=email]').val(),
-//        'purchase_number' :
     }
 });
 </script>
