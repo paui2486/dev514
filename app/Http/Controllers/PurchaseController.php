@@ -168,7 +168,6 @@ class PurchaseController extends controller
                                     "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                     'Email'             =>  $request->email,
                                     'OrderComment'      =>  $ticket->remark,
-                                    'BARCODE'           =>  '1',
                                     'TradeLimit'        =>  300,
                                     'ReturnURL'         =>  url('purchase/result'),
                                 );
