@@ -519,13 +519,6 @@ li.collapse-blog-category {
     border-radius: 10px;
 }
 
-.new-activity-panel {
-    width: 320px;
-    float: left;
-    margin: 0px 15px;
-    position: relative;
-}
-
 .new-activity-id,
 .Act-category-id,
 .inter-panel-id {
@@ -541,7 +534,7 @@ li.collapse-blog-category {
     background-position: top;
     background-color: #f2f2f2;
     border-radius:10px 10px 0px 0px;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .new-activity-thumbnail:hover{
@@ -624,9 +617,9 @@ li.collapse-blog-category {
 }
 
 .Act-category-panel {
-    max-width: 1100px;
+    width: 85%;
     margin: 0 auto;
-    background-color:rgba(255,255,255,0.7);
+    background-color:rgba(255,255,255,0.6);
     border-radius: 10px;
     box-shadow: 0px 0px 5px #ccc;
     height: auto;
@@ -635,8 +628,11 @@ li.collapse-blog-category {
 }
 
 .Act-category-title {
-    padding:10px 20px;
-    width: auto;
+    padding:10px;
+    width: 60%;
+    margin:10px auto;
+    text-align: center;
+    border-bottom: 1px solid #998675;
 }
 
 .Act-category-title a {
@@ -645,12 +641,8 @@ li.collapse-blog-category {
 }
 
 .inter-panel {
-    box-shadow: 0px 0px 5px #ccc;
-    margin: 10px;
-    max-width: 250px;
-    border-radius:6px;
-    padding: 0px;
-    background-color:rgba(255,255,255,0.7);
+    border-radius:10px;
+    padding:10px;
 }
 
 .Act-category-title img {
@@ -659,7 +651,7 @@ li.collapse-blog-category {
 }
 
 .inter-panel-thumbnail {
-    height: 170px;
+    height: 200px;
     background-position:top;
     background-size: cover;
     border-radius:6px 6px 0px 0px;
@@ -669,7 +661,7 @@ li.collapse-blog-category {
 .inter-panel-count {   
     width: auto;
     position: absolute;
-    top: 125px;
+    top: 160px;
     margin: 10px;
     color: white;
     font-size: 15px;
@@ -678,12 +670,19 @@ li.collapse-blog-category {
     background-color: rgba(0,0,0,0.7)
 }
 
+.inter-panel-count  img {
+    width: 20px;
+    padding-bottom: 3px;
+    margin-right: 7px;
+}
+
 .inter-panel-description {
     margin-bottom: 10px;
 }
 
 .inter-panel-info {
-    padding-right:5px;
+    padding:5px;
+    background-color: rgba(255,255,255,0.6);
 }
 
 .word-indent {
@@ -1505,7 +1504,7 @@ li.collapse-blog-category {
 
 .actpage-cart-content {
     padding: 15px;
-    background-color:rgba(102,204,204,0.2);
+    background-color:#f2f2f2;
     box-shadow:0px 1px 5px #666;
     border-radius: 0px 0px 10px 10px
 }
@@ -1528,6 +1527,7 @@ li.collapse-blog-category {
     float: left;
     margin: 0px 8px;
     letter-spacing: 1px;
+    border-radius: 10px;
 }
 
 .actpage-recommend-thumnail {
@@ -1535,22 +1535,37 @@ li.collapse-blog-category {
     height: 100px;
     background-position: top;
     background-size: cover;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .actpage-recommend-info {
-    padding:10px;
+    padding:5px 10px;
+}
+
+.actpage-recommend-info p {
+    font-size: 14px;
+    color: #998675;
+    margin: 0px;
+    padding: 0px;
+}
+
+.actpage-recommend-info li {
+    color: #c7b299;
+    font-size: 13px;
 }
 
 .actpage-cart-title {
     font-size: 18px;
     color: white;
-    padding:10px 0px;
+    padding: 10px 5px;
     text-align: center;
     margin: 0px;
-    background-color:rgba(0,188,212,1);
+    background-color: rgba(0,0,0,0.8);
     box-shadow: 0px 0px 5px #666;
-    border-top-left-radius:5px;
-    border-top-right-radius:5px;
+    border-radius: 10px 10px 0px 0px;
+    width: 300px;
+    height: auto;
+    word-break: break-all;
 }
 
 .actpage-cart-info {
@@ -1603,12 +1618,12 @@ li.collapse-blog-category {
 }
 
 .actpage-cart-time {
-    color: #00bcd4;
+    color:#998675;
     font-size: 15px;
     text-align: center;
     width: 70%;
     float: left;
-    border: 1px solid rgba(0,188,212,0.4);
+    border: 1px solid #c7b299;
     border-radius: 10px;
     padding: 5px;
     font-size: 14px;
@@ -1629,7 +1644,7 @@ li.collapse-blog-category {
 
 .actpage-surplus span {
     color:#fff;
-    background-color:#00bcd4;
+    background-color:#c7b299;
     padding:5px 8px; 
     text-align: center;
     border-radius: 10px;
@@ -1650,10 +1665,10 @@ li.collapse-blog-category {
 }
 
 .actpage-purchase {
-    background: -webkit-linear-gradient(#f37e7e,#ce6767);
-    background: -o-linear-gradient(#f37e7e,#ce6767);
-    background: -moz-linear-gradient(#f37e7e,#ce6767);
-    background: linear-gradient(#f37e7e,#ce6767);
+    background: -webkit-linear-gradient(#66cccc,#00bcd4);
+    background: -o-linear-gradient(#66cccc,#00bcd4);
+    background: -moz-linear-gradient(#66cccc,#00bcd4);
+    background: linear-gradient(#66cccc,#00bcd4);
     border-radius: 20px;
     text-align: center;
     padding:10px 30px;

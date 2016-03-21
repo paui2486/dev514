@@ -120,7 +120,7 @@
             <div class="row new-activity-content">
                 @foreach( $home->newActivity as $newActivity )
 
-                    <div class="new-activity-panel">
+                    <div class="col-md-4 new-activity-panel">
                         <div class="newact_panel_bg">
                             <div class="new-activity-id">
                                 {{ $newActivity->activity_id }}
@@ -132,7 +132,7 @@
                             </a>
                             <div class="new-activity-right">
                                 
-                                <div class="new-activity-title">
+                                <div class="new-activity-title word-indent-01">
                                      <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">{{ $newActivity->title }} </a>
                                 </div>
                                
@@ -172,6 +172,7 @@
             <div class="row Act-category-content">
                 @foreach( $home->totalActivity as $eachTypeActivity )
                     <div class="row Act-category-panel">
+                        
                             <div class="Act-category-id">
                                 {{ $eachTypeActivity->cat_id }}
                             </div>
@@ -185,46 +186,51 @@
                         
                         @foreach( $eachTypeActivity->cat_content as $activity )
                         
-                            <div class="col-md-3 inter-panel">
+                            <div class="col-md-4 inter-panel">
                                 <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
                                 <div class="inter-panel-thumbnail"
                                      style="background-image:url({{ $activity->thumbnail }})">
                                 </div>
+                                    </a>
                                 <div class="inter-panel-id">
                                     {{ $activity->activity_id }}
                                 </div>
-                                <div class="new-activity-title">
-                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">{{ $activity->title }}</a>
-                                </div>
-                                 </a>
-                                <div class="new-activity-count inter-panel-count">
+                                <div class="inter-panel-count">
                                      <img src="/img/icons/eye-03.png">{{ $activity->count }} 人
                                 </div>
-                                <div class="inter-panel-description new-activity-description word-indent-02">
-                                    {{ $activity->description }}
-                                </div>
                                 <div class="inter-panel-info">
-                                <div class="new-activity-price">
-                                    <img src="img/pics/money-icon-02.png">
-                                    {{ $activity->price }} 元
-                                </div>
-                                <div class="new-activity-date">
-                                    <img src="img/pics/calendar-icon-02.png">
-                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
-                                </div>
-                                <div class="new-activity-location word-indent-newact ">
-                                    <img src="img/pics/location-icon-02.png">
-                                    <span>{{ $activity->location }}</span>
-                                </div>
-                                <div class="new-activity-orginizer">
-                                    --- {{ $activity->orginizer }} ---
-                                </div>
+                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
+                                    <div class="new-activity-title word-indent-01">
+                                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">{{ $activity->title }}</a>
+                                    </div>
+                                    </a>
+
+                                    <div class="inter-panel-description new-activity-description word-indent-02">
+                                        {{ $activity->description }}
+                                    </div>
+
+                                    <div class="new-activity-price">
+                                        <img src="img/pics/money-icon-02.png">
+                                        {{ $activity->price }} 元
+                                    </div>
+                                    <div class="new-activity-date">
+                                        <img src="img/pics/calendar-icon-02.png">
+                                        {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
+                                    </div>
+                                    <div class="new-activity-location word-indent-newact ">
+                                        <img src="img/pics/location-icon-02.png">
+                                        <span>{{ $activity->location }}</span>
+                                    </div>
+                                    <div class="new-activity-orginizer">
+                                        --- {{ $activity->orginizer }} ---
+                                    </div>
                                 </div>
                             </div>
                        
                         @endforeach
-                    </div>
+                  
                 @endforeach
+                </div>
             </div>
         </div>
         <div class="home-blog">

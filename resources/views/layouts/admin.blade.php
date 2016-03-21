@@ -56,7 +56,7 @@
 
     <!-- scroll -->
     <script type="text/javascript" src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.nicescroll.js')}}"></script>
+<!--    <script type="text/javascript" src="{{asset('js/jquery.nicescroll.js')}}"></script>-->
 
     <!-- analysis -->
     <script type="text/javascript" src="{{asset('js/jquery.sparkline.js')}}"></script>
