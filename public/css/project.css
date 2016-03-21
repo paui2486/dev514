@@ -541,10 +541,6 @@ li.collapse-blog-category {
     opacity: 1;
 }
 
-.new-activity-right {
-    padding-right: 10px;
-}
-
 .new-activity-count {
     width: auto;
     position: absolute;
@@ -564,9 +560,7 @@ li.collapse-blog-category {
 }
 
 .new-activity-title {
-    margin: 10px 0 5px 15px;
-    overflow: hidden;
-    width:95%;
+    margin: 10px;
 }
 
 .new-activity-title a {
@@ -700,7 +694,7 @@ li.collapse-blog-category {
 .word-indent-01 {
     overflow : hidden;
     text-overflow:ellipsis;
-    display: -webkit-box;
+/*    display: -webkit-box;*/
     -webkit-line-clamp:1;
     -webkit-box-orient: vertical;
     position:relative;
