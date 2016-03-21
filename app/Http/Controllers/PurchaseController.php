@@ -133,6 +133,7 @@ class PurchaseController extends controller
                                 'activity_name'   => $ticket->title,
                                 'ticket_id'       => $ticket->id,
                                 'ticket_price'    => $ticket->price,
+                                'ticket_number'   => $request->purchase_number,
                                 'created_at'      => date("Y-m-d H:i:s"),
                               );
                 $insertOrder = DB::table('orders')->insert($storeOrder);
@@ -174,7 +175,6 @@ class PurchaseController extends controller
                 $result["CheckValue"]	= $Pay2go->get_check_value($result, $merKey, $merIV);
                 $submitButtonStyle    = "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
 
-
                 $storeOrder = array(
                                 'MerchantID'      => $merID,
                                 'MerchantOrderNo' => $result['MerchantOrderNo'],
@@ -189,6 +189,7 @@ class PurchaseController extends controller
                                 'activity_name'   => $ticket->title,
                                 'ticket_id'       => $ticket->id,
                                 'ticket_price'    => $ticket->price,
+                                'ticket_number'   => $request->purchase_number,
                                 'created_at'      => date("Y-m-d H:i:s"),
                               );
 
@@ -289,7 +290,7 @@ class PurchaseController extends controller
                   ->where('MerchantOrderNo', $order->MerchantOrderNo)
                   ->first();
 
-        DB::table('orders')->where('id', $info->id)->update($updateArray);
+        DB::table('orders')->where('id', $info->id)->increment('status');
         // 需要再設計交易失敗回流機制
         DB::table('act_tickets')->where('id', $info->ticket_id)->decrement('left_over');
 
