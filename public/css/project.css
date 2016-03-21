@@ -1925,6 +1925,7 @@ div.zabuto_calendar .table {
 	user-select: none;
     border: 1px solid #D1D3D4;
     border-radius: 10px;
+    height: 35px;
 }
 
 .purchase-time-option input.time-option:empty ~ label:before {
@@ -1937,6 +1938,7 @@ div.zabuto_calendar .table {
 	width:40px;
 	background: #D1D3D4;
 	border-radius:10px 0 0 10px;
+    height: 35px;
 }
 
 /* toggle hover */
