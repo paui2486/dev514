@@ -228,9 +228,8 @@
                             </div>
                        
                         @endforeach
-                  
+                  </div>
                 @endforeach
-                </div>
             </div>
         </div>
         <div class="home-blog">
