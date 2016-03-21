@@ -560,7 +560,8 @@ li.collapse-blog-category {
 }
 
 .new-activity-title {
-    margin: 10px;
+    margin: 10px 0px;
+    padding: 0px 15px
 }
 
 .new-activity-title a {
@@ -576,9 +577,10 @@ li.collapse-blog-category {
 
 .new-activity-description {
     font-size: 16px;
-    color:#666666;
-    padding-left:15px;
-    width: 100%;
+    color: #666666;
+    padding: 0px 15px;
+    margin: 5px 0px;
+    word-break: break-all;
 }
 
 .new-activity-price img,
@@ -592,7 +594,7 @@ li.collapse-blog-category {
 .new-activity-location {
     font-size: 16px;
     color: #998d7e;
-    padding-left: 12px;
+    padding:0px 10px;
     letter-spacing: 1px;
 } 
 
@@ -608,10 +610,13 @@ li.collapse-blog-category {
 .Act-category {
     background-image: url(/img/pics/woodbg.png);
     padding: 20px;
+    background-repeat: repeat-y;
+    background-size: 100% auto;
 }
 
 .Act-category-panel {
     width: 85%;
+    max-width: 1100px;
     margin: 0 auto;
     background-color:rgba(255,255,255,0.6);
     border-radius: 10px;
@@ -671,7 +676,9 @@ li.collapse-blog-category {
 }
 
 .inter-panel-description {
-    margin-bottom: 10px;
+    padding: 0px 15px;
+    word-break: break-all;
+    margin: 10px 0px;
 }
 
 .inter-panel-info {
