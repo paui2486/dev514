@@ -120,13 +120,11 @@ class PurchaseController extends controller
 
             // check ticket price
             if ($ticket->price <= 0) {
-
+                $MerchantOrderNo = time();
                 $storeOrder = array(
-                                'MerchantID'      => $merID,
-                                'MerchantOrderNo' => $result['MerchantOrderNo'],
-                                'TotalPrice'      => $result['Amt'],
-                                'ItemDesc'        => $result['ItemDesc'],
-                                'OrderComment'    => $result['OrderComment'],
+                                'MerchantOrderNo' => $MerchantOrderNo,
+                                'TotalPrice'      => 0,
+                                'ItemDesc'        => $request->activity . " - " . $ticket->name . " x " . $request->purchase_number,
                                 'user_id'         => Auth::id(),
                                 'user_email'      => $request->email,
                                 'user_phone'      => $request->mobile,
@@ -140,13 +138,14 @@ class PurchaseController extends controller
                 $insertOrder = DB::table('orders')->insert($storeOrder);
 
                 $order = (object) array(
-                    'MerchantID' => $result['MerchantOrderNo'],
+                    'MerchantOrderNo' => $MerchantOrderNo,
                     'TradeNo'    => str_random(30),
                     'TradeTime'  => date("Y-m-d H:i:s"),
                     'TotalPrice' => 0,
                 );
 
-                $this->successOrder($order);
+                $ticket = $this->successOrder($order);
+                return view('activity.ticket', compact('ticket'));
 
             } else {
 
@@ -296,8 +295,8 @@ class PurchaseController extends controller
 
         $ticket = (object) array(
             'TradeNo'           => $order->TradeNo,
-            'TradeTime'         => $order->PayTime,
-            'TotalPrice'        => $order->Amt,
+            'TradeTime'         => $order->TradeTime,
+            'TotalPrice'        => $order->TotalPrice,
             'user_name'         => $info->user_name,
             'user_phone'        => $info->user_phone,
             'user_email'        => $info->user_email,
@@ -309,7 +308,6 @@ class PurchaseController extends controller
             'ticket_start'      => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_start),
             'ticket_end'        => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_end),
         );
-
-        return view('activity.ticket', compact('ticket'));
+        return $ticket;
     }
 }
