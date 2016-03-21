@@ -1,5 +1,8 @@
 User-agent: *
 Disallow: /dashboard
+Disallow: /register
+Disallow: /rbadmin
+Disallow: /purchase
 Disallow: /password
 Disallow: /js/*.js
 Disallow: /css/*.css
