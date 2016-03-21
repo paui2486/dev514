@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY" />
-    <title>514生活頻道 - 讓生活更有意思</title>
+    <title>514活動頻道 - 讓生活更有意思</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>

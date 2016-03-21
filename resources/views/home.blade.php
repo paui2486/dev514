@@ -4,6 +4,7 @@
     @foreach($meta as $key => $value)
         <meta {{ $key }} content="{{ $value }}">
     @endforeach
+    <title>514活動頻道 - 讓生活更有意思</title>
 @endsection
 
 @section('script')
@@ -131,11 +132,11 @@
                             </div>
                             </a>
                             <div class="new-activity-right">
-                                
+
                                 <div class="new-activity-title word-indent-01">
                                      <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">{{ $newActivity->title }} </a>
                                 </div>
-                               
+
                                 <div class="new-activity-count">
                                     <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                                 </div>
@@ -172,20 +173,20 @@
             <div class="row Act-category-content">
                 @foreach( $home->totalActivity as $eachTypeActivity )
                     <div class="row Act-category-panel">
-                        
+
                             <div class="Act-category-id">
                                 {{ $eachTypeActivity->cat_id }}
                             </div>
-                       
+
                             <div class="Act-category-title">
                             <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                                <span>{{ $eachTypeActivity->cat_title }}</span> 
+                                <span>{{ $eachTypeActivity->cat_title }}</span>
                                 <img src="{{ $eachTypeActivity->cat_logo }}">
                             </a>
                             </div>
-                        
+
                         @foreach( $eachTypeActivity->cat_content as $activity )
-                        
+
                             <div class="col-md-4 inter-panel">
                                 <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
                                 <div class="inter-panel-thumbnail"
@@ -226,9 +227,9 @@
                                     </div>
                                 </div>
                             </div>
-                       
+
                         @endforeach
-                  
+
                 @endforeach
                 </div>
             </div>
@@ -250,18 +251,18 @@
                         </div>
                         <div class="row home-blog-info">
                             <div class="home-blog-created_at">
-                              
+
                                 <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
                             </div>
                             <a href="{{ url('/blog/'. $blog->category) }}">
                                 <div class="home-blog-category">
-                                   
+
                                     <li>{{ $blog->category }}</li>
                                 </div>
                             </a>
                             <a href="{{ url('/member/'. $blog->author)}}">
                                 <div class="home-blog-author">
-                                
+
                                     <li> By {{ $blog->author }}</li>
                                 </div>
                             </a>

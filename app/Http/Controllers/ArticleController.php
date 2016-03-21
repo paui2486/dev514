@@ -120,11 +120,11 @@ class ArticleController extends Controller
     public function getBlogMeta()
     {
         $blogMeta   = array(
-            'name = title'              => '514 生活頻道 - 讓生活更有意思',
-            'name = author'             => '514 生活頻道',
+            'name = title'              => '514活動頻道 - 讓生活更有意思',
+            'name = author'             => '514活動頻道',
             'name = copyright'          => 'Copyright © 514 All rights reserved.',
             'name = description'        => '',
-            'property = og:title'       => '514 生活頻道 - 讓生活更有意思',
+            'property = og:title'       => '514活動頻道 - 讓生活更有意思',
             'property = og:url'         => 'http://www.514.com.tw/',
             'property = og:image'       => '',
             'property = og:description' => '',

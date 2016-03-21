@@ -4,7 +4,7 @@
     @foreach($meta as $key => $value)
         <meta {{ $key }} content="{{ $value }}">
     @endforeach
-    <title>514生活頻道 - {{ $activity->title }}</title>
+    <title>514活動頻道 - {{ $activity->title }}</title>
 @endsection
 
 @section('content')

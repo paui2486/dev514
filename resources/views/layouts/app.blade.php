@@ -7,7 +7,6 @@
 
     @yield('meta')
 
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/bootstrap-reset.css')}}"/>

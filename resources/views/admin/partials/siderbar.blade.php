@@ -61,7 +61,7 @@
                     @endif
                     <li><a href="{{URL::to('dashboard/blog/expert')}}">我喜愛的文章</a></li>
                     <li><a href="{{URL::to('dashboard/blog/expert')}}">我關注的達人</a></li>
-                    <li><a href="{{URL::to('dashboard/blog/expert')}}">我要成為達人</a></li>
+                    <li><a href="{{URL::to('dashboard/register/expert')}}">我要成為達人</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
