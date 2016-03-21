@@ -541,10 +541,6 @@ li.collapse-blog-category {
     opacity: 1;
 }
 
-.new-activity-right {
-    padding-right: 10px;
-}
-
 .new-activity-count {
     width: auto;
     position: absolute;
@@ -564,9 +560,7 @@ li.collapse-blog-category {
 }
 
 .new-activity-title {
-    margin: 10px 0 5px 15px;
-    overflow: hidden;
-    width:95%;
+    margin: 10px;
 }
 
 .new-activity-title a {
@@ -700,7 +694,7 @@ li.collapse-blog-category {
 .word-indent-01 {
     overflow : hidden;
     text-overflow:ellipsis;
-    display: -webkit-box;
+/*    display: -webkit-box;*/
     -webkit-line-clamp:1;
     -webkit-box-orient: vertical;
     position:relative;
@@ -1931,6 +1925,7 @@ div.zabuto_calendar .table {
 	user-select: none;
     border: 1px solid #D1D3D4;
     border-radius: 10px;
+    height: 35px;
 }
 
 .purchase-time-option input.time-option:empty ~ label:before {
@@ -1943,6 +1938,7 @@ div.zabuto_calendar .table {
 	width:40px;
 	background: #D1D3D4;
 	border-radius:10px 0 0 10px;
+    height: 35px;
 }
 
 /* toggle hover */
