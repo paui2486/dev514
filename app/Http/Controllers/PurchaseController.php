@@ -93,31 +93,6 @@ class PurchaseController extends controller
             ), 402);
             return $result;
         } else {
-            $Pay2go     = new Pay2go();
-            $merID      = env('Pay2go_ID',  11606075);
-            $merKey     = env('Pay2go_Key', "7CPtmx1zm86jpLfWndymKbPmlyqP7oye");
-            $merIV      = env('Pay2go_IV',  "1oInVJXhR3BhOQeb");
-            $autoSubmit = TRUE;
-            $title      = urldecode($request->segment(3));
-            $ticketInfo = $request->activity . " - " . $ticket->name . " x " . $request->purchase_number;
-            $result     = array (
-                                "MerchantID"        =>  $merID,                 //	商店代號
-                                "RespondType"	      =>  "JSON",                 //  回傳格式
-                                "TimeStamp"		      =>  time(),                 //	時間戳記
-                                "Version"		        =>  "1.1",                  //	串接版本
-                                "MerchantOrderNo"	  =>  date("Ymdhis", time()), //	商店訂單編號
-                                "Amt"		            =>  $request->purchase_result,          //	訂單金額
-                                "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
-                                "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
-                                'Email'             =>  $request->email,
-                                'OrderComment'      =>  $ticket->remark,
-                                'BARCODE'           =>  '1',
-                                'TradeLimit'        =>  300,
-                                'ReturnURL'         =>  url('purchase/result'),
-                            );
-
-            $result["CheckValue"]	= $Pay2go->get_check_value($result, $merKey, $merIV);
-            $submitButtonStyle    = "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
 
             $user = DB::table('users')->where('email', $request->email)->first();
             if(empty($user)){
@@ -133,33 +108,95 @@ class PurchaseController extends controller
                 );
 
                 Mail::send('auth.emails.verify', array('confirmation_code'=>$confirmation_code), function($message) {
-                    $message->from('us@example.com', 'Laravel');
+                    $message->from('service@514.com.tw', '514 活動頻道');
                     $message->to(Input::get('email'), Input::get('name'))
                         ->subject('Verify your email address');
                 });
 
-                Auth::loginUsingId($user_id);
+            } else {
+                $user_id = $user->id;
             }
+            Auth::loginUsingId($user_id);
 
-            $storeOrder = array(
-                            'MerchantID'      => $merID,
-                            'MerchantOrderNo' => $result['MerchantOrderNo'],
-                            'TotalPrice'      => $result['Amt'],
-                            'ItemDesc'        => $result['ItemDesc'],
-                            'OrderComment'    => $result['OrderComment'],
-                            'user_id'         => Auth::id(),
-                            'user_email'      => $request->email,
-                            'user_phone'      => $request->mobile,
-                            'hoster_id'       => $ticket->hoster_id,
-                            'activity_id'     => $ticket->activity_id,
-                            'activity_name'   => $ticket->title,
-                            'ticket_id'       => $ticket->id,
-                            'ticket_price'    => $ticket->price,
-                            'created_at'      => date("Y-m-d H:i:s"),
-                          );
+            // check ticket price
+            if ($ticket->price <= 0) {
 
-            $insertOrder = DB::table('orders')->insert($storeOrder);
-            return $Pay2go->create_form($result, NULL, TRUE, $autoSubmit, 0, $submitButtonStyle);
+                $storeOrder = array(
+                                'MerchantID'      => $merID,
+                                'MerchantOrderNo' => $result['MerchantOrderNo'],
+                                'TotalPrice'      => $result['Amt'],
+                                'ItemDesc'        => $result['ItemDesc'],
+                                'OrderComment'    => $result['OrderComment'],
+                                'user_id'         => Auth::id(),
+                                'user_email'      => $request->email,
+                                'user_phone'      => $request->mobile,
+                                'hoster_id'       => $ticket->hoster_id,
+                                'activity_id'     => $ticket->activity_id,
+                                'activity_name'   => $ticket->title,
+                                'ticket_id'       => $ticket->id,
+                                'ticket_price'    => $ticket->price,
+                                'created_at'      => date("Y-m-d H:i:s"),
+                              );
+                $insertOrder = DB::table('orders')->insert($storeOrder);
+
+                $order = (object) array(
+                    'MerchantID' => $result['MerchantOrderNo'],
+                    'TradeNo'    => str_random(30),
+                    'TradeTime'  => date("Y-m-d H:i:s"),
+                    'TotalPrice' => 0,
+                );
+
+                $this->successOrder($order);
+
+            } else {
+
+                $Pay2go     = new Pay2go();
+                $merID      = env('Pay2go_ID',  11606075);
+                $merKey     = env('Pay2go_Key', "7CPtmx1zm86jpLfWndymKbPmlyqP7oye");
+                $merIV      = env('Pay2go_IV',  "1oInVJXhR3BhOQeb");
+                $autoSubmit = TRUE;
+                $title      = urldecode($request->segment(3));
+                $ticketInfo = $request->activity . " - " . $ticket->name . " x " . $request->purchase_number;
+                $result     = array (
+                                    "MerchantID"        =>  $merID,                 //	商店代號
+                                    "RespondType"	      =>  "JSON",                 //  回傳格式
+                                    "TimeStamp"		      =>  time(),                 //	時間戳記
+                                    "Version"		        =>  "1.1",                  //	串接版本
+                                    "MerchantOrderNo"	  =>  date("Ymdhis", time()), //	商店訂單編號
+                                    "Amt"		            =>  $request->purchase_result,          //	訂單金額
+                                    "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
+                                    "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
+                                    'Email'             =>  $request->email,
+                                    'OrderComment'      =>  $ticket->remark,
+                                    'BARCODE'           =>  '1',
+                                    'TradeLimit'        =>  300,
+                                    'ReturnURL'         =>  url('purchase/result'),
+                                );
+
+                $result["CheckValue"]	= $Pay2go->get_check_value($result, $merKey, $merIV);
+                $submitButtonStyle    = "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
+
+
+                $storeOrder = array(
+                                'MerchantID'      => $merID,
+                                'MerchantOrderNo' => $result['MerchantOrderNo'],
+                                'TotalPrice'      => $result['Amt'],
+                                'ItemDesc'        => $result['ItemDesc'],
+                                'OrderComment'    => $result['OrderComment'],
+                                'user_id'         => Auth::id(),
+                                'user_email'      => $request->email,
+                                'user_phone'      => $request->mobile,
+                                'hoster_id'       => $ticket->hoster_id,
+                                'activity_id'     => $ticket->activity_id,
+                                'activity_name'   => $ticket->title,
+                                'ticket_id'       => $ticket->id,
+                                'ticket_price'    => $ticket->price,
+                                'created_at'      => date("Y-m-d H:i:s"),
+                              );
+
+                $insertOrder = DB::table('orders')->insert($storeOrder);
+                return $Pay2go->create_form($result, NULL, TRUE, $autoSubmit, 0, $submitButtonStyle);
+            }
         }
     }
 
@@ -225,6 +262,43 @@ class PurchaseController extends controller
             'TradeNo'           => $result->TradeNo,
             'TradeTime'         => $result->PayTime,
             'TotalPrice'        => $result->Amt,
+            'user_name'         => $info->user_name,
+            'user_phone'        => $info->user_phone,
+            'user_email'        => $info->user_email,
+            'activity_name'     => $info->activity_name,
+            'activity_location' => $info->activity_location,
+            'ticket_name'       => $info->ticket_name,
+            'ticket_number'     => $info->ticket_number,
+            'ticket_day'        => preg_replace("/(.*)\s(.*):\d+/", "$1", $info->ticket_start),
+            'ticket_start'      => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_start),
+            'ticket_end'        => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_end),
+        );
+
+        return view('activity.ticket', compact('ticket'));
+    }
+
+    private function successOrder($order)
+    {
+        $info = DB::table('orders')
+                  ->leftJoin('users', 'orders.user_id', '=', 'users.id')
+                  ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
+                  ->leftJoin('act_tickets', 'orders.ticket_id',   '=', 'act_tickets.id')
+                  ->select(array(
+                      'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice',
+                      'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location',
+                      'act_tickets.name as ticket_name',  'act_tickets.ticket_start', 'act_tickets.ticket_end', 'orders.ticket_id'
+                  ))
+                  ->where('MerchantOrderNo', $order->MerchantOrderNo)
+                  ->first();
+
+        DB::table('orders')->where('id', $info->id)->update($updateArray);
+        // 需要再設計交易失敗回流機制
+        DB::table('act_tickets')->where('id', $info->ticket_id)->decrement('left_over');
+
+        $ticket = (object) array(
+            'TradeNo'           => $order->TradeNo,
+            'TradeTime'         => $order->PayTime,
+            'TotalPrice'        => $order->Amt,
             'user_name'         => $info->user_name,
             'user_phone'        => $info->user_phone,
             'user_email'        => $info->user_email,
