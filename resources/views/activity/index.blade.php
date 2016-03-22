@@ -15,7 +15,7 @@
         <div class="actpage-main-image" style="background-image:url('{{ asset($activity->thumbnail )}}')">
         </div>
         <div class="actpage-panel">
-            <div class="actpage-left-content">
+            <div class="col-md-8 actpage-left-content">
                 <p class="actpage-title">{{ $activity->title }}</p>
                 <div class="actpage-activity-content">
                     <div class="row actpage-header">
@@ -33,7 +33,7 @@
                         {!! $activity->content !!}
                     </div>
                     <div class="row actpage-header">
-                        <p class="actpage-header-left">推薦活動</p>
+                        <p class="actpage-header-left">同場加映</p>
                         <div class="actpage-header-dash"></div>
                     </div>
                     <div class="row actpage-recommend">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="actpage-right-content">
+            <div id="RightFixed" class="col-md-4 actpage-right-content">
                 <p class="actpage-cart-title">{{ $activity->title }}</p>
                 <div class="actpage-cart-content">
                     <div class="row actpage-cart-info actpage-time-block">
@@ -147,26 +147,53 @@
 @section('script')
 <script>
 var disqus_config = function () {
-this.page.url = "{{ Request::URL() }}";
-this.page.identifier = "{{ $activity->title }}";
+    this.page.url = "{{ Request::URL() }}";
+    this.page.identifier = "{{ $activity->title }}";
 };
+    
 (function() {
-var d = document, s = d.createElement('script');
+    var d = document, s = d.createElement('script');
 
-s.src = '//514life.disqus.com/embed.js';
+    s.src = '//514life.disqus.com/embed.js';
 
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
 })();
 </script>
 
-<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1516021815365717";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
+<script>
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1516021815365717";
+    fjs.parentNode.insertBefore(js, fjs);
+} (document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
+$(document).ready(function () {
+
+    var RightFixed = $("#RightFixed");
+    
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 580) {
+            RightFixed.addClass("right-content-fixed");
+        } else {
+            RightFixed.removeClass("right-content-fixed");
+        }
+    });
+    
+//    RightFixed.on("scroll", function(e) {
+//        console.log(1);
+//        if (this.scrollTop > 580) {
+//            RightFixed.addClass("right-content-fixed");
+//        } else {
+//            RightFixed.removeClass("right-content-fixed");
+//        }
+//
+//    });
+});
 </script>
 
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

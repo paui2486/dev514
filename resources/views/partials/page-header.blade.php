@@ -8,7 +8,7 @@
                 <span class="glyphicon glyphicon-list"></span>
             </button>
             <!-- Branding Image -->
-            <div class="navbar-brand">
+            <div class="navbar-brand page-navbar-brand">
                 <a  href="{{ url('/') }}">
                     <img src="/img/pics/514logobrown.png">
                 </a>
