@@ -1476,18 +1476,21 @@ li.collapse-blog-category {
 }
 
 .actpage-right-content {
-    float: right;
     position: absolute;
     top:0px;
     border-radius: 5px;
-    right: 20px;
+    width: 305px;
+
 }
 
 .right-content-fixed {
     position: fixed;
-    border-radius: 5px;
-    right: 135px;
-    width: 305px;
+}
+
+.fixed-bottom {
+    bottom: 10px;
+    position: absolute;
+    top: auto;
 }
 
 .actpage-header {
@@ -1559,6 +1562,7 @@ li.collapse-blog-category {
     padding: 15px;
     border-radius: 0px 0px 5px 5px;
     border: 1px solid #ccc;
+    background-color: white;
 }
 
 .actpage-cart-title {

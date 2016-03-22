@@ -62,70 +62,72 @@
             <div id="RightFixed" class="col-md-4 actpage-right-content">
                 <p class="actpage-cart-title">{{ $activity->title }}</p>
                 <div class="actpage-cart-content">
-                    <div class="row actpage-cart-info actpage-time-block">
-                        <div class="row" style="margin:0px;">
-                        <img src="{{ asset('/img/icons/carttime.png') }}">
-                        <p>活動時間</p>
+                        <div class="row actpage-cart-info actpage-time-block">
+                            <div class="row" style="margin:0px;">
+                            <img src="{{ asset('/img/icons/carttime.png') }}">
+                            <p>活動時間</p>
+                            </div>
+                            @if(count($tickets)>0)
+                                @foreach($tickets as $ticket)
+                                <div class="actpage-cart-time">
+                                    <div class="actpage-cart-time01">
+                                        <p>
+                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}}
+                                        </p>
+                                    </div>
+                                    <div>～</div>
+                                    <div class="actpage-cart-time02">
+                                        <p>
+                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="actpage-surplus">
+                                    <span>剩 {{ $ticket->left_over }} 位</span>
+                                </div>
+                                @endforeach
+                            @else
+                              <div class="actpage-cart-time">
+                                  所有票券已銷售完畢！
+                              </div>
+                            @endif
+                        </div>
+                         <div class="actpage-cart-info">
+                            <div class="row" style="margin:0px;">
+                            <img src="{{ asset('/img/icons/carttimelong.png') }}">
+                            <p>活動長度</p>
+                                <div class="actpage-cart-timelength">
+                                    {{ $activity->time_range }} 小時
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actpage-cart-info">
+                            <div class="row" style="margin:0px;">
+                            <img src="{{ asset('/img/icons/cartprice.png') }}">
+                            <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>
+                            </div>
+                        </div>
+
+                        <div class="actpage-cart-info">
+                            <div class="row" style="margin:0px;">
+                            <img src="{{ asset('/img/icons/cartlocation.png') }}">
+                            <p>{{ $activity->location }}</p>
+                            </div>
+                        </div>
+                        <div class="actpage-cart-info actpage-last-block">
+                            <div class="row" style="margin:0px;">
+                            <img src="{{ asset('/img/icons/cartlanguage.png') }}">
+                            <p>{{ $activity->remark }}</p>
+                            </div>
                         </div>
                         @if(count($tickets)>0)
-                            @foreach($tickets as $ticket)
-                            <div class="actpage-cart-time">
-                                <div class="actpage-cart-time01">
-                                    <p>
-                                        {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}}
-                                    </p>
-                                </div>
-                                <div>～</div>
-                                <div class="actpage-cart-time02">
-                                    <p>
-                                        {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="actpage-surplus">
-                                <span>剩 {{ $ticket->left_over }} 位</span>
-                            </div>
-                            @endforeach
+                            <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}"><div class="row actpage-purchase">前往訂購</div></a>
                         @else
-                          <div class="actpage-cart-time">
-                              所有票卷已銷售完畢！
-                          </div>
+                            <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票卷可供您訂購')">無法訂購</div>
                         @endif
                     </div>
-                     <div class="actpage-cart-info">
-                        <div class="row" style="margin:0px;">
-                        <img src="{{ asset('/img/icons/carttimelong.png') }}">
-                        <p>活動長度</p>
-                            <div class="actpage-cart-timelength">
-                                {{ $activity->time_range }} 小時
-                            </div>
-                        </div>
-                    </div>
-                    <div class="actpage-cart-info">
-                        <div class="row" style="margin:0px;">
-                        <img src="{{ asset('/img/icons/cartprice.png') }}">
-                        <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>
-                        </div>
-                    </div>
-
-                    <div class="actpage-cart-info">
-                        <div class="row" style="margin:0px;">
-                        <img src="{{ asset('/img/icons/cartlocation.png') }}">
-                        <p>{{ $activity->location }}</p>
-                        </div>
-                    </div>
-                    <div class="actpage-cart-info actpage-last-block">
-                        <div class="row" style="margin:0px;">
-                        <img src="{{ asset('/img/icons/cartlanguage.png') }}">
-                        <p>{{ $activity->remark }}</p>
-                        </div>
-                    </div>
-                    @if(count($tickets)>0)
-                        <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}"><div class="row actpage-purchase">前往訂購</div></a>
-                    @else
-                        <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票卷可供您訂購')">無法訂購</div>
-                    @endif
-                </div>
+               
+<!--
                 <div class="actpage-holder-content">
                     <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
                     </div>
@@ -137,8 +139,8 @@
                 </div>
                 <p class="actpage-bought-title">看看誰已訂購</p>
                 <div class="actpage-bought-content">
-
                 </div>
+-->
             </div>
         </div>
     </div>
@@ -176,11 +178,20 @@ $(document).ready(function () {
 
     var RightFixed = $("#RightFixed");
     
+    
     $(window).scroll(function() {
         if ($(this).scrollTop() > 580) {
             RightFixed.addClass("right-content-fixed");
         } else {
             RightFixed.removeClass("right-content-fixed");
+        }
+//        console.log(scrollbottom);
+        
+        var scrollbottom = $(this).scrollTop() - $(window).height() ;
+        if (scrollbottom > 550 ) {
+            RightFixed.addClass ("fixed-bottom");
+        } else {
+            RightFixed.removeClass("fixed-bottom");
         }
     });
     
