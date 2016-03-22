@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
+@section('meta')
+<title>514 訂購流程</title>
+@endsection
+
 @section('style')
 <link rel="stylesheet" href="{{asset('css/jquery.steps.css')}}"/>
 <link rel="stylesheet" href="{{asset('css/zabuto_calendar.min.css')}}"/>
-
 @endsection
 
 @section('content')
@@ -145,7 +148,7 @@ function getDetail(id) {
             <p>票券單價 <span> '+ eventData[id]['price'] +' 元</span></p> \
             <p>活動地點 <span> '+ eventData[id]['location'] +' </span></p></div> \
         <div class="purchase-detail-result col-sm-4"><h5>票券張數</h5>  \
-            <input id="purchase_number" name="purchase_number" type="number" placeholder="0" onchange="getPrice('+ id +', this.value)" min="1"> \
+            <input id="purchase_number" name="purchase_number" type="number" placeholder="0" onchange="getPrice('+ id +', this.value)" min="1" value=1> \
             <p>總計 <span>＄</span><span id="purchase_result"></span></p><input id="purchase" name="purchase_result" type="hidden"></div> \
     ';
 }
@@ -268,6 +271,10 @@ $(document).ready(function () {
         }
         $(".purchase-choose-time").find("strong").text(someday + week_event);
         $(".purchase-time-option").html(inputRow);
+
+        $("input:radio[name=ticket]").trigger('click');
+        $("input:radio[name=ticket]").first().attr('checked', 'checked');
+        $("#purchase_number").trigger("change");
     }
 
     function getPurchaseDetail( event_id )

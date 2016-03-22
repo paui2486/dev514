@@ -61,7 +61,7 @@ ul.dropdown-menu {
 
 .navbar-toggle {
     color: white;
-    font-size:16px; 
+    font-size:16px;
     margin-right: 0px;
 }
 
@@ -135,11 +135,11 @@ li.collapse-blog-category {
         float: left;
         padding-top: 5px;
     }
-    
+
     .blog-navbar {
         border-bottom: 1px solid #ccc;
     }
-} 
+}
 
 @media  screen and (max-width: 768px) {
     li.collapse-blog-category {
@@ -157,7 +157,7 @@ li.collapse-blog-category {
 
 .navbar-blog-category a:focus {
     text-decoration: none;
-} 
+}
 
 .navbar-blog-category > li {
     list-style: none;
@@ -322,12 +322,12 @@ li.collapse-blog-category {
 
 
 .banner-1 {
-    position: relative; 
-    margin: 0 auto; 
-    top: 0px; 
-    left: 0px; 
+    position: relative;
+    margin: 0 auto;
+    top: 0px;
+    left: 0px;
     width: 1300px;
-    height: 500px; 
+    height: 500px;
     overflow: hidden;
     visibility: hidden;
 }
@@ -595,13 +595,13 @@ li.collapse-blog-category {
     color: #998d7e;
     padding:0px 10px;
     letter-spacing: 1px;
-} 
+}
 
 .new-activity-orginizer {
     text-align: center;
     color: #666666;
     font-size: 15px;
-    padding:  5px 0 10px 0; 
+    padding:  5px 0 10px 0;
 }
 
 /* Act. Category 活動類別 */
@@ -654,7 +654,7 @@ li.collapse-blog-category {
     background-color: #f2f2f2;
 }
 
-.inter-panel-count {   
+.inter-panel-count {
     width: auto;
     position: absolute;
     top: 160px;
@@ -815,12 +815,12 @@ li.collapse-blog-category {
     font-size: 16px;
     color: #998d7e;
     text-decoration: none;
-} 
+}
 
 .contact-info a:hover {
     color: #60574e;
     text-decoration: none;
-} 
+}
 
 .day-to-day {
     font-size:14px;
@@ -918,7 +918,7 @@ li.collapse-blog-category {
 
 
 .register-container {
-    height: 100%;        
+    height: 100%;
     padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
@@ -1169,7 +1169,7 @@ li.collapse-blog-category {
 .relative-art,
 .relative-act {
     margin: 0px;
-} 
+}
 
 .relative-art p,
 .relative-act p {
@@ -1236,7 +1236,7 @@ li.collapse-blog-category {
 
 /*文章列表頁*/
 .blog-category-container {
-    background-color:#f4f4f4; 
+    background-color:#f4f4f4;
 }
 
 .blog-category-logo {
@@ -1386,14 +1386,14 @@ li.collapse-blog-category {
 @media  screen and (min-width: 440px) {
     .mobile-blog-readmore {
         display: none;
-    } 
+    }
 }
 
 @media  screen and (min-width: 768px) {
     .other-navbar-toggle {
         display: none;
     }
-    
+
     .other-navbar-collapse {
         display: block!important;
         height: auto!important;
@@ -1411,7 +1411,7 @@ li.collapse-blog-category {
 @media screen and (min-width: 1920px) {
     .home-navbar {
         padding: 0 50px;
-        } 
+        }
 }
 
 /*--------------activity-page活動內容頁------------------*/
@@ -1430,7 +1430,7 @@ li.collapse-blog-category {
     height: 500px;
     width: 100%;
     top: 0px;
-    background-size: cover; 
+    background-size: cover;
 }
 
 .actpage-main-image {
@@ -1439,7 +1439,7 @@ li.collapse-blog-category {
     width: 80%;
     position: absolute;
     left: 10%;
-    top:80px; 
+    top:80px;
 }
 
 .actpage-panel {
@@ -1625,6 +1625,7 @@ li.collapse-blog-category {
     border-radius: 10px;
     padding: 5px;
     font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .actpage-cart-time > div > p {
@@ -1643,7 +1644,7 @@ li.collapse-blog-category {
 .actpage-surplus span {
     color:#fff;
     background-color:#c7b299;
-    padding:5px 8px; 
+    padding:5px 8px;
     text-align: center;
     border-radius: 10px;
 }
@@ -1692,7 +1693,7 @@ li.collapse-blog-category {
     height: 150px;
     margin: auto;
     background-size: cover;
-    background-position: top; 
+    background-position: top;
 }
 
 .actpage-holder-name {
@@ -1760,7 +1761,7 @@ li.collapse-blog-category {
 
 li.current > a{
     background-color: #00bcd4;
-} 
+}
 
 /*
 .purchase-left {
@@ -1776,7 +1777,7 @@ div.zabuto_calendar .table {
 
 .wizard > .content {
     background:white;
-    border:none; 
+    border:none;
     -webkit-border-radius: 10px;
     -moz-border-radius:10px;
     border-radius: 10px;
@@ -2044,7 +2045,7 @@ div.zabuto_calendar .table {
     border-top: 1px solid #e6e6e6;
     width: 70%;
     margin: 20px auto;
-} 
+}
 
 .purchase-detail-result span {
     font-size: 20px;
@@ -2244,4 +2245,3 @@ div.zabuto_calendar .table {
 .result-button button:hover {
     background-color:  #02a1ad;
 }
-
