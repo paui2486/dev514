@@ -22,10 +22,10 @@
                     <p class="purchase-choose-title  col-md-2">選擇活動時間</p><span class="col-md-10 purchase-line"></span>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div id="calendar"></div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="purchase-choose-time">
                             <h5>您選擇的活動日期</h5><strong></strong>
                             <h5>您選擇的活動時間</h5>
@@ -120,7 +120,7 @@
                     <div class="confirm-price-row row">
                         <label class="col-md-3 control-label"> 總計 </label>
                          <div class="confirm-price col-md-9">
-                             <p>$<span id="confirm-ticket-price"></span></p>
+                             <p>$<span id="confirm-ticket-price"></span> NTD</p>
                          </div>
                     </div>
                 </div>
@@ -169,6 +169,7 @@ $(document).ready(function () {
             rules: {
             }
     });
+    form.show();
 
     $.fn.addHidden = function (name, value) {
         return this.each(function () {
@@ -180,14 +181,13 @@ $(document).ready(function () {
     var first_event_day = eventData[0]['date'];
     getInputRow(first_event_day);
 
-    form.show();
 
     var wizard = form.steps({
 
         labels: {
             current:    "current step:",
             pagination: "Pagination",
-            finish:     "確認送出",
+            finish:     "確 認",
             next:       "下一步",
             previous:   "上一步",
             loading:    "Loading ...",
@@ -241,6 +241,7 @@ $(document).ready(function () {
             return clickDate(this.id);
         },
     });
+    $("a[href=#previous]").addClass("purchase-previous");
 
     function clickDate(id, fromModal) {
         var event_date = $("#" + id).data("date");
