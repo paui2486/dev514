@@ -10,6 +10,7 @@ use DB;
 use Log;
 use Auth;
 use Input;
+use Session;
 use Response;
 use Redirect;
 use Datatables;
@@ -413,7 +414,7 @@ class ActivityController extends Controller
         $params['suffix']   = "category/";
 
         $update             = Library::upload($params);
-        $activityCategory       = DB::table('categories')->where('id', $id);
+        $activityCategory   = DB::table('categories')->where('id', $id);
         $result             = $activityCategory->update($update['data']);
         return Redirect::to('dashboard/activity/category');
     }
@@ -440,6 +441,27 @@ class ActivityController extends Controller
         $category->delete();
     }
 
+    public function showTicket()
+    {
+        return view('admin.activity.ticket');
+    }
+
+    public function getTicket()
+    {
+        $ticket = DB::table('orders')
+                     ->leftJoin('users', 'users.id', '=', 'orders.hoster_id')
+                     ->leftJoin('act_tickets', 'act_tickets.id', '=', 'orders.ticket_id')
+                     ->select(array(
+                        'orders.id', 'orders.ItemDesc', 'act_tickets.ticket_start',
+                        'orders.user_email', 'orders.user_phone', 'orders.status'
+                     ))
+                     ->where('orders.user_id', Auth::id())
+                     ->orderBy('users.created_at', 'ASC');
+
+        return Datatables::of($ticket)
+            ->edit_column('status', '@if($status === 0) 未付款 @elseif ($status === 1) 已付款 @else 付款失敗 @endif')
+            ->make();
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -473,5 +495,59 @@ class ActivityController extends Controller
 
         return Datatables::of($articles)
             ->make();
+    }
+
+    public function askExpert()
+    {
+        return view('admin.activity.register_expoert');
+    }
+
+    public function regExpert(Request $request)
+    {
+        $storeArray = array(
+          'name'    => $request->name,
+          'TaxID'   => $request->TaxID,
+          'address' => $request->address,
+          'phone'   => $request->phone,
+          'user_id' => Auth::id(),
+          'contact_name'  => $request->contact_name,
+          'contact_phone' => $request->contact_phone,
+          'contact_email' => $request->contact_email,
+
+        );
+
+        $id                 = DB::table('companys')->insertGetId($storeArray);
+
+
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $storeArray;
+        // $params['filed']    = ['ID_path', 'Bank_path'];
+        $params['filed']    = array();
+        $params['infix']    = '../../storage/uploads/';
+        $params['suffix']   = "CompanysID/";
+
+        if (!empty($request->ID_path)) {
+            array_push($params['filed'], 'ID_path');
+        }
+        if (!empty($request->Bank_path)) {
+            array_push($params['filed'], 'Bank_path');
+        }
+
+        $update             = Library::upload($params);
+        $result             = DB::table('companys')->where('id', $id)
+                                ->update($update['data']);
+        if ($result) {
+            Session::flash('message', '申請完成，恭喜您已經能舉辦活動，靜待系統進行審核');
+            DB::table('users')
+                  ->where('id', Auth::id())
+                  ->update(array(
+                    'ask_hoster'  => 1,
+                    'hoster'      => 1,
+                    'updated_at'  => date("Y-m-d H:i:s"),
+                  ));
+        }
+
+        return Redirect::to('dashboard');
     }
 }

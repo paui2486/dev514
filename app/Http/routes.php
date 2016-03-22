@@ -41,10 +41,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('HostGuide'      , 'PageController@HostGuide'    );
     Route::get('PlayGuide'      , 'PageController@PlayGuide'    );
     Route::get('PointUse'       , 'PageController@PointUse'     );
-
     Route::get('MediaReport'    , 'PageController@media-report' );
     Route::get('Partner'        , 'PageController@partner'      );
-
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
@@ -69,21 +67,22 @@ Route::group(['middleware' => 'web'], function () {
 
     // Route::get('order/{id}'                 , 'CartController@index'             );
     // Route::get('pay2go', 'PageController@testpay2go');
-
     // Route::get('master'                     , 'UserController@index'             );
 
     Route::get('redirect'                   , 'SocialAuthController@redirect'    );
     Route::get('callback'                   , 'SocialAuthController@callback'    );
-
     Route::get('follows'                    , 'AuthController@follows'           );
     Route::get('friends'                    , 'AuthController@friends'           );
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
-
     Route::group(['middleware' => 'auth'], function() {
-        Route::get('dashboard'                      , 'Admin\AdminController@index'       );
-        Route::get('dashboard/profile'              , 'AuthController@profile'            );
-        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'     );
+        Route::get('dashboard'                      , 'Admin\AdminController@index'         );
+        Route::get('dashboard/profile'              , 'AuthController@profile'              );
+        Route::get('dashboard/register/expert'      , 'Admin\ActivityController@askExpert'  );
+        Route::post('dashboard/register/expert'     , 'Admin\ActivityController@regExpert'  );
+        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'       );
+        Route::get('dashboard/tickets'              , 'Admin\ActivityController@showTicket' );
+        Route::get('dashboard/tickets/data'         , 'Admin\ActivityController@getTicket'  );
     });
 
     // for admin

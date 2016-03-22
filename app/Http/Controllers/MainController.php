@@ -177,7 +177,7 @@ class maincontroller extends controller
                             'articles.description',     'articles.created_at',  'users.name as author',
                             'categories.name as category')
                         ->orderBy('articles.created_at', 'desc')
-                        ->take(4)
+                        ->take(3)
                         ->get();
         return $newBlogs;
     }
@@ -230,7 +230,7 @@ class maincontroller extends controller
                         'activities.location',          'activities.activity_start as date', 'users.nick as orginizer'
                     )
                     ->orderBy('activities.created_at', 'desc')
-                    ->take(4)
+                    ->take(3)
                     ->get();
 
                 $topicActivity = (object) array(

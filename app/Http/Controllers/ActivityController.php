@@ -133,6 +133,7 @@ class ActivityController extends Controller
                           ))
                           ->groupBy('activities.title')
                           ->orderBy('activities.created_at', 'ASC')
+                          ->take(3)
                           ->get();
 
             DB::table('activities')->where('id', $activity->id)->increment('counter');
