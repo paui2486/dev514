@@ -15,7 +15,7 @@ body {
 }
 
 .navbar-brand img {
-    height:50px;
+    height:60px;
     z-index: 200;
     margin:auto;
 }
@@ -379,9 +379,8 @@ li.collapse-blog-category {
 /*Content-Blog 最新文章*/
 
 .home-blog {
-    background-image: url(/img/pics/258216-151001212S870.jpg);
-    background-repeat: repeat;
     padding:20px;
+    background-color: #fcfbfa;
 }
 
 .home-blog-content {
@@ -503,9 +502,9 @@ li.collapse-blog-category {
 /* New Activities 最新活動*/
 
 .new-activity {
-    background-color: #f4eee9;
     padding:20px;
     padding-bottom: 50px;
+    background-color: #fcfbfa;
 }
 
 .new-activity-content {
@@ -608,17 +607,15 @@ li.collapse-blog-category {
 /* Act. Category 活動類別 */
 
 .Act-category {
-    background-image: url(/img/pics/woodbg.png);
     padding: 20px;
-    background-repeat: repeat-y;
-    background-size: 100% auto;
+    background-color: #f4f4f4;
 }
 
 .Act-category-panel {
     width: 85%;
     max-width: 1100px;
     margin: 0 auto;
-    background-color:rgba(255,255,255,0.6);
+    border:1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0px 0px 5px #ccc;
     height: auto;
@@ -631,11 +628,11 @@ li.collapse-blog-category {
     width: 60%;
     margin:10px auto;
     text-align: center;
-    border-bottom: 1px solid #998675;
+    border-bottom: 1px solid #c2b49a;
 }
 
 .Act-category-title a {
-    font-size: 24px;
+    font-size: 20px;
     color: #534741;
 }
 
@@ -645,7 +642,7 @@ li.collapse-blog-category {
 }
 
 .Act-category-title img {
-    height: 40px;
+    height: 35px;
     padding-bottom: 5px;
 }
 
@@ -699,15 +696,15 @@ li.collapse-blog-category {
 }
 
 .word-indent-01 {
-    overflow : hidden;
-    text-overflow:ellipsis;
-/*    display: -webkit-box;*/
-    -webkit-line-clamp:1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    position:relative;
-    line-height:1.5em;
-    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
-    height:1.5em;
+    position: relative;
+    line-height: 1.5em;
+    height: 1.5em;
+    word-break: break-all;
 }
 
 .word-indent-02 {
@@ -1456,6 +1453,7 @@ li.collapse-blog-category {
     box-shadow: 1px 1px 10px #ccc;
     margin-bottom: 20px;
     min-height: 1000px;
+    position: relative;
 }
 
 .actpage-title {
@@ -1476,10 +1474,10 @@ li.collapse-blog-category {
 .actpage-right-content {
     width: 300px;
     float: right;
-    margin-left: 30px;
     position: absolute;
-    top: 535px;
+    top: -45px;
     border-radius: 5px;
+    right: 20px;
 }
 
 .actpage-header {
@@ -1501,13 +1499,6 @@ li.collapse-blog-category {
     width: 80%;
     height: 18px;
     border-bottom: 1px dashed;
-}
-
-.actpage-cart-content {
-    padding: 15px;
-    background-color:#f2f2f2;
-    box-shadow:0px 1px 5px #666;
-    border-radius: 0px 0px 10px 10px
 }
 
 .actpage-introduce,
@@ -1555,15 +1546,20 @@ li.collapse-blog-category {
     font-size: 13px;
 }
 
+.actpage-cart-content {
+    padding: 15px;
+    border-radius: 0px 0px 5px 5px;
+    border: 1px solid #ccc;
+}
+
 .actpage-cart-title {
     font-size: 18px;
     color: white;
     padding: 10px 5px;
     text-align: center;
     margin: 0px;
-    background-color: rgba(0,0,0,0.8);
-    box-shadow: 0px 0px 5px #666;
-    border-radius: 10px 10px 0px 0px;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 5px 5px 0px 0px;
     width: 300px;
     height: auto;
     word-break: break-all;
@@ -1584,6 +1580,7 @@ li.collapse-blog-category {
     line-height:1.5em;
     height:1.5em;
 }
+
 .actpage-last-block{
     border-bottom: 1px solid #666;
     margin-bottom: 20px;
@@ -1666,25 +1663,27 @@ li.collapse-blog-category {
 }
 
 .actpage-purchase {
-    background: -webkit-linear-gradient(#66cccc,#00bcd4);
-    background: -o-linear-gradient(#66cccc,#00bcd4);
-    background: -moz-linear-gradient(#66cccc,#00bcd4);
-    background: linear-gradient(#66cccc,#00bcd4);
-    border-radius: 20px;
+    background-color: #ff5a5f;
+    border-radius:5px;
     text-align: center;
     padding:10px 30px;
     color: white;
     font-size: 14px;
     letter-spacing:2px;
     margin:10px auto;
-    width:125px;
+    width:150px;
+}
+
+.actpage-purchase:hover {
+    background-color: #dd4e58;
 }
 
 .actpage-holder-content {
     background-color: white;
     padding: 15px;
     margin: 20px auto;
-    box-shadow: 1px 1px 10px #666;
+    box-shadow: 0px 0px 10px #ccc;
+    border-radius:10px;
 }
 
 .actpage-holder-thumnail {
@@ -1712,14 +1711,14 @@ li.collapse-blog-category {
 }
 
 .actpage-connect {
-    border-radius: 8px;
-    width:140px;
-    margin: auto;
+    border-radius:5px;
     text-align: center;
+    padding:10px 30px;
+    color:#998675;
     font-size: 14px;
-    letter-spacing: 1px;
-    padding: 10px;
-    color: #998675;
+    letter-spacing:2px;
+    margin:10px auto;
+    width:170px;
     border: 1px solid #c7b299;
 }
 
@@ -1732,7 +1731,9 @@ li.collapse-blog-category {
     background-color: white;
     padding: 15px;
     margin:auto;
-    box-shadow: 1px 1px 10px #666;
+    box-shadow: 0px 0px 10px #ccc;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
 }
 
 .actpage-bought-title {
@@ -1780,7 +1781,8 @@ div.zabuto_calendar .table {
     -moz-border-radius:10px;
     border-radius: 10px;
     box-shadow: 1px 1px 10px #ccc;
-    margin-top: 15px;
+    width: 80%;
+    margin: 20px auto;
 }
 
 .calendar-dow {
@@ -1793,7 +1795,37 @@ div.zabuto_calendar .table {
 }
 
 .wizard > .steps .current a {
-    background-color:#00bcd4 !important;
+    background-color: #00bcd4 !important;
+    height: 30px;
+    margin: 0px 10px;
+    padding: 0px 10px;
+    color: #fff;
+    text-align: left;
+}
+
+.wizard > .steps .disabled a {
+    background: #eee;
+    color: #aaa;
+    cursor:  pointer;
+    height: 30px;
+    margin: 0px 10px;
+    padding: 0px 10px;
+    text-align: left;
+}
+
+.wizard > .steps .done a {
+    background: #ccc;
+    color: #fff;
+    cursor: pointer;
+    height: 30px;
+    margin: 0px 10px;
+    padding: 0px 10px;
+    text-align: left;
+}
+
+.wizard > .steps .number {
+    font-size: 14px;
+    line-height: 30px;
 }
 
 .purchase-panel {
@@ -1899,7 +1931,7 @@ div.zabuto_calendar .table {
 
 .purchase-surplus {
     margin: 4px 15px;
-    background-color: #00bcd4;
+    background-color: #999999;
     border-radius: 10px;
     padding: 5px 10px;
     color: white;
@@ -2023,20 +2055,48 @@ div.zabuto_calendar .table {
     background-color: #00bcd4;
     padding: 10px 20px;
     font-size: 14px;
+    border-radius: 100px;
+    height: 80px;
+    line-height: 60px;
 }
 
 .wizard > .actions a:hover {
     background-color: #02a1ad;
     padding: 10px 20px;
-    font-size: 14px;
+    border-radius: 100px;
+    height: 80px;
+    line-height: 60px;
 }
 
 .wizard > .actions {
-    position: relative;
-    display: block;
-    text-align: center;
+    position: absolute;
+    display: block;    
     width: 100%;
-    margin-top: 20px;
+    bottom: 20px;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.wizard > .actions > ul > li {
+    margin: 0px;
+}
+
+.wizard > .actions .disabled a {
+    position: absolute;
+    left: 0px;
+    cursor:default;
+    color: #fff;
+}
+
+.purchase-previous {
+    left: 0px;
+    position: absolute;
+    background:#ccc!important;
+    color: #fff!important;
+}
+
+.purchase-previous:hover {
+    background:#aaa;
 }
 
 .wizard > .steps {
