@@ -1463,7 +1463,7 @@ li.collapse-blog-category {
 }
 
 .actpage-left-content {
-    width: 60%;
+    width: calc(100%/2);
     float: left;
 }
 
@@ -1475,7 +1475,7 @@ li.collapse-blog-category {
     width: 300px;
     float: right;
     position: absolute;
-    top: -45px;
+    top:0px;
     border-radius: 5px;
     right: 20px;
 }
@@ -1515,9 +1515,8 @@ li.collapse-blog-category {
 
 .actpage-recommend-panel {
     border: 1px solid #ccc;
-    width:30%;
+    width: calc(100%/3 - 30px);
     float: left;
-    margin: 0px 8px;
     letter-spacing: 1px;
     border-radius: 10px;
 }
@@ -1558,7 +1557,7 @@ li.collapse-blog-category {
     padding: 10px 5px;
     text-align: center;
     margin: 0px;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.8);
     border-radius: 5px 5px 0px 0px;
     width: 300px;
     height: auto;
@@ -1772,7 +1771,7 @@ li.current > a{
 */
 
 div.zabuto_calendar .table {
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .wizard > .content {
@@ -1787,11 +1786,10 @@ div.zabuto_calendar .table {
 }
 
 .calendar-dow {
-    height: 50px;
+    height: 40px;
 }
 
 .badge-today {
-    font-size: 16px;
     padding: 6px;
 }
 
@@ -2054,19 +2052,22 @@ div.zabuto_calendar .table {
 
 .wizard > .actions a {
     background-color: #00bcd4;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     font-size: 14px;
-    border-radius: 100px;
+    border-radius: 80px;
     height: 80px;
-    line-height: 60px;
+    line-height: 67px;
+    width: 80px;
+    text-align: center;
 }
 
 .wizard > .actions a:hover {
     background-color: #02a1ad;
-    padding: 10px 20px;
-    border-radius: 100px;
+    border-radius: 80px;
     height: 80px;
-    line-height: 60px;
+    line-height: 67px;
+    width: 80px;
+    text-align: center;
 }
 
 .wizard > .actions {
@@ -2094,10 +2095,6 @@ div.zabuto_calendar .table {
     position: absolute;
     background:#ccc!important;
     color: #fff!important;
-}
-
-.purchase-previous:hover {
-    background:#aaa;
 }
 
 .wizard > .steps {
