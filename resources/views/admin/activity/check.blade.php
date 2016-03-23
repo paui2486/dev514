@@ -5,16 +5,16 @@
 <section id="main-content">
     <section class="wrapper">
          <h4 class="wrapper-title">
-            我的活動列表
+            待審核活動列表
          </h4>
          <table id="table" class="table table-striped table-hover">
              <thead>
                  <tr>
+                     <th>活動主</th>
                      <th>活動名稱</th>
-                     <th>活動地點</th>
-                     <th>活動時間</th>
-                     <th>票卷資訊</th>
-                     <th>其他資訊</th>
+                     <th>活動類型</th>
+                     <th>提交日期</th>
+                     <th>相關設定</th>
                  </tr>
              </thead>
              <tbody></tbody>
@@ -52,7 +52,7 @@
                 ],
                 "processing": true,
                 "responsive": true,
-                "ajax": "{{ URL::to('dashboard/my/activity/data') }}",
+                "ajax": "{{ URL::to('dashboard/activity/check/data') }}",
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
@@ -68,5 +68,13 @@
                 }
             });
         });
+
+        function passActivity(id) {
+            var xhttp = new XMLHttpRequest();
+            var url = "{{ url('dashboard/activity/pass') }}" + '/' + id;
+            xhttp.open("GET", url, true);
+            xhttp.send();
+            location.reload();
+        }
     </script>
 @stop

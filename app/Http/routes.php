@@ -99,6 +99,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('blog/expert'                    , 'BlogController@showExpert'         );
         Route::get('blog/expert/data'               , 'BlogController@getExpert'          );
 
+        Route::get('priview/activity/{id}'          , 'ActivityController@showPriview'    );
+
+        Route::get('activity/check'                 , 'ActivityController@showCheckAct'   );
+        Route::get('activity/check/data'            , 'ActivityController@getCheckAct'    );
+        Route::get('activity/pass/{id}'             , 'ActivityController@passActivity'   );
         Route::get('activity/category'              , 'ActivityController@showCategory'   );
         Route::post('activity/category'             , 'ActivityController@storeCategory'  );
         Route::get('activity/category/{id}'         , 'ActivityController@getCategory'    );

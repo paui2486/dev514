@@ -79,6 +79,7 @@ class ActivityController extends Controller
             'content'       => $request->content,
             'tag_ids'       => $request->tag_ids,
             'status'        => $request->status,
+            'time_range'    => $request->time_range,
             'max_price'     => max($prices),
             'min_price'     => min($prices),
             'activity_start'=> $activity_range[0][0],
@@ -205,6 +206,7 @@ class ActivityController extends Controller
             'ticket_description'   => $request->ticket_description,
             'location'      => $request->location,
             'content'       => $request->content,
+            'time_range'    => $request->time_range,
             'tag_ids'       => $request->tag_ids,
             'status'        => $request->status,
             'activity_start'=> $activity_range[1],
@@ -544,5 +546,78 @@ class ActivityController extends Controller
         }
 
         return Redirect::to('dashboard');
+    }
+
+    public function showCheckAct()
+    {
+        return view('admin.activity.check');
+    }
+
+    public function getCheckAct()
+    {
+        $check = DB::table('activities')
+                      ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
+                      ->leftJoin('categories', 'categories.id', '=', 'activities.category_id')
+                      ->select(array(
+                        'users.name', 'activities.title', 'activities.created_at',
+                        'categories.name as cat_name', 'activities.id',
+                      ))
+                      ->where('activities.status', 3);
+
+        return Datatables::of($check)
+            ->edit_column('id','<div style="white-space: nowrap;">
+                  <a class="btn btn-info btn-sm iframe" href="{{{ url("dashboard/priview/activity/".$id) }}}" >預覽<a>
+                  <div class="btn btn-success btn-sm" onclick="passActivity({{$id}})"><span class="glyphicon glyphicon-pencil"></span> 通過</div>
+                </div>')
+            ->make();
+    }
+
+    public function passActivity($id)
+    {
+        DB::table('activities')->where('id', $id)->update(array('status' => 4));
+    }
+
+    public function showPriview()
+    {
+        $activity = DB::table('activities')
+                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                      ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
+                      ->select(array(
+                        'activities.id' ,       'activities.title',           'activities.tag_ids',
+                        'activities.thumbnail', 'activities.description',     'activities.location',
+                        'activities.content',   'activities.activity_start',  'activities.activity_end',
+                        'activities.counter',   'activities.category_id',     'activities.max_price',
+                        'activities.min_price', 'activities.remark',          'activities.time_range',
+                        'categories.name as category',  'users.name as hoster', 'users.nick as nick',
+                        'users.avatar as host_photo',   'users.description as host_destricption'
+                      ))
+                      ->first();
+
+        $tickets = DB::table('act_tickets')
+                    ->where('activity_id', $activity->id)
+                    ->where('left_over', '>', '0')
+                    ->select(array(
+                        'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                    ))
+                    ->get();
+
+        $suggests = DB::table('activities')
+                      ->where('activities.status', '>=', 4)
+                      ->where('activities.category_id', $activity->category_id)
+                      ->where('activities.id', '!=', $activity->id)
+                      ->select(array(
+                        'activities.thumbnail', 'activities.title',     'activities.description',
+                        'activities.location',  'activities.min_price', 'activities.activity_start',
+                      ))
+                      ->groupBy('activities.title')
+                      ->orderBy('activities.created_at', 'ASC')
+                      ->take(3)
+                      ->get();
+
+        DB::table('activities')->where('id', $activity->id)->increment('counter');
+
+        $meta   = array();
+
+        return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests'));
     }
 }
