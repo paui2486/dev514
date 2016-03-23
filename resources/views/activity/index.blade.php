@@ -19,7 +19,7 @@
                         <a href="{{ URL('member/'. $activity->hoster ) }}">
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
                         </div>
-                        <div class="actpage-holder-name">喵喵好可愛@if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif</div>
+                        <div class="actpage-holder-name">@if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif</div>
                         </a>
                     </div>
                     
@@ -40,8 +40,8 @@
                             </div>
                                 @endforeach
                             @else
-                              <div class="actpage-cart-time">
-                                  所有票券已銷售完畢！
+                              <div class="dashboard-text">
+                                  所有票券都賣完囉！
                               </div>
                             @endif 
                         </div>
