@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use DB;
 use Log;
 use Auth;
+use Input;
 use Image;
+use Session;
 use Response;
 use Redirect;
 use Datatables;
@@ -89,7 +91,7 @@ class TicketController extends Controller
                     'total_numbers' => $request->total_numbers,
                 );
                 $result = DB::table('act_tickets')->insert($storeArray);
-                return Redirect::to('/dashboard/activity/'.$id.'/tickets');
+                return Redirect::to('/dashboard/activity/'.$activity_id.'/tickets');
             } else {
                 return Redirect::to('/');
             }
@@ -142,6 +144,14 @@ class TicketController extends Controller
             return Redirect::to('/');
         } else {
             if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
+                $ticket = DB::table('act_tickets')->where('id', $ticket_id)->first();
+                $left_over = $ticket->left_over + $request->total_numbers - $ticket->total_numbers;
+
+                if ( $left_over < 0) {
+                    Session::flash('message', '申請完成，恭喜您已經能舉辦活動，靜待系統進行審核');
+                    return Redirect::to('dashboard/activity/'. $id .'/tickets');
+                }
+
                 $sale_range   = array();
                 $event_range  = array();
                 preg_match("/(.*)\s-\s(.*)/", $request->sale_time,  $sale_range);
@@ -152,6 +162,7 @@ class TicketController extends Controller
                     'price'         => $request->price,
                     'description'   => $request->description,
                     'total_numbers' => $request->total_numbers,
+                    'left_over'     => $left_over,
                     'ticket_start'  => $event_range[1],
                     'ticket_end'    => $event_range[2],
                     'sale_start'    => $sale_range[1],
