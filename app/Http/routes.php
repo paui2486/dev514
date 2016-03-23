@@ -154,8 +154,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/data'                          , 'ActivityController@data'       );
         Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'  );
         Route::post('activity/{id}/update'                  , 'ActivityController@update'     );
-        Route::get('activity/history'                       , 'ActivityController@getHistory' );
-        Route::get('activity/old_data'                      , 'ActivityController@showOldData');
+        // Route::get('activity/history'                       , 'ActivityController@getHistory' );
+        // Route::get('activity/old_data'                      , 'ActivityController@showOldData');
         Route::resource('activity'                          , 'ActivityController'            );
 
         Route::get('activity/{id}/tickets/data'             , 'TicketController@data'         );

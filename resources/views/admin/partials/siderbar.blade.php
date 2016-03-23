@@ -70,25 +70,20 @@
                     <span>活動管理系統</span>
                 </a>
                 <ul class="sub">
-                    @if ( Auth::user()->adminer )
+                  @if ( Auth::user()->adminer || Auth::user()->hoster )
+                    <li><a href="{{URL::to('dashboard/activity/create')}}">我要新增活動</a></li>
+                    <li><a href="{{URL::to('dashboard/activity')}}">全部活動列表</a></li>
+
+                      @if ( Auth::user()->adminer )
                         <!-- <li><a href="{{URL::to('dashboard/expert/checkout')}}">活動主查核</a></li> -->
-                        <li><a href="{{URL::to('dashboard/activity/create')}}">代為新增活動</a></li>
                         <li><a href="{{URL::to('dashboard/activity/category')}}">活動分類列表</a></li>
-                        <li><a href="{{URL::to('dashboard/activity')}}">全部活動列表</a></li>
                         <li><a href="{{URL::to('dashboard/activity/check')}}">* 待審核活動</a></li>
                         <li><a href="{{URL::to('dashboard/activity/hoster')}}">活動廠商管理</a></li>
                         <!-- <li><a href="{{URL::to('dashboard/activity/coupon')}}">優惠代碼管理</a></li> -->
-                    @endif
-                    @if ( Auth::user()->adminer || Auth::user()->hoster )
-                        <li><a href="{{URL::to('dashboard/activity/create')}}">我要新增活動</a></li>
-                    @endif
-                    @if ( Auth::user()->hoster )
-                    <li><a href="{{URL::to('dashboard/activity')}}">我的活動列表</a></li>
-                    <!-- <li><a href="{{URL::to('dashboard/my/activity/history')}}">過往辦的活動</a></li> -->
-                    <!-- <li><a href="{{URL::to('dashboard/activity/invoice')}}">支出收入管理</a></li> -->
-                    @else
+                      @endif
+                  @else
                     <li><a href="{{URL::to('dashboard/register/expert')}}">我要舉辦活動</a></li>
-                    @endif
+                  @endif
                     <li><a href="{{URL::to('dashboard/tickets')}}">我的活動票券</a></li>
                     <!-- <li><a href="{{URL::to('dashboard/activity')}}">我關注的活動</a></li> -->
                 </ul>
