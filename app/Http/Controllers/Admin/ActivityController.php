@@ -212,14 +212,12 @@ class ActivityController extends Controller
             'updated_at'    => date("Y-m-d H:i:s"),
         );
 
-        Log::error($updateArray);
-
         if( Auth::user()->adminer )
         {
-            $storeArray['hoster_id'] = $request->hoster_id;
-            $storeArray['counter'] = $request->counter;
+            $updateArray['hoster_id'] = $request->hoster_id;
+            $updateArray['counter']   = $request->counter;
         } else {
-            $storeArray['hoster_id'] = Auth::id();
+            $updateArray['hoster_id'] = Auth::id();
         }
 
         $activity_id        = $id;
