@@ -75,16 +75,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('friends'                    , 'AuthController@friends'           );
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
-    Route::group(['middleware' => 'auth'], function() {
-        Route::get('dashboard'                      , 'Admin\AdminController@index'         );
-        Route::get('dashboard/profile'              , 'AuthController@profile'              );
-        Route::get('dashboard/register/expert'      , 'Admin\ActivityController@askExpert'  );
-        Route::post('dashboard/register/expert'     , 'Admin\ActivityController@regExpert'  );
-        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'       );
-        Route::get('dashboard/tickets'              , 'Admin\ActivityController@showTicket' );
-        Route::get('dashboard/tickets/data'         , 'Admin\ActivityController@getTicket'  );
-    });
-
     // for admin
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
 
@@ -164,14 +154,27 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/data'                          , 'ActivityController@data'       );
         Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'  );
         Route::post('activity/{id}/update'                  , 'ActivityController@update'     );
+        Route::get('activity/history'                       , 'ActivityController@getHistory' );
+        Route::get('activity/old_data'                      , 'ActivityController@showOldData');
         Route::resource('activity'                          , 'ActivityController'            );
 
         Route::get('activity/{id}/tickets/data'             , 'TicketController@data'         );
-        Route::post('activity/{id}/tickets/{tickets}/update'          , 'TicketController@update'       );
+        Route::post('activity/{id}/tickets/{tickets}/update', 'TicketController@update'       );
         Route::get('activity/{id}/tickets/{tickets}/delete' , 'TicketController@getDelete'    );
         Route::resource('activity/{id}/tickets'             , 'TicketController'              );
     });
 
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('dashboard'                      , 'Admin\AdminController@index'         );
+        Route::get('dashboard/profile'              , 'AuthController@profile'              );
+        Route::get('dashboard/register/expert'      , 'Admin\ActivityController@askExpert'  );
+        // Route::get('dashboard/my/activity'          , 'Admin\ActivityController@showMyAct'  );
+        // Route::get('dashboard/my/activity/data'     , 'Admin\ActivityController@getMyAct'   );
+        Route::post('dashboard/register/expert'     , 'Admin\ActivityController@regExpert'  );
+        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'       );
+        Route::get('dashboard/tickets'              , 'Admin\ActivityController@showTicket' );
+        Route::get('dashboard/tickets/data'         , 'Admin\ActivityController@getTicket'  );
+    });
 });
 
 /*

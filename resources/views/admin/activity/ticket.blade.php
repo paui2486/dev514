@@ -5,22 +5,18 @@
 <section id="main-content">
     <section class="wrapper">
          <h4 class="wrapper-title">
-             活動廠商管理
-             <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/member/create') }}}"
-                    class="btn btn-sm  btn-primary">
-                      <span class="glyphicon glyphicon-plus-sign"></span> 新增
-                  </a>
-             </div>
+             我的活動票券
          </h4>
+
          <table id="table" class="table table-striped table-hover">
              <thead>
                  <tr>
                      <th>ID</th>
-                     <th>活動主</th>
-                     <th>活動數</th>
-                     <th>總觀看數</th>
-                     <th>相關</th>
+                     <th>票券資訊</th>
+                     <th>票券時間</th>
+                     <th>登記信箱</th>
+                     <th>登記電話</th>
+                     <th>付款狀態</th>
                  </tr>
              </thead>
              <tbody></tbody>
@@ -56,15 +52,21 @@
                     },
                     'csvHtml5',
                 ],
+                // "aoColumnDefs": [
+                //     {
+                //         "bSortable": false,
+                //         "aTargets": [ 6 ]
+                //     },
+                // ],
                 "processing": true,
                 "responsive": true,
-                "ajax": "{{ URL::to('dashboard/activity/hoster/data') }}",
+                "ajax": "{{ URL::to('dashboard/tickets/data') }}",
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
                         speed: 660,
-                        width: "80%",
-                        height: "80%",
+                        width: "40%",
+                        height: "30%",
                         opacity: 0.4,
                         transition: "fade",
                         onClosed: function () {

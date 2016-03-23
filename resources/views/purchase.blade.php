@@ -1,6 +1,10 @@
 @extends('layouts.app')
- 
- @section('content')
+
+@section('meta')
+<title>514 訂購流程</title>
+@endsection
+
+@section('content')
 <div class="row purchase-content">
     <div class="purchase-left"  style="background-image:url('/img/pics/purchase-ticket.png')">
         <div class="purchase-ticket">
@@ -16,9 +20,9 @@
             </div>
             早鳥優惠票65折 x 1<br>
                 <p class="dashed"></p>
-        
+
         </div>
-           
+
     </div>
     <div class="purchase-right">
         <div class="purchase-panel">
@@ -89,7 +93,7 @@
                             <label for="date2">上午場 10:00~12:00</label>
                             </div>
                         <div class="purchase-surplus">剩123位</div>
-                        </div>  
+                        </div>
                 </div>
 -->
             </div>

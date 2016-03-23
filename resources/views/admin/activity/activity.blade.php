@@ -5,22 +5,16 @@
 <section id="main-content">
     <section class="wrapper">
          <h4 class="wrapper-title">
-             活動廠商管理
-             <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/member/create') }}}"
-                    class="btn btn-sm  btn-primary">
-                      <span class="glyphicon glyphicon-plus-sign"></span> 新增
-                  </a>
-             </div>
+            我的活動列表
          </h4>
          <table id="table" class="table table-striped table-hover">
              <thead>
                  <tr>
-                     <th>ID</th>
-                     <th>活動主</th>
-                     <th>活動數</th>
-                     <th>總觀看數</th>
-                     <th>相關</th>
+                     <th>活動名稱</th>
+                     <th>活動地點</th>
+                     <th>活動時間</th>
+                     <th>票卷資訊</th>
+                     <th>其他資訊</th>
                  </tr>
              </thead>
              <tbody></tbody>
@@ -58,7 +52,7 @@
                 ],
                 "processing": true,
                 "responsive": true,
-                "ajax": "{{ URL::to('dashboard/activity/hoster/data') }}",
+                "ajax": "{{ URL::to('dashboard/my/activity/data') }}",
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
