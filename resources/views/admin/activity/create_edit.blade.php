@@ -230,14 +230,21 @@
                                     </label>
                                     <label class="col-xs-3">
                                         <input type="radio" name="status" value="3"
-                                        {{{ Input::old('status', (isset($activity) && $activity->status == 2 ) ? 'checked' : null) }}}>
+                                        {{{ Input::old('status', (isset($activity) && $activity->status == 3 ) ? 'checked' : null) }}}>
                                         送審
                                     </label>
                                     <label class="col-xs-3">
                                         <input type="radio" name="status" value="2"
-                                        {{{ Input::old('status', (isset($activity) && $activity->status == 3 ) ? 'checked' : null) }}}>
+                                        {{{ Input::old('status', (isset($activity) && $activity->status == 2 ) ? 'checked' : null) }}}>
                                         隱藏
                                     </label>
+                                    @if (Auth::user()->adminer )
+                                    <label class="col-xs-3">
+                                        <input type="radio" name="status" value="4"
+                                        {{{ Input::old('status', (isset($activity) && $activity->status == 4 ) ? 'checked' : null) }}}>
+                                        發佈
+                                    </label>
+                                    @endif
                                 </div>
                             </div>
                         </div>
