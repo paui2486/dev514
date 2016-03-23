@@ -283,7 +283,7 @@ class ActivityController extends Controller
        // need to change targets to processing bar
 
        return Datatables::of($activities)
-           ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status >= 3) 已發布 @elseif($status == 2) 已隱藏 @else 已刪除 @endif')
+           ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status ==3 ) 審核中 @elseif($status == 4) 已發布 @elseif($status == 2) 已隱藏 @else 已刪除 @endif')
            ->add_column('actions', '
                  <div style="white-space: nowrap;">
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"                class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
