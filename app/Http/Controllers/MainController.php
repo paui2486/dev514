@@ -149,7 +149,9 @@ class maincontroller extends controller
                 'categories.thumbnail', 'categories.name', 'categories.logo'
             )
             ->groupBy('activities.category_id')
+            ->orderBy('count', 'desc')
             ->get();
+
         foreach ($categories as $category)
         {
             if ($category->count >= 1){
