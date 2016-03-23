@@ -14,9 +14,54 @@
         </div>
         <div class="actpage-main-image" style="background-image:url('{{ asset($activity->thumbnail )}}')">
         </div>
+         <div class="row actpage-dashboard">
+                    <div class="col-md-2">
+                        <a href="{{ URL('member/'. $activity->hoster ) }}">
+                        <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
+                        </div>
+                        <div class="actpage-holder-name">喵喵好可愛@if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif</div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-md-6 actpage-dashboard-info">
+                        <p>{{ $activity->title }}</p>
+                        <div class="dashboard-block-date">
+                            <img src="/img/icons/info-date.png">
+                            @if(count($tickets)>0)
+                                @foreach($tickets as $ticket)
+                            <div class="dashboard-text">
+                                        <p>
+                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}}
+                                            </p>
+                                            <p>～</p>
+                                <p>
+                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}}
+                                        </p>
+                            </div>
+                                @endforeach
+                            @else
+                              <div class="actpage-cart-time">
+                                  所有票券已銷售完畢！
+                              </div>
+                            @endif 
+                        </div>
+
+                        <div class="dashboard-block">
+                            <img src="/img/icons/info-price.png">
+                            <div class="dashboard-text">
+                                 <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>   
+                            </div>
+                        </div>
+                        <div class="dashboard-block">
+                            <img src="/img/icons/info-where.png">
+                            <div class="dashboard-text">
+                                 {{ $activity->location }}     
+                            </div>
+                        </div>
+                     </div>
+            </div>
         <div class="actpage-panel">
             <div class="col-md-8 actpage-left-content">
-                <p class="actpage-title">{{ $activity->title }}</p>
                 <div class="actpage-activity-content">
                     <div class="row actpage-header">
                         <p class="actpage-header-left">活動介紹</p>
@@ -38,9 +83,10 @@
                     </div>
                     <div class="row actpage-recommend">
                         @foreach($suggests as $suggest)
-                        <a href="{{ URL::to('activity/' . $activity->category . '/' . $suggest->title ) }}">
-                            <div class="actpage-recommend-panel">
+                        <div class="actpage-recommend-panel">
+                            <a href="{{ URL::to('activity/' . $activity->category . '/' . $suggest->title ) }}">
                                 <div class="actpage-recommend-thumnail" style="background-image:url('{{ asset($suggest->thumbnail) }}')"></div>
+                            </a>
                                 <div class="actpage-recommend-info">
                                     <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
                                     <p class="word-indent-02">{{ $suggest->description }}</p>
@@ -49,7 +95,6 @@
                                     <li><span class="word-indent-01">{{ $suggest->location }}</span></li>
                                 </div>
                             </div>
-                        </a>
                         @endforeach
                     </div>
                     <div class="row actpage-header">
@@ -59,73 +104,42 @@
                     </div>
                 </div>
             </div>
+                
             <div id="RightFixed" class="col-md-4 actpage-right-content">
                 <p class="actpage-cart-title">{{ $activity->title }}</p>
                 <div class="actpage-cart-content">
-                        <div class="row actpage-cart-info actpage-time-block">
-                            <div class="row" style="margin:0px;">
-                            <img src="{{ asset('/img/icons/carttime.png') }}">
-                            <p>活動時間</p>
-                            </div>
-                            @if(count($tickets)>0)
-                                @foreach($tickets as $ticket)
-                                <div class="actpage-cart-time">
-                                    <div class="actpage-cart-time01">
-                                        <p>
-                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}}
-                                        </p>
-                                    </div>
-                                    <div>～</div>
-                                    <div class="actpage-cart-time02">
-                                        <p>
-                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="actpage-surplus">
+                    <p>馬上訂購票券</p>
+                @foreach($tickets as $ticket)
+                     <div class="actpage-ticket">
+                            <label><input type="radio" value="all" checked>{{ $ticket->name }}</label>
+
+<!--
+                            <div class="col-md-4 actpage-surplus">
                                     <span>剩 {{ $ticket->left_over }} 位</span>
-                                </div>
-                                @endforeach
-                            @else
-                              <div class="actpage-cart-time">
-                                  所有票券已銷售完畢！
-                              </div>
-                            @endif
-                        </div>
-                         <div class="actpage-cart-info">
+                            </div>
                             <div class="row" style="margin:0px;">
-                            <img src="{{ asset('/img/icons/carttimelong.png') }}">
-                            <p>活動長度</p>
-                                <div class="actpage-cart-timelength">
+                            <img src="{{ asset('/img/icons/carticon-02.png') }}">
+                            <p class="col-md-4">活動長度</p>
+                                <div class="col-md-8 actpage-cart-timelength">
                                     {{ $activity->time_range }} 小時
                                 </div>
                             </div>
-                        </div>
-                        <div class="actpage-cart-info">
+                            <div class="actpage-cart-info actpage-last-block">
                             <div class="row" style="margin:0px;">
-                            <img src="{{ asset('/img/icons/cartprice.png') }}">
-                            <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>
-                            </div>
-                        </div>
-
-                        <div class="actpage-cart-info">
-                            <div class="row" style="margin:0px;">
-                            <img src="{{ asset('/img/icons/cartlocation.png') }}">
-                            <p class="cart-location">{{ $activity->location }}</p>
-                            </div>
-                        </div>
-                        <div class="actpage-cart-info actpage-last-block">
-                            <div class="row" style="margin:0px;">
-                            <img src="{{ asset('/img/icons/cartlanguage.png') }}">
+                            <img src="{{ asset('/img/icons/carticon-06.png') }}">
                             <p>{{ $activity->remark }}</p>
                             </div>
-                        </div>
-                        @if(count($tickets)>0)
-                            <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}"><div class="row actpage-purchase">前往訂購</div></a>
-                        @else
-                            <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票卷可供您訂購')">無法訂購</div>
-                        @endif
+                            </div>
+-->
                     </div>
+                @endforeach
+
+                        @if(count($tickets)>0)
+                            <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}"><div class="row actpage-purchase">Let's Go</div></a>
+                        @else
+                            <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
+                        @endif
+                </div>
                
 <!--
                 <div class="actpage-holder-content">

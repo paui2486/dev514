@@ -1448,24 +1448,102 @@ li.collapse-blog-category {
     top:80px;
 }
 
+.actpage-dashboard {
+    background-color: #fff;
+    padding: 15px 0px;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    width: 80%;
+    max-width: 1050px;
+    margin: auto;
+}
+
+.actpage-dashboard-info  > p {
+    font-size: 20px;
+    color: #666666;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 0px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.actpage-dashboard-info {
+    font-size: 16px;
+    color: #333333;
+}
+
+.dashboard-block-date {
+    float: left;
+    width: calc(100%/3);
+    text-align: center;
+}
+
+.dashboard-block-date p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.dashboard-block {
+    padding: 0px;
+    width: calc(100%/3);
+    float: left;
+    text-align: center;
+}
+
+.actpage-dashboard-info img{
+    width: 35px;
+    height: 35px;
+    opacity: 0.5;
+}
+
+.dashboard-block-date img {
+    width: 32px;
+}
+
+.dashboard-text {
+    margin: 10px 0px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
 .actpage-panel {
-    background-color: white;
+    background-color:#f7f7f7;
     max-width: 1050px;
     width: 80%;
     z-index: 999;
     margin: auto;
-    padding: 20px 30px;
+    padding:0px 20px;
     display: flex;
-    box-shadow: 1px 1px 10px #ccc;
+    border: 1px solid #ccc;
     margin-bottom: 20px;
     min-height: 1000px;
     position: relative;
 }
 
-.actpage-title {
-    font-size: 24px;
-    color: black;
-    margin-bottom: 20px;
+.actpage-holder-thumnail {
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+    background-position: top;
+    border-radius: 120px;
+    border: 1px solid #ccc;
+    margin:10px auto;
+}
+
+.actpage-holder-name {
+    margin:10px auto;
+    text-align: center;
+    font-size: 14px;
+    color: #736357;
+}
+
+.actpage-holder-intro {
+    margin:10px auto;
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 0px 15px;
+    font-size: 14px;
 }
 
 .actpage-left-content {
@@ -1474,38 +1552,31 @@ li.collapse-blog-category {
 
 .actpage-activity-content {
     overflow: auto;
+    margin: 10px 0px;
 }
 
 .actpage-right-content {
     position: absolute;
-    top:0px;
+    top:-200px;
     border-radius: 5px;
     width: 340px;
-
+    z-index: 9999;
 }
-
-/*
-.fixed-bottom {
-    bottom: 10px;
-    position: absolute;
-    top: auto;
-}
-*/
 
 .right-content-fixed {
     position: fixed;
+    top:0px;
 }
 
-
-
 .actpage-header {
-    margin: 10px 0px;
+    margin: 15px 0px;
     padding: 0px;
 }
 
 .actpage-header-left {
     font-size: 16px;
-    border: 1px solid;
+    border: 1px solid #888888;
+    border-radius: 5px;
     padding: 5px 10px;
     width: 20%;
     text-align: center;
@@ -1528,23 +1599,24 @@ li.collapse-blog-category {
 }
 
 .actpage-recommend {
-    margin: 10px 0px 20px 0px;
+    margin:10px auto;
 }
 
 .actpage-recommend-panel {
     border: 1px solid #ccc;
-    width: calc(100%/3 - 30px);
+    width:calc(100%/3 - 10px);
+    margin: 5px;
     float: left;
     letter-spacing: 1px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .actpage-recommend-thumnail {
     width: 100%;
-    height: 100px;
+    height: 130px;
     background-position: top;
     background-size: cover;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .actpage-recommend-info {
@@ -1582,104 +1654,34 @@ li.collapse-blog-category {
     word-break: break-all;
 }
 
-.actpage-cart-info {
-    margin: 10px 0px;
-}
-
-.cart-location {
-    width:88%;
-}
-/*
-.actpage-cart-location {
-    width: 245px;
-    overflow : hidden;
-    text-overflow:ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp:1;
-    -webkit-box-orient: vertical;
-    position:relative;
-    line-height:1.5em;
-    height:1.5em;
-}
-*/
-
-
-.actpage-last-block{
-    border-bottom: 1px solid #666;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-}
-
-.actpage-cart-info img {
-    width: 25px;
-    float: left;
-}
-
-.actpage-cart-info > div > p {
-    color: #736357;
-    font-size: 15px;
-    line-height: 24px;
-    float: left;
-    padding-left: 5px;
-}
-
-.actpage-cart-last > span {
-    border: 1px solid;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 20px;
-    font-size: 13px;
-}
-
-.cart-time-info {
-    padding: 5px;
-    margin: 5px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
-.actpage-cart-time {
-    color:#998675;
-    font-size: 15px;
-    text-align: center;
-    width: 70%;
-    float: left;
-    border: 1px solid #c7b299;
-    border-radius: 10px;
-    padding: 5px;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.actpage-cart-time > div > p {
-    margin-bottom: 0px;
+.actpage-ticket > input[type="text"] {
+    border:1px solid red;
 }
 
 .actpage-surplus {
-    width: 30%;
-    float: left;
     font-size: 12px;
     margin-top: 26px;
-    padding-left: 5px;
     text-align: center;
+    padding: 0px;
 }
 
 .actpage-surplus span {
     color:#fff;
-    background-color:#c7b299;
+    background-color:#999999;
     padding:5px 8px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .actpage-cart-timelength {
-    float: left;
-    margin: 0px 10px;
-    font-size: 15px;
-    color:#fff;
-    background-color:#736357;
-    padding: 3px 10px;
-    border-radius: 10px;
+    font-size: 13px;
+    border: 1px solid #b3b3b3;
+    text-align: center;
+    color:#999999;
+    padding:5px 8px;
+    text-align: center;
+    border-radius:5px;
+    width: 40%;
 }
 
 .actpage-cart-content > span img {
@@ -1692,63 +1694,14 @@ li.collapse-blog-category {
     text-align: center;
     padding:10px 30px;
     color: white;
-    font-size: 14px;
+    font-size: 15px;
     letter-spacing:2px;
     margin:10px auto;
-    width:150px;
+    width:100%;
 }
 
 .actpage-purchase:hover {
     background-color: #dd4e58;
-}
-
-.actpage-holder-content {
-    background-color: white;
-    padding: 15px;
-    margin: 20px auto;
-    box-shadow: 0px 0px 10px #ccc;
-    border-radius:10px;
-}
-
-.actpage-holder-thumnail {
-    border-radius: 200px;
-    width:150px;
-    height: 150px;
-    margin: auto;
-    background-size: cover;
-    background-position: top;
-}
-
-.actpage-holder-name {
-    margin:10px auto;
-    text-align: center;
-    font-size: 16px;
-    color: #736357;
-}
-
-.actpage-holder-intro {
-    margin:10px auto;
-    text-align: center;
-    letter-spacing: 1px;
-    padding: 0px 15px;
-    font-size: 14px;
-}
-
-.actpage-connect {
-    border-radius:5px;
-    text-align: center;
-    padding:10px 30px;
-    color:#998675;
-    font-size: 14px;
-    letter-spacing:2px;
-    margin:10px auto;
-    width:170px;
-    border: 1px solid #c7b299;
-}
-
-.actpage-connect:hover {
-    background-color: #c7b299;
-    color: white;
 }
 
 .actpage-bought-content {
