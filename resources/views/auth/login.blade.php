@@ -53,11 +53,11 @@
 
                         </div>
                 </div>
-                <div class="login-button col-md-6 col-md-offset-4">
+                <div class="login-button col-md-offset-4">
                     <button type="submit" class="btn btn-primary">
                         登入
                     </button>
-                    <a class="btn btn-primary facebook-login" href="redirect">使用Facebook登入</a>
+                    <a class="btn  facebook-login" href="redirect">使用Facebook登入</a>
                 </div>
             </form>
         </div>

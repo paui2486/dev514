@@ -70,12 +70,12 @@
                     </div>
                 </div>
 
-                <div class="register-button">
-                    <div class="login-button col-md-6 col-md-offset-4">
+                <div class="row register-button">
+                    <div class="login-button col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
                             註冊
                         </button>
-                        <a class="btn btn-primary facebook-login" href="redirect">使用Facebook註冊</a>
+                        <a class="btn facebook-login" href="redirect">使用Facebook註冊</a>
                     </div>
                 </div>
             </form>

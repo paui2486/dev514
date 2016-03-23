@@ -111,7 +111,7 @@
                         <div class="actpage-cart-info">
                             <div class="row" style="margin:0px;">
                             <img src="{{ asset('/img/icons/cartlocation.png') }}">
-                            <p>{{ $activity->location }}</p>
+                            <p class="cart-location">{{ $activity->location }}</p>
                             </div>
                         </div>
                         <div class="actpage-cart-info actpage-last-block">
@@ -187,12 +187,12 @@ $(document).ready(function () {
         }
 //        console.log(scrollbottom);
         
-        var scrollbottom = $(this).scrollTop() - $(window).height() ;
-        if (scrollbottom > 550 ) {
-            RightFixed.addClass ("fixed-bottom");
-        } else {
-            RightFixed.removeClass("fixed-bottom");
-        }
+//        var scrollbottom = $(this).scrollTop() - $(window).height() ;
+//        if (scrollbottom > 550 ) {
+//            RightFixed.addClass ("fixed-bottom");
+//        } else {
+//            RightFixed.removeClass("fixed-bottom");
+//        }
     });
     
 //    RightFixed.on("scroll", function(e) {
