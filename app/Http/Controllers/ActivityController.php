@@ -109,7 +109,7 @@ class ActivityController extends Controller
                         'categories.name as category',  'users.name as hoster', 'users.nick as nick',
                         'users.avatar as host_photo',   'users.description as host_destricption'
                       ))
-                      ->where('activities.status', '>=', '2')
+                      ->where('activities.status', '>=', 4)
                       ->first();
 
         if (empty($activity)){
@@ -124,7 +124,7 @@ class ActivityController extends Controller
                         ->get();
 
             $suggests = DB::table('activities')
-                          ->where('activities.status', '>=', 2)
+                          ->where('activities.status', '>=', 4)
                           ->where('activities.category_id', $activity->category_id)
                           ->where('activities.id', '!=', $activity->id)
                           ->select(array(

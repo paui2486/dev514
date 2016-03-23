@@ -74,6 +74,7 @@ class ActivityController extends Controller
             'title'         => $request->title,
             'category_id'   => $request->category_id,
             'description'   => $request->description,
+            'ticket_description'   => $request->ticket_description,
             'location'      => $request->location,
             'content'       => $request->content,
             'tag_ids'       => $request->tag_ids,
@@ -149,7 +150,7 @@ class ActivityController extends Controller
         if (Auth::user()->adminer) {
             $activity = DB::table('activities')->find($id);
             $hosters  = DB::table('users')
-                        ->where('author', 1)
+                        ->where('hoster', 1)
                         ->select('id', 'name')
                         ->get();
         } else {
@@ -201,6 +202,7 @@ class ActivityController extends Controller
             'title'         => $request->title,
             'category_id'   => $request->category_id,
             'description'   => $request->description,
+            'ticket_description'   => $request->ticket_description,
             'location'      => $request->location,
             'content'       => $request->content,
             'tag_ids'       => $request->tag_ids,
@@ -209,6 +211,8 @@ class ActivityController extends Controller
             'activity_end'  => $activity_range[2],
             'updated_at'    => date("Y-m-d H:i:s"),
         );
+
+        Log::error($updateArray);
 
         if( Auth::user()->adminer )
         {
@@ -265,28 +269,21 @@ class ActivityController extends Controller
      */
     public function data()
     {
-        if (Auth::user()->adminer){
-            $activities = DB::table('activities')
-                        ->leftJoin('users',      'activities.hoster_id',     '=', 'users.id')
-                        ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                        ->select(array(
-                          'activities.id',       'users.name',             'categories.name as category',
-                          'activities.title',    'activities.counter',     'activities.targets',          'activities.status'))
-                        ->orderBy('activities.created_at', 'ASC');
-        } else {
-            $activities = DB::table('activities')
-                        ->leftJoin('users',      'activities.hoster_id',     '=', 'users.id')
-                        ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                        ->select(array(
-                          'activities.id',       'users.name',             'categories.name as category',
-                          'activities.title',    'activities.counter',     'activities.targets',          'activities.status'))
-                        ->orderBy('activities.created_at', 'ASC')
-                        ->where('users.id', Auth::id());
+        $activities = DB::table('activities')
+                    ->leftJoin('users',      'activities.hoster_id',     '=', 'users.id')
+                    ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                    ->select(array(
+                      'activities.id',       'users.name',             'categories.name as category',
+                      'activities.title',    'activities.counter',     'activities.targets',          'activities.status'))
+                    ->orderBy('activities.created_at', 'ASC');
+
+        if (!Auth::user()->adminer){
+            $activities->where('users.id', Auth::id());
         }
        // need to change targets to processing bar
 
        return Datatables::of($activities)
-           ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status == 2) 已發布 @elseif($status == 3) 已隱藏 @else 已刪除 @endif')
+           ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status >= 3) 已發布 @elseif($status == 2) 已隱藏 @else 已刪除 @endif')
            ->add_column('actions', '
                  <div style="white-space: nowrap;">
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"                class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
@@ -494,6 +491,7 @@ class ActivityController extends Controller
                      ->orderBy('users.created_at', 'ASC');
 
         return Datatables::of($articles)
+            ->add_column('setting','相關設定？')
             ->make();
     }
 
@@ -542,7 +540,6 @@ class ActivityController extends Controller
             DB::table('users')
                   ->where('id', Auth::id())
                   ->update(array(
-                    'ask_hoster'  => 1,
                     'hoster'      => 1,
                     'updated_at'  => date("Y-m-d H:i:s"),
                   ));

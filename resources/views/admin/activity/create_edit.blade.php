@@ -93,11 +93,11 @@
                                     <select style="width: 100%" name="hoster_id" id="hoster_id" class="form-control">
                                     @foreach($hosters as $hoster)
                                         <option value="{{$hoster->id}}"
-                                        @if(!empty($activitys))
-                                            @if($activitys->hoster_id==$hoster->id)
+                                        @if(!empty($activity))
+                                            @if( $activity->hoster_id == $hoster->id )
                                         selected="selected"
                                             @endif
-                                        @endif >{{$hoster->name}}
+                                        @endif > {{$hoster->name}}
                                         </option>
                                     @endforeach
                                     </select>
@@ -113,14 +113,14 @@
                                 <div class="col-sm-10">
                                     <select style="width: 100%" name="category_id" id="category_id" class="form-control">
                                       @foreach($categories as $category)
-                                        <option value="{{$category->id}}"
-                                        @if(!empty($activitys))
-                                            @if($activitys->category_id==$category->id)
-                                                selected="selected"
-                                            @endif
-                                        @endif >{{$category->name}}
-                                        </option>
-                                      @endforeach
+                                          <option value="{{$category->id}}"
+                                          @if(!empty($activity))
+                                              @if($activity->category_id == $category->id)
+                                                  selected
+                                              @endif
+                                          @endif >{{$category->name}}
+                                          </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -172,6 +172,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group {{{ $errors->has('ticket_description') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="ticket_description">
+                                    購票說明
+                                </label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="ticket_description" id="ticket_description"
+                                        value="{{{ Input::old('ticket_description', isset($activity) ? $activity->ticket_description : null) }}}" />
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group {{{ $errors->has('tag_ids') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="tag_ids">
@@ -218,12 +229,12 @@
                                         草稿
                                     </label>
                                     <label class="col-xs-3">
-                                        <input type="radio" name="status" value="2"
+                                        <input type="radio" name="status" value="3"
                                         {{{ Input::old('status', (isset($activity) && $activity->status == 2 ) ? 'checked' : null) }}}>
-                                        發佈
+                                        送審
                                     </label>
                                     <label class="col-xs-3">
-                                        <input type="radio" name="status" value="3"
+                                        <input type="radio" name="status" value="2"
                                         {{{ Input::old('status', (isset($activity) && $activity->status == 3 ) ? 'checked' : null) }}}>
                                         隱藏
                                     </label>
