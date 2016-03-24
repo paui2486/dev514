@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+
     <div class="act-page-container">
         <div class="act-page-blur" style="background-image:url('{{ asset($activity->thumbnail )}}')">
 <!--            <img src="/img/pics/activity-photo.jpg">-->
@@ -17,12 +18,14 @@
          <div class="row actpage-dashboard">
                     <div class="col-md-2">
                         <a href="{{ URL('member/'. $activity->hoster ) }}">
-                        <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
-                        </div>
-                        <div class="actpage-holder-name">@if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif</div>
+                            <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
+                            </div>
+                            <div class="actpage-holder-name">
+                                @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
+                            </div>
                         </a>
                     </div>
-                    
+
                     <div class="col-md-6 actpage-dashboard-info">
                         <p>{{ $activity->title }}</p>
                         <div class="dashboard-block-date">
@@ -156,6 +159,11 @@
             </div>
         </div>
     </div>
+    @if ( preg_match( "/酒/", urldecode(Request::segment(2)), $result ))
+        <div>
+            <img src="{{asset('img/wine.jpg')}}">
+        </div>
+    @endif
 @endsection
 
 @section('script')
