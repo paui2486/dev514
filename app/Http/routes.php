@@ -53,7 +53,8 @@ Route::group(['middleware' => 'web'], function () {
 
     // Route::get('members/{username}'         , 'UserController@index'             );
 
-    Route::get('activity'                   , 'ActivityController@Activity'      );
+    Route::get('activity'                   , 'ActivityController@showResult'    );
+    Route::post('activity'                  , 'ActivityController@showResult'    );
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     Route::get('purchase'                   , 'ActivityController@purchase'      );

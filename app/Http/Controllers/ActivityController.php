@@ -8,6 +8,7 @@ use DB;
 use URL;
 use Log;
 use Auth;
+use Input;
 use Response;
 use Redirect;
 use App\Http\Requests;
@@ -170,6 +171,11 @@ class ActivityController extends Controller
 
             return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests'));
         }
+    }
+
+    public function showResult()
+    {
+      return Input::all();
     }
 
 }

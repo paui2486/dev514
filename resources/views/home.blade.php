@@ -7,6 +7,10 @@
     <title>514活動頻道 - 讓生活更有意思</title>
 @endsection
 
+@section('style')
+    <link rel="stylesheet" href="{{asset('css/pure-min.css')}}"/>
+@endsection
+
 @section('script')
 <script>
     jQuery(document).ready(function ($) {
@@ -84,35 +88,66 @@
 
     <div class="home-container">
 
-        <div class="panel-filter">
-            <select name="type" id="types">
-                <option style="display:none">想和誰去</option>
-                @foreach( $home->filter->who as $key_with => $with_who )
-                <option value="{{ $key_with }}"> {{ $with_who }} </option>
-                @endforeach
-            </select>
+        <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
+            {!! csrf_field() !!}
+            <div class="pure-g panel-filter">
+                <div class="pure-u-4-24">
+                    <select name="withWho">
+                        <option value="" style="display:none">想和誰去</option>
+                        @foreach( $home->filter->who as $key_with => $with_who )
+                        <option value="{{ $key_with }}"> {{ $with_who }} </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <select name="type" id="types">
-                <option style="display:none">想玩什麼</option>
-                @foreach( $home->filter->what as $key_play => $play_what )
-                <option value="{{ $key_play }}"> {{ $play_what }} </option>
-                @endforeach
-            </select>
+                <div class="pure-u-4-24">
+                    <select name="playWhat">
+                        <option value="" style="display:none">想玩什麼</option>
+                        @foreach( $home->filter->what as $key_play => $play_what )
+                        <option value="{{ $key_play }}"> {{ $play_what }} </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <select name="type" id="types">
-                <option style="display:none">想去哪兒</option>
-                @foreach( $home->filter->where as $key_where => $go_where )
-                <option value="{{ $key_where }}"> {{ $go_where }} </option>
-                @endforeach
-            </select>
+                <div class="pure-u-4-24">
+                    <select name="goWhere">
+                        <option value="" style="display:none">想去哪兒</option>
+                        @foreach( $home->filter->where as $key_where => $go_where )
+                        <option value="{{ $key_where }}"> {{ $go_where }} </option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <select name="type" id="types">
-                <option style="display:none">預算多少</option>
-                @foreach( $home->filter->price as $key_price => $price )
-                <option value="{{ $key_price }}"> {{ $price }} </option>
-                @endforeach
-            </select>
-        </div>
+                <div class="pure-u-4-24">
+                    <select name="atWhen">
+                        <option value="" style="display:none">時間</option>
+                        <option value="1"> 今天 </option>
+                        <option value="2"> 明天 </option>
+                        <option value="3"> 這週 </option>
+                        <option value="4"> 下週 </option>
+                        <option value="5"> 一個月內 </option>
+                        <option value="6"> 兩個月內 </option>
+                    </select>
+                </div>
+
+                <div class="pure-u-4-24">
+                    <select name="haveMoney">
+                        <option value="" style="display:none">預算多少</option>
+                        @foreach( $home->filter->price as $key_price => $price )
+                        <option value="{{ $key_price }}"> {{ $price }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="pure-u-3-24">
+                    <input name="keySearch" class="" type="text" />
+                </div>
+                <div class="pure-u-1-24">
+                    <button type="submit" class="btn btn-sm btn-success">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
 
         <div class="new-activity">
             <div class="row home-title">
@@ -225,7 +260,7 @@
                                     </div>
                                     <div class="new-activity-orginizer">
                                        <img src="/img/icons/holder.png">
-                                       <span> {{ $newActivity->orginizer }} </span> 
+                                       <span> {{ $newActivity->orginizer }} </span>
                                     </div>
                                 </div>
                             </div>
