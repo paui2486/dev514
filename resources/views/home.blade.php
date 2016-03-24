@@ -83,7 +83,7 @@
 @section('content')
 
     <div class="home-container">
-<!--
+
         <div class="panel-filter">
             <select name="type" id="types">
                 <option style="display:none">想和誰去</option>
@@ -113,7 +113,7 @@
                 @endforeach
             </select>
         </div>
--->
+
         <div class="new-activity">
             <div class="row home-title">
                 <img src="/img/pics/new_activities-02.png">

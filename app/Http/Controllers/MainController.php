@@ -37,7 +37,7 @@ class maincontroller extends controller
     {
         $meta   = array(
             'charset = UTF-8'           => 'text/html',
-            'http-equiv = refresh'      => '200;url='.URL::current(),
+            // 'http-equiv = refresh'      => '200;url='.URL::current(),
             'name = google-site-verification' => '1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY',
             'name = google'             => 'notranslate',
             'name = URL'                => URL::current(),
