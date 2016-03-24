@@ -415,7 +415,7 @@
 
         var maxDate = null;
         function picker() {
-            var maxday = null;
+            var maxday = false;
             if($(this).attr('name') != "activity_range"){
                 maxday = maxDate;
             }
