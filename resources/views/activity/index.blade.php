@@ -28,34 +28,32 @@
                         <div class="dashboard-block-date">
                             <img src="/img/icons/info-date.png">
                             @if(count($tickets)>0)
-                                @foreach($tickets as $ticket)
                             <div class="dashboard-text">
                                         <p>
-                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}}
+                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}
                                             </p>
                                             <p>～</p>
                                 <p>
-                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}}
+                                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_end) /*--}}
                                         </p>
                             </div>
-                                @endforeach
                             @else
                               <div class="dashboard-text">
                                   所有票券都賣完囉！
                               </div>
-                            @endif 
+                            @endif
                         </div>
 
                         <div class="dashboard-block">
                             <img src="/img/icons/info-price.png">
                             <div class="dashboard-text">
-                                 <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>   
+                                 <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>
                             </div>
                         </div>
                         <div class="dashboard-block">
                             <img src="/img/icons/info-where.png">
                             <div class="dashboard-text">
-                                 {{ $activity->location }}     
+                                 {{ $activity->location }}
                             </div>
                         </div>
                      </div>
@@ -104,7 +102,7 @@
                     </div>
                 </div>
             </div>
-                
+
             <div id="RightFixed" class="col-md-4 actpage-right-content">
                 <p class="actpage-cart-title">{{ $activity->title }}</p>
                 <div class="actpage-cart-content">
@@ -140,7 +138,7 @@
                             <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
                         @endif
                 </div>
-               
+
 <!--
                 <div class="actpage-holder-content">
                     <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
@@ -166,7 +164,7 @@ var disqus_config = function () {
     this.page.url = "{{ Request::URL() }}";
     this.page.identifier = "{{ $activity->title }}";
 };
-    
+
 (function() {
     var d = document, s = d.createElement('script');
 
@@ -191,8 +189,8 @@ var disqus_config = function () {
 $(document).ready(function () {
 
     var RightFixed = $("#RightFixed");
-    
-    
+
+
     $(window).scroll(function() {
         if ($(this).scrollTop() > 580) {
             RightFixed.addClass("right-content-fixed");
@@ -200,7 +198,7 @@ $(document).ready(function () {
             RightFixed.removeClass("right-content-fixed");
         }
 //        console.log(scrollbottom);
-        
+
 //        var scrollbottom = $(this).scrollTop() - $(window).height() ;
 //        if (scrollbottom > 550 ) {
 //            RightFixed.addClass ("fixed-bottom");
@@ -208,7 +206,7 @@ $(document).ready(function () {
 //            RightFixed.removeClass("fixed-bottom");
 //        }
     });
-    
+
 //    RightFixed.on("scroll", function(e) {
 //        console.log(1);
 //        if (this.scrollTop > 580) {
