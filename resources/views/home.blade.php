@@ -156,7 +156,8 @@
                                     {{ $newActivity->location }}
                                 </div>
                                 <div class="new-activity-orginizer">
-                                    --- {{ $newActivity->orginizer }} ---
+                                    <img src="/img/icons/holder.png">
+                                    <span> {{ $newActivity->orginizer }} </span>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +224,8 @@
                                         <span>{{ $activity->location }}</span>
                                     </div>
                                     <div class="new-activity-orginizer">
-                                        --- {{ $activity->orginizer }} ---
+                                       <img src="/img/icons/holder.png">
+                                       <span> {{ $newActivity->orginizer }} </span> 
                                     </div>
                                 </div>
                             </div>
