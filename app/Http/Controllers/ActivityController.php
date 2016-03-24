@@ -13,6 +13,7 @@ use Response;
 use Redirect;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 
 class ActivityController extends Controller
 {
@@ -173,9 +174,51 @@ class ActivityController extends Controller
         }
     }
 
-    public function showResult()
+    public function showResult(Request $request)
     {
-      return Input::all();
-    }
+        $meta = array();
 
+        $main = new MainController();
+        $filter = $main->getFilter();
+        $option = "->orderBy( DB::raw('count(*)') , 'desc') )";
+        // $selects = range(1, 100);
+        // $sortBy = "hot";
+        $selects = $request->selects;
+        $sortBy = $reqeust->sortBy;
+        $activities = array();
+
+        if ($request->isMethod('post'))
+        {
+            $query = DB::table('categories_data')
+                            ->rightJoin('activities', 'categories_data.activity_id', '=', 'activities.id')
+                            ->whereIn('categories_data.category_id', $selects )
+                            ->groupBy('categories_data.activity_id')
+                            ->select(array(
+                                'categories_data.activity_id', 'activities.title',
+                                'activities.description',     'activities.min_price',        'activities.activity_start', 'activities.location'
+                              ))
+                            ->orderBy( DB::raw('count(*)') , 'desc');
+
+            if ( $sortBy == 'hot' ) {
+                $activities = $query->orderBy( 'activities.counter', 'desc' )->get();
+            } elseif ( $sortBy == 'coupon' ) {
+                $activities = $query->orderBy( 'activities.price', 'asc' )->get();
+            } else {
+                $activities = $query->get();
+            }
+
+
+            if ( $request->segment == "activity" ) {
+                return $activities;
+            }
+        } else {
+            $activities = DB::table('activities')
+                            ->select(array(
+                              'id','title' , 'description', 'min_price', 'activity_start', 'location'
+                            ))
+                            ->get();
+        }
+        return $activities;
+        return view('activity.search', compact('meta', 'filter', 'activities'));
+    }
 }
