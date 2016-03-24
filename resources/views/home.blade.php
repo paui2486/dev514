@@ -214,12 +214,21 @@
                                 {{ $eachTypeActivity->cat_id }}
                             </div>
 
-                            <div class="Act-category-title">
-                            <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                                <span>{{ $eachTypeActivity->cat_title }}</span>
-                                <img src="{{ $eachTypeActivity->cat_logo }}">
-                            </a>
+                           <div class="row Act-category-title">
+                            <p><a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">{{ $eachTypeActivity->cat_title }}</a>
+                            </p>
+<!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
+
+                            
+                            <div class="category-readmore">
+                                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                                    <img src="/img/icons/rightarrow.png">
+                                    <p> 看更多 </p>
+                                </a>
                             </div>
+                           
+                        </div>
+
 
                         @foreach( $eachTypeActivity->cat_content as $activity )
 

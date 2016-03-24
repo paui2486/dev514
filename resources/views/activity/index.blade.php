@@ -15,6 +15,31 @@
         </div>
         <div class="actpage-main-image" style="background-image:url('{{ asset($activity->thumbnail )}}')">
         </div>
+        <div class="actpage-content">
+          <div id="RightFixed" class="col-md-4 actpage-right-content">
+                <p class="actpage-cart-title">{{ $activity->title }}</p>
+                <div class="row actpage-cart-content">
+                    <p class="actpage-buy-now">馬上訂購票券</p>
+                    <div class="row actpage-cart-ticket">
+                        @foreach($tickets as $ticket)
+                        <div class="row cart-option">
+                        <label class="col-md-8 label_radio" for="radio-03">
+                            <input name="ticket" type="radio" value="ticket-name" checked>{{ $ticket->name }}
+                        </label>
+                        <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 位</p>
+                        </div>
+                        @endforeach  
+                    </div>
+                
+                @if(count($tickets)>0)
+                <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
+                    <div class="row actpage-purchase">Let's Go</div>
+                </a>
+                @else
+                <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
+                @endif
+                </div>
+            </div>
          <div class="row actpage-dashboard">
                     <div class="col-md-2">
                         <a href="{{ URL('member/'. $activity->hoster ) }}">
@@ -106,51 +131,7 @@
                 </div>
             </div>
 
-            <div id="RightFixed" class="col-md-4 actpage-right-content">
-                <p class="actpage-cart-title">{{ $activity->title }}</p>
-                <div class="actpage-cart-content">
-                    <p class="col-md-8 actpage-buy-now">馬上訂購票券</p>
-                    <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 個名額</p>
-<!--
-                        @foreach($ticket as $tickets)
-                        <div class="actpage-cart-ticket">
-                            <label>
-                                <input type="radio" value="all" checked>{{ $ticket->name }}
-                            </label>
-
-                            
-
-
-                    
-                                        <div class="col-md-4 actpage-surplus">
-                                                <span>剩 {{ $ticket->left_over }} 位</span>
-                                        </div>
-                                        <div class="row" style="margin:0px;">
-                                        <img src="{{ asset('/img/icons/carticon-02.png') }}">
-                                        <p class="col-md-4">活動長度</p>
-                                            <div class="col-md-8 actpage-cart-timelength">
-                                                {{ $activity->time_range }} 小時
-                                            </div>
-                                        </div>
-                                        <div class="actpage-cart-info actpage-last-block">
-                                        <div class="row" style="margin:0px;">
-                                        <img src="{{ asset('/img/icons/carticon-06.png') }}">
-                                        <p>{{ $activity->remark }}</p>
-                                        </div>
-                                        </div>
-                            
-                    </div>
-                    @endforeach
--->
-                </div>
-                @if(count($tickets)>0)
-                <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
-                    <div class="row actpage-purchase">Let's Go</div>
-                </a>
-                @else
-                <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
-                @endif
-            </div>
+          
 
 <!--
                 <div class="actpage-holder-content">
@@ -167,6 +148,7 @@
                 </div>
 -->
             </div>
+          </div>
         </div>
     </div>
     @if ( preg_match( "/酒/", urldecode(Request::segment(2)), $result ))
@@ -177,6 +159,8 @@
 @endsection
 
 @section('script')
+<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
+
 <script>
 var disqus_config = function () {
     this.page.url = "{{ Request::URL() }}";
