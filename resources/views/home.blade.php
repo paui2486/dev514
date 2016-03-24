@@ -94,8 +94,8 @@
                 <div class="pure-u-4-24">
                     <select name="withWho">
                         <option value="" style="display:none">想和誰去</option>
-                        @foreach( $home->filter->who as $key_with => $with_who )
-                        <option value="{{ $key_with }}"> {{ $with_who }} </option>
+                        @foreach( $home->filter->who as $with_who )
+                        <option value="{{ $with_who->id }}"> {{ $with_who->name }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -103,8 +103,8 @@
                 <div class="pure-u-4-24">
                     <select name="playWhat">
                         <option value="" style="display:none">想玩什麼</option>
-                        @foreach( $home->filter->what as $key_play => $play_what )
-                        <option value="{{ $key_play }}"> {{ $play_what }} </option>
+                        @foreach( $home->filter->what as $play_what )
+                        <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -113,7 +113,7 @@
                     <select name="goWhere">
                         <option value="" style="display:none">想去哪兒</option>
                         @foreach( $home->filter->where as $key_where => $go_where )
-                        <option value="{{ $key_where }}"> {{ $go_where }} </option>
+                        <option value="{{ $go_where->id }}"> {{ $go_where->name }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -134,7 +134,7 @@
                     <select name="haveMoney">
                         <option value="" style="display:none">預算多少</option>
                         @foreach( $home->filter->price as $key_price => $price )
-                        <option value="{{ $key_price }}"> {{ $price }} </option>
+                        <option value="{{ $price->id }}"> {{ $price->name }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -219,14 +219,14 @@
                             </p>
 <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
 
-                            
+
                             <div class="category-readmore">
                                 <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
                                     <img src="/img/icons/rightarrow.png">
                                     <p> 看更多 </p>
                                 </a>
                             </div>
-                           
+
                         </div>
 
 
