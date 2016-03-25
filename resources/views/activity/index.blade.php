@@ -17,7 +17,7 @@
         </div>
         <div class="actpage-content">
           <div id="RightFixed" class="col-md-4 actpage-right-content">
-                <p class="actpage-cart-title">{{ $activity->title }}</p>
+                <p class="actpage-cart-title">$ {{ $activity->min_price }} NTD起</p>
                 <div class="row actpage-cart-content">
                     <p class="actpage-buy-now">馬上訂購票券</p>
                     <div class="row actpage-cart-ticket">
@@ -75,7 +75,7 @@
                         <div class="dashboard-block">
                             <img src="/img/icons/info-price.png">
                             <div class="dashboard-text">
-                                 <p>{{ $activity->max_price }} ~ {{ $activity->min_price }} 元</p>
+                                 <p>$ {{ $activity->min_price }} NTD起</p>
                             </div>
                         </div>
                         <div class="dashboard-block">
