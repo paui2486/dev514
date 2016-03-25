@@ -88,6 +88,7 @@ class MainController extends controller
             'who'   => 3,
             'what'  => 1,
             'where' => 4,
+            'when'  => 5,
             'price' => 6,
         );
 
@@ -100,6 +101,15 @@ class MainController extends controller
                                 ))
                                 ->get();
         }
+
+        $filters['when'] = array(
+          (object) array( 'id' => 0,  'name' => '今天'   ),
+          (object) array( 'id' => 1,  'name' => '這兩天' ),
+          (object) array( 'id' => 2,  'name' => '這三天' ),
+          (object) array( 'id' => 7,  'name' => '這一週' ),
+          (object) array( 'id' => 30, 'name' => '這個月' ),
+        );
+
         return $filters;
     }
 
