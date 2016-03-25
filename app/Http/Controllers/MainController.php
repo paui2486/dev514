@@ -16,7 +16,7 @@ use App\Pay2go;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class maincontroller extends controller
+class MainController extends controller
 {
     public function index()
     {
@@ -79,23 +79,26 @@ class maincontroller extends controller
         return $home_banner;
     }
 
-    private function getFilter()
+    public function getFilter()
     {
         $filters = array();
 
-        // its match filter_options tables position
+        // its match categories tables type
         $data_match = array(
-            'who'   => 1,
-            'what'  => 2,
-            'where' => 3,
-            'price' => 4,
+            'who'   => 3,
+            'what'  => 1,
+            'where' => 4,
+            'price' => 6,
         );
 
         foreach ($data_match as $key => $value)
         {
-            $filters[$key] = DB::table('filter_options')
-                                ->where('position', $value)
-                                ->lists('name');
+            $filters[$key] = DB::table('categories')
+                                ->where('type', $value)
+                                ->select(array(
+                                  'id', 'name'
+                                ))
+                                ->get();
         }
         return $filters;
     }
