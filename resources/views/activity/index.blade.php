@@ -28,12 +28,19 @@
                         </label>
                         <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 位</p>
                         </div>
+                        <div class="row cart-option-detail">
+                            <p>票價：$ {{ $ticket->price }} NTD</p>
+                            <p>活動開始： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </p>
+    
+                            <p>活動結束：  {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </p>
+
+                        </div>
                         @endforeach  
                     </div>
                 
                 @if(count($tickets)>0)
                 <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
-                    <div class="row actpage-purchase">Let's Go</div>
+                    <div class="row actpage-purchase">讓生活更有意思</div>
                 </a>
                 @else
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
@@ -189,7 +196,8 @@ var disqus_config = function () {
 
 <script>
 $(document).ready(function () {
-
+    console.log( {!! json_encode($tickets) !!} );
+    
     var RightFixed = $("#RightFixed");
 
 

@@ -9,9 +9,12 @@
 
 @section('style')
     <link rel="stylesheet" href="{{asset('css/pure-min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/easydropdown.css')}}"/>
 @endsection
 
 @section('script')
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="{{asset('js/pure-min.css')}}"></script>
 <script>
     jQuery(document).ready(function ($) {
         var SlideoTransitions = [
@@ -90,10 +93,11 @@
 
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
             {!! csrf_field() !!}
+            <div class="filter-bg">
             <div class="pure-g panel-filter">
                 <div class="pure-u-4-24">
-                    <select name="withWho">
-                        <option value="" style="display:none">想和誰去</option>
+                    <select name="withWho" class="dropdown" >
+                        <option value="" class="label">想和誰去</option>
                         @foreach( $home->filter->who as $with_who )
                         <option value="{{ $with_who->id }}"> {{ $with_who->name }} </option>
                         @endforeach
@@ -101,8 +105,8 @@
                 </div>
 
                 <div class="pure-u-4-24">
-                    <select name="playWhat">
-                        <option value="" style="display:none">想玩什麼</option>
+                    <select name="playWhat" class="dropdown">
+                        <option value="" class="label">想玩什麼</option>
                         @foreach( $home->filter->what as $play_what )
                         <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
                         @endforeach
@@ -110,8 +114,8 @@
                 </div>
 
                 <div class="pure-u-4-24">
-                    <select name="goWhere">
-                        <option value="" style="display:none">想去哪兒</option>
+                    <select name="goWhere" class="dropdown">
+                        <option value="" class="label">想去哪兒</option>
                         @foreach( $home->filter->where as $key_where => $go_where )
                         <option value="{{ $go_where->id }}"> {{ $go_where->name }} </option>
                         @endforeach
@@ -119,8 +123,8 @@
                 </div>
 
                 <div class="pure-u-4-24">
-                    <select name="atWhen">
-                        <option value="" style="display:none">時間</option>
+                    <select name="atWhen" class="dropdown">
+                        <option value="" class="label">時間</option>
                         <option value="1"> 今天 </option>
                         <option value="2"> 明天 </option>
                         <option value="3"> 這週 </option>
@@ -131,21 +135,22 @@
                 </div>
 
                 <div class="pure-u-4-24">
-                    <select name="haveMoney">
-                        <option value="" style="display:none">預算多少</option>
+                    <select name="haveMoney" class="dropdown">
+                        <option value="" class="label">預算多少</option>
                         @foreach( $home->filter->price as $key_price => $price )
                         <option value="{{ $price->id }}"> {{ $price->name }} </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="pure-u-3-24">
-                    <input name="keySearch" class="" type="text" />
+                    <input name="keySearch" class="search-bar" type="text" />
                 </div>
                 <div class="pure-u-1-24">
-                    <button type="submit" class="btn btn-sm btn-success">
-                        Search
+                    <button type="submit" class="search-button btn">
+                        搜尋
                     </button>
                 </div>
+            </div>
             </div>
         </form>
 

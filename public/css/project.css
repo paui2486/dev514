@@ -1,8 +1,12 @@
 body {
     font-family:  "儷黑 Pro","Helvetica","Arial", "WenQuanYi Zen Hei", "LiHei Pro", "微軟正黑體", "DFKai-SB", sans-serif!important;
     padding-bottom: 0px!important;
+    height: 100%;
 }
 
+html {
+    height: 100%;
+}
 /*-----------------home navbar-----------------*/
 
 .navbar {
@@ -331,7 +335,7 @@ li.collapse-blog-category {
     top: 0px;
     left: 0px;
     width: 1300px;
-    height: 500px;
+    height: 480px;
     overflow: hidden;
     visibility: hidden;
 }
@@ -355,17 +359,48 @@ li.collapse-blog-category {
     height: 50px;
 }
 
-/*Filter*/
+/*---------------------Filter--------------------*/
+.filter-bg {
+    background-color: rgba(0,0,0,0.8);
+    padding: 20px;
+}
 
 .panel-filter {
     position: initial;
-    margin: 20px;
+    padding: 20px auto;
     text-align: center;
+    width: 80%;
+    margin: auto;
 }
 
 .panel-filter  > div {
     float: left;
     display: inline-block;
+}
+
+.filter-dropdown select {
+    border: 0 !important;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+}
+
+.search-bar {
+    height: 35px;
+    width: 100%;
+    border-radius: 0px;
+    font-size: 15px;
+    background-color: rgba(255,255,255,0.8);
+    border: 0px;
+}
+
+.search-button {
+    height: 35px;
+    font-size: 14px;
+    background-color: #ff5a5f;
+    border: none;
+    color: white;
+    border-radius: 0px;
+    font-weight:bold;
 }
 
 /*Home Content*/
@@ -893,7 +928,6 @@ li.collapse-blog-category {
 }
 
 .login-container {
-    height: 100%;
     padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
@@ -1701,6 +1735,18 @@ li.collapse-blog-category {
     margin: 0px;
 }
 
+.cart-option-detail {
+    padding: 5px 22px;
+    margin: 15px 0px;
+    font-size: 14px;
+    background-color: #f2f2f2;
+}
+
+.cart-option-detail > p {
+    padding:5px 0px;
+    margin: 0px;
+}
+
 .actpage-surplus {
     font-size: 13px;
     text-align: center;
@@ -1740,8 +1786,7 @@ li.collapse-blog-category {
     text-align: center;
     padding: 5px;
     color: white;
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 16px;
     letter-spacing: 2px;
     margin: 10px auto;
     width: 100%;
