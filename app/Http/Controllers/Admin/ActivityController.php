@@ -44,11 +44,9 @@ class ActivityController extends Controller
                           ->get();
         }
 
-        $categories   = DB::table('categories')
-                          ->where('public', 1)
-                          ->where('type', 1)
-                          ->select('id', 'name')
-                          ->get();
+        $lib = new Library();
+
+        $categories = (object) $lib->getFilterCategory();
         return view('admin.activity.create_edit', compact('hosters', 'categories'));
     }
 
@@ -62,30 +60,28 @@ class ActivityController extends Controller
     {
         $tickets    = array();
         $prices     = array();
+        // clear duplicate price
         $array_key  = "price";
         $prices     = array_map(function($item) use($array_key) {
                         return ($item[$array_key] === "")? 0 : $item[$array_key];
                       }, $request->ticket);
 
-        $activity_range = array();
-        preg_match_all("/(\d+-\d+-\d+\s\d+:\d+)/", $request->activity_range, $activity_range);
-
         $storeArray = array(
-            'title'         => $request->title,
-            'category_id'   => $request->category_id,
-            'description'   => $request->description,
-            'ticket_description'   => $request->ticket_description,
-            'location'      => $request->location,
-            'content'       => $request->content,
-            'tag_ids'       => $request->tag_ids,
-            'status'        => $request->status,
-            'time_range'    => $request->time_range,
-            'max_price'     => max($prices),
-            'min_price'     => min($prices),
-            'activity_start'=> $activity_range[0][0],
-            'activity_end'  => $activity_range[1][0],
-            'created_at'    => date("Y-m-d H:i:s"),
-            'updated_at'    => date("Y-m-d H:i:s"),
+            'title'               => $request->title,
+            'category_id'         => $request->what,
+            'description'         => $request->description,
+            'ticket_description'  => $request->ticket_description,
+            'location'            => $request->location,
+            'content'             => $request->content,
+            'tag_ids'             => $request->tag_ids,
+            'status'              => $request->status,
+            'time_range'          => $request->time_range,
+            'max_price'           => max($prices),
+            'min_price'           => min($prices),
+            'activity_start'      => $request->activity_start_date. " " . $request->activity_start_time,
+            'activity_end'        => $request->activity_end_date. " " . $request->activity_end_time,
+            'created_at'          => date("Y-m-d H:i:s"),
+            'updated_at'          => date("Y-m-d H:i:s"),
         );
 
         if( Auth::user()->adminer )
@@ -108,23 +104,26 @@ class ActivityController extends Controller
         $activity           = DB::table('activities')->where('id', $activity_id);
         $result             = $activity->update($update['data']);
 
+
+        $categories =  $request->withWho;
+        array_push( $categories, $request->soWhat  );
+        array_push( $categories, $request->goWhere );
+
+        $updateCatArray = array();
+        foreach ($categories as $category) {
+            array_push($updateCatArray, array('activity_id' => $activity_id, 'category_id' => $category));
+        }
+
+        DB::table('categories_data')->insert($updateCatArray);
+
         foreach ($request->ticket as $act_ticket) {
             $act_ticket  = (object) $act_ticket;
-
-            $sale_range  = array();
-            $sale_time   = ($act_ticket->sale_time === "")? date("Y-m-d H:i") . ' - ' . ("Y-m-d H:i") : $act_ticket->sale_time;
-            preg_match_all("/(\d+-\d+-\d+\s\d+:\d+)/", $sale_time,  $sale_range);
-
-            $event_range = array();
-            $event_time  = ($act_ticket->event_time === "")? date("Y-m-d H:i") . ' - ' . ("Y-m-d H:i") : $act_ticket->event_time;
-            preg_match_all("/(\d+-\d+-\d+\s\d+:\d+)/", $event_time, $event_range);
-
             $insert = array(
                         'activity_id'   => $activity_id,
-                        'ticket_start'  => $event_range[0][0],
-                        'ticket_end'    => $event_range[1][0],
-                        'sale_start'    => $sale_range[0][0],
-                        'sale_end'      => $sale_range[1][0],
+                        'ticket_start'  => $act_ticket->ticket_start_date . " " . $act_ticket->ticket_start_time,
+                        'ticket_end'    => $act_ticket->ticket_end_date . " " . $act_ticket->ticket_end_time,
+                        'sale_start'    => $act_ticket->sale_start_date . " " . $act_ticket->sale_start_time,
+                        'sale_end'      => $act_ticket->sale_end_date . " " . $act_ticket->sale_end_time,
                         'location'      => $request->location,
                         'name'          => $act_ticket->name,
                         'status'        => $act_ticket->ticket_status,
@@ -151,9 +150,9 @@ class ActivityController extends Controller
         if (Auth::user()->adminer) {
             $activity = DB::table('activities')->find($id);
             $hosters  = DB::table('users')
-                        ->where('hoster', 1)
-                        ->select('id', 'name')
-                        ->get();
+                          ->where('hoster', 1)
+                          ->select('id', 'name')
+                          ->get();
         } else {
             $activity = DB::table('activities')
                           ->where('id', $id)

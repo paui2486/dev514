@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{asset('assets/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/bootstrap-timepicker/compiled/timepicker.css')}}">
 <link rel="stylesheet" href="{{asset('assets/bootstrap-colorpicker/css/colorpicker.css')}}">
+<link rel="stylesheet" href="{{asset('assets/jquery-selectize/dist/css/selectize.default.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 @stop
 
@@ -105,18 +106,18 @@
                             </div>
                         </div>
                         @endif
-                        <div class="form-group {{{ $errors->has('category_id') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('soWhat') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="category_id">
+                                <label class="control-label col-sm-2" for="soWhat">
                                     活動分類
                                 </label>
                                 <div class="col-sm-10">
-                                    <select style="width: 100%" name="category_id" id="category_id" class="form-control">
-                                      @foreach($categories as $category)
+                                    <select style="width: 100%" name="soWhat" class="form-control">
+                                      @foreach($categories->what as $category)
                                           <option value="{{$category->id}}"
                                           @if(!empty($activity))
                                               @if($activity->category_id == $category->id)
-                                                  selected
+                                          selected="selected"
                                               @endif
                                           @endif >{{$category->name}}
                                           </option>
@@ -127,37 +128,88 @@
                         </div>
                         <div class="form-group {{{ $errors->has('activity_range') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="activity_range">
+                                <label class="control-label col-sm-2" for="activity_start">
                                     活動期間
                                 </label>
+                                <div class="col-sm-6">
+                                    <div class="col-sm-1 col-md-2">
+                                        <label class="control-label">
+                                            From
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-8 col-sm-7 col-md-5">
+                                        <input class="form-control act_date" type="text" name="activity_start_date"
+                                            value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_start ) : null) }}}"/>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-5">
+                                        <input class="form-control act_time" type="text" name="activity_start_time"
+                                            value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
+                                    </div>
+                                    <div class="col-sm-1 col-md-2">
+                                        <label class="control-label">
+                                            To
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-8 col-sm-7 col-md-5">
+                                        <input class="form-control act_date" type="text" name="activity_end_date"
+                                            value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_end ) : null) }}}"/>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-5">
+                                        <input class="form-control act_time" type="text" name="activity_end_time"
+                                            value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_end ) : null) }}}"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label class="control-label col-sm-4" for="time_range">
+                                        活動長度
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="time_range" id="time_range" placeholder=""
+                                                value="{{{ Input::old('time_range', isset($activity) ? $activity->time_range : null) }}}" />
+                                            <span class="input-group-addon">小時</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group {{{ $errors->has('withWho') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="withWho">
+                                    活動對象
+                                </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control time-picker" type="text" name="activity_range" id="activity_range"
-                                        value="{{{ Input::old('activity_range', isset($activity) ? preg_replace("/(.*):(.*)/", "$1", $activity->activity_start)  . "   -   " . preg_replace("/(.*):(.*)/", "$1", $activity->activity_end) : date("Y-m-d 00:00") . "   -   " . date("Y-m-d 00:00") ) }}}" />
+                                    <select id="input-who" name="withWho[]" multiple placeholder="對象是...">
+                                        @foreach($categories->who as $category)
+                                            <option value="{{$category->id}}" >
+                                                {{$category->name}}
+                                            </option>
+                                        @endforeach
+                          					</select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group {{{ $errors->has('location') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="location">
+                                <label class="control-label col-sm-2" for="goWhere">
                                     活動地點
                                 </label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="location" id="location" placeholder=""
-                                        value="{{{ Input::old('location', isset($activity) ? $activity->location : null) }}}" />
+                                <div class="col-sm-2">
+                                    <select style="width: 100%" name="goWhere" class="form-control">
+                                    @foreach($categories->where as $category)
+                                        <option value="{{$category->id}}"
+                                        @if(!empty($activity))
+                                            @if($activity->category_id == $category->id)
+                                        selected="selected"
+                                            @endif
+                                        @endif >{{$category->name}}
+                                        </option>
+                                    @endforeach
+                                    </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group {{{ $errors->has('time_range') ? 'has-error' : '' }}}">
-                            <div class="col-md-12">
-                                <label class="control-label col-sm-2" for="time_range">
-                                    活動長度
-                                </label>
-                                <div class="col-sm-10">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" name="time_range" id="time_range" placeholder=""
-                                            value="{{{ Input::old('time_range', isset($activity) ? $activity->time_range : null) }}}" />
-                                        <span class="input-group-addon">小時</span>
-                                    </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" name="location" placeholder=""
+                                        value="{{{ Input::old('location', isset($activity) ? $activity->location : null) }}}" />
                                 </div>
                             </div>
                         </div>
@@ -212,16 +264,20 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="counter" id="counter"
-                                        value="{{{ Input::old('counter', isset($activity) ? $activity->counter : null) }}}" />
+                                        value="{{{ Input::old('counter', isset($activity) ? $activity->counter : null) }}}"/>
                                 </div>
                             </div>
                         </div>
                         @endif
                         <div class="form-group {{{ $errors->has('status') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
+                                <input name="group1" type="radio" id="test1" />
+
+                                <label for="test1">Red</label>
                                 <label class="control-label col-sm-2" for="status">
                                     活動狀態
                                 </label>
+
                                 <div class="radio login-info checkbox col-sm-10">
                                     <label class="col-xs-3">
                                         <input type="radio" name="status" value="1"
@@ -278,7 +334,28 @@
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket-time">活動時間</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0][event_time]"/>
+                                            <div class="col-xs-2">
+                                                <label class="control-label">
+                                                    From
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][ticket-start-date]"/>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][ticket-start-time]"/>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label class="control-label">
+                                                    To
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][ticket-end-date]"/>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][ticket-end-time]"/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -291,7 +368,28 @@
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket-time">售票區間</label>
                                         <div class="col-sm-6">
-                                            <input class="form-control time-picker ticket-time" type="text" name="ticket[0][sale_time]"/>
+                                            <div class="col-xs-2">
+                                                <label class="control-label">
+                                                    From
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][sale_start_date]"/>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][sale_start_time]"/>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label class="control-label">
+                                                    To
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][sale_end_date]"/>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][sale_end_time]"/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -305,7 +403,7 @@
                         </div>
                         @endif
                     		<div class="form-group">
-                            請閱讀建立活動及販售票券同意書＊  我已閱讀且同意 建立活動及販售票券同意書 。
+                            <!-- 請閱讀建立活動及販售票券同意書＊  我已閱讀且同意 建立活動及販售票券同意書 。 -->
                       			<div class="col-md-12">
                         				<div type="reset" class="btn btn-sm btn-warning close_popup" onclick="history.go(-1);">
                           					<span class="glyphicon glyphicon-ban-circle"></span>
@@ -342,7 +440,7 @@
     <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
-
+    <script type="text/javascript" src="{{asset('assets/jquery-selectize/dist/js/standalone/selectize.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             CKFinder.setupCKEditor();
@@ -369,6 +467,11 @@
             $("button.btn-clone").on('click', clone);
             $("button.btn-del").on('click', remove);
 
+    				$('#input-who').selectize({
+                maxItems: 5,
+                create: false,
+    				});
+
             $.fn.modal.Constructor.prototype.enforceFocus = function() {
                 modal_this = this
                 $(document).on('focusin.modal', function (e) {
@@ -380,10 +483,37 @@
                 })
             };
 
-            $("#activity_range").change(function() {
-                date = $(this).attr("value");
-                maxDate = date.match(/-\s(.*)/i)[1];
-            })
+            var minDate = moment().format("YYYY-MM-DD");
+
+            $(".act_date").datetimepicker({
+                minDate: moment(),
+                format: 'YYYY-MM-DD',
+            });
+
+            $("input[name=activity_start_date]").on("dp.change", function (e) {
+                $('input[name="activity_end_date"]').data("DateTimePicker").minDate(e.date);
+            });
+
+            $(".act_time").val("00:00");
+            $(".act_time").datetimepicker({
+                minDate: moment({hour: 0, minute: 0}),
+                stepping: 10,
+                format: 'HH:mm',
+            });
+
+            if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
+                $("input[name='activity_start_time']").on("dp.change", function (e) {
+                    $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
+                });
+            }
+
+            $("input[name='activity_end_time']").on("dp.change", function (e) {
+                var start_time_arr = $("input[name='activity_start_time']").val().split(':');
+                var end_time_arr   = $("input[name='activity_end_time']").val().split(':');
+                var timecost       = Math.floor(end_time_arr[0]) - Math.floor(start_time_arr[0]) +
+                                        Math.round((Math.floor(end_time_arr[1]) - Math.floor(start_time_arr[1])) / 60 * 10) / 10;
+                $('input[name="time_range"]').val(timecost);
+            });
 
             $(document).on("keypress", "form", function(event) {
                 return event.keyCode != 13;
@@ -409,16 +539,36 @@
                     }
                 })
                 .on('focus', 'input.time-picker', picker)
+                .on('focus', 'input.act_date', pickerDate)
+                .on('focus', 'input.act_time', pickerTime)
                 .on('click', 'button.btn-clone', clone)
                 .on('click', 'button.btn-del', remove);
         }
 
         var maxDate = null;
+
+        function pickerDate() {
+            $(this).datetimepicker({
+                minDate: moment(),
+                maxDate: $('input[name="activity_end_date"]').val(),
+                format: 'YYYY-MM-DD',
+            });
+        }
+
+        function pickerTime() {
+            $(this).datetimepicker({
+                minDate: moment({hour: 0, minute: 0}),
+                stepping: 10,
+                format: 'HH:mm',
+            });
+        }
+
         function picker() {
             var maxday = false;
-            if($(this).attr('name') != "activity_range"){
+            if ($(this).attr('name') != "activity_range") {
                 maxday = maxDate;
             }
+
             $(this).daterangepicker({
                 timePicker: true,
                 timePickerIncrement: 30,

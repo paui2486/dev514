@@ -57,4 +57,25 @@ class Library
         return $params;
     }
 
+    public static function getMeta( $params )
+    {
+          return ;
+    }
+
+    public static function getFilterCategory()
+    {
+        $category = array(
+          'what'  => DB::table('categories')
+                      ->where('public', 1)
+                      ->where('type',   1)->get(),
+          'who'   => DB::table('categories')
+                      ->where('public', 1)
+                      ->where('type',   3)->get(),
+          'where' => DB::table('categories')
+                      ->where('public', 1)
+                      ->where('type',   4)->get(),
+        );
+        return $category;
+    }
+
 }
