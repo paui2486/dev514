@@ -103,14 +103,14 @@
                         <div class="actpage-header-dash"></div>
                     </div>
                     <div class="actpage-introduce">
-                        {{ $activity->description }}
+                        {!! $activity->content !!}
                     </div>
                     <div class="row actpage-header">
                         <p class="actpage-header-left">購票說明</p>
                         <div class="actpage-header-dash"></div>
                     </div>
                     <div class="actpage-ticket">
-                        {!! $activity->content !!}
+<!--                        {!! $activity->content !!}-->
                     </div>
                     <div class="row actpage-header">
                         <p class="actpage-header-left">同場加映</p>
