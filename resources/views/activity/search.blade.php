@@ -9,88 +9,95 @@
 
 @section('content')
 <div class ="row list-container">
-    <div class="row list-banner" style="background-image:url('/img/pics/table-690892_1280.jpg')"></div>
-    <div class="row list-filter col-sm-4">
-        
-<div class="list-filter-panel">
-    <p class="list-filter-title">搜尋活動</p>
-    <div class="list-filter-content">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="list-filter-row">
-            <p>想和誰去</p>
-            <div class="row list-filter-option">
-            @foreach( $filter['who'] as $withWho )
-                
-                <label class="checkbox-inline">
-                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $withWho->name }}
-                </label>
-                
-            @endforeach
-            </div>
-        </div>
-            
-        <div class="list-filter-row">
-            <p>想玩什麼</p>
-            <div class="row list-filter-option">
-            @foreach( $filter['what'] as $playWhat  )
-                
-                <label class="checkbox-inline">
-                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playWhat->name }}
-                </label>
-                
-            @endforeach
-            </div>
-        </div>
-        
-        <div class="list-filter-row">
-            <p>想去哪兒</p>
-            <div class="row list-filter-option">
-            @foreach( $filter['where'] as $goWhere )
-                
-                <label class="checkbox-inline">
-                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $goWhere->name }}
-                </label>
-                
-            @endforeach
-            </div>
-        </div>
-            
-        <div class="list-filter-row">
-            <p>什麼時候</p>
-            <div class="row list-filter-option">
-            @foreach( $filter['when'] as $playAt )
-                
-                <label class="checkbox-inline">
-                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playAt->name }}
-                </label>
-                
-            @endforeach
-            </div>
-        </div>
-            
-        <div class="list-filter-row">
-            <p>預算多少</p>
-            <div class="row list-filter-option">
-            @foreach( $filter['price'] as $price )
-                
-                <label class="checkbox-inline">
-                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $price->name }}
-                </label>
-                
-            @endforeach
-            </div>
+    <div class="row list-banner" style="background-image:url('/img/pics/sunmoonlake.jpg')">
+        <div class="list-banner-image">
+            <img src="/img/pics/banner_title-02.png">
+            <p>發現生活周遭美好的事物</p>
+
         </div>
     </div>
-</div>
-    </div>
-    <div class="row list-content col-sm-8">
-        <ul class="nav nav-tabs">
-          <li role="presentation"><a href="#">熱門排序</a></li>
-          <li role="presentation"><a href="#">時間排序</a></li>
-          <li role="presentation"><a href="#">優惠排序</a></li>
-        </ul>
-        <div class="list-content-panel"> 
-        
+    <div class="list-content">
+        <div class="row list-filter col-sm-4">    
+            <div class="list-filter-panel">
+                <p class="list-filter-title"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜尋活動</p>
+                <div class="list-filter-content">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="list-filter-row">
+                        <p>想和誰去</p>
+                        <div class="row list-filter-option">
+                        @foreach( $filter['who'] as $withWho )
+
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $withWho->name }}
+                            </label>
+
+                        @endforeach
+                        </div>
+                    </div>
+
+                    <div class="list-filter-row">
+                        <p>想玩什麼</p>
+                        <div class="row list-filter-option">
+                        @foreach( $filter['what'] as $playWhat  )
+
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playWhat->name }}
+                            </label>
+
+                        @endforeach
+                        </div>
+                    </div>
+
+                    <div class="list-filter-row">
+                        <p>想去哪兒</p>
+                        <div class="row list-filter-option">
+                        @foreach( $filter['where'] as $goWhere )
+
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $goWhere->name }}
+                            </label>
+
+                        @endforeach
+                        </div>
+                    </div>
+
+                    <div class="list-filter-row">
+                        <p>什麼時候</p>
+                        <div class="row list-filter-option">
+                        @foreach( $filter['when'] as $playAt )
+
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playAt->name }}
+                            </label>
+
+                        @endforeach
+                        </div>
+                    </div>
+
+                    <div class="list-filter-row">
+                        <p>預算多少</p>
+                        <div class="row list-filter-option">
+                        @foreach( $filter['price'] as $price )
+
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $price->name }}
+                            </label>
+
+                        @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row list-right-content col-sm-7">
+            <ul class="nav nav-tabs">
+              <li role="presentation"><a href="#">熱門排序</a></li>
+              <li role="presentation"><a href="#">時間排序</a></li>
+              <li role="presentation"><a href="#">優惠排序</a></li>
+            </ul>
+            <div class="list-content-panel"> 
+
+            </div>
         </div>
     </div>
 </div>
@@ -125,16 +132,18 @@ $(document).ready(function () {
         // activityRow.length = 0;
         console.log(data);
         for ( var eventIndex in data ) {
-            activityRow += '<div class="row blog-category-panel"> \
+            activityRow += '<div class="row list-category-panel"> \
                 <a href="{{ URL::to( 'activity/')}}/' + eventData[eventIndex]['category'] + '/' + eventData[eventIndex]['title'] + '"> \
-                <div class="blog-category-thumnail" style="background-image:url(\''+ eventData[eventIndex]['thumbnail']  +'\')"> </div> </a> \
-                <div class="blog-category-text"> <div class="category-title"> \
+                <div class="col-md-5 list-category-thumnail" style="background-image:url(\''+ eventData[eventIndex]['thumbnail']  +'\')"> </div> </a> \
+                <div class="col-md-7 list-category-text"> <div class="list-category-title"> \
                 <a href="{{ URL::to( 'activity/')}}/' + eventData[eventIndex]['category'] + '/' + eventData[eventIndex]['title'] + '">'+ eventData[eventIndex]['title'] +'</a> \
-                </div> <div class="category-info"> <p> <span class="glyphicon glyphicon-time" aria-hidden="true"></span> \
-                ' + getDay(eventData[eventIndex]['activity_start']) + " " + getWeekday(eventData[eventIndex]['activity_start']) + '</p> </div> \
-                <div class="category-description word-indent">' + eventData[eventIndex]['description'] + '</div>  <div class="read-article"> \
-                <a href="{{ URL::to( 'activity/')}}/' + eventData[eventIndex]['category'] + '/' + eventData[eventIndex]['title'] + '">進入活動 >> </a> \
-                </div> </div> </div> <div class="row category-page-number"> links </div> ';
+                <div class="list-category-description word-indent-02">' + eventData[eventIndex]['description'] + '</div>  \
+                </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> \
+                </p> \
+                 <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(eventData[eventIndex]['activity_start']) + " " + getWeekday(eventData[eventIndex]['activity_start']) + ' </p> \
+                <p>  <img src="img/pics/location-icon-02.png"> </p> \
+                </div> \
+                </div> </div> <div class="row list-page-number"></div> ';
         }
         $('.list-content-panel').html(activityRow);
     }

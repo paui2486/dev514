@@ -1789,7 +1789,8 @@ li.collapse-blog-category {
     width: 100%;
 }
 
-.actpage-purchase p {
+.actpage-purchase p,
+.actpage-purchase {
     color: white;
     font-size: 16px;
     letter-spacing: 2px;
@@ -2330,6 +2331,12 @@ div.zabuto_calendar .table {
     margin-top:80px;
 }
 
+.list-content {
+    max-width: 1050px;
+    width: 80%;
+    margin: 0px auto;
+}
+
 .list-banner {
     height: 200px;
     background-size: cover;
@@ -2338,28 +2345,43 @@ div.zabuto_calendar .table {
     margin: 0px;
 }
 
+.list-banner-image img {
+    width: 400px;
+}
+
+.list-banner-image {
+    width:400px;
+    margin:70px auto;
+    color: white;
+    font-size:20px;
+    text-shadow: 0px 0px 5px #000;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
 .list-filter {
     margin: 0px;
     padding: 20px;
-}
-
-.list-filter-panel {
-    width: 80%;
-    margin: auto;
 }
 
 .list-filter-title {
     background: #00bcd4;
     color: #fff;
     text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     margin: 0px;
     padding: 10px;
+    box-shadow: 0px 0px 5px #ccc;
+}
+
+.list-filter-title span {
+    margin-right: 5px;
 }
 
 .list-filter-content {
     padding:5px 15px;
-    background-color: rgba(255,255,255,0.6)
+    background-color: rgba(255,255,255,0.6);
+    box-shadow: 0px 0px 5px #ccc;
 }
 
 .list-filter-row {
@@ -2370,6 +2392,7 @@ div.zabuto_calendar .table {
 .list-filter-row p {
     font-size:20px;
     letter-spacing: 2px;
+    color: #b3b3b3;
 }
 
 .list-filter-option {
@@ -2400,9 +2423,74 @@ div.zabuto_calendar .table {
     float: left;
 }
 
-.list-content {
-    padding: 15px;
+.list-right-content {
+    margin: 20px;
 }
+
+.list-content-panel {
+    margin: 0px 15px;
+}
+
+.list-content ul a {
+    font-size: 15px;
+    color: #666;
+    letter-spacing: 2px;
+}
+
+.list-category-panel {
+    padding: 20px 0px;
+    border-bottom: 1px solid #ccc;
+}
+
+.list-category-thumnail {
+    min-height:200px;
+    background-size: cover;
+    background-position: top;
+}
+
+.list-category-text {
+    padding:10px;
+/*    background-color: white;*/
+}
+
+.list-category-title a {
+    color: #666;
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    position: relative;
+    line-height: 1.5em;
+    white-space: nowrap;
+    height: 30px;
+}
+
+.list-category-description {
+    word-break: break-all;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin: 10px 0px;
+}
+
+.list-category-info p {
+    color: #998d7e;
+    font-size: 15px;
+    margin: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 30px;
+}
+
+.list-category-info  img {
+    width: 30px;
+}
+
+
+
+
 
 
 
