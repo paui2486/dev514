@@ -19,7 +19,7 @@
           <div id="RightFixed" class="col-md-4 actpage-right-content">
                 <p class="actpage-cart-title">$ {{ $activity->min_price }} NTD起</p>
                 <div class="row actpage-cart-content">
-                    <p class="actpage-buy-now">馬上訂購票券</p>
+                    <p class="actpage-buy-now">{{ $activity->title }}</p>
                     <div class="row actpage-cart-ticket">
                         @foreach($tickets as $ticket)
                         <div class="row cart-option">
@@ -40,7 +40,9 @@
                 
                 @if(count($tickets)>0)
                 <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
-                    <div class="row actpage-purchase">讓生活更有意思</div>
+                    <div class="row actpage-purchase">
+                        <p><img src="/img/icons/playicon.png">讓生活更有意思!</p>
+                    </div>
                 </a>
                 @else
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>

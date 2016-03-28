@@ -1784,16 +1784,26 @@ li.collapse-blog-category {
     background-color: #ff5a5f;
     border-radius: 5px;
     text-align: center;
-    padding: 5px;
-    color: white;
-    font-size: 16px;
-    letter-spacing: 2px;
+    padding:10px 5px;
     margin: 10px auto;
     width: 100%;
 }
 
+.actpage-purchase p {
+    color: white;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 0px;
+}
+
 .actpage-purchase:hover {
     background-color: #dd4e58;
+}
+
+.actpage-purchase img {
+    width: 20px;
+    margin-bottom: 3px;
+    margin-right: 3px;
 }
 
 .actpage-bought-content {
@@ -2311,3 +2321,95 @@ div.zabuto_calendar .table {
 .result-button button:hover {
     background-color:  #02a1ad;
 }
+
+/*----------------活動類表頁-----------------*/
+
+.list-container {
+    margin: 0px;
+    padding: 0px;
+    margin-top:80px;
+}
+
+.list-banner {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    margin: 0px;
+}
+
+.list-filter {
+    margin: 0px;
+    padding: 20px;
+}
+
+.list-filter-panel {
+    width: 80%;
+    margin: auto;
+}
+
+.list-filter-title {
+    background: #00bcd4;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    margin: 0px;
+    padding: 10px;
+}
+
+.list-filter-content {
+    padding:5px 15px;
+    background-color: rgba(255,255,255,0.6)
+}
+
+.list-filter-row {
+    margin: 15px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.list-filter-row p {
+    font-size:20px;
+    letter-spacing: 2px;
+}
+
+.list-filter-option {
+    margin:5px 0px;
+    padding: 0px;
+}
+
+.list-filter-row label {
+    font-size: 15px;
+    float: left;
+    padding: 0px;
+    padding-right:10px;
+    letter-spacing:1px;
+    margin: 10px 0px;
+    color: #666;
+}
+
+.list-filter-option input {
+    margin-right: 5px;
+}
+
+.checkbox-inline+.checkbox-inline {
+    margin:10px 0px;
+}
+
+
+.list-filter-row input {
+    float: left;
+}
+
+.list-content {
+    padding: 15px;
+}
+
+
+
+
+
+
+
+
+
+

@@ -8,52 +8,90 @@
 @endsection
 
 @section('content')
-<div class ="content" style="margin-top:100px">
-    <div class="col-sm-4">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div>
+<div class ="row list-container">
+    <div class="row list-banner" style="background-image:url('/img/pics/table-690892_1280.jpg')"></div>
+    <div class="row list-filter col-sm-4">
+        
+<div class="list-filter-panel">
+    <p class="list-filter-title">搜尋活動</p>
+    <div class="list-filter-content">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="list-filter-row">
             <p>想和誰去</p>
+            <div class="row list-filter-option">
             @foreach( $filter['who'] as $withWho )
+                
                 <label class="checkbox-inline">
-                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}"> {{ $withWho->name }}
+                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $withWho->name }}
                 </label>
+                
             @endforeach
+            </div>
         </div>
-        <div>
+            
+        <div class="list-filter-row">
             <p>想玩什麼</p>
-            @foreach( $filter['what'] as $playWhat )
+            <div class="row list-filter-option">
+            @foreach( $filter['what'] as $playWhat  )
+                
                 <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="{{ $playWhat->id }}"> {{ $playWhat->name }}
+                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playWhat->name }}
                 </label>
+                
             @endforeach
+            </div>
         </div>
-        <div>
+        
+        <div class="list-filter-row">
             <p>想去哪兒</p>
+            <div class="row list-filter-option">
             @foreach( $filter['where'] as $goWhere )
+                
                 <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="{{ $goWhere->id }}"> {{ $goWhere->name }}
+                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $goWhere->name }}
                 </label>
+                
             @endforeach
+            </div>
         </div>
-        <div>
-            <p>時間</p>
+            
+        <div class="list-filter-row">
+            <p>什麼時候</p>
+            <div class="row list-filter-option">
             @foreach( $filter['when'] as $playAt )
+                
                 <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox4" value="{{ $playAt->id }}"> {{ $playAt->name }}
+                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playAt->name }}
                 </label>
+                
             @endforeach
+            </div>
         </div>
-        <div>
+            
+        <div class="list-filter-row">
             <p>預算多少</p>
+            <div class="row list-filter-option">
             @foreach( $filter['price'] as $price )
+                
                 <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox4" value="{{ $price->id }}"> {{ $price->name }}
+                    <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $price->name }}
                 </label>
+                
             @endforeach
+            </div>
         </div>
     </div>
-    <div class="col-sm-8">
-        <div class="row activity-content"></div>
+</div>
+    </div>
+    <div class="row list-content col-sm-8">
+        <ul class="nav nav-tabs">
+          <li role="presentation"><a href="#">熱門排序</a></li>
+          <li role="presentation"><a href="#">時間排序</a></li>
+          <li role="presentation"><a href="#">優惠排序</a></li>
+        </ul>
+        <div class="list-content-panel"> 
+        
+        </div>
     </div>
 </div>
 @endsection
@@ -98,7 +136,7 @@ $(document).ready(function () {
                 <a href="{{ URL::to( 'activity/')}}/' + eventData[eventIndex]['category'] + '/' + eventData[eventIndex]['title'] + '">進入活動 >> </a> \
                 </div> </div> </div> <div class="row category-page-number"> links </div> ';
         }
-        $('.activity-content').html(activityRow);
+        $('.list-content-panel').html(activityRow);
     }
 
     function getDay ( datetime ) {

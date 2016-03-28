@@ -25,7 +25,7 @@
                 <li><a href="{{ url('login') }}">登入</a></li>
                 <li><a href="{{ url('register') }}">註冊</a></li>
                 @else
-                <li class="dropdown">
+                <li>
                     <a href="#"
                        class="dropdown-toggle"
                        data-toggle="dropdown"
