@@ -118,22 +118,29 @@ $(document).ready(function () {
     function showResult ( data ) {
 
         var activityRow = new String();
-        for ( var eventIndex in data ) {
-            activityRow += '<div class="row list-category-panel"> \
-                <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '"> \
-                <div class="col-md-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
-                <div class="col-md-7 list-category-text"> <div class="list-category-title"> \
-                <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '">'+ data[eventIndex]['title'] +'</a> \
-                <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div>  \
-                </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> \
-                </p> \
-                 <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) + " " + getWeekday(data[eventIndex]['activity_start']) + ' </p> \
-                <p>  <img src="img/pics/location-icon-02.png"> </p> \
-                </div> \
-                </div> </div> <div class="row list-page-number"></div> ';
-                // getDay(eventData[eventIndex]['activity_end'])
-                // getDay(eventData[eventIndex]['min_price'])
+        if (data.length > 0) {
+            for ( var eventIndex in data ) {
+                activityRow += '<div class="row list-category-panel"> \
+                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '"> \
+                    <div class="col-md-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
+                    <div class="col-md-7 list-category-text"> <div class="list-category-title"> \
+                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '">'+ data[eventIndex]['title'] +'</a> \
+                    <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div>  \
+                    </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' \
+                    </p> \
+                     <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " + 
+                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
+                    <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['location'] + ' </p> \
+                    </div> \
+                    </div> </div> <div class="row list-page-number"></div> ';
+                    // getDay(data[eventIndex]['activity_end'])
+                    // getDay(data[eventIndex]['min_price'])
+                    // getDay(data[eventIndex]['location'])
+            }
+        } else {
+            activityRow = '<div>無此類別</div>';
         }
+
         $('.list-content-panel').html(activityRow);
     }
 
