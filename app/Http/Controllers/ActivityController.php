@@ -190,7 +190,7 @@ class ActivityController extends Controller
                         ->where('activities.status', 4)
                         ->select(array(
                           'activities.id',        'activities.title' ,           'activities.description',
-                          'activities.min_price', 'activities.activity_start',   'activities.activity_end', 
+                          'activities.min_price', 'activities.activity_start',   'activities.activity_end',
                           'activities.location',  'categories.name as category', 'activities.thumbnail'
                         ))
                         ->orderBy('activities.created_at', 'asc');
@@ -232,7 +232,7 @@ class ActivityController extends Controller
             }
 
             if ( URL::previous() == URL::current() ) {
-                Log::error($activities);
+                // Log::error($activities);
                 return $activities;
             }
         } else {

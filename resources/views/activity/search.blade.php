@@ -13,7 +13,6 @@
         <div class="list-banner-image">
             <img src="/img/pics/banner_title-02.png">
             <p>發現生活周遭美好的事物</p>
-
         </div>
     </div>
     <div class="list-content">
@@ -119,21 +118,21 @@ $(document).ready(function () {
     function showResult ( data ) {
 
         var activityRow = new String();
-        // activityRow.length = 0;
-        console.log(data);
         for ( var eventIndex in data ) {
             activityRow += '<div class="row list-category-panel"> \
-                <a href="{{ URL::to( 'activity/')}}/' + eventData[eventIndex]['category'] + '/' + eventData[eventIndex]['title'] + '"> \
-                <div class="col-md-5 list-category-thumnail" style="background-image:url(\''+ eventData[eventIndex]['thumbnail']  +'\')"> </div> </a> \
+                <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '"> \
+                <div class="col-md-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
                 <div class="col-md-7 list-category-text"> <div class="list-category-title"> \
-                <a href="{{ URL::to( 'activity/')}}/' + eventData[eventIndex]['category'] + '/' + eventData[eventIndex]['title'] + '">'+ eventData[eventIndex]['title'] +'</a> \
-                <div class="list-category-description word-indent-02">' + eventData[eventIndex]['description'] + '</div>  \
+                <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '">'+ data[eventIndex]['title'] +'</a> \
+                <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div>  \
                 </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> \
                 </p> \
-                 <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(eventData[eventIndex]['activity_start']) + " " + getWeekday(eventData[eventIndex]['activity_start']) + ' </p> \
+                 <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) + " " + getWeekday(data[eventIndex]['activity_start']) + ' </p> \
                 <p>  <img src="img/pics/location-icon-02.png"> </p> \
                 </div> \
                 </div> </div> <div class="row list-page-number"></div> ';
+                // getDay(eventData[eventIndex]['activity_end'])
+                // getDay(eventData[eventIndex]['min_price'])
         }
         $('.list-content-panel').html(activityRow);
     }
