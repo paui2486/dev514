@@ -2,15 +2,26 @@
     <div class="navbar-container">
             <!-- Collapsed Hamburger -->
             <button type="button"
-                    class="navbar-toggle collapsed"
+                    class="col-xs-2 navbar-toggle collapsed"
                     data-toggle="collapse"
                     data-target="#app-navbar-collapse">
-                <span class="glyphicon glyphicon-list"></span>
+                <span class="glyphicon glyphicon-align-justify"></span>
+            </button>
+            <button type="button"
+                    class="col-xs-2 navbar-toggle-mobile collapsed"
+                    data-toggle="collapse"
+                    data-target="#app-navbar-collapse">
+                <span class="glyphicon glyphicon-user"></span>
             </button>
             <!-- Branding Image -->
             <div class="navbar-brand">
                 <a  href="{{ url('/') }}">
                     <img src="/img/pics/logofin_white.png">
+                </a>
+            </div>
+            <div class="col-xs-8 navbar-brand-mobile">
+                <a  href="{{ url('/') }}">
+                    <img src="/img/pics/514mobile-logo.png">
                 </a>
             </div>
 

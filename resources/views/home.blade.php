@@ -57,10 +57,11 @@
 
 @section('banner')
     <div class="searchbar-mobile">
-        <div class="col-xs-8">
-            <input name="keySearch" class="search-bar" type="text" />
+        <p>讓生活更 有意思!</p>
+        <div class="searchbar-mbstyle col-xs-9">
+            <input name="keySearch" class="search-bar" type="text" placeholder="想找什麼活動？"/>
         </div>
-        <div class="col-xs-4">
+        <div class="searchbar-mbstyle col-xs-3">
             <button type="submit" class="search-button btn">
                 搜尋
             </button>
@@ -162,9 +163,16 @@
                 <img src="/img/pics/new_activities-02.png">
             </div>
             <div class="row new-activity-content">
+                <div class="home-mb-order">
+                    <ul class="nav nav-tabs">
+                      <li role="presentation"><a href="#">熱門排序</a></li>
+                      <li role="presentation"><a href="#">時間排序</a></li>
+                      <li role="presentation"><a href="#">優惠排序</a></li>
+                    </ul>
+                </div>
                 @foreach( $home->newActivity as $newActivity )
 
-                    <div class="col-md-4 new-activity-panel">
+                    <div class="col-md-4 col-xs-12 new-activity-panel">
                         <div class="newact_panel_bg">
                             <div class="new-activity-id">
                                 {{ $newActivity->activity_id }}
@@ -172,6 +180,9 @@
                             <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
                             <div class="new-activity-thumbnail"
                                  style="background-image:url({{ $newActivity->thumbnail }})">
+                                <div class="home-mb-price">
+                                    $ {{ $newActivity->price }} NTD 起
+                                </div>
                             </div>
                             </a>
                             <div class="new-activity-right">
@@ -186,6 +197,7 @@
                                 <div class="new-activity-description word-indent">
                                     {{ $newActivity->description }}
                                 </div>
+                                 
                                 <div class="new-activity-price">
                                     <img src="img/pics/money-icon-02.png">
                                     {{ $newActivity->price }} 元
@@ -202,14 +214,36 @@
                                     <img src="/img/icons/holder.png">
                                     <span> {{ $newActivity->orginizer }} </span>
                                 </div>
+                            
+<!--mbview-->     
+                            @foreach( $home->totalActivity as $eachTypeActivity )
+                            <div class="home-mb-info">
+                                <p>
+                                    <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                                    {{ $eachTypeActivity->cat_title }}
+                                </p>
+                                @endforeach
+
+                                <p>
+                                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                                </p>
+                                <p class="word-indent-newact ">
+                                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                    {{ $newActivity->location }}
+                                </p>
+                            </div>              
+   
                             </div>
                         </div>
                     </div>
 
                 @endforeach
+                
             </div>
+            <button> 查看更多 </button> 
         </div>
-
+<!--mbview-->
         <div class="Act-category">
             <div class="row home-title">
                 <img src="/img/pics/act_category-02.png">
@@ -223,8 +257,10 @@
                             </div>
 
                            <div class="row Act-category-title">
-                                <p class="col-md-2"><a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">{{ $eachTypeActivity->cat_title }}</a>
+                                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}"> 
+                                <p class="col-md-2">{{ $eachTypeActivity->cat_title }}
                                 </p>
+                                </a>
                                 <div class="col-md-8 home-dashed"></div>
     <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
                                 <div class="col-md-2 category-readmore">
