@@ -4,30 +4,27 @@
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
-         <h4 class="wrapper-title">
-             Filter 設定
-             <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/member/create') }}}"
+        <h4 class="wrapper-title">
+            Filter 設定
+            <div class="pull-right wrapper-create">
+                <a href="{{{ URL::to('dashboard/filter/create') }}}"
                     class="btn btn-sm  btn-primary">
-                      <span class="glyphicon glyphicon-plus-sign"></span> 新增
-                  </a>
-             </div>
-         </h4>
-
-         <table id="table" class="table table-striped table-hover">
-             <thead>
-                 <tr>
-                     <th>ID</th>
-                     <th>名字</th>
-                     <th>Email</th>
-                     <th>活動主</th>
-                     <th>達人</th>
-                     <th>狀態</th>
-                     <th>設定</th>
-                 </tr>
-             </thead>
-             <tbody></tbody>
-         </table>
+                    <span class="glyphicon glyphicon-plus-sign"></span> 新增
+                </a>
+            </div>
+        </h4>
+        <table id="table" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名稱</th>
+                    <th>類別</th>
+                    <th>狀態</th>
+                    <th>設定</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </section>
 </section>
 <!--main content end-->
@@ -53,18 +50,6 @@
                         columns: ':not(:first-child)',
                         text: '顯示欄位'
                     },
-                    // {
-                    //     extend: 'colvisGroup',
-                    //     text: '活動主',
-                    //     show: [ 1, 2 ],
-                    //     hide: [ 3, 4, 5 ]
-                    // },
-                    // {
-                    //     extend: 'colvisGroup',
-                    //     text: '達人',
-                    //     show: [ 3, 4, 5 ],
-                    //     hide: [ 1, 2 ]
-                    // },
                     {
                         extend: 'pdfHtml5',
                         download: 'open'
@@ -74,20 +59,20 @@
                 "aoColumnDefs": [
                     {
                         "bSortable": false,
-                        "aTargets": [ 6 ]
+                        "aTargets": [ 4 ]
                     },
                 ],
                 // "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "processing": true,
                 "responsive": true,
                 // "serverSide": true,
-                "ajax": "{{ URL::to('dashboard/member/data') }}",
+                "ajax": "{{ URL::to('dashboard/filter/data') }}",
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
                         speed: 660,
-                        width: "80%",
-                        height: "80%",
+                        width: "60%",
+                        height: "40%",
                         opacity: 0.4,
                         transition: "fade",
                         onClosed: function () {

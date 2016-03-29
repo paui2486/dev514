@@ -1,10 +1,10 @@
 @extends('admin.layouts.modal')
 @section('content')
-	{!! Form::model($member, array('url' => URL::to('dashboard/member') . '/' . $member->id, 'method' => 'delete', 'class' => 'bf', 'files'=> true)) !!}
+	{!! Form::model($filter, array('url' => URL::to('dashboard/filter') . '/' . $filter->id, 'method' => 'delete', 'class' => 'bf', 'files'=> true)) !!}
 	<div class="form-group">
 			<div class="tab-content">
 					<div class="controls">
-							請確認是否刪除此會員  {{ $member->name }}
+							請確認是否刪除此類別  {{ $filter->name }}
 							<br>
 							<br>
 							<element class="btn btn-warning btn-sm close_popup">

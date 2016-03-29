@@ -12,178 +12,73 @@
     <section class="wrapper">
 @endif
 
-<ul class="nav nav-tabs">
+        <ul class="nav nav-tabs">
             <li class="active">
                 <a href="#tab-general" data-toggle="tab">會員設定</a>
             </li>
         </ul>
-
         <form class="form-horizontal" enctype="multipart/form-data"
           	method="post" autocomplete="off" role="form"
-          	action="@if(isset($member)){{ URL::to('dashboard/member/'.$member->id.'/update') }}
-        	        @else{{ URL::to('dashboard/member') }}@endif">
+          	action="@if(isset($filter)){{ URL::to('dashboard/filter/'.$filter->id.'/update') }}
+        	        @else{{ URL::to('dashboard/filter') }}@endif">
             {!! csrf_field() !!}
-          	<!-- CSRF Token -->
-          	<!-- <input type="hidden" name="_token" value="{{{ csrf_token() }}}" /> -->
-          	<!-- ./ csrf token -->
-          	<!-- Tabs Content -->
           	<div class="tab-content">
             		<!-- General tab -->
             		<div class="tab-pane active" id="tab-general">
             				<div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="name">
-                                使用者名稱
+                                名稱
                             </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="name" id="name"
-                      							value="{{{ Input::old('name', isset($member) ? $member->name : null) }}}" />
-                    						    <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
+                      							value="{{{ Input::old('name', isset($filter) ? $filter->name : null) }}}" />
                             </div>
                         </div>
             				</div>
-                    <div class="form-group {{{ $errors->has('avatar') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="avatar">
-                                頭像網址
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="avatar" id="avatar"
-                      							value="{{{ Input::old('avatar', isset($member) ? $member->avatar : null) }}}" />
-                            </div>
-                        </div>
-            				</div>
-                    <div class="form-group {{{ $errors->has('address') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="address">
-                                居住地址
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="address" id="address"
-                      							value="{{{ Input::old('address', isset($member) ? $member->address : null) }}}" />
-                                    @if ($errors)
-                                        <span class="help-block">
-                                            <p>{{ $errors->first('address') }}</p>
-                                        </span>
-                                    @endif
-                            </div>
-                        </div>
-            				</div>
-                    <div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="email">
-                                電子信箱
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="email" id="email"
-                      							value="{{{ Input::old('email', isset($member) ? $member->email : null) }}}" />
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <p>{{ $errors->first('email') }}</p>
-                                        </span>
-                                    @endif
-                            </div>
-                        </div>
-            				</div>
-                    <div class="form-group {{{ $errors->has('phone') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="phone">
-                                電話號碼
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="phone" id="phone"
-                      							value="{{{ Input::old('phone', isset($member) ? $member->phone : null) }}}" />
-                    						    {!!$errors->first('phone', '<label class="control-label">:message</label>')!!}
-                            </div>
-                        </div>
-            				</div>
-                    <div class="form-group {{{ $errors->has('bank_name') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="bank_name">
-                                銀行名稱
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="bank_name" id="bank_name"
-                      							value="{{{ Input::old('bank_name', isset($member) ? $member->bank_name : null) }}}" />
-                    						    {!!$errors->first('bank_name', '<label class="control-label">:message</label>')!!}
-                            </div>
-                        </div>
-            				</div>
-                    <div class="form-group {{{ $errors->has('bank_account') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="bank_account">
-                                銀行帳號
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="bank_account" id="bank_account"
-                      							value="{{{ Input::old('bank_account', isset($member) ? $member->bank_account : null) }}}" />
-                    						    {!!$errors->first('bank_account', '<label class="control-label">:message</label>')!!}
-                            </div>
-                        </div>
-            				</div>
-                    <div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
-              					<div class="col-md-12">
-                						<label class="control-label col-sm-2" for="password">
-                                登入密碼
-                            </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="password" name="password" id="password"
-                      							value="" />
-                    						    {!!$errors->first('password', '<label class="control-label">:message</label>')!!}
-                            </div>
-                        </div>
-            				</div>
-
-                    <div class="form-group">
+                    <div class="form-group {{{ $errors->has('type') ? 'has-error' : '' }}}">
                         <div class="col-md-12">
-                            <label class="control-label col-sm-2" for="password">
-                                帳戶權限
+                            <label class="control-label col-sm-2" for="type">
+                                Filter 分類
                             </label>
-                            <div class="login-info checkbox col-sm-10">
-                                <label class="col-xs-3">
-                                    <input type="checkbox" name="permission[]" value="adminer"
-                                    {{{ Input::old('adminer', (isset($member) && $member->adminer ) ? 'checked' : null) }}}>
-                                    管理者
-                                </label>
-                                <label class="col-xs-3">
-                                    <input type="checkbox" name="permission[]" value="hoster"
-                                    {{{ Input::old('hoster', (isset($member) && $member->hoster ) ? 'checked' : null) }}}>
-                                    活動主
-                                </label>
-                                <label class="col-xs-3">
-                                    <input type="checkbox" name="permission[]" value="author"
-                                    {{{ Input::old('author', (isset($member) && $member->author ) ? 'checked' : null) }}}>
-                                    部落客達人
-                                </label>
+                            <div class="col-sm-10">
+                                <select style="width: 100%" name="type" class="form-control">
+                                @foreach($categories as $id => $value)
+                                    <option value="{{ $id }}"
+                                    @if (isset($filter))
+                                        @if ($filter->type == $id)
+                                    selected="selected"
+                                        @endif
+                                    @endif > {{$value}}
+                                    </option>
+                                @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group" id="data">
+
+
+                    </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <label class="control-label col-sm-2" for="password">
-                                帳戶狀態
+                            <label class="control-label col-sm-2" for="public">
+                                狀態
                             </label>
                             <div class="radio login-info checkbox col-sm-10">
                                 <label class="col-xs-3">
-                                    <input type="radio" name="status" value="1"
-                                    {{{ Input::old('status', (isset($member) && $member->status == 1 ) ? 'checked' : null) }}}>
-                                    已完成認證
+                                    <input type="radio" name="public" value="1"
+                                    {{{ Input::old('status', (isset($filter) && $filter->public == 1 ) ? 'checked' : null) }}}>
+                                    顯示
                                 </label>
                                 <label class="col-xs-3">
-                                    <input type="radio" name="status" value="0"
-                                    {{{ Input::old('status', (isset($member) && $member->status == 0 ) ? 'checked' : null) }}}>
-                                    未完成認證
-                                </label>
-                                <label class="col-xs-3">
-                                    <input type="radio" name="status" value="2"
-                                    {{{ Input::old('status', (isset($member) && $member->status == 2 ) ? 'checked' : null) }}}>
-                                    遭系統封鎖
+                                    <input type="radio" name="public" value="0"
+                                    {{{ Input::old('status', (isset($filter) && $filter->public == 0 ) ? 'checked' : null) }}}>
+                                    隱藏
                                 </label>
                             </div>
                         </div>
                     </div>
-
-
         				<!-- ./ general tab -->
                 </div>
           			<!-- ./ tabs content -->
@@ -201,7 +96,7 @@
             				</button>
             				<button type="submit" class="btn btn-sm btn-success">
               					<span class="glyphicon glyphicon-ok-circle"></span>
-              					@if	(isset($member))
+              					@if	(isset($filter))
               					  變更
               					@else
               					  確定
@@ -215,3 +110,26 @@
 </section>
 
 @stop
+
+@section('scripts')
+<script>
+$(document).ready(function () {
+    $('select[name=type]').on('change', function () {
+        var select = $(this).val();
+        if (select == 5) {
+            var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 名稱 </label> \
+                  <div class="col-sm-10"><input class="form-control" type="text" name="value" \
+                  value="{{{ Input::old('value', isset($filter) ? $filter->value : null) }}}" /> </div> </div>';
+        } else if (select == 6) {
+            var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最大值 </label> \
+                  <div class="col-sm-10"><input class="form-control" type="text" name="max" \
+                  value="{{{ Input::old('max', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$1", $filter->value) : null) }}}" /> </div> </div> \
+                  <div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最小值 </label> \
+                  <div class="col-sm-10"><input class="form-control" type="text" name="min" \
+                  value="{{{ Input::old('min', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$2", $filter->value) : null) }}}" /> </div> </div> ';
+        }
+        $("#data").html( inputForm );
+    });
+});
+</script>
+@endsection

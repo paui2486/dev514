@@ -116,12 +116,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/hoster'                , 'ActivityController@showExpert'     );
         Route::get('activity/hoster/data'           , 'ActivityController@getExpert'      );
 
-
+        Route::get('filter/data'            , 'FilterController@data'    );
+        Route::get('filter/{id}/delete'     , 'FilterController@getDelete'    );
+        Route::post('filter/{id}/update'    , 'FilterController@update'    );
+        Route::resource('filter'            , 'FilterController'               );
         // no yet
-        Route::get('filter/data'            , 'AdminController@showMember'    );
-        Route::get('filter/{id}/delete'     , 'AdminController@showMember'    );
-        Route::post('filter/{id}/update'    , 'AdminController@showMember'    );
-        Route::resource('filter'            , 'AdminController@showMember'    );
 
         Route::get('ad'                     , 'AdminController@showMember'    );
         Route::get('point'                  , 'AdminController@showMember'    );

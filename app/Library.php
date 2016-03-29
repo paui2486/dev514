@@ -62,6 +62,18 @@ class Library
           return ;
     }
 
+    public static function getFilter()
+    {
+        $categories = array(
+            1 => "活動類別",
+            3 => "對象類別",
+            4 => "地區類別",
+            5 => "時間類別",
+            6 => "金額類別",
+        );
+        return $categories;
+    }
+
     public static function getFilterCategory()
     {
         $category = array(
