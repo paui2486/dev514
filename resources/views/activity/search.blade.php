@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="list-content">
-        <div class="row list-filter col-sm-4">    
+        <div class="row list-filter col-sm-4">
             <div class="list-filter-panel">
                 <p class="list-filter-title"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜尋活動</p>
                 <div class="list-filter-content">
@@ -26,11 +26,9 @@
                         <p>想和誰去</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['who'] as $withWho )
-
                             <label class="checkbox-inline">
                                 <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $withWho->name }}
                             </label>
-
                         @endforeach
                         </div>
                     </div>
@@ -39,11 +37,9 @@
                         <p>想玩什麼</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['what'] as $playWhat  )
-
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playWhat->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playWhat->id }}">{{ $playWhat->name }}
                             </label>
-
                         @endforeach
                         </div>
                     </div>
@@ -52,11 +48,9 @@
                         <p>想去哪兒</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['where'] as $goWhere )
-
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $goWhere->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $goWhere->id }}">{{ $goWhere->name }}
                             </label>
-
                         @endforeach
                         </div>
                     </div>
@@ -65,11 +59,9 @@
                         <p>什麼時候</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['when'] as $playAt )
-
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $playAt->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playAt->id }}">{{ $playAt->name }}
                             </label>
-
                         @endforeach
                         </div>
                     </div>
@@ -78,11 +70,9 @@
                         <p>預算多少</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['price'] as $price )
-
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $price->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $price->id }}">{{ $price->name }}
                             </label>
-
                         @endforeach
                         </div>
                     </div>
@@ -95,7 +85,7 @@
               <li role="presentation"><a href="#">時間排序</a></li>
               <li role="presentation"><a href="#">優惠排序</a></li>
             </ul>
-            <div class="list-content-panel"> 
+            <div class="list-content-panel">
 
             </div>
         </div>
