@@ -138,7 +138,7 @@ $(document).ready(function () {
                     // getDay(data[eventIndex]['location'])
             }
         } else {
-            activityRow = '<div>無此類別</div>';
+            activityRow = '<div class="list-attention"> Woops！尚無相關的活動類別！ </div>';
         }
 
         $('.list-content-panel').html(activityRow);
