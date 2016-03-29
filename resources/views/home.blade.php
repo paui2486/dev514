@@ -74,9 +74,7 @@
                 <div class="home_bntitle">
                     <img src="/img/pics/banner_title-02.png" />
                 </div>
-                <div class="home_banner1" style="background-image:url({{ $banner->image }});" data-u="image">
-                </div>
-
+                <div class="home_banner1" style="background-image:url({{ $banner->image }});" data-u="image"></div>
             </div>
             @endforeach
         </div>
@@ -92,69 +90,67 @@
 @endsection
 
 @section('content')
-
     <div class="home-container">
-
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
             {!! csrf_field() !!}
             <div class="filter-bg">
-            <div class="pure-g panel-filter">
-                <div class="pure-u-4-24">
-                    <select name="withWho" class="dropdown" >
-                        <option value="" class="label">想和誰去</option>
-                        @foreach( $home->filter->who as $with_who )
-                        <option value="{{ $with_who->id }}"> {{ $with_who->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
+                <div class="pure-g panel-filter">
+                    <div class="pure-u-4-24">
+                        <select name="withWho" class="dropdown" >
+                            <option value="" class="label">想和誰去</option>
+                            @foreach( $home->filter->who as $with_who )
+                            <option value="{{ $with_who->id }}"> {{ $with_who->name }} </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="pure-u-4-24">
-                    <select name="playWhat" class="dropdown">
-                        <option value="" class="label">想玩什麼</option>
-                        @foreach( $home->filter->what as $play_what )
-                        <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="pure-u-4-24">
+                        <select name="playWhat" class="dropdown">
+                            <option value="" class="label">想玩什麼</option>
+                            @foreach( $home->filter->what as $play_what )
+                            <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="pure-u-4-24">
-                    <select name="goWhere" class="dropdown">
-                        <option value="" class="label">想去哪兒</option>
-                        @foreach( $home->filter->where as $key_where => $go_where )
-                        <option value="{{ $go_where->id }}"> {{ $go_where->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="pure-u-4-24">
+                        <select name="goWhere" class="dropdown">
+                            <option value="" class="label">想去哪兒</option>
+                            @foreach( $home->filter->where as $key_where => $go_where )
+                            <option value="{{ $go_where->id }}"> {{ $go_where->name }} </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="pure-u-4-24">
-                    <select name="atWhen" class="dropdown">
-                        <option value="" class="label">時間</option>
-                        <option value="1"> 今天 </option>
-                        <option value="2"> 明天 </option>
-                        <option value="3"> 這週 </option>
-                        <option value="4"> 下週 </option>
-                        <option value="5"> 一個月內 </option>
-                        <option value="6"> 兩個月內 </option>
-                    </select>
-                </div>
+                    <div class="pure-u-4-24">
+                        <select name="atWhen" class="dropdown">
+                            <option value="" class="label">時間</option>
+                            <option value="1"> 今天 </option>
+                            <option value="2"> 明天 </option>
+                            <option value="3"> 這週 </option>
+                            <option value="4"> 下週 </option>
+                            <option value="5"> 一個月內 </option>
+                            <option value="6"> 兩個月內 </option>
+                        </select>
+                    </div>
 
-                <div class="pure-u-4-24">
-                    <select name="haveMoney" class="dropdown">
-                        <option value="" class="label">預算多少</option>
-                        @foreach( $home->filter->price as $key_price => $price )
-                        <option value="{{ $price->id }}"> {{ $price->name }} </option>
-                        @endforeach
-                    </select>
+                    <div class="pure-u-4-24">
+                        <select name="haveMoney" class="dropdown">
+                            <option value="" class="label">預算多少</option>
+                            @foreach( $home->filter->price as $key_price => $price )
+                            <option value="{{ $price->id }}"> {{ $price->name }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="pure-u-3-24">
+                        <input name="keySearch" class="search-bar" type="text" />
+                    </div>
+                    <div class="pure-u-1-24">
+                        <button type="submit" class="search-button btn">
+                            搜尋
+                        </button>
+                    </div>
                 </div>
-                <div class="pure-u-3-24">
-                    <input name="keySearch" class="search-bar" type="text" />
-                </div>
-                <div class="pure-u-1-24">
-                    <button type="submit" class="search-button btn">
-                        搜尋
-                    </button>
-                </div>
-            </div>
             </div>
         </form>
 
@@ -165,83 +161,75 @@
             <div class="row new-activity-content">
                 <div class="home-mb-order">
                     <ul class="nav nav-tabs">
-                      <li role="presentation"><a href="#">熱門排序</a></li>
-                      <li role="presentation"><a href="#">時間排序</a></li>
-                      <li role="presentation"><a href="#">優惠排序</a></li>
+                        <li role="presentation"><a href="#">熱門排序</a></li>
+                        <li role="presentation"><a href="#">時間排序</a></li>
+                        <li role="presentation"><a href="#">優惠排序</a></li>
                     </ul>
                 </div>
                 @foreach( $home->newActivity as $newActivity )
-
-                    <div class="col-md-4 col-xs-12 new-activity-panel">
-                        <div class="newact_panel_bg">
-                            <div class="new-activity-id">
-                                {{ $newActivity->activity_id }}
+                <div class="col-md-4 col-xs-12 new-activity-panel">
+                    <div class="newact_panel_bg">
+                        <div class="new-activity-id">
+                            {{ $newActivity->activity_id }}
+                        </div>
+                        <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
+                        <div class="new-activity-thumbnail"
+                             style="background-image:url({{ $newActivity->thumbnail }})">
+                            <div class="home-mb-price">
+                                $ {{ $newActivity->price }} NTD 起
                             </div>
-                            <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
-                            <div class="new-activity-thumbnail"
-                                 style="background-image:url({{ $newActivity->thumbnail }})">
-                                <div class="home-mb-price">
-                                    $ {{ $newActivity->price }} NTD 起
-                                </div>
+                        </div>
+                        </a>
+                        <div class="new-activity-right">
+                            <div class="new-activity-title word-indent-01">
+                                 <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">{{ $newActivity->title }} </a>
                             </div>
-                            </a>
-                            <div class="new-activity-right">
+                            <div class="new-activity-count">
+                                <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
+                            </div>
+                            <div class="new-activity-description word-indent">
+                                {{ $newActivity->description }}
+                            </div>
+                            <div class="new-activity-price">
+                                <img src="img/pics/money-icon-02.png">
+                                {{ $newActivity->price }} 元
+                            </div>
+                            <div class="new-activity-date">
+                                <img src="img/pics/calendar-icon-02.png">
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                            </div>
+                            <div class="new-activity-location word-indent-newact ">
+                                <img src="img/pics/location-icon-02.png">
+                                {{ $newActivity->location }}
+                            </div>
+                            <div class="new-activity-orginizer">
+                                <img src="/img/icons/holder.png">
+                                <span> {{ $newActivity->orginizer }} </span>
+                            </div>
 
-                                <div class="new-activity-title word-indent-01">
-                                     <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">{{ $newActivity->title }} </a>
-                                </div>
-
-                                <div class="new-activity-count">
-                                    <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
-                                </div>
-                                <div class="new-activity-description word-indent">
-                                    {{ $newActivity->description }}
-                                </div>
-                                 
-                                <div class="new-activity-price">
-                                    <img src="img/pics/money-icon-02.png">
-                                    {{ $newActivity->price }} 元
-                                </div>
-                                <div class="new-activity-date">
-                                    <img src="img/pics/calendar-icon-02.png">
-                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                                </div>
-                                <div class="new-activity-location word-indent-newact ">
-                                    <img src="img/pics/location-icon-02.png">
-                                    {{ $newActivity->location }}
-                                </div>
-                                <div class="new-activity-orginizer">
-                                    <img src="/img/icons/holder.png">
-                                    <span> {{ $newActivity->orginizer }} </span>
-                                </div>
-                            
-<!--mbview-->     
+<!--mbview-->
                             @foreach( $home->totalActivity as $eachTypeActivity )
                             <div class="home-mb-info">
                                 <p>
                                     <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
                                     {{ $eachTypeActivity->cat_title }}
                                 </p>
-                                @endforeach
-
-                                <p>
-                                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                                </p>
-                                <p class="word-indent-newact ">
-                                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                    {{ $newActivity->location }}
-                                </p>
-                            </div>              
-   
                             </div>
+                            @endforeach
+                            <p>
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                            </p>
+                            <p class="word-indent-newact ">
+                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                {{ $newActivity->location }}
+                            </p>
                         </div>
                     </div>
-
+                </div>
                 @endforeach
-                
             </div>
-            <button> 查看更多 </button> 
+            <button> 查看更多 </button>
         </div>
 <!--mbview-->
         <div class="Act-category">
@@ -250,76 +238,69 @@
             </div>
             <div class="row Act-category-content">
                 @foreach( $home->totalActivity as $eachTypeActivity )
-                    <div class="row Act-category-panel">
-
-                            <div class="Act-category-id">
-                                {{ $eachTypeActivity->cat_id }}
-                            </div>
-
-                           <div class="row Act-category-title">
-                                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}"> 
-                                <p class="col-md-2">{{ $eachTypeActivity->cat_title }}
-                                </p>
-                                </a>
-                                <div class="col-md-8 home-dashed"></div>
-    <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
-                                <div class="col-md-2 category-readmore">
-                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                                        <img src="/img/icons/rightarrow.png">
-                                        <p> Read More </p>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                        @foreach( $eachTypeActivity->cat_content as $activity )
-
-                            <div class="col-md-4 inter-panel">
-                                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
-                                <div class="inter-panel-thumbnail"
-                                     style="background-image:url({{ $activity->thumbnail }})">
-                                </div>
-                                    </a>
-                                <div class="inter-panel-id">
-                                    {{ $activity->activity_id }}
-                                </div>
-                                <div class="inter-panel-count">
-                                     <img src="/img/icons/eye-03.png">{{ $activity->count }} 人
-                                </div>
-                                <div class="inter-panel-info">
-                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
-                                    <div class="new-activity-title word-indent-01">
-                                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">{{ $activity->title }}</a>
-                                    </div>
-                                    </a>
-
-                                    <div class="inter-panel-description new-activity-description word-indent-02">
-                                        {{ $activity->description }}
-                                    </div>
-
-                                    <div class="new-activity-price">
-                                        <img src="img/pics/money-icon-02.png">
-                                        {{ $activity->price }} 元
-                                    </div>
-                                    <div class="new-activity-date">
-                                        <img src="img/pics/calendar-icon-02.png">
-                                        {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
-                                    </div>
-                                    <div class="new-activity-location word-indent-newact ">
-                                        <img src="img/pics/location-icon-02.png">
-                                        <span>{{ $activity->location }}</span>
-                                    </div>
-                                    <div class="new-activity-orginizer">
-                                       <img src="/img/icons/holder.png">
-                                       <span> {{ $newActivity->orginizer }} </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        @endforeach
+                <div class="row Act-category-panel">
+                    <div class="Act-category-id">
+                        {{ $eachTypeActivity->cat_id }}
                     </div>
-                @endforeach
+                     <div class="row Act-category-title">
+                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                            <p class="col-md-2">{{ $eachTypeActivity->cat_title }}
+                            </p>
+                        </a>
+                        <div class="col-md-8 home-dashed"></div>
+<!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
+                        <div class="col-md-2 category-readmore">
+                            <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                                <img src="/img/icons/rightarrow.png">
+                                <p> Read More </p>
+                            </a>
+                        </div>
+                    </div>
+                    @foreach( $eachTypeActivity->cat_content as $activity )
+                    <div class="col-md-4 inter-panel">
+                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
+                            <div class="inter-panel-thumbnail"
+                                 style="background-image:url({{ $activity->thumbnail }})">
+                            </div>
+                        </a>
+                        <div class="inter-panel-id">
+                            {{ $activity->activity_id }}
+                        </div>
+                        <div class="inter-panel-count">
+                             <img src="/img/icons/eye-03.png">{{ $activity->count }} 人
+                        </div>
+                        <div class="inter-panel-info">
+                            <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
+                                <div class="new-activity-title word-indent-01">
+                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
+                                        {{ $activity->title }}
+                                    </a>
+                                </div>
+                            </a>
+                            <div class="inter-panel-description new-activity-description word-indent-02">
+                                {{ $activity->description }}
+                            </div>
+                            <div class="new-activity-price">
+                                <img src="img/pics/money-icon-02.png">
+                                {{ $activity->price }} 元
+                            </div>
+                            <div class="new-activity-date">
+                                <img src="img/pics/calendar-icon-02.png">
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
+                            </div>
+                            <div class="new-activity-location word-indent-newact ">
+                                <img src="img/pics/location-icon-02.png">
+                                <span>{{ $activity->location }}</span>
+                            </div>
+                            <div class="new-activity-orginizer">
+                               <img src="/img/icons/holder.png">
+                               <span> {{ $newActivity->orginizer }} </span>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
+                @endforeach
             </div>
         </div>
         <div class="home-blog">
@@ -339,18 +320,15 @@
                         </div>
                         <div class="row home-blog-info">
                             <div class="home-blog-created_at">
-
                                 <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
                             </div>
                             <a href="{{ url('/blog/'. $blog->category) }}">
                                 <div class="home-blog-category">
-
                                     <li>{{ $blog->category }}</li>
                                 </div>
                             </a>
                             <a href="{{ url('/member/'. $blog->author)}}">
                                 <div class="home-blog-author">
-
                                     <li> By {{ $blog->author }}</li>
                                 </div>
                             </a>
@@ -362,10 +340,9 @@
                 </div>
                 @endforeach
             </div>
-
             <div class="row home-read-more">
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
     </div>
-    @endsection
+@endsection
