@@ -406,7 +406,7 @@ li.collapse-blog-category {
 /*Home Content*/
 
 .home-title {
-    padding-bottom: 25px;
+    padding-bottom: 15px;
     position: inherit;
     text-align: center;
 }
@@ -671,36 +671,34 @@ li.collapse-blog-category {
 }
 
 .Act-category-title {
-    margin: 20px 10px;
+    margin: 10px;
 }
 
-.Act-category-title > p {
+.Act-category-title > a > p {
     position: relative;
     margin: 0px;
     text-align: center;
     padding: 5px 15px;
     border: 1px solid #534741;
-}
-
-.home-dashed {
-    border-bottom: 1px solid #534741;
-    height: 25px;
-}
-
-.Act-category-title > p > a {
     font-size: 22px;
     color: #534741;
     letter-spacing: 2px;
 }
 
-.category-readmore {
-    opacity: 0.6;
-    padding: 5px 12px;
-    margin-top:4px;
+.Act-category-title > a > p:hover {
+    background-color: #e6e6e6;
 }
 
-.category-readmore:hover {
-    background-color: #ccc;
+.home-dashed {
+    border-bottom: 1px dashed #534741;
+    height: 25px;
+}
+
+.category-readmore {
+    opacity: 0.6;
+    padding: 0px;
+    margin-top: 10px;
+    padding-left: 28px;
 }
 
 .category-readmore a {
@@ -714,6 +712,10 @@ li.collapse-blog-category {
     float: left;
     padding-left: 5px;
     letter-spacing: 2px;
+}
+
+.category-readmore p:hover {
+    text-decoration: underline;
 }
 
 .category-readmore img {
@@ -851,7 +853,7 @@ li.collapse-blog-category {
 }
 
 .footer-center {
-    max-width: 700px;
+    width: 60%;
     margin: auto;
     padding: 40px;
     padding-bottom: 20px;
@@ -860,17 +862,6 @@ li.collapse-blog-category {
 .footer-center > div > p {
     font-size: 16px;
     color: #60574e;
-}
-
-.funtion-intro,
-.about-us {
-    width: 32%;
-    float: left;
-}
-
-.contact-us {
-    width: 36%;
-    float: left;
 }
 
 .funtion-intro-content li,
@@ -891,47 +882,42 @@ li.collapse-blog-category {
     text-decoration: none;
 }
 
-.contact-info a {
-    font-size: 16px;
+.contact-info a ,
+.contact-info > span {
+    font-size: 15px;
     color: #998d7e;
     text-decoration: none;
+    padding-right: 5px;
 }
 
-.contact-info a:hover {
+.order-time span {
+    padding-right:5px;
+    color: #998d7e;
+    font-size: 15px;
+}
+
+.contact-info span :hover {
     color: #60574e;
     text-decoration: none;
 }
 
-.day-to-day {
-    font-size:14px;
-    color: #808080;
-    list-style: none;
-    border: 1px solid #808080;
-    padding: 5px 10px;
-    border-radius: 20px;
-    text-align: center;
-    width: 70%;
-}
-
-.contact-info > span {
-    padding-left: 10px;
-    color: #998d7e;
-}
-
-.contact-info img {
-    width: 30px;
-}
-
 .online-secretary {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: rgba(255,255,255,0.7);
-    box-shadow: 3px 3px 10px #666;
-    padding: 10px 20px 0px 20px;
-    margin-right: 15%;
-    font-size: 16px;
+    border: 1px solid;
+    padding: 10px;
+    text-align: center;
+    margin: 15px 0px;
+    background-color: #808080;
+}
+
+.online-secretary p {
+    margin: 0px;
+    color: white;
+    font-size: 15px;
     letter-spacing: 1px;
+}
+
+.online-secretary span {
+    margin-right: 5px;
 }
 
 .login-container {
@@ -2495,6 +2481,13 @@ div.zabuto_calendar .table {
     width: 30px;
 }
 
+.list-attention {
+    font-size: 18px;
+    margin: 20px 0px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #999;
+}
 
 
 
