@@ -56,13 +56,17 @@
 @endsection
 
 @section('banner')
-    <div id="jssor_1" class="banner-1">
-        <!-- Loading Screen -->
-        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('../img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+    <div class="searchbar-mobile">
+        <div class="col-xs-8">
+            <input name="keySearch" class="search-bar" type="text" />
         </div>
-
+        <div class="col-xs-4">
+            <button type="submit" class="search-button btn">
+                搜尋
+            </button>
+        </div>
+    </div>
+    <div id="jssor_1" class="banner-1">
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             @foreach( $home->banner as $banner )
             <div data-p="225.00" style="display: none;">
@@ -219,19 +223,17 @@
                             </div>
 
                            <div class="row Act-category-title">
-                            <p><a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">{{ $eachTypeActivity->cat_title }}</a>
-                            </p>
-<!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
-
-
-                            <div class="category-readmore">
-                                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                                    <img src="/img/icons/rightarrow.png">
-                                    <p> 看更多 </p>
-                                </a>
+                                <p class="col-md-2"><a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">{{ $eachTypeActivity->cat_title }}</a>
+                                </p>
+                                <div class="col-md-8 home-dashed"></div>
+    <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
+                                <div class="col-md-2 category-readmore">
+                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                                        <img src="/img/icons/rightarrow.png">
+                                        <p> Read More </p>
+                                    </a>
+                                </div>
                             </div>
-
-                        </div>
 
 
                         @foreach( $eachTypeActivity->cat_content as $activity )
