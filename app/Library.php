@@ -90,4 +90,12 @@ class Library
         return $category;
     }
 
+    public static function getSlideCategory()
+    {
+        $slideCategory = DB::table('categories')
+                          ->where('public', 1)
+                          ->where('type',   1)
+                          ->get();
+        return $slideCategory;
+    }
 }

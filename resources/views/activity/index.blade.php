@@ -31,13 +31,13 @@
                         <div class="row cart-option-detail">
                             <p>票價：$ {{ $ticket->price }} NTD</p>
                             <p>活動開始： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </p>
-    
+
                             <p>活動結束：  {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </p>
 
                         </div>
-                        @endforeach  
+                        @endforeach
                     </div>
-                
+
                 @if(count($tickets)>0)
                 <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
                     <div class="row actpage-purchase">
@@ -48,6 +48,7 @@
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
                 @endif
                 </div>
+                <div id="shareBtn" class="btn btn-sm btn-success"></div>
             </div>
          <div class="row actpage-dashboard">
                     <div class="col-md-2">
@@ -135,12 +136,12 @@
                     <div class="row actpage-header">
                         <p class="actpage-header-left">討論區</p>
                         <div class="actpage-header-dash"></div>
-                        <div id="disqus_thread"></div>
+                        <!-- <div id="disqus_thread"></div> -->
+                        <div class="fb-comments" data-href="{{ Request::URL() }}" data-width="100%" data-numposts="5"></div>
                     </div>
                 </div>
             </div>
 
-          
 
 <!--
                 <div class="actpage-holder-content">
@@ -171,37 +172,44 @@
 <script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
 
 <script>
-var disqus_config = function () {
-    this.page.url = "{{ Request::URL() }}";
-    this.page.identifier = "{{ $activity->title }}";
-};
+// var disqus_config = function () {
+//     this.page.url = "{{ Request::URL() }}";
+//     this.page.identifier = "{{ $activity->title }}";
+// };
+//
+// (function() {
+//     var d = document, s = d.createElement('script');
+//     s.src = '//514life.disqus.com/embed.js';
+//     s.setAttribute('data-timestamp', +new Date());
+//     (d.head || d.body).appendChild(s);
+// })();
 
-(function() {
-    var d = document, s = d.createElement('script');
+document.getElementById('shareBtn').onclick = function() {
+    // calling the API ...
+    var obj = {
+        method: 'feed',
+        redirect_uri: '{{ Request::URL() }}',
+        display: 'popup',
+        link: '{{ Request::URL() }}',
+        picture: '{{ asset($activity->thumbnail) }}',
+        name: '514 活動頻道 - {{ $activity->title }}',
+        caption: '活動由 @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif 所提供',
+        description: '{{ $activity->description }}'
+    };
 
-    s.src = '//514life.disqus.com/embed.js';
+    function callback(response) {
+        if (response && response.post_id) {
+            document.getElementById('msg').innerHTML = "Post ID: " + response["post_id"];
+        } else {
+            console.log("User didin't share the story, we'll do something else");
+        }
+    }
+    FB.ui(obj, callback);
+}
 
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-})();
-</script>
-
-<script>
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1516021815365717";
-    fjs.parentNode.insertBefore(js, fjs);
-} (document, 'script', 'facebook-jssdk'));
-</script>
-
-<script>
 $(document).ready(function () {
-    console.log( {!! json_encode($tickets) !!} );
-    
+    // console.log( {!! json_encode($tickets) !!} );
     var RightFixed = $("#RightFixed");
-
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 580) {
@@ -209,28 +217,9 @@ $(document).ready(function () {
         } else {
             RightFixed.removeClass("right-content-fixed");
         }
-//        console.log(scrollbottom);
-
-//        var scrollbottom = $(this).scrollTop() - $(window).height() ;
-//        if (scrollbottom > 550 ) {
-//            RightFixed.addClass ("fixed-bottom");
-//        } else {
-//            RightFixed.removeClass("fixed-bottom");
-//        }
     });
-
-//    RightFixed.on("scroll", function(e) {
-//        console.log(1);
-//        if (this.scrollTop > 580) {
-//            RightFixed.addClass("right-content-fixed");
-//        } else {
-//            RightFixed.removeClass("right-content-fixed");
-//        }
-//
-//    });
 });
 </script>
-
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 @endsection

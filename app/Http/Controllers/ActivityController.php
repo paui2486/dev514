@@ -11,6 +11,7 @@ use Auth;
 use Input;
 use Response;
 use Redirect;
+use App\Library;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
@@ -40,6 +41,8 @@ class ActivityController extends Controller
 
     public function showCategory($category)
     {
+        $slideCategory = Library::getSlideCategory();
+
         // unfinish
         $header_categories  = $this->getCategory();
         $category = DB::table('categories')
@@ -91,12 +94,14 @@ class ActivityController extends Controller
                 'property = fb:admins'      => '1910444804523',
             );
 
-            return view('activity.list', compact('meta', 'header_categories', 'category', 'activity_list'));
+            return view('activity.list', compact('meta', 'header_categories', 'category', 'activity_list', 'slideCategory'));
         }
     }
 
     public function showActivity($category, $title)
     {
+        $slideCategory = Library::getSlideCategory();
+
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                       ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
@@ -161,21 +166,24 @@ class ActivityController extends Controller
                 'name = keywords'           => '514,活動頻道,有意思,生活,讓生活更514,活動,找活動,辦活動,達人',
                 'property = og:title'       => '514 活動頻道 - ' . $activity->title,
                 'property = og:url'         => URL::current(),
-                'property = og:type'        => 'website',
+                'property = og:type'        => 'product.item',
                 'property = og:description' => $activity->description,
                 'property = og:site_name'   => '514 活動頻道',
+                'property = og:locale'      => 'zh_TW',
                 'property = og:image'       => asset($activity->thumbnail),
                 'property = fb:page_id'     => '514 Life',
                 'property = fb:app_id'      => '509584332499899',
                 'property = fb:admins'      => '1910444804523',
             );
 
-            return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests'));
+            return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests', 'slideCategory'));
         }
     }
 
     public function showResult(Request $request)
     {
+        $slideCategory = Library::getSlideCategory();
+
         // Log::error(Input::all());
         // Log::error(URL::previous());
         // return $request->segment(1);
@@ -239,6 +247,6 @@ class ActivityController extends Controller
             $activities = $query->get();
         }
         // Log::error($activities);
-        return view('activity.search', compact('meta', 'filter', 'activities'));
+        return view('activity.search', compact('meta', 'filter', 'activities', 'slideCategory'));
     }
 }

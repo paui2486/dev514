@@ -13,6 +13,7 @@ use Redirect;
 use Response;
 use App\User;
 use App\Pay2go;
+use App\Library;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -22,6 +23,8 @@ class MainController extends controller
     {
         $meta   = (object) $this->getMeta();
 
+        $slideCategory = Library::getSlideCategory();
+
         $home   = (object)array(
             'banner'        => (object) $this->getBanner(),
             'filter'        => (object) $this->getFilter(),
@@ -30,7 +33,7 @@ class MainController extends controller
             'totalActivity' => (object) $this->getTotalActivity(),
         );
         // return Response::json($home);
-        return view('home', compact('home', 'meta'));
+        return view('home', compact('home', 'meta', 'slideCategory'));
     }
 
     private function getMeta()
