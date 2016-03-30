@@ -56,17 +56,33 @@
     <script type="text/javascript" src="{{asset('js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jquery.nicescroll.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.sparkline.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>
+<!--    <script type="text/javascript" src="{{asset('js/jquery.sparkline.js')}}"></script>-->
+<!--    <script type="text/javascript" src="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>-->
     <script type="text/javascript" src="{{asset('js/owl.carousel.js')}}"></script>
     <!--right slidebar-->
-    <!--common script for all pages-->
-<!--    <script type="text/javascript" src="{{asset('js/common-scripts.js')}}"></script>-->
-    <!--script for this page only-->
-    <script type="text/javascript" src="{{asset('js/sparkline-chart.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/easy-pie-chart.js')}}"></script>
+    <script src=" {{asset('js/slidebars.min.js')}}"></script>
 {{--     <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script> --}}
+    <script>
+        window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '{{ env("FACEBOOK_CLIENT_ID") }}',
+            xfbml      : true,
+            version    : 'v2.5'
+            });
+        };
 
+        (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        
+        $(function(){
+            $.slidebars();
+        });
+    </script>
     @yield('script')
 
 </body>

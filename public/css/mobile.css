@@ -12,7 +12,8 @@
     .home-mb-info,
     .new-activity > button,
     .home-mb-order,
-    .home-mb-price {
+    .home-mb-price,
+    .navbar-mb {
         display: none;
     }
 }
@@ -31,7 +32,8 @@
     .online-secretary,
     .about-us,
     .funtion-intro,
-    .navbar-brand {
+    .navbar-brand,
+    .navbar-container {
         display: none;
     }
 
@@ -44,7 +46,7 @@
     }
     
     .navbar-brand-mobile {
-        padding-top: 12px;
+        padding-top: 16px;
         text-align: center;
     }
     
@@ -201,7 +203,32 @@
         text-align: center;
         padding: 20px;
     }
+    /*---------------sliderbar---------------*/
     
+    .top-nav-left {
+        left: 0px;
+    }
+    
+    .sb-toggle-left {
+        cursor: pointer;
+        margin-top: 8px;
+        font-size: 22px;
+        margin-left: 25px;
+    }
+    .sb-toggle-right {
+        margin-top: 14px;
+        margin-right: 5px;
+    }
+    
+    .quick-chat-list {
+        padding-top: 20px;
+    }
+    
+    .quick-chat-list a li {
+        color: white;
+        font-size: 16px;
+        text-align: center;
+    }
 }
 
 
