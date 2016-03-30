@@ -56,18 +56,18 @@
 @endsection
 
 @section('banner')
-    <div class="searchbar-mobile">
-        <p>讓生活更 有意思!</p>
-        <div class="searchbar-mbstyle col-xs-9">
-            <input name="keySearch" class="search-bar" type="text" placeholder="想找什麼活動？"/>
-        </div>
-        <div class="searchbar-mbstyle col-xs-3">
-            <button type="submit" class="search-button btn">
-                搜尋
-            </button>
-        </div>
-    </div>
     <div id="jssor_1" class="banner-1">
+        <div class="searchbar-mobile">
+            <p>讓生活更 有意思!</p>
+            <div class="searchbar-mbstyle col-xs-9">
+                <input name="keySearch" class="search-bar" type="text" placeholder="想找什麼活動？"/>
+            </div>
+            <div class="searchbar-mbstyle col-xs-3">
+                <button type="submit" class="search-button btn">
+                    搜尋
+                </button>
+            </div>
+        </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             @foreach( $home->banner as $banner )
             <div data-p="225.00" style="display: none;">
@@ -208,22 +208,18 @@
                             </div>
 
 <!--mbview-->
-                            @foreach( $home->totalActivity as $eachTypeActivity )
                             <div class="home-mb-info">
-                                <p>
-                                    <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
-                                    {{ $eachTypeActivity->cat_title }}
-                                </p>
+                                <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                                {{ $newActivity->category }}
                             </div>
-                            @endforeach
-                            <p>
+                            <div class="home-mb-info">
                                 <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                            </p>
-                            <p class="word-indent-newact ">
+                            </div>
+                            <div class="home-mb-info word-indent-newact">
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                 {{ $newActivity->location }}
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>

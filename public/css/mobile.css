@@ -5,7 +5,7 @@
 
 }
 */
-@media screen and (min-width: 440px) {
+@media screen and (min-width: 481px) {
     .navbar-brand-mobile,
     .navbar-toggle-mobile,
     .searchbar-mobile,
@@ -17,7 +17,7 @@
     }
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 480px) {
     .home-container > form,
     .home_bntitle,
     .home-title,
@@ -30,7 +30,8 @@
     .new-activity-location,
     .online-secretary,
     .about-us,
-    .funtion-intro {
+    .funtion-intro,
+    .navbar-brand {
         display: none;
     }
 
@@ -42,13 +43,13 @@
         padding: 0px;
     }
     
-    .navbar-brand {
-        display: none;
-    }
-    
     .navbar-brand-mobile {
         padding-top: 12px;
         text-align: center;
+    }
+    
+    .navbar-brand-mobile img {
+        height: 30px;
     }
     
     .navbar-toggle {
@@ -68,13 +69,14 @@
     .searchbar-mobile {
         position: absolute;
         z-index: 9999;
-        top: 105px;
-        left: 25%;
+        top: 30%;
+        left: 15%;
         color: white;
         text-align: center;
-        font-size: 16px;
+        font-size: 50px;
         letter-spacing: 2px;
-        text-shadow: 0px 0px 5px #000;
+        text-shadow: 1px 1px 30px #808080;
+        width: 70%;
     }
     
     .searchbar-mbstyle {
@@ -82,12 +84,18 @@
     }
     
     .searchbar-mbstyle input {
-        padding: 0px 10px;
-        background-color: rgba(255,255,255,0.9)
+        padding: 0px 30px;
+        background-color:rgba(255,255,255,0.9);
+        height: 100px;
+        font-size: 45px;
+        color: black;
     }
     
     .search-button {
         width: 100%;
+        height: 100px;
+        font-size: 45px;
+        letter-spacing: 10px;
     }
     
     /*-------- mobile view 首頁 ----------*/
@@ -136,15 +144,11 @@
     .home-mb-info {
         padding: 0px;
         padding-right: 0px;
+        font-size: 14px;
     }
     
     .home-mb-info span {
         padding-right: 5px;
-    }
-    
-    .home-mb-info p {
-        margin-bottom: 0px;
-        font-size: 14px;
     }
     
     .home-mb-price {
