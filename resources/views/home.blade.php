@@ -125,12 +125,9 @@
                     <div class="pure-u-4-24">
                         <select name="atWhen" class="dropdown">
                             <option value="" class="label">時間</option>
-                            <option value="1"> 今天 </option>
-                            <option value="2"> 明天 </option>
-                            <option value="3"> 這週 </option>
-                            <option value="4"> 下週 </option>
-                            <option value="5"> 一個月內 </option>
-                            <option value="6"> 兩個月內 </option>
+                            @foreach( $home->filter->when as $key_when => $at_when )
+                            <option value="{{ $at_when->id }}"> {{ $at_when->name }} </option>
+                            @endforeach
                         </select>
                     </div>
 
