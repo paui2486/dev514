@@ -1,13 +1,11 @@
 <nav class="header navbar">
     <div class="navbar-container">
-        <!-- Collapsed Hamburger -->
         <button type="button" class="col-xs-2 navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
             <span class="glyphicon glyphicon-align-justify"></span>
         </button>
         <button type="button" class="col-xs-2 navbar-toggle-mobile collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
             <span class="glyphicon glyphicon-user"></span>
         </button>
-        <!-- Branding Image -->
         <div class="navbar-brand">
             <a href="{{ url('/') }}">
                 <img src="/img/pics/logofin_white.png">
@@ -47,7 +45,7 @@
             </ul>
         </div>
     </div>
-    <div class="navbar-mb">
+    <div class="navbar-mb-container">
         <div class="top-nav top-nav-left">
             <div class="sb-toggle-left">
                 <i class="fa  fa-user"></i>
@@ -63,40 +61,31 @@
                 <i class="fa  fa-align-right"></i>
             </div>
         </div>
-</nav>
+
         <!-- Right Slidebar start -->
         <div class="sb-slidebar sb-right sb-style-overlay">
-            <h5 class="side-title">514活動頻道</h5>
-            <ul class="quick-chat-list">
-                <li class="online">
-                    <div class="slidebar-category">
-                        <a href="#">
-                            <strong>美食美酒</strong>
-                        </a>
-                    </div>
-                    <!-- media -->
-                </li>
-                <li class="online">
-                    <div class="slidebar-category">
-                        <a href="#">
-                            <strong>戶外活動</strong>
-                        </a>
-                    </div>
-                    <!-- media -->
-                </li>
+            <img src="/img/pics/fairelavie.png">
+            <ul class="side-list">
+                @foreach( $slideCategory as $cat )
+                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                    <li class="slidebar-category">       
+                       {{ $cat->name }}
+                    </li>
+                </a>
+                @endforeach
             </ul>
-</div>
+        </div>
         <!-- Left Slidebar start -->
         <div class="sb-slidebar sb-left sb-style-overlay">
-<!--            <h5 class="side-title">514活動頻道</h5>-->
-            <ul class="quick-chat-list">
+            <img src="/img/pics/fairelavie.png">
+            <ul class="side-list">
                 @if (Auth::guest())
                 <a href="{{ url('login') }}"><li>登入</li></a>
                 <a href="{{ url('register') }}"><li>加入會員</li></a>
                 <a href="{{ url('dashboard/activity/create') }}"><li>辦活動</li></a>
                 <a href="{{ url('login') }}"><li>514部落格</li></a>
-                <a href="{{ url('login') }}"><li>關於我們</li></a>
-                <a href="{{ url('login') }}"><li>隱私權與服務條款</li></a>
+                <a href="{{ url('#') }}"><li>關於我們</li></a>
+                <a href="{{ url('#') }}"><li>隱私權與服務條款</li></a>
                 @else
                 <a href="{{ url('dashboard/activity/create') }}"> <li>辦活動</li></a>
                 <a href="{{ url('dashboard/profile') }}"><li>個人設定</li></a>
@@ -109,3 +98,4 @@
             </ul>
         </div>
     </div>
+</nav>

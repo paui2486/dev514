@@ -5540,7 +5540,7 @@ a.guest-on i {
 /*right side bar*/
 
 .sb-slidebar {
-    background-color: rgba(42, 53, 66, 1) !important;
+    background-color:#333 !important;
     margin-top: 60px;
     color:#aeb2b7;
 }

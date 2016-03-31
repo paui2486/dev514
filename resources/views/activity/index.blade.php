@@ -14,6 +14,7 @@
 <!--            <img src="/img/pics/activity-photo.jpg">-->
         </div>
         <div class="actpage-main-image" style="background-image:url('{{ asset($activity->thumbnail )}}')">
+            <p class="actpage-mb-price">$ {{ $activity->min_price }} NTD起 </p>
         </div>
         <div class="actpage-content">
           <div id="RightFixed" class="col-md-4 actpage-right-content">
@@ -48,10 +49,21 @@
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
                 @endif
                 </div>
-                <div id="shareBtn" class="btn btn-sm btn-success"></div>
+                <div id="shareBtn" class="btn btn-sm btn-success actpage-share">分享到Facebook</div>
             </div>
+         <div class="purchase-mb-btn">
+                @if(count($tickets)>0)
+                <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
+                    <div class="row actpage-purchase">
+                        <p><img src="/img/icons/playicon.png">讓生活更有意思!</p>
+                    </div>
+                </a>
+                @else
+                <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
+                @endif
+         </div>
          <div class="row actpage-dashboard">
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-xs-4">
                         <a href="{{ URL('member/'. $activity->hoster ) }}">
                             <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
                             </div>
@@ -61,9 +73,9 @@
                         </a>
                     </div>
 
-                    <div class="col-md-6 actpage-dashboard-info">
+                    <div class="col-md-6 col-xs-8 actpage-dashboard-info">
                         <p>{{ $activity->title }}</p>
-                        <div class="dashboard-block-date">
+                        <div class="dashboard-block dashboard-block-date">
                             <img src="/img/icons/info-date.png">
                             @if(count($tickets)>0)
                             <div class="dashboard-text">
@@ -82,7 +94,7 @@
                             @endif
                         </div>
 
-                        <div class="dashboard-block">
+                        <div class="dashboard-block dashboard-price">
                             <img src="/img/icons/info-price.png">
                             <div class="dashboard-text">
                                  <p>$ {{ $activity->min_price }} NTD起</p>
@@ -97,25 +109,25 @@
                      </div>
             </div>
         <div class="actpage-panel">
-            <div class="col-md-8 actpage-left-content">
+            <div class="col-md-8 col-xs-12 actpage-left-content">
                 <div class="actpage-activity-content">
                     <div class="row actpage-header">
-                        <p class="actpage-header-left">活動介紹</p>
-                        <div class="actpage-header-dash"></div>
+                        <p class="col-md-3 col-xs-4 actpage-header-left">活動介紹</p>
+                        <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
                     </div>
                     <div class="actpage-introduce">
                         {!! $activity->content !!}
                     </div>
                     <div class="row actpage-header">
-                        <p class="actpage-header-left">購票說明</p>
-                        <div class="actpage-header-dash"></div>
+                        <p class="col-md-3 col-xs-4 actpage-header-left">購票說明</p>
+                        <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
                     </div>
                     <div class="actpage-ticket">
 <!--                        {!! $activity->content !!}-->
                     </div>
                     <div class="row actpage-header">
-                        <p class="actpage-header-left">同場加映</p>
-                        <div class="actpage-header-dash"></div>
+                        <p class="col-md-3 col-xs-4 actpage-header-left">同場加映</p>
+                        <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
                     </div>
                     <div class="row actpage-recommend">
                         @foreach($suggests as $suggest)
@@ -134,8 +146,8 @@
                         @endforeach
                     </div>
                     <div class="row actpage-header">
-                        <p class="actpage-header-left">討論區</p>
-                        <div class="actpage-header-dash"></div>
+                        <p class="col-md-3 col-xs-4 actpage-header-left">討論區</p>
+                        <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
                         <!-- <div id="disqus_thread"></div> -->
                         <div class="fb-comments" data-href="{{ Request::URL() }}" data-width="100%" data-numposts="5"></div>
                     </div>

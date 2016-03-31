@@ -1630,14 +1630,10 @@ li.collapse-blog-category {
     border: 1px solid #888888;
     border-radius: 5px;
     padding: 5px 10px;
-    width: 20%;
     text-align: center;
-    float: left
 }
 
 .actpage-header-dash {
-    float: right;
-    width: 80%;
     height: 18px;
     border-bottom: 1px dashed;
 }
@@ -1651,7 +1647,8 @@ li.collapse-blog-category {
 }
 
 .actpage-recommend {
-    margin:10px auto;
+    margin:0px;
+    margin-bottom: 25px;
 }
 
 .actpage-recommend-panel {
@@ -1683,7 +1680,8 @@ li.collapse-blog-category {
 }
 
 .actpage-recommend-info li {
-    color: #c7b299;
+    color: #808080;
+    color: #808080;
     font-size: 13px;
 }
 
@@ -1705,8 +1703,8 @@ li.collapse-blog-category {
 .actpage-cart-content {
     padding: 15px;
     margin: 0px;
-    border-radius: 0px 0px 5px 5px;
     border: 1px solid #ccc;
+    border-bottom: none;
     background-color: white;
 }
 
@@ -1820,6 +1818,22 @@ li.collapse-blog-category {
     border-top-left-radius:5px;
     border-top-right-radius:5px;
     box-shadow: 1px 1px 10px #666;
+}
+
+.actpage-share {
+    background-color:white;
+    width: 100%;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #b3b3b3;
+    border-color: #b3b3b3;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.actpage-share:hover {
+    background-color:white;
+    border-color: #808080;
+    color: #808080;
 }
 
 /*-------------------訂購頁面-------------------*/
