@@ -1638,6 +1638,10 @@ li.collapse-blog-category {
     border-bottom: 1px dashed;
 }
 
+.actpage-introduce img {
+    width: 100%;
+}
+
 .actpage-introduce,
 .actpage-ticket {
     padding-bottom: 10px;
@@ -1880,22 +1884,31 @@ div.zabuto_calendar .table {
     padding: 6px;
 }
 
+.wizard > .steps {
+    position: relative;
+    display: block;
+    width: 80%;
+    text-align: center;
+    margin-left: 20%;
+    font-size: 18px;
+}
+
 .wizard > .steps .current a {
-    background-color: #00bcd4 !important;
-    height: 30px;
+    background-color: #78CD51 !important;
+    cursor: pointer;
+    height: 50PX;
     margin: 0px 10px;
-    padding: 0px 10px;
-    color: #fff;
+    padding: 10px 20px;
     text-align: left;
 }
 
 .wizard > .steps .disabled a {
     background: #eee;
     color: #aaa;
-    cursor:  pointer;
-    height: 30px;
+    cursor: pointer;
+    height: 50PX;
     margin: 0px 10px;
-    padding: 0px 10px;
+    padding: 10px 20px;
     text-align: left;
 }
 
@@ -1903,9 +1916,9 @@ div.zabuto_calendar .table {
     background: #ccc;
     color: #fff;
     cursor: pointer;
-    height: 30px;
+    height: 50PX;
     margin: 0px 10px;
-    padding: 0px 10px;
+    padding: 10px 20px;
     text-align: left;
 }
 
@@ -1946,7 +1959,7 @@ div.zabuto_calendar .table {
 }
 
 .purchase-attention {
-    background-color: rgba(102,204,204,0.3);
+    background-color: rgba(120,205,81,0.2);
     margin: 5px 0px;
     line-height: 30px;
     padding:15px 20px;
@@ -2012,12 +2025,12 @@ div.zabuto_calendar .table {
 
 .purchase-choose-time strong {
     font-size: 20px;
-    color: #f37e7e
+    color: #c7b299;
 }
 
 .purchase-surplus {
     margin: 4px 15px;
-    background-color: #999999;
+    background-color: #ff5a5f;
     border-radius: 10px;
     padding: 5px 10px;
     color: white;
@@ -2083,15 +2096,15 @@ div.zabuto_calendar .table {
 	content:'\2714';
 	text-indent: 15px;
     padding-top: 6px;
-	color: #f2c4c4;
-	background-color: #f37e7e;
-    border: 1px solid #f37e7e;
+	color: #fff;
+	background-color: #c7b299;
+
 }
 
 .purchase-time-option input.time-option:checked ~ label {
-	color: #f37e7e;
-    border: 1px solid #f37e7e;
-    height: 35px;
+	color: #c7b299;
+    border: 1px solid #c7b299;
+    height: 36px;
 }
 
 .purchase-detail {
@@ -2138,7 +2151,7 @@ div.zabuto_calendar .table {
 }
 
 .wizard > .actions a {
-    background-color: #00bcd4;
+    background-color: #ff5a5f;
     /* padding: 10px 20px; */
     font-size: 14px;
     border-radius: 80px;
@@ -2149,7 +2162,7 @@ div.zabuto_calendar .table {
 }
 
 .wizard > .actions a:hover {
-    background-color: #02a1ad;
+    background-color: #dd4e58;
     border-radius: 80px;
     height: 80px;
     line-height: 67px;
@@ -2180,16 +2193,8 @@ div.zabuto_calendar .table {
 .purchase-previous {
     left: 0px;
     position: absolute;
-    background:#ccc!important;
+    background:#808080!important;
     color: #fff!important;
-}
-
-.wizard > .steps {
-    position: relative;
-    display: block;
-    width: 80%;
-    text-align: center;
-    margin-left: 20%;
 }
 
 .purchase-confirm {

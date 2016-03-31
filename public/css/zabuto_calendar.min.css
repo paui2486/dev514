@@ -72,7 +72,7 @@ div.zabuto_calendar .table tr td div.day {
 
 div.zabuto_calendar .table tr td.event div.day,
 div.zabuto_calendar ul.legend li.event {
-    background-color: #f37e7e;
+    background-color: #c7b299;
     border-radius: 5px;
 }
 
@@ -90,7 +90,7 @@ div.zabuto_calendar div.legend span.badge-today {
 
 div.zabuto_calendar .badge-event,
 div.zabuto_calendar div.legend span.badge-event {
-    background-color: #f37e7e;
+    background-color: #c7b299;
     color: #fff;
     text-shadow: none
 }

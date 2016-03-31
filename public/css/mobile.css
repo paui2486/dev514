@@ -38,7 +38,8 @@
     .navbar-container,
     .act-page-blur,
     .actpage-right-content,
-    .dashboard-price {
+    .dashboard-price,
+    .mb-no-display{
         display: none;
     }
     
@@ -317,6 +318,29 @@
         width: 100%;
         z-index: 9990;
         bottom: 0px;
+    }
+    
+    /*訂購頁面*/
+    .purchase-content {
+        margin-top: 0px;
+        padding: 0px;
+    }
+    
+    .wizard > .steps {
+        margin: 10px 0px;
+        width: 100%;
+        font-size: 12px;
+    }
+    
+    .wizard > .steps > ul > li {
+        width: calc(100%/3);
+    }
+    
+    .wizard > .content {
+        width: auto;
+        margin: 0px;
+        box-shadow: none;
+        border-radius: 0px;
     }
 }
 

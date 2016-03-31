@@ -19,17 +19,23 @@
             <div class="purchase-panel">
                 <div class="purchase-act-title">{{ $activity->title }}</div>
                 <div class="row" style="margin:10px 0px;">
-                    <p class="purchase-choose-title  col-md-2">選擇活動時間</p><span class="col-md-10 purchase-line"></span>
+                    <p class="purchase-choose-title col-md-2 col-xs-6">選擇您要的票券</p><span class="col-md-10 col-xs-6 purchase-line"></span>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="mb-no-display col-md-5">
                         <div id="calendar"></div>
                     </div>
                     <div class="col-md-7">
-                        <div class="purchase-choose-time">
+                        <div class="mb-no-display purchase-choose-time">
                             <h5>您選擇的活動日期</h5><strong></strong>
                             <h5>您選擇的活動時間</h5>
                             <div class="purchase-time-option"></div>
+                        </div>
+                        <div class="purchase-mb-time">
+                            <h5>
+                            </h5>
+                            <h5>您選擇的活動時間</h5>
+                            <div class="mb-no-display purchase-time-option"></div>
                         </div>
                     </div>
                 </div>
@@ -142,8 +148,8 @@ var eventData = {!! json_encode($eventData) !!};
 
 function getDetail(id) {
     document.getElementById('purchase-detail').innerHTML = ' \
-        <div class="row" style="margin:10px auto"><p class="purchase-choose-title col-md-2">設定票券張數</p> \
-            <span class="col-md-10 purchase-line"></span></div> \
+        <div class="row" style="margin:10px auto"><p class="purchase-choose-title col-md-2 col-xs-6">設定票券張數</p> \
+            <span class="col-md-10 col-xs-6 purchase-line"></span></div> \
         <div class="purchase-detail-info col-sm-8"><p>票券名稱 <span> '+ eventData[id]['description'] +' </span></p> \
             <p>票券單價 <span> '+ eventData[id]['price'] +' 元</span></p> \
             <p>活動地點 <span> '+ eventData[id]['location'] +' </span></p></div> \
