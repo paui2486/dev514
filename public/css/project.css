@@ -1616,7 +1616,6 @@ li.collapse-blog-category {
 }
 
 .actpage-activity-content {
-    overflow: auto;
     margin: 10px 0px;
 }
 
@@ -1640,6 +1639,7 @@ li.collapse-blog-category {
 
 .actpage-introduce img {
     width: 100%;
+    height: auto;
 }
 
 .actpage-introduce,
