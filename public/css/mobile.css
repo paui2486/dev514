@@ -15,7 +15,8 @@
     .home-mb-price,
     .navbar-mb-container,
     .actpage-mb-price,
-    .purchase-mb-btn {
+    .purchase-mb-btn,
+    .purchase-mb-time {
         display: none;
     }
 }
