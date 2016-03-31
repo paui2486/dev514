@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Library;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $slideCategory = Library::getSlideCategory();
+        View()->share('slideCategory', $slideCategory);
         view()->share('copyright', '這是版權宣告.');
     }
 
