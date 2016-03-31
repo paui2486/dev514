@@ -14,6 +14,7 @@ use Input;
 use Response;
 use Redirect;
 use App\Pay2go;
+use App\Library;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -26,6 +27,8 @@ class PurchaseController extends controller
 
     public function showPurchase($category, $title)
     {
+        $slideCategory = Library::getSlideCategory();
+
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                       ->where('categories.name', $category)
@@ -70,7 +73,7 @@ class PurchaseController extends controller
                 array_push($eventData, $data);
             }
 
-            return view('activity.purchase', compact('activity', 'eventData', 'tickets'));
+            return view('activity.purchase', compact('activity', 'eventData', 'tickets', 'slideCategory'));
         }
     }
 
