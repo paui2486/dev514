@@ -199,7 +199,8 @@ class ActivityController extends Controller
                         ->select(array(
                           'activities.id',        'activities.title' ,           'activities.description',
                           'activities.min_price', 'activities.activity_start',   'activities.activity_end',
-                          'activities.location',  'categories.name as category', 'activities.thumbnail'
+                          'activities.location',  'categories.name as category', 'activities.thumbnail',
+                          'activities.max_price',
                         ))
                         ->orderBy('activities.created_at', 'asc');
 
@@ -209,25 +210,33 @@ class ActivityController extends Controller
                           ->groupBy('categories_data.activity_id')
                           ->orderBy( DB::raw('count(*)') , 'desc');
 
-            $selects    = ($request->selects)? $request->selects : array( $request->withWho, $request->playWhat, $request->goWhere, $request->haveMoney );
+            $selects     = ($request->selects)? $request->selects : array( $request->withWho, $request->playWhat, $request->goWhere );
             foreach ($selects as $key => $value) {
                 if ( $value == "" ) { unset($selects[$key]); }
             }
             // Log::error($selects);
             if (!empty($selects)) {
-                $query = $query->whereIn('categories_data.category_id', $selects );
+                $query   = $query->whereIn('categories_data.category_id', $selects );
             }
 
-            $search     = $request->keySearch;
-            if( $search != "" ) {
-                $query  = $query->where('activities.title', 'like', "%$search%" )
+            $search      = $request->keySearch;
+            if ( $search != "" ) {
+                $query   = $query->where('activities.title', 'like', "%$search%" )
                             ->orWhere('activities.description', 'like', "%$search%" );
             }
 
-            $searchTime = $request->atWhen;
+            $searchMoney = $request->haveMoney;
+            if ( $searchMoney != "" ) {
+                $value = DB::table('categories')->find($searchMoney)->value;
+                preg_match("/(\d+)-(\d+)/", $value, $range);
+                $max   = $range[2];
+                $query = $query->where('min_price', '<', $max);
+            }
+
+            $searchTime  = $request->atWhen;
             if ($searchTime != "" ) {
                 $endtime = date("Y-m-d 00:00:00" , mktime(0,0,0,date("m"), date("d")+$searchTime,date("Y")) );
-                $query  = $query->where('activity_end', '<=', $endtime);
+                $query   = $query->where('activity_end', '<=', $endtime);
             }
 
             $sortBy     = $request->sortBy;

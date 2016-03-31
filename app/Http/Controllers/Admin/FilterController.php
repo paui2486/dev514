@@ -48,19 +48,21 @@ class FilterController extends Controller
      public function store(Request $request)
     {
         $value = null;
-        if ( $request->type === 5 ) {
+
+        if ( $request->type == 5 ) {
             $value = $request->data;
-        } elseif ( $request->type === 6 ) {
+        } elseif ( $request->type == 6 ) {
             $value = $request->min . "-" . $request->max;
         }
 
-        DB::table('categories')
-              ->insert(array(
-                  'name'    => $request->name,
-                  'type'    => $request->type,
-                  'public'  => $request->public,
-                  'value'   => $value,
-                ));
+        $storeArray = array(
+            'name'    => $request->name,
+            'type'    => $request->type,
+            'public'  => $request->public,
+            'value'   => $value,
+        );
+
+        DB::table('categories')->insert($storeArray);
 
         return Redirect::to('dashboard/filter');
     }
@@ -103,9 +105,9 @@ class FilterController extends Controller
     public function update(Request $request, $id)
     {
         $value = null;
-        if ( $request->type === 5 ) {
+        if ( $request->type == 5 ) {
             $value = $request->data;
-        } elseif ( $request->type === 6 ) {
+        } elseif ( $request->type == 6 ) {
             $value = $request->min . "-" . $request->max;
         }
 

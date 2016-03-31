@@ -86,7 +86,7 @@
         		<!-- Form Actions -->
         		<div class="form-group">
           			<div class="col-md-12">
-            				<button type="reset" class="btn btn-sm btn-warning close_popup">
+            				<button type="reset" class="btn btn-sm btn-warning close_popup" onclick="history.go(-1);">
               					<span class="glyphicon glyphicon-ban-circle"></span>
                         取消
             				</button>
@@ -114,22 +114,30 @@
 @section('scripts')
 <script>
 $(document).ready(function () {
+    @if (isset($filter))
+        checkValue({{$filter->type}});
+    @endif
+
     $('select[name=type]').on('change', function () {
         var select = $(this).val();
+        checkValue(select);
+    });
+
+    function checkValue(select) {
         if (select == 5) {
-            var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 名稱 </label> \
+            var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 天數 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="value" \
-                  value="{{{ Input::old('value', isset($filter) ? $filter->value : null) }}}" /> </div> </div>';
+                  value="{{{ Input::old('value', isset($filter) && $filter->type == 5 ? $filter->value : null) }}}" /> </div> </div>';
         } else if (select == 6) {
             var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最大值 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="max" \
-                  value="{{{ Input::old('max', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$1", $filter->value) : null) }}}" /> </div> </div> \
+                  value="{{{ Input::old('max', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$2", $filter->value) : null) }}}" /> </div> </div> \
                   <div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最小值 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="min" \
-                  value="{{{ Input::old('min', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$2", $filter->value) : null) }}}" /> </div> </div> ';
+                  value="{{{ Input::old('min', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$1", $filter->value) : null) }}}" /> </div> </div> ';
         }
         $("#data").html( inputForm );
-    });
+    }
 });
 </script>
 @endsection
