@@ -222,7 +222,7 @@
                 </div>
                 @endforeach
             </div>
-            <button> 查看更多 </button>
+<!--            <button> 查看更多 </button>-->
         </div>
 <!--mbview-->
         <div class="Act-category">

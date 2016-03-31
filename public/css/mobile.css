@@ -342,6 +342,25 @@
         box-shadow: none;
         border-radius: 0px;
     }
+    /*登入頁、註冊頁*/
+    
+    .login-container {
+        margin-top: 0px;
+        padding: 20px 0px;
+    }
+    
+    .login-panel {
+        width: 90%;
+    }
+    
+    .register-container {
+        margin-top: 0px;
+        padding: 20px 0px;
+    }
+    
+    .register-panel {
+        width: 90%;
+    }
 }
 
 
