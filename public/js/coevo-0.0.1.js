@@ -14,12 +14,22 @@
 // });
 
 // right slidebar
-$(function(){
+$(document).ready(function() {
     $.slidebars();
+
+    if ($.support.pjax) {
+        $.pjax.defaults.timeout = 1000; // time in milliseconds
+    }
+    // projress bar
+    $(document).on('pjax:start', function() {
+        NProgress.start();
+    });
+    $(document).on('pjax:end', function() {
+        NProgress.done();
+    });
 });
 
 var Script = function () {
-
 // sidebar dropdown menu auto scrolling
     jQuery('#sidebar .sub-menu > a').click(function () {
         var o = ($(this).offset());
