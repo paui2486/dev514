@@ -98,4 +98,36 @@ class Library
                           ->get();
         return $slideCategory;
     }
+
+    public static function getAdminTab()
+    {
+// define normal user
+        $member = array(
+            'dashboard/member'          => '會員資料',
+            'dashboard/member/profile'  => '變更資料',
+        );
+
+        $blog = array();
+
+        $activity = array();
+
+        $customer = array();
+
+        $system = array();
+// define specified user
+
+// define consultant, where adminer = 1
+
+// define administrator, where adminer = 2
+
+
+        $tabs = array(
+            'member'    => $member,
+            'blog'      => $blog,
+            'activity'  => $activity,
+            'customer'  => $customer,
+            'system'    => $system,
+        );
+        return $tabs;
+    }
 }

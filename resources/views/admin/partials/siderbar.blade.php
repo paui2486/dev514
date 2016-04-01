@@ -8,33 +8,33 @@
                 </a>
             </li>
             <li>
-                <a href="{{URL::to('dsahboard/profile')}}">
+                <a href="{{URL::to('dashboard/member')}}">
                     <i class="fa fa-list-alt"></i>
                     <span>會員設定</span>
                 </a>
             </li>
             @if( Auth::user()->adminer )
             <li>
-                <a href="{{URL::to('dsahboard/system')}}">
+                <a href="{{URL::to('dashboard/system')}}">
                     <i class="fa fa-cogs"></i>
                     <span>系統管理</span>
                 </a>
             </li>
             @endif
             <li>
-                <a href="{{URL::to('dsahboard/blog')}}">
+                <a href="{{URL::to('dashboard/blog')}}">
                     <i class="fa fa-book"></i>
                     <span>文章管理</span>
                 </a>
             </li>
             <li>
-                <a href="{{URL::to('dsahboard/activity')}}">
+                <a href="{{URL::to('dashboard/activity')}}">
                     <i class="fa fa-bar-chart-o"></i>
                     <span>活動管理</span>
                 </a>
             </li>
             <li>
-                <a href="{{URL::to('dsahboard/customer')}}">
+                <a href="{{URL::to('dashboard/customer')}}">
                     <i class="fa fa-comments-o"></i>
                     <span>聯絡客服</span>
                 </a>

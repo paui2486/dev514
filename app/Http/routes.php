@@ -79,6 +79,8 @@ Route::group(['middleware' => 'web'], function () {
     // for admin
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
 
+        Route::get('admin'                          , 'AdminController@index');
+
         Route::get('banner/data'                    , 'BannerController@data'             );
         Route::get('banner/{id}/delete'             , 'BannerController@getDelete'        );
         Route::post('banner/{id}/update'            , 'BannerController@update'           );
@@ -170,15 +172,16 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::group(['middleware' => 'auth'], function() {
-        Route::get('dashboard'                      , 'Admin\AdminController@index'         );
-        Route::get('dashboard/profile'              , 'AuthController@profile'              );
-        Route::get('dashboard/register/expert'      , 'Admin\ActivityController@askExpert'  );
+        Route::get('dashboard'                      , 'Admin\AdminController@index'           );
+        Route::get('dashboard/member'               , 'Admin\MemberController@index'          );
+        Route::get('dashboard/member/profile'       , 'Admin\MemberController@profile'        );
+        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'         );
+        Route::get('dashboard/register/expert'      , 'Admin\ActivityController@askExpert'    );
         // Route::get('dashboard/my/activity'          , 'Admin\ActivityController@showMyAct'  );
         // Route::get('dashboard/my/activity/data'     , 'Admin\ActivityController@getMyAct'   );
-        Route::post('dashboard/register/expert'     , 'Admin\ActivityController@regExpert'  );
-        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'       );
-        Route::get('dashboard/tickets'              , 'Admin\ActivityController@showTicket' );
-        Route::get('dashboard/tickets/data'         , 'Admin\ActivityController@getTicket'  );
+        Route::post('dashboard/register/expert'     , 'Admin\ActivityController@regExpert'    );
+        Route::get('dashboard/tickets'              , 'Admin\ActivityController@showTicket'   );
+        Route::get('dashboard/tickets/data'         , 'Admin\ActivityController@getTicket'    );
     });
 });
 

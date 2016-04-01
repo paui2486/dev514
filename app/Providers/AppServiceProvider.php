@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Log;
 use App\Library;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
         //
         $slideCategory = Library::getSlideCategory();
         View()->share('slideCategory', $slideCategory);
-        view()->share('copyright', '這是版權宣告.');
+
+        $adminTabs     = Library::getAdminTab();
+        View()->share('adminTabs', $adminTabs);
+
+        view()->share('copyright', '2016 &copy; 514 活動頻道.');
     }
 
     /**
