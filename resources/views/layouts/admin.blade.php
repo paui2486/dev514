@@ -25,7 +25,7 @@
 
     @include('admin.partials.footer')
 
-    <script type="text/javascript" src="{{ asset('js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery-2.2.2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery-migrate-1.2.1.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.pjax.js') }}"></script>
