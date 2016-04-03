@@ -16,6 +16,14 @@ class AdminController extends Controller
 
     public function index()
     {
+        $state    = $this->getState();
+// TODO: 1. Set up each users key info in dashboard page.  2. and name as widget or ....
+        $widgets  = array();
+
+        return view('admin.dashboard.index', compact('state', 'widget'));
+    }
+
+    private function getState() {
         $state = array();
         if ( Auth::user()->adminer ) {
             $count['blog']      = DB::table('articles')->count();
@@ -48,7 +56,7 @@ class AdminController extends Controller
             );
         }
 
-        return view('admin.dashboard.index', compact('state'));
+        return $state;
     }
 
     public function showMember(Request $request)
