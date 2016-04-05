@@ -84,7 +84,6 @@ class MemberController extends Controller
             $params['filed']   = ['avatar'];
             $params['infix']   = 'avatar/';
             $update            = Library::upload($params);
-            $avatar            = public_path($update['data']['avatar']);
             $result            = DB::table('users')->insert($update['data']);
         } else {
             $result            = DB::table('users')->insert($storeArray);
@@ -145,7 +144,6 @@ class MemberController extends Controller
                 $params['filed']   = ['avatar'];
                 $params['infix']   = 'avatar/';
                 $update            = Library::upload($params);
-                $avatar            = public_path($update['data']['avatar']);
                 $result            = $user->update($update['data']);
             } else {
                 $result            = $user->update($updateArray);

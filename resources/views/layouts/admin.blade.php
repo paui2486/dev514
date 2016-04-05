@@ -32,6 +32,7 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/nprogress.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/slidebars.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
     <script>
         window.fbAsyncInit = function() {
             FB.init({

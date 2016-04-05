@@ -136,7 +136,7 @@
                         帳戶權限
                     </label>
                     <div class="login-info checkbox col-sm-10">
-                        @if( Auth::user()->adminer > 1 )
+                        @if( Auth::user()->adminer >= 1 )
                         <label class="col-xs-3">
                             <input type="checkbox" name="permission[]" value="adminer"
                             {{{ Input::old('adminer', (isset($member) && $member->adminer ) ? 'checked' : null) }}}>

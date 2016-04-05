@@ -86,10 +86,13 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('banner/{id}/update'            , 'BannerController@update'           );
         Route::resource('banner'                    , 'BannerController'                  );
 
-        Route::get('member/search'                  , 'MemberController@searchMember'     );
         Route::get('member/data'                    , 'MemberController@data'             );
+        Route::get('member/list'                    , 'MemberController@showMember'       );
+        Route::get('member/create'                  , 'MemberController@create'           );
+        Route::get('member/{id}'                    , 'MemberController@show'             );
         Route::get('member/{id}/delete'             , 'MemberController@getDelete'        );
-        Route::resource('member'                    , 'MemberController'                  );
+        Route::post('member'                        , 'MemberController@store'            );
+        Route::delete('member/{id}'                 , 'MemberController@destroy'          );
 
         Route::get('blog/category'                  , 'BlogController@showCategory'       );
         Route::post('blog/category'                 , 'BlogController@storeCategory'      );
