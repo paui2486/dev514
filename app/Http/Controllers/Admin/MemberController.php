@@ -19,14 +19,17 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
+// TODO: caculate what he need about tab at here? and post data to next door
+// to think if i'm normal or administrator or powerful user
         return view('admin.member.index');
+    }
+
+    public function profile()
+    {
+        $member = Auth::user();
+        return view('admin.member.create_edit', compact('member'));
     }
 
     /**
@@ -40,6 +43,16 @@ class MemberController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function showMember()
+    {
+        return view('admin.member.list');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return Response
@@ -47,7 +60,7 @@ class MemberController extends Controller
     public function store(CreateMemberRequest $request)
     {
         $permission = (array) $request->permission;
-        $store = DB::table('users')->insert([
+        $storeArray = array(
           'name'          => $request->name,
           'nick'          => $request->nick,
           'password'      => bcrypt($request->password),
@@ -62,7 +75,20 @@ class MemberController extends Controller
           'status'        => $request->status,
           'created_at'    => date("Y-m-d H:i:s"),
           'updated_at'    => date("Y-m-d H:i:s"),
-        ]);
+        );
+
+        if (!empty($request->avatar)) {
+            $params            = Library::upload_param_template();
+            $params['request'] = $request;
+            $params['data']    = $storeArray;
+            $params['filed']   = ['avatar'];
+            $params['infix']   = 'avatar/';
+            $update            = Library::upload($params);
+            $avatar            = public_path($update['data']['avatar']);
+            $result            = DB::table('users')->insert($update['data']);
+        } else {
+            $result            = DB::table('users')->insert($storeArray);
+        }
         return Redirect::to('dashboard/member');
     }
 
@@ -76,17 +102,6 @@ class MemberController extends Controller
     {
         $member = DB::table('users')->find($id);
         return view('admin.member.create_edit', compact('member'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-
     }
 
     /**
@@ -129,10 +144,8 @@ class MemberController extends Controller
                 $params['data']    = $updateArray;
                 $params['filed']   = ['avatar'];
                 $params['infix']   = 'avatar/';
-                // $params['suffix']  = "$id-";
                 $update            = Library::upload($params);
                 $avatar            = public_path($update['data']['avatar']);
-                // return $update['data'];
                 $result            = $user->update($update['data']);
             } else {
                 $result            = $user->update($updateArray);
@@ -174,7 +187,7 @@ class MemberController extends Controller
                     ->orderBy('created_at', 'ASC');
 
         return Datatables::of($members)
-            // ->remove_column('id')
+            ->remove_column('id')
             ->edit_column('hoster', '@if($hoster == 1) <span class="fa-stack fa-lg">
                   <i class="fa fa-flag fa-stack-1x"></i>
                   </span> @endif')
@@ -184,30 +197,11 @@ class MemberController extends Controller
             ->edit_column('status', '@if($status == 0) 未認證 @elseif($status == 1) 已認證 @else 封鎖中  @endif')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
-                  <a href="{{{ URL::to(\'dashboard/member/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
+                  <div data-url="{{{ URL::to(\'dashboard/member/\' . $id ) }}}" onclick="edit(this)" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</div>
                   <a href="{{{ URL::to(\'dashboard/member/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')
             ->make();
-    }
-
-    /**
-     * Reorder items
-     *
-     * @param items list
-     * @return items from @param
-     */
-    public function getReorder(ReorderRequest $request) {
-        $list = $request->list;
-        $items = explode(",", $list);
-        $order = 1;
-        foreach ($items as $value) {
-            if ($value != '') {
-                ArticleCategory::where('id', '=', $value) -> update(array('position' => $order));
-                $order++;
-            }
-        }
-        return $list;
     }
 
     /**
@@ -220,15 +214,4 @@ class MemberController extends Controller
         $member = DB::table('users')->find($id);
         return view('admin.member.delete', compact('member'));
     }
-
-    /**
-     *
-     *
-     * @param
-     * @return items from @param
-     */
-    public function searchMember() {
-        return view('admin.member.index');
-    }
-
 }
