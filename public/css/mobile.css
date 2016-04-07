@@ -57,12 +57,12 @@
     }
     
     .navbar-brand-mobile {
-        padding-top: 16px;
+        padding-top: 13px;
         text-align: center;
     }
     
     .navbar-brand-mobile img {
-        height: 30px;
+        height: 35px;
     }
     
     .navbar-toggle {
@@ -253,6 +253,12 @@
         background-color: #4d4d4d;
     }
     /*活動內容頁*/
+    .actpage-purchase {
+        margin: 20px auto;
+        width: 90%;
+        padding: 15px;
+    }
+    
     .actpage-main-image {
         position: inherit;
         width: 100%;
@@ -361,6 +367,11 @@
     
     .register-panel {
         width: 90%;
+    }
+    
+    /*search page*/
+    .list-container {
+        margin-top: 0px;
     }
 }
 
