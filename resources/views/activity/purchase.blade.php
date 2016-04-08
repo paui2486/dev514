@@ -11,40 +11,50 @@
 
 @section('content')
 <div class="row purchase-content">
-    <div class="col-sm-12 col-md-12 purchase-top"><!-- purchase-right -->
-        <p>填寫資料</p>
-        <div class="purchase-panel">
-            <div class="purchase-act-title">{{ $activity->title }}</div>
-            <div class="row" style="margin:10px 0px;">
-                <p class="purchase-choose-title  col-md-2">填寫聯絡資料</p><span class="col-md-10 purchase-line"></span>
+    <div class="col-md-4 purchase-left">
+        <p class="purchase-title">{{ $activity->title }}</p>
+        <p class="purchase-location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>台北市信義區基隆路一段155號818室</p>
+        <div class="purchase-tickets">
+            <p class="ticket-name">雙人套票</p>
+            <p class="row ticket-item">票券單價：$150NTD</p>         
+            <p class="row ticket-item">購買數量：1</p>
+            <p class="row ticket-item">開始時間：2016-05-30（一）10:00</p>
+            <p class="row ticket-item">結束時間：2016-05-30（一）20:00</p>
+        </div>
+        <div class="purchase-total">總計<span>$250 NTD</span></div>
+    </div>
+    <div class="col-md-8 purchase-right">
+        <p>1. 填寫聯絡資料</p>
+        <div class="row purchase-attention">
+            建議您<a href="{{url('login')}}">登入</a>或<a href="{{url('register')}}">加入會員</a>，方便日後查詢訂單紀錄。
+        </div>
+        <div class="row purchase-form">
+        <div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <label class="col-md-3 control-label"> <span>*</span>聯絡人姓名</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control purchase-form-control" name="name"
+                    value="{{{ Input::old('name', Auth::check() ? Auth::user()->name : null) }}}" placeholder="建議輸入真實姓名">
             </div>
-            <div class="row purchase-attention">
-                建議您<a href="{{url('login')}}">登入</a>或<a href="{{url('register')}}">加入會員</a>，方便日後查詢訂單紀錄。
             </div>
-            <div class="row purchase-form">
-            <div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label class="col-md-3 control-label"> <span>*</span>聯絡人姓名</label>
+            <div class="row form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+                <label class="col-md-3 control-label"> <span>*</span>聯絡人手機</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control purchase-form-control" name="name"
-                        value="{{{ Input::old('name', Auth::check() ? Auth::user()->name : null) }}}" placeholder="建議輸入真實姓名">
+                    <input type="mobile" class="form-control purchase-form-control" name="mobile"
+                        value="{{{ Input::old('mobile', Auth::check() ? Auth::user()->phone : null) }}}" placeholder="0932-514-123">
                 </div>
-                </div>
-                <div class="row form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
-                    <label class="col-md-3 control-label"> <span>*</span>聯絡人手機</label>
-                    <div class="col-md-9">
-                        <input type="mobile" class="form-control purchase-form-control" name="mobile"
-                            value="{{{ Input::old('mobile', Auth::check() ? Auth::user()->phone : null) }}}" placeholder="0932-514-123">
-                    </div>
-                </div>
-                <div class="row form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label class="col-md-3 control-label"> <span>*</span>電子郵件</label>
-                    <div class="col-md-9">
-                        <input type="email" class="form-control purchase-form-control" name="email"
-                          value="{{{ Input::old('email', Auth::check() ? Auth::user()->email : null) }}}" placeholder="mis@514.com.tw">
-                    </div>
+            </div>
+            <div class="row form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <label class="col-md-3 control-label"> <span>*</span>電子郵件</label>
+                <div class="col-md-9">
+                    <input type="email" class="form-control purchase-form-control" name="email"
+                      value="{{{ Input::old('email', Auth::check() ? Auth::user()->email : null) }}}" placeholder="mis@514.com.tw">
                 </div>
             </div>
         </div>
-    </div>
+        <div class="purchase-button">
+            <a href="#"><button class="btn-pre">修改票券</button></a>
+            <a href="#"><button class="btn-submit">前往付款</button></a> 
+        </div>
+    </div>  
 </div>
 @endsection
