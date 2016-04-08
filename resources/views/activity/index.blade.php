@@ -1,7 +1,8 @@
 @extends('layouts.app') @section('meta') @foreach($meta as $key => $value)
 <meta {{ $key }} content="{{ $value }}"> @endforeach
 <title>514活動頻道 - {{ $activity->title }}</title>
-@endsection @section('content')
+@endsection 
+@section('content')
 
 <div class="act-page-container">
     <div class="act-page-blur" style="background-image:url('{{ asset($activity->thumbnail )}}')">
@@ -29,6 +30,7 @@
                     <div class="cart-number">
                         <p>請選擇票券數量：
                         <select>
+                            <option value="1">0</option>
                             <option value="1">1</option>
                             <option value="1">2</option>
                             <option value="1">3</option>
@@ -194,7 +196,7 @@
 </div>
 @if ( preg_match( "/酒/", urldecode(Request::segment(2)), $result ))
 <div>
-    <img src="{{asset('img/wine.jpg')}}">
+    <img src="{{asset('img/wine.jpg')}}" style="width:100%;">
 </div>
 @endif @endsection @section('script')
 <script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
