@@ -38,7 +38,12 @@ class ActivityController extends Controller
     {
 
     }
-
+    
+    public function confirm()
+    {
+        return view("activity.confirm");
+    }
+    
     public function showCategory($category)
     {
         $slideCategory = Library::getSlideCategory();
