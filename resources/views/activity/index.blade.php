@@ -22,9 +22,9 @@
                 <div class="row actpage-cart-ticket">
                     @foreach($tickets as $ticket)
                     <div class="row cart-option">
-                        <label class="col-md-8 label_radio" for="radio-03">
-                            <input name="ticket" type="checkbox" value="ticket-name">{{ $ticket->name }}
-                        </label>
+                        <div class="col-md-8">
+                        <input name="ticket" type="checkbox" value="ticket-name" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
+                        </div>
                         <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
                     </div>
                     <div class="cart-number">
