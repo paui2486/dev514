@@ -47,11 +47,6 @@
         </div>
     </div>
     <div class="navbar-mb-container">
-        <div class="top-nav top-nav-left">
-            <div class="sb-toggle-left">
-                <i class="fa  fa-user"></i>
-            </div>
-        </div>
         <div class="navbar-brand-mobile">
             <a href="/">
                 <img src="/img/pics/514mobile-logo.png">
@@ -65,19 +60,6 @@
 
         <!-- Right Slidebar start -->
         <div class="sb-slidebar sb-right sb-style-overlay">
-            <img src="/img/pics/fairelavie.png">
-            <ul class="side-list">
-                @foreach( $slideCategory as $cat )
-                <a href="#">
-                    <li class="slidebar-category">       
-                       {{ $cat->name }}
-                    </li>
-                </a>
-                @endforeach
-            </ul>
-        </div>
-        <!-- Left Slidebar start -->
-        <div class="sb-slidebar sb-left sb-style-overlay">
             <img src="/img/pics/fairelavie.png">
             <ul class="side-list">
                 @if (Auth::guest())

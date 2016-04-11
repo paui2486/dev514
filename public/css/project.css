@@ -1791,14 +1791,23 @@ li.collapse-blog-category {
     padding: 0px
 }
 
-.cart-option label {
+.cart-option > div {
     font-size: 15px;
     color: #666666;
-    letter-spacing: 1px;
-    font-weight: 100;
     padding: 0px;
     margin: 0px;
     line-height: 28px;
+}
+
+.cart-option input {
+    cursor: pointer;
+}
+
+.cart-option label {
+    letter-spacing: 2px;
+    font-weight: 100;
+    padding-left: 5px;
+    cursor: pointer;
 }
 
 .actpage-purchase {
@@ -2075,6 +2084,18 @@ li.collapse-blog-category {
     padding: 10px 15px;
 }
 
+.confirm-ticket p{
+    text-align: right;
+    font-size: 16px;
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+}
+
+.confirm-ticket p >span {
+    padding-left: 10px;
+}
+
 .confirm-price {
     margin: 10px 0;
 }
@@ -2098,12 +2119,12 @@ li.collapse-blog-category {
     padding-top: 15px;
 }
 
-.confirm-button > button {
+.confirm-button > a > button {
     padding: 10px 20px;
     border-radius: 10px;
     margin: 10px;
     border: none;
-    background-color: #666;
+    background-color: #ff5a5f;
     font-size: 15px;
     color: white;
     letter-spacing: 1px;
