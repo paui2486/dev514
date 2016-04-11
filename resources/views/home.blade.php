@@ -237,15 +237,16 @@
                     </div>
                      <div class="row Act-category-title">
                         <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                            <p class="col-md-2">{{ $eachTypeActivity->cat_title }}
+                            <p class="col-md-2">
+                                <img src="/img/icons/icon_arrowicon.png">
+                                {{ $eachTypeActivity->cat_title }}
                             </p>
                         </a>
                         <div class="col-md-8 home-dashed"></div>
 <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
                         <div class="col-md-2 category-readmore">
                             <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                                <img src="/img/icons/rightarrow.png">
-                                <p> Read More </p>
+                                <img src="/img/icons/icon_findfriend.png">
                             </a>
                         </div>
                     </div>

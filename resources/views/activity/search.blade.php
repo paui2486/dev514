@@ -78,11 +78,14 @@
                 </div>
             </div>
         </div>
+        <div class="list-mb-filter">
+        
+        </div>
         <div class="row list-right-content col-sm-7">
             <ul class="nav nav-tabs">
-              <li role="presentation"><a href="#">熱門排序</a></li>
-              <li role="presentation"><a href="#">時間排序</a></li>
-              <li role="presentation"><a href="#">優惠排序</a></li>
+              <li role="presentation"><a href="#">最熱門</a></li>
+              <li role="presentation"><a href="#">時間近</a></li>
+              <li role="presentation"><a href="#">最優惠</a></li>
             </ul>
             <div class="list-content-panel">
 

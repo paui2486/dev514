@@ -58,6 +58,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     Route::get('purchase'                   , 'ActivityController@purchase'      );
+    Route::get('purchase/confirm'           , 'ActivityController@confirm'       );
     Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
     Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
     Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
