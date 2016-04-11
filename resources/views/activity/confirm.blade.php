@@ -39,27 +39,28 @@
             <p>您的票券 Your Tickets</p>
             <div class="confirm-ticket">
                 <div class="row">
-                    <label class="col-md-3 control-label"> 票券名稱 </label>
-                    <div id="confirm-act-date" class="col-md-9"> 雙人票 </div>
+                    <label class="col-md-3 col-xs-5 control-label"> 票券名稱 </label>
+                    <div id="confirm-act-date" class="col-md-9 col-xs-7"> 雙人優惠票券雙人優惠票券 </div>
                 </div>
                 <div class="row">
-                    <label class="col-md-3 control-label"> 票券數量 </label>
-                    <div class="col-md-9">
+                    <label class="col-md-3 col-xs-5 control-label"> 票券數量 </label>
+                    <div class="col-md-9 col-xs-7">
                         1
                     </div>
                 </div>
                 <div class="row">
-                    <label class="col-md-3 control-label"> 開始時間 </label>
-                    <div class="col-md-9">
+                    <label class="col-md-3 col-xs-12 control-label"> 開始時間 </label>
+                    <div class="col-md-9 col-xs-12">
                         2016-05-30（一）10:00
                     </div>
                 </div>
                 <div class="row">
-                    <label class="col-md-3 control-label"> 結束時間 </label>
-                    <div class="col-md-9">
+                    <label class="col-md-3 col-xs-125 control-label"> 結束時間 </label>
+                    <div class="col-md-9 col-xs-12">
                         2016-05-30（一）10:00
                     </div>
                 </div>
+                <p>票價<span>$ 1,200 NTD</span></p>
             </div>
             <div class="confirm-price">
                 <p> 結帳總額 <span>$ 1,200 NTD</span></p>
@@ -67,8 +68,8 @@
         </div>
     </div>
     <div class="row confirm-button">
-        <button>回到首頁</button>
-        <button>前往票券管理</button>
+        <a href="/"><button>回到首頁</button></a>
+        <a href="/"><button>我的票券</button></a>
     </div>
 </div>
 

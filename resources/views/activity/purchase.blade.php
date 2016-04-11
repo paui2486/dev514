@@ -22,6 +22,17 @@
             <p class="row ticket-item">結束時間：2016-05-30（一）20:00</p>
         </div>
         <div class="purchase-total">總計<span>$250 NTD</span></div>
+        <div class="purchase-mb-top" id="mb-detail">
+            <p>查看詳細票券資訊</p>
+            <div class="purchase-mb-ticket">
+                <p class="ticket-name">雙人套票</p>
+                <p class="row ticket-item">票券單價：$150NTD</p>         
+                <p class="row ticket-item">購買數量：1</p>
+                <p class="row ticket-item">開始時間：2016-05-30（一）10:00</p>
+                <p class="row ticket-item">結束時間：2016-05-30（一）20:00</p>
+            </div>
+            <div class="purchase-mb-total">總計<span>$250 NTD</span></div>
+        </div>
     </div>
     <div class="col-md-8 purchase-right">
         <p>1. 填寫聯絡資料</p>
@@ -57,4 +68,12 @@
         </div>
     </div>  
 </div>
+@endsection
+@section('script')
+<script> 
+    $('div#mb-detail div').hide();
+    $('div#mb-detail > p').click(function(){
+        $(this).next().slideToggle('fast');
+    });
+</script>
 @endsection
