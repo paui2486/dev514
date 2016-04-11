@@ -24,6 +24,7 @@ $(document).ready(function () {
             $.ajax({
                 url: target.attr('data-url'),
                 type: 'GET',
+                async: true,
                 data: { view: 'ajax' },
                 error: function(xhr) {
                     alert('Ajax request 發生錯誤');
@@ -46,20 +47,16 @@ $(document).ready(function () {
 <section id="main-content">
     <section class="wrapper">
         <ul class="nav nav-tabs">
-        @foreach( $adminTabs[Request::segment(2)] as $key => $tab )
+        @foreach( $AdminTabs as $key => $tab )
             <li >
-                @if ($tab['level'] <= Auth::user()->adminer)
-                <a href="#tab-{{ $key }}" >{{ $tab['name'] }}</a>
-                @endif
+                <a href="#tab-{{ $key }}" >{{ $tab->name }}</a>
             </li>
         @endforeach
         </ul>
 @endif
 
-    @foreach( $adminTabs[Request::segment(2)] as $key => $tab )
-        @if ($tab['level'] <= Auth::user()->adminer)
-        <div id="tab-{{ $key }}" data-url="{{ URL($tab['url']) }}"></div>
-        @endif
+    @foreach( $AdminTabs as $key => $tab )
+        <div id="tab-{{ $key }}" data-url="{{ URL($tab->url) }}"></div>
     @endforeach
     </section>
 </section>

@@ -19,15 +19,21 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
+    protected $AdminTabs;
+    public function __construct()
+    {
+        $this->AdminTabs = Library::getPositionTab(1);
+    }
+
     public function index()
     {
-// TODO: caculate what he need about tab at here? and post data to next door
-// to think if i'm normal or administrator or powerful user
-        return view('admin.member.index');
+        $AdminTabs = $this->AdminTabs;
+        return view('admin.member.index', compact('AdminTabs'));
     }
 
     public function profile()
     {
+        // For AJAX
         $member = Auth::user();
         return view('admin.member.create_edit', compact('member'));
     }
@@ -49,6 +55,7 @@ class MemberController extends Controller
      */
     public function showMember()
     {
+        // For AJAX
         return view('admin.member.list');
     }
 
@@ -57,7 +64,7 @@ class MemberController extends Controller
      *
      * @return Response
      */
-    public function store(CreateMemberRequest $request)
+    public function store(Request $request)
     {
         $permission = (array) $request->permission;
         $storeArray = array(
@@ -110,7 +117,7 @@ class MemberController extends Controller
      * @return Response
      * 會有一樣的email情況
      */
-    public function update(UpdateMemberRequest $request, $id)
+    public function update(Request $request, $id)
     {
         if( Auth::user()->adminer || Auth::user()->id == $id) {
             $permission = (array) $request->permission;
@@ -181,17 +188,16 @@ class MemberController extends Controller
     public function data()
     {
         $members = DB::table('users')
-                    ->select(array('id', 'name', 'email', 'hoster', 'author', 'status'))
+                    ->select(array('id', 'name', 'email', 'adminer', 'hoster', 'author', 'status'))
                     ->orderBy('created_at', 'ASC');
 
         return Datatables::of($members)
             ->remove_column('id')
-            ->edit_column('hoster', '@if($hoster == 1) <span class="fa-stack fa-lg">
+            ->edit_column('adminer', '@if($adminer == 1) <span class="fa-stack fa-lg">
                   <i class="fa fa-flag fa-stack-1x"></i>
                   </span> @endif')
-            ->edit_column('author', '@if($author == 1) <span class="fa-stack fa-lg">
-                  <i class="fa fa-flag fa-stack-1x"></i>
-                  </span> @endif')
+            ->edit_column('hoster', '@if($hoster == 1) 申請中 @elseif($hoster == 2) 已核可 @endif')
+            ->edit_column('author', '@if($author == 1) 申請中 @elseif($author == 2) 已核可 @endif')
             ->edit_column('status', '@if($status == 0) 未認證 @elseif($status == 1) 已認證 @else 封鎖中  @endif')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">

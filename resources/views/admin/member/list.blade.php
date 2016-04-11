@@ -15,6 +15,7 @@
         <tr>
             <th>名字</th>
             <th>信箱</th>
+            <th>管理</th>
             <th>廠商</th>
             <th>達人</th>
             <th>狀態</th>
@@ -76,13 +77,13 @@ $(document).ready(function () {
         $.ajax({
             url: $(this).attr('data-url'),
             type: 'GET',
+            async: true,
             data: { view: 'ajax' },
             error: function(xhr) {
                 alert('Ajax request 發生錯誤');
             },
             success: function(data) {
                 $('.r-tabs-panel').html(data);
-                // $( target.html(data) );
             }
         });
     });
@@ -92,6 +93,7 @@ function edit(item) {
     $.ajax({
         url: item.getAttribute('data-url'),
         type: 'GET',
+        async: true,
         data: { view: 'ajax' },
         error: function(xhr) {
             alert('Ajax request 發生錯誤');
