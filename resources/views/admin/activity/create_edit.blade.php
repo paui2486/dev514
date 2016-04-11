@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+{{-- */
+    $layouts = ( isset($_GET['view'])) ? 'admin.layouts.tabs' : 'layouts.admin';
+/* --}}
+@extends($layouts)
 
 @section('style')
+<link rel="stylesheet" href="{{ asset('css/responsive-tabs.css') }}" />
 <link rel="stylesheet" href="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/bootstrap-datepicker/css/bootstrap-datetimepicker.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/bootstrap-timepicker/compiled/timepicker.css')}}">
@@ -12,26 +16,27 @@
 {{-- Content --}}
 
 @section('content')
-<!-- Tabs -->
+
+@if(!isset($_GET['view']))
 <section id="main-content">
     <section class="wrapper">
         <ul class="nav nav-tabs">
+            @foreach( $AdminTabs as $key => $tab )
+                <li >
+                    <a href="/dashboard/activity#tab-{{ $key }}" >{{ $tab->name }}</a>
+                </li>
+            @endforeach
             <li class="active">
-                <a href="#tab-general" data-toggle="tab">活動設定</a>
+                <a href="#tab-general" data-toggle="tab">活動設定 {{{ Input::old('title', isset($activity) ? " - ". $activity->title : null) }}}</a>
             </li>
         </ul>
-
+@endif
         <form class="form-horizontal" enctype="multipart/form-data"
             method="post" autocomplete="off" role="form"
             action="@if(isset($activity)){{ URL::to('dashboard/activity/'.$activity->id.'/update') }}
                   @else{{ URL::to('dashboard/activity') }}@endif">
             {!! csrf_field() !!}
-            <!-- CSRF Token -->
-            <!-- <input type="hidden" name="_token" value="{{{ csrf_token() }}}" /> -->
-            <!-- ./ csrf token -->
-            <!-- Tabs Content -->
             <div class="tab-content">
-                <!-- General tab -->
                 <div class="tab-pane active" id="tab-general">
                     @if (count($errors) > 0)
                       <div class="alert alert-danger">
@@ -113,15 +118,17 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <select style="width: 100%" name="soWhat" class="form-control">
-                                      @foreach($categories->what as $category)
-                                          <option value="{{$category->id}}"
-                                          @if(!empty($activity))
-                                              @if($activity->category_id == $category->id)
-                                          selected="selected"
-                                              @endif
-                                          @endif >{{$category->name}}
-                                          </option>
-                                        @endforeach
+                                    @foreach($slideCategory as $category)
+                                        @if($category->type === 1)
+                                            <option value="{{$category->id}}"
+                                            @if(!empty($activity))
+                                                @if($activity->category_id == $category->id)
+                                                    selected="selected"
+                                                @endif
+                                            @endif >{{$category->name}}
+                                            </option>
+                                        @endif
+                                    @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -131,35 +138,35 @@
                                 <label class="control-label col-sm-2" for="activity_start">
                                     活動期間
                                 </label>
-                                <div class="col-sm-6">
-                                    <div class="col-sm-1 col-md-2">
+                                <div class="col-sm-6 col-md-5">
+                                    <div class="col-md-2 table-cell">
                                         <label class="control-label">
                                             From
                                         </label>
                                     </div>
-                                    <div class="col-xs-8 col-sm-7 col-md-5">
+                                    <div class="col-xs-8 col-sm-7 col-md-6">
                                         <input class="form-control act_date" type="text" name="activity_start_date"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_start ) : null) }}}"/>
                                     </div>
-                                    <div class="col-xs-4 col-sm-4 col-md-5">
+                                    <div class="col-xs-4 col-sm-5 col-md-4">
                                         <input class="form-control act_time" type="text" name="activity_start_time"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
                                     </div>
-                                    <div class="col-sm-1 col-md-2">
+                                    <div class="col-md-2 table-cell">
                                         <label class="control-label">
                                             To
                                         </label>
                                     </div>
-                                    <div class="col-xs-8 col-sm-7 col-md-5">
+                                    <div class="col-xs-8 col-sm-7 col-md-6">
                                         <input class="form-control act_date" type="text" name="activity_end_date"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_end ) : null) }}}"/>
                                     </div>
-                                    <div class="col-xs-4 col-sm-4 col-md-5">
+                                    <div class="col-xs-4 col-sm-5 col-md-4">
                                         <input class="form-control act_time" type="text" name="activity_end_time"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_end ) : null) }}}"/>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 col-md-5">
                                     <label class="control-label col-sm-4" for="time_range">
                                         活動長度
                                     </label>
@@ -180,10 +187,12 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <select id="input-who" name="withWho[]" multiple placeholder="對象是...">
-                                        @foreach($categories->who as $category)
+                                        @foreach($slideCategory as $category)
+                                            @if($category->type === 3)
                                             <option value="{{$category->id}}" >
                                                 {{$category->name}}
                                             </option>
+                                            @endif
                                         @endforeach
                           					</select>
                                 </div>
@@ -196,7 +205,8 @@
                                 </label>
                                 <div class="col-sm-2">
                                     <select style="width: 100%" name="goWhere" class="form-control">
-                                    @foreach($categories->where as $category)
+                                    @foreach($slideCategory as $category)
+                                        @if($category->type === 4)
                                         <option value="{{$category->id}}"
                                         @if(!empty($activity))
                                             @if($activity->category_id == $category->id)
@@ -204,6 +214,7 @@
                                             @endif
                                         @endif >{{$category->name}}
                                         </option>
+                                        @endif
                                     @endforeach
                                     </select>
                                 </div>
@@ -230,8 +241,7 @@
                                     購票說明
                                 </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="ticket_description" id="ticket_description"
-                                        value="{{{ Input::old('ticket_description', isset($activity) ? $activity->ticket_description : null) }}}" />
+                                    <textarea class="form-control ckeditor" id="ticket_description" name="ticket_description" rows="6">{{{ Input::old('ticket_description', isset($activity) ? $activity->ticket_description : null) }}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -271,13 +281,9 @@
                         @endif
                         <div class="form-group {{{ $errors->has('status') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
-                                <input name="group1" type="radio" id="test1" />
-
-                                <label for="test1">Red</label>
                                 <label class="control-label col-sm-2" for="status">
                                     活動狀態
                                 </label>
-
                                 <div class="radio login-info checkbox col-sm-10">
                                     <label class="col-xs-3">
                                         <input type="radio" name="status" value="1"
@@ -334,7 +340,7 @@
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket-time">活動時間</label>
                                         <div class="col-sm-6">
-                                            <div class="col-xs-2">
+                                            <div class="col-xs-2 table-cell">
                                                 <label class="control-label">
                                                     From
                                                 </label>
@@ -345,7 +351,7 @@
                                             <div class="col-xs-4">
                                                 <input class="form-control act_time ticket-time" type="text" name="ticket[0][ticket-start-time]"/>
                                             </div>
-                                            <div class="col-xs-2">
+                                            <div class="col-xs-2 table-cell">
                                                 <label class="control-label">
                                                     To
                                                 </label>
@@ -425,171 +431,182 @@
                         </div>
                     </div>
                 </div>
-            <!-- ./ general tab -->
             </div>
-        		<!-- ./ form actions -->
         </form>
+@if(!isset($_GET['view']))
     </section>
 </section>
+@endif
 
 @stop
 
 {{-- Scripts --}}
 @section('scripts')
     @parent
-    <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/jquery-selectize/dist/js/standalone/selectize.min.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            CKFinder.setupCKEditor();
-
-            var editor = CKEDITOR.replace( 'content', {
-                language : 'zh',
-                height : 500,
-                allowedContent : true,
-                extraPlugins: 'autosave',
-                autosave_SaveKey: 'autosaveKey',
-                autosave_NotOlderThen : 10,
-                filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
-                filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Image',
-                filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-                filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Image',
-
-                removeButtons : 'BidiLtr,BidiRtl,Anchor,Maximize,Styles,Paste,PasteText,PasteFromWord,Cut,Copy,Source,Save,NewPage,DocProps,Print,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,Language,Flash,Iframe,',
-
-                font_names : 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana;新細明體;細明體;標楷體;微軟正黑體',
-                fontSize_sizes : '8/8px;9/9px;10/10px;11/11px;12/12px;13/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;21/21px;22/22px;23/23px;24/24px;25/25px;26/26px;28/28px;36/36px;48/48px;72/72px'
-            });
-
-            $('input.time-picker').on('focus', picker);
-            $("button.btn-clone").on('click', clone);
-            $("button.btn-del").on('click', remove);
-
-    				$('#input-who').selectize({
-                maxItems: 5,
-                create: false,
-    				});
-
-            $.fn.modal.Constructor.prototype.enforceFocus = function() {
-                modal_this = this
-                $(document).on('focusin.modal', function (e) {
-                    if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
-                    && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
-                    && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
-                        modal_this.$element.focus()
-                    }
-                })
-            };
-
-            var minDate = moment().format("YYYY-MM-DD");
-
-            $(".act_date").datetimepicker({
-                minDate: moment(),
-                format: 'YYYY-MM-DD',
-            });
-
-            $("input[name=activity_start_date]").on("dp.change", function (e) {
-                $('input[name="activity_end_date"]').data("DateTimePicker").minDate(e.date);
-            });
-
-            $(".act_time").val("00:00");
-            $(".act_time").datetimepicker({
-                minDate: moment({hour: 0, minute: 0}),
-                stepping: 10,
-                format: 'HH:mm',
-            });
-
-            if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
-                $("input[name='activity_start_time']").on("dp.change", function (e) {
-                    $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
-                });
-            }
-
-            $("input[name='activity_end_time']").on("dp.change", function (e) {
-                var start_time_arr = $("input[name='activity_start_time']").val().split(':');
-                var end_time_arr   = $("input[name='activity_end_time']").val().split(':');
-                var timecost       = Math.floor(end_time_arr[0]) - Math.floor(start_time_arr[0]) +
-                                        Math.round((Math.floor(end_time_arr[1]) - Math.floor(start_time_arr[1])) / 60 * 10) / 10;
-                $('input[name="time_range"]').val(timecost);
-            });
-
-            $(document).on("keypress", "form", function(event) {
-                return event.keyCode != 13;
-            });
-
-            $('form').on('submit', function() {
-                CKEDITOR.instances.content.updateElement();
-            });
+<script type="text/javascript" src="{{ asset('js/jquery.responsiveTabs.min.js') }}"></script>
+<script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/jquery-selectize/dist/js/standalone/selectize.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/ckfinder/ckfinder.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        CKFinder.setupCKEditor();
+        var description = CKEDITOR.replace( 'ticket_description', {
+            language : 'zh',
+            height : 100,
+            toolbar: [
+                ['Styles', 'Format', 'Font', 'FontSize'],
+                ['TextColor', 'BGColor']
+            ],
+            uiColor : '#9AB8F3'
         });
 
-        function clone() {
-            var regex = /\[(\d*)/i;
-            var id_next = $(".form-ticket").length;
-            $(this).parents(".form-ticket").clone()
-                .appendTo(".ticket-area")
-                .attr("id", "ticket" + (id_next + 1) )
-                .find("*")
-                .each(function() {
-                    var name = $(this).attr('name');
-                    if (typeof name !== "undefined") {
-                        var cg_name = name.replace(regex, '[' + id_next);
-                        $(this).attr('name', cg_name);
-                    }
-                })
-                .on('focus', 'input.time-picker', picker)
-                .on('focus', 'input.act_date', pickerDate)
-                .on('focus', 'input.act_time', pickerTime)
-                .on('click', 'button.btn-clone', clone)
-                .on('click', 'button.btn-del', remove);
-        }
+        var editor = CKEDITOR.replace( 'content', {
+            language : 'zh',
+            uiColor : '#9AB8F3',
+            height : 500,
+            allowedContent : true,
+            extraPlugins: 'autosave',
+            autosave_SaveKey: 'autosaveKey',
+            autosave_NotOlderThen : 10,
+            filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Image',
+            filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Image',
 
-        var maxDate = null;
+            removeButtons : 'BidiLtr,BidiRtl,Anchor,Maximize,Styles,Paste,PasteText,PasteFromWord,Cut,Copy,Source,Save,NewPage,DocProps,Print,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,Language,Flash,Iframe,',
 
-        function pickerDate() {
-            $(this).datetimepicker({
-                minDate: moment(),
-                maxDate: $('input[name="activity_end_date"]').val(),
-                format: 'YYYY-MM-DD',
+            font_names : 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana;新細明體;細明體;標楷體;微軟正黑體',
+            fontSize_sizes : '8/8px;9/9px;10/10px;11/11px;12/12px;13/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;21/21px;22/22px;23/23px;24/24px;25/25px;26/26px;28/28px;36/36px;48/48px;72/72px'
+        });
+
+        $('input.time-picker').on('focus', picker);
+        $("button.btn-clone").on('click', clone);
+        $("button.btn-del").on('click', remove);
+
+				$('#input-who').selectize({
+            maxItems: 5,
+            create: false,
+				});
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {
+            modal_this = this
+            $(document).on('focusin.modal', function (e) {
+                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                    modal_this.$element.focus()
+                }
+            })
+        };
+
+        var minDate = moment().format("YYYY-MM-DD");
+
+        $(".act_date").datetimepicker({
+            minDate: moment(),
+            format: 'YYYY-MM-DD',
+        });
+
+        $("input[name=activity_start_date]").on("dp.change", function (e) {
+            $('input[name="activity_end_date"]').data("DateTimePicker").minDate(e.date);
+        });
+
+        $(".act_time").val("00:00");
+        $(".act_time").datetimepicker({
+            minDate: moment({hour: 0, minute: 0}),
+            stepping: 10,
+            format: 'HH:mm',
+        });
+
+        if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
+            $("input[name='activity_start_time']").on("dp.change", function (e) {
+                $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
             });
         }
 
-        function pickerTime() {
-            $(this).datetimepicker({
-                minDate: moment({hour: 0, minute: 0}),
-                stepping: 10,
-                format: 'HH:mm',
-            });
+        $("input[name='activity_end_time']").on("dp.change", function (e) {
+            var start_time_arr = $("input[name='activity_start_time']").val().split(':');
+            var end_time_arr   = $("input[name='activity_end_time']").val().split(':');
+            var timecost       = Math.floor(end_time_arr[0]) - Math.floor(start_time_arr[0]) +
+                                    Math.round((Math.floor(end_time_arr[1]) - Math.floor(start_time_arr[1])) / 60 * 10) / 10;
+            $('input[name="time_range"]').val(timecost);
+        });
+
+        $(document).on("keypress", "form", function(event) {
+            return event.keyCode != 13;
+        });
+
+        $('form').on('submit', function() {
+            CKEDITOR.instances.content.updateElement();
+        });
+    });
+
+    function clone() {
+        var regex = /\[(\d*)/i;
+        var id_next = $(".form-ticket").length;
+        $(this).parents(".form-ticket").clone()
+            .appendTo(".ticket-area")
+            .attr("id", "ticket" + (id_next + 1) )
+            .find("*")
+            .each(function() {
+                var name = $(this).attr('name');
+                if (typeof name !== "undefined") {
+                    var cg_name = name.replace(regex, '[' + id_next);
+                    $(this).attr('name', cg_name);
+                }
+            })
+            .on('focus', 'input.time-picker', picker)
+            .on('focus', 'input.act_date', pickerDate)
+            .on('focus', 'input.act_time', pickerTime)
+            .on('click', 'button.btn-clone', clone)
+            .on('click', 'button.btn-del', remove);
+    }
+
+    var maxDate = null;
+
+    function pickerDate() {
+        $(this).datetimepicker({
+            minDate: moment(),
+            maxDate: $('input[name="activity_end_date"]').val(),
+            format: 'YYYY-MM-DD',
+        });
+    }
+
+    function pickerTime() {
+        $(this).datetimepicker({
+            minDate: moment({hour: 0, minute: 0}),
+            stepping: 10,
+            format: 'HH:mm',
+        });
+    }
+
+    function picker() {
+        var maxday = false;
+        if ($(this).attr('name') != "activity_range") {
+            maxday = maxDate;
         }
 
-        function picker() {
-            var maxday = false;
-            if ($(this).attr('name') != "activity_range") {
-                maxday = maxDate;
-            }
+        $(this).daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: {
+                format: 'YYYY-MM-DD H:mm',
+                separator: '   -   '
+            },
+            minDate: 'today',
+            maxDate: maxday
+        });
+    }
 
-            $(this).daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'YYYY-MM-DD H:mm',
-                    separator: '   -   '
-                },
-                minDate: 'today',
-                maxDate: maxday
-            });
+    function remove() {
+        var count = $(".form-ticket").length;
+        if (count === 1){
+            alert("只剩下一張票卷！請勿刪除！！感謝");
+        } else {
+            $(this).parents(".form-ticket").remove();
         }
-
-        function remove() {
-            var count = $(".form-ticket").length;
-            if (count === 1){
-                alert("只剩下一張票卷！請勿刪除！！感謝");
-            } else {
-                $(this).parents(".form-ticket").remove();
-            }
-        }
-
-
-    </script>
+    }
+</script>
 @stop

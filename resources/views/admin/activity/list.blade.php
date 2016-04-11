@@ -1,23 +1,18 @@
+<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}"/>
 <link rel="stylesheet" href="{{ asset('css/colorbox.css') }}"/>
 
 <h4 class="wrapper-title">
-    會員列表
-    <div class="pull-right wrapper-create">
-        <a href="#" data-url="{{{ URL::to('dashboard/member/create') }}}"
-           class="btn btn-sm btn-primary">
-             <span class="glyphicon glyphicon-plus-sign"></span> 新增
-         </a>
-    </div>
+    活動列表
 </h4>
 
 <table id="table" class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>名字</th>
-            <th>信箱</th>
-            <th>管理</th>
-            <th>廠商</th>
-            <th>達人</th>
+            <th>主辦</th>
+            <th>分類</th>
+            <th>標題</th>
+            <th>觀看</th>
+            <th>票卷</th>
             <th>狀態</th>
             <th>設定</th>
         </tr>
@@ -25,6 +20,7 @@
     <tbody></tbody>
 </table>
 
+<script type="text/javascript" src="{{ asset('js/datatables.min.js' ) }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.colorbox.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function () {
@@ -57,7 +53,7 @@ $(document).ready(function () {
         ],
         "processing": true,
         "responsive": true,
-        "ajax": "{{ URL::to('dashboard/member/data') }}",
+        "ajax": "{{ URL::to('dashboard/activity/data') }}",
         "fnDrawCallback": function (oSettings) {
             $(".iframe").colorbox({
                 iframe: true,
@@ -100,6 +96,7 @@ function edit(item) {
             location.reload(true);
         },
         success: function(data) {
+            // console.log("here");
             $('.r-tabs-panel').html(data);
         }
     });

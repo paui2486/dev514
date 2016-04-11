@@ -37,10 +37,9 @@ class AuthorMiddleware
             } else {
                 return redirect()->guest('login')->withFlashmessage('請先加入會員');
             }
-        } elseif ( Auth::user()->author == 1 || Auth::user()->adminer ) {
+        } elseif ( Auth::user()->author || Auth::user()->adminer ) {
             return $next($request);
         } else {
-            // return redirect('/');
             return redirect()->guest('login')->withFlashmessage('請申請成為部落客');
         }
     }

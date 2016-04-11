@@ -28,13 +28,6 @@ class AuthController extends Controller
         return view('');
     }
 
-    public function profile()
-    {
-        $member = Auth::user();
-        // $banners = DB::table('galleries')->find($id);
-        return view('admin.member.create_edit', compact('member'));
-    }
-
     public function follows()
     {
         return view('auth.pages.follows');

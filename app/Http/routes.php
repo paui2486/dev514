@@ -76,6 +76,20 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('friends'                    , 'AuthController@friends'           );
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
+    Route::group(['middleware' => 'auth'], function() {
+        Route::get('dashboard'                        , 'Admin\AdminController@index'           );
+        Route::get('dashboard/member'                 , 'Admin\MemberController@index'          );
+        Route::get('dashboard/member/profile'         , 'Admin\MemberController@profile'        );
+        Route::post('dashboard/member/{id}/update'    , 'Admin\MemberController@update'         );
+        Route::get('dashboard/activity/register'      , 'Admin\ActivityController@askExpert'    );
+        // Route::get('dashboard/my/activity'          , 'Admin\ActivityController@showMyAct'  );
+        // Route::get('dashboard/my/activity/data'     , 'Admin\ActivityController@getMyAct'   );
+        Route::get('dashboard/activity'               , 'Admin\ActivityController@index'        );
+        Route::post('dashboard/activity/register'     , 'Admin\ActivityController@regExpert'    );
+        Route::get('dashboard/activity/tickets'       , 'Admin\ActivityController@showTicket'   );
+        Route::get('dashboard/activity/tickets/data'  , 'Admin\ActivityController@getTicket'    );
+    });
+
     // for admin
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
 
@@ -94,21 +108,26 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('member'                        , 'MemberController@store'            );
         Route::delete('member/{id}'                 , 'MemberController@destroy'          );
 
-        Route::get('blog/category'                  , 'BlogController@showCategory'       );
-        Route::post('blog/category'                 , 'BlogController@storeCategory'      );
-        Route::get('blog/category/{id}'             , 'BlogController@getCategory'        );
-        Route::post('blog/category/{id}/update'     , 'BlogController@updateCategory'     );
-        Route::get('blog/category/{id}/delete'      , 'BlogController@deleteCategory'     );
-        Route::post('blog/category/{id}/delete'     , 'BlogController@destoryCategory'    );
-        Route::get('blog/category/data'             , 'BlogController@getCategoryData'    );
-        Route::get('blog/category/create'           , 'BlogController@createCategory'     );
-        Route::get('blog/expert'                    , 'BlogController@showExpert'         );
-        Route::get('blog/expert/data'               , 'BlogController@getExpert'          );
+        // TODO: filter setting, banner setting, event setting.... at system
+        Route::get('system'                         , 'AdminController@showMember'        );
 
-        Route::get('priview/activity/{id}'          , 'ActivityController@showPriview'    );
+        // Route::get('blog/category'                  , 'BlogController@showCategory'       );
+        // Route::post('blog/category'                 , 'BlogController@storeCategory'      );
+        // Route::get('blog/category/{id}'             , 'BlogController@getCategory'        );
+        // Route::post('blog/category/{id}/update'     , 'BlogController@updateCategory'     );
+        // Route::get('blog/category/{id}/delete'      , 'BlogController@deleteCategory'     );
+        // Route::post('blog/category/{id}/delete'     , 'BlogController@destoryCategory'    );
+        // Route::get('blog/category/data'             , 'BlogController@getCategoryData'    );
+        // Route::get('blog/category/create'           , 'BlogController@createCategory'     );
+        // Route::get('blog/expert'                    , 'BlogController@showExpert'         );
+        // Route::get('blog/expert/data'               , 'BlogController@getExpert'          );
+
+        Route::get('activity/{id}/priview'          , 'ActivityController@showPriview'    );
 
         Route::get('activity/check'                 , 'ActivityController@showCheckAct'   );
         Route::get('activity/check/data'            , 'ActivityController@getCheckAct'    );
+
+
         Route::get('activity/pass/{id}'             , 'ActivityController@passActivity'   );
         Route::get('activity/category'              , 'ActivityController@showCategory'   );
         Route::post('activity/category'             , 'ActivityController@storeCategory'  );
@@ -161,30 +180,19 @@ Route::group(['middleware' => 'web'], function () {
 
     // for host
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
-        Route::get('activity/data'                          , 'ActivityController@data'       );
-        Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'  );
-        Route::post('activity/{id}/update'                  , 'ActivityController@update'     );
+        Route::get('activity/data'                          , 'ActivityController@data'         );
+        Route::get('activity/list'                          , 'ActivityController@showActivity' );
+        Route::get('activity/create'                        , 'ActivityController@create'       );
+        Route::get('activity/{id}'                          , 'ActivityController@show'         );
+        Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'    );
+        Route::post('activity/{id}/update'                  , 'ActivityController@update'       );
         // Route::get('activity/history'                       , 'ActivityController@getHistory' );
         // Route::get('activity/old_data'                      , 'ActivityController@showOldData');
-        Route::resource('activity'                          , 'ActivityController'            );
 
         Route::get('activity/{id}/tickets/data'             , 'TicketController@data'         );
         Route::post('activity/{id}/tickets/{tickets}/update', 'TicketController@update'       );
         Route::get('activity/{id}/tickets/{tickets}/delete' , 'TicketController@getDelete'    );
         Route::resource('activity/{id}/tickets'             , 'TicketController'              );
-    });
-
-    Route::group(['middleware' => 'auth'], function() {
-        Route::get('dashboard'                      , 'Admin\AdminController@index'           );
-        Route::get('dashboard/member'               , 'Admin\MemberController@index'          );
-        Route::get('dashboard/member/profile'       , 'Admin\MemberController@profile'        );
-        Route::post('dashboard/member/{id}/update'  , 'Admin\MemberController@update'         );
-        Route::get('dashboard/register/expert'      , 'Admin\ActivityController@askExpert'    );
-        // Route::get('dashboard/my/activity'          , 'Admin\ActivityController@showMyAct'  );
-        // Route::get('dashboard/my/activity/data'     , 'Admin\ActivityController@getMyAct'   );
-        Route::post('dashboard/register/expert'     , 'Admin\ActivityController@regExpert'    );
-        Route::get('dashboard/tickets'              , 'Admin\ActivityController@showTicket'   );
-        Route::get('dashboard/tickets/data'         , 'Admin\ActivityController@getTicket'    );
     });
 });
 

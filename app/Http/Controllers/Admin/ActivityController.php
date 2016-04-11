@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ActivityRequest;
-use App\Http\Requests\UpdateActivityRequest;
+// use App\Http\Requests\ActivityRequest;
+// use App\Http\Requests\UpdateActivityRequest;
 
 use DB;
 use Log;
@@ -20,43 +20,47 @@ use App\Http\Controllers\Controller;
 
 class ActivityController extends Controller
 {
+    protected $AdminTabs;
+    public function __construct()
+    {
+        if( Auth::check() ) {
+            $this->AdminTabs = Library::getPositionTab(3, Auth::user()->hoster);
+        }
+    }
+
     /**
      * Display a listing of the resource.
-     *
      * @return Response
      */
     public function index()
     {
-        return view('admin.activity.index');
+        $AdminTabs = $this->AdminTabs;
+        return view('admin.activity.index',compact('AdminTabs'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function create()
     {
+        $AdminTabs  = $this->AdminTabs;
         if (Auth::user()->adminer) {
             $hosters  = DB::table('users')
                           ->where('hoster', 1)
                           ->select('id', 'name')
                           ->get();
         }
-
-        $lib = new Library();
-
+        $lib        = new Library();
         $categories = (object) $lib->getFilterCategory();
-        return view('admin.activity.create_edit', compact('hosters', 'categories'));
+        return view('admin.activity.create_edit', compact('hosters', 'categories', 'AdminTabs'));
     }
 
     /**
      * Store a newly created resource in storage.
-     *
      * @return Response
      */
-    //  public function store(ActivityRequest $request)
-     public function store(ActivityRequest $request)
+    public function store(Request $request)
     {
         $tickets    = array();
         $prices     = array();
@@ -79,7 +83,7 @@ class ActivityController extends Controller
             'max_price'           => max($prices),
             'min_price'           => min($prices),
             'activity_start'      => $request->activity_start_date. " " . $request->activity_start_time,
-            'activity_end'        => $request->activity_end_date. " " . $request->activity_end_time,
+            'activity_end'        => $request->activity_end_date.   " " . $request->activity_end_time,
             'created_at'          => date("Y-m-d H:i:s"),
             'updated_at'          => date("Y-m-d H:i:s"),
         );
@@ -121,9 +125,9 @@ class ActivityController extends Controller
             $insert = array(
                         'activity_id'   => $activity_id,
                         'ticket_start'  => $act_ticket->ticket_start_date . " " . $act_ticket->ticket_start_time,
-                        'ticket_end'    => $act_ticket->ticket_end_date . " " . $act_ticket->ticket_end_time,
-                        'sale_start'    => $act_ticket->sale_start_date . " " . $act_ticket->sale_start_time,
-                        'sale_end'      => $act_ticket->sale_end_date . " " . $act_ticket->sale_end_time,
+                        'ticket_end'    => $act_ticket->ticket_end_date .   " " . $act_ticket->ticket_end_time,
+                        'sale_start'    => $act_ticket->sale_start_date .   " " . $act_ticket->sale_start_time,
+                        'sale_end'      => $act_ticket->sale_end_date .     " " . $act_ticket->sale_end_time,
                         'location'      => $request->location,
                         'name'          => $act_ticket->name,
                         'status'        => $act_ticket->ticket_status,
@@ -141,12 +145,12 @@ class ActivityController extends Controller
 
     /**
      * Display the specified resource.
-     *
      * @param  int  $id
      * @return Response
      */
     public function show($id)
     {
+        $AdminTabs    = $this->AdminTabs;
         if (Auth::user()->adminer) {
             $activity = DB::table('activities')->find($id);
             $hosters  = DB::table('users')
@@ -171,33 +175,17 @@ class ActivityController extends Controller
                         ->where('type', 1)
                         ->select('id', 'name')
                         ->get();
-
         // tickets 尚未實作
-        return view('admin.activity.create_edit', compact('activity', 'hosters', 'tickets', 'categories'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('admin.activity.create_edit', compact('activity', 'hosters', 'tickets', 'categories', 'AdminTabs'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  int  $id
      * @return Response
      */
-    public function update(UpdateActivityRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $activity_range = array();
-        preg_match("/(.*)\s-\s(.*)/", $request->activity_range, $activity_range);
-
         $updateArray = array(
             'title'         => $request->title,
             'category_id'   => $request->category_id,
@@ -208,8 +196,8 @@ class ActivityController extends Controller
             'time_range'    => $request->time_range,
             'tag_ids'       => $request->tag_ids,
             'status'        => $request->status,
-            'activity_start'=> $activity_range[1],
-            'activity_end'  => $activity_range[2],
+            'activity_start'=> $request->activity_start_date. " " . $request->activity_start_time,
+            'activity_end'  => $request->activity_end_date.   " " . $request->activity_end_time,
             'updated_at'    => date("Y-m-d H:i:s"),
         );
 
@@ -237,8 +225,6 @@ class ActivityController extends Controller
     }
 
     /**
-     *
-     *
      * @param
      * @return items from @param
      */
@@ -249,7 +235,6 @@ class ActivityController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -260,9 +245,13 @@ class ActivityController extends Controller
         return Redirect::to('dashboard/activity');
     }
 
+    public function showActivity()
+    {
+        return view('admin.activity.list');
+    }
+
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -282,10 +271,11 @@ class ActivityController extends Controller
        // need to change targets to processing bar
 
        return Datatables::of($activities)
+           ->remove_column('id')
            ->edit_column('status', '@if($status == 1) 編輯中 @elseif($status ==3 ) 審核中 @elseif($status == 4) 已發布 @elseif($status == 2) 已隱藏 @else 已刪除 @endif')
            ->add_column('actions', '
                  <div style="white-space: nowrap;">
-                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"                class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"  class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets\') }}}" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 票卷</a>
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}"  class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
                  <input type="hidden" name="row" value="{{$id}}" id="row">
@@ -293,11 +283,8 @@ class ActivityController extends Controller
            ->make();
     }
 
-
-
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -308,7 +295,6 @@ class ActivityController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -320,7 +306,6 @@ class ActivityController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -347,7 +332,6 @@ class ActivityController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return Response
      */
@@ -379,7 +363,6 @@ class ActivityController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function createCategory()
@@ -389,7 +372,6 @@ class ActivityController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function storeCategory(Request $request)
@@ -417,7 +399,6 @@ class ActivityController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function deleteCategory($id)
@@ -428,7 +409,6 @@ class ActivityController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function destoryCategory(Request $request, $id)
@@ -496,11 +476,12 @@ class ActivityController extends Controller
 
     public function askExpert()
     {
-        return view('admin.activity.register_expoert');
+        return view('admin.activity.register_expert');
     }
 
     public function regExpert(Request $request)
     {
+        $count = 0;
         $storeArray = array(
           'name'    => $request->name,
           'TaxID'   => $request->TaxID,
@@ -512,9 +493,7 @@ class ActivityController extends Controller
           'contact_email' => $request->contact_email,
 
         );
-
         $id                 = DB::table('companys')->insertGetId($storeArray);
-
 
         $params             = Library::upload_param_template();
         $params['request']  = $request;
@@ -526,14 +505,21 @@ class ActivityController extends Controller
 
         if (!empty($request->ID_path)) {
             array_push($params['filed'], 'ID_path');
+            $count ++;
         }
         if (!empty($request->Bank_path)) {
             array_push($params['filed'], 'Bank_path');
+            $count ++;
         }
 
-        $update             = Library::upload($params);
-        $result             = DB::table('companys')->where('id', $id)
-                                ->update($update['data']);
+        if ($count) {
+            $update = Library::upload($params);
+            $result = DB::table('companys')->where('id', $id)
+                        ->update($update['data']);
+        } else {
+            $result = true;
+        }
+
         if ($result) {
             Session::flash('message', '申請完成，恭喜您已經能舉辦活動，靜待系統進行審核');
             DB::table('users')
@@ -542,9 +528,9 @@ class ActivityController extends Controller
                     'hoster'      => 1,
                     'updated_at'  => date("Y-m-d H:i:s"),
                   ));
+        } else {
+            return Redirect::to('dashboard');
         }
-
-        return Redirect::to('dashboard');
     }
 
     public function showCheckAct()
@@ -565,7 +551,7 @@ class ActivityController extends Controller
 
         return Datatables::of($check)
             ->edit_column('id','<div style="white-space: nowrap;">
-                  <a class="btn btn-info btn-sm iframe" href="{{{ url("dashboard/priview/activity/".$id) }}}" >預覽<a>
+                  <a class="btn btn-info btn-sm iframe" href="{{{ url("dashboard/activity/".$id. "/priview") }}}" >預覽<a>
                   <div class="btn btn-success btn-sm" onclick="passActivity({{$id}})"><span class="glyphicon glyphicon-pencil"></span> 通過</div>
                 </div>')
             ->make();

@@ -1,88 +1,78 @@
 @extends('layouts.admin')
 
-@section('content')
-<!--main content start-->
-<section id="main-content">
-    <section class="wrapper">
-         <h4 class="wrapper-title">
-             全部活動列表
-             <div class="pull-right wrapper-create">
-                 <a href="{{{ URL::to('dashboard/activity/create') }}}"
-                    class="btn btn-sm  btn-primary">
-                      <span class="glyphicon glyphicon-plus-sign"></span> 新增
-                  </a>
-             </div>
-         </h4>
-
-         <table id="table" class="table table-striped table-hover">
-             <thead>
-                 <tr>
-                     <th>ID</th>
-                     <th>主辦</th>
-                     <th>分類</th>
-                     <th>標題</th>
-                     <th>觀看</th>
-                     <th>票卷</th>
-                     <th>狀態</th>
-                     <th>設定</th>
-                 </tr>
-             </thead>
-             <tbody></tbody>
-         </table>
-    </section>
-</section>
-<!--main content end-->
+@section('style')
+<link rel="stylesheet" href="{{ asset('assets/bootstrap-fileupload/bootstrap-fileupload.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/responsive-tabs.css') }}" />
 @stop
 
-{{-- Scripts --}}
 @section('scripts')
-    @parent
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var oTable;
-            oTable = $('#table').DataTable({
-                "dom": 'Bfrtip',
-                "select": true,
-                "lengthMenu": [
-                    [ 10, 25, 50, -1 ],
-                    [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                ],
-                "buttons": [
-                    'pageLength',
-                    {
-                        extend: 'colvis',
-                        columns: ':not(:first-child)',
-                        text: '顯示欄位'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        download: 'open'
-                    },
-                    'csvHtml5',
-                ],
-                "aoColumnDefs": [
-                    {
-                        "bSortable": false,
-                        "aTargets": [ 6 ]
-                    },
-                ],
-                "processing": true,
-                "responsive": true,
-                "ajax": "{{ URL::to('dashboard/activity/data') }}",
-                "fnDrawCallback": function (oSettings) {
-                    $(".iframe").colorbox({
-                        iframe: true,
-                        speed: 660,
-                        width: "40%",
-                        height: "30%",
-                        opacity: 0.4,
-                        transition: "fade",
-                        onClosed: function () {
-                            window.location.reload();
-                        }
-                    });
+<script type="text/javascript" src="{{ asset('js/jquery.responsiveTabs.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-tagsinput.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/jquery-selectize/dist/js/standalone/selectize.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
+<script>
+$(document).ready(function () {
+    var $tabs = $('.wrapper');
+    $tabs.responsiveTabs({
+        rotate: false,
+        startCollapsed: 'accordion',
+        collapsible: 'accordion',
+        setHash: true,
+        scrollToAccordion: true,
+        active: 1,
+        activate: function(e, tab) {
+            $(tab.anchor.context).addClass('active');
+            var target = $(tab.selector);
+            $.ajax({
+                url: target.attr('data-url'),
+                type: 'GET',
+                async: true,
+                data: { view: 'ajax' },
+                error: function(xhr) {
+                    alert('Ajax request 發生錯誤');
+                },
+                success: function(data) {
+                    $( target.html(data) );
                 }
             });
-        });
-    </script>
+        },
+        deactivate: function(e, tab) {
+            $(tab.anchor.context).removeClass('active');
+        }
+    });
+});
+</script>
+@stop
+
+{{-- Content --}}
+
+@section('content')
+
+@if (!isset($_GET['view']))
+<section id="main-content">
+    <section class="wrapper">
+        <ul class="nav nav-tabs">
+        @foreach( $AdminTabs as $key => $tab )
+            <li >
+                @if ( $tab->level >= 0 )
+                    @if ((Auth::user()->adminer > 1) || ($tab->level <= Auth::user()->hoster))
+                    <a href="#tab-{{ $key }}" >{{ $tab->name }}</a>
+                    @endif
+                @else
+                <a href="#tab-{{ $key }}" >{{ $tab->name }}</a>
+                @endif
+            </li>
+        @endforeach
+        </ul>
+@endif
+
+    @foreach( $AdminTabs as $key => $tab )
+        <div id="tab-{{ $key }}" data-url="{{ URL($tab->url) }}"></div>
+    @endforeach
+    </section>
+</section>
+
 @stop

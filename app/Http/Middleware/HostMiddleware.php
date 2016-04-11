@@ -37,10 +37,9 @@ class HostMiddleware
             } else {
                 return redirect()->guest('login')->withFlashmessage('請先登入會員');
             }
-        } elseif ( Auth::user()->hoster == 1 || Auth::user()->adminer ) {
+        } elseif ( Auth::user()->hoster || Auth::user()->adminer ) {
             return $next($request);
         } else {
-            // return redirect('/');
             return redirect()->guest('login')->withFlashmessage('請先申請成為部落客');
 
         }

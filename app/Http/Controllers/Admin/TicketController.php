@@ -19,6 +19,14 @@ use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
 {
+    protected $AdminTabs;
+    public function __construct()
+    {
+        if( Auth::check() ) {
+            $this->AdminTabs = Library::getPositionTab(3, Auth::user()->hoster);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +34,7 @@ class TicketController extends Controller
      */
     public function index($id)
     {
+        $AdminTabs = $this->AdminTabs;
         if ( Auth::user()->adminer ) {
             return view('admin.ticket.index', compact('id'));
         } else {
@@ -36,7 +45,7 @@ class TicketController extends Controller
             if (empty($act_info)) {
                 return Redirect::to('/');
             } else {
-                return view('admin.ticket.index', compact('id', 'act_info'));
+                return view('admin.ticket.index', compact('id', 'act_info', 'AdminTabs'));
             }
         }
     }
@@ -48,12 +57,14 @@ class TicketController extends Controller
      */
     public function create($id)
     {
+        $AdminTabs = $this->AdminTabs;
+
         $act_info = DB::table('activities')->find($id);
         if ( empty($act_info) ) {
             return Redirect::to('/');
         } else {
             if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
-                return view('admin.ticket.create_edit', compact('id', 'act_info'));
+                return view('admin.ticket.create_edit', compact('id', 'act_info', 'AdminTabs'));
             } else {
                 return Redirect::to('/');
             }
@@ -72,15 +83,12 @@ class TicketController extends Controller
             return Redirect::to('/');
         } else {
             if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
-                $sale_range   = array();
-                $event_range  = array();
-                preg_match("/(.*)\s-\s(.*)/", $request->sale_time,  $sale_range);
-                preg_match("/(.*)\s-\s(.*)/", $request->event_time, $event_range);
+
                 $storeArray = array(
-                    'ticket_start'  => $event_range[1],
-                    'ticket_end'    => $event_range[2],
-                    'sale_start'    => $sale_range[1],
-                    'sale_end'      => $sale_range[2],
+                    'ticket_start'  => $request->ticket_start_date. " " . $request->ticket_start_time,
+                    'ticket_end'    => $request->ticket_end_date.   " " . $request->ticket_end_time,
+                    'sale_start'    => $request->sale_start_date.   " " . $request->sale_start_time,
+                    'sale_end'      => $request->sale_end_date.     " " . $request->sale_end_time,
                     'activity_id'   => $activity_id,
                     'location'      => $act_info->location,
                     'name'          => $request->name,
@@ -107,13 +115,15 @@ class TicketController extends Controller
      */
     public function show($id, $ticket_id)
     {
+        $AdminTabs = $this->AdminTabs;
+
         $act_info = DB::table('activities')->find($id);
         if ( empty($act_info) ) {
             return Redirect::to('/');
         } else {
             if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
                 $ticket = DB::table('act_tickets')->find($ticket_id);
-                return view('admin.ticket.create_edit', compact('id', 'act_info', 'ticket'));
+                return view('admin.ticket.create_edit', compact('id', 'act_info', 'ticket', 'AdminTabs'));
             } else {
                 return Redirect::to('/');
             }
@@ -146,16 +156,11 @@ class TicketController extends Controller
             if ( Auth::user()->adminer || $act_info->hoster_id === Auth::id() ) {
                 $ticket = DB::table('act_tickets')->where('id', $ticket_id)->first();
                 $left_over = $ticket->left_over + $request->total_numbers - $ticket->total_numbers;
-
                 if ( $left_over < 0) {
-                    Session::flash('message', '申請完成，恭喜您已經能舉辦活動，靜待系統進行審核');
+                    Session::flash('message', '系統出現錯誤，由於你設定的票卷數遠少於已售出的票數，所以此次更新無效');
                     return Redirect::to('dashboard/activity/'. $id .'/tickets');
                 }
 
-                $sale_range   = array();
-                $event_range  = array();
-                preg_match("/(.*)\s-\s(.*)/", $request->sale_time,  $sale_range);
-                preg_match("/(.*)\s-\s(.*)/", $request->event_time, $event_range);
                 $updateArray  = array(
                     'name'          => $request->name,
                     'status'        => $request->status,
@@ -163,10 +168,10 @@ class TicketController extends Controller
                     'description'   => $request->description,
                     'total_numbers' => $request->total_numbers,
                     'left_over'     => $left_over,
-                    'ticket_start'  => $event_range[1],
-                    'ticket_end'    => $event_range[2],
-                    'sale_start'    => $sale_range[1],
-                    'sale_end'      => $sale_range[2],
+                    'ticket_start'  => $request->ticket_start_date. " " . $request->ticket_start_time,
+                    'ticket_end'    => $request->ticket_end_date.   " " . $request->ticket_end_time,
+                    'sale_start'    => $request->sale_start_date.   " " . $request->sale_start_time,
+                    'sale_end'      => $request->sale_end_date.     " " . $request->sale_end_time,
                 );
                 $result       = DB::table('act_tickets')->where('id', $ticket_id)->update($updateArray);
                 return Redirect::to('dashboard/activity/'. $id .'/tickets');

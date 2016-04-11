@@ -103,6 +103,7 @@ class Library
     public static function getPositionTab( $position, $level = 0 )
     {
         $nav = DB::table('navbars')
+                ->where('admin', '<=', Auth::user()->adminer)
                 ->where('reverse', 0)
                 ->where('position', $position);
 
@@ -121,49 +122,6 @@ class Library
         }
 
         return $nav->get();
-    }
-
-    // TODO: delete it
-    public static function getAdminTab(Request $request)
-    {
-        $member   = self::getPositionTab(1);
-        // Log::error(Auth::user());
-        // $blog     = self::getPositionTab(2, Auth::user()->author);
-        // $activity = self::getPositionTab(3, Auth::user()->hoster);
-
-        // $member = array(
-        //     0 => array( 'level' => 0, 'url' => 'dashboard/member/profile', 'name' => '個人資料', ),
-        //     1 => array( 'level' => 1, 'url' => 'dashboard/member/list',    'name' => '會員列表', ),
-        // );
-        //
-        // // TODO: 還沒開始修改
-        // $blog = array(
-        //     0 => array( 'level' => 1, 'url' => 'dashboard/blog/create',     'name' => '新增文章',     ),
-        //     1 => array( 'level' => 0, 'url' => 'dashboard/blog/list',       'name' => '文章列表',     ),
-        //     2 => array( 'level' => 0, 'url' => 'dashboard/blog/register',   'name' => '申請成為達人', ),
-        // );
-        //
-        // $activity = array(
-        //     0 => array( 'admin' => 0, 'level' => 1,  'url' => 'dashboard/activity/create',   'name' => '新增活動',      ),
-        //     1 => array( 'admin' => 0, 'level' => 1,  'url' => 'dashboard/activity/list',     'name' => '活動列表',      ),
-        //     2 => array( 'admin' => 0, 'level' => 2,  'url' => 'dashboard/activity/checkout', 'name' => '收支統計',      ),
-        //     3 => array( 'admin' => 0, 'level' => 0,  'url' => 'dashboard/activity/tickets',  'name' => '我的票卷',      ),
-        //     4 => array( 'admin' => 1, 'level' => 0,  'url' => 'dashboard/activity/check',    'name' => '審核活動',      ),
-        //     5 => array( 'admin' => 0, 'level' => -1, 'url' => 'dashboard/activity/register', 'name' => '申請成為活動主', ),
-        // );
-
-        $customer = array();
-
-        $system = array();
-
-        $tabs = array(
-            'member'    => $member,
-            'blog'      => $blog,
-            'activity'  => $activity,
-            'customer'  => $customer,
-            'system'    => $system,
-        );
-        return $tabs;
     }
 
     public static function contactUs()

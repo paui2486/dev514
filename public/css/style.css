@@ -6332,3 +6332,7 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 .actpage-ticket img {
     width: 100%;
 }
+
+.table-cell {
+    display: table-cell;
+}

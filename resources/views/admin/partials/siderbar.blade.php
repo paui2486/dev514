@@ -13,7 +13,7 @@
                     <span>會員設定</span>
                 </a>
             </li>
-            @if( Auth::user()->adminer )
+            @if ( Auth::user()->adminer )
             <li>
                 <a href="{{URL::to('dashboard/system')}}">
                     <i class="fa fa-cogs"></i>
@@ -21,12 +21,14 @@
                 </a>
             </li>
             @endif
+            @if ( Auth::user()->adminer || Auth::user()->author )
             <li>
                 <a href="{{URL::to('dashboard/blog')}}">
                     <i class="fa fa-book"></i>
                     <span>文章管理</span>
                 </a>
             </li>
+            @endif
             <li>
                 <a href="{{URL::to('dashboard/activity')}}">
                     <i class="fa fa-bar-chart-o"></i>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateMemberRequest;
-use App\Http\Requests\UpdateMemberRequest;
+// use App\Http\Requests\CreateMemberRequest;
+// use App\Http\Requests\UpdateMemberRequest;
 
 use DB;
 use Log;
@@ -22,7 +22,9 @@ class MemberController extends Controller
     protected $AdminTabs;
     public function __construct()
     {
-        $this->AdminTabs = Library::getPositionTab(1);
+        if( Auth::check() ) {
+            $this->AdminTabs = Library::getPositionTab(1);
+        }
     }
 
     public function index()
