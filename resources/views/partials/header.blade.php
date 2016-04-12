@@ -70,7 +70,7 @@
                 <a href="{{ url('dashboard/activity/create') }}"> <li>辦活動</li></a>
                 <a href="{{ url('dashboard/member#tab-0') }}"><li>個人設定</li></a>
                 <a href="{{ url('dashboard') }}"><li>我的後台</li></a>
-                <a href="{{ url('dashboard/activitys') }}"><li>我的活動</li></a>
+                <a href="{{ url('dashboard/activity') }}"><li>我的活動</li></a>
                 <a href="{{ url('logout') }}"><li>登出</li></a>
                 @endif
             </ul>

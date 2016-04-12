@@ -33,12 +33,10 @@
                        aria-expanded="true">
                          會員中心<span class="caret"></span>
                     </a>
-
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('dashboard/profile') }}">個人資料</a></li>
-                        <li><a href="{{ url('dashboard/follows') }}">我的關注</a></li>
-                        <li><a href="{{ url('dashboard/friends') }}">我的朋友</a></li>
-                        <li><a href="{{ url('dashboard/activitys') }}">我的活動</a></li>
+                        <li><a href="{{ url('dashboard/member#tab-0') }}">個人設定</a></li>
+                        <li><a href="{{ url('dashboard') }}">我的後台</a></li>
+                        <li><a href="{{ url('dashboard/activity') }}">我的活動</a></li>
                         <li><a href="{{ url('logout') }}">登出</a></li>
                     </ul>
                 </li>
