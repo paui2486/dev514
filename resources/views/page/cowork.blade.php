@@ -3,12 +3,12 @@
 @section('content')
 <div class="page-container">
     <div class="page-content">
-        <div class="page-title">廣告合作專區</div>
+        <div class="page-title">企業合作專區</div>
         <div class="page-describe cowork-contact">
             <dl>
-                <dt>您有任何整合行銷上的合作提案、異業行銷合作或刊登廣告，<br>
-                    或者是會員活動與紅利活動的合作方案嗎？<br>
-                    請來信或來電至客服，我們將會有專人為您服務。
+                <dt>您的公司想要舉辦活動，教育訓練，凝聚向心力的Team Building，  
+                    或是團體想要一起參與嗎？<br>
+                    歡迎來信或來電至客服，我們將會有專人為您服務。
                 </dt>
                 <dd>
                     <p>

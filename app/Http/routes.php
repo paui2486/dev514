@@ -40,7 +40,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('FAQ'            , 'PageController@FAQ'          );
     Route::get('HostGuide'      , 'PageController@HostGuide'    );
     Route::get('PlayGuide'      , 'PageController@PlayGuide'    );
-    Route::get('PointUse'       , 'PageController@PointUse'     );
+    Route::get('Cooperation'    , 'PageController@Cooperation'  );
     Route::get('MediaReport'    , 'PageController@media-report' );
     Route::get('Partner'        , 'PageController@partner'      );
 /*

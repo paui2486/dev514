@@ -6,9 +6,9 @@
     </div>
 -->
     <div class="bottom-linkout">
-        <img src="{{asset('img/pics/igicon.png')}}">
-        <img src="{{asset('img/pics/fbicon.png')}}">
-        <img src="{{asset('img/pics/youtubeicon.png')}}">
+        <a href="https://www.instagram.com/"><img src="{{asset('img/pics/igicon.png')}}"></a>
+        <a href="https://www.facebook.com/iwinetodayshop/?fref=ts"><img src="{{asset('img/pics/fbicon.png')}}">
+            <a href="https://www.youtube.com/?gl=TW&hl=zh-TW&noredirect=1"><img src="{{asset('img/pics/youtubeicon.png')}}"></a>
     </div>
     <div class="row  footer-info">
         
@@ -29,23 +29,19 @@
                         <a href="/About"><li>關於 514</li></a>
                         <a href="/Join"><li>加入我們</li></a>
                         <a href="/Advertising"><li>廣告合作專區</li></a>
-                        <a href="#"><li>企業合作專區</li></a>
+                        <a href="/Cooperation"><li>企業合作專區</li></a>
                         <a href="/Privacy"><li>服務與隱私權條款</li></a>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12 contact-us">
                     <p>聯絡我們</p>
                     <p class="contact-info">
-                        
-                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span><a href="mailto:mis@514.com.tw">
-                            service@514.com.tw</a></span>
-                        
+                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span><a href="mailto:service@514.com.tw">
+                            service@514.com.tw</a></span>   
                     </p>
                     <p class="contact-info">
-                        
                             <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
                             <span><a href="tel:+886 2-2767-514-6">+886 2-2767-514-6</a></span>
-                        
                     </p>
                     <p class="order-time">
                         <span class="glyphicon glyphicon-time" aria-hidden="true">
