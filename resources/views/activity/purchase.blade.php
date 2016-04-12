@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="purchase-button">
-            <a href="#"><button class="btn-pre">修改票券</button></a>
+            <input type ="button" onclick="history.back()" value="修改票券" class="btn-pre"></input>
             <a href="#"><button class="btn-submit">前往付款</button></a> 
         </div>
     </div>  

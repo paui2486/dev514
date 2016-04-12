@@ -49,9 +49,9 @@ class PageController extends Controller
         return view("page.play-guide");
     }
     
-    public function PointUse()
+    public function Cooperation()
     {
-        return view("page.point-use");
+        return view("page.cowork");
     }
 
 }
