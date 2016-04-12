@@ -528,9 +528,9 @@ class ActivityController extends Controller
                     'hoster'      => 1,
                     'updated_at'  => date("Y-m-d H:i:s"),
                   ));
-        } else {
-            return Redirect::to('dashboard');
         }
+        return Redirect::to('dashboard');
+
     }
 
     public function showCheckAct()
