@@ -61,7 +61,7 @@
                 @if(count($tickets)>0)
                 <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
                     <div class="row actpage-purchase">
-                        <p><img src="/img/icons/playicon.png">讓生活更有意思!</p>
+                        <p><img src="/img/icons/playicon.png"> GO!讓生活更有意思!</p>
                     </div>
                 </a>
                 @else
@@ -77,7 +77,7 @@
             @if(count($tickets)>0)
             <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
                 <div class="row actpage-purchase">
-                    <p><img src="/img/icons/playicon.png">讓生活更有意思!</p>
+                    <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
                 </div>
             </a>
             @else

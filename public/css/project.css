@@ -1391,7 +1391,7 @@ li.collapse-blog-category {
 .category-page-number {
     margin: 20px auto;
     text-align: center;
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 .category-page-number li {
@@ -1419,20 +1419,58 @@ li.collapse-blog-category {
 }
 
 .page-content {
-    width: 60%;
+    width: 80%;
     margin: auto;
     padding: 20px;
+    letter-spacing: 1px;
 }
 
 .page-title {
     font-size: 28px;
     padding: 10px 5px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
 .page-describe {
     font-size: 15px;
-    padding: 0px 5px;
+    padding: 0 5px;
     line-height: 30px;
+}
+
+.page-describe dt {
+    padding: 10px 0;
+    font-size: 18px;
+    color: #666;
+    font-weight: 500;
+}
+
+.page-describe dd {
+    margin: 10px 0;
+    hyphens: auto;
+}
+
+.cowork-contact > dl > dt {
+    text-align: center;
+    line-height: 30px;
+}
+
+.cowork-contact > dl > dd {
+    margin: 15px auto;
+    width: 60%;
+    text-align: center;
+    border: 1px solid #888;
+    padding: 10px;
+}
+
+.cowork-contact > dl > dd > p {
+    margin: 15px 0;
+}
+
+.cowork-contact > dl > dd > p > a {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
 }
 
 @media  screen and (min-width: 440px) {
@@ -2216,6 +2254,7 @@ li.collapse-blog-category {
     margin: 0px;
     padding: 0px;
     margin-top:80px;
+    background-color: white;
 }
 
 .list-content {
