@@ -2,7 +2,7 @@
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="縮放 Slider"></div>
     </div>
-    <a href="{{URL::to('dashboard')}}" class="logo">514 <span>後台管理系統</span></a>
+    <a href="{{URL::to('')}}" class="logo">514 <span>後台管理系統</span></a>
     <div class="top-nav ">
         <ul class="nav pull-right top-menu">
             <li class="dropdown">
