@@ -212,6 +212,6 @@ class MainController extends controller
 
         Auth::loginUsingId($user->id);
 
-        return Redirect::to("dashboard/profile");
+        return Redirect::to("dashboard/member#tab-0");
     }
 }

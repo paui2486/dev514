@@ -13,7 +13,7 @@
                 </a>
                 <ul class="dropdown-menu extended logout">
                     <li><a href="{{URL::to('')}}"><i class="fa fa-home"></i> 回到首頁</a></li>
-                    <li><a href="{{URL::to('dashboard/profile')}}"><i class="fa fa-cog"></i> 個人設定</a></li>
+                    <li><a href="{{URL::to('dashboard/member#tab-0')}}"><i class="fa fa-cog"></i> 個人設定</a></li>
                     <li><a href="{{URL::to('dashboard/activity')}}"><i class="fa fa-bell-o"></i> 我的活動</a></li>
                     <li><a href="{{URL::to('logout')}}"><i class="fa fa-key"></i> 登出</a></li>
                 </ul>

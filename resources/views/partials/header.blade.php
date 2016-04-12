@@ -33,11 +33,9 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('dashboard/profile') }}">個人設定</a></li>
+                        <li><a href="{{ url('dashboard/member#tab-0') }}">個人設定</a></li>
                         <li><a href="{{ url('dashboard') }}">我的後台</a></li>
-                        <li><a href="{{ url('dashboard/follows') }}">我的關注</a></li>
-                        <li><a href="{{ url('dashboard/friends') }}">我的朋友</a></li>
-                        <li><a href="{{ url('dashboard/activitys') }}">我的活動</a></li>
+                        <li><a href="{{ url('dashboard/activity') }}">我的活動</a></li>
                         <li><a href="{{ url('logout') }}">登出</a></li>
                     </ul>
                 </li>
@@ -70,25 +68,12 @@
                 <a href="{{ url('#') }}"><li>隱私權與服務條款</li></a>
                 @else
                 <a href="{{ url('dashboard/activity/create') }}"> <li>辦活動</li></a>
-                <a href="{{ url('dashboard/profile') }}"><li>個人設定</li></a>
+                <a href="{{ url('dashboard/member#tab-0') }}"><li>個人設定</li></a>
                 <a href="{{ url('dashboard') }}"><li>我的後台</li></a>
-                <a href="{{ url('dashboard/follows') }}"><li>我的關注</li></a>
-                <a href="{{ url('dashboard/friends') }}"><li>我的朋友</li></a>
                 <a href="{{ url('dashboard/activitys') }}"><li>我的活動</li></a>
                 <a href="{{ url('logout') }}"><li>登出</li></a>
                 @endif
             </ul>
-<!--
-            <ul class="side-list">
-                @foreach( $slideCategory as $cat )
-                <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
-                    <li class="slidebar-category">       
-                       {{ $cat->name }}
-                    </li>
-                </a>
-                @endforeach
-            </ul>
--->
         </div>
     </div>
 </nav>

@@ -40,10 +40,8 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url('profile') }}">個人資料</a></li>
-                        <li><a href="{{ url('follows') }}">我的關注</a></li>
-                        <li><a href="{{ url('friends') }}">我的朋友</a></li>
-                        <li><a href="{{ url('activitys') }}">我的活動</a></li>
+                        <li><a href="{{ url('dashboard/member#tab-0') }}">個人資料</a></li>
+                        <li><a href="{{ url('dashboard/activity') }}">我的活動</a></li>
                         <li><a href="{{ url('logout') }}">登出</a></li>
                     </ul>
                 </li>
