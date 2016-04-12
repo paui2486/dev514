@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateBannerRequest;
 
 use DB;
 use Log;
+use Auth;
 use Input;
 use Response;
 use Redirect;
@@ -18,6 +19,14 @@ use App\Http\Controllers\Controller;
 
 class BannerController extends Controller
 {
+    protected $AdminTabs;
+    public function __construct()
+    {
+        if( Auth::check() ) {
+            $this->AdminTabs = Library::getPositionTab(5);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +34,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('admin.banner.index');
+        return view('admin.system.banner.index');
     }
 
     /**
@@ -35,7 +44,8 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('admin.banner.create_edit');
+        $AdminTabs = $this->AdminTabs;
+        return view('admin.system.banner.create_edit', compact('AdminTabs'));
     }
 
     /**
@@ -75,8 +85,9 @@ class BannerController extends Controller
      */
     public function show($id)
     {
+        $AdminTabs = $this->AdminTabs;
         $banners = DB::table('galleries')->find($id);
-        return view('admin.banner.create_edit', compact('banners'));
+        return view('admin.system.banner.create_edit', compact('banners', 'AdminTabs'));
     }
 
     /**
@@ -117,7 +128,7 @@ class BannerController extends Controller
         $update             = Library::upload($params);
         $banner             = DB::table('galleries')->where('id', $id);
         $result             = $banner->update($update['data']);
-        return Redirect::to('dashboard/banner');
+        return Redirect::to('dashboard/system#tab-1');
     }
 
     /**
@@ -130,7 +141,7 @@ class BannerController extends Controller
     {
         $banner = DB::table('galleries')->where('id', $id);
         $banner->delete();
-        return Redirect::to('dashboard/banner');
+        return Redirect::to('dashboard/system#tab-1');
     }
 
     /**
@@ -143,11 +154,12 @@ class BannerController extends Controller
     {
         $banners = DB::table('galleries')
                     ->where('position', 1)
-                    ->select(array('id', 'title', 'source', 'caption'))
+                    ->select(array('id', 'source', 'title', 'caption'))
                     ->orderby('priority', 'ASC');
 
         return Datatables::of($banners)
-            // ->remove_column('id')
+            ->remove_column('id')
+            ->edit_column('source', '<img src="{{ asset($source) }}" height="100px"></img>')
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
                   <a href="{{{ URL::to(\'dashboard/banner/\' . $id ) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</a>
@@ -165,6 +177,6 @@ class BannerController extends Controller
      */
     public function getDelete($id) {
         $banner = DB::table('galleries')->find($id);
-        return view('admin.banner.delete', compact('banner'));
+        return view('admin.system.banner.delete', compact('banner'));
     }
 }

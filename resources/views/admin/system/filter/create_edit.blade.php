@@ -1,20 +1,19 @@
-{{-- */
-    $layouts = ( isset($_GET['view'])) ? 'admin.layouts.modal' : 'layouts.admin';
-/* --}}
-@extends($layouts)
+@extends('layouts.admin')
 
 {{-- Content --}}
 
 @section('content')
 <!-- Tabs -->
-@if (!isset($_GET['view']))
 <section id="main-content">
     <section class="wrapper">
-@endif
-
         <ul class="nav nav-tabs">
+            @foreach( $AdminTabs as $key => $tab )
+                <li >
+                    <a href="/dashboard/system#tab-{{ $key }}" >{{ $tab->name }}</a>
+                </li>
+            @endforeach
             <li class="active">
-                <a href="#tab-general" data-toggle="tab">會員設定</a>
+                <a href="#tab-general" data-toggle="tab">{{ isset($filter) ? "Filter設定 - ". $filter->name : "新增Filter" }}</a>
             </li>
         </ul>
         <form class="form-horizontal" enctype="multipart/form-data"
@@ -79,11 +78,8 @@
                             </div>
                         </div>
                     </div>
-        				<!-- ./ general tab -->
                 </div>
-          			<!-- ./ tabs content -->
             </div>
-        		<!-- Form Actions -->
         		<div class="form-group">
           			<div class="col-md-12">
             				<button type="reset" class="btn btn-sm btn-warning close_popup" onclick="history.go(-1);">

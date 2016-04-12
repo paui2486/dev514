@@ -1,33 +1,28 @@
-{{-- */
-    $layouts = 'layouts.admin';
-/* --}}
-@extends($layouts)
+@extends('layouts.admin')
 
 @section('style')
 <link rel="stylesheet" href="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.css')}}" />
 @stop
 
 {{-- Content --}}
-
 @section('content')
-<!-- Tabs -->
 <section id="main-content">
     <section class="wrapper">
         <ul class="nav nav-tabs">
+            @foreach( $AdminTabs as $key => $tab )
+            <li >
+                <a href="/dashboard/system#tab-{{ $key }}" >{{ $tab->name }}</a>
+            </li>
+            @endforeach
             <li class="active">
-                <a href="#tab-general" data-toggle="tab">Banner 設定</a>
+                <a href="#tab-general" data-toggle="tab">Banner 設定 {{ isset($banners) ? " - ". $banners->title : null }}</a>
             </li>
         </ul>
-
         <form class="form-horizontal" enctype="multipart/form-data"
           	method="post" autocomplete="off" role="form"
           	action="@if(isset($banners)){{ URL::to('dashboard/banner/'.$banners->id.'/update') }}
         	        @else{{ URL::to('dashboard/banner') }}@endif">
             {!! csrf_field() !!}
-          	<!-- CSRF Token -->
-          	<!-- <input type="hidden" name="_token" value="{{{ csrf_token() }}}" /> -->
-          	<!-- ./ csrf token -->
-          	<!-- Tabs Content -->
           	<div class="tab-content">
             		<!-- General tab -->
             		<div class="tab-pane active" id="tab-general">
@@ -39,7 +34,6 @@
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="title" id="title"
                       							value="{{{ Input::old('title', isset($banners) ? $banners->title : null) }}}" />
-                    						    <!-- {!!$errors->first('name', '<label class="control-label">:message</label>')!!} -->
                             </div>
                         </div>
             				</div>
@@ -124,13 +118,10 @@
                   			</div>
                     </div>
                 </div>
-            <!-- ./ general tab -->
             </div>
-        		<!-- ./ form actions -->
         </form>
     </section>
 </section>
-
 @stop
 
 @section('scripts')

@@ -51,8 +51,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('register/verify/{confirm}'  , 'MainController@confirm'           );
 
-    // Route::get('members/{username}'         , 'UserController@index'             );
-
     Route::get('activity'                   , 'ActivityController@showResult'    );
     Route::post('activity'                  , 'ActivityController@showResult'    );
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
@@ -67,10 +65,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('blog/{category}'            , 'ArticleController@showCategory'   );
     Route::get('blog/{category}/{slug}'     , 'ArticleController@showArticle'    );
 
-    // Route::get('order/{id}'                 , 'CartController@index'             );
-    // Route::get('pay2go', 'PageController@testpay2go');
-    // Route::get('master'                     , 'UserController@index'             );
-
     Route::get('redirect'                   , 'SocialAuthController@redirect'    );
     Route::get('callback'                   , 'SocialAuthController@callback'    );
     Route::get('follows'                    , 'AuthController@follows'           );
@@ -83,8 +77,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('dashboard/member/profile'         , 'Admin\MemberController@profile'        );
         Route::post('dashboard/member/{id}/update'    , 'Admin\MemberController@update'         );
         Route::get('dashboard/activity/register'      , 'Admin\ActivityController@askExpert'    );
-        // Route::get('dashboard/my/activity'          , 'Admin\ActivityController@showMyAct'  );
-        // Route::get('dashboard/my/activity/data'     , 'Admin\ActivityController@getMyAct'   );
         Route::get('dashboard/activity'               , 'Admin\ActivityController@index'        );
         Route::post('dashboard/activity/register'     , 'Admin\ActivityController@regExpert'    );
         Route::get('dashboard/activity/tickets'       , 'Admin\ActivityController@showTicket'   );
@@ -96,11 +88,6 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('admin'                          , 'AdminController@index');
 
-        Route::get('banner/data'                    , 'BannerController@data'             );
-        Route::get('banner/{id}/delete'             , 'BannerController@getDelete'        );
-        Route::post('banner/{id}/update'            , 'BannerController@update'           );
-        Route::resource('banner'                    , 'BannerController'                  );
-
         Route::get('member/data'                    , 'MemberController@data'             );
         Route::get('member/list'                    , 'MemberController@showMember'       );
         Route::get('member/create'                  , 'MemberController@create'           );
@@ -110,8 +97,19 @@ Route::group(['middleware' => 'web'], function () {
         Route::delete('member/{id}'                 , 'MemberController@destroy'          );
 
         // TODO: filter setting, banner setting, event setting.... at system
-        Route::get('system'                         , 'AdminController@showMember'        );
+        Route::get('system'                         , 'SystemController@index'            );
+        Route::get('system/{target}'                , 'SystemController@listTarget'       );
+        // Route::get('system/filter'                  , 'SystemController@listFilter'       );
 
+        Route::get('banner/data'                    , 'BannerController@data'             );
+        Route::get('banner/{id}/delete'             , 'BannerController@getDelete'        );
+        Route::post('banner/{id}/update'            , 'BannerController@update'           );
+        Route::resource('banner'                    , 'BannerController'                  );
+
+        Route::get('filter/data'                    , 'FilterController@data'    );
+        Route::get('filter/{id}/delete'             , 'FilterController@getDelete'    );
+        Route::post('filter/{id}/update'            , 'FilterController@update'    );
+        Route::resource('filter'                    , 'FilterController'               );
         // Route::get('blog/category'                  , 'BlogController@showCategory'       );
         // Route::post('blog/category'                 , 'BlogController@storeCategory'      );
         // Route::get('blog/category/{id}'             , 'BlogController@getCategory'        );
@@ -128,7 +126,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/check'                 , 'ActivityController@showCheckAct'   );
         Route::get('activity/check/data'            , 'ActivityController@getCheckAct'    );
 
-
         Route::get('activity/pass/{id}'             , 'ActivityController@passActivity'   );
         Route::get('activity/category'              , 'ActivityController@showCategory'   );
         Route::post('activity/category'             , 'ActivityController@storeCategory'  );
@@ -141,12 +138,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/hoster'                , 'ActivityController@showExpert'     );
         Route::get('activity/hoster/data'           , 'ActivityController@getExpert'      );
 
-        Route::get('filter/data'            , 'FilterController@data'    );
-        Route::get('filter/{id}/delete'     , 'FilterController@getDelete'    );
-        Route::post('filter/{id}/update'    , 'FilterController@update'    );
-        Route::resource('filter'            , 'FilterController'               );
         // no yet
-
         Route::get('ad'                     , 'AdminController@showMember'    );
         Route::get('point'                  , 'AdminController@showMember'    );
         Route::get('coupon'                 , 'AdminController@showMember'    );
