@@ -95,7 +95,6 @@ class Library
     {
         $slideCategory = DB::table('categories')
                           ->where('public', 1)
-                          ->where('type',   1)
                           ->get();
         return $slideCategory;
     }
