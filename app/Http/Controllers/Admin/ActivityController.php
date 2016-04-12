@@ -72,7 +72,7 @@ class ActivityController extends Controller
 
         $storeArray = array(
             'title'               => $request->title,
-            'category_id'         => $request->what,
+            'category_id'         => $request->soWhat,
             'description'         => $request->description,
             'ticket_description'  => $request->ticket_description,
             'location'            => $request->location,
