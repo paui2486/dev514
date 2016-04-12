@@ -206,8 +206,9 @@
 
             var minDate = moment().format("YYYY-MM-DD");
             $(".act_date").datetimepicker({
-                minDate: moment(),
+                // minDate: moment(),
                 format: 'YYYY-MM-DD',
+                startDate: $(this).value,
             });
 
             $("input[name=ticket_start_date]").on("dp.change", function (e) {
@@ -218,11 +219,11 @@
                 $('input[name="sale_end_date"]').data("DateTimePicker").minDate(e.date);
             });
 
-            $(".act_time").val("00:00");
             $(".act_time").datetimepicker({
-                minDate: moment({hour: 0, minute: 0}),
+                // minDate: moment({hour: 0, minute: 0}),
                 stepping: 10,
                 format: 'HH:mm',
+                startDate: $(this).value,
             });
         });
     </script>
