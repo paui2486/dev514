@@ -312,14 +312,14 @@
                         </div>
                         @if ( Request::segment(3) == "create" )
                         <div class="form-group {{{ $errors->has('tickets') ? 'has-error' : '' }}}">
-                            <div class="col-sm-12 ticket-area">
+                            <div class="col-sm-12 ticket_area">
                                 <div id="ticket1" class="form-ticket">
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket-name">票卷名稱</label>
+                                        <label class="control-label col-sm-2" for="ticket_name">票卷名稱</label>
                                         <div class="col-sm-2">
                                             <input class="form-control" type="text" name="ticket[0][name]"/>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket-price">票卷單價</label>
+                                        <label class="control-label col-sm-2" for="ticket_price">票卷單價</label>
                                         <div class="col-sm-4">
                                             <div class="input-group">
                                               <span class="input-group-btn">
@@ -334,11 +334,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket-numbers">票卷張數</label>
+                                        <label class="control-label col-sm-2" for="ticket_numbers">票卷張數</label>
                                         <div class="col-sm-2">
                                             <input class="form-control" type="number" name="ticket[0][numbers]" min="0"/>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket-time">活動時間</label>
+                                        <label class="control-label col-sm-2" for="ticket_time">活動時間</label>
                                         <div class="col-sm-6">
                                             <div class="col-xs-2 table-cell">
                                                 <label class="control-label">
@@ -346,10 +346,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][ticket-start-date]"/>
+                                                <input class="form-control act_date ticket_date" type="text" name="ticket[0][ticket_start_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][ticket-start-time]"/>
+                                                <input class="form-control act_time ticket_time" type="text" name="ticket[0][ticket_start_time]"/>
                                             </div>
                                             <div class="col-xs-2 table-cell">
                                                 <label class="control-label">
@@ -357,22 +357,22 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][ticket-end-date]"/>
+                                                <input class="form-control act_date ticket_date" type="text" name="ticket[0][ticket_end_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][ticket-end-time]"/>
+                                                <input class="form-control act_time ticket_time" type="text" name="ticket[0][ticket_end_time]"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket-time">售票狀態</label>
+                                        <label class="control-label col-sm-2" for="ticket_time">售票狀態</label>
                                         <div class="col-sm-2">
                                             <select style="width: 100%" name="ticket[0][ticket_status]" class="form-control">
                                                 <option value="1">發售</option>
                                                 <option value="2">停售</option>
                                             </select>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket-time">售票區間</label>
+                                        <label class="control-label col-sm-2" for="ticket_time">售票區間</label>
                                         <div class="col-sm-6">
                                             <div class="col-xs-2">
                                                 <label class="control-label">
@@ -380,10 +380,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][sale_start_date]"/>
+                                                <input class="form-control act_date ticket_date" type="text" name="ticket[0][sale_start_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][sale_start_time]"/>
+                                                <input class="form-control act_time ticket_time" type="text" name="ticket[0][sale_start_time]"/>
                                             </div>
                                             <div class="col-xs-2">
                                                 <label class="control-label">
@@ -391,15 +391,15 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket-date" type="text" name="ticket[0][sale_end_date]"/>
+                                                <input class="form-control act_date ticket_date" type="text" name="ticket[0][sale_end_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket-time" type="text" name="ticket[0][sale_end_time]"/>
+                                                <input class="form-control act_time ticket_time" type="text" name="ticket[0][sale_end_time]"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket-description">票種說明</label>
+                                        <label class="control-label col-sm-2" for="ticket_description">票種說明</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" name="ticket[0][description]"/>
                                         </div>
@@ -547,7 +547,7 @@
         var regex = /\[(\d*)/i;
         var id_next = $(".form-ticket").length;
         $(this).parents(".form-ticket").clone()
-            .appendTo(".ticket-area")
+            .appendTo(".ticket_area")
             .attr("id", "ticket" + (id_next + 1) )
             .find("*")
             .each(function() {

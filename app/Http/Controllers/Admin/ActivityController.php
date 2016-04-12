@@ -64,7 +64,6 @@ class ActivityController extends Controller
     {
         $tickets    = array();
         $prices     = array();
-        // clear duplicate price
         $array_key  = "price";
         $prices     = array_map(function($item) use($array_key) {
                         return ($item[$array_key] === "")? 0 : $item[$array_key];
@@ -108,8 +107,11 @@ class ActivityController extends Controller
         $activity           = DB::table('activities')->where('id', $activity_id);
         $result             = $activity->update($update['data']);
 
-
-        $categories =  $request->withWho;
+        if (empty($request->withWho)) {
+            $categories = array();
+        } else {
+            $categories =  $request->withWho;
+        }
         array_push( $categories, $request->soWhat  );
         array_push( $categories, $request->goWhere );
 
@@ -208,6 +210,22 @@ class ActivityController extends Controller
         } else {
             $updateArray['hoster_id'] = Auth::id();
         }
+
+
+        if (empty($request->withWho)) {
+            $categories = array();
+        } else {
+            $categories =  $request->withWho;
+        }
+        array_push( $categories, $request->soWhat  );
+        array_push( $categories, $request->goWhere );
+
+        $updateCatArray = array();
+        foreach ($categories as $category) {
+            array_push($updateCatArray, array('activity_id' => $activity_id, 'category_id' => $category));
+        }
+
+        DB::table('categories_data')->insert($updateCatArray);
 
         $activity_id        = $id;
         $params             = Library::upload_param_template();

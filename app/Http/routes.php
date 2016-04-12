@@ -173,6 +173,7 @@ Route::group(['middleware' => 'web'], function () {
 
     // for host
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
+        Route::post('activity'                              , 'ActivityController@store'       );
         Route::get('activity/data'                          , 'ActivityController@data'         );
         Route::get('activity/list'                          , 'ActivityController@showActivity' );
         Route::get('activity/create'                        , 'ActivityController@create'       );
