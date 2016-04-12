@@ -188,7 +188,7 @@ class ActivityController extends Controller
     {
         $updateArray = array(
             'title'         => $request->title,
-            'category_id'   => $request->category_id,
+            'category_id'   => $request->soWhat,
             'description'   => $request->description,
             'ticket_description'   => $request->ticket_description,
             'location'      => $request->location,
