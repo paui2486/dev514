@@ -186,10 +186,10 @@
                                     活動對象
                                 </label>
                                 <div class="col-sm-10">
-                                    <select id="input-who" name="withWho[]" multiple placeholder="對象是..." value="[15,19,1,21]">
+                                    <select id="input-who" name="withWho[]" multiple placeholder="對象是...">
                                         @foreach($slideCategory as $category)
                                             @if($category->type === 3)
-                                            <option value="{{$category->id}}">
+                                            <option value="{{$category->id}}" @if (isset($categories_data)) @if (in_array($category->id, $categories_data)) selected @endif @endif>
                                                 {{$category->name}}
                                             </option>
                                             @endif
@@ -207,12 +207,8 @@
                                     <select style="width: 100%" name="goWhere" class="form-control">
                                     @foreach($slideCategory as $category)
                                         @if($category->type === 4)
-                                        <option value="{{$category->id}}"
-                                        @if(!empty($activity))
-                                            @if($activity->category_id == $category->id)
-                                        selected="selected"
-                                            @endif
-                                        @endif >{{$category->name}}
+                                        <option value="{{$category->id}}" @if (isset($categories_data)) @if (in_array($category->id, $categories_data)) selected @endif @endif>
+                                            {{$category->name}}
                                         </option>
                                         @endif
                                     @endforeach
