@@ -74,7 +74,7 @@ class BannerController extends Controller
         $update             = Library::upload($params);
         $banner             = DB::table('galleries')->where('id', $id);
         $result             = $banner->update($update['data']);
-        return Redirect::to('dashboard/banner');
+        return Redirect::to('dashboard/system#tab-1');
     }
 
     /**
