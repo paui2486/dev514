@@ -120,17 +120,24 @@ $(document).ready(function () {
     });
 
     function checkValue(select) {
+        var inputForm;
         if (select == 5) {
-            var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 天數 </label> \
+            inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 天數 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="value" \
                   value="{{{ Input::old('value', isset($filter) && $filter->type == 5 ? $filter->value : null) }}}" /> </div> </div>';
         } else if (select == 6) {
-            var inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最大值 </label> \
+            inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最大值 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="max" \
                   value="{{{ Input::old('max', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$2", $filter->value) : null) }}}" /> </div> </div> \
                   <div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最小值 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="min" \
                   value="{{{ Input::old('min', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$1", $filter->value) : null) }}}" /> </div> </div> ';
+        } else if (select == 1) {
+            inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> FB社團連結 </label> \
+                  <div class="col-sm-10"><input class="form-control" type="text" name="value" \
+                  value="{{{ Input::old('value', isset($filter) && $filter->type == 2 ? $filter->value : null) }}}" /> </div> </div>';
+        } else {
+            inputForm = '';
         }
         $("#data").html( inputForm );
     }

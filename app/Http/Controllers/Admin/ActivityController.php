@@ -177,8 +177,11 @@ class ActivityController extends Controller
                         ->where('type', 1)
                         ->select('id', 'name')
                         ->get();
-        // tickets 尚未實作
-        return view('admin.activity.create_edit', compact('activity', 'hosters', 'tickets', 'categories', 'AdminTabs'));
+
+        $categories_data = DB::table('categories_data')
+                            ->where('activity_id', $id)
+                            ->pluck('category_id');
+        return view('admin.activity.create_edit', compact('activity', 'hosters', 'tickets', 'categories', 'AdminTabs', 'categories_data'));
     }
 
     /**
@@ -211,6 +214,7 @@ class ActivityController extends Controller
             $updateArray['hoster_id'] = Auth::id();
         }
 
+        DB::table('categories_data')->where('activity_id', $id)->delete();
 
         if (empty($request->withWho)) {
             $categories = array();
@@ -222,7 +226,7 @@ class ActivityController extends Controller
 
         $updateCatArray = array();
         foreach ($categories as $category) {
-            array_push($updateCatArray, array('activity_id' => $activity_id, 'category_id' => $category));
+            array_push($updateCatArray, array('activity_id' => $id, 'category_id' => $category));
         }
 
         DB::table('categories_data')->insert($updateCatArray);

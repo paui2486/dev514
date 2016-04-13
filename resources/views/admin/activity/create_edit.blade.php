@@ -186,10 +186,10 @@
                                     活動對象
                                 </label>
                                 <div class="col-sm-10">
-                                    <select id="input-who" name="withWho[]" multiple placeholder="對象是...">
+                                    <select id="input-who" name="withWho[]" multiple placeholder="對象是..." value="[15,19,1,21]">
                                         @foreach($slideCategory as $category)
                                             @if($category->type === 3)
-                                            <option value="{{$category->id}}" >
+                                            <option value="{{$category->id}}">
                                                 {{$category->name}}
                                             </option>
                                             @endif

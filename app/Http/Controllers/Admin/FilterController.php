@@ -57,11 +57,12 @@ class FilterController extends Controller
      public function store(Request $request)
     {
         $value = "";
-
         if ( $request->type == 5 ) {
-            $value = $request->data;
+            $value = $request->value;
         } elseif ( $request->type == 6 ) {
             $value = $request->min . "-" . $request->max;
+        } elseif ( $request->type == 1 ) {
+            $value = $request->value;
         }
 
         $storeArray = array(
@@ -116,9 +117,11 @@ class FilterController extends Controller
     {
         $value = "";
         if ( $request->type == 5 ) {
-            $value = $request->data;
+            $value = $request->value;
         } elseif ( $request->type == 6 ) {
             $value = $request->min . "-" . $request->max;
+        } elseif ( $request->type == 1 ) {
+            $value = $request->value;
         }
 
         DB::table('categories')
