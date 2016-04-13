@@ -66,7 +66,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('blog/{category}/{slug}'     , 'ArticleController@showArticle'    );
 
     Route::get('redirect'                   , 'SocialAuthController@redirect'    );
-    Route::get('callback'                   , 'SocialAuthController@callback'    );
+    Route::get('callback'                   , 'SocialAuthController@fbCallback'    );
     Route::get('follows'                    , 'AuthController@follows'           );
     Route::get('friends'                    , 'AuthController@friends'           );
     Route::get('activitys'                  , 'AuthController@activitys'         );
@@ -173,11 +173,12 @@ Route::group(['middleware' => 'web'], function () {
 
     // for host
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'host'], function() {
-        Route::post('activity'                              , 'ActivityController@store'       );
+        Route::post('activity'                              , 'ActivityController@store'        );
         Route::get('activity/data'                          , 'ActivityController@data'         );
         Route::get('activity/list'                          , 'ActivityController@showActivity' );
         Route::get('activity/create'                        , 'ActivityController@create'       );
         Route::get('activity/{id}'                          , 'ActivityController@show'         );
+        Route::delete('activity/{id}'                         , 'ActivityController@destroy'      );
         Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'    );
         Route::post('activity/{id}/update'                  , 'ActivityController@update'       );
         // Route::get('activity/history'                       , 'ActivityController@getHistory' );

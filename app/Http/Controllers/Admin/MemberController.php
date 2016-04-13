@@ -204,7 +204,7 @@ class MemberController extends Controller
             ->add_column('actions', '
                   <div style="white-space: nowrap;">
                   <div data-url="{{{ URL::to(\'dashboard/member/\' . $id ) }}}" onclick="edit(this)" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 變更</div>
-                  <a href="{{{ URL::to(\'dashboard/member/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+                  <div data-url="{{{ URL::to(\'dashboard/member/\' . $id . \'/delete\' ) }}}" class="btn btn-sm btn-danger" onclick="showColorBox(this)"><span class="glyphicon glyphicon-trash"></span> 刪除</div>
                   <input type="hidden" name="row" value="{{$id}}" id="row">
                   </div>')
             ->make();

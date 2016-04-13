@@ -137,6 +137,22 @@ $(document).ready(function () {
     });
 });
 
+function showColorBox(id) {
+    var url = id.getAttribute('data-url');
+    $.colorbox({
+        href: url,
+        iframe: true,
+        speed: 660,
+        width: "60%",
+        height: "30%",
+        opacity: 0.4,
+        transition: "fade",
+        onClosed: function () {
+            window.location.reload();
+        }
+    });
+}
+
 function edit(item) {
     $.ajax({
         url: item.getAttribute('data-url'),

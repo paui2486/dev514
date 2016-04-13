@@ -260,7 +260,7 @@ class ActivityController extends Controller
     {
         $activities = DB::table('activities')->where('id', $id);
         $activities->delete();
-        return Redirect::to('dashboard/activity');
+        return Redirect::to('dashboard/activity#tab-1');
     }
 
     public function showActivity()
@@ -295,7 +295,7 @@ class ActivityController extends Controller
                  <div style="white-space: nowrap;">
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"  class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets\') }}}" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 票卷</a>
-                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}"  class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+                 <div data-url="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}"  class="btn btn-sm btn-danger" onclick="showColorBox(this)"><span class="glyphicon glyphicon-trash"></span> 刪除</div>
                  <input type="hidden" name="row" value="{{$id}}" id="row">
                  </div>')
            ->make();

@@ -231,7 +231,7 @@ class TicketController extends Controller
            ->add_column('actions', '
                  <div style="white-space: nowrap;">
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $activity_id  . \'/tickets/\' . $id) }}}" class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 調整</a>
-                 <a href="{{{ URL::to(\'dashboard/activity/\' . $activity_id . \'/tickets/\' . $id .  \'/delete\' ) }}}" class="btn btn-sm btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> 刪除</a>
+                 <div data-url="{{{ URL::to(\'dashboard/activity/\' . $activity_id . \'/tickets/\' . $id .  \'/delete\' ) }}}" class="btn btn-sm btn-danger" onclick="showColorBox(this)"><span class="glyphicon glyphicon-trash"></span> 刪除</div>
                  <input type="hidden" name="row" value="{{$id}}" id="row">
                  </div>')
            ->make();

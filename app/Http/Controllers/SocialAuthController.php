@@ -17,17 +17,11 @@ class SocialAuthController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-    public function callback()
+    public function fbCallback()
     {
-//        $user = Socialite::driver('facebook')->user();
-//
-//        return response()->json($user);
-//
         $service = new SocialAccountService();
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
-
         auth()->login($user);
-
         return redirect()->to('/');
     }
 }
