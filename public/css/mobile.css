@@ -17,7 +17,8 @@
     .actpage-mb-price,
     .purchase-mb-btn,
     .purchase-mb-time,
-    .purchase-mb-top {
+    .purchase-mb-top,
+    .list-mb-content {
         display: none;
     }
 }
@@ -45,7 +46,8 @@
     .purchase-total,
     .purchase-tickets,
     .list-banner,
-    .list-filter {
+    .list-filter-content,
+    .list-filter-title {
         display: none;
     }
     
@@ -413,6 +415,19 @@
         width: 100%;
     }
     
+    .list-mb-content > div > p {
+        cursor: pointer;
+        font-size: 16px;
+        color: #666;
+    }
+    
+    .list-filter {
+        margin: 0;
+        padding: 5px 10px;
+        background-color: #fff;
+        margin-bottom: 15px;
+    }
+    
     .list-right-content > ul > li > a {
         font-size: 14px;
         padding: 10px;
@@ -423,12 +438,24 @@
         padding:0;
         border-bottom: 1px solid #ccc;
         background: white;
-        box-shadow: 0px 0px 10px #666;
-        margin: 15px 0;
+        box-shadow: 0px 0px 10px #ccc;
+        margin: 5px 0;
+    }
+    
+    .nav-tabs {
+        margin-bottom: 15px;
+    }
+    
+    .list-right-content {
+        margin: 0;
     }
     
     .list-content-panel {
-        margin: 0;
+        margin:10px 0;
+    }
+    
+    .list-category-text {
+        padding: 8px;
     }
 }
 
