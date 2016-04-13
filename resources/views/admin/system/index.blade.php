@@ -18,9 +18,10 @@ $(document).ready(function () {
         collapsible: 'accordion',
         setHash: true,
         scrollToAccordion: true,
-        active: 1,
+        active: 0,
         activate: function(e, tab) {
             var target = $(tab.selector);
+            $( target.html("<img src='{{ asset('img/icons/ellipsis.gif') }}'></img>") );
             $.ajax({
                 url: target.attr('data-url'),
                 type: 'GET',
