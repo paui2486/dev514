@@ -36,7 +36,7 @@ class TicketController extends Controller
     {
         $AdminTabs = $this->AdminTabs;
         if ( Auth::user()->adminer ) {
-            return view('admin.ticket.index', compact('id'));
+            return view('admin.ticket.index', compact('id', 'AdminTabs'));
         } else {
             $act_info = DB::table('activities')
                           ->where('id', $id)
