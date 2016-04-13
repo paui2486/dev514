@@ -71,8 +71,6 @@
                 <a href="{{ url('dashboard/activity/create') }}"> <li>辦活動</li></a>
                 <a href="{{ url('dashboard/profile') }}"><li>個人設定</li></a>
                 <a href="{{ url('dashboard') }}"><li>我的後台</li></a>
-                <a href="{{ url('dashboard/follows') }}"><li>我的關注</li></a>
-                <a href="{{ url('dashboard/friends') }}"><li>我的朋友</li></a>
                 <a href="{{ url('dashboard/activitys') }}"><li>我的活動</li></a>
                 <a href="{{ url('logout') }}"><li>登出</li></a>
                 @endif
