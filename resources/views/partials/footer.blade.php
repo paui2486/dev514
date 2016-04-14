@@ -16,7 +16,7 @@
                 <div class="col-md-4 funtion-intro">
                     <p>功能介紹</p>
                     <div class="funtion-intro-content">
-                        <a href="/blog"><li>514 部落格</li></a>
+                        <a href="#"><li>514 部落格</li></a>
                         <a href="/FAQ"><li>常見問題</li></a>
                         <a href="/HostGuide"><li>如何舉辦活動</li></a>
                         <a href="/PlayGuide"><li>如何報名活動</li></a>

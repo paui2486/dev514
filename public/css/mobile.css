@@ -12,7 +12,7 @@
     .home-mb-info,
     .new-activity > button,
     .home-mb-order,
-    .home-mb-price,
+    .home-mb-count ,
     .navbar-mb-container,
     .actpage-mb-price,
     .purchase-mb-btn,
@@ -171,7 +171,7 @@
         padding-right: 5px;
     }
     
-    .home-mb-price {
+    .home-mb-count {
         color: white;
         background-color: rgba(0,0,0,0.7);
         width: 80%;
@@ -179,9 +179,16 @@
         text-align: center;
         position: absolute;
         right: 0px;
+        font-size: 14px;
         bottom: 10px;
     }
-
+    
+    .home-mb-count img {
+        width: 20px;
+        padding-bottom: 3px;
+        margin-right: 7px;
+    }
+    
     .new-activity > button {
         background-color: #ff5a5f;
         padding: 10px;

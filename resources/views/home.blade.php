@@ -172,8 +172,8 @@
                         <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
                         <div class="new-activity-thumbnail"
                              style="background-image:url({{ $newActivity->thumbnail }})">
-                            <div class="home-mb-price">
-                                $ {{ $newActivity->price }} NTD 起
+                            <div class="home-mb-count">
+                                <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                             </div>
                         </div>
                         </a>
@@ -206,11 +206,11 @@
 
 <!--mbview-->
                             <div class="home-mb-info">
-                                <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
-                                {{ $newActivity->category }}
+                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                                {{ $newActivity->price }} 元起
                             </div>
                             <div class="home-mb-info">
-                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                             </div>
                             <div class="home-mb-info word-indent-newact">
