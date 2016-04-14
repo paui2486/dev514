@@ -26,17 +26,17 @@
                     </label>
                     <div class="col-sm-10">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                            <div class="fileupload-new thumbnail" style="width: 100%; height: 300px;">
+                            <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;">
                                 <img src="{{{ ( isset($member) && !empty($member->avatar) ? asset($member->avatar) : asset('img/no-image.png')) }}}" alt="" />
                             </div>
                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>
                             <div>
                                 <span class="btn btn-white btn-file">
-                                    <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
+                                    <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
                                     <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
                                     <input id="avatar" class="file"  name="avatar" type="file" />
                                 </span>
-                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 移除圖片 </a>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
             </div>
             @endif
             <div class="form-group">
-          			<div class="col-md-12">
+          			<div class="col-md-12" style="margin:15px;">
             				<!-- <div type="reset" class="btn btn-sm btn-warning close_popup" onclick="history.go(-1);">
               					<span class="glyphicon glyphicon-ban-circle"></span>
                         取消

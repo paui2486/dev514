@@ -21,7 +21,7 @@ $(document).ready(function () {
         active: 0,
         activate: function(e, tab) {
             var target = $(tab.selector);
-            $( target.html("<img src='{{ asset('img/icons/ellipsis.gif') }}'></img>") );
+            $( target.html("<div class='loading'>Loading<img src='{{ asset('img/icons/ellipsis.gif') }}'></img></div>") );
             $.ajax({
                 url: target.attr('data-url'),
                 type: 'GET',

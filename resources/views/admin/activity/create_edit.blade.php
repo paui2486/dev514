@@ -54,25 +54,25 @@
                       </div>
                     @endif
                     <div class="col-md-12">
-                        <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}} ">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="thumbnail">
                                     活動縮圖
                                 </label>
                                 <div class="col-sm-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="width: 100%; height: 300px;">
+                                        <div class="fileupload-new thumbnail" style="max-width: 500px; max-height: 300px;">
                                             <img src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
                                         </div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>
                                         <div>
                                             <span class="btn btn-white btn-file">
-                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 選擇圖片 </span>
+                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
                                                 <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
                                                 <input id="thumbnail" class="file"  name="thumbnail" type="file"
                                                     value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
                                             </span>
-                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove </a>
+                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 移除圖片 </a>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                         <div class="form-group {{{ $errors->has('hoster_id') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="hoster_id">
-                                    活動主辦
+                                    主辦單位
                                 </label>
                                 <div class="col-sm-10">
                                     <select style="width: 100%" name="hoster_id" id="hoster_id" class="form-control">
@@ -152,16 +152,16 @@
                                         <input class="form-control act_time" type="text" name="activity_start_time"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
                                     </div>
-                                    <div class="col-md-2 table-cell">
+                                    <div class="col-md-2 table-cell" style="margin-top:10px;">
                                         <label class="control-label">
                                             To
                                         </label>
                                     </div>
-                                    <div class="col-xs-8 col-sm-7 col-md-6">
+                                    <div class="col-xs-8 col-sm-7 col-md-6" style="margin-top:10px;">
                                         <input class="form-control act_date" type="text" name="activity_end_date"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_end ) : null) }}}"/>
                                     </div>
-                                    <div class="col-xs-4 col-sm-5 col-md-4">
+                                    <div class="col-xs-4 col-sm-5 col-md-4"style="margin-top:10px;">
                                         <input class="form-control act_time" type="text" name="activity_end_time"
                                             value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_end ) : null) }}}"/>
                                     </div>

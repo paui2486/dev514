@@ -368,19 +368,18 @@ a.logo {
     font-size: 21px;
     color: #2e2e2e;
     float: left;
-    margin-top: 15px;
+    margin-top: 6px;
     text-transform: uppercase;
+}
+
+a.logo img {
+    height: 50px;
 }
 
 a.logo:hover, a.logo:focus {
     text-decoration: none;
     outline: none;
 }
-
-a.logo span {
-    color: #FF6C60;
-}
-
 
 /*notification*/
 
@@ -611,7 +610,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border-radius: 4px;
     -webkit-border-radius: 4px;
     padding: 6px;
-    background: none;
+    background: white;
     margin-right: 0;
 }
 .top-nav ul.top-menu > li {
@@ -2933,6 +2932,10 @@ ul.amounts li {
 
 .tab-container {
     margin-top: 10px;
+}
+
+.nav-tabs {
+    border: none;
 }
 
 .tab-head .nav-tabs > li > a {
@@ -6342,26 +6345,54 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
     border-bottom: 4px solid white;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+    margin: 0;
+    margin-bottom: 15px;
 }
 
 .r-tabs-accordion-title .r-tabs-anchor{
     display: block;
     padding: 10px;
-    background-color: #00c5ad;
+    background-color: #41cac0;
     color: #fff !important;
     font-weight: bold;
     text-decoration: none;
     font-size: 14px;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
-}
-
-.r-tabs-state-active {
-    border: 2px #C7A9D4 solid;
+    margin-bottom: 10px;
 }
 
 .r-tabs-state-active .r-tabs-anchor {
-    background-color: #fff;
-    color: #00c5ad !important;
+    background-color: #00bcd4;
+    color: #fff !important;
     text-shadow: none;
+    border: none!important;
 }
+
+.loading {
+    font-size: 22px;
+    color: #00bcd4;
+    font-weight: 600;
+    text-align: center;
+}
+
+.selectize-control.multi .selectize-input > div {
+    background-color: #41cac0!important;
+    background-image: none!important;
+    text-shadow: none!important;
+    border: none!important;
+    padding: 5px 10px!important;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.cke_combo_button,
+.cke_toolgroup{
+    background-image: -webkit-linear-gradient(top, rgb(255, 255, 255), rgb(222, 222, 222))!important;
+    border-color: #ccc!important;
+}
+
+
+
+
+

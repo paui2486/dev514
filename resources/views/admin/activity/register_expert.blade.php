@@ -124,7 +124,7 @@
                         </label>
                         <div class="col-sm-10">
                             <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <div class="fileupload-new thumbnail" style="width: 100%; height: 300px;">
+                                <div class="fileupload-new thumbnail" style="width: 100%; max-height: 300px;">
                                     <img src="{{ asset('img/no-image.png') }}" alt="" />
                                 </div>
                                 <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>

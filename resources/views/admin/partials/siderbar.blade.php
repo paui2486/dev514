@@ -4,7 +4,7 @@
             <li>
                 <a href="{{URL::to('dashboard')}}">
                     <i class="fa fa-dashboard"></i>
-                    <span>控制首頁</span>
+                    <span>首頁</span>
                 </a>
             </li>
             <li>

@@ -26,7 +26,7 @@ $(document).ready(function () {
         activate: function(e, tab) {
             $(tab.anchor.context).addClass('active');
             var target = $(tab.selector);
-            $( target.html("<img src='{{ asset('img/icons/ellipsis.gif') }}'></img>") );
+            $( target.html("<div class='loading'>Loading<img src='{{ asset('img/icons/ellipsis.gif') }}'></img></div>") );
             $.ajax({
                 url: target.attr('data-url'),
                 type: 'GET',
@@ -71,7 +71,7 @@ $(document).ready(function () {
 @endif
 
     @foreach( $AdminTabs as $key => $tab )
-        <div id="tab-{{ $key }}" data-url="{{ URL($tab->url) }}"></div>
+        <div class="row" id="tab-{{ $key }}" data-url="{{ URL($tab->url) }}"></div>
     @endforeach
     </section>
 </section>
