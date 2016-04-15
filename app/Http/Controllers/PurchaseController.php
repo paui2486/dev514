@@ -192,6 +192,7 @@ class PurchaseController extends controller
                                 'TotalPrice'      => 0,
                                 'ItemDesc'        => $itemDesc,
                                 'user_id'         => Auth::id(),
+                                'user_name'       => $request->name,
                                 'user_email'      => $request->email,
                                 'user_phone'      => $request->mobile,
                                 'hoster_id'       => $activity->hoster_id,
@@ -231,7 +232,6 @@ class PurchaseController extends controller
                                     "ItemDesc"		      =>  $itemDesc,              //	商品資訊
                                     "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                     'Email'             =>  $request->email,
-                                    // 'OrderComment'      =>  $ticket->remark,
                                     'TradeLimit'        =>  300,
                                     'ReturnURL'         =>  url('purchase/result'),
                                 );
@@ -244,8 +244,8 @@ class PurchaseController extends controller
                                 'MerchantOrderNo' => $result['MerchantOrderNo'],
                                 'TotalPrice'      => $result['Amt'],
                                 'ItemDesc'        => $result['ItemDesc'],
-                                // 'OrderComment'    => $result['OrderComment'],
                                 'user_id'         => Auth::id(),
+                                'user_name'       => $request->name,
                                 'user_email'      => $request->email,
                                 'user_phone'      => $request->mobile,
                                 'hoster_id'       => $activity->hoster_id,
