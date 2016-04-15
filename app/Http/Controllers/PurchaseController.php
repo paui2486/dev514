@@ -181,7 +181,9 @@ class PurchaseController extends controller
             //         ->subject('Verify your email address');
             // });
 
-            DB::table('act_tickets')->whereIn('id', $ticket_ids)->decrement('left_over');
+            foreach ($ticket_ids as $key => $id) {
+                DB::table('act_tickets')->where('id', $id)->decrement('decrement', $numbers[$key]);
+            }
 
             if ($total_price == 0) {
                 $MerchantOrderNo = time();
@@ -269,15 +271,17 @@ class PurchaseController extends controller
               'status' => 2,
             );
 
-            DB::table('orders')
-              ->where('MerchantOrderNo', $result->MerchantOrderNo)
-              ->update($updateArray);
+            $order = DB::table('orders')->where('MerchantOrderNo', $result->MerchantOrderNo);
+            $order->update($updateArray);
 
-            DB::table('act_tickets')
-              ->where('id', $target->ticket_id)
-              ->increment('left_over', $target->ticket_number);
+            $ticket_ids  = explode(',' , $order->first()->ticket_id);
+            $numbers     = explode(',' , $order->first()->ticket_numbers);
 
+            foreach ($ticket_ids as $key => $id) {
+                DB::table('act_tickets')->where('id', $id)->increment('decrement', $numbers[$key]);
+            }
             return Redirect::to(Session::get('url'));
+
         } else {
             $updateArray = array(
                 'TradeNo'         => $result->TradeNo,
@@ -296,6 +300,14 @@ class PurchaseController extends controller
                 'updated_at'      => date("Y-m-d H:i:s"),
             );
             DB::table('orders')->where('MerchantOrderNo', $result->MerchantOrderNo)->update($updateArray);
+
+            $order = (object) array(
+                'MerchantOrderNo' => $result->MerchantOrderNo,
+                'TradeNo'    => $result->TradeNo,
+                'TradeTime'  => date("Y-m-d H:i:s"),
+                'TotalPrice' => $result->Inst,
+            );
+            $tickets = $this->successOrder($order);
             return Redirect::to('purchase/'.$result->MerchantOrderNo);
         }
     }
