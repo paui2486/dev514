@@ -148,6 +148,7 @@ class PurchaseController extends controller
                          'ticket_start', 'ticket_end', 'description',
                      ))
                      ->get();
+        $total_price = 0;
         $itemDesc = ' [ ' . $activity->title . ' ] ';
         foreach ($tickets as $ticket) {
            foreach ($purchase as $target) {
@@ -182,8 +183,7 @@ class PurchaseController extends controller
 
             DB::table('act_tickets')->whereIn('id', $ticket_ids)->decrement('left_over');
 
-            // if (1) {
-            if ($ticket->price <= 0) {
+            if ($total_price == 0) {
                 $MerchantOrderNo = time();
                 $storeOrder = array(
                                 'MerchantOrderNo' => $MerchantOrderNo,
@@ -219,18 +219,17 @@ class PurchaseController extends controller
                 $merIV      = env('Pay2go_IV',  "1oInVJXhR3BhOQeb");
                 $autoSubmit = TRUE;
                 $title      = urldecode($request->segment(3));
-                $ticketInfo = $request->activity . " - " . $ticket->name . " x " . $request->purchase_number;
                 $result     = array (
                                     "MerchantID"        =>  $merID,                 //	商店代號
                                     "RespondType"	      =>  "JSON",                 //  回傳格式
                                     "TimeStamp"		      =>  time(),                 //	時間戳記
                                     "Version"		        =>  "1.1",                  //	串接版本
                                     "MerchantOrderNo"	  =>  date("Ymdhis", time()), //	商店訂單編號
-                                    "Amt"		            =>  $request->purchase_result,          //	訂單金額
-                                    "ItemDesc"		      =>  $ticketInfo,        //	商品資訊
+                                    "Amt"		            =>  $total_price,           //	訂單金額
+                                    "ItemDesc"		      =>  $itemDesc,              //	商品資訊
                                     "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                     'Email'             =>  $request->email,
-                                    'OrderComment'      =>  $ticket->remark,
+                                    // 'OrderComment'      =>  $ticket->remark,
                                     'TradeLimit'        =>  300,
                                     'ReturnURL'         =>  url('purchase/result'),
                                 );
@@ -243,16 +242,16 @@ class PurchaseController extends controller
                                 'MerchantOrderNo' => $result['MerchantOrderNo'],
                                 'TotalPrice'      => $result['Amt'],
                                 'ItemDesc'        => $result['ItemDesc'],
-                                'OrderComment'    => $result['OrderComment'],
+                                // 'OrderComment'    => $result['OrderComment'],
                                 'user_id'         => Auth::id(),
                                 'user_email'      => $request->email,
                                 'user_phone'      => $request->mobile,
-                                'hoster_id'       => $ticket->hoster_id,
-                                'activity_id'     => $ticket->activity_id,
-                                'activity_name'   => $ticket->title,
-                                'ticket_id'       => $ticket->id,
-                                'ticket_price'    => $ticket->price,
-                                'ticket_number'   => $request->purchase_number,
+                                'hoster_id'       => $activity->hoster_id,
+                                'activity_id'     => $activity->id,
+                                'activity_name'   => $activity->title,
+                                'ticket_id'       => $data->tickets,
+                                'ticket_price'    => $total_price,
+                                'ticket_number'   => $data->numbers,
                                 'created_at'      => date("Y-m-d H:i:s"),
                               );
 
