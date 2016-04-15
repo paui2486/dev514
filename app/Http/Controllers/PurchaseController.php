@@ -304,8 +304,8 @@ class PurchaseController extends controller
             $order = (object) array(
                 'MerchantOrderNo' => $result->MerchantOrderNo,
                 'TradeNo'    => $result->TradeNo,
-                'TradeTime'  => date("Y-m-d H:i:s"),
-                'TotalPrice' => $result->Inst,
+                'TradeTime'  => $updateArray['updated_at'],
+                'TotalPrice' => $result->InstFirst,
             );
             $tickets = $this->successOrder($order);
             return Redirect::to('purchase/'.$result->MerchantOrderNo);
@@ -318,7 +318,7 @@ class PurchaseController extends controller
                   ->leftJoin('users', 'orders.user_id', '=', 'users.id')
                   ->rightJoin('activities',  'orders.activity_id', '=', 'activities.id')
                   ->select(array(
-                      'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice',
+                      'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice', 'orders.hoster_id',
                       'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location', 'orders.ticket_id',
                   ))
                   ->where('MerchantOrderNo', $order->MerchantOrderNo)
@@ -357,11 +357,14 @@ class PurchaseController extends controller
             'ticket_infos'      => $ticket_infos,
         );
 
+        $hoster = DB::table('users')->find($info->hoster_id);
+
         Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info) {
             $message->from('service@514.com.tw', '514 活動頻道');
-            $message->to( Auth::user()->email, $info->user_name )
+            $message->to( Auth::user()->email, $info->user_name )->bcc( $hoster->email, $hoster->name )
                     ->subject('【 514 活動頻道 】恭喜您！您的活動行程已經訂購成功！');
         });
+
 
         return $orders;
     }
