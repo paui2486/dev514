@@ -182,7 +182,7 @@ class PurchaseController extends controller
             // });
 
             foreach ($ticket_ids as $key => $id) {
-                DB::table('act_tickets')->where('id', $id)->decrement('decrement', $numbers[$key]);
+                DB::table('act_tickets')->where('id', $id)->decrement('left_over', $numbers[$key]);
             }
 
             if ($total_price == 0) {
@@ -278,7 +278,7 @@ class PurchaseController extends controller
             $numbers     = explode(',' , $order->first()->ticket_numbers);
 
             foreach ($ticket_ids as $key => $id) {
-                DB::table('act_tickets')->where('id', $id)->increment('decrement', $numbers[$key]);
+                DB::table('act_tickets')->where('id', $id)->increment('left_over', $numbers[$key]);
             }
             return Redirect::to(Session::get('url'));
 
