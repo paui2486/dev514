@@ -41,7 +41,7 @@
         </div>
         <div class="col-md-7 confirm-right">
             <p>您的票券 Your Tickets</p>
-            @foreach( $tickets->ticket_infos as $info )
+            @foreach ( $tickets->ticket_infos as $info )
             <div class="confirm-ticket">
                 <div class="row">
                     <label class="col-md-3 col-xs-5 control-label"> 票券名稱 </label>

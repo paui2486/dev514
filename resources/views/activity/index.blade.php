@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('meta') @foreach($meta as $key => $value)
 <meta {{ $key }} content="{{ $value }}"> @endforeach
 <title>514活動頻道 - {{ $activity->title }}</title>
-@endsection 
+@endsection
 @section('content')
 
 <div class="act-page-container">
@@ -14,35 +14,36 @@
     <div class="actpage-content">
         <div id="RightFixed" class="col-md-4 actpage-right-content">
             <div class="row actpage-cart-title">
-                <p class="col-md-6"> 剩 110 位 </p>
-                <p class="col-md-6"> 倒數 10 天 </p>
+                <p id="left_number" class="col-md-6"> 剩  位 </p>
+                <p id="left_date" class="col-md-6"> 倒數  天 </p>
             </div>
             <div class="row actpage-cart-content">
                 <p class="actpage-buy-now">{{ $activity->title }}</p>
                 <div class="row actpage-cart-ticket">
-                    @foreach($tickets as $ticket)
+                    {!! csrf_field() !!}
+                    {{--*/ $count = 0; /*--}}
+                    @foreach($tickets as $key => $ticket)
+                    {{--*/ $count += $ticket->left_over; /*--}}
                     <div class="row cart-option">
                         <div class="col-md-8">
-                        <input name="ticket" type="checkbox" value="ticket-name" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
+                            <input name="ticket_id" type="checkbox" value="{{ $key }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
                         </div>
                         <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
                     </div>
                     <div class="cart-number">
                         <p>請選擇票券數量：
-                        <select>
-                            <option value="1">0</option>
-                            <option value="1">1</option>
-                            <option value="1">2</option>
-                            <option value="1">3</option>
-                            <option value="1">4</option>
-                            <option value="1">5</option>
-                        </select>
+                            <select name="ticket-{{$key}}-number">
+                            @for ($i = 1; $i <= 10; $i++)
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endfor
+                            </select>
                         </p>
                     </div>
+                    <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
                     <div id="OneClick" class="row cart-option-detail">
                         <ul>
                             <li>
-                                <p>詳細票券資訊 
+                                <p>詳細票券資訊
                                     <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                                 </p>
                                 <ul>
@@ -59,15 +60,13 @@
             </div>
             <div class="purchase-block">
                 @if(count($tickets)>0)
-                <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
-                    <div class="row actpage-purchase">
-                        <p><img src="/img/icons/playicon.png"> GO!讓生活更有意思!</p>
-                    </div>
-                </a>
+                <div class="row actpage-purchase">
+                    <p><img src="/img/icons/playicon.png"> GO!讓生活更有意思!</p>
+                </div>
                 @else
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
                 @endif
-            
+
                 <div id="shareBtn" class="btn btn-sm btn-success actpage-share">
                    分享到Facebook
                 </div>
@@ -75,11 +74,9 @@
         </div>
         <div class="purchase-mb-btn">
             @if(count($tickets)>0)
-            <a href="{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}">
-                <div class="row actpage-purchase">
-                    <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
-                </div>
-            </a>
+            <div class="row actpage-purchase">
+                <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
+            </div>
             @else
             <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
             @endif
@@ -87,12 +84,12 @@
         <div class="row actpage-dashboard">
             <div class="col-md-2 col-xs-4">
                 <a href="{{ URL('member/'. $activity->hoster ) }}">
-                            <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
-                            </div>
-                            <div class="actpage-holder-name">
-                                @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
-                            </div>
-                        </a>
+                    <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
+                    </div>
+                    <div class="actpage-holder-name">
+                        @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
+                    </div>
+                </a>
             </div>
 
             <div class="col-md-6 col-xs-8 actpage-dashboard-info">
@@ -193,29 +190,18 @@
         </div>
     </div>
 </div>
-</div>
 @if ( preg_match( "/酒/", urldecode(Request::segment(2)), $result ))
 <div>
     <img src="{{asset('img/wine.jpg')}}" style="width:100%;">
 </div>
-@endif @endsection @section('script')
+@endif
+@endsection
+
+@section('script')
 <script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
-
+<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
 <script>
-    // var disqus_config = function () {
-    //     this.page.url = "{{ Request::URL() }}";
-    //     this.page.identifier = "{{ $activity->title }}";
-    // };
-    //
-    // (function() {
-    //     var d = document, s = d.createElement('script');
-    //     s.src = '//514life.disqus.com/embed.js';
-    //     s.setAttribute('data-timestamp', +new Date());
-    //     (d.head || d.body).appendChild(s);
-    // })();
-
     document.getElementById('shareBtn').onclick = function () {
-        // calling the API ...
         var obj = {
             method: 'feed',
             redirect_uri: '{{ Request::URL() }}',
@@ -230,17 +216,17 @@
         function callback(response) {
             if (response && response.post_id) {
                 document.getElementById('msg').innerHTML = "Post ID: " + response["post_id"];
-            } else {
-                console.log("User didin't share the story, we'll do something else");
             }
         }
         FB.ui(obj, callback);
     }
 
     $(document).ready(function () {
-        // console.log( {!! json_encode($tickets) !!} );
-        var RightFixed = $("#RightFixed");
+        var duration = moment("{{$activity->activity_start}}", "YYYY-MM-DD hh:mm:ss").diff(moment(),'days');
+        $('#left_number').text('剩 {{ $count }} 位');
+        $('#left_date').text('倒數 '+ duration +' 天');
 
+        var RightFixed = $("#RightFixed");
         $(window).scroll(function () {
             if ($(this).scrollTop() > 580) {
                 RightFixed.addClass("right-content-fixed");
@@ -249,12 +235,22 @@
             }
         });
     });
-    
+
+    $('.actpage-purchase').click(function() {
+        var ticketIds = [];
+        var ticketNumbers = [];
+        $('input[name=ticket_id]:checked').each(function() {
+            id = $(this).val();
+            ticketIds.push($('input[name=ticket-' + id + '-id]').val());
+            ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
+        });
+        var url = "{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
+        window.location.href = url;
+    });
+
     $('div#OneClick ul li ul').hide();
     $('div#OneClick > ul > li >p').click(function(){
         $(this).next().slideToggle('fast');
     });
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
 @endsection

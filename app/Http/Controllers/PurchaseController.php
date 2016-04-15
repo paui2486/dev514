@@ -11,6 +11,7 @@ use Form;
 use Auth;
 use Mail;
 use Input;
+use Session;
 use Response;
 use Redirect;
 use App\Pay2go;
@@ -25,9 +26,29 @@ class PurchaseController extends controller
         //
     }
 
-    public function showPurchase($category, $title)
+    public function showPurchase(Request $request, $category, $title)
     {
-        $slideCategory = Library::getSlideCategory();
+        $tickets = explode(',' , $request->tickets);
+        $numbers = explode(',' , $request->numbers);
+
+        $url = str_replace('purchase', 'activity', $request->url());
+
+        if ( !current($numbers) && count($numbers) == 1 ) {
+            Session::flash('message', '請勾選票卷與數量');
+            return Redirect::to($url);
+        } elseif ( count($numbers) != count($tickets) ) {
+            Session::flash('message', '票卷數目與種類不相符合');
+            return Redirect::to($url);
+        } elseif ( max(array_values($numbers)) > 10 ) {
+            Session::flash('message', '請勿擅自修改票卷數目');
+            return Redirect::to($url);
+        }
+
+        $purchase = array();
+        foreach ($tickets as $key => $ticket_id) {
+            $temp = array( 'id' => $ticket_id, 'wanted' => $numbers[$key] );
+            array_push($purchase, $temp);
+        }
 
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
@@ -41,103 +62,144 @@ class PurchaseController extends controller
                       ->where('activities.status', '>=', '2')
                       ->first();
 
-        if (empty($activity)){
-            return Redirect::back();
+        if (empty($activity)) {
+            Session::flash('message', '查無無此活動票卷');
+            return Redirect::to($url);
         } else {
-            $tickets = DB::table('act_tickets')
-                        ->where('activity_id', $activity->id)
-                        ->where('left_over', '>', 0)
-                        ->select(array(
-                            'id', 'name',   'left_over',  'price', 'location',
-                            'ticket_start', 'ticket_end', 'description',
-                        ))
-                        ->get();
+            $tickets  = DB::table('act_tickets')
+                         ->whereIn('id', $tickets )
+                         ->where('activity_id', $activity->id)
+                        //  ->where('left_over', '>', 0)
+                         ->select(array(
+                             'id', 'name',   'left_over',  'price', 'location',
+                             'ticket_start', 'ticket_end', 'description',
+                         ))
+                         ->get();
 
-
-            $weekday=['日', '一', '二', '三', '四', '五', '六'];
+            $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
             $eventData = array();
-            foreach ($tickets as $key => $ticket) {
-                $data = array(
-                  'date'         => preg_replace("/(.*)\s(.*)/", "$1", $ticket->ticket_start),
-                  'badge'        => true,
-                  'title'        => $ticket->id,
-                  'name'         => $ticket->name,
-                  'price'        => $ticket->price,
-                  'location'     => $ticket->location,
-                  'left_over'    => $ticket->left_over,
-                  'weekday'      => $weekday[date('w', strtotime($activity->activity_start))],
-                  'ticket_start' => $ticket->ticket_start,
-                  'ticket_end'   => $ticket->ticket_end,
-                  'description'  => $ticket->description,
-                );
-                array_push($eventData, $data);
+            $misCatch  = array();
+            foreach ($tickets as $ticket) {
+                foreach ($purchase as $target) {
+                    if ($ticket->id != $target['id']) {
+                        continue;
+                    } else {
+                        if ($target['wanted'] > $ticket->left_over) {
+                            array_push($misCatch, $ticket->id);
+                        } else {
+                            $weekday_start  = $weekday[date('w', strtotime($ticket->ticket_start))];
+                            $weekday_end    = $weekday[date('w', strtotime($ticket->ticket_end))];
+                            $data = (object) array (
+                                        'id'        => $ticket->id,
+                                        'name'      => $ticket->name,
+                                        'price'     => $ticket->price,
+                                        'quantity'  => $target['wanted'],
+                                        'act_start' => preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_start ) $2", $ticket->ticket_start),
+                                        'act_end'   => preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_end ) $2", $ticket->ticket_end),
+                                    );
+                            array_push($eventData, $data);
+                        }
+                    }
+                }
             }
 
-            return view('activity.purchase', compact('activity', 'eventData', 'tickets', 'slideCategory'));
+            if (!empty($misCatch)) {
+                Session::flash('message', '目前剩餘票卷無法滿足您的需求');
+                return Redirect::to($url);
+            }
+            return view('activity.purchase', compact('activity', 'eventData'));
         }
     }
 
-    public function postPurchase(Request $request)
+    public function postPurchase(Request $request, $category, $title)
     {
-        $ticket = DB::table('act_tickets')
-                    ->leftJoin('activities', 'act_tickets.activity_id', '=', 'activities.id')
-                    ->where('act_tickets.id', $request->ticket_id)
-                    ->where('act_tickets.left_over', '>=', $request->purchase_number)
-                    ->select(array(
-                      'act_tickets.id', 'act_tickets.price', 'act_tickets.left_over', 'act_tickets.name',  'act_tickets.activity_id',
-                      'activities.title', 'activities.hoster_id', 'activities.location', 'activities.remark'
-                    ))
-                    ->first();
+        $data        = json_decode($request->data);
 
-        if (empty($ticket)) {
-            $result = Response::json(Array(
-              'code'    => 402,
-              'message' => 'Tickets is not enough!',
-            ), 402);
-            return $result;
-        } else {
+        $ticket_ids  = explode(',' , $data->tickets);
+        $numbers     = explode(',' , $data->numbers);
 
-            $user = DB::table('users')->where('email', $request->email)->first();
-            if(empty($user)){
-                $confirmation_code = str_random(30);
+        $url         = str_replace('purchase', 'activity', $request->url());
 
-                $user_id = DB::table('users')->insertGetId(
-                    array(
-                      'name'              => $request->name,
-                      'phone'             => $request->mobile,
-                      'email'             => $request->email,
-                      'confirmation_code' => $confirmation_code,
-                    )
-                );
+        $total_price = 0;
+        $misCatch    = array();
+        $purchase    = array();
 
-                Mail::send('auth.emails.verify', array('confirmation_code'=>$confirmation_code), function($message) {
-                    $message->from('service@514.com.tw', '514 活動頻道');
-                    $message->to(Input::get('email'), Input::get('name'))
-                        ->subject('Verify your email address');
-                });
+        foreach ($ticket_ids as $key => $ticket_id) {
+            $temp    = array( 'id' => $ticket_id, 'wanted' => $numbers[$key] );
+            array_push($purchase, $temp);
+        }
 
-            } else {
-                $user_id = $user->id;
+        $activity    = DB::table('activities')
+                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                      ->where('categories.name', $category)
+                      ->where('activities.title', $title)
+                      ->select(array(
+                        'activities.id' ,               'activities.title',           'activities.thumbnail',         'activities.description',     'activities.activity_start',  'activities.activity_end',
+                        'activities.category_id',       'activities.remark',          'activities.time_range',
+                        'categories.name as category',  'activities.description',     'activities.hoster_id',
+                      ))
+                      ->where('activities.status', '>=', '2')
+                      ->first();
+
+        $tickets  = DB::table('act_tickets')
+                     ->whereIn('id', $ticket_ids )
+                     ->select(array(
+                         'id', 'name',   'left_over',  'price', 'location',
+                         'ticket_start', 'ticket_end', 'description',
+                     ))
+                     ->get();
+        $itemDesc = ' [ ' . $activity->title . ' ] ';
+        foreach ($tickets as $ticket) {
+           foreach ($purchase as $target) {
+                if ($ticket->id != $target['id']) {
+                    continue;
+                } else {
+                    if ($target['wanted'] > $ticket->left_over) {
+                        array_push($misCatch, $ticket->id);
+                    } else {
+                        $itemDesc .= $ticket->name . ' x ' . $target['wanted'] . '張； ';
+                        $total_price += $ticket->price * $target['wanted'];
+                    }
+                }
             }
-            Auth::loginUsingId($user_id);
+        }
 
-            // check ticket price
+        if (empty($activity)) {
+            Session::flash('message', '查無無此活動票卷');
+            return Redirect::to($url);
+        } elseif (!empty($misCatch)) {
+            Session::flash('message', '目前剩餘票卷無法滿足您的需求');
+            return Redirect::to($url);
+        } elseif ($total_price != $request->price) {
+            Session::flash('message', '票卷金額異常，請重新購買');
+            return Redirect::to($url);
+        } else {
+            // Mail::send('auth.emails.verify', array('confirmation_code'=>$confirmation_code), function($message) {
+            //     $message->from('service@514.com.tw', '514 活動頻道');
+            //     $message->to(Input::get('email'), Input::get('name'))
+            //         ->subject('Verify your email address');
+            // });
+
+            DB::table('act_tickets')->whereIn('id', $ticket_ids)->decrement('left_over');
+
+            // if (1) {
             if ($ticket->price <= 0) {
                 $MerchantOrderNo = time();
                 $storeOrder = array(
                                 'MerchantOrderNo' => $MerchantOrderNo,
                                 'TotalPrice'      => 0,
-                                'ItemDesc'        => $request->activity . " - " . $ticket->name . " x " . $request->purchase_number,
+                                'ItemDesc'        => $itemDesc,
                                 'user_id'         => Auth::id(),
                                 'user_email'      => $request->email,
                                 'user_phone'      => $request->mobile,
-                                'hoster_id'       => $ticket->hoster_id,
-                                'activity_id'     => $ticket->activity_id,
-                                'activity_name'   => $ticket->title,
-                                'ticket_id'       => $ticket->id,
-                                'ticket_price'    => $ticket->price,
-                                'ticket_number'   => $request->purchase_number,
+                                'hoster_id'       => $activity->hoster_id,
+                                'activity_id'     => $activity->id,
+                                'activity_name'   => $title,
+                                'ticket_id'       => $data->tickets,
+                                'ticket_number'   => $data->numbers,
+                                'ticket_price'    => $total_price,
                                 'created_at'      => date("Y-m-d H:i:s"),
+                                'PayTime'         => date("Y-m-d H:i:s"),
                               );
                 $insertOrder = DB::table('orders')->insert($storeOrder);
 
@@ -147,10 +209,8 @@ class PurchaseController extends controller
                     'TradeTime'  => date("Y-m-d H:i:s"),
                     'TotalPrice' => 0,
                 );
-
-                $ticket = $this->successOrder($order);
-                return view('activity.ticket', compact('ticket'));
-
+                $tickets = $this->successOrder($order);
+                return Redirect::to('purchase/'.$order->MerchantOrderNo);
             } else {
 
                 $Pay2go     = new Pay2go();
@@ -196,7 +256,7 @@ class PurchaseController extends controller
                                 'created_at'      => date("Y-m-d H:i:s"),
                               );
 
-                $insertOrder = DB::table('orders')->insert($storeOrder);
+                DB::table('orders')->insert($storeOrder);
                 return $Pay2go->create_form($result, NULL, TRUE, $autoSubmit, 0, $submitButtonStyle);
             }
         }
@@ -206,98 +266,75 @@ class PurchaseController extends controller
     {
         $result = (object) json_decode($request->Result,true);
         if( $request->Status != "SUCCESS" ) {
-            Log::error('交易失敗');
-            Log::info(Response::json(Input::all()));
             $updateArray = array(
               'status' => 2,
             );
 
-            $target = DB::table('orders')
-              ->where('MerchantOrderNo', $result->MerchantOrderNo)
-              ->get();
-
             DB::table('orders')
-              ->where('id', $target->id)
+              ->where('MerchantOrderNo', $result->MerchantOrderNo)
               ->update($updateArray);
 
             DB::table('act_tickets')
               ->where('id', $target->ticket_id)
               ->increment('left_over', $target->ticket_number);
 
-            return Redirect::to('/');
+            return Redirect::to(Session::get('url'));
+        } else {
+            $updateArray = array(
+                'TradeNo'         => $result->TradeNo,
+                'MerchantOrderNo' => $result->MerchantOrderNo,
+                'CheckCode'       => $result->CheckCode,
+                'EscrowBank'      => $result->EscrowBank,
+                'Card6No'         => $result->Card6No,
+                'Card4No'         => $result->Card4No,
+                'InstFirst'       => $result->InstFirst,
+                'InstEach'        => $result->InstEach,
+                'Inst'            => $result->Inst,
+                'IP'              => $result->IP,
+                'PayTime'         => $result->PayTime,
+                'status'          => 1,
+                'OrderResult'     => json_encode($result),
+                'updated_at'      => date("Y-m-d H:i:s"),
+            );
+            DB::table('orders')->where('MerchantOrderNo', $result->MerchantOrderNo)->update($updateArray);
+            return Redirect::to('purchase/'.$result->MerchantOrderNo);
         }
-
-        $updateArray = array(
-            'TradeNo'         => $result->TradeNo,
-            'MerchantOrderNo' => $result->MerchantOrderNo,
-            'CheckCode'       => $result->CheckCode,
-            'EscrowBank'      => $result->EscrowBank,
-            'Card6No'         => $result->Card6No,
-            'Card4No'         => $result->Card4No,
-            'InstFirst'       => $result->InstFirst,
-            'InstEach'        => $result->InstEach,
-            'Inst'            => $result->Inst,
-            'IP'              => $result->IP,
-            'PayTime'         => $result->PayTime,
-            'status'          => 1,
-            'OrderResult'     => json_encode($result),
-            'updated_at'      => date("Y-m-d H:i:s"),
-        );
-
-        $info = DB::table('orders')
-                  ->leftJoin('users', 'orders.user_id', '=', 'users.id')
-                  ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
-                  ->leftJoin('act_tickets', 'orders.ticket_id',   '=', 'act_tickets.id')
-                  ->select(array(
-                      'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice',
-                      'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location',
-                      'act_tickets.name as ticket_name',  'act_tickets.ticket_start', 'act_tickets.ticket_end', 'orders.ticket_id'
-                  ))
-                  ->where('MerchantOrderNo', $result->MerchantOrderNo)
-                  ->first();
-
-        DB::table('orders')->where('id', $info->id)->update($updateArray);
-        // 需要再設計交易失敗回流機制
-        DB::table('act_tickets')->where('id', $info->ticket_id)->decrement('left_over');
-
-        $ticket = (object) array(
-            'TradeNo'           => $result->TradeNo,
-            'TradeTime'         => $result->PayTime,
-            'TotalPrice'        => $result->Amt,
-            'user_name'         => $info->user_name,
-            'user_phone'        => $info->user_phone,
-            'user_email'        => $info->user_email,
-            'activity_name'     => $info->activity_name,
-            'activity_location' => $info->activity_location,
-            'ticket_name'       => $info->ticket_name,
-            'ticket_number'     => $info->ticket_number,
-            'ticket_day'        => preg_replace("/(.*)\s(.*):\d+/", "$1", $info->ticket_start),
-            'ticket_start'      => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_start),
-            'ticket_end'        => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_end),
-        );
-
-        return view('activity.ticket', compact('ticket'));
     }
 
     private function successOrder($order)
     {
         $info = DB::table('orders')
                   ->leftJoin('users', 'orders.user_id', '=', 'users.id')
-                  ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
-                  ->leftJoin('act_tickets', 'orders.ticket_id',   '=', 'act_tickets.id')
+                  ->rightJoin('activities',  'orders.activity_id', '=', 'activities.id')
                   ->select(array(
                       'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice',
-                      'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location',
-                      'act_tickets.name as ticket_name',  'act_tickets.ticket_start', 'act_tickets.ticket_end', 'orders.ticket_id'
+                      'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location', 'orders.ticket_id',
                   ))
                   ->where('MerchantOrderNo', $order->MerchantOrderNo)
                   ->first();
 
         DB::table('orders')->where('id', $info->id)->increment('status');
-        // 需要再設計交易失敗回流機制
-        DB::table('act_tickets')->where('id', $info->ticket_id)->decrement('left_over');
 
-        $ticket = (object) array(
+        $ticket_ids     = explode(',' , $info->ticket_id);
+        $ticket_numbers = explode(',' , $info->ticket_number);
+
+        $ticket_infos = array();
+        foreach ($ticket_ids as $key => $id) {
+            $ticket_target = DB::table('act_tickets')
+                              ->where('id', $id)
+                              ->select(array(
+                                'id', 'name', 'price', 'ticket_start', 'ticket_end'
+                              ))->first();
+            $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
+            $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];
+            $weekday_end    = $weekday[date('w', strtotime($ticket_target->ticket_end))];
+            $ticket_target->ticket_start = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_start ) $2", $ticket_target->ticket_start);
+            $ticket_target->ticket_end   = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_end ) $2", $ticket_target->ticket_end);
+            $ticket_target->quantity     = $ticket_numbers["$key"];
+            array_push($ticket_infos, $ticket_target);
+        }
+
+        $orders = (object) array(
             'TradeNo'           => $order->TradeNo,
             'TradeTime'         => $order->TradeTime,
             'TotalPrice'        => $order->TotalPrice,
@@ -306,12 +343,57 @@ class PurchaseController extends controller
             'user_email'        => $info->user_email,
             'activity_name'     => $info->activity_name,
             'activity_location' => $info->activity_location,
-            'ticket_name'       => $info->ticket_name,
-            'ticket_number'     => $info->ticket_number,
-            'ticket_day'        => preg_replace("/(.*)\s(.*):\d+/", "$1", $info->ticket_start),
-            'ticket_start'      => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_start),
-            'ticket_end'        => preg_replace("/(.*)\s(.*):\d+/", "$2", $info->ticket_end),
+            'ticket_infos'      => $ticket_infos,
         );
-        return $ticket;
+
+        Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info) {
+            $message->from('service@514.com.tw', '514 活動頻道');
+            $message->to( Auth::user()->email, $info->user_name )
+                    ->subject('【 514 活動頻道 】恭喜您！您的活動行程已經訂購成功！');
+        });
+
+        return $orders;
+    }
+
+    public function getTradeInfo($id) {
+        $orders = DB::table('orders')
+                    ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
+                    ->where('MerchantOrderNo', $id)
+                    ->where('user_id', Auth::id())
+                    ->first();
+
+        if (empty($orders)) {
+            return Redirect::to('');
+        }
+        $ticket_ids     = explode(',' , $orders->ticket_id);
+        $ticket_numbers = explode(',' , $orders->ticket_number);
+        $ticket_infos   = array();
+        foreach ($ticket_ids as $key => $id) {
+            $ticket_target = DB::table('act_tickets')
+                              ->where('id', $id)
+                              ->select(array(
+                                'id', 'name', 'price', 'ticket_start', 'ticket_end'
+                              ))->first();
+            $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
+            $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];
+            $weekday_end    = $weekday[date('w', strtotime($ticket_target->ticket_end))];
+            $ticket_target->ticket_start = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_start ) $2", $ticket_target->ticket_start);
+            $ticket_target->ticket_end   = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_end ) $2", $ticket_target->ticket_end);
+            $ticket_target->quantity     = $ticket_numbers["$key"];
+            array_push($ticket_infos, $ticket_target);
+        }
+
+        $tickets = (object) array(
+            'TradeNo'           => $orders->MerchantOrderNo,
+            'TradeTime'         => $orders->PayTime,
+            'TotalPrice'        => $orders->TotalPrice,
+            'user_name'         => $orders->user_name,
+            'user_phone'        => $orders->user_phone,
+            'user_email'        => $orders->user_email,
+            'activity_name'     => $orders->activity_name,
+            'activity_location' => $orders->location,
+            'ticket_infos'      => $ticket_infos,
+        );
+        return view('activity.confirm', compact('tickets'));
     }
 }

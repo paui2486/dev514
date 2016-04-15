@@ -14,24 +14,30 @@
     <div class="col-md-4 purchase-left">
         <p class="purchase-title">{{ $activity->title }}</p>
         <p class="purchase-location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>台北市信義區基隆路一段155號818室</p>
+        {{--*/ $count = 0; /*--}}
+        @foreach ( $eventData as $event )
+        {{--*/ $count += $event->price * $event->quantity; /*--}}
         <div class="purchase-tickets">
-            <p class="ticket-name">雙人套票</p>
-            <p class="row ticket-item">票券單價：$150NTD</p>         
-            <p class="row ticket-item">購買數量：1</p>
-            <p class="row ticket-item">開始時間：2016-05-30（一）10:00</p>
-            <p class="row ticket-item">結束時間：2016-05-30（一）20:00</p>
+            <p class="ticket-name">{{ $event->name }}</p>
+            <p class="row ticket-item">票券單價：$ {{ $event->price }} NTD</p>
+            <p class="row ticket-item">購買數量：{{ $event->quantity }}</p>
+            <p class="row ticket-item">開始時間：{{ $event->act_start }}</p>
+            <p class="row ticket-item">結束時間：{{ $event->act_end }}</p>
         </div>
-        <div class="purchase-total">總計<span>$250 NTD</span></div>
+        @endforeach
+        <div class="purchase-total">總計<span>$ {{ $count }} NTD</span></div>
         <div class="purchase-mb-top" id="mb-detail">
             <p>查看詳細票券資訊</p>
+            @foreach ( $eventData as $event )
             <div class="purchase-mb-ticket">
-                <p class="ticket-name">雙人套票</p>
-                <p class="row ticket-item">票券單價：$150NTD</p>         
-                <p class="row ticket-item">購買數量：1</p>
-                <p class="row ticket-item">開始時間：2016-05-30（一）10:00</p>
-                <p class="row ticket-item">結束時間：2016-05-30（一）20:00</p>
+                <p class="ticket-name">{{ $event->name }}</p>
+                <p class="row ticket-item">票券單價：$ {{ $event->price }} NTD</p>
+                <p class="row ticket-item">購買數量：{{ $event->quantity }}</p>
+                <p class="row ticket-item">開始時間：{{ $event->act_start }}</p>
+                <p class="row ticket-item">結束時間：{{ $event->act_end }}</p>
             </div>
-            <div class="purchase-mb-total">總計<span>$250 NTD</span></div>
+            @endforeach
+            <div class="purchase-mb-total">總計<span>$ {{ $count }} NTD</span></div>
         </div>
     </div>
     <div class="col-md-8 purchase-right">
@@ -39,13 +45,14 @@
         <div class="row purchase-attention">
             建議您<a href="{{url('login')}}">登入</a>或<a href="{{url('register')}}">加入會員</a>，方便日後查詢訂單紀錄。
         </div>
-        <div class="row purchase-form">
-        <div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label class="col-md-3 control-label"> <span>*</span>聯絡人姓名</label>
-            <div class="col-md-9">
-                <input type="text" class="form-control purchase-form-control" name="name"
-                    value="{{{ Input::old('name', Auth::check() ? Auth::user()->name : null) }}}" placeholder="建議輸入真實姓名（例：陳小明）">
-            </div>
+        <form class="row purchase-form" action="{{ Request::url() }}" method='POST'>
+            {!! csrf_field() !!}
+            <div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                <label class="col-md-3 control-label"> <span>*</span>聯絡人姓名</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control purchase-form-control" name="name"
+                        value="{{{ Input::old('name', Auth::check() ? Auth::user()->name : null) }}}" placeholder="建議輸入真實姓名（例：陳小明）">
+                </div>
             </div>
             <div class="row form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
                 <label class="col-md-3 control-label"> <span>*</span>聯絡人手機</label>
@@ -61,19 +68,24 @@
                       value="{{{ Input::old('email', Auth::check() ? Auth::user()->email : null) }}}" placeholder="請輸入email（例：mis@514.com.tw）">
                 </div>
             </div>
-        </div>
-        <div class="purchase-button">
-            <input type ="button" onclick="history.back()" value="修改票券" class="btn-pre"></input>
-            <a href="#"><button class="btn-submit">前往付款</button></a> 
-        </div>
-    </div>  
+            <div class="purchase-button">
+                <input type="button" onclick="history.back()" value="修改票券" class="btn-pre"></input>
+                <a id="submit" href="#"><button class="btn-submit">前往付款</button></a>
+            </div>
+            <input type="hidden" name="data" value='{{ json_encode(Request::all()) }}'>
+            <input type="hidden" name="price" value='{{ $count }}'>
+        </form>
+    </div>
 </div>
 @endsection
 @section('script')
-<script> 
+<script>
+$(document).ready(function () {
     $('div#mb-detail div').hide();
     $('div#mb-detail > p').click(function(){
-        $(this).next().slideToggle('fast');
+        $(this).parent().find('div').slideToggle('fast');
     });
+    $('#submit').click( funtion() { $('form').submit(); });
+});
 </script>
 @endsection

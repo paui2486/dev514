@@ -55,11 +55,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('activity'                  , 'ActivityController@showResult'    );
     Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
-    Route::get('purchase'                   , 'ActivityController@purchase'      );
-    Route::get('purchase/confirm'           , 'ActivityController@confirm'       );
-    Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
-    Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
-    Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
+    // Route::get('purchase'                   , 'ActivityController@purchase'      );
+    // Route::get('purchase/confirm'           , 'ActivityController@confirm'       );
 
     Route::get('blog'                       , 'ArticleController@index'          );
     Route::get('blog/{category}'            , 'ArticleController@showCategory'   );
@@ -72,6 +69,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
     Route::group(['middleware' => 'auth'], function() {
+        Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
+        Route::get('purchase/{MerchantOrderNo}' , 'PurchaseController@getTradeInfo'  );
+        Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
+        Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
+
         Route::get('dashboard'                        , 'Admin\AdminController@index'           );
         Route::get('dashboard/member'                 , 'Admin\MemberController@index'          );
         Route::get('dashboard/member/profile'         , 'Admin\MemberController@profile'        );
@@ -85,7 +87,6 @@ Route::group(['middleware' => 'web'], function () {
 
     // for admin
     Route::group(['prefix' => 'dashboard', 'namespace' => 'Admin', 'middleware' => 'admin'], function() {
-
         Route::get('admin'                          , 'AdminController@index');
 
         Route::get('member/data'                    , 'MemberController@data'             );

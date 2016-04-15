@@ -131,7 +131,7 @@ class ActivityController extends Controller
                         ->where('activity_id', $activity->id)
                         ->where('left_over', '>', '0')
                         ->select(array(
-                            'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                            'id', 'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
                         ))
                         ->get();
 
