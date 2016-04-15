@@ -47,8 +47,7 @@
                                     票卷名稱
                                 </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="name" id="name"
-                          							value="{{{ Input::old('name', isset($ticket) ? $ticket->name : null) }}}" />
+                                    <input class="form-control" type="text" name="name" id="name" placeholder="例：早鳥票" value="{{{ Input::old('name', isset($ticket) ? $ticket->name : null) }}}" />
                                 </div>
                             </div>
                 				</div>
@@ -62,8 +61,7 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-white" type="button">$</button>
                                         </span>
-                                        <input class="form-control" type="number" name="price"
-                                            value="{{{ Input::old('price', isset($ticket) ? $ticket->price : null) }}}" />
+                                        <input class="form-control" type="number" name="price" value="{{{ Input::old('price', isset($ticket) ? $ticket->price : null) }}}" />
                                     </div>
                                 </div>
                             </div>
@@ -82,30 +80,26 @@
                         <div class="form-group {{{ $errors->has('event_time') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="activity_start">
-                                    活動期間
+                                    票券使用時間
                                 </label>
                                 <div class="col-sm-10">
                                     <div class="col-md-2 table-cell">
                                         <label class="control-label"> From </label>
                                     </div>
                                     <div class="col-xs-8 col-sm-7 col-md-6">
-                                        <input class="form-control act_date" type="text" name="ticket_start_date"
-                                            value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_start ) : null) }}}"/>
+                                        <input class="form-control act_date" type="text" name="ticket_start_date" placeholder="年/月/日" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_start ) : null) }}}"/>
                                     </div>
                                     <div class="col-xs-4 col-sm-5 col-md-4">
-                                        <input class="form-control act_time" type="text" name="ticket_start_time"
-                                            value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_start ) : null) }}}"/>
+                                        <input class="form-control act_time" type="text" name="ticket_start_time" placeholder="時/分" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_start ) : null) }}}"/>
                                     </div>
                                     <div class="col-md-2 table-cell">
                                         <label class="control-label"> To </label>
                                     </div>
                                     <div class="col-xs-8 col-sm-7 col-md-6">
-                                        <input class="form-control act_date" type="text" name="ticket_end_date"
-                                            value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_end ) : null) }}}"/>
+                                        <input class="form-control act_date" type="text" name="ticket_end_date" placeholder="年/月/日" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_end ) : null) }}}"/>
                                     </div>
                                     <div class="col-xs-4 col-sm-5 col-md-4">
-                                        <input class="form-control act_time" type="text" name="ticket_end_time"
-                                            value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_end ) : null) }}}"/>
+                                        <input class="form-control act_time" type="text" name="ticket_end_time" placeholder="時/分" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_end ) : null) }}}"/>
                                     </div>
                                 </div>
                             </div>
