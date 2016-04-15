@@ -17,6 +17,8 @@
     <!--  right slidebar -->
     <link rel="stylesheet" href="{{asset('css/slidebars.css')}}"/>
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/simpleMobileMenu.css" />
     @yield('style')
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
@@ -24,7 +26,6 @@
     <link rel="stylesheet" href="{{asset('css/project.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/mobile.css')}}"/>
     {{-- <link rel="stylesheet" href="{{ elixir('css/app.css') }}"> --}}
-
 </head>
 <body id="app-layout">
     <!-- Google Tag Manager -->
@@ -42,7 +43,7 @@
     /*--}}
 
     @include($header)
-
+    
     @yield('banner')
 
     @yield('content')
@@ -56,9 +57,30 @@
     <script type="text/javascript" src="{{asset('js/jquery.dcjqaccordion.2.7.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jquery.nicescroll.js')}}"></script>
-<!--    <script type="text/javascript" src="{{asset('js/jquery.sparkline.js')}}"></script>-->
-<!--    <script type="text/javascript" src="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')}}"></script>-->
     <script type="text/javascript" src="{{asset('js/owl.carousel.js')}}"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="js/simpleMobileMenu.js"></script>
+	<script type="text/javascript">
+
+		jQuery(document).ready(function($) {
+			$('.smobitrigger').smplmnu();
+		});
+
+	</script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+    </script>
     <!--right slidebar-->
     <script src=" {{asset('js/slidebars.min.js')}}"></script>
 {{--     <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script> --}}
@@ -83,6 +105,7 @@
             $.slidebars();
         });
     </script>
+
     @yield('script')
 
 </body>

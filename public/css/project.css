@@ -9,13 +9,12 @@ html {
 }
 /*-----------------home navbar-----------------*/
 
-.navbar {
-    position: absolute;
-    top: 0;
-    z-index: 999;
-    height: 80px;
+.Navbar { 
+    background-color: transparent;
+    position:absolute;
+    padding: 10px;
+    z-index: 99999;
     width: 100%;
-    padding: 0px 20px;
 }
 
 .navbar-brand img {
@@ -24,53 +23,33 @@ html {
     margin:auto;
 }
 
+.navigation {
+    padding:10px;
+}
+
+.navigation nav ul li a {
+    color: #fff;
+    font-weight: 500; 
+    font-size: 17px;
+    letter-spacing: 3px;
+    text-shadow: 0px 0px 3px #000;
+}
+
+.navbar-brand {
+    padding: 10px 20px;
+}
+
 .page-navbar-brand img {
     height:50px;
 }
 
-.navbar-collapse {
-    font-size: 16px;
-    letter-spacing: 3px;
-}
-
-.navbar-right {
-    margin-top:15px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.navbar-right > li {
-    margin-right: 10px;
-}
-
-.navbar-right > li > a {
-    color: white;
-    text-shadow: 0px 0px 3px #000;
-}
-
-ul.navbar-nav > li :hover{
-    background-color:rgba(255,255,255,0.6);
-}
-
-li.navbar-host {
-    border: 1px solid #fff;
-}
-
-ul.dropdown-menu > li :hover {
-    background-color: white;
-    color: black;
-}
-
-ul.dropdown-menu {
-    background-color:rgba(255,255,255,0.6);
-    border-radius: 8px;
-    margin-top: 10px !important;
-}
-
-.navbar-toggle {
-    color: white;
-    font-size:16px;
-    margin-right: 0px;
+.open>.dropdown-menu {
+    display: block;
+    position: absolute;
+    right: 20px;
+    left: inherit;
+    width: 100px;
+    top: 75px;
 }
 
 /*-----------------page navber-----------------*/

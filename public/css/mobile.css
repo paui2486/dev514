@@ -1,24 +1,23 @@
-/*
 
+/*
 @media screen and (max-width: 768px) {
 
 
 }
 */
+
 @media screen and (min-width: 481px) {
-    .navbar-brand-mobile,
-    .navbar-toggle-mobile,
     .searchbar-mobile,
     .home-mb-info,
     .new-activity > button,
     .home-mb-order,
     .home-mb-count ,
-    .navbar-mb-container,
     .actpage-mb-price,
     .purchase-mb-btn,
     .purchase-mb-time,
     .purchase-mb-top,
-    .list-mb-content {
+    .list-mb-content,
+    .navbar-mb-brand {
         display: none;
     }
 }
@@ -37,8 +36,6 @@
     .online-secretary,
     .about-us,
     .funtion-intro,
-    .navbar-brand,
-    .navbar-container,
     .act-page-blur,
     .actpage-right-content,
     .dashboard-price,
@@ -47,7 +44,8 @@
     .purchase-tickets,
     .list-banner,
     .list-filter-content,
-    .list-filter-title {
+    .list-filter-title,
+    .navbar-brand {
         display: none;
     }
     
@@ -55,36 +53,37 @@
         margin-top: 0px;
     }
     
-    .navbar {
-        position: inherit;
-        height: 45px;
+    .Navbar {
         background-color: white;
-        margin: 0px;
-        padding: 0px;
+        position:inherit;
+        top: 0;
+        z-index: 99999;
+        width: 100%;
+        height: 50px;
     }
     
-    .navbar-brand-mobile {
-        padding-top: 13px;
-        text-align: center;
+    .navbar-mb-brand {
+        padding: 0;
     }
     
-    .navbar-brand-mobile img {
-        height: 35px;
+    .navbar-mb-brand img {
+        height: 34px;
     }
     
-    .navbar-toggle {
-        color: #333333;
-        margin: 0px;
-        padding-top: 14px;
+    .smobitrigger {
+        color: #666;
+        font-size: 30px;
     }
     
-    .navbar-toggle-mobile {
-        border: none;
-        color: #333333;
-        padding:10px;
-        margin-top: 6px;
-        background-color: transparent;
-        font-size: 16px;
+    .navigation {
+        padding: 0;
+        position: absolute;
+        top: 3px;
+        right: 10px;
+    }
+    
+    .navigation nav ul li a {
+        text-shadow: none;
     }
     .searchbar-mobile {
         position: absolute;
@@ -242,11 +241,11 @@
         margin-left: 25px;
     }
     .sb-toggle-right {
-        margin-top: 14px;
-        margin-right: 5px;
+        padding: 5px 5px 20px 10px;
     }
     .sb-slidebar {
-        background-color: #f2f2f2;
+        position: absolute;
+        height: 100%;
     }
     
     .sb-slidebar img {
