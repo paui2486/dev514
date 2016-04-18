@@ -162,7 +162,7 @@
                                         <input class="form-control act_time" type="text" name="activity_end_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_end ) : null) }}}"/>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 col-md-5">
+                                <div class="col-sm-4 col-md-5"  style="display:none">
                                     <label class="control-label col-sm-4" for="time_range">
                                         活動長度
                                     </label>
@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}"  style="display:none">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="description">
                                     活動摘要
@@ -339,10 +339,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][ticket_start_date]"/>
+                                                <input class="form-control act_date act_start_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][ticket_start_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket_time" type="text" placeholder="時/分" name="ticket[0][ticket_start_time]"/>
+                                                <input id="ticket_start_time" class="form-control act_time act_start_time ticket_time" type="text" placeholder="時/分" name="ticket[0][ticket_start_time]"/>
                                             </div>
                                             <div class="col-xs-2 table-cell">
                                                 <label class="control-label">
@@ -350,10 +350,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][ticket_end_date]"/>
+                                                <input class="form-control act_date act_end_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][ticket_end_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket_time" type="text" placeholder="時/分" name="ticket[0][ticket_end_time]"/>
+                                                <input id="ticket_end_time" class="form-control act_time act_end_time ticket_time" type="text" placeholder="時/分" name="ticket[0][ticket_end_time]"/>
                                             </div>
                                         </div>
                                     </div>
@@ -373,10 +373,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][sale_start_date]"/>
+                                                <input class="form-control act_date sale_start_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][sale_start_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket_time" type="text" placeholder="時/分" name="ticket[0][sale_start_time]"/>
+                                                <input id="sale_start_time" class="form-control act_time sale_start_time ticket_time" type="text" placeholder="時/分" name="ticket[0][sale_start_time]"/>
                                             </div>
                                             <div class="col-xs-2">
                                                 <label class="control-label">
@@ -384,10 +384,10 @@
                                                 </label>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input class="form-control act_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][sale_end_date]"/>
+                                                <input class="form-control act_date sale_end_date ticket_date" type="text" placeholder="年/月/日" name="ticket[0][sale_end_date]"/>
                                             </div>
                                             <div class="col-xs-4">
-                                                <input class="form-control act_time ticket_time" type="text" placeholder="時/分" name="ticket[0][sale_end_time]"/>
+                                                <input id="sale_end_time" class="form-control act_time sale_end_time ticket_time" type="text" placeholder="時/分" name="ticket[0][sale_end_time]"/>
                                             </div>
                                         </div>
                                     </div>
@@ -497,17 +497,24 @@
 
         var minDate = moment().format("YYYY-MM-DD");
         $(".act_date").datetimepicker({
-            // minDate: moment(),
             format: 'YYYY-MM-DD',
             startDate: $(this).value,
         });
 
         $("input[name=activity_start_date]").on("dp.change", function (e) {
+            $('input.act_start_date').data("DateTimePicker").minDate(e.date);
+            $('input.sale_start_date').data("DateTimePicker").minDate(e.date);
+
             $('input[name="activity_end_date"]').data("DateTimePicker").minDate(e.date);
         });
 
+
+        $("input[name=activity_end_date]").on("dp.change", function (e) {
+            $('input.act_end_date').data("DateTimePicker").minDate(e.date);
+            $('input.sale_end_date').data("DateTimePicker").minDate(e.date);
+        });
+
         $(".act_time").datetimepicker({
-            // minDate: moment({hour: 0, minute: 0}),
             stepping: 10,
             format: 'HH:mm',
             startDate: $(this).value,
@@ -516,10 +523,14 @@
         if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
             $("input[name='activity_start_time']").on("dp.change", function (e) {
                 $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
+                $('input.act_start_time').data('DateTimePicker').date(e.date);
+                $('input.sale_start_time').data('DateTimePicker').date(e.date);
             });
         }
 
         $("input[name='activity_end_time']").on("dp.change", function (e) {
+            $('input.act_end_time').data('DateTimePicker').minDate(e.date);
+            $('input.sale_end_time').data('DateTimePicker').minDate(e.date);
             var start_time_arr = $("input[name='activity_start_time']").val().split(':');
             var end_time_arr   = $("input[name='activity_end_time']").val().split(':');
             var timecost       = Math.floor(end_time_arr[0]) - Math.floor(start_time_arr[0]) +
