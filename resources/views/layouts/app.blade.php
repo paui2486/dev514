@@ -59,7 +59,7 @@
     <script type="text/javascript" src="{{asset('js/jquery.nicescroll.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/owl.carousel.js')}}"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="js/simpleMobileMenu.js"></script>
+	<script src="{{asset('js/simpleMobileMenu.js')}}"></script>
 	<script type="text/javascript">
 
 		jQuery(document).ready(function($) {

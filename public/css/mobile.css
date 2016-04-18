@@ -17,8 +17,9 @@
     .purchase-mb-time,
     .purchase-mb-top,
     .list-mb-content,
-    .navbar-mb-brand {
-        display: none;
+    .navbar-mb-brand,
+    .drawer-mb{
+        display: none!important ;
     }
 }
 
@@ -45,8 +46,10 @@
     .list-banner,
     .list-filter-content,
     .list-filter-title,
-    .navbar-brand {
-        display: none;
+    .navbar-brand,
+    li.drawer,
+    .navbar-host {
+        display: none!important;
     }
     
     .act-page-container {
@@ -85,6 +88,7 @@
     .navigation nav ul li a {
         text-shadow: none;
     }
+    
     .searchbar-mobile {
         position: absolute;
         z-index: 9999;
@@ -228,43 +232,19 @@
         padding: 20px;
     }
     /*---------------sliderbar---------------*/
-    
-    .top-nav-left {
-        left: 0px;
-        width: 50px;
+    li.drawer-mb {
+      text-align: center;  
+      padding: 10px 0;
     }
     
-    .sb-toggle-left {
-        cursor: pointer;
-        margin-top: 8px;
-        font-size: 22px;
-        margin-left: 25px;
-    }
-    .sb-toggle-right {
-        padding: 5px 5px 20px 10px;
-    }
-    .sb-slidebar {
-        position: absolute;
-        height: 100%;
+    li.drawer-mb > a {
+        padding: 10px 0!important;
     }
     
-    .sb-slidebar img {
-        width: 100%;
-        padding: 15px 50px;
+    li.drawer-mb > a:hover {
+        color: #fff!important;
     }
     
-    .side-list a li {
-        color: white;
-        font-size: 16px;
-        text-align: center;
-        padding: 15px 0px;
-        letter-spacing: 2px;
-        border-bottom: 1px dashed #4d4d4d;
-    }
-    
-    .side-list a li:hover {
-        background-color: #4d4d4d;
-    }
     /*活動內容頁*/
     .actpage-purchase {
         margin: 20px auto;

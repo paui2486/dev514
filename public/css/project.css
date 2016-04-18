@@ -30,9 +30,10 @@ html {
 .navigation nav ul li a {
     color: #fff;
     font-weight: 500; 
-    font-size: 17px;
-    letter-spacing: 3px;
+    font-size: 16px;
+    letter-spacing: 2px;
     text-shadow: 0px 0px 3px #000;
+    width: 100%;
 }
 
 .navbar-brand {
@@ -43,42 +44,71 @@ html {
     height:50px;
 }
 
-.open>.dropdown-menu {
-    display: block;
-    position: absolute;
+.navbar-collapse {
+    font-size: 16px;
+    letter-spacing: 3px;
+}
+
+li.navbar-host {
+    border: 1px solid #fff;
+}
+
+ul.dropdown-menu {
+    float: right;
     right: 20px;
-    left: inherit;
+    left: auto;
+    top: 80px;
     width: 100px;
-    top: 75px;
+    text-align: center;
+    background-color: rgba(255,255,255,0.8)
+}
+
+ul.dropdown-menu > li {
+    width: 100%!important;
+}
+
+ul.dropdown-menu > li :hover{
+    background-color:rgba(255,255,255,0.9)!important;
+}
+
+ul.dropdown-menu > li > a {
+    text-shadow: none!important;
+    color: #666!important;
+}
+
+.navbar-toggle {
+    color: white;
+    font-size:16px;
+    margin-right: 0px;
 }
 
 /*-----------------page navber-----------------*/
 
-.page-navbar {
+.page-Navbar {
     background-color: white;
     margin-bottom: 0px;
     box-shadow: 1px 0px 5px #ccc;
     border-bottom: 1px solid #ccc;
     border-radius: 0px;
+    height: 90px;
+    position: inherit;
 }
 
-.page-navbar-right > li > a  {
-    color:#60574e;
-    text-shadow: none;
+.page-mobimenu > li > a {
+    color:#60574e!important;
+    text-shadow: none!important;
 }
 
-.page-navbar-right > li > a:hover {
-    background-color: rgba(0,0,0,0.1)
-}
-
-.page-navbar-toggle,
-.blog-navbar-toggle {
-    background-color:white;
-    color: #736357;
+.page-mobimenu > li > a:hover {
+    background-color: rgba(0,0,0,0.1)!important;
 }
 
 li.page-navbar-host {
     border-color: #60574e;
+}
+
+ul.page-dropdown-menu {
+    top: 90px;
 }
 
 /*-----------------blog navber-----------------*/
@@ -886,10 +916,9 @@ li.collapse-blog-category {
 }
 
 .login-container {
-    padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
-    margin-top: 80px;
+    padding:70px 0;
 }
 
 .control-label > span {
@@ -949,11 +978,9 @@ li.collapse-blog-category {
 }
 
 .register-container {
-    height: 100%;
-    padding: 100px 0px;
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
-    margin-top: 80px;
+    padding: 70px 0;
 }
 
 .register-panel {
@@ -1394,7 +1421,7 @@ li.collapse-blog-category {
 
 .page-container {
     background-color: #f4eee9;
-    margin-top: 80px;
+    padding: 20px 0;
 }
 
 .page-content {
@@ -1485,9 +1512,11 @@ li.collapse-blog-category {
 
 /*--------------activity-page活動內容頁------------------*/
 
+/*
 .act-page-container {
     margin-top:80px;
 }
+*/
 
 .act-page-blur {
     z-index: 1;
@@ -1508,8 +1537,9 @@ li.collapse-blog-category {
     background-size: cover;
     width: 80%;
     position: absolute;
+    background-position: center;
     left: 10%;
-    top:80px;
+    top:90px;
 }
 
 .actpage-content {
@@ -1896,9 +1926,7 @@ li.collapse-blog-category {
 
 .purchase-content {
     margin: 0px auto;
-    margin-top: 80px;
-    max-width: 1050px;
-    padding:50px;
+    padding: 50px 100px;
     background-color: white;
 }
 
@@ -1986,6 +2014,10 @@ li.collapse-blog-category {
 
 .purchase-attention a {
     color: #f37e7e;
+}
+
+.purchase-form {
+    margin: 0;
 }
 
 .purchase-form > div {
@@ -2232,7 +2264,6 @@ li.collapse-blog-category {
 .list-container {
     margin: 0px;
     padding: 0px;
-    margin-top:80px;
     background-color: white;
 }
 
