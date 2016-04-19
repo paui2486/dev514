@@ -20,7 +20,7 @@
             <div class="list-filter-panel">
                 <p class="list-filter-title"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜尋活動</p>
                 <div class="list-filter-content">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <!-- <div class="list-filter-row">
                         <p>想和誰去</p>
                         <div class="row list-filter-option">
@@ -31,7 +31,6 @@
                         endforeach
                         </div>
                     </div> -->
-
                     <div class="list-filter-row">
                         <p>想玩什麼</p>
                         <div class="row list-filter-option">
@@ -88,7 +87,6 @@
                         endforeach
                         </div>
                     </div> -->
-
                     <div class="list-filter-row">
                         <p>想玩什麼<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
                         <div class="row list-filter-option">

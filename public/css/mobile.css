@@ -18,7 +18,9 @@
     .purchase-mb-top,
     .list-mb-content,
     .navbar-mb-brand,
-    .drawer-mb{
+    .drawer-mb,
+    .mobimenu img,
+    .gotop-mb {
         display: none!important ;
     }
 }
@@ -48,8 +50,23 @@
     .list-filter-title,
     .navbar-brand,
     li.drawer,
-    .navbar-host {
+    .navbar-host,
+    .gotop {
         display: none!important;
+    }
+    
+    .gotop-mb {
+        display: none;
+        position: fixed;
+        right: 0px;
+        bottom:10px;    
+        padding: 5px;    
+        cursor: pointer;
+        z-index: 999999;
+    }
+    
+    .gotop-mb img {
+        width: 80px;
     }
     
     .act-page-container {
@@ -87,6 +104,7 @@
     
     .navigation nav ul li a {
         text-shadow: none;
+        border-bottom: 1px dashed #ccc;
     }
     
     .searchbar-mobile {
@@ -233,8 +251,8 @@
     }
     /*---------------sliderbar---------------*/
     li.drawer-mb {
-      text-align: center;  
-      padding: 10px 0;
+      text-align: center;
+      border-top: 1px dashed #ccc;
     }
     
     li.drawer-mb > a {
@@ -317,7 +335,44 @@
         position: fixed;
         width: 100%;
         z-index: 9990;
-        bottom: 0px;
+        bottom: 15px;
+    }
+    
+    .purchase-mb-submit {
+        text-align: center;
+        background-color: #ff5a5f;
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+    
+    .actpage-mb-purchase {
+        background-color: #ff5a5f;
+        border-radius: 5px;
+        text-align: center;
+        padding:15px 5px;
+        margin: 0px auto;
+        width:90%;
+        cursor: pointer;
+    }
+    
+    .actpage-mb-purchase p ,
+    .actpage-mb-purchase {
+        color: white;
+        font-size: 16px;
+        letter-spacing: 2px;
+        margin-bottom: 0px;
+    }
+
+    .actpage-mb-purchase:hover {
+        background-color: #dd4e58;
+    }
+
+    .actpage-mb-purchase img {
+        width: 20px;
+        margin-bottom: 3px;
+        margin-right: 3px;
     }
     
     /*訂購頁面*/

@@ -7,6 +7,23 @@ body {
 html {
     height: 100%;
 }
+
+/*-----back to top-----*/
+
+.gotop {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;    
+    padding: 10px 15px;    
+    cursor: pointer;
+    z-index: 999999;
+}
+
+.gotop img {
+    width: 100px;
+}
+
 /*-----------------home navbar-----------------*/
 
 .Navbar { 
@@ -80,6 +97,15 @@ ul.dropdown-menu > li > a {
     color: white;
     font-size:16px;
     margin-right: 0px;
+}
+
+.mobimenu img {
+    width: 100%;
+    padding: 10px 20px;
+} 
+
+.mobimenu li {
+    text-align: center;
 }
 
 /*-----------------page navber-----------------*/
@@ -1789,7 +1815,7 @@ li.collapse-blog-category {
 }
 
 .cart-number select {
-    font-size: 26px;
+    font-size: 14px;
     width: 60px;
 }
 
@@ -1852,7 +1878,7 @@ li.collapse-blog-category {
 
 .cart-option label {
     letter-spacing: 2px;
-    font-weight: 100;
+    font-weight: 500;
     padding-left: 5px;
     cursor: pointer;
 }
@@ -1864,6 +1890,7 @@ li.collapse-blog-category {
     padding:10px 5px;
     margin: 0px auto;
     width:90%;
+    cursor: pointer;
 }
 
 .actpage-purchase p,
@@ -1941,7 +1968,7 @@ li.collapse-blog-category {
     background-image: url(/img/pics/ticket.png);
     background-size: 100% auto;
     background-repeat: no-repeat;
-    padding: 10px;
+    padding: 18px;
 }
 
 .purchase-title {

@@ -13,11 +13,19 @@
         <nav>
             <a href="javascript:void(0)" class="smobitrigger ion-navicon-round"></a>
             <ul class="mobimenu">
+                <a href="/"><img src="/img/pics/logo-fairlavie.png"></a>
 <!--            <li><a href="{{ url('blog') }}">部落格</a></li>-->
                 <li class="navbar-host"><a href="{{ url('dashboard/activity/create') }}">辦活動</a></li>
                 @if (Auth::guest())
-                <li><a href="{{ url('login') }}">登入</a></li>
-                <li><a href="{{ url('register') }}">註冊</a></li>
+                <li class="drawer"><a href="{{ url('login') }}">登入</a></li>
+                <li class="drawer"><a href="{{ url('register') }}">註冊</a></li>
+                <li class="drawer-mb">
+                    <a href="{{ url('login') }}">登入</a>
+                    <a href="{{ url('register') }}">加入會員</a>
+                    <a href="{{ url('dashboard/activity/create') }}">辦活動</a>
+                    <a href="{{ url('About') }}">關於 514</a>
+                    <a href="{{ url('Privacy') }}">隱私與服務條款</a>
+                </li>
                 @else
                 <li class="drawer">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
@@ -41,7 +49,7 @@
                     <a href="{{ url('logout') }}">登出</a>
                 </li>
                 @endif
-            </ul>         
+            </ul>
         </nav>
     </div>
 </div>

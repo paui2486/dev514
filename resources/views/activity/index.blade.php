@@ -1,6 +1,7 @@
 @extends('layouts.app') @section('meta') @foreach($meta as $key => $value)
 <meta {{ $key }} content="{{ $value }}"> @endforeach
 <title>514活動頻道 - {{ $activity->title }}</title>
+<link rel="stylesheet" href="/css/colorbox.css" />
 @endsection
 @section('content')
 
@@ -25,8 +26,8 @@
                     @foreach($tickets as $key => $ticket)
                     {{--*/ $count += $ticket->left_over; /*--}}
                     <div class="row cart-option">
-                        <div class="col-md-8">
-                            <input name="ticket_id" type="checkbox" value="{{ $key }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
+                        <div class="col-md-8 ">
+                            <input name="ticket_id" type="checkbox" value="{{ $key }}" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
                         </div>
                         <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
                     </div>
@@ -72,15 +73,63 @@
                 </div>
             </div>
         </div>
+<!--------------mobile submit button--------------->
         <div class="purchase-mb-btn">
             @if(count($tickets)>0)
-            <div class="row actpage-purchase">
-                <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
+            <a class='inline' href="#inline_content">
+            <div class="row actpage-mb-purchase">
+               <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
             </div>
+            </a>
+            <div style='display:none'>
+                <div id='inline_content' style='padding:10px; background:#fff;'>
+                    <p class="actpage-buy-now">{{ $activity->title }}</p>
+                    <div class="row actpage-cart-ticket">
+                        {!! csrf_field() !!}
+                        {{--*/ $count = 0; /*--}}
+                        @foreach($tickets as $key => $ticket)
+                        {{--*/ $count += $ticket->left_over; /*--}}
+                        <div class="row cart-option">
+                            <div class="col-xs-8">
+                                <input name="ticket_id" type="checkbox" value="{{ $key }}" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
+                            </div>
+                            <p class="col-xs-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
+                        </div>
+                        <div class="cart-number">
+                            <p>請選擇票券數量：
+                                <select name="ticket-{{$key}}-number">
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor
+                                </select>
+                            </p>
+                        </div>
+                        <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
+                        <div id="OneClick" class="row cart-option-detail">
+                            <ul>
+                                <li>
+                                    <p>詳細票券資訊
+                                        <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                    </p>
+                                    <ul>
+                                        <li>票價：$ {{ $ticket->price }} NTD</li>
+                                        <li>活動開始： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+
+                                        <li>活動結束： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="purchase-mb-submit">繼續下一步</div>
+                </div>
+            </div>         
             @else
             <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
             @endif
         </div>
+<!--------------mobile submit buttonv end--------------->
         <div class="row actpage-dashboard">
             <div class="col-md-2 col-xs-4">
                 <a href="{{ URL('member/'. $activity->hoster ) }}">
@@ -200,6 +249,9 @@
 @section('script')
 <script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="{{ asset('js/jquery.colorbox.js') }}"></script>
+
 <script>
     document.getElementById('shareBtn').onclick = function () {
         var obj = {
@@ -233,6 +285,11 @@
             } else {
                 RightFixed.removeClass("right-content-fixed");
             }
+
+        $(".inline").colorbox({inline:true, width:"90%"});
+        $("#click").click(function(){ 
+            $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+            return false;
         });
     });
 
@@ -246,11 +303,25 @@
         });
         var url = "{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
         window.location.href = url;
+        });
+        
+    $('.purchase-mb-submit').click(function() {
+        var ticketIds = [];
+        var ticketNumbers = [];
+        $('input[name=ticket_id]:checked').each(function() {
+            id = $(this).val();
+            ticketIds.push($('input[name=ticket-' + id + '-id]').val());
+            ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
+        });
+        var url = "{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
+        window.location.href = url;
+        
     });
 
     $('div#OneClick ul li ul').hide();
     $('div#OneClick > ul > li >p').click(function(){
         $(this).next().slideToggle('fast');
     });
+         });
 </script>
 @endsection

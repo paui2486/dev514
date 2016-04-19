@@ -53,6 +53,34 @@
         //responsive code end
     });
 </script>
+<script type="text/javascript">
+    $(function(){
+        $(".gotop").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:0
+            },1000);
+        });
+        $(window).scroll(function() {
+            if ( $(this).scrollTop() > 300){
+                $('.gotop').fadeIn("fast");
+            } else {
+                $('.gotop').stop().fadeOut("fast");
+            }
+        });
+        $(".gotop-mb").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:0
+            },1000);
+        });
+        $(window).scroll(function() {
+            if ( $(this).scrollTop() > 150){
+                $('.gotop-mb').fadeIn("fast");
+            } else {
+                $('.gotop-mb').stop().fadeOut("fast");
+            }
+        });
+    });
+</script>
 @endsection
 
 @section('banner')
@@ -95,25 +123,15 @@
             {!! csrf_field() !!}
             <div class="filter-bg">
                 <div class="pure-g panel-filter">
-                    <div class="pure-u-4-24">
-                        <select name="withWho" class="dropdown" >
-                            <option value="" class="label">想和誰去</option>
-                            @foreach( $home->filter->who as $with_who )
-                            <option value="{{ $with_who->id }}"> {{ $with_who->name }} </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="pure-u-4-24">
-                        <select name="playWhat" class="dropdown">
+                    <div class="filter-select pure-u-5-24">
+                        <select name="playWhat" class="filter-select dropdown">
                             <option value="" class="label">想玩什麼</option>
                             @foreach( $home->filter->what as $play_what )
                             <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="pure-u-4-24">
+                    <div class="pure-u-5-24">
                         <select name="goWhere" class="dropdown">
                             <option value="" class="label">想去哪兒</option>
                             @foreach( $home->filter->where as $key_where => $go_where )
@@ -122,16 +140,16 @@
                         </select>
                     </div>
 
-                    <div class="pure-u-4-24">
+                    <div class="pure-u-5-24">
                         <select name="atWhen" class="dropdown">
-                            <option value="" class="label">時間</option>
+                            <option value="" class="label">什麼時候</option>
                             @foreach( $home->filter->when as $key_when => $at_when )
                             <option value="{{ $at_when->id }}"> {{ $at_when->name }} </option>
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="pure-u-4-24">
+                    <div class="pure-u-5-24">
                         <select name="haveMoney" class="dropdown">
                             <option value="" class="label">預算多少</option>
                             @foreach( $home->filter->price as $key_price => $price )
@@ -338,5 +356,7 @@
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
+        <div class="gotop"><img src="/img/pics/backtotop.png"></div>
+        <div class="gotop-mb"><img src="/img/pics/backtotop-mb.png"></div>
     </div>
 @endsection
