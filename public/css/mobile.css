@@ -19,7 +19,8 @@
     .list-mb-content,
     .navbar-mb-brand,
     .drawer-mb,
-    .mobimenu img {
+    .mobimenu img,
+    .gotop-mb {
         display: none!important ;
     }
 }
@@ -49,8 +50,23 @@
     .list-filter-title,
     .navbar-brand,
     li.drawer,
-    .navbar-host {
+    .navbar-host,
+    .gotop {
         display: none!important;
+    }
+    
+    .gotop-mb {
+        display: none;
+        position: fixed;
+        right: 0px;
+        bottom:10px;    
+        padding: 5px;    
+        cursor: pointer;
+        z-index: 999999;
+    }
+    
+    .gotop-mb img {
+        width: 80px;
     }
     
     .act-page-container {
