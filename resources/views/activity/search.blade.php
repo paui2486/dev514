@@ -21,16 +21,16 @@
                 <p class="list-filter-title"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜尋活動</p>
                 <div class="list-filter-content">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="list-filter-row">
+                    <!-- <div class="list-filter-row">
                         <p>想和誰去</p>
                         <div class="row list-filter-option">
-                        @foreach( $filter['who'] as $withWho )
+                        foreach( $filter['who'] as $withWho )
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $withWho->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value=" $withWho->id }}"> $withWho->name }}
                             </label>
-                        @endforeach
+                        endforeach
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="list-filter-row">
                         <p>想玩什麼</p>
@@ -77,17 +77,17 @@
                     </div>
                 </div>
                 <div class="list-mb-content">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="list-filter-row">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <!-- <div class="list-filter-row">
                         <p>想和誰去<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
                         <div class="row list-filter-option">
-                        @foreach( $filter['who'] as $withWho )
+                        foreach( $filter['who'] as $withWho )
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $withWho->id }}">{{ $withWho->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value=" $withWho->id }}"> $withWho->name }}
                             </label>
-                        @endforeach
+                        endforeach
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="list-filter-row">
                         <p>想玩什麼<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
@@ -189,7 +189,7 @@ $(document).ready(function () {
                     <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div>  \
                     </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' \
                     </p> \
-                    <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " + 
+                    <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
                     <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['location'] + ' </p> \
                     </div> \

@@ -177,9 +177,11 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('activity'                              , 'ActivityController@store'        );
         Route::get('activity/data'                          , 'ActivityController@data'         );
         Route::get('activity/list'                          , 'ActivityController@showActivity' );
+        Route::get('activity/checkout'                      , 'ActivityController@showCheckout' );
+        Route::post('activity/checkout'                      , 'ActivityController@letCheckout' );
         Route::get('activity/create'                        , 'ActivityController@create'       );
         Route::get('activity/{id}'                          , 'ActivityController@show'         );
-        Route::delete('activity/{id}'                         , 'ActivityController@destroy'      );
+        Route::delete('activity/{id}'                       , 'ActivityController@destroy'      );
         Route::get('activity/{id}/delete'                   , 'ActivityController@getDelete'    );
         Route::post('activity/{id}/update'                  , 'ActivityController@update'       );
         // Route::get('activity/history'                       , 'ActivityController@getHistory' );

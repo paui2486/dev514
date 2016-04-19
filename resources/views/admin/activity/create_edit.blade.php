@@ -162,7 +162,7 @@
                                         <input class="form-control act_time" type="text" name="activity_end_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_end ) : null) }}}"/>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 col-md-5"  style="display:none">
+                                <div class="col-sm-4 col-md-5" style="display:none">
                                     <label class="control-label col-sm-4" for="time_range">
                                         活動長度
                                     </label>
@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group {{{ $errors->has('withWho') ? 'has-error' : '' }}}">
+                        <div class="form-group {{{ $errors->has('withWho') ? 'has-error' : '' }}}" style="display:none">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="withWho">
                                     活動對象
@@ -284,14 +284,14 @@
                                         草稿
                                     </label>
                                     <label class="col-xs-3">
-                                        <input type="radio" name="status" value="3"
-                                        {{{ Input::old('status', (isset($activity) && $activity->status == 3 ) ? 'checked' : null) }}}>
-                                        送審
-                                    </label>
-                                    <label class="col-xs-3">
                                         <input type="radio" name="status" value="2"
                                         {{{ Input::old('status', (isset($activity) && $activity->status == 2 ) ? 'checked' : null) }}}>
                                         隱藏
+                                    </label>
+                                    <label class="col-xs-3">
+                                        <input type="radio" name="status" value="3"
+                                        {{{ Input::old('status', (isset($activity) && $activity->status == 3 ) ? 'checked' : null) }}}>
+                                        送審
                                     </label>
                                     @if (Auth::user()->adminer )
                                     <label class="col-xs-3">

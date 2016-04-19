@@ -35,7 +35,6 @@ class MemberController extends Controller
 
     public function profile()
     {
-        // For AJAX
         $member = Auth::user();
         return view('admin.member.create_edit', compact('member'));
     }
@@ -142,9 +141,9 @@ class MemberController extends Controller
             }
 
             if (!empty($request->password)) {
-                $update['password'] = bcrypt($request->password);
+                $updateArray['password'] = bcrypt($request->password);
             }
-            // return Input::all();
+
             $user              = DB::table('users')->where('id', $id);
             if (!empty($request->avatar)) {
                 $params            = Library::upload_param_template();
@@ -158,9 +157,6 @@ class MemberController extends Controller
                 $result            = $user->update($updateArray);
             }
 
-            if ( Auth::user()->adminer ) {
-                return Redirect::to('dashboard/member');
-            }
             return Redirect::back();
         } else {
             return Redirect::to();

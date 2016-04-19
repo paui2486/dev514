@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use DB;
 use Log;
 use Auth;
+use Mail;
 use Input;
 use Session;
 use Response;
@@ -584,7 +585,7 @@ class ActivityController extends Controller
         DB::table('activities')->where('id', $id)->update(array('status' => 4));
     }
 
-    public function showPriview()
+    public function showPriview($id)
     {
         $activity = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
@@ -598,10 +599,11 @@ class ActivityController extends Controller
                         'categories.name as category',  'users.name as hoster', 'users.nick as nick',
                         'users.avatar as host_photo',   'users.description as host_destricption'
                       ))
+                      ->where('activities.id', $id)
                       ->first();
 
         $tickets = DB::table('act_tickets')
-                    ->where('activity_id', $activity->id)
+                    ->where('activity_id', $id)
                     ->where('left_over', '>', '0')
                     ->select(array(
                         'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
@@ -626,5 +628,71 @@ class ActivityController extends Controller
         $meta   = array();
 
         return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests'));
+    }
+
+    public function showCheckout()
+    {
+        $tickets = DB::table('act_tickets')
+                    ->leftJoin('activities', 'activities.id', '=', 'act_tickets.activity_id')
+                    ->where('activities.status', '=', 4)
+                    ->whereDate('activities.activity_end', '<', date('Y-m-d'))
+                    ->where('activities.hoster_id', Auth::user()->id)
+                    ->select(array(
+                      'activities.id as activity_id', 'activities.title as activity_name', 'act_tickets.id as ticket_id',
+                      'act_tickets.name as ticket_name', 'act_tickets.left_over', 'act_tickets.total_numbers', 'act_tickets.price',
+                    ))
+                    ->get();
+
+        $orders = DB::table('orders')
+                    ->where('hoster_id', Auth::id())
+                    ->whereIn('status', array(1,3));
+
+        $price = 0;
+        $temp = array();
+        foreach ($orders->get() as $order) {
+            $price  += $order->ticket_price;
+            $tids    = explode(',' , $order->ticket_id);
+            $numbers = explode(',' , $order->ticket_number);
+            foreach ($tids as $key => $ticket_id) {
+                if (isset($temp[$ticket_id])) {
+                    $temp[$ticket_id] += $numbers[$key];
+                } else {
+                    $temp[$ticket_id] = $numbers[$key];
+                }
+            }
+        }
+
+        foreach ($tickets as $ticket) {
+            if (isset($temp[$ticket->ticket_id])) {
+                $ticket->sold = $temp[$ticket->ticket_id];
+            } else {
+                $ticket->sold = 0;
+            }
+        }
+
+        $orders->update(array('status'=>3));
+
+        return view('admin.activity.checkout', compact('tickets'));
+    }
+
+    public function letCheckout()
+    {
+        $orders = DB::table('orders')
+                    ->where('hoster_id', Auth::id())
+                    ->where('status', 3);
+        $price = $orders->sum('ticket_price');
+        $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
+        $msg = '請匯錢給使用者'.Auth::user()->name. '; 帳號是 '. Auth::user()->bank_name. ' : '. Auth::user()->bank_account . '; 金額:'. intval($price * 0.9);
+        Mail::send('auth.emails.checkout', array('msg' => $msg),  function($message) use ($mails, $msg) {
+            $message->from('service@514.com.tw', '514 活動頻道');
+            $message->to($mails)->subject('催款通知 : '. Auth::user()->name);
+        });
+
+        $activities = $orders->groupBy('activity_id')->lists('activity_id');
+        DB::table('activities')->whereIn('id', $activities)->update(array('status'=>5));
+        $orders->update(array('status' => 4));
+
+        Session::flash('message', '申請完成，請靜待系統進行結清匯款');
+        return Redirect::to('dashboard');
     }
 }

@@ -236,7 +236,7 @@
                         {{ $eachTypeActivity->cat_id }}
                     </div>
                      <div class="row Act-category-title">
-                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                        <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
                             <p class="col-md-2">
                                 <img src="/img/icons/icon_arrowicon.png">
                                 {{ $eachTypeActivity->cat_title }}
@@ -245,7 +245,7 @@
                         <div class="col-md-8 home-dashed"></div>
 <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
                         <div class="col-md-2 category-readmore">
-                            <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title ) }}">
+                            <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
                                 <img src="/img/icons/icon_findfriend.png">
                             </a>
                         </div>
@@ -288,7 +288,7 @@
                             </div>
                             <div class="new-activity-orginizer">
                                <img src="/img/icons/holder.png">
-                               <span> {{ $newActivity->orginizer }} </span>
+                               <span> {{ $activity->orginizer }} </span>
                             </div>
                         </div>
                     </div>
