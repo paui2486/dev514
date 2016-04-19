@@ -26,7 +26,7 @@
                     @foreach($tickets as $key => $ticket)
                     {{--*/ $count += $ticket->left_over; /*--}}
                     <div class="row cart-option">
-                        <div class="col-md-8">
+                        <div class="col-md-8 ">
                             <input name="ticket_id" type="checkbox" value="{{ $key }}" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
                         </div>
                         <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
@@ -90,10 +90,10 @@
                         @foreach($tickets as $key => $ticket)
                         {{--*/ $count += $ticket->left_over; /*--}}
                         <div class="row cart-option">
-                            <div class="col-md-8">
+                            <div class="col-xs-8">
                                 <input name="ticket_id" type="checkbox" value="{{ $key }}" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
                             </div>
-                            <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
+                            <p class="col-xs-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
                         </div>
                         <div class="cart-number">
                             <p>請選擇票券數量：
