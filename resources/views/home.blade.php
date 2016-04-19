@@ -202,9 +202,6 @@
                             <div class="new-activity-count">
                                 <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                             </div>
-                            <div class="new-activity-description word-indent">
-                                {{ $newActivity->description }}
-                            </div>
                             <div class="new-activity-price">
                                 <img src="img/pics/money-icon-02.png">
                                 {{ $newActivity->price }} 元
@@ -289,9 +286,6 @@
                                     </a>
                                 </div>
                             </a>
-                            <div class="inter-panel-description new-activity-description word-indent-02">
-                                {{ $activity->description }}
-                            </div>
                             <div class="new-activity-price">
                                 <img src="img/pics/money-icon-02.png">
                                 {{ $activity->price }} 元
