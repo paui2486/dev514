@@ -32,7 +32,7 @@ class ActivityController extends Controller
                           'activities.counter',   'activities.category_id',     'activities.max_price',
                           'activities.min_price', 'activities.remark',          'activities.time_range',
                           'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
-                          'users.avatar as host_photo',    'users.description as host_destricption'
+                          'users.avatar as host_photo',    'users.description as host_destricption',
                       ))
                       ->where('activities.id', $id)
                       ->first();
@@ -62,8 +62,8 @@ class ActivityController extends Controller
                           ->take(3)
                           ->get();
 
-        //     # 這行會有錯誤，會修改 activity_start 的時間 （ 於 php 7
-        //     #DB::table('activities')->where('id', $activity->id)->increment('counter');
+        //     # 這行會有錯誤，會修改 activity_start 的時間 （ 於 php 7 用 increment 的話
+            DB::table('activities')->where('id', $id)->update(array('counter'=> $activity->counter - 1, 'activity_start' => $activity->activity_start));
 
             $meta   = array(
                 'charset = UTF-8'           => 'text/html',

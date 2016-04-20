@@ -623,8 +623,6 @@ class ActivityController extends Controller
                       ->take(3)
                       ->get();
 
-        DB::table('activities')->where('id', $activity->id)->increment('counter');
-
         $meta   = array();
 
         return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests'));
