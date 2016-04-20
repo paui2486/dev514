@@ -223,7 +223,9 @@
                             </div>
                             <div class="home-mb-info">
                                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                                </a>
                             </div>
                             <div class="home-mb-info word-indent-newact">
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
