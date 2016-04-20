@@ -18,32 +18,86 @@ use App\Http\Controllers\MainController;
 
 class ActivityController extends Controller
 {
-    //
-    public function index()
+    public function index($id)
     {
-        return view("activity.index");
+        // $slideCategory = Library::getSlideCategory();
+        //
+        $activity = DB::table('activities')
+                      ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
+                      ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                      ->select(array(
+                          'activities.id' ,       'activities.title',           'activities.tag_ids',
+                          'activities.thumbnail', 'activities.description',     'activities.location',
+                          'activities.content',   'activities.activity_start',  'activities.activity_end',
+                          'activities.counter',   'activities.category_id',     'activities.max_price',
+                          'activities.min_price', 'activities.remark',          'activities.time_range',
+                          'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
+                          'users.avatar as host_photo',    'users.description as host_destricption'
+                      ))
+                      ->where('activities.id', $id)
+                      ->first();
+        if (empty($activity)){
+            return Redirect::to('');
+        } else {
+            $tickets = DB::table('act_tickets')
+                        ->where('activity_id', $activity->id)
+                        ->where('left_over', '>', '0')
+                        ->select(array(
+                            'id', 'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                        ))
+                        ->get();
+
+            $suggests = DB::table('activities')
+                          ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                          ->where('activities.status', '>=', 4)
+                          ->where('activities.category_id', $activity->category_id)
+                          ->where('activities.id', '!=', $activity->id)
+                          ->select(array(
+                            'activities.thumbnail', 'activities.title',     'activities.description',
+                            'activities.location',  'activities.min_price', 'activities.activity_start',
+                            'categories.name as locat_name', 'activities.id'
+                          ))
+                          // ->groupBy('activities.title')
+                          ->orderBy('activities.created_at', 'ASC')
+                          ->take(3)
+                          ->get();
+
+        //     # 這行會有錯誤，會修改 activity_start 的時間 （ 於 php 7
+        //     #DB::table('activities')->where('id', $activity->id)->increment('counter');
+
+            $meta   = array(
+                'charset = UTF-8'           => 'text/html',
+                'name = google-site-verification' => '1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY',
+                'name = google'             => 'notranslate',
+                'name = URL'                => URL::current(),
+                'name = title'              => '514 活動頻道 - ' . $activity->title,
+                'name = author'             => ($activity->nick)?$activity->nick:$activity->hoster ,
+                'name = publisher'          => '514 活動頻道',
+                'name = rating'             => 'general',
+                'name = robots'             => 'index,follow',
+                'name = spiders'            => 'all',
+                'name = webcrawlers'        => 'all',
+                'name = copyright'          => 'Copyright ©2016 514 Life Inc. All rights reserved.',
+                'name = company'            => '共贏科技股份有限公司: 514 Life',
+                'name = abstract'           => $activity->description,
+                'name = description'        => $activity->description,
+                'name = fragment'           => '!',
+                'name = keywords'           => '514,活動頻道,有意思,生活,讓生活更514,活動,找活動,辦活動,達人',
+                'property = og:title'       => '514 活動頻道 - ' . $activity->title,
+                'property = og:url'         => URL::current(),
+                'property = og:type'        => 'product.item',
+                'property = og:description' => $activity->description,
+                'property = og:site_name'   => '514 活動頻道',
+                'property = og:locale'      => 'zh_TW',
+                'property = og:image'       => asset($activity->thumbnail),
+                'property = fb:page_id'     => '514 Life',
+                'property = fb:app_id'      => '509584332499899',
+                'property = fb:admins'      => '1910444804523',
+            );
+        }
+        return view("activity.index", compact('meta', 'activity', 'tickets', 'suggests'));
     }
 
-    public function Activity()
-    {
-        return view("activity");
-    }
-
-    public function purchase()
-    {
-        return view("purchase");
-    }
-
-    public function getCategory()
-    {
-
-    }
-    
-    public function confirm()
-    {
-        return view("activity.confirm");
-    }
-    
     public function showCategory($category)
     {
         $slideCategory = Library::getSlideCategory();
@@ -148,11 +202,11 @@ class ActivityController extends Controller
                           ->take(3)
                           ->get();
 
-            DB::table('activities')->where('id', $activity->id)->increment('counter');
+            # 這行會有錯誤，會修改 activity_start 的時間 （ 於 php 7
+            #DB::table('activities')->where('id', $activity->id)->increment('counter');
 
             $meta   = array(
                 'charset = UTF-8'           => 'text/html',
-                // 'http-equiv = refresh'      => '200;url='.URL::current(),
                 'name = google-site-verification' => '1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY',
                 'name = google'             => 'notranslate',
                 'name = URL'                => URL::current(),

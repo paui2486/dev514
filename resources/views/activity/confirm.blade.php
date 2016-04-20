@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <label class="col-md-4 control-label"> 活動地點 </label>
-                <div id="confirm-location" class="col-md-8">{{ $tickets->activity_location }}</div>
+                <div id="confirm-location" class="col-md-8">{{ $tickets->activity_locaname . $tickets->activity_location }}</div>
             </div>
             <div class="row">
                 <label class="col-md-4 control-label"> 聯絡人姓名</label>

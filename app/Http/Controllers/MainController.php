@@ -104,7 +104,6 @@ class MainController extends controller
                                 ))
                                 ->get();
         }
-
         return $filters;
     }
 
@@ -130,18 +129,16 @@ class MainController extends controller
                         ->where('activities.status', '>=', 4)
                         ->leftJoin('users',                 'users.id',      '=',   'activities.hoster_id')
                         ->leftJoin('act_tickets',           'activities.id', '=',   'act_tickets.activity_id')
-                        ->leftJoin('categories',            'categories.id', '=',   'activities.category_id')
-                        ->select(
+                        ->leftJoin('categories',            'categories.id', '=',   'activities.location_id')
+                        ->select(array(
                             'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
                             'activities.description',       'activities.counter as count',
-                            'act_tickets.price',            'activities.location',
-                            'activities.activity_start as date', 'users.nick as orginizer',
-                            'categories.name as category'
-                        )
+                            'act_tickets.price',            'activities.location',  'activities.location_id',
+                            'activities.activity_start as date', 'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
+                        ))
                         ->orderBy('activities.created_at', 'desc')
                         ->groupBy('activities.id')
-                        ->take(3)
-                        ->get();
+                        ->take(3)->get();
         return $newActivity;
     }
 
@@ -153,7 +150,7 @@ class MainController extends controller
             ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
             ->where('activities.status', '>=', 4)
             ->select(
-                'categories.id', DB::raw('count(*) as count'),
+                'categories.id', DB::raw('count(*) as count'), 'categories.value as affinity',
                 'categories.thumbnail', 'categories.name', 'categories.logo'
             )
             ->groupBy('activities.category_id')
@@ -168,11 +165,13 @@ class MainController extends controller
                     ->where('activities.status', '>=', 4)
                     ->where('activities.category_id', $category->id)
                     ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
-                    ->select(
+                    ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                    ->select(array(
                         'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
                         'activities.description',       'activities.counter as count',       'activities.min_price as price',
-                        'activities.location',          'activities.activity_start as date', 'users.nick as orginizer'
-                    )
+                        'activities.location',          'activities.activity_start as date', 'users.nick as orginizer',
+                        'categories.name as locat_name', 'activities.activity_end as date_end',
+                    ))
                     ->orderBy('activities.created_at', 'desc')
                     ->take(3)
                     ->get();
@@ -182,6 +181,7 @@ class MainController extends controller
                     'cat_thumbnail' => $category->thumbnail,
                     'cat_title'     => $category->name,
                     'cat_logo'      => $category->logo,
+                    'affinity'      => $category->affinity,
                     'cat_content'   => $eachActivity,
                 );
 

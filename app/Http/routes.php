@@ -53,8 +53,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('activity'                   , 'ActivityController@showResult'    );
     Route::post('activity'                  , 'ActivityController@showResult'    );
-    Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
-    Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
+    Route::get('activity/{id}'              , 'ActivityController@index'         );
+    // Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
+    // Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     // Route::get('purchase'                   , 'ActivityController@purchase'      );
     // Route::get('purchase/confirm'           , 'ActivityController@confirm'       );
 
@@ -70,9 +71,11 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::group(['middleware' => 'auth'], function() {
         Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
-        Route::get('purchase/{MerchantOrderNo}' , 'PurchaseController@getTradeInfo'  );
-        Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
-        Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
+        Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );
+        Route::post('purchase/{activity_id}'    , 'PurchaseController@postPurchase'  );
+        Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
+        // Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
+        // Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
 
         Route::get('dashboard'                        , 'Admin\AdminController@index'           );
         Route::get('dashboard/member'                 , 'Admin\MemberController@index'          );

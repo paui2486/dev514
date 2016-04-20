@@ -8,23 +8,22 @@
     @yield('meta')
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/bootstrap-reset.css')}}"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-reset.css"/>
     <!--external css-->
-    <link rel="stylesheet" href="{{asset('assets/font-awesome/css/font-awesome.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css')}}" media="screen"/>
-    <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}"/>
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" media="screen"/>
+    <link rel="stylesheet" href="/css/owl.carousel.css"/>
     <!--  right slidebar -->
-    <link rel="stylesheet" href="{{asset('css/slidebars.css')}}"/>
+    <link rel="stylesheet" href="/css/slidebars.css"/>
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/simpleMobileMenu.css" />
+    <link rel="stylesheet" type="text/css" href="/css/ionicons.min.css">
+  	<link rel="stylesheet" type="text/css" href="/css/simpleMobileMenu.css" />
     @yield('style')
-
-    <link rel="stylesheet" href="{{asset('css/style.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/style-responsive.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/project.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/mobile.css')}}"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/style-responsive.css"/>
+    <link rel="stylesheet" href="/css/project.css"/>
+    <link rel="stylesheet" href="/css/mobile.css"/>
     {{-- <link rel="stylesheet" href="{{ elixir('css/app.css') }}"> --}}
 </head>
 <body id="app-layout">
@@ -43,48 +42,34 @@
     /*--}}
 
     @include($header)
-    
+
     @yield('banner')
 
     @yield('content')
 
     @include('partials.footer')
 
-    <!-- JavaScripts -->
-    <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jssor.slider.mini.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.dcjqaccordion.2.7.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.scrollTo.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.nicescroll.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/owl.carousel.js')}}"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="{{asset('js/simpleMobileMenu.js')}}"></script>
-	<script type="text/javascript">
-
-		jQuery(document).ready(function($) {
-			$('.smobitrigger').smplmnu();
-		});
-
-	</script>
-    <script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-    </script>
-    <!--right slidebar-->
-    <script src=" {{asset('js/slidebars.min.js')}}"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jssor.slider.mini.js"></script>
+    <script type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.nicescroll.js"></script>
+    <script type="text/javascript" src="/js/owl.carousel.js"></script>
+  	<script type="text/javascript" src="/js/simpleMobileMenu.js"></script>
+    <script type="text/javascript" src="/js/slidebars.min.js"></script>
 {{--     <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script> --}}
     <script>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
         window.fbAsyncInit = function() {
         FB.init({
             appId      : '{{ env("FACEBOOK_CLIENT_ID") }}',
@@ -100,8 +85,9 @@
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-        
+
         $(function(){
+            $('.smobitrigger').smplmnu();
             $.slidebars();
         });
     </script>

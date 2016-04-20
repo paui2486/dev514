@@ -13,7 +13,7 @@
 <div class="row purchase-content">
     <div class="col-md-4 purchase-left">
         <p class="purchase-title">{{ $activity->title }}</p>
-        <p class="purchase-location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>台北市信義區基隆路一段155號818室</p>
+        <p class="purchase-location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>{{ $activity->locat_name . $activity->location }}</p>
         {{--*/ $count = 0; /*--}}
         @foreach ( $eventData as $event )
         {{--*/ $count += $event->price * $event->quantity; /*--}}
@@ -85,7 +85,7 @@ $(document).ready(function () {
     $('div#mb-detail > p').click(function(){
         $(this).parent().find('div').slideToggle('fast');
     });
-    $('#submit').click( funtion() { $('form').submit(); });
+    $('#submit').click( function() { $('form').submit(); });
 });
 </script>
 @endsection

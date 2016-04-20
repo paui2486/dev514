@@ -26,7 +26,7 @@ class PurchaseController extends controller
         //
     }
 
-    public function showPurchase(Request $request, $category, $title)
+    public function showPurchase(Request $request, $id)
     {
         $tickets = explode(',' , $request->tickets);
         $numbers = explode(',' , $request->numbers);
@@ -51,13 +51,15 @@ class PurchaseController extends controller
         }
 
         $activity = DB::table('activities')
-                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                      ->where('categories.name', $category)
-                      ->where('activities.title', $title)
+                      // ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                      ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                      // ->where('categories.name', $category)
+                      ->where('activities.id', $id)
                       ->select(array(
-                        'activities.id' ,               'activities.title',           'activities.thumbnail',         'activities.description',     'activities.activity_start',  'activities.activity_end',
-                        'activities.category_id',       'activities.remark',          'activities.time_range',
-                        'categories.name as category',  'activities.description',
+                        'activities.id' ,             'activities.title',               'activities.thumbnail',
+                        'activities.description',     'activities.activity_start',      'activities.activity_end',
+                        'activities.category_id',     'activities.remark',              'activities.time_range',
+                        'activities.location',        'categories.name as locat_name',  'activities.description',
                       ))
                       ->where('activities.status', '>=', '2')
                       ->first();
@@ -69,7 +71,6 @@ class PurchaseController extends controller
             $tickets  = DB::table('act_tickets')
                          ->whereIn('id', $tickets )
                          ->where('activity_id', $activity->id)
-                        //  ->where('left_over', '>', 0)
                          ->select(array(
                              'id', 'name',   'left_over',  'price', 'location',
                              'ticket_start', 'ticket_end', 'description',
@@ -111,7 +112,7 @@ class PurchaseController extends controller
         }
     }
 
-    public function postPurchase(Request $request, $category, $title)
+    public function postPurchase(Request $request, $id)
     {
         $data        = json_decode($request->data);
 
@@ -131,8 +132,8 @@ class PurchaseController extends controller
 
         $activity    = DB::table('activities')
                       ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
-                      ->where('categories.name', $category)
-                      ->where('activities.title', $title)
+                      // ->where('categories.name', $category)
+                      ->where('activities.id', $id)
                       ->select(array(
                         'activities.id' ,               'activities.title',           'activities.thumbnail',         'activities.description',     'activities.activity_start',  'activities.activity_end',
                         'activities.category_id',       'activities.remark',          'activities.time_range',
@@ -213,7 +214,7 @@ class PurchaseController extends controller
                     'TotalPrice' => 0,
                 );
                 $tickets = $this->successOrder($order);
-                return Redirect::to('purchase/'.$order->MerchantOrderNo);
+                return Redirect::to('purchase/trade/'.$order->MerchantOrderNo);
             } else {
 
                 $Pay2go     = new Pay2go();
@@ -308,7 +309,7 @@ class PurchaseController extends controller
                 'TotalPrice' => $result->InstFirst,
             );
             $tickets = $this->successOrder($order);
-            return Redirect::to('purchase/'.$result->MerchantOrderNo);
+            return Redirect::to('purchase/trade/'.$order->MerchantOrderNo);
         }
     }
 
@@ -359,12 +360,11 @@ class PurchaseController extends controller
 
         $hoster = DB::table('users')->find($info->hoster_id);
 
-        Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info) {
+        Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info, $hoster) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( Auth::user()->email, $info->user_name )->bcc( $hoster->email, $hoster->name )
                     ->subject('【 514 活動頻道 】恭喜您！您的活動行程已經訂購成功！');
         });
-
 
         return $orders;
     }
@@ -372,6 +372,13 @@ class PurchaseController extends controller
     public function getTradeInfo($id) {
         $orders = DB::table('orders')
                     ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
+                    ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                    ->select(array(
+                        'orders.MerchantOrderNo', 'orders.PayTime',         'orders.TotalPrice',
+                        'orders.user_name',       'orders.user_phone',      'orders.user_email',
+                        'orders.activity_name',   'activities.location',    'categories.name as locat_name',
+                        'orders.ticket_id',       'orders.ticket_number',
+                    ))
                     ->where('MerchantOrderNo', $id)
                     ->where('user_id', Auth::id())
                     ->first();
@@ -384,10 +391,11 @@ class PurchaseController extends controller
         $ticket_infos   = array();
         foreach ($ticket_ids as $key => $id) {
             $ticket_target = DB::table('act_tickets')
-                              ->where('id', $id)
-                              ->select(array(
-                                'id', 'name', 'price', 'ticket_start', 'ticket_end'
-                              ))->first();
+                                ->where('id', $id)
+                                ->select(array(
+                                  'id', 'name', 'price', 'ticket_start', 'ticket_end'
+                                ))
+                                ->first();
             $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
             $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];
             $weekday_end    = $weekday[date('w', strtotime($ticket_target->ticket_end))];
@@ -405,6 +413,7 @@ class PurchaseController extends controller
             'user_phone'        => $orders->user_phone,
             'user_email'        => $orders->user_email,
             'activity_name'     => $orders->activity_name,
+            'activity_locaname' => $orders->locat_name,
             'activity_location' => $orders->location,
             'ticket_infos'      => $ticket_infos,
         );

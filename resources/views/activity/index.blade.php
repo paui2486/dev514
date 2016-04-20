@@ -1,15 +1,24 @@
-@extends('layouts.app') @section('meta') @foreach($meta as $key => $value)
-<meta {{ $key }} content="{{ $value }}"> @endforeach
-<title>514活動頻道 - {{ $activity->title }}</title>
-<link rel="stylesheet" href="/css/colorbox.css" />
-@endsection
-@section('content')
+@extends('layouts.app')
 
+@section('meta')
+    @if(isset($meta))
+        @foreach($meta as $key => $value)
+            <meta {{ $key }} content="{{ $value }}">
+        @endforeach
+    @endif
+    <title>514活動頻道 - {{ $activity->title }}</title>
+@endsection
+
+@section('style')
+    <link rel="stylesheet" href="/css/colorbox.css" />
+@endsection
+
+@section('content')
 <div class="act-page-container">
-    <div class="act-page-blur" style="background-image:url('{{ asset($activity->thumbnail )}}')">
+    <div class="act-page-blur" style="background-image:url('{{ $activity->thumbnail }}')">
         <!--            <img src="/img/pics/activity-photo.jpg">-->
     </div>
-    <div class="actpage-main-image" style="background-image:url('{{ asset($activity->thumbnail )}}')">
+    <div class="actpage-main-image" style="background-image:url('{{ $activity->thumbnail }}')">
         <p class="actpage-mb-price">$ {{ $activity->min_price }} NTD起 </p>
     </div>
     <div class="actpage-content">
@@ -78,7 +87,7 @@
             @if(count($tickets)>0)
             <a class='inline' href="#inline_content">
             <div class="row actpage-mb-purchase">
-               <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
+                 <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
             </div>
             </a>
             <div style='display:none'>
@@ -124,16 +133,23 @@
                     </div>
                     <div class="purchase-mb-submit">繼續下一步</div>
                 </div>
-            </div>         
+            </div>
             @else
             <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
             @endif
         </div>
-<!--------------mobile submit buttonv end--------------->
+<!--------------mobile submit button end--------------->
         <div class="row actpage-dashboard">
+            @if (Session::has('message'))
+              <div class="alert alert-danger">
+                  <ul>
+                      <li> *** {{ Session::get('message') }} *** </li>
+                  </ul>
+              </div>
+            @endif
             <div class="col-md-2 col-xs-4">
                 <a href="{{ URL('member/'. $activity->hoster ) }}">
-                    <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
+                    <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
                     </div>
                     <div class="actpage-holder-name">
                         @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
@@ -170,7 +186,7 @@
                 <div class="dashboard-block">
                     <img src="/img/icons/info-where.png">
                     <div class="dashboard-text">
-                        {{ $activity->location }}
+                        {{ $activity->locat_name . $activity->location }}
                     </div>
                 </div>
             </div>
@@ -199,14 +215,14 @@
                     <div class="row actpage-recommend">
                         @foreach($suggests as $suggest)
                         <div class="actpage-recommend-panel">
-                            <a href="{{ URL::to('activity/' . $activity->category . '/' . $suggest->title ) }}">
-                                <div class="actpage-recommend-thumnail" style="background-image:url('{{ asset($suggest->thumbnail) }}')"></div>
+                            <a href="{{ URL::to('activity/' . $activity->id) }}">
+                                <div class="actpage-recommend-thumnail" style="background-image:url('{{ $suggest->thumbnail }}')"></div>
                             </a>
                             <div class="actpage-recommend-info">
                                 <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
                                 <li>{{ $suggest->min_price }} 元 ~</li>
-                                <li>{{ preg_replace("/(.*)\s(.*)/", "$1", $suggest->activity_start) }}</li>
-                                <li><span class="word-indent-01">{{ $suggest->location }}</span></li>
+                                <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</li>
+                                <li><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></li>
                             </div>
                         </div>
                         @endforeach
@@ -214,16 +230,13 @@
                     <div class="row actpage-header">
                         <p class="col-md-3 col-xs-4 actpage-header-left">討論區</p>
                         <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
-                        <!-- <div id="disqus_thread"></div> -->
                         <div class="fb-comments" data-href="{{ Request::URL() }}" data-width="100%" data-numposts="5"></div>
                     </div>
                 </div>
             </div>
-
-
             <!--
                 <div class="actpage-holder-content">
-                    <div class="actpage-holder-thumnail" style="background-image:url('{{ asset($activity->host_photo) }}')">
+                    <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
                     </div>
                     <div class="actpage-holder-name">@if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif</div>
                     <div class="actpage-holder-intro word-indent-04">{{ $activity->host_destricption }}</div>
@@ -234,23 +247,20 @@
                 <p class="actpage-bought-title">看看誰已訂購</p>
                 <div class="actpage-bought-content">
                 </div>
--->
+              -->
         </div>
     </div>
 </div>
 @if ( preg_match( "/酒/", urldecode(Request::segment(2)), $result ))
 <div>
-    <img src="{{asset('img/wine.jpg')}}" style="width:100%;">
+    <img src="/img/wine.jpg" style="width:100%;">
 </div>
 @endif
 @endsection
 
 @section('script')
-<script src="{{asset('js/jquery-ui-1.9.2.custom.min.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/moment.min.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="{{ asset('js/jquery.colorbox.js') }}"></script>
-
+<script type="text/javascript" src="/js/jquery.colorbox.js"></script>
+<script type="text/javascript" src="/js/moment.min.js"></script>
 <script>
     document.getElementById('shareBtn').onclick = function () {
         var obj = {
@@ -258,7 +268,7 @@
             redirect_uri: '{{ Request::URL() }}',
             display: 'popup',
             link: '{{ Request::URL() }}',
-            picture: '{{ asset($activity->thumbnail) }}',
+            picture: '{{ $activity->thumbnail }}',
             name: '514 活動頻道 - {{ $activity->title }}',
             caption: '活動由 @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif 所提供',
             description: '{{ $activity->description }}'
@@ -285,42 +295,41 @@
                 RightFixed.removeClass("right-content-fixed");
             }
 
-        $(".inline").colorbox({inline:true, width:"90%"});
-        $("#click").click(function(){ 
-            $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
-            return false;
+            $(".inline").colorbox({inline:true, width:"90%"});
+            $("#click").click(function(){
+                $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+                return false;
+            });
         });
-    });
 
-    $('.actpage-purchase').click(function() {
-        var ticketIds = [];
-        var ticketNumbers = [];
-        $('input[name=ticket_id]:checked').each(function() {
-            id = $(this).val();
-            ticketIds.push($('input[name=ticket-' + id + '-id]').val());
-            ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
-        });
-        var url = "{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
-        window.location.href = url;
-        });
-        
-    $('.purchase-mb-submit').click(function() {
-        var ticketIds = [];
-        var ticketNumbers = [];
-        $('input[name=ticket_id]:checked').each(function() {
-            id = $(this).val();
-            ticketIds.push($('input[name=ticket-' + id + '-id]').val());
-            ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
-        });
-        var url = "{{ URL('purchase/'. $activity->category .'/'. $activity->title) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
-        window.location.href = url;
-        
-    });
+        $('.actpage-purchase').click(function() {
+            var ticketIds = [];
+            var ticketNumbers = [];
+            $('input[name=ticket_id]:checked').each(function() {
+                id = $(this).val();
+                ticketIds.push($('input[name=ticket-' + id + '-id]').val());
+                ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
+            });
+            var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
+            window.location.href = url;
+            });
 
-    $('div#OneClick ul li ul').hide();
-    $('div#OneClick > ul > li >p').click(function(){
-        $(this).next().slideToggle('fast');
+        $('.purchase-mb-submit').click(function() {
+            var ticketIds = [];
+            var ticketNumbers = [];
+            $('input[name=ticket_id]:checked').each(function() {
+                id = $(this).val();
+                ticketIds.push($('input[name=ticket-' + id + '-id]').val());
+                ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
+            });
+            var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
+            window.location.href = url;
+        });
+
+        $('div#OneClick ul li ul').hide();
+        $('div#OneClick > ul > li >p').click(function(){
+            $(this).next().slideToggle('fast');
+        });
     });
-         });
 </script>
 @endsection

@@ -8,14 +8,13 @@
 @endsection
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('css/pure-min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/easydropdown.css')}}"/>
+    <link rel="stylesheet" href="/css/pure-min.css"/>
+    <link rel="stylesheet" href="/css/easydropdown.css"/>
 @endsection
 
 @section('script')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
-    jQuery(document).ready(function ($) {
+    $(function(){
         var SlideoTransitions = [
         ];
 
@@ -51,10 +50,7 @@
         $(window).bind("resize", ScaleSlider);
         $(window).bind("orientationchange", ScaleSlider);
         //responsive code end
-    });
-</script>
-<script type="text/javascript">
-    $(function(){
+
         $(".gotop").click(function(){
             jQuery("html,body").animate({
                 scrollTop:0
@@ -187,7 +183,7 @@
                         <div class="new-activity-id">
                             {{ $newActivity->activity_id }}
                         </div>
-                        <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">
+                        <a href="{{ URL::to('activity/' . $newActivity->activity_id ) }}">
                         <div class="new-activity-thumbnail"
                              style="background-image:url({{ $newActivity->thumbnail }})">
                             <div class="home-mb-count">
@@ -197,7 +193,7 @@
                         </a>
                         <div class="new-activity-right">
                             <div class="new-activity-title word-indent-01">
-                                 <a href="{{ URL::to('activity/' . $newActivity->category . '/' . $newActivity->title ) }}">{{ $newActivity->title }} </a>
+                                 <a href="{{ URL::to('activity/' . $newActivity->activity_id ) }}">{{ $newActivity->title }} </a>
                             </div>
                             <div class="new-activity-count">
                                 <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
@@ -208,7 +204,9 @@
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                                </a>
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
@@ -218,7 +216,6 @@
                                 <img src="/img/icons/holder.png">
                                 <span> {{ $newActivity->orginizer }} </span>
                             </div>
-
 <!--mbview-->
                             <div class="home-mb-info">
                                 <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
@@ -260,14 +257,14 @@
                         <div class="col-md-8 home-dashed"></div>
 <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
                         <div class="col-md-2 category-readmore">
-                            <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
+                            <a href="{{ $eachTypeActivity->affinity }}">
                                 <img src="/img/icons/icon_findfriend.png">
                             </a>
                         </div>
                     </div>
                     @foreach( $eachTypeActivity->cat_content as $activity )
                     <div class="col-md-4 inter-panel">
-                        <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
+                        <a href="{{ URL::to('activity/' . $activity->activity_id ) }}">
                             <div class="inter-panel-thumbnail"
                                  style="background-image:url({{ $activity->thumbnail }})">
                             </div>
@@ -279,20 +276,20 @@
                              <img src="/img/icons/eye-03.png">{{ $activity->count }} 人
                         </div>
                         <div class="inter-panel-info">
-                            <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
-                                <div class="new-activity-title word-indent-01">
-                                    <a href="{{ URL::to('activity/' . $eachTypeActivity->cat_title . '/' . $activity->title ) }}">
-                                        {{ $activity->title }}
-                                    </a>
-                                </div>
-                            </a>
+                            <div class="new-activity-title word-indent-01">
+                                <a href="{{ URL::to('activity/' . $activity->activity_id ) }}">
+                                    {{ $activity->title }}
+                                </a>
+                            </div>
                             <div class="new-activity-price">
                                 <img src="img/pics/money-icon-02.png">
                                 {{ $activity->price }} 元
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $activity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($activity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($activity->date_end)) }}&details={{ $activity->description }}&location={{ $activity->locat_name . $activity->location }}&trp=true" target="_blank" rel="nofollow">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
+                                </a>
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
@@ -325,9 +322,10 @@
                              <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
                         </div>
                         <div class="row home-blog-info">
-                            <div class="home-blog-created_at">
-                                <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
-                            </div>
+                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                                <div class="home-blog-created_at">
+                                    <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
+                                </div>
+                            </a>
                             <a href="{{ url('/blog/'. $blog->category) }}">
                                 <div class="home-blog-category">
                                     <li>{{ $blog->category }}</li>
