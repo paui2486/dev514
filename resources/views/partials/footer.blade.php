@@ -54,10 +54,9 @@
                     </div>
                 </div>
             </div>
-       
-        
     </div>
-
+    <div class="gotop"><img src="/img/pics/backtotop.png"></div>
+    <div class="gotop-mb"><img src="/img/pics/backtotop-mb.png"></div>
     <div class="copyright">Copyright © 2016 514 Inc. All rights reserved
     </div>
 </div>

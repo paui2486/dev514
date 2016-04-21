@@ -15,7 +15,7 @@
             <ul class="mobimenu page-mobimenu">
                 <a href="/"><img src="/img/pics/logo-fairlavie.png"></a>
 <!--            <li><a href="{{ url('blog') }}">部落格</a></li>-->
-                <li class="navbar-host"><a href="{{ url('dashboard/activity/create') }}">辦活動</a></li>
+                <li class="page-navbar-host"><a href="{{ url('dashboard/activity/create') }}">辦活動</a></li>
                 @if (Auth::guest())
                 <li class="drawer"><a href="{{ url('login') }}">登入</a></li>
                 <li class="drawer"><a href="{{ url('register') }}">註冊</a></li>
