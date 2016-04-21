@@ -6413,3 +6413,47 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 }
 }
 
+.Customer {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+.page-header {
+    margin: 0;
+    margin-top: 15px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding-bottom: 0;
+    border: none;
+}
+
+textarea.form-control {
+    height: 150px;
+}
+
+.control-label > span {
+    color: #ff5a5f;
+}
+
+.help-block {
+    color:#ff5a5f;
+    font-style: normal;
+}
+
+.customer-button {
+    text-align: right
+}
+
+.customer-button button {
+    width: 100px;
+    letter-spacing: 5px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+
+
+
+
