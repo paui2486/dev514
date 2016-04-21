@@ -253,12 +253,12 @@ class ActivityController extends Controller
         $activities = array();
 
         $query      = DB::table('activities')
-                        ->leftJoin('categories', 'categories.id', '=', 'activities.category_id')
-                        ->where('activities.status', 4)
+                        ->leftJoin('categories', 'categories.id', '=', 'activities.location_id')
+                        ->where('activities.status', '>=', 4)
                         ->select(array(
                           'activities.id',        'activities.title' ,           'activities.description',
                           'activities.min_price', 'activities.activity_start',   'activities.activity_end',
-                          'activities.location',  'categories.name as category', 'activities.thumbnail',
+                          'activities.location',  'categories.name as locat_name', 'activities.thumbnail',
                           'activities.max_price',
                         ))
                         ->orderBy('activities.created_at', 'asc');
@@ -307,7 +307,7 @@ class ActivityController extends Controller
                 $activities = $query->get();
             }
 
-            if ( URL::previous() == URL::current() ) {
+            if ( $request->url() == URL('activity/data') ) {
                 // Log::error($activities);
                 return $activities;
             }

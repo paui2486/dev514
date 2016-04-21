@@ -152,46 +152,56 @@
 $(document).ready(function () {
     var eventData = {!! json_encode($activities) !!};
     var search = [];
-    showResult(eventData);
+    var url_param = getURLParameter('cat_id');
     $("input[type=checkbox]").on("click", function() {
         search = $('input:checkbox:checked').map(function() {
              return this.value;
         }).get();
-        search.push()
+        search.push();
         $.ajax({
              type: "POST",
              headers: { 'X-CSRF-Token' : $('input[name=_token]').val() },
-             url: "{{ URL::current() }}",
-             data: { 'selects' : search },
+             url: "{{ URL('activity/data') }}",
+             data: { 'selects' : search.filter( onlyUnique ) },
              success: function(data) {
                  showResult(data);
              }
         });
     });
 
+    if ( url_param ) {
+        $('input[value='+ url_param +']').click();
+    } else {
+        showResult(eventData);
+    }
     $('.list-mb-content > .list-filter-row > div ').hide();
     $('.list-mb-content > .list-filter-row > p').click(function(){
         $(this).parent().find('.list-filter-option').slideToggle();
     });
-    // console.log(eventData);
-    function showResult ( data ) {
 
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
+
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+    }
+
+    function showResult ( data ) {
         var activityRow = new String();
         if (data.length > 0) {
             for ( var eventIndex in data ) {
-                activityRow += '<div class="row list-category-panel"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '"> \
-                    <div class="col-md-5 col-xs-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
-                    <div class="col-md-7 col-xs-7 list-category-text"> <div class="list-category-title"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '">'+ data[eventIndex]['title'] +'</a> \
-                    <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div>  \
-                    </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' \
-                    </p> \
-                    <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
+                activityRow += ' \
+                    <div class="row list-category-panel"> \
+                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
+                    <div class="col-md-5 col-xs-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> \
+                    <\/a><div class="col-md-7 col-xs-7 list-category-text"> <div class="list-category-title">\
+                    <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div> </div> <div class="list-category-info"> \
+                    <p> <img src="/img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' </p> \
+                    <p> <img src="/img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
-                    <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['location'] + ' </p> \
-                    </div> \
-                    </div> </div> <div class="row list-page-number"></div> ';
+                    <p> <img src="/img/pics/location-icon-02.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
+                    </div> </div> </div> <div class="row list-page-number"></div> ';
             }
         } else {
             activityRow = '<div class="list-attention"> Woops！尚無相關的活動類別！ </div>';
@@ -201,16 +211,24 @@ $(document).ready(function () {
     }
 
     function getDay ( datetime ) {
-        var DateReg = "";
-        var result = /(.*)\s/.exec( datetime );
-        return result[0];
+        if ( datetime != null) {
+            var DateReg = "";
+            var result = /(.*)\s/.exec( datetime );
+            return result[0];
+        } else {
+            return '';
+        }
     }
 
     function getWeekday( datetime ) {
-        var day_list = ['日', '一', '二', '三', '四', '五', '六'];
-        var weekday = new Date(datetime).getDay();
-        var week_event = ' ('+ day_list[weekday] +')';
-        return week_event;
+        if ( datetime != null) {
+            var day_list = ['日', '一', '二', '三', '四', '五', '六'];
+            var weekday = new Date(datetime).getDay();
+            var week_event = ' ('+ day_list[weekday] +')';
+            return week_event;
+        } else {
+            return '';
+        }
     }
 });
 </script>

@@ -210,7 +210,7 @@
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
-                                {{ $newActivity->location }}
+                                {{ $newActivity->locat_name . $newActivity->location }}
                             </div>
                             <div class="new-activity-orginizer">
                                 <img src="/img/icons/holder.png">
@@ -229,7 +229,7 @@
                             </div>
                             <div class="home-mb-info word-indent-newact">
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                {{ $newActivity->location }}
+                                {{ $newActivity->locat_name . $newActivity->location }}
                             </div>
                         </div>
                     </div>
@@ -295,7 +295,7 @@
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
-                                <span>{{ $activity->location }}</span>
+                                <span>{{ $activity->locat_name . $activity->location }}</span>
                             </div>
                             <div class="new-activity-orginizer">
                                <img src="/img/icons/holder.png">

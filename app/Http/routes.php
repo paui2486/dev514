@@ -52,7 +52,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('register/verify/{confirm}'  , 'MainController@confirm'           );
 
     Route::get('activity'                   , 'ActivityController@showResult'    );
-    Route::post('activity'                  , 'ActivityController@showResult'    );
+    Route::post('activity/data'             , 'ActivityController@showResult'    );
     Route::get('activity/{id}'              , 'ActivityController@index'         );
     // Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     // Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
