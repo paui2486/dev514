@@ -63,7 +63,7 @@ class ActivityController extends Controller
                           ->get();
 
         //     # 這行會有錯誤，會修改 activity_start 的時間 （ 於 php 7 用 increment 的話
-            DB::table('activities')->where('id', $id)->update(array('counter'=> $activity->counter - 1, 'activity_start' => $activity->activity_start));
+            DB::table('activities')->where('id', $id)->update(array('counter'=> $activity->counter + 1, 'activity_start' => $activity->activity_start));
 
             $meta   = array(
                 'charset = UTF-8'           => 'text/html',
