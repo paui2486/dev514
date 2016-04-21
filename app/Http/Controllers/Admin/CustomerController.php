@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
+    public function customer()
+    {
+        return view('admin.dashboard.customer');
+    }
     /**
      * Display a listing of the resource.
      *

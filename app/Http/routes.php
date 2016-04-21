@@ -148,8 +148,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('coupon'                 , 'AdminController@showMember'    );
         Route::get('invoice'                , 'AdminController@showMember'    );
         Route::get('analysis'               , 'AdminController@showMember'    );
-
-        Route::get('customer'               , 'AdminController@showMember'    );
+        Route::get('customer'               , 'CustomerController@customer'   );
         Route::get('customer/wait'          , 'AdminController@showMember'    );
         Route::get('customer/handle'        , 'AdminController@showMember'    );
         Route::get('customer/finish'        , 'AdminController@showMember'    );
