@@ -22,10 +22,6 @@
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜尋活動
                 </p>
                 <div class="list-filter-content">
-                    <div class="row list-search">
-                        <input class="col-md-8" name="keySearch" type="text" placeholder="請輸入關鍵字..."> 
-                        <button class="col-md-4" type="submit">搜尋</button>
-                    </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <!-- <div class="list-filter-row">
                         <p>想和誰去</p>
@@ -37,6 +33,13 @@
                         endforeach
                         </div>
                     </div> -->
+                    <div class="list-filter-row">
+                        <p>想找什麼</p>
+                        <div class="row list-search">
+                            <input class="col-md-8" name="keySearch" type="text" placeholder="請輸入關鍵字...">
+                            <button class="btn col-md-4" type="submit">搜尋</button>
+                        </div>
+                    </div>
                     <div class="list-filter-row">
                         <p>想玩什麼</p>
                         <div class="row list-filter-option">
@@ -168,7 +171,27 @@ $(document).ready(function () {
              type: "POST",
              headers: { 'X-CSRF-Token' : $('input[name=_token]').val() },
              url: "{{ URL('activity/data') }}",
-             data: { 'selects' : search.filter( onlyUnique ) },
+             data: { 'selects' : search.filter( onlyUnique ),
+                'keySearch' : $('input[name=keySearch]').val()
+             },
+             success: function(data) {
+                 showResult(data);
+             }
+        });
+    });
+
+    $('input[name=keySearch]').on('change', function() {
+        search = $('input:checkbox:checked').map(function() {
+             return this.value;
+        }).get();
+        search.push();
+        $.ajax({
+             type: "POST",
+             headers: { 'X-CSRF-Token' : $('input[name=_token]').val() },
+             url: "{{ URL('activity/data') }}",
+             data: { 'selects' : search.filter( onlyUnique ),
+                'keySearch' : $('input[name=keySearch]').val()
+             },
              success: function(data) {
                  showResult(data);
              }
@@ -197,34 +220,19 @@ $(document).ready(function () {
         var activityRow = new String();
         if (data.length > 0) {
             for ( var eventIndex in data ) {
-<<<<<<< HEAD
-                activityRow += ' \
-                    <div class="row list-category-panel"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
-                    <div class="col-md-5 col-xs-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> \
-                    <\/a><div class="col-md-7 col-xs-7 list-category-text"> <div class="list-category-title">\
-                    <div class="list-category-description word-indent-02">' + data[eventIndex]['description'] + '</div> </div> <div class="list-category-info"> \
-                    <p> <img src="/img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' </p> \
-                    <p> <img src="/img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
-                    getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
-                    <p> <img src="/img/pics/location-icon-02.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
-                    </div> </div> </div> <div class="row list-page-number"></div> ';
-=======
                 activityRow += '<div class="row list-category-panel"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '"> \
+                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
                     <div class="col-md-5 col-xs-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
                     <div class="col-md-7 col-xs-7 list-category-text"> <div class="list-category-title"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '">'+ data[eventIndex]['title'] +'</a> \
+                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '">'+ data[eventIndex]['title'] +'</a> \
                     </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' \
                     </p> \
                     <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
-                    <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['location'] + ' </p> \
-                    </div> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['category'] + '/' + data[eventIndex]['title'] + '"> \
+                    <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
+                    </div> <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
                     <div class="list-readmore">觀看更多</div></a>\
                     </div> </div> <div class="row list-page-number"></div> ';
->>>>>>> 0f57f6a88b281734fe373680d79d4b94514f09a7
             }
         } else {
             activityRow = '<div class="list-attention"> Woops！尚無相關的活動類別！ </div>';
