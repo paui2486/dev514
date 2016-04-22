@@ -50,31 +50,9 @@
         $(window).bind("resize", ScaleSlider);
         $(window).bind("orientationchange", ScaleSlider);
         //responsive code end
-
-        $(".gotop").click(function(){
-            jQuery("html,body").animate({
-                scrollTop:0
-            },1000);
-        });
-        $(window).scroll(function() {
-            if ( $(this).scrollTop() > 300){
-                $('.gotop').fadeIn("fast");
-            } else {
-                $('.gotop').stop().fadeOut("fast");
-            }
-        });
-        $(".gotop-mb").click(function(){
-            jQuery("html,body").animate({
-                scrollTop:0
-            },1000);
-        });
-        $(window).scroll(function() {
-            if ( $(this).scrollTop() > 150){
-                $('.gotop-mb').fadeIn("fast");
-            } else {
-                $('.gotop-mb').stop().fadeOut("fast");
-            }
-        });
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+        })
     });
 </script>
 @endsection
@@ -119,7 +97,7 @@
             {!! csrf_field() !!}
             <div class="filter-bg">
                 <div class="pure-g panel-filter">
-                    <div class="filter-select pure-u-5-24">
+                    <div class="filter-select pure-u-4-24">
                         <select name="playWhat" class="filter-select dropdown">
                             <option value="" class="label">想玩什麼</option>
                             @foreach( $home->filter->what as $play_what )
@@ -127,7 +105,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="pure-u-5-24">
+                    <div class="pure-u-4-24">
                         <select name="goWhere" class="dropdown">
                             <option value="" class="label">想去哪兒</option>
                             @foreach( $home->filter->where as $key_where => $go_where )
@@ -136,7 +114,7 @@
                         </select>
                     </div>
 
-                    <div class="pure-u-5-24">
+                    <div class="pure-u-4-24">
                         <select name="atWhen" class="dropdown">
                             <option value="" class="label">什麼時候</option>
                             @foreach( $home->filter->when as $key_when => $at_when )
@@ -145,7 +123,7 @@
                         </select>
                     </div>
 
-                    <div class="pure-u-5-24">
+                    <div class="pure-u-4-24">
                         <select name="haveMoney" class="dropdown">
                             <option value="" class="label">預算多少</option>
                             @foreach( $home->filter->price as $key_price => $price )
@@ -153,10 +131,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="pure-u-3-24">
+                    <div class="pure-u-6-24">
                         <input name="keySearch" class="search-bar" type="text" />
                     </div>
-                    <div class="pure-u-1-24">
+                    <div class="pure-u-2-24">
                         <button type="submit" class="search-button btn">
                             搜尋
                         </button>
@@ -202,11 +180,17 @@
                                 <img src="img/pics/money-icon-02.png">
                                 {{ $newActivity->price }} 元
                             </div>
+                            <!-- HTML to write -->
+
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
-                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                                </a>
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
+                                <img src="/img/icons/arrow-calendar.png" style="width:20px;    padding-bottom: 2px;"></a>
+                                <div class="tooltip top" role="tooltip">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner"></div>
+                                </div>
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
@@ -224,7 +208,7 @@
                             <div class="home-mb-info">
                                 <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow">
-                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                                 </a>
                             </div>
                             <div class="home-mb-info word-indent-newact">
@@ -289,9 +273,13 @@
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
-                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $activity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($activity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($activity->date_end)) }}&details={{ $activity->description }}&location={{ $activity->locat_name . $activity->location }}&trp=true" target="_blank" rel="nofollow">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
-                                </a>
+                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
+                                <img src="/img/icons/arrow-calendar.png" style="width:20px;    padding-bottom: 2px;"></a>
+                                <div class="tooltip top" role="tooltip">
+                                    <div class="tooltip-arrow"></div>
+                                    <div class="tooltip-inner"></div>
+                                </div>
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">

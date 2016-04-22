@@ -425,7 +425,7 @@ li.collapse-blog-category {
 
 .search-bar {
     height: 35px;
-    width:100%;
+    width:90%;
     border-radius: 0px;
     font-size: 15px;
     background-color: rgba(255,255,255,0.8);
@@ -435,7 +435,6 @@ li.collapse-blog-category {
 .filter-keySearch input {
     background-color: #f2f2f2;
     padding: 0 10px;
-    width: 90%;
 }
 
 .search-button {
@@ -446,7 +445,6 @@ li.collapse-blog-category {
     color: white;
     border-radius: 0px;
     font-weight: bold;
-    width: 100%;
     letter-spacing: 4px;
 }
 
@@ -681,6 +679,15 @@ li.collapse-blog-category {
     color: #998d7e;
     padding:0px 10px;
     letter-spacing: 1px;
+}
+
+.new-activity-date a{
+    color: #998d7e;
+}
+
+.tooltip-inner {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .new-activity-orginizer {
