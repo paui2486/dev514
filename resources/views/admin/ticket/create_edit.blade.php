@@ -87,19 +87,19 @@
                                         <label class="control-label"> From </label>
                                     </div>
                                     <div class="col-xs-8 col-sm-7 col-md-6">
-                                        <input class="form-control act_date" type="text" name="ticket_start_date" placeholder="年/月/日" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_start ) : null) }}}"/>
+                                        <input class="form-control act_date" type="text" name="ticket_start_date" placeholder="年/月/日" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_start ) : preg_replace('/(.*)\s(.*):(.*)/', '$1', $act_info->activity_start )) }}}"/>
                                     </div>
                                     <div class="col-xs-4 col-sm-5 col-md-4">
-                                        <input class="form-control act_time" type="text" name="ticket_start_time" placeholder="時/分" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_start ) : null) }}}"/>
+                                        <input class="form-control act_time" type="text" name="ticket_start_time" placeholder="時/分" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_start ) : preg_replace('/(.*)\s(.*):(.*)/', '$2', $act_info->activity_start )) }}}"/>
                                     </div>
                                     <div class="col-md-2 table-cell">
                                         <label class="control-label"> To </label>
                                     </div>
                                     <div class="col-xs-8 col-sm-7 col-md-6">
-                                        <input class="form-control act_date" type="text" name="ticket_end_date" placeholder="年/月/日" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_end ) : null) }}}"/>
+                                        <input class="form-control act_date" type="text" name="ticket_end_date" placeholder="年/月/日" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->ticket_end ) : preg_replace('/(.*)\s(.*):(.*)/', '$1', $act_info->activity_end )) }}}"/>
                                     </div>
                                     <div class="col-xs-4 col-sm-5 col-md-4">
-                                        <input class="form-control act_time" type="text" name="ticket_end_time" placeholder="時/分" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_end ) : null) }}}"/>
+                                        <input class="form-control act_time" type="text" name="ticket_end_time" placeholder="時/分" value="{{{ Input::old('ticket_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->ticket_end ) : preg_replace('/(.*)\s(.*):(.*)/', '$2', $act_info->activity_end )) }}}"/>
                                     </div>
                                 </div>
                             </div>
@@ -128,22 +128,22 @@
                                     </div>
                                     <div class="col-xs-8 col-sm-7 col-md-6">
                                         <input class="form-control act_date" type="text" name="sale_start_date"
-                                            value="{{{ Input::old('sale_start_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->sale_start ) : null) }}}"/>
+                                            value="{{{ Input::old('sale_start_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->sale_start ) : date('Y-m-d') ) }}}"/>
                                     </div>
                                     <div class="col-xs-4 col-sm-5 col-md-4">
                                         <input class="form-control act_time" type="text" name="sale_start_time"
-                                            value="{{{ Input::old('sale_start_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->sale_start ) : null) }}}"/>
+                                            value="{{{ Input::old('sale_start_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->sale_start ) : '00:00') }}}"/>
                                     </div>
                                     <div class="col-md-2 table-cell">
                                         <label class="control-label"> To </label>
                                     </div>
                                     <div class="col-xs-8 col-sm-7 col-md-6">
                                         <input class="form-control act_date" type="text" name="sale_end_date"
-                                            value="{{{ Input::old('sale_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->sale_end ) : null) }}}"/>
+                                            value="{{{ Input::old('sale_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $ticket->sale_end ) : preg_replace('/(.*)\s(.*):(.*)/', '$1', $act_info->activity_end )) }}}"/>
                                     </div>
                                     <div class="col-xs-4 col-sm-5 col-md-4">
                                         <input class="form-control act_time" type="text" name="sale_end_time"
-                                            value="{{{ Input::old('sale_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->sale_end ) : null) }}}"/>
+                                            value="{{{ Input::old('sale_end_time', isset($ticket) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $ticket->sale_end ) : '00:00') }}}"/>
                                     </div>
                                 </div>
                             </div>
