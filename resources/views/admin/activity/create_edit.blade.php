@@ -73,6 +73,7 @@
                                                     value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
                                             </span>
                                             <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 移除圖片 </a>
+                                            <span style="color:red;">(建議尺寸 1,200 x 675 像素)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +264,7 @@
                         <div class="form-group {{{ $errors->has('counter') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="counter">
-                                    觀賞人數
+                                    觀賞人數 (PageView)
                                 </label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="counter" id="counter"

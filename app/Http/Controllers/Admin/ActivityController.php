@@ -588,7 +588,7 @@ class ActivityController extends Controller
     public function showPriview($id)
     {
         $activity = DB::table('activities')
-                      ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
+                      ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                       ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                       ->select(array(
                         'activities.id' ,       'activities.title',           'activities.tag_ids',
@@ -596,7 +596,7 @@ class ActivityController extends Controller
                         'activities.content',   'activities.activity_start',  'activities.activity_end',
                         'activities.counter',   'activities.category_id',     'activities.max_price',
                         'activities.min_price', 'activities.remark',          'activities.time_range',
-                        'categories.name as category',  'users.name as hoster', 'users.nick as nick',
+                        'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
                         'users.avatar as host_photo',   'users.description as host_destricption'
                       ))
                       ->where('activities.id', $id)
@@ -606,17 +606,18 @@ class ActivityController extends Controller
                     ->where('activity_id', $id)
                     ->where('left_over', '>', '0')
                     ->select(array(
-                        'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                        'id', 'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
                     ))
                     ->get();
 
         $suggests = DB::table('activities')
+                      ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                       ->where('activities.status', '>=', 4)
                       ->where('activities.category_id', $activity->category_id)
                       ->where('activities.id', '!=', $activity->id)
                       ->select(array(
-                        'activities.thumbnail', 'activities.title',     'activities.description',
-                        'activities.location',  'activities.min_price', 'activities.activity_start',
+                        'activities.id',        'activities.thumbnail', 'activities.title',     'activities.description',
+                        'activities.location',  'activities.min_price', 'activities.activity_start', 'categories.name as locat_name',  
                       ))
                       ->groupBy('activities.title')
                       ->orderBy('activities.created_at', 'ASC')
