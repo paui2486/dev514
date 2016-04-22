@@ -92,6 +92,51 @@
 @endsection
 
 @section('content')
+    <!-- mobile view -->
+    <div class="mobile-container">
+        <div class="mobile-navbar">
+            <ul class="nav nav-tabs">
+                <li data-type="hot" ><a href="#">熱門排序</a></li>
+                <li data-type="time" ><a href="#">時間排序</a></li>
+                <li data-type="price" ><a href="#">優惠排序</a></li>
+            </ul>
+        </div>
+        <div class="mobile-panel">
+            @foreach( $home->allActivity as $mbActivity )
+            <div class="mobile_panel_bg">
+                <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">
+                    <div class="mobile-activity-thumbnail"
+                         style="background-image:url('{{ $mbActivity->thumbnail }}')">
+                        <div class="home-mb-count">
+                            <img src="/img/icons/eye-03.png">{{ $mbActivity->count }} 人
+                        </div>
+                    </div>
+                </a>
+                <div class="mobile-activity-info">
+                    <div class="home-mb-activity-title word-indent-01">
+                         <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">{{ $mbActivity->title }} </a>
+                    </div>
+                    <div class="home-mb-info">
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                        {{ $mbActivity->price }} 元起
+                    </div>
+                    <div class="home-mb-info">
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $mbActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($mbActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($mbActivity->date_end)) }}&details={{ $mbActivity->description }}&location={{ $mbActivity->locat_name . $mbActivity->location }}&trp=true" target="_blank" rel="nofollow">
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
+                        </a>
+                    </div>
+                    <div class="home-mb-info word-indent-newact">
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                        {{ $mbActivity->locat_name . $mbActivity->location }}
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- mobile view -->
+
     <div class="home-container">
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
             {!! csrf_field() !!}

@@ -31,6 +31,7 @@ class MainController extends controller
             'newBlog'       => (object) $this->getNewBlog(),
             'newActivity'   => (object) $this->getNewActivity(),
             'totalActivity' => (object) $this->getTotalActivity(),
+            'allActivity'   => (object) $this->getAllActivity(),
         );
         // return Response::json($home);
         return view('home', compact('home', 'meta', 'slideCategory'));
@@ -189,6 +190,24 @@ class MainController extends controller
             }
         }
         return $totalActivity;
+    }
+
+    public function getAllActivity()
+    {
+        $allActivity = DB::table('activities')
+                          ->leftJoin('categories', 'categories.id', '=', 'activities.location_id')
+                          ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
+                          ->where('activities.status', '>=', 4)
+                          ->select(array(
+                              'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
+                              'activities.description',       'activities.counter as count',    'activities.min_price as price',
+                              'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
+                              'users.nick as orginizer',      'activities.activity_end as date_end',
+                          ))
+                          ->orderBy('activities.created_at', 'desc')
+                          ->get();
+
+        return $allActivity;
     }
 
 
