@@ -104,35 +104,36 @@
         <div class="mobile-panel">
             @foreach( $home->allActivity as $mbActivity )
             <div class="mobile_panel_bg">
-                <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">
-                    <div class="mobile-activity-thumbnail"
+                <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}" class="col-xs-5 ">
+                <div class="mobile-activity-thumbnail"
                          style="background-image:url('{{ $mbActivity->thumbnail }}')">
                         <div class="home-mb-count">
                             <img src="/img/icons/eye-03.png">{{ $mbActivity->count }} 人
                         </div>
-                    </div>
+                </div>
                 </a>
-                <div class="mobile-activity-info">
+                <div class="col-xs-7 mobile-activity-info">
                     <div class="home-mb-activity-title word-indent-01">
-                         <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">{{ $mbActivity->title }} </a>
+                         {{ $mbActivity->title }}
                     </div>
                     <div class="home-mb-info">
-                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                        <img src="/img/icons/mb-price.png">
                         {{ $mbActivity->price }} 元起
                     </div>
-                    <div class="home-mb-info">
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    <div class="home-mb-info home-mb-calendar">
+                        <img src="/img/icons/mb-date.png">
                         <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $mbActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($mbActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($mbActivity->date_end)) }}&details=活動名稱：{{ $mbActivity->title }}%0A活動描述：{{ $mbActivity->description }}%0A活動網址：{{ url('activity'). '/' . $mbActivity->activity_id }}&location={{ $mbActivity->locat_name . $mbActivity->location }}&trp=true" target="_blank" rel="nofollow">
                             {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
+                            <img src="/img/icons/arrow-calendar.png" style="width:15px;padding-bottom: 2px;">
                         </a>
                     </div>
                     <div class="home-mb-info word-indent-newact">
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                        <img src="/img/icons/mb-location.png">
                         {{ $mbActivity->locat_name . $mbActivity->location }}
                     </div>
-                </div>
+                </div>  
             </div>
-            @endforeach
+            @endforeach 
         </div>
     </div>
     <!-- mobile view -->

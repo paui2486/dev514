@@ -165,43 +165,56 @@
     .mobile-container {
         display: inline-table;
         width: 100%;
-        margin-top: 10px;
+        background-color: #fff;
     }
 
     .mobile-navbar {
 
     }
 
-    .mobile-panel {
-
+    .mobile-panel{
     }
 
     .mobile_panel_bg {
         background-color: white;
-        box-shadow: 0px 0px 6px #ccc;
-        border-radius: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         margin: 15px
     }
-
     .mobile_panel_bg a {
-        width: 40%;
+        padding: 0;
     }
-
+    
+    .home-mb-calendar a,
+    .home-mb-calendar a:hover{
+        color: #998675;
+        text-decoration: underline;
+    }
+    
     .mobile-activity-thumbnail {
-        height: 100px;
-        border-radius: 10px;
+        height: 105px;
+        border-radius: 5px 0 0 5px;
         position: relative;
+        background-size: cover;
     }
-
+    
+    .home-mb-activity-title {
+        margin-bottom: 5px;
+        font-size: 15px;
+    }
+    
     .mobile-activity-info {
         width: 60%;
         padding: 5px 10px;
     }
-
-
+    
+    .home-mb-info img {
+        width: 20px;
+    }
+    
     .new-activity-right {
         width: 60%;
         float: left;
