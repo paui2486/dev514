@@ -61,14 +61,17 @@
     <div id="jssor_1" class="banner-1">
         <div class="searchbar-mobile">
             <p>讓生活更 有意思!</p>
-            <div class="searchbar-mbstyle col-xs-9">
-                <input name="keySearch" class="search-bar" type="text" placeholder="想找什麼活動？"/>
-            </div>
-            <div class="searchbar-mbstyle col-xs-3">
-                <button type="submit" class="search-button btn">
-                    搜尋
-                </button>
-            </div>
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
+                {!! csrf_field() !!}
+                <div class="searchbar-mbstyle col-xs-9">
+                    <input name="keySearch" class="search-bar" type="text" placeholder="想找什麼活動？"/>
+                </div>
+                <div class="searchbar-mbstyle col-xs-3">
+                    <button type="submit" class="search-button btn">
+                        搜尋
+                    </button>
+                </div>
+            </form>
         </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             @foreach( $home->banner as $banner )
