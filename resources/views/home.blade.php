@@ -383,7 +383,6 @@
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
-        <div class="gotop"><img src="/img/pics/backtotop.png"></div>
-        <div class="gotop-mb"><img src="/img/pics/backtotop-mb.png"></div>
+      </div>
     </div>
 @endsection

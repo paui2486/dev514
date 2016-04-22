@@ -91,6 +91,35 @@
             $.slidebars();
         });
     </script>
+    <script type="text/javascript">
+    $(function(){
+        $(".gotop").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:0
+            },1000);
+        });
+        $(window).scroll(function() {
+            if ( $(this).scrollTop() > 300){
+                $('.gotop').fadeIn("fast");
+            } else {
+                $('.gotop').stop().fadeOut("fast");
+            }
+        });
+        $(".gotop-mb").click(function(){
+            jQuery("html,body").animate({
+                scrollTop:0
+            },1000);
+        });
+        $(window).scroll(function() {
+            if ( $(this).scrollTop() > 150){
+                $('.gotop-mb').fadeIn("fast");
+            } else {
+                $('.gotop-mb').stop().fadeOut("fast");
+            }
+        });
+    });
+    </script>
+
 
     @yield('script')
 
