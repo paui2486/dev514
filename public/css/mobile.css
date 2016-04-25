@@ -110,33 +110,17 @@
     .searchbar-mobile {
         position: absolute;
         z-index: 9999;
-        top: 30%;
-        left: 15%;
+        top: 35%;
+        left: 6%;
         color: white;
         text-align: center;
         font-size: 50px;
         letter-spacing: 2px;
         text-shadow: 1px 1px 30px #808080;
-        width: 70%;
     }
-
-    .searchbar-mbstyle {
-        padding: 0px;
-    }
-
-    .searchbar-mbstyle input {
-        padding: 0px 30px;
-        background-color:rgba(255,255,255,0.9);
-        height: 100px;
-        font-size: 45px;
-        color: black;
-    }
-
-    .search-button {
-        width: 100%;
-        height: 100px;
-        font-size: 45px;
-        letter-spacing: 10px;
+    
+    .searchbar-mobile img {
+        width: 80%;
     }
 
     /*-------- mobile view 首頁 ----------*/
@@ -167,12 +151,9 @@
         width: 100%;
         background-color: #fff;
     }
-
-    .mobile-navbar {
-
-    }
-
-    .mobile-panel{
+    
+    .mobile-panel a {
+        color: #666;
     }
 
     .mobile_panel_bg {
@@ -184,14 +165,9 @@
         display: flex;
         margin: 15px
     }
-    .mobile_panel_bg a {
-        padding: 0;
-    }
     
-    .home-mb-calendar a,
-    .home-mb-calendar a:hover{
-        color: #998675;
-        text-decoration: underline;
+    .mobile_panel_bg:hover {
+        background-color: #f2f2f2;
     }
     
     .mobile-activity-thumbnail {
@@ -227,17 +203,6 @@
     .new-activity-title a {
         font-size: 18px;
     }
-    .new-activity-description {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        position: relative;
-        line-height: 1.5em;
-        height:3em;
-        padding: 0px;
-    }
 
     .home-mb-info {
         padding: 0px;
@@ -251,49 +216,42 @@
 
     .home-mb-count {
         color: white;
-        background-color: rgba(0,0,0,0.7);
-        padding: 5px 10px;
+        background-color: rgba(0,0,0,0.5);
+        padding: 2px 10px;
         text-align: center;
         position: absolute;
         left: 10px;
-        font-size: 14px;
+        font-size: 10px;
         bottom: 10px;
         border-radius: 10px;
     }
 
     .home-mb-count img {
-        width: 20px;
+        width: 15px;
         padding-bottom: 3px;
         margin-right: 7px;
     }
-
-    .new-activity > button {
-        background-color: #ff5a5f;
-        padding: 10px;
+    
+    .more-activity {
+        position: fixed;
+        bottom: 18px;
         width: 100%;
-        border: none;
-        color: white;
-        font-size: 15px;
-        letter-spacing: 1px;
+        font-size: 16px;
+        letter-spacing: 4px;
+        color: #fff;
+        z-index: 100000;
+        text-align: center;
+    }
+    
+    .more-activity > div {
+        margin: 10px auto;
+        padding: 12px;
+        width: 60%;
         border-radius: 5px;
+        background-color: rgba(255,90,95,0.9);
+        
     }
-
-    .new-activity > button:hover {
-        background-color: #dd4e58;
-    }
-
-    .home-mb-order {
-        margin-bottom: 10px;
-    }
-
-    .nav-tabs > li > a {
-        margin-right: 1px;
-        color: #888;
-        border: 1px solid #ccc;
-        margin: 0px 5px;
-        padding: 8px 15px;
-    }
-
+    
     /*foooooooooooooooooooooter*/
     .bottom-linkout {
         padding: 10px;

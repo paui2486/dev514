@@ -60,18 +60,7 @@
 @section('banner')
     <div id="jssor_1" class="banner-1">
         <div class="searchbar-mobile">
-            <p>讓生活更 有意思!</p>
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
-                {!! csrf_field() !!}
-                <div class="searchbar-mbstyle col-xs-9">
-                    <input name="keySearch" class="search-bar" type="text" placeholder="想找什麼活動？"/>
-                </div>
-                <div class="searchbar-mbstyle col-xs-3">
-                    <button type="submit" class="search-button btn">
-                        搜尋
-                    </button>
-                </div>
-            </form>
+            <img src="/img/pics/banner_title-02.png">
         </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             @foreach( $home->banner as $banner )
@@ -97,6 +86,7 @@
 @section('content')
     <!-- mobile view -->
     <div class="mobile-container">
+<!--
         <div class="mobile-navbar">
             <ul class="nav nav-tabs">
                 <li data-type="hot" ><a href="#">熱門排序</a></li>
@@ -104,17 +94,17 @@
                 <li data-type="price" ><a href="#">優惠排序</a></li>
             </ul>
         </div>
+-->
         <div class="mobile-panel">
             @foreach( $home->allActivity as $mbActivity )
+            <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">
             <div class="mobile_panel_bg">
-                <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}" class="col-xs-5 ">
-                <div class="mobile-activity-thumbnail"
+                <div class="col-xs-5 mobile-activity-thumbnail"
                          style="background-image:url('{{ $mbActivity->thumbnail }}')">
                         <div class="home-mb-count">
                             <img src="/img/icons/eye-03.png">{{ $mbActivity->count }} 人
                         </div>
                 </div>
-                </a>
                 <div class="col-xs-7 mobile-activity-info">
                     <div class="home-mb-activity-title word-indent-01">
                          {{ $mbActivity->title }}
@@ -125,10 +115,7 @@
                     </div>
                     <div class="home-mb-info home-mb-calendar">
                         <img src="/img/icons/mb-date.png">
-                        <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $mbActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($mbActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($mbActivity->date_end)) }}&details=活動名稱：{{ $mbActivity->title }}%0A活動描述：{{ $mbActivity->description }}%0A活動網址：{{ url('activity'). '/' . $mbActivity->activity_id }}&location={{ $mbActivity->locat_name . $mbActivity->location }}&trp=true" target="_blank" rel="nofollow">
                             {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
-                            <img src="/img/icons/arrow-calendar.png" style="width:15px;padding-bottom: 2px;">
-                        </a>
                     </div>
                     <div class="home-mb-info word-indent-newact">
                         <img src="/img/icons/mb-location.png">
@@ -136,8 +123,14 @@
                     </div>
                 </div>  
             </div>
+            </a>
             @endforeach 
         </div>
+        <a href="/activity">
+        <div class="more-activity">
+            <div>進階搜尋</div>
+        </div>
+        </a>
     </div>
     <!-- mobile view -->
 
@@ -181,7 +174,7 @@
                         </select>
                     </div>
                     <div class="pure-u-6-24">
-                        <input name="keySearch" class="search-bar" type="text" />
+                        <input name="keySearch" class="search-bar" type="text" placeholder="輸入關鍵字搜尋" />
                     </div>
                     <div class="pure-u-2-24">
                         <button type="submit" class="search-button btn">
@@ -197,13 +190,6 @@
                 <img src="/img/pics/new_activities-02.png">
             </div>
             <div class="row new-activity-content">
-                <div class="home-mb-order">
-                    <ul class="nav nav-tabs">
-                        <li role="presentation"><a href="#">熱門排序</a></li>
-                        <li role="presentation"><a href="#">時間排序</a></li>
-                        <li role="presentation"><a href="#">優惠排序</a></li>
-                    </ul>
-                </div>
                 @foreach( $home->newActivity as $newActivity )
                 <div class="col-md-4 col-xs-12 new-activity-panel">
                     <div class="newact_panel_bg">
@@ -235,7 +221,7 @@
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ url('activity'). '/' . $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
-                                <img src="/img/icons/arrow-calendar.png" style="width:20px;    padding-bottom: 2px;"></a>
+                                <img src="/img/icons/arrow-calendar.png" style="width:32px;padding-bottom:2px;"></a>
                                 <div class="tooltip top" role="tooltip">
                                     <div class="tooltip-arrow"></div>
                                     <div class="tooltip-inner"></div>
@@ -324,7 +310,7 @@
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
-                                <img src="/img/icons/arrow-calendar.png" style="width:20px;    padding-bottom: 2px;"></a>
+                                <img src="/img/icons/arrow-calendar.png" style="width:32px;    padding-bottom: 2px;"></a>
                                 <div class="tooltip top" role="tooltip">
                                     <div class="tooltip-arrow"></div>
                                     <div class="tooltip-inner"></div>
