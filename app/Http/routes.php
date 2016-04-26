@@ -71,6 +71,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
     Route::group(['middleware' => 'auth'], function() {
+
         Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
         Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );
         Route::post('purchase/{activity_id}'    , 'PurchaseController@postPurchase'  );
@@ -82,6 +83,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('dashboard/member'                 , 'Admin\MemberController@index'          );
         Route::get('dashboard/member/profile'         , 'Admin\MemberController@profile'        );
         Route::post('dashboard/member/{id}/update'    , 'Admin\MemberController@update'         );
+        Route::get('dashboard/customer'               , 'Admin\CustomerController@customer'     );
+        Route::post('dashboard/customer'              , 'Admin\CustomerController@mailQA'       );
         Route::get('dashboard/activity/register'      , 'Admin\ActivityController@askExpert'    );
         Route::get('dashboard/activity'               , 'Admin\ActivityController@index'        );
         Route::post('dashboard/activity/register'     , 'Admin\ActivityController@regExpert'    );
@@ -149,7 +152,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('coupon'                 , 'AdminController@showMember'    );
         Route::get('invoice'                , 'AdminController@showMember'    );
         Route::get('analysis'               , 'AdminController@showMember'    );
-        Route::get('customer'               , 'CustomerController@customer'   );
         Route::get('customer/wait'          , 'AdminController@showMember'    );
         Route::get('customer/handle'        , 'AdminController@showMember'    );
         Route::get('customer/finish'        , 'AdminController@showMember'    );
@@ -191,6 +193,8 @@ Route::group(['middleware' => 'web'], function () {
         // Route::get('activity/old_data'                      , 'ActivityController@showOldData');
 
         Route::get('activity/{id}/tickets/data'             , 'TicketController@data'         );
+        Route::get('activity/{id}/tickets/admission'        , 'TicketController@showList'     );
+        Route::get('activity/{id}/tickets/admissionData'    , 'TicketController@getList'      );
         Route::post('activity/{id}/tickets/{tickets}/update', 'TicketController@update'       );
         Route::get('activity/{id}/tickets/{tickets}/delete' , 'TicketController@getDelete'    );
         Route::resource('activity/{id}/tickets'             , 'TicketController'              );

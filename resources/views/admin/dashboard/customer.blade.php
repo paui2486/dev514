@@ -12,6 +12,11 @@
 					</div>
 				</div>
 
+
+        <form class="form-horizontal" enctype="multipart/form-data"
+            method="post" autocomplete="off" role="form" action="{{ URL::current() }}">
+            {!! csrf_field() !!}
+
 				<div class="panel panel-default">
 					<div class="panel-heading">
                         聯絡我們
@@ -31,27 +36,27 @@
 									<input type="text" class="form-control" id="email" name="email" placeholder="例：service@514.com.tw" />
 								</div>
 							</div>
-                            
+
                             <div class="form-group">
 								<label class="col-sm-2 control-label" for="mobile"><span>*</span>聯絡電話</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="mobile" name="mobile" placeholder="請填寫手機號碼" />
 								</div>
 							</div>
-                            
+
                             <div class="form-group">
 								<label class="col-sm-2 control-label" for="comment"><span>*</span>需求內容</label>
 								<div class="col-sm-10">
 									<textarea type="text" class="form-control" id="comment" name="comment" /></textarea>
 								</div>
 							</div>
-                            
+
 							<div class="form-group">
 								<div class="col-sm-12 customer-button">
 									<button type="submit" class="btn btn-primary" name="submit" value="submit">送出</button>
 								</div>
 							</div>
-                            
+
 						</form>
 					</div>
 				</div>
@@ -88,7 +93,7 @@
                     comment: {
                         required:true,
                     }
-                    
+
 				},
 				messages: {
 					username: {
@@ -119,13 +124,3 @@
 		} );
 	</script>
 @stop
-
-
-
-
-
-
-
-
-
-

@@ -236,4 +236,26 @@ class TicketController extends Controller
                  </div>')
            ->make();
     }
+
+    public function showList($id)
+    {
+        $AdminTabs = $this->AdminTabs;
+        return view('admin.activity.ticket_list', compact('AdminTabs'));
+    }
+
+    public function getList($id)
+    {
+        $solds = DB::table('orders')
+                  ->select(array(
+                      'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ItemDesc', 'orders.TotalPrice', 'orders.PayTime', 'orders.status'
+                  ))
+                  ->where('orders.activity_id', $id)
+                  ->where('orders.status', '>', 2)
+                  ->orderBy('orders.PayTime', 'ASC');
+      // need to change targets to processing bar
+      return Datatables::of($solds)
+        //  ->remove_column('id', 'activity_id')
+         ->edit_column('status', '@if($status == 3) 已付款 @elseif($status == 4) 已結清 @elseif($status == 2) 無付款 @else 已刪除 @endif')
+         ->make();
+    }
 }
