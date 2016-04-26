@@ -213,15 +213,13 @@ class MainController extends controller
 
     public function confirm($confirmation_code)
     {
-        if( ! $confirmation_code)
-        {
+        if( ! $confirmation_code){
             return Redirect::to("register");
         }
 
         $user = User::whereConfirmationCode($confirmation_code)->first();
 
-        if ( ! $user)
-        {
+        if ( ! $user) {
             return Redirect::to("register");
         }
 
