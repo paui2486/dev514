@@ -64,12 +64,14 @@
         </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             @foreach( $home->banner as $banner )
-            <div data-p="225.00" style="display: none;">
-                <div class="home_bntitle">
-                    <img src="/img/pics/banner_title-02.png" />
+                <div data-p="225.00" style="display: none;">
+                    <div class="home_bntitle">
+                        <img src="/img/pics/banner_title-02.png" />
+                    </div>
+                    <a href="{{ $banner->caption }}">
+                        <div class="home_banner1" style="background-image:url({{ $banner->image }});" data-u="image"></div>
+                    </a>
                 </div>
-                <div class="home_banner1" style="background-image:url({{ $banner->image }});" data-u="image"></div>
-            </div>
             @endforeach
         </div>
         <!-- Bullet Navigator -->
@@ -121,10 +123,10 @@
                         <img src="/img/icons/mb-location.png">
                         {{ $mbActivity->locat_name . $mbActivity->location }}
                     </div>
-                </div>  
+                </div>
             </div>
             </a>
-            @endforeach 
+            @endforeach
         </div>
         <a href="/activity">
         <div class="more-activity">

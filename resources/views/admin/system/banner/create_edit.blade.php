@@ -63,7 +63,7 @@
                     <div class="form-group {{{ $errors->has('caption') ? 'has-error' : '' }}}">
               					<div class="col-md-12">
                 						<label class="control-label col-sm-2" for="caption">
-                                Banner 標語
+                                連結網址
                             </label>
                             <div class="col-sm-10">
                                 <input class="form-control" type="text" name="caption" id="caption"

@@ -135,7 +135,7 @@ $(document).ready(function () {
         } else if (select == 1) {
             inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> FB社團連結 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="value" \
-                  value="{{{ Input::old('value', isset($filter) && $filter->type == 2 ? $filter->value : null) }}}" /> </div> </div>';
+                  value="{{{ Input::old('value', isset($filter) && $filter->type == 1 ? $filter->value : null) }}}" /> </div> </div>';
         } else {
             inputForm = '';
         }

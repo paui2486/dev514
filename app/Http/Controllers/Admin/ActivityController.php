@@ -76,6 +76,7 @@ class ActivityController extends Controller
             'description'         => $request->description,
             'ticket_description'  => $request->ticket_description,
             'location'            => $request->location,
+            'location_id'         => $request->goWhere,
             'content'             => $request->content,
             'tag_ids'             => $request->tag_ids,
             'status'              => $request->status,
@@ -197,6 +198,7 @@ class ActivityController extends Controller
             'category_id'   => $request->soWhat,
             'description'   => $request->description,
             'ticket_description'   => $request->ticket_description,
+            'location_id'   => $request->goWhere,
             'location'      => $request->location,
             'content'       => $request->content,
             'time_range'    => $request->time_range,
@@ -299,7 +301,8 @@ class ActivityController extends Controller
            ->add_column('actions', '
                  <div style="white-space: nowrap;">
                  <a href="{{{ URL::to(\'dashboard/activity/\' . $id ) }}}"  class="btn btn-success btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 活動</a>
-                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets\') }}}" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-pencil"></span> 票卷</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets\') }}}" class="btn btn-warning btn-sm" ><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;票卷</a>
+                 <a href="{{{ URL::to(\'dashboard/activity/\' . $id  . \'/tickets/admission\') }}}" class="btn btn-default btn-sm" ><span class="glyphicon glyphicon-list"></span> 清單</a>
                  <div data-url="{{{ URL::to(\'dashboard/activity/\' . $id . \'/delete\' ) }}}"  class="btn btn-sm btn-danger" onclick="showColorBox(this)"><span class="glyphicon glyphicon-trash"></span> 刪除</div>
                  <input type="hidden" name="row" value="{{$id}}" id="row">
                  </div>')
@@ -617,7 +620,7 @@ class ActivityController extends Controller
                       ->where('activities.id', '!=', $activity->id)
                       ->select(array(
                         'activities.id',        'activities.thumbnail', 'activities.title',     'activities.description',
-                        'activities.location',  'activities.min_price', 'activities.activity_start', 'categories.name as locat_name',  
+                        'activities.location',  'activities.min_price', 'activities.activity_start', 'categories.name as locat_name',
                       ))
                       ->groupBy('activities.title')
                       ->orderBy('activities.created_at', 'ASC')

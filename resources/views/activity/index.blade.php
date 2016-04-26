@@ -219,7 +219,7 @@
                     <div class="row actpage-recommend">
                         @foreach($suggests as $suggest)
                         <div class="actpage-recommend-panel">
-                            <a href="{{ URL::to('activity/' . $activity->id) }}">
+                            <a href="{{ URL::to('activity/' . $suggest->id) }}">
                                 <div class="actpage-recommend-thumnail" style="background-image:url('{{ $suggest->thumbnail }}')"></div>
                             </a>
                             <div class="actpage-recommend-info">
