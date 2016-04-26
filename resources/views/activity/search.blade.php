@@ -84,20 +84,11 @@
                         </div>
                     </div>
                 </div>
+<!------mobile_start------>
                 <div class="list-mb-content">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <!-- <div class="list-filter-row">
-                        <p>想和誰去<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
-                        <div class="row list-filter-option">
-                        foreach( $filter['who'] as $withWho )
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value=" $withWho->id }}"> $withWho->name }}
-                            </label>
-                        endforeach
-                        </div>
-                    </div> -->
                     <div class="list-filter-row">
-                        <p>想玩什麼<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
+                        <p>想玩什麼</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['what'] as $playWhat  )
                             <label class="checkbox-inline">
@@ -106,9 +97,8 @@
                         @endforeach
                         </div>
                     </div>
-
                     <div class="list-filter-row">
-                        <p>想去哪兒<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
+                        <p>想去哪兒</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['where'] as $goWhere )
                             <label class="checkbox-inline">
@@ -117,20 +107,8 @@
                         @endforeach
                         </div>
                     </div>
-
                     <div class="list-filter-row">
-                        <p>什麼時候<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
-                        <div class="row list-filter-option">
-                        @foreach( $filter['when'] as $playAt )
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playAt->id }}">{{ $playAt->name }}
-                            </label>
-                        @endforeach
-                        </div>
-                    </div>
-
-                    <div class="list-filter-row">
-                        <p>預算多少<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span><p/>
+                        <p>預算多少</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['price'] as $price )
                             <label class="checkbox-inline">
@@ -140,16 +118,11 @@
                         </div>
                     </div>
                 </div>
+<!------mobile_end------>
             </div>
         </div>
         <div class="row list-right-content col-sm-8">
-            <ul class="nav nav-tabs list-tabs">
-              <li role="presentation"><a href="#">最熱門</a></li>
-              <li role="presentation"><a href="#">時間近</a></li>
-              <li role="presentation"><a href="#">最優惠</a></li>
-            </ul>
             <div class="list-content-panel">
-
             </div>
         </div>
     </div>
@@ -198,15 +171,15 @@ $(document).ready(function () {
         });
     });
 
-    if ( url_param ) {
-        $('input[value='+ url_param +']').click();
-    } else {
-        showResult(eventData);
-    }
-    $('.list-mb-content > .list-filter-row > div ').hide();
-    $('.list-mb-content > .list-filter-row > p').click(function(){
-        $(this).parent().find('.list-filter-option').slideToggle();
-    });
+//    if ( url_param ) {
+//        $('input[value='+ url_param +']').click();
+//    } else {
+//        showResult(eventData);
+//    }
+//    $('.list-mb-content > .list-filter-row > div ').hide();
+//    $('.list-mb-content > .list-filter-row > p').click(function(){
+//        $(this).parent().find('.list-filter-option').slideToggle();
+//    });
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;

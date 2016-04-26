@@ -51,7 +51,8 @@
     .navbar-brand,
     li.drawer,
     .navbar-host,
-    .gotop {
+    .gotop,
+    .list-content-panel{
         display: none!important;
     }
 
@@ -462,6 +463,7 @@
     }
 
     /*search page*/
+
     .list-container {
         margin-top: 0px;
         background-color: #f7f7f7;
@@ -512,5 +514,9 @@
 
     .list-category-text {
         padding: 8px;
+    }
+    
+    .checkbox-inline input {
+        display: none;
     }
 }

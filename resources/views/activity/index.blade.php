@@ -36,7 +36,9 @@
                     {{--*/ $count += $ticket->left_over; /*--}}
                     <div class="row cart-option">
                         <div class="col-md-8 ">
-                            <input name="ticket_id" type="checkbox" value="{{ $key }}" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
+                            <label class="checkbox-inline">
+                            <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1"  value="{{ $key }}">{{ $ticket->name }}
+                            </label>
                         </div>
                         <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
                     </div>
@@ -100,7 +102,9 @@
                         {{--*/ $count += $ticket->left_over; /*--}}
                         <div class="row cart-option">
                             <div class="col-xs-8">
-                                <input name="ticket_id" type="checkbox" value="{{ $key }}" id="{{ $ticket->name }}"><label for="{{ $ticket->name }}">{{ $ticket->name }}</label>
+                                <label class="checkbox-inline">
+                            <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1"  value="{{ $key }}">{{ $ticket->name }}
+                            </label>
                             </div>
                             <p class="col-xs-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
                         </div>

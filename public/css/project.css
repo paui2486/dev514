@@ -1898,13 +1898,15 @@ li.collapse-blog-category {
 
 .cart-option input {
     cursor: pointer;
+    margin-top: 6px;
+    margin-right: 6px;
+    float: left;
 }
 
 .cart-option label {
     letter-spacing: 2px;
     font-weight: 500;
     padding-left: 5px;
-    cursor: pointer;
 }
 
 .actpage-purchase {
@@ -2397,19 +2399,6 @@ li.collapse-blog-category {
     color: #666;
 }
 
-.list-filter-option input {
-    margin-right: 5px;
-}
-
-.checkbox-inline+.checkbox-inline {
-    margin:10px 0px;
-}
-
-
-.list-filter-row input {
-    float: left;
-}
-
 .list-right-content {
     padding: 20px;
 }
@@ -2515,10 +2504,31 @@ li.collapse-blog-category {
     background-color: #dd4e58;
 }
 
-.list-tabs li {
-    margin-right: 5px;
+.list-filter-option input {
+    margin-right: 8px;
+    margin-top: 3px;
 }
 
-.list-tabs li a {
+.checkbox-inline+.checkbox-inline {
+    margin:10px 0px;
+}
+
+.list-filter-row input {
+    float: left;
+}
+
+input[type='checkbox'],
+input[type='checkbox']:focus,
+input[type='checkbox']:hover {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 2px;
     border: 1px solid #ccc;
+}
+
+input[type='checkbox']:checked {
+    background-image: url(/img/icons/checked_box.png);
+    background-size: cover;
 }
