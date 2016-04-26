@@ -84,9 +84,8 @@
                                 <label class="control-label col-sm-2" for="title">
                                     活動名稱
                                 </label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="text" name="title" id="title"
-                                        value="{{{ Input::old('title', isset($activity) ? $activity->title : null) }}}" />
+                                <div class="col-sm-10 errorbox">
+                                    <input class="form-control " type="text" name="title" id="title"value="{{{ Input::old('title', isset($activity) ? $activity->title : null) }}}" />
                                 </div>
                             </div>
                         </div>
@@ -139,27 +138,27 @@
                                 <label class="control-label col-sm-2" for="activity_start">
                                     活動期間
                                 </label>
-                                <div class="col-sm-6 col-md-5">
+                                <div class="errorbox col-sm-6 col-md-5">
                                     <div class="col-md-2 table-cell">
                                         <label class="control-label">
                                             From
                                         </label>
                                     </div>
-                                    <div class="col-xs-8 col-sm-7 col-md-6">
-                                        <input class="form-control act_date" type="text" name="activity_start_date" placeholder="年/月/日" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_start ) : null) }}}"/>
+                                    <div class="errorbox col-xs-8 col-sm-7 col-md-6">
+                                        <input id="ActDate" class="form-control act_date" type="text" name="activity_start_date" placeholder="年/月/日" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_start ) : null) }}}"/>
                                     </div>
-                                    <div class="col-xs-4 col-sm-5 col-md-4">
-                                        <input class="form-control act_time" type="text" name="activity_start_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
+                                    <div class="errorbox col-xs-4 col-sm-5 col-md-4">
+                                        <input id="ActDate" class="form-control act_time" type="text" name="activity_start_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
                                     </div>
                                     <div class="col-md-2 table-cell" style="margin-top:10px;">
                                         <label class="control-label">
                                             To
                                         </label>
                                     </div>
-                                    <div class="col-xs-8 col-sm-7 col-md-6" style="margin-top:10px;">
+                                    <div class="errorbox col-xs-8 col-sm-7 col-md-6" style="margin-top:10px;">
                                         <input class="form-control act_date" type="text" name="activity_end_date" placeholder="年/月/日" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_end ) : null) }}}"/>
                                     </div>
-                                    <div class="col-xs-4 col-sm-5 col-md-4"style="margin-top:10px;">
+                                    <div class="errorbox col-xs-4 col-sm-5 col-md-4"style="margin-top:10px;">
                                         <input class="form-control act_time" type="text" name="activity_end_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_end ) : null) }}}"/>
                                     </div>
                                 </div>
@@ -213,7 +212,7 @@
                                     @endforeach
                                     </select>
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="errorbox col-sm-8">
                                     <input class="form-control" type="text" name="location" placeholder="請輸入詳細活動地址"
                                         value="{{{ Input::old('location', isset($activity) ? $activity->location : null) }}}" />
                                 </div>
@@ -310,8 +309,8 @@
                                 <div id="ticket1" class="form-ticket">
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket_name">票券名稱</label>
-                                        <div class="col-sm-2">
-                                            <input class="form-control" placeholder="例：早鳥票" type="text" name="ticket[0][name]"/>
+                                        <div class="errorbox col-sm-2">
+                                            <input class="form-control" placeholder="例：早鳥票" type="text" name="ticket"/>
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket_price">票券單價</label>
                                         <div class="col-sm-4">
@@ -437,6 +436,8 @@
 {{-- Scripts --}}
 @section('scripts')
     @parent
+<script type="text/javascript" src="{{ asset('js/jquery.validate.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/additional-methods.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.responsiveTabs.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
@@ -613,5 +614,56 @@
             $(this).parents(".form-ticket").remove();
         }
     }
+		$( document ).ready( function () {
+			$( ".form-horizontal" ).validate( {
+				rules: {
+					title: {
+						required: true,
+					},
+                    activity_start_date: {
+                        required: true,
+                    },
+                    activity_end_date: {
+                        required: true,
+                    },
+                    activity_start_time: {
+                        required: true,
+                    },
+                    activity_end_time: {
+                        required: true,
+                    },
+                    location:{
+                        required:true,
+                    },
+				},
+				messages: {
+					title: {
+						required: "*請填寫活動名稱",
+					},
+                    activity_start_date:"*請選取日期",
+                    activity_end_date:"*請選取日期",
+                    activity_start_time:"*請選取日期",
+                    activity_end_time:"*請選取日期",
+                    location:"*請填寫活動詳細地址",
+				},
+				errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".errorbox" ).addClass( "has-error" ).removeClass( "has-success" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).parents( ".errorbox" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+			} );
+		} );
 </script>
 @stop
