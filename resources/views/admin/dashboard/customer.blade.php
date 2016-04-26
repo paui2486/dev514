@@ -42,7 +42,7 @@
                             <div class="form-group">
 								<label class="col-sm-2 control-label" for="comment"><span>*</span>需求內容</label>
 								<div class="col-sm-10">
-									<textarea type="text" class="form-control" id="comment" name="comment" /></textarea>
+									<textarea type="text" class="form-control"  name="comment" /></textarea>
 								</div>
 							</div>
                             
@@ -110,10 +110,10 @@
 					}
 				},
 				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+					$( element ).parents( ".col-sm-10" ).addClass( "has-error" ).removeClass( "has-success" );
 				},
 				unhighlight: function (element, errorClass, validClass) {
-					$( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+					$( element ).parents( ".col-sm-10" ).addClass( "has-success" ).removeClass( "has-error" );
 				}
 			} );
 		} );
