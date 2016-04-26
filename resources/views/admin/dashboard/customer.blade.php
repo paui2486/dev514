@@ -26,21 +26,21 @@
 							<div class="form-group">
                                 <label class="col-sm-2 control-label" for="username"><span>*</span>您的姓名</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="username" name="username" />
+                    <input class="form-control" type="text" name="username" id="username" value="{{ Auth::user()->name }}" />
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="email"><span>*</span>電子郵件</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="email" name="email" placeholder="例：service@514.com.tw" />
+									<input type="text" class="form-control" id="email" name="email" placeholder="例：service@514.com.tw" value="{{ Auth::user()->email }}"/>
 								</div>
 							</div>
 
                             <div class="form-group">
 								<label class="col-sm-2 control-label" for="mobile"><span>*</span>聯絡電話</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="mobile" name="mobile" placeholder="請填寫手機號碼" />
+									<input type="text" class="form-control" id="mobile" name="mobile" placeholder="請填寫手機號碼" value="{{ Auth::user()->phone }}"/>
 								</div>
 							</div>
 
