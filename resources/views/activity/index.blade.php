@@ -164,12 +164,6 @@
                         @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
                     </div>
                 </a>
-                <div class="dashboard-mb-share">
-                    <img src="/img/icons/share-fb.png">
-                    <img src="/img/icons/share-line.png">
-                    <img src="/img/icons/share-wechat.png">
-                    <img src="/img/icons/share-email.png">
-                </div>
             </div>
 
             <div class="col-md-6 col-xs-8 actpage-dashboard-info">
@@ -204,6 +198,13 @@
                         <p>{{ $activity->locat_name . $activity->location }}</p>
                     </div>
                 </div>
+            </div>
+            <div class="dashboard-mb-share col-xs-12">
+                <span>分享到</span>
+                <img src="/img/icons/share-fb.png">
+                <img src="/img/icons/share-line.png">
+                <img src="/img/icons/share-wechat.png">
+                <img src="/img/icons/share-email.png">
             </div>
         </div>
         <div class="actpage-panel">

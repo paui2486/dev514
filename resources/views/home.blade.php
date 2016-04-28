@@ -123,6 +123,10 @@
                         <img src="/img/icons/mb-location.png">
                         {{ $mbActivity->locat_name . $mbActivity->location }}
                     </div>
+                    <div class="home-mb-info word-indent-newact">
+                        <img src="/img/icons/mb-location.png">
+                        {{ $mbActivity->locat_name . $mbActivity->location }}
+                    </div>
                 </div>
             </div>
             </a>
@@ -134,7 +138,7 @@
         </div>
         </a>
     </div>
-    <!-- mobile view -->
+    <!-- mobile view end-->
 
     <div class="home-container">
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
@@ -252,6 +256,7 @@
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                 {{ $newActivity->locat_name . $newActivity->location }}
                             </div>
+                            
                         </div>
                     </div>
                 </div>
