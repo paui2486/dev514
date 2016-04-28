@@ -19,7 +19,6 @@
         <!--            <img src="/img/pics/activity-photo.jpg">-->
     </div>
     <div class="actpage-main-image" style="background-image:url('{{ $activity->thumbnail }}')">
-        <p class="actpage-mb-price">$ {{ $activity->min_price }} NTD起 </p>
     </div>
     <div class="actpage-content">
         <div id="RightFixed" class="col-md-4 actpage-right-content">
@@ -55,9 +54,7 @@
                     <div id="OneClick" class="row cart-option-detail">
                         <ul>
                             <li>
-                                <p>詳細票券資訊
-                                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                </p>
+                                <p>詳細票券資訊</p>
                                 <ul>
                                     <li>票價：$ {{ $ticket->price }} NTD</li>
                                     <li>活動開始： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
@@ -79,8 +76,15 @@
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
                 @endif
 
-                <div id="shareBtn" class="btn btn-sm btn-success actpage-share">
-                   分享到Facebook
+                <div class="actpage-share">
+                    <span class="btn btn-sm" id="shareBtn">
+                        <img src="/img/icons/share-fb.png">Facebook</span>
+                    <span class="btn btn-sm">
+                        <img src="/img/icons/share-line.png">Line</span>
+                    <span class="btn btn-sm">
+                        <img src="/img/icons/share-wechat.png">WeChat</span>
+                    <span class="btn btn-sm" style="border:none;">
+                        <img src="/img/icons/share-email.png">Email</span>
                 </div>
             </div>
         </div>
@@ -90,6 +94,7 @@
             <a class='inline' href="#inline_content">
             <div class="row actpage-mb-purchase">
                  <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
+                
             </div>
             </a>
             <div style='display:none'>
@@ -159,6 +164,12 @@
                         @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
                     </div>
                 </a>
+                <div class="dashboard-mb-share">
+                    <img src="/img/icons/share-fb.png">
+                    <img src="/img/icons/share-line.png">
+                    <img src="/img/icons/share-wechat.png">
+                    <img src="/img/icons/share-email.png">
+                </div>
             </div>
 
             <div class="col-md-6 col-xs-8 actpage-dashboard-info">
@@ -190,7 +201,7 @@
                 <div class="dashboard-block">
                     <img src="/img/icons/info-where.png">
                     <div class="dashboard-text">
-                        {{ $activity->locat_name . $activity->location }}
+                        <p>{{ $activity->locat_name . $activity->location }}</p>
                     </div>
                 </div>
             </div>
@@ -224,9 +235,14 @@
                             </a>
                             <div class="actpage-recommend-info">
                                 <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
-                                <li>{{ $suggest->min_price }} 元 ~</li>
-                                <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</li>
-                                <li><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></li>
+                                <p>
+                                    <img src="/img/icons/mb-price.png">{{ $suggest->min_price }} 元起
+                                </p>
+                                <p>
+                                    <img src="/img/icons/mb-date.png">{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}
+                                </p>
+                                <p>
+                                    <img src="/img/icons/mb-location.png"><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></p>
                             </div>
                         </div>
                         @endforeach
@@ -329,11 +345,11 @@
             var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
             window.location.href = url;
         });
-
-        $('div#OneClick ul li ul').hide();
-        $('div#OneClick > ul > li >p').click(function(){
-            $(this).next().slideToggle('fast');
-        });
+//
+//        $('div#OneClick ul li ul').hide();
+//        $('div#OneClick > ul > li >p').click(function(){
+//            $(this).next().slideToggle('fast');
+//        });
     });
 </script>
 @endsection
