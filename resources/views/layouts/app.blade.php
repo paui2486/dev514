@@ -119,6 +119,18 @@
         });
     });
     </script>
+    <script>    
+        $(document).ready(function () {
+        var RightFixed = $("#FilterFixed");
+        $(window).scroll(function () {
+            if ($(this).scrollTop() >470) {
+                RightFixed.addClass("FilterFixed");
+            } else {
+                RightFixed.removeClass("FilterFixed");
+            }
+            });
+        });
+    </script>
 
 
     @yield('script')

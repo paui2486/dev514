@@ -12,8 +12,7 @@
     <div class="navigation">
         <nav>
             <a href="javascript:void(0)" class="smobitrigger ion-navicon-round"></a>
-            <ul class="mobimenu">
-                <a href="/"><img src="/img/pics/logo-fairlavie.png"></a>
+            <ul class="mobimenu">   
 <!--            <li><a href="{{ url('blog') }}">部落格</a></li>-->
                 <li class="navbar-host"><a href="{{ url('dashboard/activity/create') }}">辦活動</a></li>
                 @if (Auth::guest())

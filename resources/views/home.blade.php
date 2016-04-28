@@ -139,7 +139,7 @@
     <div class="home-container">
         <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
             {!! csrf_field() !!}
-            <div class="filter-bg">
+            <div class="filter-bg" id="FilterFixed">
                 <div class="pure-g panel-filter">
                     <div class="filter-select pure-u-4-24">
                         <select name="playWhat" class="filter-select dropdown">
@@ -223,7 +223,7 @@
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ url('activity'). '/' . $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
-                                <img src="/img/icons/arrow-calendar.png" style="width:32px;padding-bottom:2px;"></a>
+                                <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom:2px;"></a>
                                 <div class="tooltip top" role="tooltip">
                                     <div class="tooltip-arrow"></div>
                                     <div class="tooltip-inner"></div>
@@ -312,7 +312,7 @@
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
-                                <img src="/img/icons/arrow-calendar.png" style="width:32px;    padding-bottom: 2px;"></a>
+                                <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom: 2px;"></a>
                                 <div class="tooltip top" role="tooltip">
                                     <div class="tooltip-arrow"></div>
                                     <div class="tooltip-inner"></div>
