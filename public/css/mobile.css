@@ -60,7 +60,7 @@
         display: none;
         position: fixed;
         right: 0px;
-        bottom:10px;
+        bottom:45px;
         padding: 5px;
         cursor: pointer;
         z-index: 999999;
@@ -88,7 +88,8 @@
     }
 
     .navbar-mb-brand img {
-        height: 34px;
+        height: 28px;
+        margin-top: 2px;
     }
 
     .smobitrigger {
@@ -235,19 +236,19 @@
     
     .more-activity {
         position: fixed;
-        bottom: 18px;
+        bottom: 0px;
         width: 100%;
         font-size: 16px;
         letter-spacing: 4px;
         color: #fff;
-        z-index: 100000;
+        z-index:99;
         text-align: center;
     }
     
     .more-activity > div {
         margin: 10px auto;
         padding: 12px;
-        width: 60%;
+        width: 90%;
         border-radius: 5px;
         background-color: rgba(255,90,95,0.9);
         
@@ -268,7 +269,6 @@
     /*---------------sliderbar---------------*/
     li.drawer-mb {
       text-align: center;
-      border-top: 1px dashed #ccc;
     }
 
     li.drawer-mb > a {
@@ -367,7 +367,7 @@
         background-color: #ff5a5f;
         border-radius: 5px;
         text-align: center;
-        padding:15px 5px;
+        padding:10px 5px;
         margin: 0px auto;
         width:90%;
         cursor: pointer;
@@ -516,7 +516,4 @@
         padding: 8px;
     }
     
-    .checkbox-inline input {
-        display: none;
-    }
 }

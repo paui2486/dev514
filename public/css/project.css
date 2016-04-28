@@ -35,7 +35,7 @@ html {
 }
 
 .navbar-brand img {
-    height:60px;
+    height:40px;
     z-index: 200;
     margin:auto;
 }
@@ -58,7 +58,7 @@ html {
 }
 
 .page-navbar-brand img {
-    height:50px;
+    margin-top: 6px;
 }
 
 .navbar-collapse {
@@ -110,6 +110,13 @@ ul.dropdown-menu > li > a {
 
 .mobimenu li {
     text-align: center;
+}
+
+.FilterFixed {
+    position:fixed;
+    top:0px;
+    z-index: 100000;
+    width: 100%;
 }
 
 /*-----------------page navber-----------------*/
@@ -719,14 +726,7 @@ li.collapse-blog-category {
     width: 85%;
     max-width: 1100px;
     margin: 0 auto;
-/*
-    border:1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px #ccc;
-*/
     height: auto;
-    padding: 10px;
-    margin-bottom: 20px;
 }
 
 .Act-category-title {
@@ -931,7 +931,7 @@ li.collapse-blog-category {
 .contact-info > span {
     font-size: 15px;
     color: #998d7e;
-    text-decoration: none;
+    text-decoration:underline;
     padding-right: 5px;
 }
 
