@@ -157,13 +157,28 @@
               </div>
             @endif
             <div class="col-md-2 col-xs-4">
-                <a href="{{ URL('member/'. $activity->hoster ) }}">
-                    <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
-                    </div>
-                    <div class="actpage-holder-name">
-                        @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
-                    </div>
-                </a>
+                <div class="actpage-holder">
+                    <a href="{{ URL('member/'. $activity->hoster ) }}">
+                        <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
+                        </div>
+                        <div class="actpage-holder-name">
+                            @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
+                        </div>
+                    </a>
+                </div>
+                <div class="actpage-mb-holder">
+                     <a href="{{ URL('member/'. $activity->hoster ) }}">
+                        <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
+                        </div>
+                        <div class="actpage-holder-name">
+                            @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
+                        </div>
+                    </a>
+                </div>
+                <div class="row actpage-mb-surplus">
+                    <p id="left_number"> 剩  位 </p>
+                    <p id="left_date"> 倒數  天 </p>
+                </div>
             </div>
 
             <div class="col-md-6 col-xs-8 actpage-dashboard-info">
@@ -180,7 +195,7 @@
                         </p>
                     </div>
                     @else
-                    <div class="dashboard-text">
+                    <div class="dashboard-text dashboard-alert">
                         所有票券都賣完囉！
                     </div>
                     @endif
@@ -188,7 +203,7 @@
 
                 <div class="dashboard-block dashboard-price">
                     <img src="/img/icons/info-price.png">
-                    <div class="dashboard-text">
+                    <div class="dashboard-text dashboard-block-price">
                         <p>$ {{ $activity->min_price }} NTD起</p>
                     </div>
                 </div>
@@ -244,6 +259,10 @@
                                 </p>
                                 <p>
                                     <img src="/img/icons/mb-location.png"><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></p>
+                                <p>
+                                    <img src="/img/icons/mb-category.png"><span>
+                                    Category Name</span>
+                                </p>
                             </div>
                         </div>
                         @endforeach
