@@ -124,8 +124,8 @@
                         {{ $mbActivity->locat_name . $mbActivity->location }}
                     </div>
                     <div class="home-mb-info word-indent-newact">
-                        <img src="/img/icons/mb-location.png">
-                        {{ $mbActivity->locat_name . $mbActivity->location }}
+                        <img src="/img/icons/mb-category.png">
+                        Category Name
                     </div>
                 </div>
             </div>
