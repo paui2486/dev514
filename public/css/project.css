@@ -1674,16 +1674,17 @@ li.collapse-blog-category {
 }
 
 .actpage-holder-thumnail {
-    width: 110px;
-    height: 110px;
+    width:110px;
+    height:110px;
     background-size: cover;
     background-position: top;
     border-radius: 120px;
     border: 1px solid #ccc;
+    margin: auto;
 }
 
 .actpage-holder-name {
-    margin:10px auto;
+    margin:5px auto;
     text-align: center;
     font-size: 14px;
     color: #736357;
@@ -2388,7 +2389,7 @@ li.collapse-blog-category {
 }
 
 .list-filter-row {
-    margin: 15px 10px;
+    margin: 15px 0;
     border-bottom: 1px solid #ccc;
 }
 
@@ -2404,13 +2405,22 @@ li.collapse-blog-category {
 }
 
 .list-filter-row label {
-    font-size: 15px;
+    font-size: 14px;
     float: left;
     padding: 0px;
-    padding-right:10px;
-    letter-spacing:1px;
+    letter-spacing:2px;
     margin: 10px 0px;
     color: #666;
+    width: calc(100%/3);
+}
+
+.list-howmuch {
+    width: calc(100%/2)!important;
+}
+
+.list-filter-option input {
+    margin-right: 5px;
+    margin-top: 3px;
 }
 
 .list-right-content {
@@ -2445,6 +2455,7 @@ li.collapse-blog-category {
     letter-spacing: 4px;
     color: #fff;
     font-size: 16px;
+    border-radius: 0;
 }
 
 .list-category-panel {
@@ -2516,11 +2527,6 @@ li.collapse-blog-category {
 
 .list-readmore:hover {
     background-color: #dd4e58;
-}
-
-.list-filter-option input {
-    margin-right: 8px;
-    margin-top: 3px;
 }
 
 .checkbox-inline+.checkbox-inline {

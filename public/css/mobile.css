@@ -22,7 +22,12 @@
     .mobimenu img,
     .gotop-mb,
     .actpage-recommend-info img,
-    .dashboard-mb-share{
+    .dashboard-mb-share,
+    .actpage-mb-holder,
+    .actpage-mb-surplus,
+    .list-mb-content,
+    .list-mb-activities,
+    .list-result{
         display: none!important ;
     }
 }
@@ -49,11 +54,12 @@
     .list-banner,
     .list-filter-content,
     .list-filter-title,
+    .list-right-content,
     .navbar-brand,
     li.drawer,
     .navbar-host,
     .gotop,
-    .list-content-panel{
+    .actpage-holder{
         display: none!important;
     }
 
@@ -292,6 +298,28 @@
         height: 200px;
         background-position: center;
     }
+    
+    .actpage-holder-thumnail {
+        width: 90px;
+        height: 90px;
+        background-size: cover;
+        background-position: top;
+        border-radius: 120px;
+        border: 1px solid #ccc;
+    }
+    
+    .actpage-mb-surplus p {
+        background-color: #808080;
+        color: #fff;
+        text-align: center;
+        width: 80%;
+        margin: 5px auto;
+        padding: 3px;
+        border-radius: 10px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    
     .dashboard-mb-share span {
         letter-spacing: 2px;
         font-size: 14px;
@@ -320,11 +348,12 @@
 
     .actpage-dashboard-info > p {
         margin: 0px;
+        font-size: 15px;
     }
 
     .dashboard-block {
         width: 100%;
-        margin: 10px 0px;
+        margin: 6px 0px;
     }
     
     .dashboard-text {
@@ -333,9 +362,14 @@
         margin: 0px;
         padding-left: 10px;
     }
+    
+    .dashboard-alert {
+        padding-top: 16px;
+    }
+    
     .dashboard-text p {
         margin: 0;
-        margin-top: 5px;
+        font-size: 13px;
     }
     
     .dashboard-block img  {
@@ -347,25 +381,26 @@
     
     .dashboard-block-date img {
         width: 28px;
-        margin-top: 15px;
+        margin-top:10px;
+    }
+    
+    .dashboard-block-price {
+        padding-top: 5px;
     }
     
     .actpage-recommend-panel {
         width: 100%;
-        border: none;
     }
 
     .actpage-recommend-thumnail {
         width: 40%;
         border-radius: 0px;
         float: left;
-        height: 109px;
     }
 
     .actpage-recommend-info {
         width: 60%;
         float: left;
-        border: 1px solid #ccc;
     }
     
     .actpage-recommend-info p {
@@ -506,16 +541,18 @@
     }
 
     .list-mb-content > div > p {
-        cursor: pointer;
+       cursor: pointer;
         font-size: 16px;
         color: #666;
+        margin: 0;
+        background-color: #f4f4f4;
+        padding: 10px;
     }
 
     .list-filter {
         margin: 0;
         padding: 5px 10px;
         background-color: #fff;
-        margin-bottom: 15px;
     }
 
     .list-right-content > ul > li > a {
@@ -525,11 +562,10 @@
     }
 
     .list-category-panel {
-        padding:0;
-        border-bottom: 1px solid #ccc;
+        padding: 0;
+        border: 1px solid #ccc;
         background: white;
-        box-shadow: 0px 0px 10px #ccc;
-        margin: 5px 0;
+        margin: 15px 0;
     }
 
     .nav-tabs {
@@ -545,7 +581,81 @@
     }
 
     .list-category-text {
-        padding: 8px;
+        padding: 10px;
     }
     
+    .list-filter-row {
+        border: none;
+    }
+
+    .list-filter-row  span {
+        float: right;
+        padding-top: 5px;
+    }
+    
+    .list-filter-row img {
+        width: 30px;
+        padding-right: 5px;
+    }
+    
+    .list-filter-option label{
+        font-size: 14px;
+    }
+    
+    .list-mb-what,
+    .list-mb-when{
+        width: calc(100%/3);
+    }
+    
+    .list-mb-where {
+        width: calc(100%/4);
+    }
+    
+    .list-mb-howmuch {
+        width: calc(100%/2);
+    }
+    
+    .list-filter-option input {
+        margin: 2px 5px 0 0;
+    }
+    
+    .list-filter-option {
+        margin: 0px;
+        padding: 10px;
+        border: 1px solid #f2f2f2;
+        border-top: none;
+    }
+    
+    .list-content-panel {
+        border: none;
+    }
+    
+    .list-category-info {
+        margin: 0;
+    }
+    
+    .list-category-info img {
+        width: 26px;
+    }
+    
+    .list-category-info p {
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .list-readmore {
+        width: 100%;
+    }
+    
+    .list-result {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        background-color: #999999;
+        color: #fff;
+        letter-spacing: 2px;
+        font-size: 15px;
+    }
+
 }

@@ -77,7 +77,7 @@
                         <p>預算多少</p>
                         <div class="row list-filter-option">
                         @foreach( $filter['price'] as $price )
-                            <label class="checkbox-inline">
+                            <label class="list-howmuch checkbox-inline">
                                 <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $price->id }}">{{ $price->name }}
                             </label>
                         @endforeach
@@ -88,30 +88,40 @@
                 <div class="list-mb-content">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="list-filter-row">
-                        <p>想玩什麼</p>
+                        <p>想玩什麼 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></p>
                         <div class="row list-filter-option">
                         @foreach( $filter['what'] as $playWhat  )
-                            <label class="checkbox-inline">
+                            <label class="list-mb-what checkbox-inline">
                                 <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playWhat->id }}">{{ $playWhat->name }}
                             </label>
                         @endforeach
                         </div>
                     </div>
                     <div class="list-filter-row">
-                        <p>想去哪兒</p>
+                        <p>想去哪兒<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></p>
                         <div class="row list-filter-option">
                         @foreach( $filter['where'] as $goWhere )
-                            <label class="checkbox-inline">
+                            <label class="list-mb-where checkbox-inline">
                                 <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $goWhere->id }}">{{ $goWhere->name }}
                             </label>
                         @endforeach
                         </div>
                     </div>
                     <div class="list-filter-row">
-                        <p>預算多少</p>
+                        <p>什麼時候<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></p>
+                        <div class="row list-filter-option">
+                        @foreach( $filter['when'] as $playAt )
+                            <label class="list-mb-when checkbox-inline">
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playAt->id }}">{{ $playAt->name }}
+                            </label>
+                        @endforeach
+                        </div>
+                    </div>
+                    <div class="list-filter-row">
+                        <p>預算多少<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></p>
                         <div class="row list-filter-option">
                         @foreach( $filter['price'] as $price )
-                            <label class="checkbox-inline">
+                            <label class="list-mb-howmuch checkbox-inline">
                                 <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $price->id }}">{{ $price->name }}
                             </label>
                         @endforeach
@@ -121,7 +131,12 @@
 <!------mobile_end------>
             </div>
         </div>
+        <p class="list-result">活動搜尋列表</p>
         <div class="row list-right-content col-sm-8">
+            <div class="list-content-panel">
+            </div>
+        </div>
+        <div class="row list-mb-activities col-sm-8" style="margin:0;">
             <div class="list-content-panel">
             </div>
         </div>
@@ -171,15 +186,15 @@ $(document).ready(function () {
         });
     });
 
-//    if ( url_param ) {
-//        $('input[value='+ url_param +']').click();
-//    } else {
-//        showResult(eventData);
-//    }
-//    $('.list-mb-content > .list-filter-row > div ').hide();
-//    $('.list-mb-content > .list-filter-row > p').click(function(){
-//        $(this).parent().find('.list-filter-option').slideToggle();
-//    });
+    if ( url_param ) {
+        $('input[value='+ url_param +']').click();
+    } else {
+        showResult(eventData);
+    }
+    $('.list-mb-content > .list-filter-row > div ').hide();
+    $('.list-mb-content > .list-filter-row > p').click(function(){
+        $(this).parent().find('.list-filter-option').slideToggle();
+    });
 
     function onlyUnique(value, index, self) {
         return self.indexOf(value) === index;
@@ -198,14 +213,14 @@ $(document).ready(function () {
                     <div class="col-md-5 col-xs-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
                     <div class="col-md-7 col-xs-7 list-category-text"> <div class="list-category-title"> \
                     <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '">'+ data[eventIndex]['title'] +'</a> \
-                    </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + " NTD起 " + ' \
+                    </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + "元起 " + ' \
                     </p> \
                     <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
                     <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
                     </div> <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
                     <div class="list-readmore">觀看更多</div></a>\
-                    </div> </div> <div class="row list-page-number"></div> ';
+                    </div> </div>';
             }
         } else {
             activityRow = '<div class="list-attention"> Woops！尚無相關的活動類別！ </div>';
