@@ -832,7 +832,6 @@ li.collapse-blog-category {
     line-height: 1.5em;
     height: 1.5em;
     word-break: break-all;
-    display:-webkit-box;
 }
 
 .word-indent-02 {
