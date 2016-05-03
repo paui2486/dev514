@@ -252,16 +252,15 @@
                             <div class="actpage-recommend-info">
                                 <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
                                 <p>
-                                    <img src="/img/icons/mb-price.png">{{ $suggest->min_price }} 元起
+                                    <img src="/img/icons/web-price.png"><span>{{ $suggest->min_price }} 元起</span>
                                 </p>
                                 <p>
-                                    <img src="/img/icons/mb-date.png">{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}
+                                    <img src="/img/icons/web-date.png"><span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</span>
                                 </p>
                                 <p>
-                                    <img src="/img/icons/mb-location.png"><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></p>
+                                    <img src="/img/icons/web-location.png"><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></p>
                                 <p>
-                                    <img src="/img/icons/mb-category.png"><span>
-                                    Category Name</span>
+                                    <img src="/img/icons/web-category.png"><span>Category Name</span>
                                 </p>
                             </div>
                         </div>
@@ -334,7 +333,10 @@
             } else {
                 RightFixed.removeClass("right-content-fixed");
             }
-
+            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+200){
+                RightFixed.removeClass("right-content-fixed");
+            }
+            
             $(".inline").colorbox({inline:true, width:"90%"});
             $("#click").click(function(){
                 $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");

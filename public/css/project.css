@@ -825,7 +825,6 @@ li.collapse-blog-category {
 .word-indent-01 {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     position: relative;
@@ -1759,9 +1758,15 @@ li.collapse-blog-category {
     padding:5px 10px;
 }
 
+.actpage-recommend-info img {
+    width: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+
 .actpage-recommend-info p {
     font-size: 14px;
-    color: #998675;
+    color: #666;
     margin: 0px;
     padding: 0px;
 }
