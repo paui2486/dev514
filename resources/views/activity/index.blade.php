@@ -94,7 +94,7 @@
             <a class='inline' href="#inline_content">
             <div class="row actpage-mb-purchase">
                  <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
-                
+
             </div>
             </a>
             <div style='display:none'>
@@ -263,7 +263,7 @@
                                 <p class="word-indent-01">
                                     <img src="/img/icons/web-location.png"><span>{{ $suggest->locat_name . $suggest->location }}</span></p>
                                 <p>
-                                    <img src="/img/icons/web-category.png"><span>Category Name</span>
+                                    <img src="/img/icons/web-category.png"><span>{{ $suggest->cat_name }}</span>
                                 </p>
                             </div>
                         </div>
@@ -340,7 +340,7 @@
             if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+200){
                 RightFixed.removeClass("right-content-fixed");
             }
-            
+
             $(".inline").colorbox({inline:true, width:"90%"});
             $("#click").click(function(){
                 $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");

@@ -125,7 +125,7 @@
                     </div>
                     <div class="home-mb-info word-indent-newact">
                         <img src="/img/icons/mb-category.png">
-                        Category Name
+                        {{ $mbActivity->cat_name }}
                     </div>
                 </div>
             </div>
@@ -256,7 +256,7 @@
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                 {{ $newActivity->locat_name . $newActivity->location }}
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

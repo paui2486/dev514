@@ -195,6 +195,7 @@ class MainController extends controller
     public function getAllActivity()
     {
         $allActivity = DB::table('activities')
+                          ->leftJoin('categories as cat', 'activities.category_id', '=', 'cat.id')
                           ->leftJoin('categories', 'categories.id', '=', 'activities.location_id')
                           ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                           ->where('activities.status', '>=', 4)
@@ -202,7 +203,7 @@ class MainController extends controller
                               'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
                               'activities.description',       'activities.counter as count',    'activities.min_price as price',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
-                              'users.nick as orginizer',      'activities.activity_end as date_end',
+                              'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name',
                           ))
                           ->orderBy('activities.created_at', 'desc')
                           ->get();

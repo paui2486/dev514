@@ -48,6 +48,7 @@ class ActivityController extends Controller
                         ->get();
 
             $suggests = DB::table('activities')
+                          ->leftJoin('categories as cat', 'activities.category_id', '=', 'cat.id')
                           ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                           ->where('activities.status', '>=', 4)
                           ->where('activities.category_id', $activity->category_id)
@@ -55,7 +56,7 @@ class ActivityController extends Controller
                           ->select(array(
                             'activities.thumbnail', 'activities.title',     'activities.description',
                             'activities.location',  'activities.min_price', 'activities.activity_start',
-                            'categories.name as locat_name', 'activities.id'
+                            'categories.name as locat_name', 'activities.id', 'cat.name as cat_name'
                           ))
                           // ->groupBy('activities.title')
                           ->orderBy('activities.created_at', 'ASC')
@@ -234,7 +235,6 @@ class ActivityController extends Controller
                 'property = fb:app_id'      => '509584332499899',
                 'property = fb:admins'      => '1910444804523',
             );
-
             return view('activity.index', compact('meta', 'activity', 'tickets', 'suggests', 'slideCategory'));
         }
     }
