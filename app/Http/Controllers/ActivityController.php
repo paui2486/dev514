@@ -241,8 +241,8 @@ class ActivityController extends Controller
 
     public function showResult(Request $request)
     {
+        // return Input::all();
         $slideCategory = Library::getSlideCategory();
-
         // Log::error(Input::all());
         // Log::error(URL::previous());
         // return $request->segment(1);
@@ -315,6 +315,19 @@ class ActivityController extends Controller
             $activities = $query->get();
         }
         // Log::error($activities);
+
+        foreach($filter as $key => $value) {
+          # code...
+            foreach ($value as $target) {
+              # code...
+                if ( in_array($target->id, $selects) ) {
+                    $target->checked = 'checked';
+                } else {
+                    $target->checked = null;
+                }
+            }
+        }
+        // return $filter;
         return view('activity.search', compact('meta', 'filter', 'activities', 'slideCategory'));
     }
 }

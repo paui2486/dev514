@@ -259,7 +259,10 @@ class PurchaseController extends controller
                               );
 
                 DB::table('orders')->insert($storeOrder);
+                // for test
                 return $Pay2go->create_form($result, NULL, TRUE, $autoSubmit, 0, $submitButtonStyle);
+                // for production
+                // return $Pay2go->create_form($result, NULL, FALSE, $autoSubmit, 0, $submitButtonStyle);
             }
         }
     }

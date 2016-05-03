@@ -45,7 +45,7 @@
                         <div class="row list-filter-option">
                         @foreach( $filter['what'] as $playWhat  )
                             <label class="checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playWhat->id }}">{{ $playWhat->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playWhat->id }}" {{ $playWhat->checked }}>{{ $playWhat->name }}
                             </label>
                         @endforeach
                         </div>
