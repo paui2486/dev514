@@ -12,6 +12,8 @@
             <th>分類</th>
             <th>標題</th>
             <th>觀看</th>
+            <th>開始時間</th>
+            <th>結束時間</th>
             <th>票卷</th>
             <th>狀態</th>
             <th>設定</th>
@@ -48,7 +50,7 @@ $(document).ready(function () {
         "aoColumnDefs": [
             {
                 "bSortable": false,
-                "aTargets": [ 5 ]
+                // "aTargets": [ 5 ]
             },
         ],
         "processing": true,

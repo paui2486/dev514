@@ -145,10 +145,10 @@
                                         </label>
                                     </div>
                                     <div class="errorbox col-xs-8 col-sm-7 col-md-6">
-                                        <input id="ActDate" class="form-control act_date" type="text" name="activity_start_date" placeholder="年/月/日" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_start ) : null) }}}"/>
+                                        <input class="form-control act_date" type="text" name="activity_start_date" placeholder="年/月/日" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$1', $activity->activity_start ) : null) }}}"/>
                                     </div>
                                     <div class="errorbox col-xs-4 col-sm-5 col-md-4">
-                                        <input id="ActDate" class="form-control act_time" type="text" name="activity_start_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
+                                        <input class="form-control act_time" type="text" name="activity_start_time" placeholder="時/分" value="{{{ Input::old('activity_end_time', isset($activity) ? preg_replace('/(.*)\s(.*):(.*)/', '$2', $activity->activity_start ) : null) }}}"/>
                                     </div>
                                     <div class="col-md-2 table-cell" style="margin-top:10px;">
                                         <label class="control-label">
@@ -310,7 +310,7 @@
                                     <div class="row">
                                         <label class="control-label col-sm-2" for="ticket_name">票券名稱</label>
                                         <div class="errorbox col-sm-2">
-                                            <input class="form-control" placeholder="例：早鳥票" type="text" name="ticket"/>
+                                            <input class="form-control" placeholder="例：早鳥票" type="text" name="ticket[0][name]"/>
                                         </div>
                                         <label class="control-label col-sm-2" for="ticket_price">票券單價</label>
                                         <div class="col-sm-4">
@@ -448,6 +448,18 @@
 <script type="text/javascript">
     $(document).ready(function () {
         CKFinder.setupCKEditor();
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {
+            modal_this = this
+            $(document).on('focusin.modal', function (e) {
+                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+                    modal_this.$element.focus()
+                }
+            })
+        };
+
         var description = CKEDITOR.replace( 'ticket_description', {
             language : 'zh',
             height : 100,
@@ -477,36 +489,22 @@
             fontSize_sizes : '8/8px;9/9px;10/10px;11/11px;12/12px;13/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;21/21px;22/22px;23/23px;24/24px;25/25px;26/26px;28/28px;36/36px;48/48px;72/72px'
         });
 
-        $('input.time-picker').on('focus', picker);
-        $("button.btn-clone").on('click', clone);
-        $("button.btn-del").on('click', remove);
-
-				$('#input-who').selectize({
-            maxItems: 5,
-            create: false,
-				});
-
-        $.fn.modal.Constructor.prototype.enforceFocus = function() {
-            modal_this = this
-            $(document).on('focusin.modal', function (e) {
-                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
-                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
-                && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
-                    modal_this.$element.focus()
-                }
-            })
-        };
-
+        var maxDate = null;
         var minDate = moment().format("YYYY-MM-DD");
+
         $(".act_date").datetimepicker({
             format: 'YYYY-MM-DD',
             startDate: $(this).value,
         });
 
+        $(".act_time").datetimepicker({
+            stepping: 10,
+            format: 'HH:mm',
+            startDate: $(this).value,
+        });
+
         $("input[name=activity_start_date]").on("dp.change", function (e) {
             $('input.act_start_date').data("DateTimePicker").minDate(e.date);
-            $('input.sale_start_date').data("DateTimePicker").minDate(e.date);
-
             $('input[name="activity_end_date"]').data("DateTimePicker").minDate(e.date);
         });
 
@@ -516,12 +514,6 @@
             $('input.sale_end_date').data("DateTimePicker").minDate(e.date);
         });
 
-        $(".act_time").datetimepicker({
-            stepping: 10,
-            format: 'HH:mm',
-            startDate: $(this).value,
-        });
-
         if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
             $("input[name='activity_start_time']").on("dp.change", function (e) {
                 $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
@@ -529,6 +521,15 @@
                 $('input.sale_start_time').data('DateTimePicker').date(e.date);
             });
         }
+
+        // $('input.time-picker').on('focus', picker);
+        $("button.btn-clone").on('click', clone);
+        $("button.btn-del").on('click', remove);
+
+  			$('#input-who').selectize({
+            maxItems: 5,
+            create: false,
+  			});
 
         $("input[name='activity_end_time']").on("dp.change", function (e) {
             $('input.act_end_time').data('DateTimePicker').minDate(e.date);
@@ -547,6 +548,56 @@
         $('form').on('submit', function() {
             CKEDITOR.instances.content.updateElement();
         });
+
+        $(".form-horizontal").validate( {
+            rules: {
+                  title: {
+                    required: true,
+                  },
+                  activity_start_date: {
+                      required: true,
+                  },
+                  activity_end_date: {
+                      required: true,
+                  },
+                  activity_start_time: {
+                      required: true,
+                  },
+                  activity_end_time: {
+                      required: true,
+                  },
+                  location:{
+                      required:true,
+                  },
+              },
+              messages: {
+                  title: {
+                      required: "*請填寫活動名稱",
+                  },
+                  activity_start_date:"*請選取日期",
+                  activity_end_date:"*請選取日期",
+                  activity_start_time:"*請選取日期",
+                  activity_end_time:"*請選取日期",
+                  location:"*請填寫活動詳細地址",
+              },
+              errorElement: "em",
+              errorPlacement: function ( error, element ) {
+            // Add the `help-block` class to the error element
+              error.addClass( "help-block" );
+
+              if ( element.prop( "type" ) === "checkbox" ) {
+                  error.insertAfter( element.parent( "label" ) );
+              } else {
+                  error.insertAfter( element );
+              }
+          },
+          highlight: function ( element, errorClass, validClass ) {
+              $( element ).parents( ".errorbox" ).addClass( "has-error" ).removeClass( "has-success" );
+          },
+          unhighlight: function (element, errorClass, validClass) {
+              $( element ).parents( ".errorbox" ).addClass( "has-success" ).removeClass( "has-error" );
+          }
+        } );
     });
 
     function clone() {
@@ -563,14 +614,12 @@
                     $(this).attr('name', cg_name);
                 }
             })
-            .on('focus', 'input.time-picker', picker)
+            // .on('focus', 'input.time-picker', picker)
             .on('focus', 'input.act_date', pickerDate)
             .on('focus', 'input.act_time', pickerTime)
             .on('click', 'button.btn-clone', clone)
             .on('click', 'button.btn-del', remove);
     }
-
-    var maxDate = null;
 
     function pickerDate() {
         $(this).datetimepicker({
@@ -614,56 +663,5 @@
             $(this).parents(".form-ticket").remove();
         }
     }
-		$( document ).ready( function () {
-			$( ".form-horizontal" ).validate( {
-				rules: {
-					title: {
-						required: true,
-					},
-                    activity_start_date: {
-                        required: true,
-                    },
-                    activity_end_date: {
-                        required: true,
-                    },
-                    activity_start_time: {
-                        required: true,
-                    },
-                    activity_end_time: {
-                        required: true,
-                    },
-                    location:{
-                        required:true,
-                    },
-				},
-				messages: {
-					title: {
-						required: "*請填寫活動名稱",
-					},
-                    activity_start_date:"*請選取日期",
-                    activity_end_date:"*請選取日期",
-                    activity_start_time:"*請選取日期",
-                    activity_end_time:"*請選取日期",
-                    location:"*請填寫活動詳細地址",
-				},
-				errorElement: "em",
-				errorPlacement: function ( error, element ) {
-					// Add the `help-block` class to the error element
-					error.addClass( "help-block" );
-
-					if ( element.prop( "type" ) === "checkbox" ) {
-						error.insertAfter( element.parent( "label" ) );
-					} else {
-						error.insertAfter( element );
-					}
-				},
-				highlight: function ( element, errorClass, validClass ) {
-					$( element ).parents( ".errorbox" ).addClass( "has-error" ).removeClass( "has-success" );
-				},
-				unhighlight: function (element, errorClass, validClass) {
-					$( element ).parents( ".errorbox" ).addClass( "has-success" ).removeClass( "has-error" );
-				}
-			} );
-		} );
 </script>
 @stop

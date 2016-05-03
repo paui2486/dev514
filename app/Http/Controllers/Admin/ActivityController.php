@@ -287,7 +287,10 @@ class ActivityController extends Controller
                     ->leftJoin('categories', 'activities.category_id', '=', 'categories.id')
                     ->select(array(
                       'activities.id',       'users.name',             'categories.name as category',
-                      'activities.title',    'activities.counter',     'activities.targets',          'activities.status'))
+                      'activities.title',    'activities.counter',     'activities.activity_start',   'activities.activity_end',
+                      'activities.targets',  'activities.status',
+
+                    ))
                     ->orderBy('activities.created_at', 'ASC');
 
         if (!Auth::user()->adminer){
@@ -684,7 +687,7 @@ class ActivityController extends Controller
                     ->where('status', 3);
         $price = $orders->sum('ticket_price');
         $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
-        $msg = '請匯錢給使用者'.Auth::user()->name. '; 帳號是 '. Auth::user()->bank_name. ' : '. Auth::user()->bank_account . '; 金額:'. intval($price * 0.9);
+        $msg   = '請匯錢給使用者'.Auth::user()->name. '; 帳號是 '. Auth::user()->bank_name. ' : '. Auth::user()->bank_account . '; 金額:'. intval($price * 0.9);
         Mail::send('auth.emails.checkout', array('msg' => $msg),  function($message) use ($mails, $msg) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to($mails)->subject('催款通知 : '. Auth::user()->name);

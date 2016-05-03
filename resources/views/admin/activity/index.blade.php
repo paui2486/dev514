@@ -22,7 +22,7 @@ $(document).ready(function () {
         collapsible: 'accordion',
         setHash: true,
         scrollToAccordion: true,
-        active: 0,
+        active: 1,
         activate: function(e, tab) {
             $(tab.anchor.context).addClass('active');
             var target = $(tab.selector);
