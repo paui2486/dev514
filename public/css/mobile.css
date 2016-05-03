@@ -58,7 +58,8 @@
     li.drawer,
     .navbar-host,
     .gotop,
-    .actpage-holder{
+    .actpage-holder,
+    .actpage-recommend-info{
         display: none!important;
     }
 
@@ -290,7 +291,10 @@
         width: 90%;
         padding: 15px;
     }
-
+    
+    .actpage-header {
+        margin: 5px 0;
+    }
     .actpage-main-image {
         position: inherit;
         width: 100%;
@@ -325,7 +329,7 @@
     }
     
     .dashboard-mb-share img {
-        width: 50px;
+        width: 15%;
         border: 1px solid #000;
         border-radius: 50px;
         padding: 10px;
@@ -389,12 +393,15 @@
     
     .actpage-recommend-panel {
         width: 100%;
+        border: none;
     }
 
     .actpage-recommend-thumnail {
-        width: 40%;
+        width: calc(100%/3 - 5px);
         border-radius: 0px;
         float: left;
+        height: 85px;
+        margin: 2px;
     }
 
     .actpage-recommend-info {

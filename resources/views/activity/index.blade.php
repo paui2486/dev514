@@ -144,7 +144,8 @@
                 </div>
             </div>
             @else
-            <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">無法訂購</div>
+
+            <div class="row actpage-mb-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完</div>
             @endif
         </div>
 <!--------------mobile submit button end--------------->
@@ -217,7 +218,10 @@
             <div class="dashboard-mb-share col-xs-12">
                 <span>分享到</span>
                 <img src="/img/icons/share-fb.png">
+                 <a href="http://line.me/R/msg/{{ $activity->title }}/?{{ URL::current() }}">
+
                 <img src="/img/icons/share-line.png">
+                </a>
                 <img src="/img/icons/share-wechat.png">
                 <img src="/img/icons/share-email.png">
             </div>
@@ -245,10 +249,9 @@
                     </div>
                     <div class="row actpage-recommend">
                         @foreach($suggests as $suggest)
+                        <a href="{{ URL::to('activity/' . $suggest->id) }}">
                         <div class="actpage-recommend-panel">
-                            <a href="{{ URL::to('activity/' . $suggest->id) }}">
                                 <div class="actpage-recommend-thumnail" style="background-image:url('{{ $suggest->thumbnail }}')"></div>
-                            </a>
                             <div class="actpage-recommend-info">
                                 <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
                                 <p>
@@ -264,6 +267,7 @@
                                 </p>
                             </div>
                         </div>
+                        </a>
                         @endforeach
                     </div>
                     <div class="row actpage-header">
@@ -307,7 +311,7 @@
             redirect_uri: '{{ Request::URL() }}',
             display: 'popup',
             link: '{{ Request::URL() }}',
-            picture: '{{ $activity->thumbnail }}',
+            picture: '{{ asset($activity->thumbnail) }}',
             name: '514 活動頻道 - {{ $activity->title }}',
             caption: '活動由 @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif 所提供',
             description: '{{ $activity->description }}'

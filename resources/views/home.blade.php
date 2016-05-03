@@ -101,13 +101,13 @@
             @foreach( $home->allActivity as $mbActivity )
             <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">
             <div class="mobile_panel_bg">
-                <div class="col-xs-5 mobile-activity-thumbnail"
+                <div class="col-xs-6 mobile-activity-thumbnail"
                          style="background-image:url('{{ $mbActivity->thumbnail }}')">
                         <div class="home-mb-count">
                             <img src="/img/icons/eye-03.png">{{ $mbActivity->count }} 人
                         </div>
                 </div>
-                <div class="col-xs-7 mobile-activity-info">
+                <div class="col-xs-6 mobile-activity-info">
                     <div class="home-mb-activity-title word-indent-01">
                          {{ $mbActivity->title }}
                     </div>

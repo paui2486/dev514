@@ -706,9 +706,10 @@ li.collapse-blog-category {
     text-align: right;
     color: #666666;
     font-size: 15px;
-    padding: 15px 20px;
+    padding: 0px 20px;
     color: black;
     opacity: 0.5;
+    padding-bottom: 10px;
 }
 
 .new-activity-orginizer img {
@@ -1667,7 +1668,6 @@ li.collapse-blog-category {
     padding:0px 20px;
     display: flex;
     border: 1px solid #ccc;
-    margin-bottom: 20px;
     min-height: 1000px;
     position: relative;
 }
@@ -1707,11 +1707,12 @@ li.collapse-blog-category {
 }
 
 .actpage-header-left {
-    font-size: 16px;
+    font-size: 14px;
     border: 1px solid #888888;
     border-radius: 5px;
     padding: 5px 10px;
     text-align: center;
+    letter-spacing: 1px;
 }
 
 .actpage-header-dash {
