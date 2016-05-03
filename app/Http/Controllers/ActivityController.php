@@ -320,7 +320,8 @@ class ActivityController extends Controller
           # code...
             foreach ($value as $target) {
               # code...
-                if ( in_array($target->id, $selects) ) {
+
+                if ( isset($selects) && in_array($target->id, $selects) ) {
                     $target->checked = 'checked';
                 } else {
                     $target->checked = null;
