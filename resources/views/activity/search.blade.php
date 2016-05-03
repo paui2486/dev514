@@ -92,7 +92,7 @@
                         <div class="row list-filter-option">
                         @foreach( $filter['what'] as $playWhat  )
                             <label class="list-mb-what checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playWhat->id }}">{{ $playWhat->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playWhat->id }}" {{ $playWhat->checked }}>{{ $playWhat->name }}
                             </label>
                         @endforeach
                         </div>
@@ -102,7 +102,7 @@
                         <div class="row list-filter-option">
                         @foreach( $filter['where'] as $goWhere )
                             <label class="list-mb-where checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $goWhere->id }}">{{ $goWhere->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $goWhere->id }}" {{ $goWhere->checked }}>{{ $goWhere->name }}
                             </label>
                         @endforeach
                         </div>
@@ -112,7 +112,7 @@
                         <div class="row list-filter-option">
                         @foreach( $filter['when'] as $playAt )
                             <label class="list-mb-when checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playAt->id }}">{{ $playAt->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $playAt->id }}" {{ $playAt->checked }}>{{ $playAt->name }}
                             </label>
                         @endforeach
                         </div>
@@ -122,7 +122,7 @@
                         <div class="row list-filter-option">
                         @foreach( $filter['price'] as $price )
                             <label class="list-mb-howmuch checkbox-inline">
-                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $price->id }}">{{ $price->name }}
+                                <input type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $price->id }}" {{ $price->checked }}>{{ $price->name }}
                             </label>
                         @endforeach
                         </div>
