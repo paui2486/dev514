@@ -832,6 +832,7 @@ li.collapse-blog-category {
     line-height: 1.5em;
     height: 1.5em;
     word-break: break-all;
+    display:-webkit-box;
 }
 
 .word-indent-02 {
@@ -1760,7 +1761,6 @@ li.collapse-blog-category {
 }
 
 .actpage-recommend-info img {
-    width: 20px;
     width: 20px;
     margin-right: 5px;
 }

@@ -260,8 +260,8 @@
                                 <p>
                                     <img src="/img/icons/web-date.png"><span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</span>
                                 </p>
-                                <p>
-                                    <img src="/img/icons/web-location.png"><span class="word-indent-01">{{ $suggest->locat_name . $suggest->location }}</span></p>
+                                <p class="word-indent-01">
+                                    <img src="/img/icons/web-location.png"><span>{{ $suggest->locat_name . $suggest->location }}</span></p>
                                 <p>
                                     <img src="/img/icons/web-category.png"><span>Category Name</span>
                                 </p>
