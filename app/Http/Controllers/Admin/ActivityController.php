@@ -594,7 +594,6 @@ class ActivityController extends Controller
     public function showPriview($id)
     {
         $activity = DB::table('activities')
-                      ->leftJoin('categories as cat', 'activities.category_id', '=', 'cat.id')
                       ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                       ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                       ->select(array(
@@ -604,7 +603,7 @@ class ActivityController extends Controller
                         'activities.counter',   'activities.category_id',     'activities.max_price',
                         'activities.min_price', 'activities.remark',          'activities.time_range',
                         'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
-                        'users.avatar as host_photo',   'users.description as host_destricption', 'cat.name as cat_name'
+                        'users.avatar as host_photo',   'users.description as host_destricption',
                       ))
                       ->where('activities.id', $id)
                       ->first();
@@ -618,13 +617,14 @@ class ActivityController extends Controller
                     ->get();
 
         $suggests = DB::table('activities')
+                      ->leftJoin('categories as cat', 'activities.category_id', '=', 'cat.id')
                       ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                       ->where('activities.status', '>=', 4)
                       ->where('activities.category_id', $activity->category_id)
                       ->where('activities.id', '!=', $activity->id)
                       ->select(array(
                         'activities.id',        'activities.thumbnail', 'activities.title',     'activities.description',
-                        'activities.location',  'activities.min_price', 'activities.activity_start', 'categories.name as locat_name',
+                        'activities.location',  'activities.min_price', 'activities.activity_start', 'categories.name as locat_name', 'cat.name as cat_name'
                       ))
                       ->groupBy('activities.title')
                       ->orderBy('activities.created_at', 'ASC')
