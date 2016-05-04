@@ -92,8 +92,8 @@
                         電話號碼
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="phone" id="phone"
-              							value="{{{ Input::old('phone', isset($member) ? $member->phone : null) }}}" />
+                        <input class="form-control" type="text" name="phone" id="phone" placeholder="xxxx-xxx-xxx"
+              							value="{{{ Input::old('phone', isset($member) ? $member->phone : null) }}}"  data-masked-input="9999-999-999"/>
                     </div>
                 </div>
     				</div>
@@ -114,8 +114,8 @@
                         銀行帳號
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" name="bank_account" id="bank_account"
-              							value="{{{ Input::old('bank_account', isset($member) ? $member->bank_account : null) }}}" />
+                        <input class="form-control" type="text" name="bank_account" id="bank_account" placeholder="xxxx-xxxx-xxxx-xxxx"
+              							value="{{{ Input::old('bank_account', isset($member) ? $member->bank_account : null) }}}" data-masked-input="9999-9999-9999-9999"/>
                     </div>
                 </div>
     				</div>
@@ -207,4 +207,72 @@
 		<!-- ./ form actions -->
 </form>
 
-<script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.validate.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.masked-input.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/additional-methods.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
+<script>
+$(document).ready(function () {
+    $.validator.addMethod("phone", function(value, element) {
+        return this.optional(element) || /\d{4}-\d{3}-\d{3}/.test(value);
+    }, "請輸入完整電話號碼");
+
+    $.validator.addMethod("credit_card", function(value, element) {
+        return this.optional(element) || /\d{4}-\d{4}-\d{4}-\d{4}/.test(value);
+    }, "請輸入正確銀行帳號");
+
+    $(".form-horizontal").validate( {
+        rules: {
+              name: {
+                  required: true,
+              },
+              nick: {
+                  required: true,
+              },
+              address: {
+                  required: true,
+              },
+              email: {
+                  email: true,
+                  required: true,
+              },
+              phone: {
+                  required: true,
+                  phone: true,
+              },
+              bank_account: {
+                  credit_card: true,
+              },
+          },
+          messages: {
+              name: "*請填寫使用者名稱",
+              nick: "*請填寫使用者暱稱",
+              address: "*請填寫居住地址",
+              email: {
+                  required: "*請輸入電子信箱",
+                  email: "*請輸入 email 格式"
+              },
+              phone: {
+                  required: "*請輸入電話號碼 ex: 09xx-xxx-xxx",
+              },
+          },
+          errorElement: "em",
+          errorPlacement: function ( error, element ) {
+          // Add the `help-block` class to the error element
+            error.addClass( "help-block" );
+
+            if ( element.prop( "type" ) === "checkbox" ) {
+                error.insertAfter( element.parent( "label" ) );
+            } else {
+                error.insertAfter( element );
+            }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+            $( element ).parents( ".errorbox" ).addClass( "has-error" ).removeClass( "has-success" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $( element ).parents( ".errorbox" ).addClass( "has-success" ).removeClass( "has-error" );
+        }
+    });
+});
+</script>
