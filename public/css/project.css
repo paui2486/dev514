@@ -1968,12 +1968,11 @@ li.collapse-blog-category {
 }
 
 .actpage-share {
-    text-align: center;
     margin-top: 15px;
     border-top: 1px solid #ccc;
 }
 
-.actpage-share span{
+.actpage-share > span {
     background-color: transparent;
     font-size: 13px;
     letter-spacing: 1px;
@@ -1985,7 +1984,7 @@ li.collapse-blog-category {
     opacity: 0.3;
 }
 
-.actpage-share span:hover {
+.actpage-share > span:hover {
     opacity: 0.6;
 }
 
@@ -1995,6 +1994,46 @@ li.collapse-blog-category {
     margin-bottom: 3px;
 }
 
+.share-dropbtn {
+    color: #999999;
+    padding-left: 10px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+}
+
+.share-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.share-dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    border:1px solid #ccc;
+    background-color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.share-dropdown-content a {
+    color: #999999;
+    padding:10px;
+    text-decoration: none;
+    display: block;
+}
+
+.share-dropdown-content a:hover {
+    background-color: #f1f1f1}
+
+.share-dropdown:hover .share-dropdown-content {
+    display: block;
+}
+
+.share-dropdown:hover .share-dropbtn {
+    color: #666;
+}
 /*-------------------訂購頁面-------------------*/
 
 .purchase-content {

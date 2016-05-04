@@ -21,12 +21,11 @@
     .drawer-mb,
     .mobimenu img,
     .gotop-mb,
-    .dashboard-mb-share,
-    .actpage-mb-holder,
-    .actpage-mb-surplus,
     .list-mb-content,
     .list-mb-activities,
-    .list-result{
+    .list-result,
+    .actpage-mb-dashboard,
+    .actpage-thum-mb-title {
         display: none!important ;
     }
 }
@@ -58,8 +57,8 @@
     li.drawer,
     .navbar-host,
     .gotop,
-    .actpage-holder,
-    .actpage-recommend-info{
+    .actpage-recommend-info,
+    .actpage-dashboard {
         display: none!important;
     }
 
@@ -302,27 +301,67 @@
         background-position: center;
     }
     
+/*------------- actpage-dashboard --------------*/
+    
+    .actpage-mb-dashboard {
+        padding: 10px;
+        margin: 0;
+    }
+        
     .actpage-holder-thumnail {
-        width: 90px;
-        height: 90px;
+        width: 75px;
+        height: 75px;
         background-size: cover;
         background-position: top;
         border-radius: 120px;
         border: 1px solid #ccc;
     }
+
+    .dashboard-title {
+        font-size: 15px;
+    }
     
     .actpage-mb-surplus p {
         background-color: #808080;
         color: #fff;
+        width: calc(100%/2 - 10px);
         text-align: center;
-        width: 80%;
-        margin: 5px auto;
+        margin-right:5px;
         padding: 3px;
         border-radius: 10px;
         font-size: 12px;
         letter-spacing: 1px;
+        float: left;
     }
     
+    .actpage-holder-name {
+        text-align: left;
+        font-size: 13px;
+        color: #999999;
+    }
+    
+    .actpage-dashboard-info {
+        padding: 10px 0;
+        border-top: 1px solid #ccc;
+    }
+    
+    .actpage-dashboard-info  p {
+        margin: 0;
+    }
+    
+    .dashboard-block img  {
+        width: auto;
+        margin: 0px;
+        height: 30px;
+    }
+
+    .dashboard-text {
+        margin: 0px;
+        text-align: center;
+        font-size: 13px;
+        padding-top:5px; 
+    }
+        
     .dashboard-mb-share span {
         letter-spacing: 2px;
         font-size: 14px;
@@ -342,68 +381,41 @@
         text-align: center;
         border-top: 1px solid #ccc;
     }
-    
-    .actpage-dashboard,
+
     .actpage-panel {
         width: 100%;
         min-height: auto;
     }
 
-    .actpage-dashboard-info > p {
-        margin: 0px;
-        font-size: 15px;
-    }
-
-    .dashboard-block {
-        width: 100%;
-        margin: 6px 0px;
-    }
-    
-    .dashboard-text {
-        float: left;
-        width: 80%;
-        margin: 0px;
-        padding-left: 10px;
-    }
-    
-    .dashboard-alert {
-        padding-top: 16px;
-    }
-    
-    .dashboard-text p {
-        margin: 0;
-        font-size: 13px;
-    }
-    
-    .dashboard-block img  {
-        float: left;
-        width: 30px;
-        margin: 0px;
-        height: auto;
-    }
-    
-    .dashboard-block-date img {
-        width: 28px;
-        margin-top:10px;
-    }
-    
-    .dashboard-block-price {
-        padding-top: 5px;
-    }
-    
-    .actpage-recommend-panel {
-        width: 100%;
+    .actpage-recommend-panel{
         border: none;
+        width:100%;
+        margin: 0;
+        margin-bottom: 5px;
     }
-
+    
     .actpage-recommend-thumnail {
-        width: calc(100%/3 - 5px);
         border-radius: 0px;
         float: left;
-        height: 85px;
-        margin: 2px;
+        height: 200px;
+        position: relative;
     }
-
+    
+    .actpage-thum-mb-title {
+        font-size: 15px;
+        color: #fff;
+        background-color: rgba(0,0,0,0.4);
+        padding: 5px 10px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        margin: 0;
+    }
+    
+    .actpage-recommend {
+        margin-bottom: 10px;
+    }
+    
     .actpage-recommend-info {
         width: 60%;
         float: left;

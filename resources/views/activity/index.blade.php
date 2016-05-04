@@ -23,8 +23,8 @@
     <div class="actpage-content">
         <div id="RightFixed" class="col-md-4 actpage-right-content">
             <div class="row actpage-cart-title">
-                <p id="left_number" class="col-md-6"> 剩  位 </p>
-                <p id="left_date" class="col-md-6"> 倒數  天 </p>
+                <p id="" class="col-md-6 left_number"> 剩  位 </p>
+                <p id="" class="col-md-6 left_date"> 倒數  天 </p>
             </div>
             <div class="row actpage-cart-content">
                 <p class="actpage-buy-now">{{ $activity->title }}</p>
@@ -80,15 +80,20 @@
                     <span class="btn btn-sm" id="shareBtn">
                         <img src="/img/icons/share-fb.png">Facebook</span>
                     <span class="btn btn-sm">
-                        <img src="/img/icons/share-line.png">Line</span>
-                    <span class="btn btn-sm">
-                        <img src="/img/icons/share-wechat.png">WeChat</span>
-                    <span class="btn btn-sm" style="border:none;">
+                        <img src="/img/icons/share-message.png">Message</span>
+                    <span class="btn btn-sm" >
                         <img src="/img/icons/share-email.png">Email</span>
+                    <div class="share-dropdown">
+                        <span class="share-dropbtn">更多...</span>
+                        <div class="share-dropdown-content">
+                            <a href="#">WeChat</a>
+                            <a href="#">微博</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-<!--------------mobile submit button--------------->
+<!--------------mobile colorbox start--------------->
         <div class="purchase-mb-btn">
             @if(count($tickets)>0)
             <a class='inline' href="#inline_content">
@@ -148,16 +153,16 @@
             <div class="row actpage-mb-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完</div>
             @endif
         </div>
-<!--------------mobile submit button end--------------->
+<!--------------mobile colorbox end--------------->
         <div class="row actpage-dashboard">
             @if (Session::has('message'))
-              <div class="alert alert-danger">
-                  <ul>
-                      <li> *** {{ Session::get('message') }} *** </li>
-                  </ul>
-              </div>
+            <div class="alert alert-danger">
+                <ul>
+                  <li> *** {{ Session::get('message') }} *** </li>
+                </ul>
+            </div>
             @endif
-            <div class="col-md-2 col-xs-4">
+            <div class="col-md-2">
                 <div class="actpage-holder">
                     <a href="{{ URL('member/'. $activity->hoster ) }}">
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
@@ -167,22 +172,8 @@
                         </div>
                     </a>
                 </div>
-                <div class="actpage-mb-holder">
-                     <a href="{{ URL('member/'. $activity->hoster ) }}">
-                        <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
-                        </div>
-                        <div class="actpage-holder-name">
-                            @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
-                        </div>
-                    </a>
-                </div>
-                <div class="row actpage-mb-surplus">
-                    <p id="left_number"> 剩  位 </p>
-                    <p id="left_date"> 倒數  天 </p>
-                </div>
             </div>
-
-            <div class="col-md-6 col-xs-8 actpage-dashboard-info">
+            <div class="col-md-6 actpage-dashboard-info">
                 <p>{{ $activity->title }}</p>
                 <div class="dashboard-block dashboard-block-date">
                     <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
@@ -197,7 +188,7 @@
                     </div>
                     @else
                     <div class="dashboard-text dashboard-alert">
-                        所有票券都賣完囉！
+                        票券已售完
                     </div>
                     @endif
                 </div>
@@ -205,6 +196,61 @@
                 <div class="dashboard-block dashboard-price">
                     <img src="/img/icons/info-price.png">
                     <div class="dashboard-text dashboard-block-price">
+                        <p>$ {{ $activity->min_price }} NTD起</p>
+                    </div>
+                </div>
+                <div class="dashboard-block">
+                    <img src="/img/icons/info-where.png">
+                    <div class="dashboard-text">
+                        <p>{{ $activity->locat_name . $activity->location }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--mobile-dashboard start-->
+        <div class="row actpage-mb-dashboard">
+           <div class="col-xs-3" style="padding:0;">
+                <div class="actpage-holder">
+                    <a href="{{ URL('member/'. $activity->hoster ) }}">
+                        <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
+                        </div>
+                        
+                    </a>
+                </div>
+            </div>
+            <div class="dashboard-title col-xs-9">
+                <p style="margin:0;">{{ $activity->title }}</p>
+                <div class="actpage-holder-name">
+                    由 @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif 主辦
+                </div>
+                <div class="actpage-mb-surplus">
+                    <p class="left_number"> 剩  位 </p>
+                    <p class="left_date"> 倒數  天 </p>
+                </div>
+            </div>
+            <div class="col-xs-12 actpage-dashboard-info">
+                <div class="dashboard-block">
+                    <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
+                    <div class="dashboard-text">
+                        <p>
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}
+                        </p>
+                        <p>～</p>
+                        <p>
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_end) /*--}}
+                        </p>
+                    </div>
+                    @else
+                    <div class="dashboard-text dashboard-alert">
+                        票券已售完
+                    </div>
+                    @endif
+                </div>
+
+                <div class="dashboard-block">
+                    <img src="/img/icons/info-price.png">
+                    <div class="dashboard-text">
                         <p>$ {{ $activity->min_price }} NTD起</p>
                     </div>
                 </div>
@@ -226,6 +272,7 @@
                 <img src="/img/icons/share-email.png">
             </div>
         </div>
+<!--mobile-dashboard end-->
         <div class="actpage-panel">
             <div class="col-md-8 col-xs-12 actpage-left-content">
                 <div class="actpage-activity-content">
@@ -251,9 +298,11 @@
                         @foreach($suggests as $suggest)
                         <a href="{{ URL::to('activity/' . $suggest->id) }}">
                         <div class="actpage-recommend-panel">
-                                <div class="actpage-recommend-thumnail" style="background-image:url('{{ $suggest->thumbnail }}')"></div>
+                            <div class="actpage-recommend-thumnail" style="background-image:url('{{ $suggest->thumbnail }}')">
+                                <p class="actpage-thum-mb-title">{{ $suggest->title }}</p>
+                            </div>
                             <div class="actpage-recommend-info">
-                                <p class="word-indent-01"><strong>{{ $suggest->title }}</strong></p>
+                                <p class="word-indent-01">{{ $suggest->title }}</p>
                                 <p>
                                     <img src="/img/icons/web-price.png"><span>{{ $suggest->min_price }} 元起</span>
                                 </p>
@@ -327,8 +376,8 @@
 
     $(document).ready(function () {
         var duration = moment("{{$activity->activity_start}}", "YYYY-MM-DD hh:mm:ss").diff(moment(),'days');
-        $('#left_number').text('剩 {{ $count }} 位');
-        $('#left_date').text('倒數 '+ duration +' 天');
+        $('.left_number').text('剩 {{ $count }} 位');
+        $('.left_date').text('倒數 '+ duration +' 天');
 
         var RightFixed = $("#RightFixed");
         $(window).scroll(function () {
