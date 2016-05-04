@@ -594,6 +594,7 @@ class ActivityController extends Controller
     public function showPriview($id)
     {
         $activity = DB::table('activities')
+                      ->leftJoin('categories as cat', 'activities.category_id', '=', 'cat.id')
                       ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                       ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                       ->select(array(
@@ -603,7 +604,7 @@ class ActivityController extends Controller
                         'activities.counter',   'activities.category_id',     'activities.max_price',
                         'activities.min_price', 'activities.remark',          'activities.time_range',
                         'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
-                        'users.avatar as host_photo',   'users.description as host_destricption'
+                        'users.avatar as host_photo',   'users.description as host_destricption', 'cat.name as cat_name'
                       ))
                       ->where('activities.id', $id)
                       ->first();

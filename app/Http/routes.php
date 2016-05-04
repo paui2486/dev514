@@ -183,7 +183,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/data'                          , 'ActivityController@data'         );
         Route::get('activity/list'                          , 'ActivityController@showActivity' );
         Route::get('activity/checkout'                      , 'ActivityController@showCheckout' );
-        Route::post('activity/checkout'                      , 'ActivityController@letCheckout' );
+        Route::post('activity/checkout'                     , 'ActivityController@letCheckout' );
         Route::get('activity/create'                        , 'ActivityController@create'       );
         Route::get('activity/{id}'                          , 'ActivityController@show'         );
         Route::delete('activity/{id}'                       , 'ActivityController@destroy'      );

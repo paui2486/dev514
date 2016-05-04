@@ -289,7 +289,8 @@ class ActivityController extends Controller
                 $value = DB::table('categories')->find($searchMoney)->value;
                 preg_match("/(\d+)-(\d+)/", $value, $range);
                 $max   = $range[2];
-                $query = $query->where('min_price', '<', $max);
+                $min   = $range[1];
+                $query = $query->where('min_price', '>', $min)->where('max_price', '<', $max);
             }
 
             $searchTime  = $request->atWhen;
