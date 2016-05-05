@@ -1,10 +1,4 @@
 
-/*
-@media screen and (max-width: 768px) {
-
-
-}
-*/
 
 @media screen and (min-width: 481px) {
     .searchbar-mobile,
@@ -94,8 +88,7 @@
     }
 
     .navbar-mb-brand img {
-        height: 28px;
-        margin-top: 2px;
+        height: 36px;
     }
 
     .smobitrigger {
@@ -397,7 +390,7 @@
     .actpage-recommend-thumnail {
         border-radius: 0px;
         float: left;
-        height: 200px;
+        height: 250px;
         position: relative;
     }
     
@@ -579,13 +572,6 @@
         text-align: center;
     }
 
-    .list-category-panel {
-        padding: 0;
-        border: 1px solid #ccc;
-        background: white;
-        margin: 15px 0;
-    }
-
     .nav-tabs {
         margin: 15px;
     }
@@ -594,14 +580,6 @@
         margin: 0;
     }
 
-    .list-content-panel {
-        margin:10px 0;
-    }
-
-    .list-category-text {
-        padding: 10px;
-    }
-    
     .list-filter-row {
         border: none;
     }
@@ -646,19 +624,48 @@
     
     .list-content-panel {
         border: none;
+        margin:10px 0;
+        padding: 0;
+    }
+     
+    .list-category-panel {
+        padding: 0;
+        border: 1px solid #ccc;
+        background: white;
+        margin: 15px 0;
+        border-radius: 5px;
+    }
+    
+    .list-category-panel:hover {
+        background:#f2f2f2;
+    }
+
+    .list-category-text {
+        padding: 5px 10px;
+    }
+    
+    .list-category-thumnail {
+        min-height:150px;
+    }
+    
+    .list-category-title {
+        font-size: 15px;
+        color: #666;
+        margin-bottom: 5px;
     }
     
     .list-category-info {
-        margin: 0;
+        margin:0;
     }
     
     .list-category-info img {
-        width: 26px;
+        width: 23px;
     }
     
     .list-category-info p {
         height: 28px;
         font-size: 14px;
+        color: #666;
     }
     
     .list-readmore {
@@ -676,4 +683,52 @@
         font-size: 15px;
     }
 
+
 }
+
+
+@media screen and (max-width: 768px) {
+    .new-activity-panel {
+        width:100%;
+    }
+    
+    .new-activity-thumbnail {
+        height: 400px;
+    }
+    
+    .category-readmore img {
+        height: 40px;
+    }
+    
+    .new-activity-count,
+    .inter-panel-count {
+        top: 20px;
+        right: 30px;
+    }
+    
+    .new-activity-price, 
+    .new-activity-date, 
+    .new-activity-location {
+        width: 50%;
+        float: left;
+    }
+    
+    .newact_panel_bg {
+        margin: 10px;
+    }
+    
+    .inter-panel-thumbnail {
+        height: 300px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -35,7 +35,7 @@ html {
 }
 
 .navbar-brand img {
-    height:40px;
+    height:70px;
     z-index: 200;
     margin:auto;
 }
@@ -57,8 +57,14 @@ html {
     padding: 10px 20px;
 }
 
+.page-navbar-brand {
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 2px;
+}
+
 .page-navbar-brand img {
-    margin-top: 6px;
+    height: 65px;
 }
 
 .navbar-collapse {
@@ -2050,10 +2056,8 @@ li.collapse-blog-category {
 }
 
 .purchase-tickets  {
-    background-image: url(/img/pics/ticket.png);
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    padding: 18px;
+      border: 2px dashed #ccc;
+      padding:15px 10px;
 }
 
 .purchase-title {

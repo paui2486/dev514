@@ -21,10 +21,10 @@
     <div class="actpage-main-image" style="background-image:url('{{ $activity->thumbnail }}')">
     </div>
     <div class="actpage-content">
-        <div id="RightFixed" class="col-md-4 actpage-right-content">
+        <div id="RightFixed" class="col-md-4 col-sm-4 actpage-right-content">
             <div class="row actpage-cart-title">
-                <p id="" class="col-md-6 left_number"> 剩  位 </p>
-                <p id="" class="col-md-6 left_date"> 倒數  天 </p>
+                <p id="" class="col-md-6 col-sm-6 left_number"> 剩  位 </p>
+                <p id="" class="col-md-6 col-sm-6 left_date"> 倒數  天 </p>
             </div>
             <div class="row actpage-cart-content">
                 <p class="actpage-buy-now">{{ $activity->title }}</p>
@@ -162,7 +162,7 @@
                 </ul>
             </div>
             @endif
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-2">
                 <div class="actpage-holder">
                     <a href="{{ URL('member/'. $activity->hoster ) }}">
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
@@ -173,7 +173,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 actpage-dashboard-info">
+            <div class="col-md-6 col-sm-4 actpage-dashboard-info">
                 <p>{{ $activity->title }}</p>
                 <div class="dashboard-block dashboard-block-date">
                     <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
