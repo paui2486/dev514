@@ -6,17 +6,16 @@
 </h4>
 
 <table id="ticket_table" class="table table-striped table-hover">
-   <thead>
-       <tr>
-           <th>ID</th>
-           <th>票券資訊</th>
-           <th>票券時間</th>
-           <th>登記信箱</th>
-           <th>登記電話</th>
-           <th>付款狀態</th>
-       </tr>
-   </thead>
-   <tbody></tbody>
+    <thead>
+        <tr>
+            <th>票券資訊</th>
+            <th>票券時間</th>
+            <th>登記信箱</th>
+            <th>登記電話</th>
+            <th>付款狀態</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
 </table>
 
 <script type="text/javascript" src="{{ asset('js/datatables.min.js' ) }}"></script>
@@ -38,11 +37,11 @@
                     columns: ':not(:first-child)',
                     text: '顯示欄位'
                 },
-                {
-                    extend: 'pdfHtml5',
-                    download: 'open'
-                },
-                'csvHtml5',
+                // {
+                //     extend: 'pdfHtml5',
+                //     download: 'open'
+                // },
+                // 'csvHtml5',
             ],
             "processing": true,
             "responsive": true,
