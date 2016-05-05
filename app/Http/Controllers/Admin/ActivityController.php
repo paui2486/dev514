@@ -464,6 +464,7 @@ class ActivityController extends Controller
                      ->orderBy('users.created_at', 'ASC');
 
         return Datatables::of($ticket)
+            ->remove_column('id')
             ->edit_column('status', '@if($status === 0) 未付款 @elseif ($status === 1) 已付款 @else 付款失敗 @endif')
             ->make();
     }
