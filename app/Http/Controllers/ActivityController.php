@@ -307,7 +307,7 @@ class ActivityController extends Controller
             } else {
                 $activities = $query->get();
             }
-
+            $tmp_Array = array_merge( $selects, [$searchTime, $searchMoney] );
             if ( $request->url() == URL('activity/data') ) {
                 // Log::error($activities);
                 return $activities;
@@ -321,15 +321,17 @@ class ActivityController extends Controller
           # code...
             foreach ($value as $target) {
               # code...
-
-                if ( isset($selects) && in_array($target->id, $selects) ) {
-                    $target->checked = 'checked';
+                if ( isset($selects) ) {
+                    if ( in_array($target->id, $tmp_Array) ){
+                        $target->checked = 'checked';
+                    } else {
+                        $target->checked = null;
+                    }
                 } else {
                     $target->checked = null;
                 }
             }
         }
-        // return $filter;
         return view('activity.search', compact('meta', 'filter', 'activities', 'slideCategory'));
     }
 }
