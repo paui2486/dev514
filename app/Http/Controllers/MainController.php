@@ -33,7 +33,7 @@ class MainController extends controller
             'totalActivity' => (object) $this->getTotalActivity(),
             'allActivity'   => (object) $this->getAllActivity(),
         );
-        // return Response::json($home);
+
         return view('home', compact('home', 'meta', 'slideCategory'));
     }
 
@@ -41,7 +41,6 @@ class MainController extends controller
     {
         $meta   = array(
             'charset = UTF-8'           => 'text/html',
-            // 'http-equiv = refresh'      => '200;url='.URL::current(),
             'name = google-site-verification' => '1qpynM1neEq_KsaE13qkYgSNKXaGU7X8nkIeXrgJCwY',
             'name = google'             => 'notranslate',
             'name = URL'                => URL::current(),
@@ -54,14 +53,14 @@ class MainController extends controller
             'name = webcrawlers'        => 'all',
             'name = copyright'          => 'Copyright ©2016 514 Life Inc. All rights reserved.',
             'name = company'            => '共贏科技股份有限公司: 514 Life',
-            'name = abstract'           => '514＞活動頻道＞有意思的活動＞讓生活更514＞找活動＞辦活動＞都在514',
-            'name = description'        => '514＞活動頻道＞有意思的活動＞讓生活更514＞找活動＞辦活動＞都在514',
+            'name = abstract'           => '514生活頻道想要提供最有意思的活動資訊，集結DIY動手作、講座、課程、體驗等各式各樣的活動，無論您想找活動或是辦活動，方便的線上報名與售票，514生活頻道絕對是您最好的活動寶貝，讓大家可以簡單找到，並且輕鬆享受你喜愛的生活，體驗514「有意思」的活動。',
+            'name = description'        => '514生活頻道想要提供最有意思的活動資訊，集結DIY動手作、講座、課程、體驗等各式各樣的活動，無論您想找活動或是辦活動，方便的線上報名與售票，514生活頻道絕對是您最好的活動寶貝，讓大家可以簡單找到，並且輕鬆享受你喜愛的生活，體驗514「有意思」的活動。',
             'name = keywords'           => '514,活動頻道,有意思,生活,讓生活更514,活動,找活動,辦活動,達人',
             'name = fragment'           => '!',
             'property = og:title'       => '514 活動頻道 - 讓生活更有意思',
             'property = og:url'         => URL::current(),
             'property = og:type'        => 'website',
-            'property = og:description' => '514 活動頻道，有意思的活動 讓生活更514 找活動 辦活動 都在514',
+            'property = og:description' => '514生活頻道想要提供最有意思的活動資訊，集結DIY動手作、講座、課程、體驗等各式各樣的活動，無論您想找活動或是辦活動，方便的線上報名與售票，514生活頻道絕對是您最好的活動寶貝，讓大家可以簡單找到，並且輕鬆享受你喜愛的生活，體驗514「有意思」的活動。',
             'property = og:site_name'   => '514 活動頻道',
             'property = og:image'       => asset('/uploads/galleries/1/source-1457072725.png'),
             'property = fb:page_id'     => '514 Life',
