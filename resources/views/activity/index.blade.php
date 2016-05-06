@@ -77,17 +77,17 @@
                 @endif
 
                 <div class="actpage-share">
-                    <span class="btn btn-sm" id="shareBtn">
+                    <span class="btn btn-sm"  onclick="share('FBSeed', FB)">
                         <img src="/img/icons/share-fb.png">Facebook</span>
-                    <span class="btn btn-sm">
+                    <span class="btn btn-sm"  onclick="share('FBMsg', FB)">
                         <img src="/img/icons/share-message.png">Message</span>
-                    <span class="btn btn-sm" >
+                    <span class="btn btn-sm" onclick="share('Mail')">
                         <img src="/img/icons/share-email.png">Email</span>
                     <div class="share-dropdown">
                         <span class="share-dropbtn">更多...</span>
                         <div class="share-dropdown-content">
-                            <a href="#">WeChat</a>
-                            <a href="#">微博</a>
+                            <!-- <a href="#" id="shareWeChat">WeChat</a> -->
+                            <a href="#" onclick="share('Weibo')">微博</a>
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                     <a href="{{ URL('member/'. $activity->hoster ) }}">
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
                         </div>
-                        
+
                     </a>
                 </div>
             </div>
@@ -263,13 +263,10 @@
             </div>
             <div class="dashboard-mb-share col-xs-12">
                 <span>分享到</span>
-                <img src="/img/icons/share-fb.png">
-                 <a href="http://line.me/R/msg/{{ $activity->title }}/?{{ URL::current() }}">
-
-                <img src="/img/icons/share-line.png">
-                </a>
-                <img src="/img/icons/share-wechat.png">
-                <img src="/img/icons/share-email.png">
+                <img src="/img/icons/share-fb.png" onclick="share('FBSeed', FB)">
+                <img src="/img/icons/share-line.png" onclick="share('Line')">
+                <!-- <img src="/img/icons/share-wechat.png" onclick="share('WeChat')"> -->
+                <img src="/img/icons/share-email.png" onclick="share('Mail')">
             </div>
         </div>
 <!--mobile-dashboard end-->
@@ -354,15 +351,17 @@
 <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
 <script type="text/javascript" src="/js/moment.min.js"></script>
 <script>
-    document.getElementById('shareBtn').onclick = function () {
+    function share(type, FB=false) {
         var obj = {
             method: 'feed',
             redirect_uri: '{{ Request::URL() }}',
+            link: '{{ Request::URL() }}',
             display: 'popup',
             link: '{{ Request::URL() }}',
             picture: '{{ asset($activity->thumbnail) }}',
             name: '514 活動頻道 - {{ $activity->title }}',
-            caption: '活動由 @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif 所提供',
+            caption: '活動由 514 活動頻道 所提供',
+            // caption: '活動由 @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif 所提供',
             description: '{{ $activity->description }}'
         };
 
@@ -371,7 +370,36 @@
                 document.getElementById('msg').innerHTML = "Post ID: " + response["post_id"];
             }
         }
-        FB.ui(obj, callback);
+
+        switch (type) {
+            case 'FBSeed':
+                FB.ui(obj, callback);
+                break;
+
+            case 'FBMsg':
+                obj['method'] = 'send';
+                FB.ui(obj, callback);
+                break;
+
+            case 'Line':
+                window.location = "http://line.me/R/msg/{{ $activity->title }}/?{{ URL::current() }}";
+                break;
+
+            case 'WeChat':
+                console.log(type);
+                break;
+
+            case 'Weibo':
+                window.open("http://service.weibo.com/share/share.php?title=&url=http://www.iwine.com.tw/expert_article.php?n_id=307", "_blank")
+                break;
+
+            case 'Mail':
+                window.location = "mailto:?Subject=從%20514%20活動頻道分享 {{ $activity->title }}&body=這是一個非常好玩的活動%20{{ $activity->title }}%0D%0A點此瀏覽頁面%09{{ Request::URL() }}";
+                break;
+
+            default:
+                console.log(type);
+        }
     }
 
     $(document).ready(function () {
