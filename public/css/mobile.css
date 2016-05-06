@@ -183,7 +183,6 @@
     }
     
     .mobile-activity-info {
-        width: 60%;
         padding: 5px 10px;
     }
     
@@ -299,6 +298,7 @@
     .actpage-mb-dashboard {
         padding: 10px;
         margin: 0;
+        background-color: #fff;
     }
         
     .actpage-holder-thumnail {
