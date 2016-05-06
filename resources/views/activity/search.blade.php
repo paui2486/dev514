@@ -208,19 +208,18 @@ $(document).ready(function () {
         var activityRow = new String();
         if (data.length > 0) {
             for ( var eventIndex in data ) {
-                activityRow += '<div class="row list-category-panel"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
-                    <div class="col-md-5 col-xs-5 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"> </div> </a> \
-                    <div class="col-md-7 col-xs-7 list-category-text"> <div class="list-category-title"> \
-                    <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '">'+ data[eventIndex]['title'] +'</a> \
-                    </div> <div class="list-category-info"> <p> <img src="img/pics/money-icon-02.png"> ' + " $ " + data[eventIndex]['min_price'] + "元起 " + ' \
+                activityRow += ' <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> <div class="row list-category-panel"> \
+                    <div class="col-md-6 col-xs-6 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"></div>  \
+                    <div class="col-md-6 col-xs-6 list-category-text"> \ <div class="word-indent-01 list-category-title"> \
+                    '+ data[eventIndex]['title'] +' \
+                    </div> <div class="list-category-info"> <p> <img src="/img/icons/mb-price.png"> ' + " $ " + data[eventIndex]['min_price'] + "元起 " + ' \
                     </p> \
-                    <p> <img src="img/pics/calendar-icon-02.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
+                    <p> <img src="/img/icons/mb-date.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
-                    <p> <img src="img/pics/location-icon-02.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
-                    </div> <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> \
-                    <div class="list-readmore">觀看更多</div></a>\
-                    </div> </div>';
+                    <p> <img src="/img/icons/mb-location.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
+                    <p> <img src="/img/icons/mb-category.png"> ' + data[eventIndex]['category'] + '  </p> \
+                    </div> \
+                    </div> </div></a>';
             }
         } else {
             activityRow = '<div class="list-attention"> Woops！尚無相關的活動類別！ </div>';

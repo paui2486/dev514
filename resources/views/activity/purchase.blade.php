@@ -11,7 +11,7 @@
 
 @section('content')
 <div class="row purchase-content">
-    <div class="col-md-4 purchase-left">
+    <div class="col-md-4 col-sm-4 purchase-left">
         <p class="purchase-title">{{ $activity->title }}</p>
         <p class="purchase-location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>{{ $activity->locat_name . $activity->location }}</p>
         {{--*/ $count = 0; /*--}}
@@ -40,7 +40,7 @@
             <div class="purchase-mb-total">總計<span>$ {{ $count }} NTD</span></div>
         </div>
     </div>
-    <div class="col-md-8 purchase-right">
+    <div class="col-md-8 col-sm-8 purchase-right">
         <p>1. 填寫聯絡資料</p>
         <div class="row purchase-attention">
             建議您<a href="{{url('login')}}">登入</a>或<a href="{{url('register')}}">加入會員</a>，方便日後查詢訂單紀錄。

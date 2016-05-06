@@ -197,7 +197,7 @@
             </div>
             <div class="row new-activity-content">
                 @foreach( $home->newActivity as $newActivity )
-                <div class="col-md-4 col-xs-12 new-activity-panel">
+                <div class="col-md-4 col-sm-4 col-xs-12 new-activity-panel">
                     <div class="newact_panel_bg">
                         <div class="new-activity-id">
                             {{ $newActivity->activity_id }}
@@ -277,21 +277,21 @@
                     </div>
                      <div class="row Act-category-title">
                         <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
-                            <p class="col-md-2">
+                            <p class="col-md-2 col-sm-4 col-xs-5">
                                 <img src="/img/icons/icon_arrowicon.png">
                                 {{ $eachTypeActivity->cat_title }}
                             </p>
                         </a>
-                        <div class="col-md-8 home-dashed"></div>
+                        <div class="col-md-8 col-sm-6 col-xs-6 home-dashed"></div>
 <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
-                        <div class="col-md-2 category-readmore">
+                        <div class="col-md-2 col-sm-2 col-xs-3 category-readmore">
                             <a href="{{ $eachTypeActivity->affinity }}">
                                 <img src="/img/icons/icon_findfriend.png">
                             </a>
                         </div>
                     </div>
                     @foreach( $eachTypeActivity->cat_content as $activity )
-                    <div class="col-md-4 inter-panel">
+                    <div class="col-md-4 col-sm-4 inter-panel">
                         <a href="{{ URL::to('activity/' . $activity->activity_id ) }}">
                             <div class="inter-panel-thumbnail"
                                  style="background-image:url({{ $activity->thumbnail }})">
