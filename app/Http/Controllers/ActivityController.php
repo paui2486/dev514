@@ -253,13 +253,14 @@ class ActivityController extends Controller
         $activities = array();
 
         $query      = DB::table('activities')
+                        ->leftJoin('categories as cat', 'activities.category_id', '=', 'cat.id')
                         ->leftJoin('categories', 'categories.id', '=', 'activities.location_id')
                         ->where('activities.status', '>=', 4)
                         ->select(array(
                           'activities.id',        'activities.title' ,           'activities.description',
                           'activities.min_price', 'activities.activity_start',   'activities.activity_end',
                           'activities.location',  'categories.name as locat_name', 'activities.thumbnail',
-                          'activities.max_price',
+                          'activities.max_price', 'cat.name as cat_name'
                         ))
                         ->orderBy('activities.activity_start')
                         ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d'));

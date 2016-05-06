@@ -217,7 +217,7 @@ $(document).ready(function () {
                     <p> <img src="/img/icons/mb-date.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
                     getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
                     <p> <img src="/img/icons/mb-location.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
-                    <p> <img src="/img/icons/mb-category.png"> ' + data[eventIndex]['category'] + '  </p> \
+                    <p> <img src="/img/icons/mb-category.png"> ' + data[eventIndex]['cat_name'] + '  </p> \
                     </div> \
                     </div> </div></a>';
             }
