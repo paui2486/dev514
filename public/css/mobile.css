@@ -183,7 +183,6 @@
     }
     
     .mobile-activity-info {
-        width: 60%;
         padding: 5px 10px;
     }
     
@@ -255,6 +254,8 @@
     /*foooooooooooooooooooooter*/
     .bottom-linkout {
         padding: 10px;
+        border-bottom: 2px solid #d8d8d8;
+        margin-bottom: 20px;
     }
     .bottom-linkout img {
         width: 80px;
@@ -299,6 +300,7 @@
     .actpage-mb-dashboard {
         padding: 10px;
         margin: 0;
+        background-color: #fff;
     }
         
     .actpage-holder-thumnail {

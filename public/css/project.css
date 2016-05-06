@@ -878,9 +878,9 @@ li.collapse-blog-category {
 
 /*footer*/
 
-.bottom-linkout {
+.footer-topblock {
     text-align: center;
-    padding: 20px;
+    margin: 0;
     background-color:#ccc;
 }
 
@@ -888,13 +888,36 @@ li.collapse-blog-category {
     width:100px;
 }
 
-.copyright {
-    text-align: center;
-    height: 50px;
-    background-color:#d8d8d8;
-    border-top:1px dashed #998d7e;
-    line-height: 50px;
-    color: #998d7e;
+.book-us {
+    float: right;
+    text-align: left;
+}
+
+.book-us > p {
+    font-size: 17px;
+    color: #555;
+}
+
+.book-us > p > span {
+    margin-right: 5px;
+}
+
+.book-us input {
+    height: 35px;
+    font-size: 14px;
+    padding: 5px;
+    margin-top: 10px;
+} 
+
+.book-us button {
+    background: #00bcd4;
+    color: #fff;
+    padding: 5px 10px;
+    height: 35px;
+    border: none;
+    float: right;
+    margin-top: 10px;
+    letter-spacing:1px;
 }
 
 .footer-info {
@@ -907,7 +930,6 @@ li.collapse-blog-category {
     width: 60%;
     margin: auto;
     padding: 40px;
-    padding-bottom: 20px;
 }
 
 .footer-center > div > p {
@@ -969,6 +991,15 @@ li.collapse-blog-category {
 
 .online-secretary span {
     margin-right: 5px;
+}
+
+.copyright {
+    text-align: center;
+    height: 50px;
+    background-color:#d8d8d8;
+    border-top:1px dashed #998d7e;
+    line-height: 50px;
+    color: #998d7e;
 }
 
 .login-container {
@@ -1641,13 +1672,22 @@ li.collapse-blog-category {
 .dashboard-block-date p {
     margin: 0px;
     padding: 0px;
+    color: #222;
 }
 
 .dashboard-block {
-    padding: 0px;
+    padding: 5px;
     width: calc(100%/3);
     float: left;
     text-align: center;
+}
+
+.dashboard-block:hover{
+    background-color: #f2f2f2;
+}
+
+.dashboard-price:hover{
+    background-color: transparent;
 }
 
 .actpage-dashboard-info img{
@@ -1664,6 +1704,10 @@ li.collapse-blog-category {
     margin: 10px 0px;
     font-size: 14px;
     opacity: 0.7;
+}
+
+.dashboard-text p {
+    color: #222;
 }
 
 .actpage-panel {
@@ -1739,6 +1783,11 @@ li.collapse-blog-category {
     letter-spacing: 1px;
 }
 
+.impact-acts {
+    background-color: #666;
+    color: #fff;
+}
+
 .actpage-recommend {
     margin:0px;
     margin-bottom: 25px;
@@ -1789,7 +1838,7 @@ li.collapse-blog-category {
     right: 10%;
     border-radius: 5px;
     width: 340px;
-    z-index: 9999;
+    z-index: 1000;
     background-color: white;
     margin: 2px 0px;
     padding: 0px;
@@ -1806,7 +1855,7 @@ li.collapse-blog-category {
     padding: 15px;
     margin: 0px;
     overflow: auto;
-    max-height: 400px;
+    max-height: 350px;
 }
 
 

@@ -175,6 +175,7 @@
             </div>
             <div class="col-md-6 col-sm-4 actpage-dashboard-info">
                 <p>{{ $activity->title }}</p>
+                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $activity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($activity->activity_start)) }}/{{ date('Ymd\\THi00\\Z', strtotime($activity->activity_end)) }}&details=活動名稱：{{ $activity->title }}%0A活動描述：{{ $activity->description }}%0A活動網址：{{ url('activity'). '/' . $activity->id }}&location={{ $activity->locat_name . $activity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
                 <div class="dashboard-block dashboard-block-date">
                     <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
                     <div class="dashboard-text">
@@ -192,19 +193,21 @@
                     </div>
                     @endif
                 </div>
-
+                </a>
                 <div class="dashboard-block dashboard-price">
                     <img src="/img/icons/info-price.png">
                     <div class="dashboard-text dashboard-block-price">
                         <p>$ {{ $activity->min_price }} NTD起</p>
                     </div>
                 </div>
+                <a href="https://maps.google.com?daddr={{ $activity->locat_name . $activity->location }}" target="_blank">
                 <div class="dashboard-block">
                     <img src="/img/icons/info-where.png">
                     <div class="dashboard-text">
                         <p>{{ $activity->locat_name . $activity->location }}</p>
                     </div>
                 </div>
+                </a>
             </div>
         </div>
 
@@ -230,6 +233,7 @@
                 </div>
             </div>
             <div class="col-xs-12 actpage-dashboard-info">
+                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $activity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($activity->activity_start)) }}/{{ date('Ymd\\THi00\\Z', strtotime($activity->activity_end)) }}&details=活動名稱：{{ $activity->title }}%0A活動描述：{{ $activity->description }}%0A活動網址：{{ url('activity'). '/' . $activity->id }}&location={{ $activity->locat_name . $activity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
                 <div class="dashboard-block">
                     <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
                     <div class="dashboard-text">
@@ -247,17 +251,19 @@
                     </div>
                     @endif
                 </div>
-
-                <div class="dashboard-block">
-                    <img src="/img/icons/info-price.png">
-                    <div class="dashboard-text">
-                        <p>$ {{ $activity->min_price }} NTD起</p>
-                    </div>
-                </div>
+                </a>
+                <a href="https://maps.google.com?daddr={{ $activity->locat_name . $activity->location }}" target="_blank">
                 <div class="dashboard-block">
                     <img src="/img/icons/info-where.png">
                     <div class="dashboard-text">
                         <p>{{ $activity->locat_name . $activity->location }}</p>
+                    </div>
+                </div>
+                </a>
+                <div class="dashboard-block dashboard-price">
+                    <img src="/img/icons/info-price.png">
+                    <div class="dashboard-text">
+                        <p>$ {{ $activity->min_price }} NTD起</p>
                     </div>
                 </div>
             </div>
@@ -288,7 +294,7 @@
                         <!--                        {!! $activity->content !!}-->
                     </div>
                     <div class="row actpage-header">
-                        <p class="col-md-3 col-xs-4 actpage-header-left">同場加映</p>
+                        <p class="col-md-3 col-xs-4 actpage-header-left impact-acts">同場加映</p>
                         <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
                     </div>
                     <div class="row actpage-recommend">
@@ -414,9 +420,9 @@
             } else {
                 RightFixed.removeClass("right-content-fixed");
             }
-            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+200){
-                RightFixed.removeClass("right-content-fixed");
-            }
+//            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+200){
+//                RightFixed.removeClass("right-content-fixed");
+//            }
 
             $(".inline").colorbox({inline:true, width:"90%"});
             $("#click").click(function(){

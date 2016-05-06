@@ -277,12 +277,12 @@
                     </div>
                      <div class="row Act-category-title">
                         <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
-                            <p class="col-md-2 col-sm-4 col-xs-5">
+                            <p class="col-md-2 col-sm-4 col-xs-4">
                                 <img src="/img/icons/icon_arrowicon.png">
                                 {{ $eachTypeActivity->cat_title }}
                             </p>
                         </a>
-                        <div class="col-md-8 col-sm-6 col-xs-6 home-dashed"></div>
+                        <div class="col-md-8 col-sm-6 col-xs-5 home-dashed"></div>
 <!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
                         <div class="col-md-2 col-sm-2 col-xs-3 category-readmore">
                             <a href="{{ $eachTypeActivity->affinity }}">
