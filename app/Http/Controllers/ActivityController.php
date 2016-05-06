@@ -261,7 +261,8 @@ class ActivityController extends Controller
                           'activities.location',  'categories.name as locat_name', 'activities.thumbnail',
                           'activities.max_price',
                         ))
-                        ->orderBy('activities.created_at', 'asc');
+                        ->orderBy('activities.activity_start')
+                        ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d'));
 
         if ($request->isMethod('post'))
         {
@@ -281,16 +282,13 @@ class ActivityController extends Controller
             $search      = $request->keySearch;
             if ( $search != "" ) {
                 $query   = $query->where('activities.title', 'like', "%$search%" )
-                            ->orWhere('activities.description', 'like', "%$search%" );
+                              ->orWhere('activities.description', 'like', "%$search%" );
             }
 
             $searchMoney = $request->haveMoney;
             if ( $searchMoney != "" ) {
                 $value = DB::table('categories')->find($searchMoney)->value;
-                preg_match("/(\d+)-(\d+)/", $value, $range);
-                $max   = $range[2];
-                $min   = $range[1];
-                $query = $query->where('min_price', '>', $min)->where('max_price', '<', $max);
+                $query = $query->where('max_price', '<=', $value);
             }
 
             $searchTime  = $request->atWhen;
