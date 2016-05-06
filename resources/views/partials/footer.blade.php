@@ -6,16 +6,18 @@
     </div>
 --> 
     <div class="row footer-topblock">
-        <div class="col-md-6 bottom-linkout">
-            <a href="https://www.instagram.com/"><img src="{{asset('img/pics/igicon.png')}}"></a>
-            <a href="https://www.facebook.com/iwinetodayshop/?fref=ts"><img src="{{asset('img/pics/fbicon.png')}}">
-                <a href="https://www.youtube.com/?gl=TW&hl=zh-TW&noredirect=1"><img src="{{asset('img/pics/youtubeicon.png')}}"></a>
-        </div>
-        <div class="col-md-6 book-us">
-            <p><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>訂閱514</p>
-            <span>我們將提供給您最新的活動資訊，給您第一手有意思的活動內容！</span>
-            <input class="col-md-9" type="email" name="email" placeholder="請輸入您的email">
-            <button class="col-md-3" type="submit">確定訂閱</button>
+        <div class="row footer-center">
+            <div class="col-md-6 bottom-linkout">
+                <a href="https://www.instagram.com/"><img src="{{asset('img/pics/igicon.png')}}"></a>
+                <a href="https://www.facebook.com/iwinetodayshop/?fref=ts"><img src="{{asset('img/pics/fbicon.png')}}">
+                    <a href="https://www.youtube.com/?gl=TW&hl=zh-TW&noredirect=1"><img src="{{asset('img/pics/youtubeicon.png')}}"></a>
+            </div>
+            <div class="col-md-6 book-us">
+                <p><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>訂閱514</p>
+                <span>我們將提供給您最新的活動資訊，給您第一手有意思的活動內容！</span>
+                <input class="col-md-9" type="email" name="email" placeholder="請輸入您的email">
+                <button class="col-md-3" type="submit">確定訂閱</button>
+            </div>
         </div>
     </div>
     <div class="row footer-info">

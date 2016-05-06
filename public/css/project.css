@@ -880,7 +880,6 @@ li.collapse-blog-category {
 
 .footer-topblock {
     text-align: center;
-    padding: 20px 200px;
     margin: 0;
     background-color:#ccc;
 }
@@ -918,7 +917,7 @@ li.collapse-blog-category {
     border: none;
     float: right;
     margin-top: 10px;
-    letter-spacing: 1px;
+    letter-spacing:1px;
 }
 
 .footer-info {
@@ -931,7 +930,6 @@ li.collapse-blog-category {
     width: 60%;
     margin: auto;
     padding: 40px;
-    padding-bottom: 20px;
 }
 
 .footer-center > div > p {
@@ -1857,7 +1855,7 @@ li.collapse-blog-category {
     padding: 15px;
     margin: 0px;
     overflow: auto;
-    max-height: 400px;
+    max-height: 350px;
 }
 
 
