@@ -275,9 +275,20 @@ class ActivityController extends Controller
             foreach ($selects as $key => $value) {
                 if ( $value == "" ) { unset($selects[$key]); }
             }
-            // Log::error($selects);
+
             if (!empty($selects)) {
-                $query   = $query->whereIn('categories_data.category_id', $selects );
+                // Log::error($selects);
+
+                $rmArray = DB::table('categories')->where('type', 6)->lists('id');
+                $inMArray = array_intersect($rmArray, $selects);
+                $outMArray = array_diff($selects, $rmArray);
+                if ( !empty($inMArray) ) {
+                    $vMoney = DB::table('categories')->whereIn('id', $inMArray)->max('value');
+                    $query = $query->where('min_price', '<=', $vMoney);
+                }
+                if ( !empty($outMArray) ) {
+                    $query   = $query->whereIn('categories_data.category_id', $outMArray );
+                }
             }
 
             $search      = $request->keySearch;
