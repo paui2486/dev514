@@ -357,7 +357,8 @@
 <script type="text/javascript" src="/js/jquery.colorbox.js"></script>
 <script type="text/javascript" src="/js/moment.min.js"></script>
 <script>
-    function share(type, FB=false) {
+    function share(type, FB) {
+        if (FB === undefined) FB = false;
         var obj = {
             method: 'feed',
             redirect_uri: '{{ Request::URL() }}',
