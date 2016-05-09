@@ -150,7 +150,7 @@ $(document).ready(function () {
     var eventData = {!! json_encode($activities) !!};
     var search = [];
     var url_param = getURLParameter('cat_id');
-    $("input[type=checkbox]").on("click", function() {
+    $("input").on("change", function() {
         search = $('input:checkbox:checked').map(function() {
              return this.value;
         }).get();
@@ -168,23 +168,6 @@ $(document).ready(function () {
         });
     });
 
-    $('input[name=keySearch]').on('change', function() {
-        search = $('input:checkbox:checked').map(function() {
-             return this.value;
-        }).get();
-        search.push();
-        $.ajax({
-             type: "POST",
-             headers: { 'X-CSRF-Token' : $('input[name=_token]').val() },
-             url: "{{ URL('activity/data') }}",
-             data: { 'selects' : search.filter( onlyUnique ),
-                'keySearch' : $('input[name=keySearch]').val()
-             },
-             success: function(data) {
-                 showResult(data);
-             }
-        });
-    });
 
     if ( url_param ) {
         $('input[value='+ url_param +']').click();
