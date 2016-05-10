@@ -43,10 +43,10 @@ class ActivityController extends Controller
                         ->where('activity_id', $activity->id)
                         ->where('left_over', '>', '0')
                         ->select(array(
-                            'id', 'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
+                            'id', 'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description', 'sale_start', 'sale_end'
                         ))
-                        ->whereDate('sale_start', '<=', date('Y-m-d H:i:00'))
-                        ->whereDate('sale_end', '>=', date('Y-m-d H:i:00'))
+                        ->where('sale_start', '<=', date('Y-m-d H:i:00'))
+                        ->where('sale_end',   '>=', date('Y-m-d H:i:00'))
                         ->get();
 
             $suggests = DB::table('activities')
@@ -265,7 +265,7 @@ class ActivityController extends Controller
                           'activities.max_price', 'cat.name as cat_name'
                         ))
                         ->orderBy('activities.activity_start')
-                        ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d'));
+                        ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d H:i:00'));
 
         if ($request->isMethod('post'))
         {
