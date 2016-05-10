@@ -22,7 +22,7 @@ $(document).ready(function () {
         collapsible: 'accordion',
         setHash: true,
         scrollToAccordion: true,
-        active: 1,
+        active: @if(Auth::user()->hoster) 1 @elseif(Auth::user()->adminer) 4 @else 0 @endif,
         activate: function(e, tab) {
             $(tab.anchor.context).addClass('active');
             var target = $(tab.selector);
