@@ -205,7 +205,7 @@
     .home-mb-info {
         padding: 0px;
         margin-bottom: 5px;
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .home-mb-info span {
@@ -257,12 +257,12 @@
         margin-bottom: 20px;
     }
     .bottom-linkout img {
-        width: 80px;
+        width: 60px;
     }
     .footer-center {
         width: 100%;
         text-align: center;
-        padding: 20px;
+        padding: 10px;
     }
     /*---------------sliderbar---------------*/
     li.drawer-mb {
