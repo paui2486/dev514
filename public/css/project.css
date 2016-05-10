@@ -604,14 +604,17 @@ li.collapse-blog-category {
 /* New Activities 最新活動*/
 
 .new-activity {
-    padding:20px;
-    padding-bottom: 50px;
     background-color: #fcfbfa;
+    padding: 30px 0;
 }
 
 .new-activity-content {
     margin: auto;
-    max-width: 1050px;
+    width: 85%;
+}
+
+.new-activity-panel {
+    padding: 10px;
 }
 
 .newact_panel_bg {
@@ -629,23 +632,18 @@ li.collapse-blog-category {
 }
 
 .new-activity-thumbnail {
-    height: 200px;
+    height: 240px;
     width:auto;
     background-size: cover;
     background-position: top;
     background-color: #f2f2f2;
     border-radius:10px 10px 0px 0px;
-    opacity: 0.8;
-}
-
-.new-activity-thumbnail:hover{
-    opacity: 1;
 }
 
 .new-activity-count {
     width: auto;
     position: absolute;
-    top: 150px;
+    top: 190px;
     margin: 15px;
     color: white;
     font-size: 15px;
@@ -731,7 +729,6 @@ li.collapse-blog-category {
 
 .Act-category-panel {
     width: 85%;
-    max-width: 1100px;
     margin: 0 auto;
     height: auto;
 }
@@ -772,7 +769,7 @@ li.collapse-blog-category {
 }
 
 .inter-panel-thumbnail {
-    height: 200px;
+    height: 240px;
     background-position:top;
     background-size: cover;
     border-radius:6px 6px 0px 0px;
@@ -791,7 +788,7 @@ li.collapse-blog-category {
 .inter-panel-count {
     width: auto;
     position: absolute;
-    top: 160px;
+    top: 190px;
     margin: 10px;
     color: white;
     font-size: 15px;
@@ -905,8 +902,9 @@ li.collapse-blog-category {
 .book-us input {
     height: 35px;
     font-size: 14px;
-    padding: 5px;
-    margin-top: 10px;
+    border:none;
+    border-radius: 0;
+    padding-left: 10px;
 } 
 
 .book-us button {
@@ -915,8 +913,6 @@ li.collapse-blog-category {
     padding: 5px 10px;
     height: 35px;
     border: none;
-    float: right;
-    margin-top: 10px;
     letter-spacing:1px;
 }
 
@@ -1621,10 +1617,9 @@ li.collapse-blog-category {
 
 .actpage-main-image {
     height: 500px;
-    background-size: cover;
+    background-size:100% auto;
     width: 80%;
     position: absolute;
-    background-position: center;
     left: 10%;
     top:90px;
 }

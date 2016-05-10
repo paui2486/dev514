@@ -115,7 +115,7 @@
                         <img src="/img/icons/mb-price.png">
                         {{ $mbActivity->price }} 元起
                     </div>
-                    <div class="home-mb-info home-mb-calendar">
+                    <div class="word-indent-newact home-mb-info home-mb-calendar">
                         <img src="/img/icons/mb-date.png">
                             {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
                     </div>
@@ -123,7 +123,7 @@
                         <img src="/img/icons/mb-location.png">
                         {{ $mbActivity->locat_name . $mbActivity->location }}
                     </div>
-                    <div class="home-mb-info word-indent-newact">
+                    <div class="home-mb-info">
                         <img src="/img/icons/mb-category.png">
                         {{ $mbActivity->cat_name }}
                     </div>
@@ -241,30 +241,11 @@
                                 <img src="/img/icons/holder.png">
                                 <span> {{ $newActivity->orginizer }} </span>
                             </div>
-<!--mbview-->
-                            <div class="home-mb-info">
-                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                                {{ $newActivity->price }} 元起
-                            </div>
-                            <div class="home-mb-info">
-                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow">
-                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                                </a>
-                            </div>
-                            <div class="home-mb-info word-indent-newact">
-                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                {{ $newActivity->locat_name . $newActivity->location }}
-                            </div>
-
                         </div>
                     </div>
                 </div>
                 @endforeach
-            </div>
-<!--            <button> 查看更多 </button>-->
-        </div>
-<!--mbview-->
+                </div>
         <div class="Act-category">
             <div class="row home-title">
                 <img src="/img/pics/act_category-02.png">
@@ -338,6 +319,7 @@
                 @endforeach
             </div>
         </div>
+<!--
         <div class="home-blog">
             <div class="row home-title">
                 <img src="/img/pics/new_articles-02.png">
@@ -380,6 +362,7 @@
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
+-->
       </div>
     </div>
 @endsection
