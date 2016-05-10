@@ -151,8 +151,9 @@ $(document).ready(function () {
     var search = [];
     var url_param = getURLParameter('cat_id');
     $("input").on("change", function() {
-        search = $('input:checkbox:checked').map(function() {
-             return this.value;
+        var content = $(this).parents('div[class!="list-content"][class$="content"]');
+        search = content.find('input:checkbox:checked').map(function() {
+            return this.value;
         }).get();
         search.push();
         $.ajax({
