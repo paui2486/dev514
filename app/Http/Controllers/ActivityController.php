@@ -265,7 +265,7 @@ class ActivityController extends Controller
                           'activities.max_price', 'cat.name as cat_name'
                         ))
                         ->orderBy('activities.activity_start')
-                        ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d H:i:00'));
+                        ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d'));
 
         if ($request->isMethod('post'))
         {
