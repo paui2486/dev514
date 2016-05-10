@@ -184,7 +184,7 @@ class PurchaseController extends controller
 
             foreach ($ticket_ids as $key => $id) {
                 $ticket = DB::table('act_tickets')->find($id);
-                DB::table('act_tickets')->where('id', $id)->update(array('left_over' => $ticket->left_over - $numbers[$key]));
+                DB::table('act_tickets')->where('id', $id)->update(array('left_over' => $ticket->left_over - $numbers[$key], 'ticket_start' => $ticket->ticket_start));
             }
 
             if ($total_price == 0) {
