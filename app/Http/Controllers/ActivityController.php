@@ -45,6 +45,8 @@ class ActivityController extends Controller
                         ->select(array(
                             'id', 'name', 'left_over', 'run_time', 'price', 'ticket_start', 'ticket_end', 'location', 'description'
                         ))
+                        ->whereDate('sale_start', '<', date('Y-m-d'))
+                        ->whereDate('sale_end', '>', date('Y-m-d'))
                         ->get();
 
             $suggests = DB::table('activities')
