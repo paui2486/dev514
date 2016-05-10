@@ -1,4 +1,4 @@
-<div class="Navbar">      
+<div class="Navbar">
     <div class="navbar-brand">
         <a href="{{ url('/') }}">
             <img src="/img/pics/logofin_white.png">
@@ -12,16 +12,16 @@
     <div class="navigation">
         <nav>
             <a href="javascript:void(0)" class="smobitrigger ion-navicon-round"></a>
-            <ul class="mobimenu">   
+            <ul class="mobimenu">
 <!--            <li><a href="{{ url('blog') }}">部落格</a></li>-->
-                <li class="navbar-host"><a href="{{ url('dashboard/activity/create') }}">辦活動</a></li>
+                <li class="navbar-host"><a href="{{ url('dashboard/activity/create#tab-0') }}">辦活動</a></li>
                 @if (Auth::guest())
                 <li class="drawer"><a href="{{ url('login') }}">登入</a></li>
                 <li class="drawer"><a href="{{ url('register') }}">註冊</a></li>
                 <li class="drawer-mb">
                     <a href="{{ url('login') }}">登入</a>
                     <a href="{{ url('register') }}">加入會員</a>
-                    <a href="{{ url('dashboard/activity/create') }}">辦活動</a>
+                    <a href="{{ url('dashboard/activity/create#tab-0') }}">辦活動</a>
                     <a href="{{ url('About') }}">關於 514</a>
                     <a href="{{ url('Privacy') }}">隱私與服務條款</a>
                 </li>
@@ -39,7 +39,7 @@
                     </ul>
                 </li>
                 <li class="drawer-mb">
-                    <a href="{{ url('dashboard/activity/create') }}">辦活動</a>
+                    <a href="{{ url('dashboard/activity/create#tab-0') }}">辦活動</a>
                     <a href="{{ url('dashboard/member#tab-0') }}">個人設定</a>
                     <a href="{{ url('dashboard') }}">我的後台</a>
                     <a href="{{ url('dashboard/activity') }}">我的活動</a>
