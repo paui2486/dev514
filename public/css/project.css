@@ -470,6 +470,7 @@ li.collapse-blog-category {
 
 .home-title {
     padding-bottom: 15px;
+    margin: 0;
     position: inherit;
     text-align: center;
 }

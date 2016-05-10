@@ -245,7 +245,8 @@
                     </div>
                 </div>
                 @endforeach
-                </div>
+            </div>
+        </div>
         <div class="Act-category">
             <div class="row home-title">
                 <img src="/img/pics/act_category-02.png">

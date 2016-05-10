@@ -20,9 +20,12 @@
                 <li class="drawer"><a href="{{ url('register') }}">註冊</a></li>
                 <li class="drawer-mb">
                     <a href="{{ url('login') }}">登入</a>
-                    <a href="{{ url('register') }}">加入會員</a>
+                    <a href="{{ url('register') }}">註冊</a>
                     <a href="{{ url('dashboard/activity#tab-0') }}">辦活動</a>
                     <a href="{{ url('About') }}">關於 514</a>
+                    <a href="{{ url('Join') }}">加入我們</a>
+                    <a href="{{ url('Advertising') }}">廣告合作專區</a>
+                    <a href="{{ url('Cooperation') }}">企業合作專區</a>
                     <a href="{{ url('Privacy') }}">隱私與服務條款</a>
                 </li>
                 @else
@@ -44,6 +47,9 @@
                     <a href="{{ url('dashboard') }}">我的後台</a>
                     <a href="{{ url('dashboard/activity') }}">我的活動</a>
                     <a href="{{ url('About') }}">關於 514</a>
+                    <a href="{{ url('Join') }}">加入我們</a>
+                    <a href="{{ url('Advertising') }}">廣告合作專區</a>
+                    <a href="{{ url('Cooperation') }}">企業合作專區</a>
                     <a href="{{ url('Privacy') }}">隱私與服務條款</a>
                     <a href="{{ url('logout') }}">登出</a>
                 </li>
