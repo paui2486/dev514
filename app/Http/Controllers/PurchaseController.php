@@ -328,7 +328,7 @@ class PurchaseController extends controller
                   ->where('MerchantOrderNo', $order->MerchantOrderNo)
                   ->first();
 
-        DB::table('orders')->where('id', $info->id)->increment('status');
+        DB::table('orders')->where('id', $info->id)->update(array('status'=> 2));
 
         $ticket_ids     = explode(',' , $info->ticket_id);
         $ticket_numbers = explode(',' , $info->ticket_number);

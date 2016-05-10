@@ -465,7 +465,7 @@ class ActivityController extends Controller
 
         return Datatables::of($ticket)
             ->remove_column('id')
-            ->edit_column('status', '@if($status === 0) 未付款 @elseif ($status === 1) 已付款 @else 付款失敗 @endif')
+            ->edit_column('status', '@if($status === 0) 未付款 @elseif ($status === 1) 尚未付款完成 @else 已付款完成 @endif')
             ->make();
     }
 
