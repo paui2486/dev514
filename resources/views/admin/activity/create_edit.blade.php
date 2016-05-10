@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="{{asset('assets/bootstrap-colorpicker/css/colorpicker.css')}}">
 <link rel="stylesheet" href="{{asset('assets/jquery-selectize/dist/css/selectize.default.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+<link rel="stylesheet" href="{{asset('css/cropper.min.css')}}">
 @stop
 
 {{-- Content --}}
@@ -62,7 +63,7 @@
                                 <div class="col-sm-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="fileupload-new thumbnail" style="max-width: 500px; max-height: 300px;">
-                                            <img src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
+                                            <img id="image" src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
                                         </div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>
                                         <div>
@@ -439,15 +440,34 @@
 <script type="text/javascript" src="{{ asset('js/jquery.validate.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/additional-methods.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.responsiveTabs.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/jquery-selectize/dist/js/standalone/selectize.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/ckfinder/ckfinder.js')}}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-tagsinput.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/jquery-selectize/dist/js/standalone/selectize.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/cropper.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         CKFinder.setupCKEditor();
+
+        // $('#image').cropper({
+        //   aspectRatio: 16 / 9,
+        //   crop: function(e) {
+        //     // Output the result data for cropping image.
+        //     console.log(e.x);
+        //     console.log(e.y);
+        //     console.log(e.width);
+        //     console.log(e.height);
+        //     console.log(e.rotate);
+        //     console.log(e.scaleX);
+        //     console.log(e.scaleY);
+        //   }
+        // });
+
+        // $('#image').Fileupload().on('fileuploaded', function(event, data) {
+            // console.log
+        // });
 
         $.fn.modal.Constructor.prototype.enforceFocus = function() {
             modal_this = this

@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('time_514', 'Asia/Taipei'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('locale_514', 'zh-Hant-TW'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => env('fb_locale', 'zh-Hant-TW'),
 
     /*
     |--------------------------------------------------------------------------
@@ -158,6 +158,8 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+
+        // SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * for develop
          */
@@ -216,7 +218,7 @@ return [
         'Datatables' => Yajra\Datatables\Datatables::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        // 'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         // for develop
         'Debugbar'   => Barryvdh\Debugbar\Facade::class,
     ],
