@@ -183,7 +183,8 @@ class PurchaseController extends controller
             // });
 
             foreach ($ticket_ids as $key => $id) {
-                DB::table('act_tickets')->where('id', $id)->decrement('left_over', $numbers[$key]);
+                $ticket = DB::table('act_tickets')->find($id);
+                DB::table('act_tickets')->where('id', $id)->update(array('left_over' => $ticket->left_over - $numbers[$key]));
             }
 
             if ($total_price == 0) {
