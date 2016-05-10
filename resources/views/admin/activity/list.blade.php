@@ -31,8 +31,8 @@ $(document).ready(function () {
         "dom": 'Bfrtip',
         "select": true,
         "lengthMenu": [
-            [ 10, 25, 50, -1 ],
-            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+            [ 50, 10, 25, -1 ],
+            [ '50 rows', '10 rows', '25 rows',  'Show all' ]
         ],
         "buttons": [
             'pageLength',
