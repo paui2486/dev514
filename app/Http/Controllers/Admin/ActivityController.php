@@ -291,7 +291,7 @@ class ActivityController extends Controller
                       'activities.targets',  'activities.status',
 
                     ))
-                    ->orderBy('activities.created_at', 'ASC');
+                    ->orderBy('activities.created_at', 'DESC');
 
         if (!Auth::user()->adminer){
             $activities->where('users.id', Auth::id());
