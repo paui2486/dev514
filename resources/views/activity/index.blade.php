@@ -444,6 +444,14 @@
             window.location.href = url;
             });
 
+        $(".checkbox").on("click", function() {
+            if ($(this).closest(".cart-option").hasClass('list-checkbox')) {
+                $(this).closest(".cart-option").removeClass('list-checkbox');
+            } else {
+                $(this).closest(".cart-option").addClass('list-checkbox');
+            }
+        });
+
         $('.purchase-mb-submit').click(function() {
             var ticketIds = [];
             var ticketNumbers = [];
