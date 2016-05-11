@@ -35,7 +35,7 @@
                     {{--*/ $count += $ticket->left_over; /*--}}
                     <div class="row cart-option">
                         <div class="col-md-8 ">
-                            <label class="checkbox-inline">
+                            <label class="checkbox-inline"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1"  value="{{ $key }}">{{ $ticket->name }}
                             </label>
                         </div>
