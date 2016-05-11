@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="list-content">
-        <div class="row list-filter col-sm-4">
+        <div class="row list-filter col-md-4 col-sm-4">
             <div class="list-filter-panel">
                 <p class="list-filter-title">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜尋活動
@@ -132,11 +132,11 @@
             </div>
         </div>
         <p class="list-result">活動搜尋列表</p>
-        <div class="row list-right-content col-sm-8">
+        <div class="row list-right-content col-md-8 col-sm-8">
             <div class="list-content-panel">
             </div>
         </div>
-        <div class="row list-mb-activities col-sm-8" style="margin:0;">
+        <div class="row list-mb-activities col-sm-12" style="margin:5px 0;">
             <div class="list-content-panel">
             </div>
         </div>
@@ -152,6 +152,13 @@ $(document).ready(function () {
     var url_param = getURLParameter('cat_id');
     $("input").on("change", function() {
         var content = $(this).parents('div[class!="list-content"][class$="content"]');
+        
+        if ($(this).parent().hasClass('list-checkbox')) {
+            $(this).parent().removeClass('list-checkbox');
+        } else {
+            $(this).parent().addClass('list-checkbox');
+        }
+        
         search = content.find('input:checkbox:checked').map(function() {
             return this.value;
         }).get();
@@ -168,13 +175,13 @@ $(document).ready(function () {
              }
         });
     });
-
-
+        
     if ( url_param ) {
         $('input[value='+ url_param +']').click();
     } else {
         showResult(eventData);
     }
+    
     $('.list-mb-content > .list-filter-row > div ').hide();
     $('.list-mb-content > .list-filter-row > p').click(function(){
         $(this).parent().find('.list-filter-option').slideToggle();
@@ -193,8 +200,8 @@ $(document).ready(function () {
         if (data.length > 0) {
             for ( var eventIndex in data ) {
                 activityRow += ' <a href="{{ URL::to( 'activity/')}}/' + data[eventIndex]['id'] + '"> <div class="row list-category-panel"> \
-                    <div class="col-md-6 col-xs-6 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"></div>  \
-                    <div class="col-md-6 col-xs-6 list-category-text"> \ <div class="word-indent-01 list-category-title"> \
+                    <div class="col-md-12 col-xs-6 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"></div>  \
+                    <div class="col-md-12 col-xs-6 list-category-text"> \ <div class="word-indent-01 list-category-title"> \
                     '+ data[eventIndex]['title'] +' \
                     </div> <div class="list-category-info"> <p> <img src="/img/icons/mb-price.png"> ' + " $ " + data[eventIndex]['min_price'] + "元起 " + ' \
                     </p> \

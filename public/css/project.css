@@ -891,9 +891,15 @@ li.collapse-blog-category {
     text-align: left;
 }
 
+.book-us img {
+    width: 25px;
+    padding-bottom: 5px;
+}
+
 .book-us > p {
     font-size: 17px;
     color: #555;
+    margin-bottom: 5px;
 }
 
 .book-us > p > span {
@@ -932,6 +938,7 @@ li.collapse-blog-category {
 .footer-center > div > p {
     font-size: 16px;
     color: #60574e;
+
 }
 
 .funtion-intro-content li,
@@ -2425,13 +2432,13 @@ li.collapse-blog-category {
 .list-container {
     margin: 0px;
     padding: 0px;
-    background-color: white;
+    background-color:#f2f2f2;
 }
 
 .list-content {
-    max-width: 1050px;
     width: 90%;
     margin: 0px auto;
+    background-color: #f2f2f2;
 }
 
 .list-banner {
@@ -2462,7 +2469,7 @@ li.collapse-blog-category {
 }
 
 .list-filter-title {
-    background: #666;
+    background: #00bcd4;
     color: #fff;
     text-align: center;
     font-size: 18px;
@@ -2487,9 +2494,10 @@ li.collapse-blog-category {
 }
 
 .list-filter-row p {
-    font-size:20px;
+    font-size:17px;
     letter-spacing: 2px;
     color: #b3b3b3;
+    margin: 0;
 }
 
 .list-filter-option {
@@ -2498,17 +2506,31 @@ li.collapse-blog-category {
 }
 
 .list-filter-row label {
-    font-size: 14px;
-    float: left;
-    padding: 0px;
-    letter-spacing:2px;
-    margin: 10px 0px;
-    color: #666;
-    width: calc(100%/3);
+    font-size: 15px;
+    text-align: center;
+    border: 1px solid #00bcd4;
+    padding: 5px;
+    letter-spacing: 2px;
+    color: #00bcd4;
+    width: calc(100%/3 - 15px);
+    margin:5px;
+}
+
+.list-filter-row label:hover {
+    background-color: rgba(0,188,212,0.1)
+}
+
+.checkbox-inline+.checkbox-inline {
+    margin:5px;
+}
+
+.list-checkbox {
+    background-color: #00bcd4;
+    color: #fff!important;
 }
 
 .list-howmuch {
-    width: calc(100%/2)!important;
+    width: calc(100%/2 - 15px)!important;
 }
 
 .list-filter-option input {
@@ -2522,7 +2544,6 @@ li.collapse-blog-category {
 
 .list-content-panel {
     padding: 0px 15px;
-    border: 1px solid #ccc;
 }
 
 .list-content ul a {
@@ -2552,21 +2573,28 @@ li.collapse-blog-category {
 }
 
 .list-category-panel {
-    padding: 15px;
-    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    background-color: #fff;
+    width: calc(100%/2 - 20px);
+    float: left;
+    margin: 0 10px;
+}
+
+.list-category-panel:hover {
+    box-shadow:0px 0px 8px 3px #ccc;
 }
 
 .list-category-thumnail {
-    min-height:170px;
+    height: 250px;
     background-size: cover;
     background-position: top;
 }
 
 .list-category-text {
-    padding:0 10px;
+    padding:5px 15px;
 }
 
-.list-category-title a {
+.list-category-title {
     color: #666;
     font-size: 18px;
     overflow: hidden;
@@ -2577,25 +2605,25 @@ li.collapse-blog-category {
     position: relative;
     line-height: 1.5em;
     white-space: nowrap;
-    height: 30px;
 }
 
 .list-category-info p {
-    color: #998d7e;
+    color: #808080;
     font-size: 15px;
     margin: 0px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    height: 30px;
 }
 
 .list-category-info {
     margin: 5px 0;
 }
 
-.list-category-info  img {
-    width: 30px;
+.list-category-info img {
+    width: 23px;
+    padding-bottom: 3px;
+    opacity: 0.8;
 }
 
 .list-attention {
@@ -2606,24 +2634,8 @@ li.collapse-blog-category {
     color: #999;
 }
 
-.list-readmore {
-    background-color: #ff5a5f;
-    border-radius: 5px;
-    padding: 8px 10px;
-    color: #fff;
-    font-size: 14px;
-    letter-spacing: 1px;
-    text-align: center;
-    float: right;
-    cursor: pointer;
-}
-
-.list-readmore:hover {
-    background-color: #dd4e58;
-}
-
-.checkbox-inline+.checkbox-inline {
-    margin:10px 0px;
+.checkbox-inline input {
+    display: none;
 }
 
 .list-filter-row input {
