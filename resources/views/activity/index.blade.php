@@ -70,7 +70,7 @@
             <div class="purchase-block">
                 @if(count($tickets)>0)
                 <div class="row actpage-purchase">
-                    <p><img src="/img/icons/playicon.png"> GO!讓生活更有意思!</p>
+                    <p><img src="/img/icons/playicon.png">前往購買</p>
                 </div>
                 @else
                 <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
@@ -98,7 +98,7 @@
             @if(count($tickets)>0)
             <a class='inline' href="#inline_content">
             <div class="row actpage-mb-purchase">
-                 <p><img src="/img/icons/playicon.png">GO!讓生活更有意思!</p>
+                 <p><img src="/img/icons/playicon.png">前往購買</p>
 
             </div>
             </a>
