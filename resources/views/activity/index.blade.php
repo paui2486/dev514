@@ -445,10 +445,10 @@
             });
 
         $(".checkbox").on("click", function() {
-            if ($(this).closest(".cart-option").hasClass('list-checkbox')) {
-                $(this).closest(".cart-option").removeClass('list-checkbox');
+            if ($(this).closest(".cart-option").hasClass('list-rb-checkbox')) {
+                $(this).closest(".cart-option").removeClass('list-rb-checkbox');
             } else {
-                $(this).closest(".cart-option").addClass('list-checkbox');
+                $(this).closest(".cart-option").addClass('list-rb-checkbox');
             }
         });
 

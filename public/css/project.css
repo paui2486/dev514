@@ -1955,6 +1955,11 @@ li.collapse-blog-category {
     margin: 2px;
 }
 
+.list-rb-checkbox {
+    background-color: #FDF0FF;
+    color: #fff!important;
+}
+
 .cart-option > div {
     font-size: 15px;
     color: #666666;
