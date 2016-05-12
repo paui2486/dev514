@@ -27,7 +27,7 @@
                 <p id="" class="col-md-6 col-sm-6 left_date"> 倒數  天 </p>
             </div>
             <div class="row actpage-cart-content">
-                <p class="actpage-buy-now">{{ $activity->title }}</p>
+                <p class="actpage-actname">{{ $activity->title }}</p>
                 <div class="row actpage-cart-ticket">
                     {!! csrf_field() !!}
                     {{--*/ $count = 0; /*--}}
@@ -104,7 +104,7 @@
             </a>
             <div style='display:none'>
                 <div id='inline_content' style='padding:10px; background:#fff;'>
-                    <p class="actpage-buy-now">{{ $activity->title }}</p>
+                    <p class="actpage-actname">{{ $activity->title }}</p>
                     <div class="row actpage-cart-ticket">
                         {!! csrf_field() !!}
                         {{--*/ $count = 0; /*--}}
