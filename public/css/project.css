@@ -912,7 +912,7 @@ li.collapse-blog-category {
     border:none;
     border-radius: 0;
     padding-left: 10px;
-} 
+}
 
 .book-us-submit {
     background: #00bcd4;
@@ -1953,8 +1953,19 @@ li.collapse-blog-category {
 }
 
 .cart-option {
-    margin: 10px 0px;
-    padding: 0px
+    /*margin: 10px 0px;
+    padding: 0px;
+    font-size: 15px;*/
+    text-align: center;
+    border: 2px solid #DCB0D9;
+    padding: 2px;
+    letter-spacing: 1px;
+    margin: 2px;
+}
+
+.list-rb-checkbox {
+    background-color: #FDF0FF;
+    color: #fff!important;
 }
 
 .cart-option > div {
@@ -2640,6 +2651,10 @@ li.collapse-blog-category {
     letter-spacing: 2px;
     text-align: center;
     color: #999;
+}
+
+.checkbox-inline {
+    width: 100%;
 }
 
 .checkbox-inline input {

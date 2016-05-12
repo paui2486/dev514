@@ -35,7 +35,7 @@
                     {{--*/ $count += $ticket->left_over; /*--}}
                     <div class="row cart-option">
                         <div class="col-md-8 ">
-                            <label class="checkbox-inline">
+                            <label class="checkbox-inline"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1"  value="{{ $key }}">{{ $ticket->name }}
                             </label>
                         </div>
@@ -443,6 +443,14 @@
             var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
             window.location.href = url;
             });
+
+        $(".checkbox").on("click", function() {
+            if ($(this).closest(".cart-option").hasClass('list-rb-checkbox')) {
+                $(this).closest(".cart-option").removeClass('list-rb-checkbox');
+            } else {
+                $(this).closest(".cart-option").addClass('list-rb-checkbox');
+            }
+        });
 
         $('.purchase-mb-submit').click(function() {
             var ticketIds = [];
