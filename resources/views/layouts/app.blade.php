@@ -24,6 +24,18 @@
     <link rel="stylesheet" href="/css/style-responsive.css"/>
     <link rel="stylesheet" href="/css/project.css"/>
     <link rel="stylesheet" href="/css/mobile.css"/>
+    <style>
+    .actpage-introduce {
+        position: relative;
+    }
+
+    .actpage-introduce iframe {
+        display:block;
+        width:100%;
+        height:auto;
+    }
+    </style>
+
     {{-- <link rel="stylesheet" href="{{ elixir('css/app.css') }}"> --}}
 </head>
 <body id="app-layout">
