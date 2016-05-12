@@ -65,10 +65,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('blog/{category}/{slug}'     , 'ArticleController@showArticle'    );
 
     Route::get('redirect'                   , 'SocialAuthController@redirect'    );
-    Route::get('callback'                   , 'SocialAuthController@fbCallback'    );
+    Route::get('callback'                   , 'SocialAuthController@fbCallback'  );
     Route::get('follows'                    , 'AuthController@follows'           );
     Route::get('friends'                    , 'AuthController@friends'           );
     Route::get('activitys'                  , 'AuthController@activitys'         );
+
+    Route::get('subscribes/add'             , 'PageController@addSubscribe'      );
 
     Route::group(['middleware' => 'auth'], function() {
 
