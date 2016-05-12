@@ -914,13 +914,21 @@ li.collapse-blog-category {
     padding-left: 10px;
 } 
 
-.book-us button {
+.book-us-submit {
     background: #00bcd4;
     color: #fff;
     padding: 5px 10px;
     height: 35px;
     border: none;
-    letter-spacing:1px;
+    letter-spacing: 1px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.book-us-submit:hover {
+    background-color:#00a8b5;
 }
 
 .footer-info {
@@ -1888,7 +1896,7 @@ li.collapse-blog-category {
     letter-spacing: 1px;
 }
 
-.actpage-buy-now {
+.actpage-actname {
     font-size: 17px;
     color: #666;
     margin: 0px;
