@@ -52,6 +52,7 @@
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jssor.slider.mini.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.js"></script>
     <script type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
     <script type="text/javascript" src="/js/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="/js/jquery.nicescroll.js"></script>
@@ -70,6 +71,15 @@
           ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
+
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-72845688-2', 'auto');
+        ga('send', 'pageview');
+
         window.fbAsyncInit = function() {
         FB.init({
             appId      : '{{ env("FACEBOOK_CLIENT_ID") }}',
@@ -79,33 +89,24 @@
         };
 
         (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-
-        $(function(){
-            $('.smobitrigger').smplmnu();
-            $.slidebars();
-        });
-
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-72845688-2', 'auto');
-        ga('send', 'pageview');
     </script>
     <script type="text/javascript">
     $(function(){
+        $('.smobitrigger').smplmnu();
+        $.slidebars();
+
         $(".gotop").click(function(){
             jQuery("html,body").animate({
                 scrollTop:0
             },1000);
         });
+
         $(window).scroll(function() {
             if ( $(this).scrollTop() > 300){
                 $('.gotop').fadeIn("fast");
@@ -118,6 +119,22 @@
                 scrollTop:0
             },1000);
         });
+
+        $("#subscribe").click(function(){
+            $.ajax({
+                 type: "get",
+                 url: "{{ URL('subscribes/add') }}",
+                 data: {
+                    'email' : $('input[name=email]').val()
+                 },
+                 success: function(data) {
+                    alert(data['result']);
+                 }
+            });
+            return false;
+        });
+
+        var RightFixed = $("#FilterFixed");
         $(window).scroll(function() {
             if ( $(this).scrollTop() > 150){
                 $('.gotop-mb').fadeIn("fast");
@@ -125,22 +142,16 @@
                 $('.gotop-mb').stop().fadeOut("fast");
             }
         });
-    });
-    </script>
-    <script>
-        $(document).ready(function () {
-        var RightFixed = $("#FilterFixed");
+
         $(window).scroll(function () {
             if ($(this).scrollTop() >470) {
                 RightFixed.addClass("FilterFixed");
             } else {
                 RightFixed.removeClass("FilterFixed");
             }
-            });
         });
+    });
     </script>
-
-
     @yield('script')
 
 </body>
