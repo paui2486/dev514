@@ -7,12 +7,14 @@
 --> 
     <div class="row footer-topblock">
         <div class="row footer-center">
+<!--
             <div class="col-md-6 bottom-linkout">
                 <a href="https://www.instagram.com/"><img src="{{asset('img/pics/igicon.png')}}"></a>
                 <a href="https://www.facebook.com/iwinetodayshop/?fref=ts"><img src="{{asset('img/pics/fbicon.png')}}">
                     <a href="https://www.youtube.com/?gl=TW&hl=zh-TW&noredirect=1"><img src="{{asset('img/pics/youtubeicon.png')}}"></a>
             </div>
-            <div class="col-md-6 book-us">
+-->
+            <div class="book-us">
                 <p><img src="/img/icons/gifticon.png">514活動懶人包</p>
                 <span>我們將提供給您最新的活動資訊，給您第一手有意思的活動內容！</span>
                 <div class="row" style="margin:10px 0;">
