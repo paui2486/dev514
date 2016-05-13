@@ -33,6 +33,7 @@
         display:block;
         width:100%;
         height:auto;
+        min-height: 260px;
     }
     </style>
 
