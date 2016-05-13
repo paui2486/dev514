@@ -26,8 +26,7 @@
         </div>
         @endforeach
         <div class="purchase-total">總計<span>$ {{ $count }} NTD</span></div>
-        <div class="purchase-mb-top" id="mb-detail">
-            <p>查看詳細票券資訊</p>
+        <div class="purchase-mb-top">
             @foreach ( $eventData as $event )
             <div class="purchase-mb-ticket">
                 <p class="ticket-name">{{ $event->name }}</p>
@@ -80,12 +79,12 @@
 @endsection
 @section('script')
 <script>
-$(document).ready(function () {
-    $('div#mb-detail div').hide();
-    $('div#mb-detail > p').click(function(){
-        $(this).parent().find('div').slideToggle('fast');
-    });
-    $('#submit').click( function() { $('form').submit(); });
-});
+//$(document).ready(function () {
+//    $('div#mb-detail div').hide();
+//    $('div#mb-detail > p').click(function(){
+//        $(this).parent().find('div').slideToggle('fast');
+//    });
+//    $('#submit').click( function() { $('form').submit(); });
+//});
 </script>
 @endsection
