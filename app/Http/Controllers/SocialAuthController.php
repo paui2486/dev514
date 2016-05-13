@@ -22,6 +22,8 @@ class SocialAuthController extends Controller
 
     public function fbCallback(Request $request)
     {
+        Log::error('SocialAuth Login');
+        Log::error($request);
         $service = new SocialAccountService();
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
         Log::error(json_encode($user));
