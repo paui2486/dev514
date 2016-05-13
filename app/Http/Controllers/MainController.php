@@ -173,7 +173,7 @@ class MainController extends controller
                         'categories.name as locat_name', 'activities.activity_end as date_end',
                     ))
                     ->orderBy('activities.created_at', 'desc')
-                    ->take(3)
+                    // ->take(3)
                     ->get();
 
                 $topicActivity = (object) array(
