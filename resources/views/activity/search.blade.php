@@ -152,13 +152,13 @@ $(document).ready(function () {
     var url_param = getURLParameter('cat_id');
     $("input").on("change", function() {
         var content = $(this).parents('div[class!="list-content"][class$="content"]');
-        
+
         if ($(this).parent().hasClass('list-checkbox')) {
             $(this).parent().removeClass('list-checkbox');
         } else {
             $(this).parent().addClass('list-checkbox');
         }
-        
+
         search = content.find('input:checkbox:checked').map(function() {
             return this.value;
         }).get();
@@ -175,13 +175,13 @@ $(document).ready(function () {
              }
         });
     });
-        
+
     if ( url_param ) {
         $('input[value='+ url_param +']').click();
     } else {
         showResult(eventData);
     }
-    
+
     $('.list-mb-content > .list-filter-row > div ').hide();
     $('.list-mb-content > .list-filter-row > p').click(function(){
         $(this).parent().find('.list-filter-option').slideToggle();
@@ -222,8 +222,8 @@ $(document).ready(function () {
     function getDay ( datetime ) {
         if ( datetime != null) {
             var DateReg = "";
-            var result = /(.*)\s/.exec( datetime );
-            return result[0];
+            var result = /\d{4}-(.*)\s/.exec( datetime );
+            return result[1];
         } else {
             return '';
         }
