@@ -15,11 +15,11 @@
             </div>
 -->
             <div class="book-us">
-                <p><img src="/img/icons/gifticon.png">514活動懶人包</p>
+                <p><img src="/img/icons/gifticon.png">514活動懶人包<img src="/img/icons/freeicon.png" style="width: 50px;margin-left: 5px;"></p>
                 <span>我們將提供給您最新的活動資訊，給您第一手有意思的活動內容！</span>
                 <div class="row" style="margin:10px 0;">
-                    <input class="col-md-8 col-xs-8" type="email" name="email" placeholder="請輸入您的email">
-                    <div class="book-us-submit col-md-4 col-xs-4" id="subscribe">確定訂閱</div>
+                    <input class="col-md-9 col-xs-9" type="email" name="email" placeholder="輸入email，訂閱活動資訊">
+                    <div class="book-us-submit col-md-3 col-xs-3" id="subscribe">確定</div>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12 contact-us">
-                    <p>聯絡我們</p>
+                    <p class="contact-p">聯絡我們</p>
                     <p class="contact-info">
                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span><a href="mailto:service@514.com.tw">
                             service@514.com.tw</a></span>

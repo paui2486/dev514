@@ -53,7 +53,9 @@
     .gotop,
     .actpage-recommend-info,
     .actpage-dashboard,
-    .bottom-linkout{
+    .bottom-linkout,
+    .order-time,
+    .contact-p{
         display: none!important;
     }
 

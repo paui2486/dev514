@@ -425,8 +425,8 @@
             } else {
                 RightFixed.removeClass("Cart-fixed");
             }
-//            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+200){
-//                RightFixed.removeClass("right-content-fixed");
+//            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+250){
+//                RightFixed.removeClass("Cart-fixed");
 //            }
 
             $(".inline").colorbox({

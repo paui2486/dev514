@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="purchase-button">
-                <input type="button" onclick="history.back()" value="修改票券" class="btn-pre"></input>
+                <input type="button" onclick="history.back()" value="上一步" class="btn-pre"></input>
                 <a id="submit" href="#"><button class="btn-submit">前往付款</button></a>
             </div>
             <input type="hidden" name="data" value='{{ json_encode(Request::all()) }}'>
