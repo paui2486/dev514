@@ -117,7 +117,7 @@
                     </div>
                     <div class="word-indent-newact home-mb-info home-mb-calendar">
                         <img src="/img/icons/mb-date.png">
-                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
                     </div>
                     <div class="home-mb-info word-indent-newact">
                         <img src="/img/icons/mb-location.png">
@@ -225,7 +225,7 @@
 
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
-                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ url('activity'). '/' . $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
                                 <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom:2px;"></a>
                                 <div class="tooltip top" role="tooltip">
@@ -265,9 +265,10 @@
                             </p>
                         </a>
                         <div class="col-md-8 col-sm-6 col-xs-5 home-dashed"></div>
-<!--                            <img src="{{ $eachTypeActivity->cat_logo }}">-->
+                           <!-- <img src="{{ $eachTypeActivity->cat_logo }}"> -->
                         <div class="col-md-2 col-sm-2 col-xs-3 category-readmore">
-                            <a href="{{ $eachTypeActivity->affinity }}">
+                            <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
+                            <!-- <a href="{{ $eachTypeActivity->affinity }}"> -->
                                 <img src="/img/icons/icon_findfriend.png">
                             </a>
                         </div>
@@ -297,7 +298,7 @@
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
-                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
                                 <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
                                 <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom: 2px;"></a>
                                 <div class="tooltip top" role="tooltip">
