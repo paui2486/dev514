@@ -39,7 +39,7 @@
     .about-us,
     .funtion-intro,
     .act-page-blur,
-    .actpage-right-content,
+    .actpage-Cart,
     .mb-no-display,
     .purchase-total,
     .purchase-tickets,
@@ -427,6 +427,31 @@
         margin-right: 5px;
     }
     
+    .Cart-content {
+        max-height: 415px;
+        border: 1px solid #ccc;
+    }
+    
+    .Cart-ticket-surplus {
+        font-size: 10px;
+    }
+    
+    .Cart-ticket {
+        background-size: 120% auto;
+    }
+    
+    .Cart-number select {
+        font-size: 14px;
+    }
+    
+    .Cart-detail > ul > li > span {
+        letter-spacing: 0;
+    }
+    
+    .Cart-alert {
+        font-size: 14px;
+    }
+    
     .purchase-mb-btn {
         position: fixed;
         width: 100%;
@@ -443,7 +468,7 @@
         letter-spacing: 2px;
     }
 
-    .actpage-mb-purchase {
+    .Cart-mb-purchase {
         background-color: #ff5a5f;
         border-radius: 5px;
         text-align: center;
@@ -453,24 +478,36 @@
         cursor: pointer;
     }
 
-    .actpage-mb-purchase p ,
-    .actpage-mb-purchase {
+    .Cart-mb-purchase p ,
+    .Cart-mb-purchase {
         color: white;
         font-size: 16px;
         letter-spacing: 2px;
         margin-bottom: 0px;
     }
 
-    .actpage-mb-purchase:hover {
+    .Cart-mb-purchase:hover {
         background-color: #dd4e58;
     }
 
-    .actpage-mb-purchase img {
+    .Cart-mb-purchase img {
         width: 20px;
         margin-bottom: 3px;
         margin-right: 3px;
     }
-
+    
+    .Cart-mb-nextstep{
+        width: 100%;
+        padding: 8px 10px;
+        background-color: #ff5a5f;
+        border-radius: 5px;
+        margin: 10px 0;
+        text-align: center;
+        color: #fff;
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+    
     /*訂購頁面*/
     .purchase-content {
         margin-top: 0px;

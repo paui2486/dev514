@@ -99,71 +99,64 @@
         <div class="cart purchase-mb-btn">
             @if(count($tickets)>0)
             <a class='inline' href="#inline_content">
-            <div class="row actpage-mb-purchase">
+            <div class="row Cart-mb-purchase">
                  <p><img src="/img/icons/playicon.png">訂購</p>
-
             </div>
             </a>
             <div style='display:none'>
                 <div id='inline_content' style='padding:10px; background:#fff;'>
-                    <p class="actpage-cart-actname">{{ $activity->title }}</p>
-                    <div class="row actpage-cart-ticket">
+                    <div class="row Cart-content">
+                        <p>{{ $activity->title }}</p>
+
                         {!! csrf_field() !!}
-                        {{--*/ $count = 0; /*--}}
+                        {{--*/ 
+                            $count = 0; 
+                            $cnt = count($tickets);
+                        /*--}}
                         @foreach($tickets as $key => $ticket)
                         {{--*/ $count += $ticket->left_over; /*--}}
-                        <div class="row cart-option">
-                            <div class="col-xs-8">
-                                <label class="checkbox-inline">
-                            <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1"  value="{{ $key }}">{{ $ticket->name }}
-                            </label>
+                        <div style="position:relative">
+                        <div class="row Cart-ticket @if($cnt == 1) Cart-ticket-checked @endif">
+                            <div class="Cart-ticket-surplus">
+                               剩 {{ $ticket->left_over }} 張
                             </div>
-                            <p class="col-xs-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
-                        </div>
-                        <div class="cart-number">
-                            <p>請選擇票券數量：
-                                <select name="ticket-{{$key}}-number">
-                                @for ($i = 1; $i <= 10; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
-                                @endfor
-                                </select>
-                            </p>
-                        </div>
-                        <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
-                        <div id="OneClick" class="row cart-option-detail">
-                            <ul>
-                                <li>
-                                    <p>詳細票券資訊
-                                        <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                    </p>
-                                    <ul>
-                                        <li>票價：$ {{ $ticket->price }} NTD</li>
-                                        <li>活動開始： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+    <!--
+                            <div class="col-md-12">
+                                <label class="checkbox-inline">
+                                <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $key }}" @if($cnt == 1) checked="checked" @endif >                       </label>
+                            </div>
+    -->
 
-                                        <li>活動結束： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
+                            <div id="OneClick" class="row Cart-detail">
+                                <ul>
+                                    <li><span>票券名稱</span>{{ $ticket->name }}</li>
+                                    <li><span>票券價格</span>$ {{ $ticket->price }} 元</li>
+                                    <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+
+                                    <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="Cart-number">請選擇數量
+                            <select name="ticket-{{$key}}-number">
+                            @for ($i = 1; $i <= 10; $i++)
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endfor
+                            </select>
+                        </div>
                         </div>
                         @endforeach
                     </div>
-                    <div class="Cart-mb-purchase">繼續下一步</div>
+                <div class="Cart-mb-nextstep">下一步</div>
                 </div>
             </div>
             @else
-
             <div class="row actpage-mb-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完</div>
             @endif
         </div>
 <!--------------mobile colorbox end--------------->
         <div class="row actpage-dashboard">
-            @if (Session::has('message'))
-            <div class="alert alert-danger">
-                <ul>
-                  <li> *** {{ Session::get('message') }} *** </li>
-                </ul>
-            </div>
-            @endif
             <div class="col-md-2 col-sm-2">
                 <div class="actpage-holder">
 <!--                    <a href="{{ URL('member/'. $activity->hoster ) }}">-->
@@ -294,7 +287,7 @@
                         <div class="col-md-9 col-xs-8 actpage-header-dash"></div>
                     </div>
                     <div class="actpage-ticket">
-                        <!--                        {!! $activity->content !!}-->
+                        {!! $activity->ticket_description !!}
                     </div>
                     <div class="row actpage-header">
                         <p class="col-md-3 col-xs-4 actpage-header-left impact-acts">同場加映</p>
@@ -413,6 +406,14 @@
     }
 
     $(document).ready(function () {
+        @if (Session::has('message'))
+            $.colorbox({
+                fixed   : true,
+                opacity : 0.5,
+                html    : '<div class="Cart-alert"><p>請勾選您要的票券，謝謝!</p></div>',
+            });
+        @endif
+        
         var duration = moment("{{$activity->activity_start}}", "YYYY-MM-DD hh:mm:ss").diff(moment(),'days');
         $('.left_number').text('剩 {{ $count }} 位');
         $('.left_date').text('倒數 '+ duration +' 天');
@@ -428,9 +429,17 @@
 //                RightFixed.removeClass("right-content-fixed");
 //            }
 
-            $(".inline").colorbox({inline:true, width:"90%"});
+            $(".inline").colorbox({
+                fixed : true,
+                inline : true, 
+                width : "90%"
+            });
+            
             $("#click").click(function(){
-                $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
+                $('#click').css({
+                    "background-color":"#f00", 
+                    "color":"#fff", "cursor":"inherit"
+                })
                 return false;
             });
         });
@@ -444,8 +453,8 @@
         });
 
         $(".Cart-purchase").on('click', purchase);
-        $(".Cart-mb-purchase").on('click', purchase);
-
+        $(".Cart-mb-nextstep").on('click', purchase);
+        
         function purchase(){
             var ticketIds = [];
             var ticketNumbers = [];

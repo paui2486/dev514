@@ -2014,6 +2014,13 @@ li.collapse-blog-category {
     margin-right: 3px;
 }
 
+.Cart-alert {
+    padding: 15px 5px;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #ff5a5f;
+}
+
 .actpage-bought-content {
     background-color: white;
     padding: 15px;
