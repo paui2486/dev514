@@ -75,6 +75,8 @@
                     },
                     'csvHtml5',
                 ],
+                "aaSorting": [[5, 'desc']],
+                "aaSorting": [[6, 'desc']],
                 "processing": true,
                 "responsive": true,
                 "ajax": "{{ URL::current('') . 'Data' }}",

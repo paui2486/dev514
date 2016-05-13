@@ -204,7 +204,7 @@ class MainController extends controller
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
                               'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name',
                           ))
-                          ->orderBy('activities.created_at', 'desc')
+                          ->orderBy('activities.activity_start', 'desc')
                           ->get();
 
         return $allActivity;
