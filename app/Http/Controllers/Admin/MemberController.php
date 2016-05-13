@@ -185,9 +185,9 @@ class MemberController extends Controller
      */
     public function data()
     {
-        $members = DB::table('users')
-                    ->select(array('id', 'name', 'email', 'adminer', 'hoster', 'author', 'status'))
-                    ->orderBy('created_at', 'ASC');
+        $members = DB::table('users as u1')
+                    ->leftJoin('users as u2', 'u1.id', '=', 'u2.last_update_by')
+                    ->select(array('u1.id', 'u1.name', 'u1.email', 'u1.adminer', 'u1.hoster', 'u1.author', 'u1.status', 'u2.name as last_update_by', 'u1.created_at'));
 
         return Datatables::of($members)
             ->remove_column('id')

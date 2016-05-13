@@ -19,6 +19,8 @@
             <th>廠商</th>
             <th>達人</th>
             <th>狀態</th>
+            <th>最後更改人</th>
+            <th>註冊時間</th>
             <th>設定</th>
         </tr>
     </thead>
@@ -52,9 +54,14 @@ $(document).ready(function () {
         "aoColumnDefs": [
             {
                 "bSortable": false,
-                "aTargets": [ 5 ]
+                "aTargets": [ 8 ]
             },
+            {
+                "targets": [ 7 ],
+                "visible": false
+            }
         ],
+        "aaSorting": [[7, 'desc']],
         "processing": true,
         "responsive": true,
         "ajax": "{{ URL::to('dashboard/member/data') }}",
