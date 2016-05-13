@@ -28,10 +28,10 @@
             </div>
             <div class="row Cart-content">
                 <p>{{ $activity->title }}</p>
-        
+
                     {!! csrf_field() !!}
-                    {{--*/ 
-                        $count = 0; 
+                    {{--*/
+                        $count = 0;
                         $cnt = count($tickets);
                     /*--}}
                     @foreach($tickets as $key => $ticket)
@@ -47,15 +47,15 @@
                             <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $key }}" @if($cnt == 1) checked="checked" @endif >                       </label>
                         </div>
 -->
-                        
+
                         <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
                         <div id="OneClick" class="row Cart-detail">
                             <ul>
                                 <li><span>票券名稱</span>{{ $ticket->name }}</li>
                                 <li><span>票券價格</span>$ {{ $ticket->price }} 元</li>
-                                <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+                                <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
 
-                                <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
+                                <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
                             </ul>
                         </div>
                     </div>
@@ -109,8 +109,8 @@
                         <p>{{ $activity->title }}</p>
 
                         {!! csrf_field() !!}
-                        {{--*/ 
-                            $count = 0; 
+                        {{--*/
+                            $count = 0;
                             $cnt = count($tickets);
                         /*--}}
                         @foreach($tickets as $key => $ticket)
@@ -132,9 +132,9 @@
                                 <ul>
                                     <li><span>票券名稱</span>{{ $ticket->name }}</li>
                                     <li><span>票券價格</span>$ {{ $ticket->price }} 元</li>
-                                    <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+                                    <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
 
-                                    <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
+                                    <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
                                 </ul>
                             </div>
                         </div>
@@ -175,11 +175,11 @@
                     <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
                     <div class="dashboard-text">
                         <p>
-                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}
                         </p>
                         <p>～</p>
                         <p>
-                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_end) /*--}}
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_end))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_end) /*--}}
                         </p>
                     </div>
                     @else
@@ -234,11 +234,11 @@
                     <img src="/img/icons/info-date.png"> @if(count($tickets)>0)
                     <div class="dashboard-text">
                         <p>
-                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}
                         </p>
                         <p>～</p>
                         <p>
-                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_end) /*--}}
+                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_end))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_end) /*--}}
                         </p>
                     </div>
                     @else
@@ -306,7 +306,7 @@
                                     <img src="/img/icons/web-price.png"><span>{{ $suggest->min_price }} 元起</span>
                                 </p>
                                 <p>
-                                    <img src="/img/icons/web-date.png"><span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</span>
+                                    <img src="/img/icons/web-date.png"><span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</span>
                                 </p>
                                 <p class="word-indent-01">
                                     <img src="/img/icons/web-location.png"><span>{{ $suggest->locat_name . $suggest->location }}</span></p>
@@ -413,7 +413,7 @@
                 html    : '<div class="Cart-alert"><p>請勾選您要的票券，謝謝!</p></div>',
             });
         @endif
-        
+
         var duration = moment("{{$activity->activity_start}}", "YYYY-MM-DD hh:mm:ss").diff(moment(),'days');
         $('.left_number').text('剩 {{ $count }} 位');
         $('.left_date').text('倒數 '+ duration +' 天');
@@ -431,13 +431,13 @@
 
             $(".inline").colorbox({
                 fixed : true,
-                inline : true, 
+                inline : true,
                 width : "90%"
             });
-            
+
             $("#click").click(function(){
                 $('#click').css({
-                    "background-color":"#f00", 
+                    "background-color":"#f00",
                     "color":"#fff", "cursor":"inherit"
                 })
                 return false;
@@ -454,7 +454,7 @@
 
         $(".Cart-purchase").on('click', purchase);
         $(".Cart-mb-nextstep").on('click', mbpurchase);
-        
+
         function purchase(){
             var ticketIds = [];
             var ticketNumbers = [];
@@ -470,7 +470,7 @@
             window.location.href = url;
             return false;
         }
-         
+
         function mbpurchase(){
             var ticketIds = [];
             var ticketNumbers = [];
