@@ -269,7 +269,7 @@
                         <div class="col-md-2 col-sm-2 col-xs-3 category-readmore">
                             <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
                             <!-- <a href="{{ $eachTypeActivity->affinity }}"> -->
-                                <img src="/img/icons/icon_findfriend.png">
+                                Read More
                             </a>
                         </div>
                     </div>

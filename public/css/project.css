@@ -777,9 +777,18 @@ li.collapse-blog-category {
     background-color: #f2f2f2;
 }
 
-.category-readmore img {
-    height: 45px;
-    padding-top: 5px;
+.category-readmore{
+    font-size: 18px;
+    padding: 10px;
+    background: #808080;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.category-readmore a {
+    color: #fff;
 }
 
 .category-readmore:hover {
@@ -940,7 +949,7 @@ li.collapse-blog-category {
 .footer-center {
     width: 60%;
     margin: auto;
-    padding: 40px;
+    padding:30px;
 }
 
 .footer-center > div > p {
