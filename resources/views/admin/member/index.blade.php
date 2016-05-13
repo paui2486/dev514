@@ -18,7 +18,7 @@ $(document).ready(function () {
         collapsible: 'accordion',
         setHash: true,
         scrollToAccordion: true,
-        active: 0,
+        active: @if(Auth::user()->adminer) 1 @else 0 @endif,
         activate: function(e, tab) {
             var target = $(tab.selector);
             $( target.html("<div class='loading'>Loading<img src='{{ asset('img/icons/ellipsis.gif') }}'></img></div>") );
