@@ -63,8 +63,8 @@
                 "dom": 'Bfrtip',
                 "select": true,
                 "lengthMenu": [
-                    [ 10, 25, 50, -1 ],
-                    [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+                    [ 50, 10, 25,  -1 ],
+                    [ '50 rows', '10 rows', '25 rows', 'Show all' ]
                 ],
                 "buttons": [
                     'pageLength',
@@ -72,10 +72,6 @@
                         extend: 'colvis',
                         columns: ':not(:first-child)',
                         text: '顯示欄位'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        download: 'open'
                     },
                     'csvHtml5',
                 ],
@@ -85,6 +81,7 @@
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
+                        fixed: true,
                         speed: 660,
                         width: "40%",
                         height: "30%",

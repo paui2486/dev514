@@ -4,7 +4,6 @@
 <h4 class="wrapper-title">
    我的票券
 </h4>
-
 <table id="ticket_table" class="table table-striped table-hover">
     <thead>
         <tr>
@@ -13,6 +12,7 @@
             <th>登記信箱</th>
             <th>登記電話</th>
             <th>付款狀態</th>
+            <th>票券設定</th>
         </tr>
     </thead>
     <tbody></tbody>

@@ -128,10 +128,7 @@ $(document).ready(function () {
         } else if (select == 6) {
             inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最大值 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="max" \
-                  value="{{{ Input::old('max', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$2", $filter->value) : null) }}}" /> </div> </div> \
-                  <div class="col-md-12" ><label class="control-label col-sm-2" for="name"> 最小值 </label> \
-                  <div class="col-sm-10"><input class="form-control" type="text" name="min" \
-                  value="{{{ Input::old('min', isset($filter) ? preg_replace("/(\d+)\D*(\d+)/", "$1", $filter->value) : null) }}}" /> </div> </div> ';
+                  value="{{{ Input::old('max', isset($filter) ? $filter->value : null) }}}" /> </div> </div>';
         } else if (select == 1) {
             inputForm = '<div class="col-md-12" ><label class="control-label col-sm-2" for="name"> FB社團連結 </label> \
                   <div class="col-sm-10"><input class="form-control" type="text" name="value" \

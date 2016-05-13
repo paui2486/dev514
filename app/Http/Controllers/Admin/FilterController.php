@@ -60,7 +60,7 @@ class FilterController extends Controller
         if ( $request->type == 5 ) {
             $value = $request->value;
         } elseif ( $request->type == 6 ) {
-            $value = $request->min . "-" . $request->max;
+            $value = $request->max;
         } elseif ( $request->type == 1 ) {
             $value = $request->value;
         }

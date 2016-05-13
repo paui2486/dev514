@@ -41,10 +41,6 @@
                     columns: ':not(:first-child)',
                     text: '顯示欄位'
                 },
-                {
-                    extend: 'pdfHtml5',
-                    download: 'open'
-                },
                 'csvHtml5',
             ],
             "aoColumnDefs": [
