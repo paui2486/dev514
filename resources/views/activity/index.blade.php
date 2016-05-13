@@ -116,7 +116,7 @@
                         @foreach($tickets as $key => $ticket)
                         {{--*/ $count += $ticket->left_over; /*--}}
                         <div style="position:relative">
-                        <div class="row Cart-ticket @if($cnt == 1) Cart-ticket-checked @endif">
+                        <div class="row Cart-mb-ticket @if($cnt == 1) Cart-ticket-checked @endif">
                             <div class="Cart-ticket-surplus">
                                剩 {{ $ticket->left_over }} 張
                             </div>
@@ -444,7 +444,7 @@
             });
         });
 
-        $(".Cart-ticket").on("click", function() {
+        $(".Cart-ticket , .Cart-mb-ticket").on("click", function() {
             if ($(this).hasClass('Cart-ticket-checked')) {
                 $(this).removeClass('Cart-ticket-checked');
             } else {
@@ -453,12 +453,28 @@
         });
 
         $(".Cart-purchase").on('click', purchase);
-        $(".Cart-mb-nextstep").on('click', purchase);
+        $(".Cart-mb-nextstep").on('click', mbpurchase);
         
         function purchase(){
             var ticketIds = [];
             var ticketNumbers = [];
             $('.Cart-ticket').each(function() {
+                if($(this).hasClass('Cart-ticket-checked')) {
+                    id = $(this).find('input[type=hidden]').val();
+                    target_number = $(this).next().find('option:selected').val();
+                    ticketIds.push(id);
+                    ticketNumbers.push(target_number);
+                }
+            });
+            var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
+            window.location.href = url;
+            return false;
+        }
+         
+        function mbpurchase(){
+            var ticketIds = [];
+            var ticketNumbers = [];
+            $('.Cart-mb-ticket').each(function() {
                 if($(this).hasClass('Cart-ticket-checked')) {
                     id = $(this).find('input[type=hidden]').val();
                     target_number = $(this).next().find('option:selected').val();

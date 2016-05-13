@@ -1913,7 +1913,8 @@ li.collapse-blog-category {
     letter-spacing: 2px;
 }
 
-.Cart-ticket {
+.Cart-ticket,
+.Cart-mb-ticket{
     margin: 15px 0;
     background-image: url(/img/pics/checkbox-gray.png);
     background-size: 105% auto;
