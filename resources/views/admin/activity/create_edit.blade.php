@@ -449,7 +449,7 @@
 <script type="text/javascript" src="{{ asset('js/cropper.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        CKFinder.setupCKEditor();
+        // CKFinder.setupCKEditor();
 
         // $('#image').cropper({
         //   aspectRatio: 16 / 9,
@@ -483,6 +483,12 @@
         var description = CKEDITOR.replace( 'ticket_description', {
             language : 'zh',
             height : 100,
+            autosave_SaveKey: 'autosaveKey',
+            autosave_NotOlderThen : 10,
+            filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
+            filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Images',
+            filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
             toolbar: [
                 ['Styles', 'Format', 'Font', 'FontSize'],
                 ['TextColor', 'BGColor']
@@ -498,10 +504,10 @@
             extraPlugins: 'autosave',
             autosave_SaveKey: 'autosaveKey',
             autosave_NotOlderThen : 10,
-            filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
-            filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Image',
+            // filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
+            // filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Images',
             filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-            filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Image',
+            filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
 
             removeButtons : 'BidiLtr,BidiRtl,Anchor,Maximize,Styles,Paste,PasteText,PasteFromWord,Cut,Copy,Source,Save,NewPage,DocProps,Print,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,Language,Flash,Iframe,',
 
