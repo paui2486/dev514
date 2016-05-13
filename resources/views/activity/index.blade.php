@@ -21,59 +21,62 @@
     <div class="actpage-main-image" style="background-image:url('{{ $activity->thumbnail }}')">
     </div>
     <div class="actpage-content">
-        <div id="RightFixed" class="col-md-4 col-sm-4 actpage-right-content">
-            <div class="row actpage-cart-title">
+        <div id="RightFixed" class="col-md-4 col-sm-4 cart actpage-Cart">
+            <div class="row Cart-top">
                 <p id="" class="col-md-6 col-sm-6 left_number"> 剩  位 </p>
                 <p id="" class="col-md-6 col-sm-6 left_date"> 倒數  天 </p>
             </div>
-            <div class="row actpage-cart-content">
-                <p class="actpage-actname">{{ $activity->title }}</p>
-                <div class="row actpage-cart-ticket">
+            <div class="row Cart-content">
+                <p>{{ $activity->title }}</p>
+        
                     {!! csrf_field() !!}
-                    {{--*/ $count = 0; /*--}}
-                    @foreach($tickets as $key => $ticket)
-                    {{--*/ $count += $ticket->left_over; /*--}}
-                    <div class="row cart-option">
-                        <div class="col-md-8 ">
-                            <label class="checkbox-inline"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1"  value="{{ $key }}">{{ $ticket->name }}
-                            </label>
+                    {{--*/ 
+                        $count = 0; 
+                        $cnt = count($tickets);
+                    /*--}}
+                @foreach($tickets as $key => $ticket)
+                {{--*/ $count += $ticket->left_over; /*--}}
+                
+                <div class="row Cart-ticket @if($cnt == 1) Cart-ticket-checked @endif">
+<!--
+                        <div class="col-md-12">
+                            <label class="checkbox-inline">
+                            <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $key }}" @if($cnt == 1) checked="checked" @endif >                       </label>
                         </div>
-                        <p class="col-md-4 actpage-surplus">剩 {{ $ticket->left_over }} 張</p>
-                    </div>
-                    <div class="cart-number">
-                        <p>請選擇票券數量：
-                            <select name="ticket-{{$key}}-number">
-                            @for ($i = 1; $i <= 10; $i++)
-                                <option value="{{$i}}">{{$i}}</option>
-                            @endfor
-                            </select>
-                        </p>
-                    </div>
-                    <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
-                    <div id="OneClick" class="row cart-option-detail">
-                        <ul>
-                            <li>
-                                <p>詳細票券資訊</p>
-                                <ul>
-                                    <li>票價：$ {{ $ticket->price }} NTD</li>
-                                    <li>活動開始： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+-->
+                        
+                        <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
+                        <div id="OneClick" class="row Cart-detail">
+                            <ul>
+                                <li><span>票券名稱</span>{{ $ticket->name }}</li>
+                                <li><span>票券價格</span>$ {{ $ticket->price }} 元</li>
+                                <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
 
-                                    <li>活動結束： {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    @endforeach
+                                <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
+                            </ul>
+                        </div>
+                        <div class="Cart-ticket-bottom">
+                            <p class="col-md-4 Cart-ticket-surplus">剩 {{ $ticket->left_over }} 張</p>
+                            
+                        </div>
                 </div>
+                    <p class="col-md-8 Cart-number">請選擇數量
+                        <select name="ticket-{{$key}}-number">
+                        @for ($i = 1; $i <= 10; $i++)
+                            <option value="{{$i}}">{{$i}}</option>
+                        @endfor
+                        </select>
+                    </p>
+                    @endforeach
+               
             </div>
             <div class="purchase-block">
                 @if(count($tickets)>0)
-                <div class="row actpage-purchase">
-                    <p><img src="/img/icons/playicon.png">前往購買</p>
+                <div class="row Cart-purchase">
+                    <p><img src="/img/icons/playicon.png">訂購</p>
                 </div>
                 @else
-                <div class="row actpage-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
+                <div class="row Cart-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
                 @endif
 
                 <div class="actpage-share">
@@ -94,17 +97,17 @@
             </div>
         </div>
 <!--------------mobile colorbox start--------------->
-        <div class="purchase-mb-btn">
+        <div class="cart purchase-mb-btn">
             @if(count($tickets)>0)
             <a class='inline' href="#inline_content">
             <div class="row actpage-mb-purchase">
-                 <p><img src="/img/icons/playicon.png">前往購買</p>
+                 <p><img src="/img/icons/playicon.png">訂購</p>
 
             </div>
             </a>
             <div style='display:none'>
                 <div id='inline_content' style='padding:10px; background:#fff;'>
-                    <p class="actpage-actname">{{ $activity->title }}</p>
+                    <p class="actpage-cart-actname">{{ $activity->title }}</p>
                     <div class="row actpage-cart-ticket">
                         {!! csrf_field() !!}
                         {{--*/ $count = 0; /*--}}
@@ -145,7 +148,7 @@
                         </div>
                         @endforeach
                     </div>
-                    <div class="purchase-mb-submit">繼續下一步</div>
+                    <div class="Cart-mb-purchase">繼續下一步</div>
                 </div>
             </div>
             @else
@@ -417,9 +420,9 @@
         var RightFixed = $("#RightFixed");
         $(window).scroll(function () {
             if ($(this).scrollTop() > 580) {
-                RightFixed.addClass("right-content-fixed");
+                RightFixed.addClass("Cart-fixed");
             } else {
-                RightFixed.removeClass("right-content-fixed");
+                RightFixed.removeClass("Cart-fixed");
             }
 //            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+200){
 //                RightFixed.removeClass("right-content-fixed");
@@ -432,42 +435,33 @@
             });
         });
 
-        $('.actpage-purchase').click(function() {
-            var ticketIds = [];
-            var ticketNumbers = [];
-            $('input[name=ticket_id]:checked').each(function() {
-                id = $(this).val();
-                ticketIds.push($('input[name=ticket-' + id + '-id]').val());
-                ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
-            });
-            var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
-            window.location.href = url;
-            });
-
-        $(".checkbox").on("click", function() {
-            if ($(this).closest(".cart-option").hasClass('list-rb-checkbox')) {
-                $(this).closest(".cart-option").removeClass('list-rb-checkbox');
+        $(".Cart-ticket").on("click", function() {
+            if ($(this).hasClass('Cart-ticket-checked')) {
+                $(this).removeClass('Cart-ticket-checked');
             } else {
-                $(this).closest(".cart-option").addClass('list-rb-checkbox');
+                $(this).addClass('Cart-ticket-checked');
             }
         });
 
-        $('.purchase-mb-submit').click(function() {
+        $(".Cart-purchase").on('click', purchase);
+        $(".Cart-mb-purchase").on('click', purchase);
+
+        function purchase(){
             var ticketIds = [];
             var ticketNumbers = [];
-            $('input[name=ticket_id]:checked').each(function() {
-                id = $(this).val();
-                ticketIds.push($('input[name=ticket-' + id + '-id]').val());
-                ticketNumbers.push($('select[name=ticket-' + id + '-number]').val());
+            $('.Cart-ticket').each(function() {
+                if($(this).hasClass('Cart-ticket-checked')) {
+                    id = $(this).find('input[type=hidden]').val();
+                    target_number = $(this).next().find('option:selected').val();
+                    ticketIds.push(id);
+                    ticketNumbers.push(target_number);
+                }
             });
             var url = "{{ URL('purchase/'. $activity->id) }}?tickets=" + ticketIds.toString() + "&numbers=" + ticketNumbers.toString();
             window.location.href = url;
-        });
-//
-//        $('div#OneClick ul li ul').hide();
-//        $('div#OneClick > ul > li >p').click(function(){
-//            $(this).next().slideToggle('fast');
-//        });
+            return false;
+        }
+
     });
 </script>
 @endsection
