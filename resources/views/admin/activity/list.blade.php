@@ -16,6 +16,7 @@
             <th>結束時間</th>
             <th>票卷</th>
             <th>狀態</th>
+            <th>創建時間</th>
             <th>設定</th>
         </tr>
     </thead>
@@ -50,9 +51,14 @@ $(document).ready(function () {
         "aoColumnDefs": [
             {
                 "bSortable": false,
-                // "aTargets": [ 5 ]
+                "aTargets": [ 9 ]
             },
+            // {
+            //     "targets": [ 8 ],
+            //     "visible": false
+            // }
         ],
+        "aaSorting": [[8, 'desc']],
         "processing": true,
         "responsive": true,
         "ajax": "{{ URL::to('dashboard/activity/data') }}",

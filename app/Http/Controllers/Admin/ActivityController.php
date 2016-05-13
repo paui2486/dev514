@@ -10,6 +10,7 @@ use DB;
 use Log;
 use Auth;
 use Mail;
+use View;
 use Input;
 use Session;
 use Response;
@@ -288,7 +289,7 @@ class ActivityController extends Controller
                     ->select(array(
                       'activities.id',       'users.name',             'categories.name as category',
                       'activities.title',    'activities.counter',     'activities.activity_start',   'activities.activity_end',
-                      'activities.targets',  'activities.status',
+                      'activities.targets',  'activities.status',      'activities.created_at'
 
                     ))
                     ->orderBy('activities.created_at', 'DESC');
@@ -454,18 +455,36 @@ class ActivityController extends Controller
     public function getTicket()
     {
         $ticket = DB::table('orders')
-                     ->leftJoin('users', 'users.id', '=', 'orders.hoster_id')
-                     ->leftJoin('act_tickets', 'act_tickets.id', '=', 'orders.ticket_id')
-                     ->select(array(
+                    ->leftJoin('orders_detail', 'orders_detail.order_id', '=', 'orders.id')
+                    ->leftJoin('users', 'users.id', '=', 'orders_detail.owner_id')
+                    ->leftJoin('act_tickets', 'act_tickets.id', '=', 'orders_detail.sub_topic_id')
+                    ->select(array(
                         'orders.id', 'orders.ItemDesc', 'act_tickets.ticket_start',
                         'orders.user_email', 'orders.user_phone', 'orders.status'
-                     ))
-                     ->where('orders.user_id', Auth::id())
-                     ->orderBy('users.created_at', 'ASC');
+                    ))
+                    ->where('orders.user_id', Auth::id())
+                    ->orderBy('users.created_at', 'ASC');
 
         return Datatables::of($ticket)
+        // ->add_column('event','<button>前往活動</button> <button>申請退票</button> <button>聯絡廠商</button>')
             ->remove_column('id')
-            ->edit_column('status', '@if($status === 0) 未付款 @elseif ($status === 1) 尚未付款完成 @else 已付款完成 @endif')
+            ->add_column('event','')
+            ->edit_column('status', '
+                            {{-- */
+                              $orderStatus = array(
+                                  0 => "正選擇交易中",
+                                  1 => "購買交易失敗",
+                                  2 => "購買交易成功",
+                                  3 => "等待 WebATM",
+                                  4 => "等待 ATM 轉帳",
+                                  5 => "等待超商代繳",
+                                  6 => "準備超商代繳",
+                                  7 => "等待條碼繳費",
+                                  8 => "網頁逾時未繳",
+                              );
+                              /* --}}
+                            {{ $orderStatus[$status] }}
+                            ')
             ->make();
     }
 
@@ -639,35 +658,47 @@ class ActivityController extends Controller
 
     public function showCheckout()
     {
-        $tickets = DB::table('act_tickets')
-                    ->leftJoin('activities', 'activities.id', '=', 'act_tickets.activity_id')
-                    ->where('activities.status', '=', 4)
-                    ->whereDate('activities.activity_end', '<', date('Y-m-d'))
-                    ->where('activities.hoster_id', Auth::user()->id)
-                    ->select(array(
-                      'activities.id as activity_id', 'activities.title as activity_name', 'act_tickets.id as ticket_id',
-                      'act_tickets.name as ticket_name', 'act_tickets.left_over', 'act_tickets.total_numbers', 'act_tickets.price',
-                    ))
-                    ->get();
+        return "系統調整中";
+        // $tickets = DB::table('act_tickets')
+        //             ->leftJoin('activities', 'activities.id', '=', 'act_tickets.activity_id')
+        //             ->where('activities.status', '=', 4)
+        //             ->whereDate('activities.activity_end', '<', date('Y-m-d'))
+        //             ->where('activities.hoster_id', Auth::user()->id)
+        //             ->select(array(
+        //               'activities.id as activity_id', 'activities.title as activity_name', 'act_tickets.id as ticket_id',
+        //               'act_tickets.name as ticket_name', 'act_tickets.left_over', 'act_tickets.total_numbers', 'act_tickets.price',
+        //             ))
+        //             ->get();
 
-        $orders = DB::table('orders')
-                    ->where('hoster_id', Auth::id())
-                    ->whereIn('status', array(1,3));
+        // 要再想清楚一些
+
+        $orders = DB::table('orders_detail')
+                    ->leftJoin('orders', 'orders.id', '=', 'orders_detail.order_id')
+                    ->leftJoin('activities', 'activities.id', '=', 'orders_detail.topic_id')
+                    ->where('orders_detail.owner_id', Auth::id())
+                    ->where('orders_detail.status', 1)
+                    ->where('orders.status', 2)
+                    ->where('activities.activity_end', '<=', date('Y-m-d H:i:00'));
 
         $price = 0;
-        $temp = array();
-        foreach ($orders->get() as $order) {
-            $price  += $order->ticket_price;
-            $tids    = explode(',' , $order->ticket_id);
-            $numbers = explode(',' , $order->ticket_number);
-            foreach ($tids as $key => $ticket_id) {
-                if (isset($temp[$ticket_id])) {
-                    $temp[$ticket_id] += $numbers[$key];
-                } else {
-                    $temp[$ticket_id] = $numbers[$key];
-                }
-            }
-        }
+
+        // $orders_ids = $orders->distinct('orders.id')->lists('orders.id');
+        $orders_list = $orders->lists('orders_detail.id');
+        $checkout_price = $orders->sum('InstFirst');
+
+        return $orders->get();
+        // foreach ($orders as $order) {
+        //     $price  += $order->ticket_price;
+        //     $tids    = explode(',' , $order->ticket_id);
+        //     $numbers = explode(',' , $order->ticket_number);
+        //     foreach ($tids as $key => $ticket_id) {
+        //         if (isset($temp[$ticket_id])) {
+        //             $temp[$ticket_id] += $numbers[$key];
+        //         } else {
+        //             $temp[$ticket_id] = $numbers[$key];
+        //         }
+        //     }
+        // }
 
         foreach ($tickets as $ticket) {
             if (isset($temp[$ticket->ticket_id])) {
@@ -677,7 +708,21 @@ class ActivityController extends Controller
             }
         }
 
+        // update orders
+        // update orders_detail
+        DB::table('orders_detail')->whereIn('id', $orders_list)->update(array('status' => 2));
         $orders->update(array('status'=>3));
+
+        array(
+                'activities.id as activity_id',
+                'activities.title as activity_name',
+                'act_tickets.id as ticket_id',
+                'act_tickets.name as ticket_name',
+                'act_tickets.left_over',
+                'act_tickets.total_numbers',
+                'act_tickets.price',
+                'sold'
+        );
 
         return view('admin.activity.checkout', compact('tickets'));
     }
@@ -685,7 +730,7 @@ class ActivityController extends Controller
     public function letCheckout()
     {
         $orders = DB::table('orders')
-                    ->where('hoster_id', Auth::id())
+                    ->where('provider_id', Auth::id())
                     ->where('status', 3);
         $price = $orders->sum('ticket_price');
         $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
