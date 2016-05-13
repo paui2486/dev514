@@ -243,19 +243,35 @@ class TicketController extends Controller
         return view('admin.activity.ticket_list', compact('AdminTabs'));
     }
 
+
     public function getList($id)
     {
         $solds = DB::table('orders')
+                  ->leftJoin('orders_detail', 'orders_detail.order_id', '=', 'orders.id')
                   ->select(array(
-                      'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ItemDesc', 'orders.TotalPrice', 'orders.PayTime', 'orders.status'
+                      'orders.user_name', 'orders.user_email', 'orders.user_phone',
+                      'orders.ItemDesc',  'orders.TotalPrice', 'orders.PayTime', 'orders.status'
                   ))
-                  ->where('orders.activity_id', $id)
-                  ->where('orders.status', '>', 2)
+                  ->where('orders_detail.topic_id', $id)
                   ->orderBy('orders.PayTime', 'ASC');
-      // need to change targets to processing bar
-      return Datatables::of($solds)
-        //  ->remove_column('id', 'activity_id')
-         ->edit_column('status', '@if($status == 3) 已付款 @elseif($status == 4) 已結清 @elseif($status == 2) 無付款 @else 已刪除 @endif')
-         ->make();
+
+        return Datatables::of($solds)
+          //  ->remove_column('id', 'activity_id')
+            ->add_column('event','')
+            ->edit_column('status', '{{-- */
+                                       $orderStatus = array(
+                                           0 => "正選擇交易中",
+                                           1 => "購買交易失敗",
+                                           2 => "購買交易成功",
+                                           3 => "等待 WebATM",
+                                           4 => "等待 ATM 轉帳",
+                                           5 => "等待超商代繳",
+                                           6 => "準備超商代繳",
+                                           7 => "等待條碼繳費",
+                                           8 => "網頁逾時未繳",
+                                       );
+                                       /* --}}
+                                     {{ $orderStatus[$status] }}')
+            ->make();
     }
 }
