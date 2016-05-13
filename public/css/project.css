@@ -2126,8 +2126,9 @@ li.collapse-blog-category {
 }
 
 .purchase-tickets  {
-      border: 2px dashed #ccc;
-      padding:15px 10px;
+    box-shadow: 0px 0px 10px #ccc;
+    padding:15px 10px;
+    margin: 15px 0;
 }
 
 .purchase-title {
@@ -2138,8 +2139,6 @@ li.collapse-blog-category {
     font-size: 13px;
     color: #909090;
     letter-spacing: 1px;
-    padding-bottom: 8px;
-    margin-bottom: 5px;
 }
 
 .ticket-name {
@@ -2161,10 +2160,11 @@ li.collapse-blog-category {
 
 .ticket-item {
     margin: 0px;
-    line-height: 23px;
+    line-height: 25px;
     font-size: 14px;
-    padding: 0px 10px;
-    color: #999;
+    padding: 0px 15px;
+    color: #808080;
+    letter-spacing: 1px;
 }
 
 .purchase-total {
