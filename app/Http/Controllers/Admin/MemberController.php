@@ -186,8 +186,11 @@ class MemberController extends Controller
     public function data()
     {
         $members = DB::table('users as u1')
-                    ->leftJoin('users as u2', 'u1.id', '=', 'u2.last_update_by')
-                    ->select(array('u1.id', 'u1.name', 'u1.email', 'u1.adminer', 'u1.hoster', 'u1.author', 'u1.status', 'u2.name as last_update_by', 'u1.created_at'));
+                    ->Join('users as u2', 'u2.last_update_by', '=', 'u1.id')
+                    ->select(array(
+                          'u2.id', 'u2.name', 'u2.email', 'u2.adminer', 'u2.hoster',
+                          'u2.author', 'u2.status', 'u1.name as last_update_by', 'u2.created_at',
+                        ));
 
         return Datatables::of($members)
             ->remove_column('id')
