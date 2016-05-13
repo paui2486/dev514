@@ -1923,7 +1923,7 @@ li.collapse-blog-category {
 }
 
 .Cart-ticket-checked {
-    margin: 15px 0;
+    margin:15px 0;
     background-image: url(/img/pics/checkbox-blue.png);
     background-size: 105% auto;
     background-repeat: no-repeat;
@@ -1935,8 +1935,10 @@ li.collapse-blog-category {
 .Cart-detail {
     margin: 0 10px;
     margin-top: 38px;
+    margin-bottom: 32px;
     font-size: 14px;
     color: #999999;
+    border-bottom: 1px dashed #ccc;
 }
 
 .Cart-detail > ul > li {
@@ -1952,33 +1954,31 @@ li.collapse-blog-category {
     letter-spacing: 2px;
 }
 
-.Cart-ticket-bottom {
-    padding: 0 10px;
-    border-top: 1px dashed #ccc;
-    padding-top: 10px;
-}
-
 .Cart-number {
     font-size: 14px;
     letter-spacing: 1px;
-    text-align: right;
-    padding: 0;
+    float: right;
+    padding: 5px 0;
+    position: absolute;
+    bottom: 1px;
+    right: 10px;
 }
 
 .Cart-number select {
-    font-size: 14px;
+    font-size: 16px;
     width: 60px;
 }
 
 .Cart-ticket-surplus {
     font-size: 12px;
     text-align: center;
-    color:#999999;
-    border:1px solid #999999;
-    padding:2px;
+    float: right;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.7);
+    padding: 2px 10px;
     text-align: center;
     border-radius: 5px;
-    margin: 0px;
+    margin: 4px 10px;
 }
 
 .purchase-block {

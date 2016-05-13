@@ -34,10 +34,13 @@
                         $count = 0; 
                         $cnt = count($tickets);
                     /*--}}
-                @foreach($tickets as $key => $ticket)
-                {{--*/ $count += $ticket->left_over; /*--}}
-                
-                <div class="row Cart-ticket @if($cnt == 1) Cart-ticket-checked @endif">
+                    @foreach($tickets as $key => $ticket)
+                    {{--*/ $count += $ticket->left_over; /*--}}
+                    <div style="position:relative">
+                    <div class="row Cart-ticket @if($cnt == 1) Cart-ticket-checked @endif">
+                        <div class="Cart-ticket-surplus">
+                           剩 {{ $ticket->left_over }} 張
+                        </div>
 <!--
                         <div class="col-md-12">
                             <label class="checkbox-inline">
@@ -55,25 +58,21 @@
                                 <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
                             </ul>
                         </div>
-                        <div class="Cart-ticket-bottom">
-                            <p class="col-md-4 Cart-ticket-surplus">剩 {{ $ticket->left_over }} 張</p>
-                            
-                        </div>
-                </div>
-                    <p class="col-md-8 Cart-number">請選擇數量
+                    </div>
+                    <div class="Cart-number">請選擇數量
                         <select name="ticket-{{$key}}-number">
                         @for ($i = 1; $i <= 10; $i++)
                             <option value="{{$i}}">{{$i}}</option>
                         @endfor
                         </select>
-                    </p>
+                    </div>
+                    </div>
                     @endforeach
-               
             </div>
             <div class="purchase-block">
                 @if(count($tickets)>0)
                 <div class="row Cart-purchase">
-                    <p><img src="/img/icons/playicon.png">訂購</p>
+                    <p><img src="/img/icons/playicon.png">訂 購</p>
                 </div>
                 @else
                 <div class="row Cart-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
@@ -167,13 +166,13 @@
             @endif
             <div class="col-md-2 col-sm-2">
                 <div class="actpage-holder">
-                    <a href="{{ URL('member/'. $activity->hoster ) }}">
+<!--                    <a href="{{ URL('member/'. $activity->hoster ) }}">-->
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
                         </div>
                         <div class="actpage-holder-name">
                             @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
                         </div>
-                    </a>
+<!--                    </a>-->
                 </div>
             </div>
             <div class="col-md-6 col-sm-4 actpage-dashboard-info">
@@ -218,11 +217,12 @@
         <div class="row actpage-mb-dashboard">
            <div class="col-xs-3" style="padding:0;">
                 <div class="actpage-holder">
-                    <a href="{{ URL('member/'. $activity->hoster ) }}">
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
                         </div>
-
+<!--
+                     <a href="{{ URL('member/'. $activity->hoster ) }}">
                     </a>
+-->
                 </div>
             </div>
             <div class="dashboard-title col-xs-9">
