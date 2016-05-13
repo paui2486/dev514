@@ -2232,9 +2232,9 @@ li.collapse-blog-category {
 .btn-pre {
     padding: 10px 20px;
     border-radius: 10px;
-    border: none;
-    background-color: #666;
-    color: white;
+    background: #fff;
+    border: 1px solid #b3b3b3;
+    color: #b3b3b3;
     letter-spacing: 1px;
 }
 
