@@ -81,6 +81,7 @@ class MemberController extends Controller
           'author'        => in_array('author', $permission),
           'hoster'        => in_array('hoster', $permission),
           'status'        => $request->status,
+          'last_update_by'=> Auth::id(),
           'created_at'    => date("Y-m-d H:i:s"),
           'updated_at'    => date("Y-m-d H:i:s"),
         );
@@ -131,6 +132,7 @@ class MemberController extends Controller
               'bank_name'     => $request->bank_name,
               'bank_account'  => $request->bank_account,
               'status'        => $request->status,
+              'last_update_by'=> Auth::id(),
               'updated_at'    => date("Y-m-d H:i:s"),
             );
 
