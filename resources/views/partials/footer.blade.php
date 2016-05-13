@@ -2,9 +2,9 @@
 <div class="footer-area">
     <!--
     <div class="bottom_media">
-        <div class="media_title">媒體報導</div>       
+        <div class="media_title">媒體報導</div>
     </div>
---> 
+-->
     <div class="row footer-topblock">
         <div class="row footer-center">
 <!--
@@ -33,7 +33,7 @@
                         <a href="/FAQ"><li>常見問題</li></a>
                         <a href="/HostGuide"><li>如何舉辦活動</li></a>
                         <a href="/PlayGuide"><li>如何報名活動</li></a>
-                        
+
                     </div>
                 </div>
                 <div class="col-md-4 about-us">
@@ -50,7 +50,7 @@
                     <p class="contact-p">聯絡我們</p>
                     <p class="contact-info">
                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span><a href="mailto:service@514.com.tw">
-                            service@514.com.tw</a></span>   
+                            service@514.com.tw</a></span>
                     </p>
                     <p class="contact-info">
                             <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
@@ -61,7 +61,7 @@
                         </span>
                         <span>週一到週日10:00~18:00</span>
                     </p>
-                    <div class="online-secretary">
+                    <div class="online-secretary" hidden="">
                         <p><span class="glyphicon glyphicon-headphones" aria-hidden="true">
                         </span>線上客服小秘書</p>
                     </div>
