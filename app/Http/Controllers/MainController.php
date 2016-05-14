@@ -128,17 +128,26 @@ class MainController extends controller
         $newActivity = DB::table('activities')
                         ->where('activities.status', '>=', 4)
                         ->leftJoin('users',                 'users.id',      '=',   'activities.hoster_id')
-                        ->leftJoin('act_tickets',           'activities.id', '=',   'act_tickets.activity_id')
                         ->leftJoin('categories',            'categories.id', '=',   'activities.location_id')
                         ->select(array(
                             'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
-                            'activities.description',       'activities.counter as count',
-                            'act_tickets.price',            'activities.location',  'activities.location_id',
-                            'activities.activity_start as date', 'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
+                            'activities.description',       'activities.counter as count', 'activities.location',
+                            'activities.location_id', 'activities.activity_start as date',
+                            'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
                         ))
                         ->orderBy('activities.created_at', 'desc')
                         ->groupBy('activities.id')
                         ->take(3)->get();
+
+        foreach ($newActivity as $activity) {
+            $tickets_price = DB::table('act_tickets')
+                          ->where('activity_id', $activity->activity_id)
+                          ->where('act_tickets.sale_start', '<=', date('Y-m-d H:i:s'))
+                          ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
+                          ->lists('price');
+
+            $activity->price = min($tickets_price);
+        }
         return $newActivity;
     }
 
@@ -168,13 +177,23 @@ class MainController extends controller
                     ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                     ->select(array(
                         'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
-                        'activities.description',       'activities.counter as count',       'activities.min_price as price',
+                        'activities.description',       'activities.counter as count',
                         'activities.location',          'activities.activity_start as date', 'users.nick as orginizer',
                         'categories.name as locat_name', 'activities.activity_end as date_end',
                     ))
                     ->orderBy('activities.created_at', 'desc')
                     // ->take(3)
                     ->get();
+
+                foreach ($eachActivity as $activity) {
+                    $tickets_price = DB::table('act_tickets')
+                                  ->where('activity_id', $activity->activity_id)
+                                  ->where('act_tickets.sale_start', '<=', date('Y-m-d H:i:s'))
+                                  ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
+                                  ->lists('price');
+
+                    $activity->price = min($tickets_price);
+                }
 
                 $topicActivity = (object) array(
                     'cat_id'        => $category->id,
@@ -200,13 +219,23 @@ class MainController extends controller
                           ->where('activities.status', '>=', 4)
                           ->select(array(
                               'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
-                              'activities.description',       'activities.counter as count',    'activities.min_price as price',
+                              'activities.description',       'activities.counter as count',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
                               'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name',
                           ))
                           ->where('activities.activity_end', '>=', date('Y-m-d'))
                           ->orderBy('activities.activity_start', 'asc')
                           ->get();
+
+        foreach ($allActivity as $activity) {
+            $tickets_price = DB::table('act_tickets')
+                          ->where('activity_id', $activity->activity_id)
+                          ->where('act_tickets.sale_start', '<=', date('Y-m-d H:i:s'))
+                          ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
+                          ->lists('price');
+
+            $activity->price = min($tickets_price);
+        }
 
         return $allActivity;
     }
