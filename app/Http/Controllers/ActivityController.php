@@ -266,8 +266,11 @@ class ActivityController extends Controller
                           'activities.location',  'categories.name as locat_name', 'activities.thumbnail',
                           'activities.max_price', 'cat.name as cat_name'
                         ))
-                        ->orderBy('activities.activity_start')
-                        ->whereRaw('DATE(activities.activity_end)' . ' >= '. date('Y-m-d'));
+                        ->orderBy('activities.activity_start');
+
+        if (!isset($request->showOld)) {
+            $query = $query->where('activities.activity_end', '>=', date('Y-m-d'));
+        }
 
         if ($request->isMethod('post'))
         {

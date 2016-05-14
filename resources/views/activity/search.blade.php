@@ -168,7 +168,8 @@ $(document).ready(function () {
              headers: { 'X-CSRF-Token' : $('input[name=_token]').val() },
              url: "{{ URL('activity/data') }}",
              data: { 'selects' : search.filter( onlyUnique ),
-                'keySearch' : $('input[name=keySearch]').val()
+                'keySearch' : $('input[name=keySearch]').val(),
+                // 'showOld' : 'y', 顯示過往選項
              },
              success: function(data) {
                  showResult(data);
