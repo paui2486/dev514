@@ -132,7 +132,7 @@ class MainController extends controller
                         ->select(array(
                             'activities.id as activity_id', 'activities.thumbnail', 'activities.title',
                             'activities.description',       'activities.counter as count', 'activities.location',
-                            'activities.location_id', 'activities.activity_start as date',
+                            'activities.location_id', 'activities.activity_start as date', 'activities.min_price as price',
                             'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
                         ))
                         ->orderBy('activities.created_at', 'desc')
@@ -146,7 +146,7 @@ class MainController extends controller
                           ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
                           ->lists('price');
 
-            $activity->price = min($tickets_price);
+            // $activity->price = min($tickets_price);
         }
         return $newActivity;
     }
@@ -177,7 +177,7 @@ class MainController extends controller
                     ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                     ->select(array(
                         'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
-                        'activities.description',       'activities.counter as count',
+                        'activities.description',       'activities.counter as count',       'activities.min_price as price',
                         'activities.location',          'activities.activity_start as date', 'users.nick as orginizer',
                         'categories.name as locat_name', 'activities.activity_end as date_end',
                     ))
@@ -192,7 +192,7 @@ class MainController extends controller
                                   ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
                                   ->lists('price');
 
-                    $activity->price = min($tickets_price);
+                    // $activity->price = min($tickets_price);
                 }
 
                 $topicActivity = (object) array(
@@ -219,7 +219,7 @@ class MainController extends controller
                           ->where('activities.status', '>=', 4)
                           ->select(array(
                               'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
-                              'activities.description',       'activities.counter as count',
+                              'activities.description',       'activities.counter as count',    'activities.min_price as price',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
                               'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name',
                           ))
@@ -234,7 +234,7 @@ class MainController extends controller
                           ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
                           ->lists('price');
 
-            $activity->price = min($tickets_price);
+            // $activity->price = min($tickets_price);
         }
 
         return $allActivity;
