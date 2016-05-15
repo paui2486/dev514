@@ -21,7 +21,7 @@
                 <li class="drawer-mb">
                     <a href="{{ url('login') }}">登入</a>
                     <a href="{{ url('register') }}">註冊</a>
-                    <a href="{{ url('dashboard/activity#tab-0') }}">辦活動</a>
+                    <a href="{{ url('dashboard/activity#tab-'. (Auth::check() && Auth::user()->hoster)? 1 : 0 ) }}">辦活動</a>
                     <a href="{{ url('About') }}">關於 514</a>
                     <a href="{{ url('Join') }}">加入我們</a>
                     <a href="{{ url('Advertising') }}">廣告合作專區</a>

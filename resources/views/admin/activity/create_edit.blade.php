@@ -542,23 +542,23 @@
             $('input.sale_end_date').data("DateTimePicker").maxDate(e.date);
         });
 
-        $("input[name='activity_end_time']").on("dp.change", function (e) {
-            $('input.act_end_time').data('DateTimePicker').minDate(e.date);
-            $('input.sale_end_time').data('DateTimePicker').minDate(e.date);
-            var start_time_arr = $("input[name='activity_start_time']").val().split(':');
-            var end_time_arr   = $("input[name='activity_end_time']").val().split(':');
-            var timecost       = Math.floor(end_time_arr[0]) - Math.floor(start_time_arr[0]) +
-                                    Math.round((Math.floor(end_time_arr[1]) - Math.floor(start_time_arr[1])) / 60 * 10) / 10;
-            $('input[name="time_range"]').val(timecost);
-        });
-
-        if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
-            $("input[name='activity_start_time']").on("dp.change", function (e) {
-                $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
-                $('input.act_start_time').data('DateTimePicker').date(e.date);
-                $('input.sale_start_time').data('DateTimePicker').date(e.date);
-            });
-        }
+        // $("input[name='activity_end_time']").on("dp.change", function (e) {
+        //     $('input.act_end_time').data('DateTimePicker').minDate(e.date);
+        //     $('input.sale_end_time').data('DateTimePicker').minDate(e.date);
+        //     var start_time_arr = $("input[name='activity_start_time']").val().split(':');
+        //     var end_time_arr   = $("input[name='activity_end_time']").val().split(':');
+        //     var timecost       = Math.floor(end_time_arr[0]) - Math.floor(start_time_arr[0]) +
+        //                             Math.round((Math.floor(end_time_arr[1]) - Math.floor(start_time_arr[1])) / 60 * 10) / 10;
+        //     $('input[name="time_range"]').val(timecost);
+        // });
+        //
+        // if ($("input[name='activity_start_date']").val() == $("input[name=activity_end_date]").val()) {
+            // $("input[name='activity_start_time']").on("dp.change", function (e) {
+            //     $('input[name="activity_end_time"]').data("DateTimePicker").minDate(e.date);
+            //     $('input.act_start_time').data('DateTimePicker').date(e.date);
+            //     $('input.sale_start_time').data('DateTimePicker').date(e.date);
+            // });
+        // }
 
         // $('input.time-picker').on('focus', picker);
         $("button.btn-clone").on('click', clone);
