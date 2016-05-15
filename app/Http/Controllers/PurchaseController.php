@@ -413,7 +413,7 @@ class PurchaseController extends controller
             // clean orders_detail and turn back ticket
             DB::table('orders_detail')->where('order_id', $first_order->order_id)
                   ->update(array(
-                      'status' => 4,
+                      'status' => 3,
                   ));
 
             foreach ($order_info as $order) {
