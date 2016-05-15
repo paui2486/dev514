@@ -292,7 +292,8 @@ class TicketController extends Controller
                         'activity_start' => $act_info->activity_start,
                         'max_price'      => $price,
                 ));
-        } elseif ( $price < $min ) {
+        }
+        if ( $price < $min ) {
             DB::table('activities')->where('id', $act_info->id)
                 ->update(Array(
                         'activity_start' => $act_info->activity_start,
