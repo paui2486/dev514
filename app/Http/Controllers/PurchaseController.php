@@ -395,11 +395,11 @@ class PurchaseController extends controller
 
             $act = DB::table('activities')->find( DB::table('orders_detail')->where('order_id', $order->id)->first()->topic_id );
             $tickets = (object) array(
-                'TradeNo'           => $order->TradeNo,
-                'TradeTime'         => $order->PayTime,
-                'TotalPrice'        => $order->TotalPrice,
-                'MerchantOrderNo'   => $order->MerchantOrderNo,
-                'ItemDesc'          => $order->ItemDesc,
+                'TradeNo'           => $feedback->TradeNo,
+                'TradeTime'         => $feedback->PayTime,
+                'TotalPrice'        => $feedback->Amt,
+                'MerchantOrderNo'   => $feedback->MerchantOrderNo,
+                'ItemDesc'          => $feedback->ItemDesc,
                 'user_name'         => $order->user_name,
                 'user_phone'        => $order->user_phone,
                 'user_email'        => $order->user_email,
@@ -423,7 +423,7 @@ class PurchaseController extends controller
             });
 
             // MSG  customer
-            $subject_msg = "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。";
+            $subject_msg = "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。 ". url('purchase/trade/'.$feedback->MerchantOrderNo);
             $msg  = "username=coevo5311&password=coevo8909&dstaddr=". $tickets->user_phone ."&smbody=". $subject_msg;
             $host = "202.39.48.216";
             $url  = "http://".$host."/kotsmsapi-1.php?".$msg;
