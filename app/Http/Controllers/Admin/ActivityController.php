@@ -149,7 +149,7 @@ class ActivityController extends Controller
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
             $msg_system = '<p>Hi 514的同仁</p>
                            <p>活動主 '. Auth::user()->name .' 於514有新增送審的活動，請盡速前往審核</p>
-                           <p href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
+                           <p><a href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
             Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg_system) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $mails )->subject('【514活動上架審核通知】514活動主'. Auth::user()->name .'新增活動，活動ID：'. $activity_id);
@@ -262,7 +262,7 @@ class ActivityController extends Controller
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
             $msg_system = '<p>Hi 514的同仁</p>
                            <p>活動主 '. Auth::user()->name .' 於514有新增送審的活動，請盡速前往審核</p>
-                           <p href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
+                           <p><a href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
             Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg_system, $activity_id) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $mails )->subject('【514活動上架審核通知】514活動主'. Auth::user()->name .'新增活動，活動ID：'. $activity_id);
@@ -651,7 +651,7 @@ class ActivityController extends Controller
         $user     = DB::table('users')->find($activity->first()->hoster_id);
         $msg_customer = '<p>Hi '. $user->name .'您好，</p>
                        <p>您的活動 '. $activity->first()->title .'，已經通過審核</p>
-                       <p href="' . url("/activity/$id") . '" >前台活動連結</a></p>';
+                       <p><a href="' . url("/activity/$id") . '" >前台活動連結</a></p>';
         Mail::send('auth.emails.checkout', array('msg' => $msg_customer),  function($message) use ($user, $msg_customer, $id) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( $user->email, $user->name )->subject('【514活動上架審核通知】您舉辦的活動已通過審核，活動ID：'. $id);
