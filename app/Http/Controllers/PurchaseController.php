@@ -413,10 +413,10 @@ class PurchaseController extends controller
             $hoster = DB::table('users')->find($act->hoster_id);
 
             // email provider
-            $msg_provider = '<p>'. $hoster->name .'您好，</p>
+            $msg = '<p>'. $hoster->name .'您好，</p>
                         <p>' . $tickets->user_name . '已訂購『' . $tickets->ItemDesc .'』，請登入後台查詢名單，即可獲得更多資訊。謝謝！</p>
                         <p>後台連結：<a href="'. url('dashboard/activity/' .$ticket_target->activity_id. '/tickets/admission') .'">後台活動票券名單</a>';
-            Mail::send('auth.emails.checkout', array('msg' => $msg_provider),  function($message) use ($tickets, $hoster, $msg) {
+            Mail::send('auth.emails.checkout', array('msg' => $msg),  function($message) use ($tickets, $hoster, $msg) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $hoster->email, $hoster->name )
                       ->subject('【514活動報名通知】活動主您好，'. $tickets->user_name .' 已於『'. $tickets->ItemDesc .'』完成報名');
@@ -644,13 +644,13 @@ class PurchaseController extends controller
         $hoster = DB::table('users')->find($act->hoster_id);
 
         // email provider
-        $msg_provider = '<p>'. $hoster->name .'您好，</p>
-                    <p>' . $info->name . '已訂購『' . $info->ItemDesc .'』，請登入後台查詢名單，即可獲得更多資訊。謝謝！</p>
+        $msg = '<p>'. $hoster->name .'您好，</p>
+                    <p>' . $info->user_name . '已訂購『' . $info->ItemDesc .'』，請登入後台查詢名單，即可獲得更多資訊。謝謝！</p>
                     <p>後台連結：<a href="'. url('dashboard/activity/' .$ticket_target->activity_id. '/tickets/admission') .'">後台活動票券名單</a>';
-        Mail::send('auth.emails.checkout', array('msg' => $msg_provider),  function($message) use ($info, $hoster, $msg) {
+        Mail::send('auth.emails.checkout', array('msg' => $msg),  function($message) use ($info, $hoster, $msg) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( $hoster->email, $hoster->name )
-                  ->subject('【514活動報名通知】活動主您好，'. Auth::user()->name .' 已於『'. $info->ItemDesc .'』完成報名');
+                  ->subject('【514活動報名通知】活動主您好，'. $info->user_name .' 已於『'. $info->ItemDesc .'』完成報名');
         });
 
         // MSG  customer
@@ -670,7 +670,7 @@ class PurchaseController extends controller
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( $info->user_email, $info->user_name )
                     // ->bcc( $hoster->email, $hoster->name )
-                    ->subject('【514活動報名通知】您好'. Auth::user()->name .'，您已經成功報名『'. $info->ItemDesc .'』
+                    ->subject('【514活動報名通知】'. $info->user_name .'您好，您已經成功報名『'. $info->ItemDesc .'』
 ');
         });
 
