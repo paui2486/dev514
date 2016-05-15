@@ -478,19 +478,22 @@ class ActivityController extends Controller
     {
         $ticket = DB::table('orders')
                     ->leftJoin('orders_detail', 'orders_detail.order_id', '=', 'orders.id')
-                    ->leftJoin('users', 'users.id', '=', 'orders_detail.owner_id')
                     ->leftJoin('act_tickets', 'act_tickets.id', '=', 'orders_detail.sub_topic_id')
+                    ->leftJoin('activities', 'orders_detail.topic_id', '=', 'activities.id')
+                    ->leftJoin('users', 'users.id', '=', 'orders_detail.provider_id')
                     ->select(array(
-                        'orders.id', 'orders.ItemDesc', 'act_tickets.ticket_start',
-                        'orders.user_email', 'orders.user_phone', 'orders.status'
+                        'activities.title', 'orders_detail.sub_topic_name', 'orders_detail.sub_topic_number',
+                        DB::raw("CONCAT(act_tickets.ticket_start, ' ', act_tickets.ticket_end) as ticket_time"),
+                        'orders.user_email', 'orders.user_phone', 'orders.status', 'activities.id', 'users.email',
                     ))
                     ->where('orders.user_id', Auth::id())
-                    ->orderBy('users.created_at', 'ASC');
+                    ->orderBy('orders.created_at', 'ASC');
 
         return Datatables::of($ticket)
-        // ->add_column('event','<button>前往活動</button> <button>申請退票</button> <button>聯絡廠商</button>')
-            ->remove_column('id')
-            ->add_column('event','')
+            ->remove_column('email')
+            ->edit_column('id', "<a href='mailto:{{ \$email }}'><div class='btn btn-xs btn-info'>聯絡廠商</div></a>
+                                 <a href='mailto:service@514.com.tw'><div class='btn btn-xs btn-danger'>疑難排解</div></a>")
+            ->edit_column('title', "<a style='width:100%' href='{{ url(\"activity/\$id\") }}'>{{ \$title }}</>")
             ->edit_column('status', '
                             {{-- */
                               $orderStatus = array(
