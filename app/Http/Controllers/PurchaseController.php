@@ -34,7 +34,7 @@ class PurchaseController extends controller
         $url = str_replace('purchase', 'activity', $request->url());
 
         if ( !current($numbers) && count($numbers) == 1 ) {
-            Session::flash('message', '請勾選票卷與數量');
+            Session::flash('message', '請勾選您要的票券，謝謝!');
             return Redirect::to($url);
         } elseif ( count($numbers) != count($tickets) ) {
             Session::flash('message', '票卷數目與種類不相符合');
@@ -114,15 +114,23 @@ class PurchaseController extends controller
 
     public function postPurchase(Request $request, $id)
     {
+        // sample = {
+        //     _token: "GkuQnkX0r2xUGFwKigEVLu3SOupjlYvZXlhMw243",
+        //     name: "測試一",
+        //     mobile: "091231231231",
+        //     email: "123123@22.gg",
+        //     data: "{"tickets":"34,35","numbers":"1,3"}",    step 1
+        //     data: "{ id: { "tickets":"34","numbers":"1"} }",    step 2
+        //     price: "55"
+        // }
+        Log::error($request);
+        // return Input::all();
         $data        = json_decode($request->data);
-
         $ticket_ids  = explode(',' , $data->tickets);
         $numbers     = explode(',' , $data->numbers);
 
+        // replace url activity -> purchase
         $url         = str_replace('purchase', 'activity', $request->url());
-
-        $total_price = 0;
-        $misCatch    = array();
         $purchase    = array();
 
         foreach ($ticket_ids as $key => $ticket_id) {
@@ -139,7 +147,7 @@ class PurchaseController extends controller
                         'activities.category_id',       'activities.remark',          'activities.time_range',
                         'categories.name as category',  'activities.description',     'activities.hoster_id',
                       ))
-                      ->where('activities.status', '>=', '2')
+                      ->where('activities.status', '=', '4')
                       ->first();
 
         $tickets  = DB::table('act_tickets')
@@ -149,8 +157,10 @@ class PurchaseController extends controller
                          'ticket_start', 'ticket_end', 'description',
                      ))
                      ->get();
+
         $total_price = 0;
-        $itemDesc = ' [ ' . $activity->title . ' ] ';
+        $misCatch    = array();
+        $itemDesc    = ' [ ' . $activity->title . ' ] ';
         foreach ($tickets as $ticket) {
            foreach ($purchase as $target) {
                 if ($ticket->id != $target['id']) {
@@ -158,6 +168,7 @@ class PurchaseController extends controller
                 } else {
                     if ($target['wanted'] > $ticket->left_over) {
                         array_push($misCatch, $ticket->id);
+                        $misTarget = $ticket->name;
                     } else {
                         $itemDesc .= $ticket->name . ' x ' . $target['wanted'] . '張； ';
                         $total_price += $ticket->price * $target['wanted'];
@@ -167,171 +178,353 @@ class PurchaseController extends controller
         }
 
         if (empty($activity)) {
-            Session::flash('message', '查無無此活動票卷');
+            Session::flash('message', '抱歉！查無無此活動票卷');
             return Redirect::to($url);
         } elseif (!empty($misCatch)) {
-            Session::flash('message', '目前剩餘票卷無法滿足您的需求');
+            Session::flash('message', '抱歉！目前 '. $misTarget .' 的剩餘票卷，無法滿足您的需求');
             return Redirect::to($url);
         } elseif ($total_price != $request->price) {
-            Session::flash('message', '票卷金額異常，請重新購買');
+            Session::flash('message', '抱歉！您的票卷金額異常，請重新購買');
             return Redirect::to($url);
         } else {
-            // Mail::send('auth.emails.verify', array('confirmation_code'=>$confirmation_code), function($message) {
-            //     $message->from('service@514.com.tw', '514 活動頻道');
-            //     $message->to(Input::get('email'), Input::get('name'))
-            //         ->subject('Verify your email address');
-            // });
+            $MerchantOrderNo = date("Ymdhis", time());
+            $user_id         = (Auth::check())? Auth::id() : '';
+            $orderInfo            = (object) array(
+                                    'ItemDesc'        => $itemDesc,
+                                    'MerchantOrderNo' => $MerchantOrderNo,
+                                    'TradeNo'         => str_random(30),
+                                    'TradeTime'       => date("Y-m-d H:i:s"),
+                                    'TotalPrice'      => $total_price,
+                                    'activity'        => $activity,
+                                    'data'            => $purchase,
+                                    'total_price'     => $total_price,
+                                    'user_id'         => $user_id,
+                                    'user_name'       => $request->name,
+                                    'user_email'      => $request->email,
+                                    'user_phone'      => $request->mobile,
+                                );
 
-            foreach ($ticket_ids as $key => $id) {
-                $ticket = DB::table('act_tickets')->find($id);
-                DB::table('act_tickets')->where('id', $id)->update(array('left_over' => $ticket->left_over - $numbers[$key], 'ticket_start' => $ticket->ticket_start));
+            $reduceResult = $this->reduceTickets($orderInfo);
+            if (!$reduceResult) {
+                Session::flash('message', '抱歉！目前 '. $misTarget .' 的剩餘票卷，無法滿足您的需求');
+                return Redirect::to($url);
+            } else {
+                $insertResult = $this->insertOrderGetID($orderInfo);
             }
 
             if ($total_price == 0) {
-                $MerchantOrderNo = time();
-                $storeOrder = array(
-                                'MerchantOrderNo' => $MerchantOrderNo,
-                                'TotalPrice'      => 0,
-                                'ItemDesc'        => $itemDesc,
-                                'user_id'         => Auth::id(),
-                                'user_name'       => $request->name,
-                                'user_email'      => $request->email,
-                                'user_phone'      => $request->mobile,
-                                'hoster_id'       => $activity->hoster_id,
-                                'activity_id'     => $activity->id,
-                                'activity_name'   => $title,
-                                'ticket_id'       => $data->tickets,
-                                'ticket_number'   => $data->numbers,
-                                'ticket_price'    => $total_price,
-                                'created_at'      => date("Y-m-d H:i:s"),
-                                'PayTime'         => date("Y-m-d H:i:s"),
-                              );
-                $insertOrder = DB::table('orders')->insert($storeOrder);
-
-                $order = (object) array(
-                    'MerchantOrderNo' => $MerchantOrderNo,
-                    'TradeNo'    => str_random(30),
-                    'TradeTime'  => date("Y-m-d H:i:s"),
-                    'TotalPrice' => 0,
-                );
-                $tickets = $this->successOrder($order);
-                return Redirect::to('purchase/trade/'.$order->MerchantOrderNo);
+                $orderResult = $this->successOrder($orderInfo);
+                return Redirect::to('purchase/trade/'.$orderResult->MerchantOrderNo);
             } else {
-
+                // go pay2go
                 $Pay2go     = new Pay2go();
-                $merID      = env('Pay2go_ID',  11606075);
-                $merKey     = env('Pay2go_Key', "7CPtmx1zm86jpLfWndymKbPmlyqP7oye");
-                $merIV      = env('Pay2go_IV',  "1oInVJXhR3BhOQeb");
+                $PayEnvDev  = (Auth::id() != env('DemoID', 1))? env('Pay2go_DEV', TRUE) : TRUE;
+                $merID      = (!$PayEnvDev) ? env('Pay2go_ID') : 11606075 ;
+                $merKey     = (!$PayEnvDev) ? env('Pay2go_Key'): "7CPtmx1zm86jpLfWndymKbPmlyqP7oye";
+                $merIV      = (!$PayEnvDev) ? env('Pay2go_IV') : "1oInVJXhR3BhOQeb";
+                $payVersion = env('Pay2go_Version', "1.1");
                 $autoSubmit = TRUE;
-                $title      = urldecode($request->segment(3));
                 $result     = array (
                                     "MerchantID"        =>  $merID,                 //	商店代號
                                     "RespondType"	      =>  "JSON",                 //  回傳格式
                                     "TimeStamp"		      =>  time(),                 //	時間戳記
-                                    "Version"		        =>  "1.1",                  //	串接版本
-                                    "MerchantOrderNo"	  =>  date("Ymdhis", time()), //	商店訂單編號
-                                    "Amt"		            =>  $total_price,           //	訂單金額
-                                    "ItemDesc"		      =>  $itemDesc,              //	商品資訊
+                                    "Version"		        =>  $payVersion,                  //	串接版本
+                                    "MerchantOrderNo"	  =>  $orderInfo->MerchantOrderNo, //	商店訂單編號
+                                    "Amt"		            =>  $orderInfo->TotalPrice,           //	訂單金額
+                                    "ItemDesc"		      =>  $orderInfo->ItemDesc,              //	商品資訊
                                     "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                     'Email'             =>  $request->email,
-                                    'TradeLimit'        =>  300,
-                                    'ReturnURL'         =>  url('purchase/result'),
+                                    'TradeLimit'        =>  900,                    //  交易秒數
+                                    'ExpireDate'        =>  date('Ymd', strtotime ( '+1 day') ), // 需要修改
+                                    'ReturnURL'         =>  url('purchase/result'), // must be different
+                                    'NotifyURL'         =>  url('purchase/notify'),
+                                    // 'ClientBackURL'     =>  URL::current(),
                                 );
 
                 $result["CheckValue"]	= $Pay2go->get_check_value($result, $merKey, $merIV);
                 $submitButtonStyle    = "<input id='Pay2goMgr' name='submit' type='submit' value='送出' />";
-
-                $storeOrder = array(
-                                'MerchantID'      => $merID,
-                                'MerchantOrderNo' => $result['MerchantOrderNo'],
-                                'TotalPrice'      => $result['Amt'],
-                                'ItemDesc'        => $result['ItemDesc'],
-                                'user_id'         => Auth::id(),
-                                'user_name'       => $request->name,
-                                'user_email'      => $request->email,
-                                'user_phone'      => $request->mobile,
-                                'hoster_id'       => $activity->hoster_id,
-                                'activity_id'     => $activity->id,
-                                'activity_name'   => $activity->title,
-                                'ticket_id'       => $data->tickets,
-                                'ticket_price'    => $total_price,
-                                'ticket_number'   => $data->numbers,
-                                'created_at'      => date("Y-m-d H:i:s"),
-                              );
-
-                DB::table('orders')->insert($storeOrder);
-                // for test
-
-                return $Pay2go->create_form($result, NULL, env('Pay2go_DEV', TRUE), $autoSubmit, 0, $submitButtonStyle);
+                return $Pay2go->create_form($result, NULL, $PayEnvDev, $autoSubmit, 0, $submitButtonStyle);
             }
         }
     }
 
     public function postByPay2Go(Request $request)
     {
-        $result = (object) json_decode($request->Result,true);
-        if( $request->Status != "SUCCESS" ) {
-            $updateArray = array(
-              'status' => 2,
-            );
+        // no matter success or fail
+          // $return = array (
+          //   'Status' => 'TRA10016',
+          //   'Message' => '信用卡授權失敗拒絕交易',
+          //   'Result' => '{
+          //       "MerchantID":"37455317", "Amt":300,  "TradeNo": "16051417122853204",
+          //       "MerchantOrderNo":"20160514050952",  "RespondType":"JSON",
+          //       "CheckCode":"32DD623B49F29268F78634971BD660CDCD60B490CE46AFE463B766A64519DACB",
+          //       "IP":"111.248.55.187",  "EscrowBank":"-",
+          //       "ItemDesc":"[ \\u6e2c\\u8a66\\u6d3b\\u52d5 ] \\u65e9\\u9ce5\\u7968 x 2\\u5f35\\uff1b \\u5c0f\\u7968 x 1\\u5f35\\uff1b",
+          //       "IsLogin":false,  "PaymentType":"CREDIT",
+          //       "PayTime":"2016-05-14 17:12:39",  "RespondCode":"05","Auth":"",
+          //       "Card6No":"400022","Card4No":"2222","Exp":"1802",
+          //       "TokenUseStatus":0,"InstFirst":0,"InstEach":0,
+          //       "Inst":0,"ECI":null}',
+          // )
+        Log::error(Input::all());
+        // url 2 notify or result
+        $comURL     = urldecode($request->segment(2));
+        $status     = $request->Status;
+        $msg        = $request->Message;
+        $feedback   = (object) json_decode($request->Result, true);
+        $order      = DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)->first();
 
-            $order = DB::table('orders')->where('MerchantOrderNo', $result->MerchantOrderNo);
-            $order->update($updateArray);
+        if ( $status == "SUCCESS" ) {
+            // parse type
+            switch ($feedback->PaymentType) {
+                case 'CREDIT':
+                    // $comURL = result
+                    $updateArray = array(
+                        'MerchantID'      => $feedback->MerchantID,
+                        'TradeNo'         => $feedback->TradeNo,
+                        'MerchantOrderNo' => $feedback->MerchantOrderNo,
+                        'CheckCode'       => $feedback->CheckCode,
+                        'EscrowBank'      => $feedback->EscrowBank,
+                        'Card6No'         => $feedback->Card6No,
+                        'Card4No'         => $feedback->Card4No,
+                        'InstFirst'       => $feedback->InstFirst,
+                        'InstEach'        => $feedback->InstEach,
+                        'Inst'            => $feedback->Inst,
+                        'IP'              => $feedback->IP,
+                        'PayTime'         => $feedback->PayTime,
+                        'status'          => 2,
+                        'OrderComment'    => 'CREDIT: ' . $feedback->RespondCode . ' - ' . $msg,
+                        'OrderResult'     => json_encode($feedback),
+                        'updated_at'      => date("Y-m-d H:i:s"),
+                    );
 
-            $ticket_ids  = explode(',' , $order->first()->ticket_id);
-            $numbers     = explode(',' , $order->first()->ticket_numbers);
+                    DB::table('orders_detail')
+                        ->where('order_id', $order->id)
+                        ->update(array(
+                            'status' => 1
+                        ));
+                    Log::error('WTF! CREDIT payment type');
+                    break;
 
-            foreach ($ticket_ids as $key => $id) {
-                DB::table('act_tickets')->where('id', $id)->increment('left_over', $numbers[$key]);
+                case 'WEBATM':
+                    // $comURL = result
+                    $updateArray = array(
+                        'MerchantID'      => $feedback->MerchantID,
+                        'TradeNo'         => $feedback->TradeNo,
+                        'MerchantOrderNo' => $feedback->MerchantOrderNo,
+                        'CheckCode'       => $feedback->CheckCode,
+                        'EscrowBank'      => $feedback->EscrowBank,
+                        'IP'              => $feedback->IP,
+                        'PayTime'         => $feedback->PayTime,
+                        'status'          => 2,
+                        'OrderResult'     => json_encode($feedback),
+                        'OrderComment'    => 'WEBATM: ' . $feedback->PayBankCode . ' - ' . $msg,
+                        'updated_at'      => date("Y-m-d H:i:s"),
+                    );
+
+                    DB::table('orders_detail')
+                        ->where('order_id', $order->id)
+                        ->update(array(
+                            'status' => 1
+                        ));
+                    Log::error('WTF! WEBATM payment type');
+                    break;
+
+                case 'VACC':
+                    // $comURL = notify
+                    Log::error('WTF! VACC payment type');
+                    Log::error(Input::all());
+                    break;
+
+                case 'CVS':
+                    // $comURL = notify
+                    Log::error('WTF! CVS payment type');
+                    Log::error(Input::all());
+                    exit;
+                    break;
+
+                case 'BARCODE':
+                    // $comURL = notify
+                    Log::error('WTF! BARCODE payment type');
+                    Log::error(Input::all());
+                    break;
+
+                default:
+                    // $comURL = ?
+                    Log::error('WTF! CUSTOME payment type');
+                    Log::error(Input::all());
+                    exit;
+                    break;
             }
-            return Redirect::to(Session::get('url'));
 
+            // if clean mail provider and system
+
+
+            // add mail status at brfore
+            if ($sendMail) {
+              //  xxx
+            }
+
+            DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)->update($updateArray);
+
+            // return Response::json($feedback);
+            return Redirect::to('purchase/trade/'.$feedback->MerchantOrderNo);
         } else {
-            $updateArray = array(
-                'TradeNo'         => $result->TradeNo,
-                'MerchantOrderNo' => $result->MerchantOrderNo,
-                'CheckCode'       => $result->CheckCode,
-                'EscrowBank'      => $result->EscrowBank,
-                'Card6No'         => $result->Card6No,
-                'Card4No'         => $result->Card4No,
-                'InstFirst'       => $result->InstFirst,
-                'InstEach'        => $result->InstEach,
-                'Inst'            => $result->Inst,
-                'IP'              => $result->IP,
-                'PayTime'         => $result->PayTime,
-                'status'          => 1,
-                'OrderResult'     => json_encode($result),
-                'updated_at'      => date("Y-m-d H:i:s"),
-            );
-            DB::table('orders')->where('MerchantOrderNo', $result->MerchantOrderNo)->update($updateArray);
+            $order_info = DB::table('orders')
+                            ->leftJoin('orders_detail', 'orders_detail.order_id', '=', 'orders.id')
+                            ->select(array(
+                                'orders.id as order_id', 'orders_detail.topic_id as activity_id',
+                                'orders_detail.sub_topic_id as ticket_id', 'orders_detail.sub_topic_number as ticket_number',
+                            ))
+                            ->where('orders.MerchantOrderNo', $feedback->MerchantOrderNo)
+                            ->get();
 
-            $order = (object) array(
-                'MerchantOrderNo' => $result->MerchantOrderNo,
-                'TradeNo'    => $result->TradeNo,
-                'TradeTime'  => $updateArray['updated_at'],
-                'TotalPrice' => $result->InstFirst,
-            );
-            $tickets = $this->successOrder($order);
-            return Redirect::to('purchase/trade/'.$order->MerchantOrderNo);
+            // Log::error(json_encode($order_info));
+            $first_order = reset($order_info);
+            $url = URL('activity/' . $first_order->activity_id);
+
+            // clean order
+            if ($status == "TRA10016") { // 信用卡授權失敗拒絕交易
+                DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)
+                      ->update(array(
+                          'TradeNo'         => $feedback->TradeNo,
+                          'CheckCode'       => $feedback->CheckCode,
+                          'EscrowBank'      => $feedback->EscrowBank,
+                          'Card6No'         => $feedback->Card6No,  // not sure
+                          'Card4No'         => $feedback->Card4No,  // not sure
+                          'InstFirst'       => $feedback->InstFirst,
+                          'InstEach'        => $feedback->InstEach,
+                          'Inst'            => $feedback->Inst,
+                          'IP'              => $feedback->IP,
+                          'PayTime'         => $feedback->PayTime,
+                          'OrderComment'    => $feedback->RespondCode . ' - ' . $msg,
+                          'OrderResult'     => json_encode($feedback),
+                          'status'          => 1,
+                          'updated_at'      => date("Y-m-d H:i:s"),
+                      ));
+            } else {
+                DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)
+                      ->update(array(
+                        'status'          => 1,
+                        'updated_at'      => date("Y-m-d H:i:s"),
+                      ));
+            }
+
+            // clean orders_detail and turn back ticket
+            DB::table('orders_detail')->where('order_id', $first_order->order_id)
+                  ->update(array(
+                      'status' => 4,
+                  ));
+
+            foreach ($order_info as $order) {
+                $turnback = $order->ticket_number;
+                DB::table('act_tickets')->where('id', $order->ticket_id)
+                  ->update(array(
+                    'left_over'     => DB::raw("left_over + $turnback"),
+                    'ticket_start'  => DB::raw('ticket_start'),
+                  ));
+            }
+
+            Session::flash('message', $msg);
+            return Redirect::to($url);
+        }
+    }
+
+    private function reduceTickets($info)
+    {
+        try {
+            $orders_tickets     = $info->data;
+            foreach ($orders_tickets as $want) {
+                $wanted         = $want['wanted'];
+                $want['reduce'] = DB::table('act_tickets')->where('id', $want['id'])
+                    ->update(array(
+                        'left_over'    => DB::raw("left_over - $wanted"),
+                        'ticket_start' => DB::raw('ticket_start'),
+                    ));
+            }
+            return true;
+        } catch ( Exception $e ) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
+            return false;
+        }
+    }
+
+    private function insertOrderGetID($info)
+    {
+        $insertInfo = array(
+            'MerchantOrderNo' => $info->MerchantOrderNo,
+            'TotalPrice'      => $info->total_price,
+            'ItemDesc'        => $info->ItemDesc,
+            'user_id'         => $info->user_id,
+            'user_name'       => $info->user_name,
+            'user_email'      => $info->user_email,
+            'user_phone'      => $info->user_phone,
+            'created_at'      => date("Y-m-d H:i:s"),
+        );
+
+        $info->orderID = DB::table('orders')->insertGetId($insertInfo);
+        $resultInfo    = $this->insertTicketToOrder($info);
+
+        return $resultInfo;
+    }
+
+    private function insertTicketToOrder($info)
+    {
+        try {
+            // Log::error(json_encode($info));
+            $orders_tickets     = $info->data;
+            foreach ($orders_tickets as $want) {
+                $ticket = DB::table('act_tickets')->find($want['id']);
+                $status = ($ticket->price == 0) ? 1 : 0;
+                $orderDetail = array(
+                                'order_id'      => $info->orderID,
+                                'topic_type'    => 1, // activty, coupon, stock.....
+                                'topic_id'      => $info->activity->id,
+                                'topic_name'    => $info->activity->title,
+                                'provider_id'   => $info->activity->hoster_id,
+                                'sub_topic_id'  => $ticket->id,
+                                'sub_topic_name'    => $ticket->name,
+                                'sub_topic_price'   => $ticket->price,
+                                'sub_topic_number'  => $want['wanted'],
+                                'status'        => $status, // 因為免費所以直接結清
+                                'owner_id'      => $info->user_id,
+                                'owner_name'    => $info->user_name,
+                                'owner_email'   => $info->user_email,
+                              );
+                $want['insertResult'] = DB::table('orders_detail')->insert($orderDetail);
+            }
+            return true;
+        } catch ( Exception $e ) {
+            Log::error('Caught exception: ',  $e->getMessage(), "\n");
+            return false;
         }
     }
 
     private function successOrder($order)
     {
         $info = DB::table('orders')
-                  ->leftJoin('users', 'orders.user_id', '=', 'users.id')
-                  ->rightJoin('activities',  'orders.activity_id', '=', 'activities.id')
                   ->select(array(
-                      'orders.id', 'orders.user_name', 'orders.user_email', 'orders.user_phone', 'orders.ticket_number', 'orders.TotalPrice', 'orders.hoster_id',
-                      'orders.PayTime',   'activities.title as activity_name',      'activities.location as activity_location', 'orders.ticket_id',
+                      'id',        'PayTime',    'TotalPrice',
+                      'user_name', 'user_phone', 'user_email', 'ItemDesc'
                   ))
                   ->where('MerchantOrderNo', $order->MerchantOrderNo)
                   ->first();
 
-        DB::table('orders')->where('id', $info->id)->update(array('status'=> 2));
 
-        $ticket_ids     = explode(',' , $info->ticket_id);
-        $ticket_numbers = explode(',' , $info->ticket_number);
+                  // paytime 還要思考
+        $paytime = date("Y-m-d H:i:s");
+
+        $updateOrder       = DB::table('orders')->where('id', $info->id)
+                              ->update(array(
+                                  'status'     => 2,
+                                  'PayTime'    => $paytime,
+                                  'updated_at' => date("Y-m-d H:i:s"),
+                                ));
+        $orderDetail       = DB::table('orders_detail')->where('order_id', $info->id);
+        $updateOrderDetail = $orderDetail->update(array('status' => 1));
+
+        $ticket_ids     = $orderDetail->orderBy('id', 'ASC')->lists('sub_topic_id');
+        $ticket_numbers = $orderDetail->orderBy('id', 'ASC')->lists('sub_topic_number');
 
         $ticket_infos = array();
         foreach ($ticket_ids as $key => $id) {
@@ -349,23 +542,24 @@ class PurchaseController extends controller
             array_push($ticket_infos, $ticket_target);
         }
 
+        $act = DB::table('activities')->find( $orderDetail->first()->topic_id );
         $orders = (object) array(
             'TradeNo'           => $order->TradeNo,
             'TradeTime'         => $order->TradeTime,
             'TotalPrice'        => $order->TotalPrice,
+            'MerchantOrderNo'   => $order->MerchantOrderNo,
             'user_name'         => $info->user_name,
             'user_phone'        => $info->user_phone,
             'user_email'        => $info->user_email,
-            'activity_name'     => $info->activity_name,
-            'activity_location' => $info->activity_location,
+            'activity_name'     => $act->title,
+            'activity_location' => $act->location,
             'ticket_infos'      => $ticket_infos,
         );
-
-        $hoster = DB::table('users')->find($info->hoster_id);
+        $hoster = DB::table('users')->find($act->hoster_id);
 
         Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info, $hoster) {
             $message->from('service@514.com.tw', '514 活動頻道');
-            $message->to( Auth::user()->email, $info->user_name )->bcc( $hoster->email, $hoster->name )
+            $message->to( $info->user_email, $info->user_name )->bcc( $hoster->email, $hoster->name )
                     ->subject('【 514 活動頻道 】恭喜您！您的活動行程已經訂購成功！');
         });
 
@@ -374,23 +568,22 @@ class PurchaseController extends controller
 
     public function getTradeInfo($id) {
         $orders = DB::table('orders')
-                    ->leftJoin('activities',  'orders.activity_id', '=', 'activities.id')
-                    ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
                     ->select(array(
-                        'orders.MerchantOrderNo', 'orders.PayTime',         'orders.TotalPrice',
+                        'orders.id', 'orders.MerchantOrderNo', 'orders.PayTime',         'orders.TotalPrice',
                         'orders.user_name',       'orders.user_phone',      'orders.user_email',
-                        'orders.activity_name',   'activities.location',    'categories.name as locat_name',
-                        'orders.ticket_id',       'orders.ticket_number',
                     ))
                     ->where('MerchantOrderNo', $id)
-                    ->where('user_id', Auth::id())
+                    // ->where('user_id', Auth::id())
                     ->first();
 
         if (empty($orders)) {
             return Redirect::to('');
         }
-        $ticket_ids     = explode(',' , $orders->ticket_id);
-        $ticket_numbers = explode(',' , $orders->ticket_number);
+
+        $orderDetail       = DB::table('orders_detail')->where('order_id', $orders->id);
+        $ticket_ids     = $orderDetail->orderBy('id', 'ASC')->lists('sub_topic_id');
+        $ticket_numbers = $orderDetail->orderBy('id', 'ASC')->lists('sub_topic_number');
+
         $ticket_infos   = array();
         foreach ($ticket_ids as $key => $id) {
             $ticket_target = DB::table('act_tickets')
@@ -408,6 +601,10 @@ class PurchaseController extends controller
             array_push($ticket_infos, $ticket_target);
         }
 
+        $act = DB::table('activities')
+                ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                ->where( 'activities.id', $orderDetail->first()->topic_id )->first();
+
         $tickets = (object) array(
             'TradeNo'           => $orders->MerchantOrderNo,
             'TradeTime'         => $orders->PayTime,
@@ -415,9 +612,9 @@ class PurchaseController extends controller
             'user_name'         => $orders->user_name,
             'user_phone'        => $orders->user_phone,
             'user_email'        => $orders->user_email,
-            'activity_name'     => $orders->activity_name,
-            'activity_locaname' => $orders->locat_name,
-            'activity_location' => $orders->location,
+            'activity_name'     => $act->title,
+            'activity_locaname' => $act->name,
+            'activity_location' => $act->location,
             'ticket_infos'      => $ticket_infos,
         );
         return view('activity.confirm', compact('tickets'));

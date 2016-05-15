@@ -71,16 +71,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
     Route::get('subscribes/add'             , 'PageController@addSubscribe'      );
+    Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
+    Route::post('purchase/notify'           , 'PurchaseController@postByPay2Go'  );
+    Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );
+    Route::post('purchase/{activity_id}'    , 'PurchaseController@postPurchase'  );
+    Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
 
     Route::group(['middleware' => 'auth'], function() {
 
-        Route::post('purchase/result'           , 'PurchaseController@postByPay2Go'  );
-        Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );
-        Route::post('purchase/{activity_id}'    , 'PurchaseController@postPurchase'  );
-        Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
         // Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
         // Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );
-
         Route::get('dashboard'                        , 'Admin\AdminController@index'           );
         Route::get('dashboard/member'                 , 'Admin\MemberController@index'          );
         Route::get('dashboard/member/profile'         , 'Admin\MemberController@profile'        );

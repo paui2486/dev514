@@ -410,7 +410,7 @@
             $.colorbox({
                 fixed   : true,
                 opacity : 0.5,
-                html    : '<div class="Cart-alert"><p>請勾選您要的票券，謝謝!</p></div>',
+                html    : '<div class="Cart-alert"><p>{{ Session::get('message') }}</p></div>',
             });
         @endif
 
