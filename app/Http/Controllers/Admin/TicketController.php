@@ -98,6 +98,9 @@ class TicketController extends Controller
                     'left_over'     => $request->total_numbers,
                     'total_numbers' => $request->total_numbers,
                 );
+
+                $this->priceCompare($act_info, $request);
+
                 $result = DB::table('act_tickets')->insert($storeArray);
                 return Redirect::to('/dashboard/activity/'.$activity_id.'/tickets');
             } else {
@@ -173,6 +176,9 @@ class TicketController extends Controller
                     'sale_start'    => $request->sale_start_date.   " " . $request->sale_start_time,
                     'sale_end'      => $request->sale_end_date.     " " . $request->sale_end_time,
                 );
+
+                $this->priceCompare($act_info, $request);
+
                 $result       = DB::table('act_tickets')->where('id', $ticket_id)->update($updateArray);
                 return Redirect::to('dashboard/activity/'. $id .'/tickets');
             } else {
@@ -273,5 +279,26 @@ class TicketController extends Controller
                                        /* --}}
                                      {{ $orderStatus[$status] }}')
             ->make();
+    }
+
+    private function priceCompare($act_info, $request)
+    {
+        $max = $act_info->max_price;
+        $min = $act_info->min_price;
+        $price = $request->price;
+        if ( $price > $max ) {
+            DB::table('activities')->where('id', $act_info->id)
+                ->update(Array(
+                        'activity_start' => $act_info->activity_start,
+                        'max_price'      => $price,
+                ));
+        } elseif ( $price < $min ) {
+            DB::table('activities')->where('id', $act_info->id)
+                ->update(Array(
+                        'activity_start' => $act_info->activity_start,
+                        'min_price'      => $price,
+                ));
+        }
+        return true;
     }
 }
