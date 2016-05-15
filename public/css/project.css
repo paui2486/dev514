@@ -1854,6 +1854,7 @@ li.collapse-blog-category {
 
 .actpage-introduce {
     position: relative;
+    word-wrap: break-word;
 }
 
 .actpage-introduce iframe {
