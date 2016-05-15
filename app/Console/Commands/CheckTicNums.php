@@ -30,19 +30,33 @@ class checkTicNums extends Command
      */
     public function handle()
     {
-        $tickets_info = DB::table('orders_detail')
-                            ->select(array(
-                                'act_tickets.id', 'act_tickets.total_numbers', 'act_tickets.left_over',
-                                DB::raw("sum(orders_detail.sub_topic_number) as sold")
-                            ))
-                            ->leftJoin('orders', 'orders.id', '=', 'orders_detail.order_id')
-                            ->leftJoin('act_tickets', 'orders_detail.sub_topic_id', '=', 'act_tickets.id')
-                            ->where('orders.status', 2)
-                            ->orWhere('orders.ExpireDate', '>=', date('Y-m-d H:i:s'))
-                            ->groupBy('act_tickets.id')
-                            ->get();
+        $tickets = DB::table('act_tickets')->select(array('id', 'total_numbers', 'left_over'))->get();
 
-        foreach ($tickets_info as $ticket) {
+
+
+        foreach ($tickets as $ticket) {
+          # code...
+            $sold = DB::table('orders_detail')
+                      ->leftJoin('orders', 'orders.id', '=', 'orders_detail.order_id')
+                      ->where('orders_detail.sub_topic_id', $ticket->id)
+                      ->where('orders.status', 2)
+                      ->sum('sub_topic_number');
+
+            $unclear = DB::table('orders_detail')
+                      ->leftJoin('orders', 'orders.id', '=', 'orders_detail.order_id')
+                      ->where('orders_detail.sub_topic_id', $ticket->id)
+                      ->where('orders.status', '!=', 2)
+                      ->where('orders.ExpireDate', '>=', date('Y-m-d H:i:s'))
+                      ->sum('sub_topic_number');
+            $ticket->sold = $sold + $unclear;
+        }
+
+        DB::table('orders')
+            ->where('status', '!=', 2)
+            ->where('ExpireDate', '<', date('Y-m-d H:i:s'))
+            ->update(array( 'status'=> 1 ));
+
+        foreach ($tickets as $ticket) {
             $left_over = $ticket->total_numbers - $ticket->sold;
             if ($left_over < 0) {
                 Log::error("Ticket Numbers error: " . $ticket->id . " have $left_over...");
