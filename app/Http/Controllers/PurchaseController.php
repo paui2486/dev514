@@ -590,7 +590,7 @@ class PurchaseController extends controller
             $ticket_target = DB::table('act_tickets')
                               ->where('id', $id)
                               ->select(array(
-                                'id', 'name', 'price', 'ticket_start', 'ticket_end'
+                                'id', 'name', 'price', 'ticket_start', 'ticket_end', 'activity_id'
                               ))->first();
             $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
             $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];
@@ -606,6 +606,7 @@ class PurchaseController extends controller
             'TradeNo'           => $order->TradeNo,
             'TradeTime'         => $order->TradeTime,
             'TotalPrice'        => $order->TotalPrice,
+            'ItemDesc'          => $order->ItemDesc,
             'MerchantOrderNo'   => $order->MerchantOrderNo,
             'user_name'         => $info->user_name,
             'user_phone'        => $info->user_phone,
@@ -616,10 +617,35 @@ class PurchaseController extends controller
         );
         $hoster = DB::table('users')->find($act->hoster_id);
 
+        // email provider
+        $msg_provider = '<p>'. $hoster->name .'您好，</p>
+                    <p>' . Auth::user()->name . '已訂購『' . $info->ItemDesc .'』，請登入後台查詢名單，即可獲得更多資訊。謝謝！</p>
+                    <p>後台連結：<a href="'. url('dashboard/activity/' .$ticket_target->activity_id. '/tickets/admission') .'">後台活動票券名單</a>';
+        Mail::send('auth.emails.checkout', array('msg' => $msg_provider),  function($message) use ($info, $hoster, $msg) {
+            $message->from('service@514.com.tw', '514 活動頻道');
+            $message->to( $hoster->email, $hoster->name )
+                  ->subject('【514活動報名通知】活動主您好，'. Auth::user()->name .' 已於『'. $info->ItemDesc .'』完成報名');
+        });
+
+        // MSG  customer
+        $subject_msg = "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。";
+        $msg  = "username=coevo5311&password=coevo8909&dstaddr=". $info->user_phone ."&smbody=". $subject_msg;
+        $host = "202.39.48.216";
+        $url  = "http://".$host."/kotsmsapi-1.php?".$msg;
+        $ch   = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $html = curl_exec($ch);
+        curl_close($ch);
+
+        // email customer
         Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info, $hoster) {
             $message->from('service@514.com.tw', '514 活動頻道');
-            $message->to( $info->user_email, $info->user_name )->bcc( $hoster->email, $hoster->name )
-                    ->subject('【 514 活動頻道 】恭喜您！您的活動行程已經訂購成功！');
+            $message->to( $info->user_email, $info->user_name )
+                    // ->bcc( $hoster->email, $hoster->name )
+                    ->subject('【514活動報名通知】您好'. Auth::user()->name .'，您已經成功報名『'. $info->ItemDesc .'』
+');
         });
 
         return $orders;

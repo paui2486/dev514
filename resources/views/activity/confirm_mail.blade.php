@@ -4,10 +4,9 @@
 <div class="row confirm-container">
     <div class="row confirm-panel">
         <div class="confirm-top">
-            恭喜您！您的活動行程已經訂購成功！
-            <p>我們將寄送確認信件至您的E-mail，您也可以選擇
-                <a href="#"><span class="glyphicon glyphicon-print" aria-hidden="true" onClick="window.print()">列印此頁</span></a>。
-            </p>
+            您好，{{ Auth::user()->name }}
+            感謝您報名了 {{ $tickets->ItemDesc }}，預祝您有個美好的活動體驗。
+            連結：<a href="{{ url('activity/'. reset($tickets->ticket_infos)->activity_id ) }}">活動票券連結</a>
         </div>
         <div class="col-md-5 confirm-left">
             <div class="row">

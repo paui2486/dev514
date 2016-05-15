@@ -145,6 +145,17 @@ class ActivityController extends Controller
         }
         $results            = DB::table('act_tickets')->insert($tickets);
 
+        if ($request->status == 3) {
+            $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
+            $msg_system = '<p>Hi 514的同仁</p>
+                           <p>活動主 '. Auth::user()->name .' 於514有新增送審的活動，請盡速前往審核</p>
+                           <p href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
+            Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg) {
+                $message->from('service@514.com.tw', '514 活動頻道');
+                $message->to( $mails )->subject('【514活動上架審核通知】514活動主'. Auth::user()->name .'新增活動，活動ID：'. $activity_id);
+            });
+        }
+
         return Redirect::to('dashboard/activity');
     }
 
@@ -246,6 +257,17 @@ class ActivityController extends Controller
         $update             = Library::upload($params);
         $activity           = DB::table('activities')->where('id', $activity_id);
         $result             = $activity->update($update['data']);
+
+        if ($request->status == 3) {
+            $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
+            $msg_system = '<p>Hi 514的同仁</p>
+                           <p>活動主 '. Auth::user()->name .' 於514有新增送審的活動，請盡速前往審核</p>
+                           <p href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
+            Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg) {
+                $message->from('service@514.com.tw', '514 活動頻道');
+                $message->to( $mails )->subject('【514活動上架審核通知】514活動主'. Auth::user()->name .'新增活動，活動ID：'. $activity_id);
+            });
+        }
 
         return Redirect::to('dashboard/activity');
     }
@@ -540,8 +562,8 @@ class ActivityController extends Controller
           'contact_name'  => $request->contact_name,
           'contact_phone' => $request->contact_phone,
           'contact_email' => $request->contact_email,
-
         );
+
         $id                 = DB::table('companys')->insertGetId($storeArray);
 
         $params             = Library::upload_param_template();
@@ -570,7 +592,22 @@ class ActivityController extends Controller
         }
 
         if ($result) {
-            Session::flash('message', '申請完成，恭喜您已經能舉辦活動，靜待系統進行審核');
+            $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
+            $msg_system = '<p>Hi 514的同仁</p>
+                           <p>514會員 '. Auth::user()->name .' 於514平台申請成為活動主，請盡速前往審核</p>
+                           <p href="' . url('dashboard/member#tab-2') . '" >後台活動主審核區連結</a></p>';
+            Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg) {
+                $message->from('service@514.com.tw', '514 活動頻道');
+                $message->to( $mails )->subject('【514活動主申請審核通知】514會員'. Auth::user()->name .'要申請成為活動主');
+            });
+
+            $msg_customer = '申請完成，請靜待系統進行審核';
+            Mail::send('auth.emails.checkout', array('msg' => $msg_customer),  function($message) use ($msg) {
+                $message->from('service@514.com.tw', '514 活動頻道');
+                $message->to( Auth::user()->email, Auth::user()->name )->subject('【514活動主申請通知】申請完成，請靜待系統進行審核');
+            });
+
+            Session::flash('message', '申請完成，請靜待系統進行審核');
             DB::table('users')
                   ->where('id', Auth::id())
                   ->update(array(
@@ -608,7 +645,17 @@ class ActivityController extends Controller
 
     public function passActivity($id)
     {
-        DB::table('activities')->where('id', $id)->update(array('status' => 4));
+        $activity = DB::table('activities')->where('id', $id);
+        $activity->update(array('status' => 4));
+
+        $user     = DB::table('users')->find($activity->first()->hoster_id);
+        $msg_customer = '<p>Hi '. $user->name .'您好，</p>
+                       <p>您的活動 '. $activity->first()->title .'，已經通過審核</p>
+                       <p href="' . url("/activity/$id") . '" >前台活動連結</a></p>';
+        Mail::send('auth.emails.checkout', array('msg' => $msg_customer),  function($message) use ($user, $msg, $id) {
+            $message->from('service@514.com.tw', '514 活動頻道');
+            $message->to( $user->email, $user->name )->subject('【514活動上架審核通知】您舉辦的活動已通過審核，活動ID：'. $id);
+        });
     }
 
     public function showPriview($id)
