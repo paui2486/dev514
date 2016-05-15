@@ -482,33 +482,34 @@ class ActivityController extends Controller
                     ->leftJoin('activities', 'orders_detail.topic_id', '=', 'activities.id')
                     ->leftJoin('users', 'users.id', '=', 'orders_detail.provider_id')
                     ->select(array(
-                        'activities.title', 'orders_detail.sub_topic_name', 'orders_detail.sub_topic_number',
+                        'orders.MerchantOrderNo', 'activities.title', 'orders_detail.sub_topic_name', 'orders_detail.sub_topic_number',
                         DB::raw("CONCAT(act_tickets.ticket_start, ' ', act_tickets.ticket_end) as ticket_time"),
-                        'orders.user_email', 'orders.user_phone', 'orders.status', 'activities.id', 'users.email',
+                        'orders.user_email', 'orders.user_phone', 'orders.PayTime', 'orders.status', 'activities.id', 'users.email',
                     ))
                     ->where('orders.user_id', Auth::id())
                     ->orderBy('orders.created_at', 'ASC');
 
         return Datatables::of($ticket)
             ->remove_column('email')
+            ->edit_column('MerchantOrderNo', "<a style='width:100%' href='{{ url(\"purchase/trade/\$MerchantOrderNo\") }}'>{{ \$MerchantOrderNo }}</a>")
             ->edit_column('id', "<a href='mailto:{{ \$email }}'><div class='btn btn-xs btn-info'>聯絡廠商</div></a>
                                  <a href='mailto:service@514.com.tw'><div class='btn btn-xs btn-danger'>疑難排解</div></a>")
-            ->edit_column('title', "<a style='width:100%' href='{{ url(\"activity/\$id\") }}'>{{ \$title }}</>")
+            ->edit_column('title', "<a style='width:100%' href='{{ url(\"activity/\$id\") }}'>{{ \$title }}</a>")
             ->edit_column('status', '
                             {{-- */
                               $orderStatus = array(
-                                  0 => "正選擇交易中",
-                                  1 => "購買交易失敗",
-                                  2 => "購買交易成功",
-                                  3 => "等待 WebATM",
-                                  4 => "等待 ATM 轉帳",
-                                  5 => "等待超商代繳",
-                                  6 => "準備超商代繳",
-                                  7 => "等待條碼繳費",
-                                  8 => "網頁逾時未繳",
+                                  0 => "<span class=\"label label-success\">正選擇交易中</span>",
+                                  1 => "<span class=\"label label-default\">購買交易失敗</span>",
+                                  2 => "<span class=\"label label-primary\">購買交易成功</span>",
+                                  3 => "<span class=\"label label-success\">等待 WebATM</span>",
+                                  4 => "<span class=\"label label-success\">等待 ATM 轉帳</span>",
+                                  5 => "<span class=\"label label-info\">等待超商提票</span>",
+                                  6 => "<span class=\"label label-success\">準備超商代繳</span>",
+                                  7 => "<span class=\"label label-success\">等待條碼繳費</span>",
+                                  8 => "<span class=\"label label-warning\">網頁逾時未繳</span>",
                               );
                               /* --}}
-                            {{ $orderStatus[$status] }}
+                            {!! $orderStatus[$status] !!}
                             ')
             ->make();
     }

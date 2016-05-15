@@ -7,10 +7,14 @@
 <table id="ticket_table" class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>票券資訊</th>
-            <th>票券時間</th>
+            <th>訂單編號</th>
+            <th>活動資訊</th>
+            <th>票卷名稱</th>
+            <th>票卷張數</th>
+            <th>票券使用時間</th>
             <th>登記信箱</th>
             <th>登記電話</th>
+            <th>付款時間</th>
             <th>付款狀態</th>
             <th>票券設定</th>
         </tr>
@@ -37,11 +41,16 @@
                     columns: ':not(:first-child)',
                     text: '顯示欄位'
                 },
+            ],
+            "aoColumnDefs": [
+                {
+                    "bSortable": false,
+                    "aTargets": [ 9 ]
+                },
                 // {
-                //     extend: 'pdfHtml5',
-                //     download: 'open'
-                // },
-                // 'csvHtml5',
+                //     "targets": [ 7 ],
+                //     "visible": false
+                // }
             ],
             "processing": true,
             "responsive": true,
