@@ -36,7 +36,8 @@
                    <th>購買人</th>
                    <th>連絡信箱</th>
                    <th>聯絡電話</th>
-                   <th>購票資訊</th>
+                   <th>票卷名稱</th>
+                   <th>票卷張數</th>
                    <th>票卷金額</th>
                    <th>購票時間</th>
                    <th>票卷狀態</th>
@@ -75,8 +76,7 @@
                     },
                     'csvHtml5',
                 ],
-                "aaSorting": [[5, 'desc']],
-                "aaSorting": [[6, 'desc']],
+                "aaSorting": [[7, 'desc'], [6, 'desc'], [5, 'desc'], ],
                 "processing": true,
                 "responsive": true,
                 "ajax": "{{ URL::current('') . 'Data' }}",
