@@ -595,7 +595,7 @@ class ActivityController extends Controller
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
             $msg_system = '<p>Hi 514的同仁</p>
                            <p>514會員 '. Auth::user()->name .' 於514平台申請成為活動主，請盡速前往審核</p>
-                           <p href="' . url('dashboard/member#tab-2') . '" >後台活動主審核區連結</a></p>';
+                           <p><a href="' . url('dashboard/member#tab-2') . '" >後台活動主審核區連結</a></p>';
             Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg_system) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $mails )->subject('【514活動主申請審核通知】514會員'. Auth::user()->name .'要申請成為活動主');
