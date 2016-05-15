@@ -10,8 +10,8 @@
        <tr>
            <th>活動主</th>
            <th>活動名稱</th>
-           <th>活動類型</th>
            <th>提交日期</th>
+           <th>活動類型</th>
            <th>相關設定</th>
        </tr>
    </thead>
@@ -27,8 +27,8 @@
             "dom": 'Bfrtip',
             "select": true,
             "lengthMenu": [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+                [ 50, 25, 10, -1 ],
+                [ '50 rows', '25 rows', '10 rows', 'Show all' ]
             ],
             "buttons": [
                 'pageLength',
