@@ -393,7 +393,7 @@
                 break;
 
             case 'Weibo':
-                window.open("http://service.weibo.com/share/share.php?title=&url=http://www.iwine.com.tw/expert_article.php?n_id=307", "_blank")
+                window.open("http://service.weibo.com/share/share.php?title=&url={{ URL::current() }}", "_blank")
                 break;
 
             case 'Mail':
