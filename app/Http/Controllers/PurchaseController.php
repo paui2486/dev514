@@ -248,7 +248,7 @@ class PurchaseController extends controller
         }
     }
 
-    public function postByPay2Go(Request $request)
+    public function pay2GoResult(Request $request)
     {
         // no matter success or fail
           // $return = array (
@@ -428,6 +428,13 @@ class PurchaseController extends controller
             Session::flash('message', $msg);
             return Redirect::to($url);
         }
+    }
+
+    public function pay2GoNotify(Request $request)
+    {
+        Log::error(Input::all());
+        $feedback   = (object) json_decode($request->JSONData, true);
+        Log::error($feedback);
     }
 
     private function reduceTickets($info)
