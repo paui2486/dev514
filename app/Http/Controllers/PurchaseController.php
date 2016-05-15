@@ -297,15 +297,16 @@ class PurchaseController extends controller
                         'MerchantOrderNo' => $feedback->MerchantOrderNo,
                         'CheckCode'       => $feedback->CheckCode,
                         'EscrowBank'      => $feedback->EscrowBank,
+                        'IP'              => $feedback->IP,
+                        'PayTime'         => $feedback->PayTime,
+
                         'Card6No'         => $feedback->Card6No,
                         'Card4No'         => $feedback->Card4No,
                         'InstFirst'       => $feedback->InstFirst,
                         'InstEach'        => $feedback->InstEach,
                         'Inst'            => $feedback->Inst,
-                        'IP'              => $feedback->IP,
-                        'PayTime'         => $feedback->PayTime,
                         'status'          => 2,
-                        'OrderComment'    => 'CREDIT: ' . $feedback->RespondCode . ' - ' . $msg,
+                        'OrderComment'    => 'CREDIT: ' . $feedback->RespondCode . '; Amt: ' . $feedback->Amt . ' - ' . $msg,
                         'OrderResult'     => json_encode($feedback),
                         'updated_at'      => date("Y-m-d H:i:s"),
                     );
@@ -319,7 +320,8 @@ class PurchaseController extends controller
                     break;
 
                 case 'WEBATM':
-                    // $comURL = result
+                    // $comURL = notify
+                    Log::error('WTF! WEBATM payment type');
                     $updateArray = array(
                         'MerchantID'      => $feedback->MerchantID,
                         'TradeNo'         => $feedback->TradeNo,
@@ -330,7 +332,7 @@ class PurchaseController extends controller
                         'PayTime'         => $feedback->PayTime,
                         'status'          => 2,
                         'OrderResult'     => json_encode($feedback),
-                        'OrderComment'    => 'WEBATM: ' . $feedback->PayBankCode . ' - ' . $msg,
+                        'OrderComment'    => 'WEBATM: ' . $feedback->PayBankCode . '; Amt: ' . $feedback->Amt . ' - ' . $msg,
                         'updated_at'      => date("Y-m-d H:i:s"),
                     );
 
@@ -339,26 +341,79 @@ class PurchaseController extends controller
                         ->update(array(
                             'status' => 1
                         ));
-                    Log::error('WTF! WEBATM payment type');
                     break;
 
                 case 'VACC':
                     // $comURL = notify
                     Log::error('WTF! VACC payment type');
-                    Log::error(Input::all());
+                    $updateArray = array(
+                        'MerchantID'      => $feedback->MerchantID,
+                        'TradeNo'         => $feedback->TradeNo,
+                        'MerchantOrderNo' => $feedback->MerchantOrderNo,
+                        'CheckCode'       => $feedback->CheckCode,
+                        'EscrowBank'      => $feedback->EscrowBank,
+                        'IP'              => $feedback->IP,
+                        'PayTime'         => $feedback->PayTime,
+                        'status'          => 2,
+                        'OrderResult'     => json_encode($feedback),
+                        'OrderComment'    => 'VACC: ' . $feedback->PayBankCode . '; Amt: ' . $feedback->Amt . ' - ' . $msg,
+                        'updated_at'      => date("Y-m-d H:i:s"),
+                    );
+
+                    DB::table('orders_detail')
+                        ->where('order_id', $order->id)
+                        ->update(array(
+                            'status' => 1
+                        ));
                     break;
 
                 case 'CVS':
                     // $comURL = notify
                     Log::error('WTF! CVS payment type');
-                    Log::error(Input::all());
-                    exit;
+                    $updateArray = array(
+                        'MerchantID'      => $feedback->MerchantID,
+                        'TradeNo'         => $feedback->TradeNo,
+                        'MerchantOrderNo' => $feedback->MerchantOrderNo,
+                        'CheckCode'       => $feedback->CheckCode,
+                        'EscrowBank'      => $feedback->EscrowBank,
+                        'IP'              => $feedback->IP,
+                        'PayTime'         => $feedback->PayTime,
+                        'status'          => 2,
+                        'OrderResult'     => json_encode($feedback),
+                        'OrderComment'    => 'CVS: Amt: ' . $feedback->Amt . ' - ' . $msg,
+                        'updated_at'      => date("Y-m-d H:i:s"),
+                    );
+
+                    DB::table('orders_detail')
+                        ->where('order_id', $order->id)
+                        ->update(array(
+                            'status' => 1
+                        ));
                     break;
 
                 case 'BARCODE':
                     // $comURL = notify
                     Log::error('WTF! BARCODE payment type');
                     Log::error(Input::all());
+                    $updateArray = array(
+                        'MerchantID'      => $feedback->MerchantID,
+                        'TradeNo'         => $feedback->TradeNo,
+                        'MerchantOrderNo' => $feedback->MerchantOrderNo,
+                        'CheckCode'       => $feedback->CheckCode,
+                        'EscrowBank'      => $feedback->EscrowBank,
+                        'IP'              => $feedback->IP,
+                        'PayTime'         => $feedback->PayTime,
+                        'status'          => 2,
+                        'OrderResult'     => json_encode($feedback),
+                        'OrderComment'    => 'BARCODE: Amt: ' . $feedback->Amt . ' - ' . $msg,
+                        'updated_at'      => date("Y-m-d H:i:s"),
+                    );
+
+                    DB::table('orders_detail')
+                        ->where('order_id', $order->id)
+                        ->update(array(
+                            'status' => 1
+                        ));
                     break;
 
                 default:
