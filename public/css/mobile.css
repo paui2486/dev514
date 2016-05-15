@@ -122,7 +122,7 @@
         letter-spacing: 2px;
         text-shadow: 1px 1px 30px #808080;
     }
-    
+
     .searchbar-mobile img {
         width: 80%;
     }
@@ -155,7 +155,7 @@
         width: 100%;
         background-color: #fff;
     }
-    
+
     .mobile-panel a {
         color: #666;
     }
@@ -168,30 +168,30 @@
         display: flex;
         margin: 15px
     }
-    
+
     .mobile_panel_bg:hover {
         background-color: #f2f2f2;
     }
-    
+
     .mobile-activity-thumbnail {
         border-radius: 5px 0 0 5px;
         position: relative;
         background-size: cover;
     }
-    
+
     .home-mb-activity-title {
         margin-bottom: 5px;
         font-size: 15px;
     }
-    
+
     .mobile-activity-info {
         padding: 5px 10px;
     }
-    
+
     .home-mb-info img {
         width: 23px;
     }
-    
+
     .new-activity-right {
         width: 60%;
         float: left;
@@ -232,7 +232,7 @@
         padding-bottom: 3px;
         margin-right: 7px;
     }
-    
+
     .more-activity {
         position: fixed;
         bottom: 0px;
@@ -243,16 +243,16 @@
         z-index:99;
         text-align: center;
     }
-    
+
     .more-activity > div {
         margin: 10px auto;
         padding: 12px;
         width: 90%;
         border-radius: 5px;
         background-color: rgba(255,90,95,0.9);
-        
+
     }
-    
+
     /*foooooooooooooooooooooter*/
     .bottom-linkout {
         padding: 10px;
@@ -286,7 +286,7 @@
         width: 90%;
         padding: 15px;
     }
-    
+
     .actpage-header {
         margin: 5px 0;
     }
@@ -296,15 +296,15 @@
         height: 200px;
         background-position: center;
     }
-    
+
 /*------------- actpage-dashboard --------------*/
-    
+
     .actpage-mb-dashboard {
         padding: 10px;
         margin: 0;
         background-color: #fff;
     }
-        
+
     .actpage-holder-thumnail {
         width: 75px;
         height: 75px;
@@ -317,7 +317,7 @@
     .dashboard-title {
         font-size: 15px;
     }
-    
+
     .actpage-mb-surplus p {
         background-color: #808080;
         color: #fff;
@@ -330,22 +330,22 @@
         letter-spacing: 1px;
         float: left;
     }
-    
+
     .actpage-holder-name {
         text-align: left;
         font-size: 13px;
         color: #999999;
     }
-    
+
     .actpage-dashboard-info {
         padding: 10px 0;
         border-top: 1px solid #ccc;
     }
-    
+
     .actpage-dashboard-info  p {
         margin: 0;
     }
-    
+
     .dashboard-block img  {
         width: auto;
         margin: 0px;
@@ -356,14 +356,14 @@
         margin: 0px;
         text-align: center;
         font-size: 13px;
-        padding-top:5px; 
+        padding-top:5px;
     }
-        
+
     .dashboard-mb-share span {
         letter-spacing: 2px;
         font-size: 14px;
     }
-    
+
     .dashboard-mb-share img {
         width: 15%;
         border: 1px solid #000;
@@ -372,7 +372,7 @@
         margin:0 5px;
         opacity: 0.4;
     }
-    
+
     .dashboard-mb-share {
         padding-top: 15px;
         text-align: center;
@@ -390,14 +390,14 @@
         margin: 0;
         margin-bottom: 5px;
     }
-    
+
     .actpage-recommend-thumnail {
         border-radius: 0px;
         float: left;
         height: 250px;
         position: relative;
     }
-    
+
     .actpage-thum-mb-title {
         font-size: 15px;
         color: #fff;
@@ -408,52 +408,52 @@
         bottom: 0;
         margin: 0;
     }
-    
+
     .actpage-recommend {
         margin-bottom: 10px;
     }
-    
+
     .actpage-recommend-info {
         width: 60%;
         float: left;
     }
-    
+
     .actpage-recommend-info p {
         margin: 3px auto;
         color: #666;
     }
-    
+
     .actpage-recommend-info img {
         width: 20px;
         float: left;
         margin-right: 5px;
     }
-    
+
     .Cart-content {
         max-height: 415px;
         border: 1px solid #ccc;
     }
-    
+
     .Cart-ticket-surplus {
         font-size: 10px;
     }
-    
+
     .Cart-ticket {
         background-size: 120% auto;
     }
-    
+
     .Cart-number select {
         font-size: 14px;
     }
-    
+
     .Cart-detail > ul > li > span {
         letter-spacing: 0;
     }
-    
+
     .Cart-alert {
         font-size: 14px;
     }
-    
+
     .purchase-mb-btn {
         position: fixed;
         width: 100%;
@@ -497,7 +497,7 @@
         margin-bottom: 3px;
         margin-right: 3px;
     }
-    
+
     .Cart-mb-nextstep{
         width: 100%;
         padding: 8px 10px;
@@ -509,7 +509,7 @@
         font-size: 15px;
         letter-spacing: 2px;
     }
-    
+
     /*訂購頁面*/
     .purchase-content {
         margin-top: 0px;
@@ -630,46 +630,46 @@
         float: right;
         padding-top: 5px;
     }
-    
+
     .list-filter-row img {
         width: 30px;
         padding-right: 5px;
     }
-    
+
     .list-filter-option label{
         font-size: 14px;
         padding: 5px;
     }
-    
+
     .list-mb-what,
     .list-mb-when{
         width: calc(100%/3);
     }
-    
+
     .list-mb-where {
         width: calc(100%/4);
     }
-    
+
     .list-mb-howmuch {
         width: calc(100%/2);
     }
-    
+
     .list-filter-option input {
         margin: 2px 5px 0 0;
     }
-    
+
     .list-filter-option {
         margin: 0px;
         padding: 10px;
         border: 1px solid #f2f2f2;
         border-top: none;
     }
-    
+
     .list-content-panel {
         border: none;
         padding: 0;
     }
-     
+
     .list-category-panel {
         padding: 0;
         border: 1px solid #ccc;
@@ -679,7 +679,7 @@
         height: 150px;
         width: 100%;
     }
-    
+
     .list-category-panel:hover {
         background:#f2f2f2;
     }
@@ -687,35 +687,35 @@
     .list-category-text {
         padding: 5px 10px;
     }
-    
+
     .list-category-thumnail {
         height:100%;
     }
-    
+
     .list-category-title {
         font-size: 15px;
         color: #666;
         margin-bottom: 5px;
     }
-    
+
     .list-category-info {
         margin:0;
     }
-    
+
     .list-category-info img {
         width: 23px;
     }
-    
+
     .list-category-info p {
         height: 28px;
         font-size: 14px;
         color: #666;
     }
-    
+
     .list-readmore {
         width: 100%;
     }
-    
+
     .list-result {
         text-align: center;
         width: 100%;
@@ -726,11 +726,15 @@
         letter-spacing: 2px;
         font-size: 15px;
     }
-    
-    .list-filter-row label:hover {
+
+    /*.list-filter-row label:hover {
+        background-color: none;
+    }*/
+
+    /*.list-filter-row label:hover {
         background-color:#00bcd4;
         color: #fff;
-    }
+    }*/
 
 }
 
@@ -739,44 +743,33 @@
     .new-activity-panel {
         width:100%;
     }
-    
+
     .new-activity-thumbnail {
         height: 400px;
     }
-    
+
     .category-readmore img {
         height: 40px;
     }
-    
+
     .new-activity-count,
     .inter-panel-count {
         top: 20px;
         right: 30px;
     }
-    
-    .new-activity-price, 
-    .new-activity-date, 
+
+    .new-activity-price,
+    .new-activity-date,
     .new-activity-location {
         width: 50%;
         float: left;
     }
-    
+
     .newact_panel_bg {
         margin: 10px;
     }
-    
+
     .inter-panel-thumbnail {
         height: 300px;
     }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -2547,9 +2547,10 @@ li.collapse-blog-category {
     margin:5px;
 }
 
+/*
 .list-filter-row label:hover {
     background-color: rgba(0,188,212,0.1)
-}
+}*/
 
 .checkbox-inline+.checkbox-inline {
     margin:5px;
