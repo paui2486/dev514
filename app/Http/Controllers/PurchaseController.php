@@ -123,6 +123,7 @@ class PurchaseController extends controller
         //     data: "{ id: { "tickets":"34","numbers":"1"} }",    step 2
         //     price: "55"
         // }
+        Log::error(URL::current() . ' postPurchase()');
         Log::error($request);
         // return Input::all();
         $data        = json_decode($request->data);
@@ -149,6 +150,8 @@ class PurchaseController extends controller
                       ))
                       ->where('activities.status', '=', '4')
                       ->first();
+
+        $expireDate = date('Ymd', strtotime ( '+1 day') );
 
         $tickets  = DB::table('act_tickets')
                      ->whereIn('id', $ticket_ids )
@@ -195,6 +198,7 @@ class PurchaseController extends controller
                                     'TradeNo'         => str_random(30),
                                     'TradeTime'       => date("Y-m-d H:i:s"),
                                     'TotalPrice'      => $total_price,
+                                    'ExpireDate'     => $expireDate,
                                     'activity'        => $activity,
                                     'data'            => $purchase,
                                     'total_price'     => $total_price,
@@ -235,7 +239,7 @@ class PurchaseController extends controller
                                     "LoginType"		      =>  "0",                    //	是否要登入智付寶會員
                                     'Email'             =>  $request->email,
                                     'TradeLimit'        =>  900,                    //  交易秒數
-                                    'ExpireDate'        =>  date('Ymd', strtotime ( '+1 day') ), // 需要修改
+                                    'ExpireDate'        =>  $expireDate, // 需要修改
                                     'ReturnURL'         =>  url('purchase/result'), // must be different
                                     'NotifyURL'         =>  url('purchase/notify'),
                                     // 'ClientBackURL'     =>  URL::current(),
@@ -266,11 +270,19 @@ class PurchaseController extends controller
           //       "TokenUseStatus":0,"InstFirst":0,"InstEach":0,
           //       "Inst":0,"ECI":null}',
           // )
+        Log::error(URL::current() . ' pay2GoResult()');
         Log::error(Input::all());
         // url 2 notify or result
         $comURL     = urldecode($request->segment(2));
         $status     = $request->Status;
         $msg        = $request->Message;
+
+        if ($comURL == 'result') {
+          $feedback   = (object) json_decode($request->Result, true);
+        } else {
+          $feedback   = (object) json_decode($request->JSONData, true);
+        }
+
         $feedback   = (object) json_decode($request->Result, true);
         $order      = DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)->first();
 
@@ -357,13 +369,51 @@ class PurchaseController extends controller
                     break;
             }
 
-            // if clean mail provider and system
+            $ticket_infos = array();
+            $ticket_ids     = DB::table('orders_detail')
+                ->where('order_id', $order->id)
+                ->orderBy('id', 'ASC')->lists('sub_topic_id');
+            $ticket_numbers = DB::table('orders_detail')
+                ->where('order_id', $order->id)
+                ->orderBy('id', 'ASC')->lists('sub_topic_number');
 
-
-            // add mail status at brfore
-            if ($sendMail) {
-              //  xxx
+            $ticket_infos = array();
+            foreach ($ticket_ids as $key => $id) {
+                $ticket_target = DB::table('act_tickets')
+                                  ->where('id', $id)
+                                  ->select(array(
+                                    'id', 'name', 'price', 'ticket_start', 'ticket_end'
+                                  ))->first();
+                $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
+                $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];
+                $weekday_end    = $weekday[date('w', strtotime($ticket_target->ticket_end))];
+                $ticket_target->ticket_start = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_start ) $2", $ticket_target->ticket_start);
+                $ticket_target->ticket_end   = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_end ) $2", $ticket_target->ticket_end);
+                $ticket_target->quantity     = $ticket_numbers["$key"];
+                array_push($ticket_infos, $ticket_target);
             }
+
+            $act = DB::table('activities')->find( DB::table('orders_detail')
+                ->where('order_id', $order->id)->first()->topic_id );
+            $tickets = (object) array(
+                'TradeNo'           => $order->TradeNo,
+                'TradeTime'         => $order->PayTime,
+                'TotalPrice'        => $order->TotalPrice,
+                'MerchantOrderNo'   => $order->MerchantOrderNo,
+                'user_name'         => $order->user_name,
+                'user_phone'        => $order->user_phone,
+                'user_email'        => $order->user_email,
+                'activity_name'     => $act->title,
+                'activity_location' => $act->location,
+                'ticket_infos'      => $ticket_infos,
+            );
+            $hoster = DB::table('users')->find($act->hoster_id);
+
+            Mail::send('activity.confirm_mail', array('tickets' => $tickets), function($message) use ($order, $hoster) {
+                $message->from('service@514.com.tw', '514 活動頻道');
+                $message->to( $order->user_email, $order->user_name )->bcc( $hoster->email, $hoster->name )
+                        ->subject('【 514 活動頻道 】恭喜您！您的活動行程已經訂購成功！');
+            });
 
             DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)->update($updateArray);
 
@@ -432,9 +482,10 @@ class PurchaseController extends controller
 
     public function pay2GoNotify(Request $request)
     {
+        Log::error(URL::current() . ' pay2GoNotify()');
         Log::error(Input::all());
         $feedback   = (object) json_decode($request->JSONData, true);
-        Log::error($feedback);
+        Log::error(json_encode($feedback));
     }
 
     private function reduceTickets($info)
@@ -462,6 +513,7 @@ class PurchaseController extends controller
             'MerchantOrderNo' => $info->MerchantOrderNo,
             'TotalPrice'      => $info->total_price,
             'ItemDesc'        => $info->ItemDesc,
+            'ExpireDate'      => $info->ExpireDate,
             'user_id'         => $info->user_id,
             'user_name'       => $info->user_name,
             'user_email'      => $info->user_email,
