@@ -645,7 +645,7 @@ class PurchaseController extends controller
 
         // email provider
         $msg_provider = '<p>'. $hoster->name .'您好，</p>
-                    <p>' . Auth::user()->name . '已訂購『' . $info->ItemDesc .'』，請登入後台查詢名單，即可獲得更多資訊。謝謝！</p>
+                    <p>' . $info->name . '已訂購『' . $info->ItemDesc .'』，請登入後台查詢名單，即可獲得更多資訊。謝謝！</p>
                     <p>後台連結：<a href="'. url('dashboard/activity/' .$ticket_target->activity_id. '/tickets/admission') .'">後台活動票券名單</a>';
         Mail::send('auth.emails.checkout', array('msg' => $msg_provider),  function($message) use ($info, $hoster, $msg) {
             $message->from('service@514.com.tw', '514 活動頻道');
