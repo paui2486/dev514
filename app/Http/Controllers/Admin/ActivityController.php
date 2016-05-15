@@ -646,7 +646,10 @@ class ActivityController extends Controller
     public function passActivity($id)
     {
         $activity = DB::table('activities')->where('id', $id);
-        $activity->update(array('status' => 4));
+        $activity->update(array(
+                      'status' => 4,
+                      'activity_start'  => DB::raw('activity_start'),
+                    ));
 
         $user     = DB::table('users')->find($activity->first()->hoster_id);
         $msg_customer = '<p>Hi '. $user->name .'您好，</p>

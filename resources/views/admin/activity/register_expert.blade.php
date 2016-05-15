@@ -167,3 +167,10 @@
 </form>
 
 <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
+<script>
+$(document).ready(function () {
+    $(document).on("keypress", "form", function(event) {
+        return event.keyCode != 13;
+    });
+});
+</script>
