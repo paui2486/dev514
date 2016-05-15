@@ -149,7 +149,7 @@ class ActivityController extends Controller
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
             $msg_system = '<p>Hi 514的同仁</p>
                            <p>活動主 '. Auth::user()->name .' 於514有新增送審的活動，請盡速前往審核</p>
-                           <p><a href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
+                           <p><a href="' . url('dashboard/activity#tab-4') . '" >後台活動審核連結</a></p>';
             Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg_system) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $mails )->subject('【514活動上架審核通知】514活動主'. Auth::user()->name .'新增活動，活動ID：'. $activity_id);
@@ -262,7 +262,7 @@ class ActivityController extends Controller
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
             $msg_system = '<p>Hi 514的同仁</p>
                            <p>活動主 '. Auth::user()->name .' 於514有新增送審的活動，請盡速前往審核</p>
-                           <p><a href="' . url('dashboard/dashboard#tab-4') . '" >後台活動審核連結</a></p>';
+                           <p><a href="' . url('dashboard/activity#tab-4') . '" >後台活動審核連結</a></p>';
             Mail::send('auth.emails.checkout', array('msg' => $msg_system),  function($message) use ($mails, $msg_system, $activity_id) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $mails )->subject('【514活動上架審核通知】514活動主'. Auth::user()->name .'新增活動，活動ID：'. $activity_id);
