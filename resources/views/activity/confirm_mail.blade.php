@@ -6,7 +6,7 @@
         <div class="confirm-top">
             您好，{{ $tickets->user_name }}
             感謝您報名了 {{ $tickets->ItemDesc }}，預祝您有個美好的活動體驗。
-            連結：<a href="{{ url('activity/'. reset($tickets->ticket_infos)->activity_id ) }}">活動票券連結</a>
+            連結：<a href="{{ url('activity/'. reset($tickets->ticket_infos)->activity_id ) }}">該活動頁面</a>
         </div>
         <div class="col-md-5 confirm-left">
             <div class="row">
