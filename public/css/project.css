@@ -2549,10 +2549,10 @@ li.collapse-blog-category {
 .list-filter-row label {
     font-size: 15px;
     text-align: center;
-    border: 1px solid #00bcd4;
+    border: 1px solid #998d7e;
     padding: 5px;
     letter-spacing: 2px;
-    color: #00bcd4;
+    color: #998d7e;
     width: calc(100%/3 - 15px);
     margin:5px;
 }
