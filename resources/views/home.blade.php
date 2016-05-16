@@ -113,7 +113,7 @@
                     </div>
                     <div class="home-mb-info">
                         <img src="/img/icons/mb-price.png">
-                        {{ $mbActivity->price }} 元起
+                        {{ $mbActivity->price }} 元
                     </div>
                     <div class="word-indent-newact home-mb-info home-mb-calendar">
                         <img src="/img/icons/mb-date.png">

@@ -259,14 +259,20 @@
         border-bottom: 2px solid #d8d8d8;
         margin-bottom: 20px;
     }
+    
     .bottom-linkout img {
         width: 60px;
     }
+    
     .footer-center {
-        width: 80%;
-        text-align: center;
-        padding: 15px 10px;
+        width: 100%;
+        padding: 15px 0;
     }
+    
+    .contact-us {
+        padding: 10px 40px;
+    }
+    
     /*---------------sliderbar---------------*/
     li.drawer-mb {
       text-align: center;
@@ -637,7 +643,7 @@
     }
 
     .list-filter-option label{
-        font-size: 14px;
+        font-size: 16px;
         padding: 5px;
     }
 

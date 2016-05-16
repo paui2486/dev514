@@ -259,7 +259,7 @@
                 <div class="dashboard-block dashboard-price">
                     <img src="/img/icons/info-price.png">
                     <div class="dashboard-text">
-                        <p>$ {{ $activity->min_price }} NTD起</p>
+                        <p>$ {{ $activity->min_price }} 元</p>
                     </div>
                 </div>
             </div>
@@ -410,7 +410,7 @@
             $.colorbox({
                 fixed   : true,
                 opacity : 0.5,
-                html    : '<div class="Cart-alert"><p>{{ Session::get('message') }}</p></div>',
+                html    : '<div class="Cart-alert"><p>請勾選您要的票券，謝謝！</p></div>',
             });
         @endif
 
@@ -425,10 +425,13 @@
             } else {
                 RightFixed.removeClass("Cart-fixed");
             }
-//            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+250){
-//                RightFixed.removeClass("Cart-fixed");
-//            }
-
+            if ($(this).scrollTop() > $(".act-page-container").height()-$(window).height()+160){
+                RightFixed.addClass("Cart-fixed-bottom");
+            } else {
+                RightFixed.removeClass("Cart-fixed-bottom");
+            }
+            
+          
             $(".inline").colorbox({
                 fixed : true,
                 inline : true,
