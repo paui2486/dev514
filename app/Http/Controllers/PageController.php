@@ -60,17 +60,23 @@ class PageController extends Controller
 
     public function addSubscribe(Request $request)
     {
-        $subscribes = DB::table('subscribes');
-        $sub = $subscribes->where('email', $request->email)->get();
-        if ( empty($sub) ) {
-            $subscribes->insert(array('email' => $request->email));
+        if ($request->email == "") {
             return Response::json([
-                  'result' => '感謝您！您已訂閱成功，有新的活動我們會第一時間通知您！'
+                  'result' => '請勿輸入空白資訊！'
               ], 201);
         } else {
-            return Response::json([
-                  'result' => '感謝您！您已存在於訂閱戶當中！'
-              ], 201);
+            $subscribes = DB::table('subscribes');
+            $sub = $subscribes->where('email', $request->email)->get();
+            if ( empty($sub) ) {
+                $subscribes->insert(array('email' => $request->email));
+                return Response::json([
+                      'result' => '感謝您！您已訂閱成功，有新的活動我們會第一時間通知您！'
+                  ], 201);
+            } else {
+                return Response::json([
+                      'result' => '感謝您！您已存在於訂閱戶當中！'
+                  ], 201);
+            }
         }
     }
 }
