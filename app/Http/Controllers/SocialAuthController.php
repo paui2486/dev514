@@ -25,7 +25,11 @@ class SocialAuthController extends Controller
         Log::error('SocialAuth Login');
         Log::error($request);
         $service = new SocialAccountService();
-        $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
+
+        $social_user = Socialite::driver('facebook')->user();
+        Log::error(json_encode($social_user));
+
+        $user = $service->createOrGetUser($social_user);
         Log::error(json_encode($user));
 
         auth()->login($user);
