@@ -226,34 +226,26 @@ $(document).ready(function () {
               name: {
                   required: true,
               },
-              nick: {
-                  required: true,
-              },
               address: {
-                  required: true,
+                  required: false,
               },
               email: {
                   email: true,
                   required: true,
               },
               phone: {
-                  required: true,
-                  phone: true,
+                  required: false,
+                  phone: false,
               },
               bank_account: {
-                  credit_card: true,
+                  credit_card: false,
               },
           },
           messages: {
               name: "*請填寫使用者名稱",
-              nick: "*請填寫使用者暱稱",
-              address: "*請填寫居住地址",
               email: {
                   required: "*請輸入電子信箱",
                   email: "*請輸入 email 格式"
-              },
-              phone: {
-                  required: "*請輸入電話號碼 ex: 09xx-xxx-xxx",
               },
           },
           errorElement: "em",

@@ -686,7 +686,7 @@
     function remove() {
         var count = $(".form-ticket").length;
         if (count === 1){
-            alert("只剩下一張票卷！請勿刪除！！感謝");
+            alert("只剩下一張票券！請勿刪除！！感謝");
         } else {
             $(this).parents(".form-ticket").remove();
         }
