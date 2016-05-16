@@ -491,7 +491,7 @@ class ActivityController extends Controller
 
         return Datatables::of($ticket)
             ->remove_column('email')
-            ->edit_column('MerchantOrderNo', "<a style='width:100%' href='{{ url(\"purchase/trade/\$MerchantOrderNo\") }}'>{{ \$MerchantOrderNo }}</a>")
+            ->edit_column('MerchantOrderNo', "<a style='width:100%' href='@if(\$status == 2) {{ url(\"purchase/trade/\$MerchantOrderNo\") }} @else # @endif'>{{ \$MerchantOrderNo }}</a>")
             ->edit_column('id', "<a href='mailto:{{ \$email }}'><div class='btn btn-xs btn-info'>聯絡廠商</div></a>
                                  <a href='mailto:service@514.com.tw'><div class='btn btn-xs btn-danger'>疑難排解</div></a>")
             ->edit_column('title', "<a style='width:100%' href='{{ url(\"activity/\$id\") }}'>{{ \$title }}</a>")
