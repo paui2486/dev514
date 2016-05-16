@@ -204,10 +204,10 @@ $(document).ready(function () {
                     <div class="col-md-12 col-xs-6 list-category-thumnail" style="background-image:url(\''+ data[eventIndex]['thumbnail']  +'\')"></div>  \
                     <div class="col-md-12 col-xs-6 list-category-text"> \ <div class="word-indent-01 list-category-title"> \
                     '+ data[eventIndex]['title'] +' \
-                    </div> <div class="list-category-info"> <p> <img src="/img/icons/mb-price.png"> ' + " $ " + data[eventIndex]['min_price'] + "元 " + ' \
+                    </div> <div class="list-category-info"> <p> <img src="/img/icons/mb-date.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
+                    getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +'  \
                     </p> \
-                    <p> <img src="/img/icons/mb-date.png"> ' + getDay(data[eventIndex]['activity_start']) +  getWeekday(data[eventIndex]['activity_start']) + " ～ " +
-                    getDay(data[eventIndex]['activity_end']) + getWeekday(data[eventIndex]['activity_start']) +' </p> \
+                    <p> <img src="/img/icons/mb-price.png"> ' + " $ " + data[eventIndex]['min_price'] + "元 " + '</p> \
                     <p> <img src="/img/icons/mb-location.png"> ' + data[eventIndex]['locat_name'] + data[eventIndex]['location'] + ' </p> \
                     <p> <img src="/img/icons/mb-category.png"> ' + data[eventIndex]['cat_name'] + '  </p> \
                     </div> \

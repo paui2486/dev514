@@ -303,10 +303,10 @@
                             <div class="actpage-recommend-info">
                                 <p class="word-indent-01">{{ $suggest->title }}</p>
                                 <p>
-                                    <img src="/img/icons/web-price.png"><span>{{ $suggest->min_price }} 元起</span>
+                                    <img src="/img/icons/web-date.png"><span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</span>
                                 </p>
                                 <p>
-                                    <img src="/img/icons/web-date.png"><span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($suggest->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $suggest->activity_start); /*--}}</span>
+                                    <img src="/img/icons/web-price.png"><span>{{ $suggest->min_price }} 元</span>
                                 </p>
                                 <p class="word-indent-01">
                                     <img src="/img/icons/web-location.png"><span>{{ $suggest->locat_name . $suggest->location }}</span></p>
