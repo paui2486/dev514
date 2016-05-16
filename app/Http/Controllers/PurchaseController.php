@@ -739,6 +739,7 @@ class PurchaseController extends controller
                         'orders.user_name',       'orders.user_phone',      'orders.user_email',
                     ))
                     ->where('MerchantOrderNo', $id)
+                    ->where('status', 2)
                     // ->where('user_id', Auth::id())
                     ->first();
 
