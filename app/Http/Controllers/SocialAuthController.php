@@ -28,7 +28,7 @@ class SocialAuthController extends Controller
 
         $social_user = Socialite::driver('facebook')->user();
         Log::error(json_encode($social_user));
-
+        // fb 回傳結果
         $user = $service->createOrGetUser($social_user);
         Log::error(json_encode($user));
 
