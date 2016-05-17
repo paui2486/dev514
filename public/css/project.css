@@ -2699,3 +2699,144 @@ input[type='checkbox']:checked {
     background-image: url(/img/icons/checked_box.png);
     background-size: cover;
 }
+
+/*----------會員資料頁----------*/
+
+.Member-container {
+    padding: 20px;
+}
+
+.Member-TopContent {
+    width: 80%;
+    margin: auto;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 1px 1px 10px #ccc;
+}
+
+.Member-TopContent img {
+    width: 150px;
+    border-radius: 150px;
+}
+
+.Member-introduce {
+    padding: 15px 0;
+}
+
+.Member-introduce p {
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.Member-introduce span {
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.contact-dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 30px;
+}
+
+.contact-dropbtn {
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    background: #00bcd4;
+    letter-spacing: 2px;
+}
+
+.contact-dropcontent {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    letter-spacing: 2px;
+    z-index: 1000;
+}
+
+.contact-dropcontent a {
+    color: #999999;
+    padding:10px;
+    text-decoration: none;
+    display: block;
+}
+
+.contact-dropcontent a:hover {
+    background-color: #f1f1f1}
+
+.contact-dropdown:hover .contact-dropcontent {
+    display: block;
+}
+
+.Member-InfoBar {
+    width: 80%;
+    margin: 15px auto;
+    font-size: 16px;
+}
+
+.Member-InfoBar span {
+    padding: 10px;
+    background: #ccc;
+    display: inline-block;
+}
+
+.Member-MainContent {
+    width: 80%;
+    margin: 20px auto;
+    background-color: rgba(255,255,255,0.6);
+    padding: 5px 10px;
+}
+
+.Member-panel {
+    margin: 15px 0px;
+}
+
+.Member-panel-bg {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.MemberAct-thumbnail {
+    height: 200px;
+    background-size: cover;
+    background-position: top;
+    border-radius: 10px 10px 0 0;
+}
+
+.MemberAct-text {
+    padding:5px 10px;
+    font-size: 15px;
+}
+
+.MemberAct-info {
+    color: #998d7e;
+    font-size: 14px;
+}
+
+.MemberAct-info img {
+    width: 28px;
+}
+
+.MemberAct-pro {
+    opacity: 0.7;
+    font-size: 13px;
+    text-align:  right;
+    color: black;
+}
+
+.MemberAct-pro img {
+    width: 20px;
+    padding-bottom: 5px;
+}
+
+
+
+
+
