@@ -89,7 +89,7 @@
                         <span class="share-dropbtn">更多...</span>
                         <div class="share-dropdown-content">
                             <!-- <a href="#" id="shareWeChat">WeChat</a> -->
-                            <a href="#" onclick="share('Weibo')">微博</a>
+                            <a href="#" onclick="share('Weibo')"> <img src="/img/icons/share-weibo.png">微博</a>
                         </div>
                     </div>
                 </div>

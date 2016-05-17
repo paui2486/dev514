@@ -57,6 +57,11 @@ class PageController extends Controller
     {
         return view("page.cowork");
     }
+    
+    public function memberpage()
+    {
+        return view("page.memberpage");
+    }
 
     public function testMail()
     {
