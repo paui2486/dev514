@@ -274,15 +274,17 @@ class PurchaseController extends controller
         Log::error(Input::all());
         // url 2 notify or result
         $comURL     = urldecode($request->segment(2));
-        $status     = $request->Status;
-        $msg        = $request->Message;
 
         if ($comURL == 'result') {
-          $feedback   = (object) json_decode($request->Result, true);
+            $feedback   = (object) json_decode($request->Result, true);
+            $status     = $request->Status;
+            $msg        = $request->Message;
         } else {
-          $jsonData   = iconv("UTF-8","BIG5", $request->JSONData);
-          $decodeJsonData   = (object) json_decode($jsonData, true);
-          $feedback   = (object) json_decode($decodeJsonData->Result, true);
+            $jsonData   = iconv("UTF-8","BIG5", $request->JSONData);
+            $decodeJsonData   = (object) json_decode($jsonData, true);
+            $feedback   = (object) json_decode($decodeJsonData->Result, true);
+            $status     = $decodeJsonData->Status;
+            $msg        = $decodeJsonData->Message;
         }
 
         // $feedback   = (object) json_decode($request->Result, true);
@@ -456,7 +458,7 @@ class PurchaseController extends controller
                 'TradeTime'         => $feedback->PayTime,
                 'TotalPrice'        => $feedback->Amt,
                 'MerchantOrderNo'   => $feedback->MerchantOrderNo,
-                'ItemDesc'          => $feedback->ItemDesc,
+                'ItemDesc'          => $order->ItemDesc,
                 'user_name'         => $order->user_name,
                 'user_phone'        => $order->user_phone,
                 'user_email'        => $order->user_email,
