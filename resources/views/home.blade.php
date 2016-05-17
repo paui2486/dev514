@@ -111,13 +111,13 @@
                     <div class="home-mb-activity-title word-indent-01">
                          {{ $mbActivity->title }}
                     </div>
-                    <div class="home-mb-info">
-                        <img src="/img/icons/mb-price.png">
-                        {{ $mbActivity->price }} 元
-                    </div>
                     <div class="word-indent-newact home-mb-info home-mb-calendar">
                         <img src="/img/icons/mb-date.png">
                             {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
+                    </div>
+                    <div class="home-mb-info">
+                        <img src="/img/icons/mb-price.png">
+                        {{ $mbActivity->price }} 元
                     </div>
                     <div class="home-mb-info word-indent-newact">
                         <img src="/img/icons/mb-location.png">
@@ -217,10 +217,6 @@
                             <div class="new-activity-count">
                                 <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                             </div>
-                            <div class="new-activity-price">
-                                <img src="img/pics/money-icon-02.png">
-                                {{ $newActivity->price }} 元
-                            </div>
                             <!-- HTML to write -->
 
                             <div class="new-activity-date">
@@ -232,6 +228,10 @@
                                     <div class="tooltip-arrow"></div>
                                     <div class="tooltip-inner"></div>
                                 </div>
+                            </div>
+                            <div class="new-activity-price">
+                                <img src="img/pics/money-icon-02.png">
+                                {{ $newActivity->price }} 元
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
@@ -292,10 +292,6 @@
                                     {{ $activity->title }}
                                 </a>
                             </div>
-                            <div class="new-activity-price">
-                                <img src="img/pics/money-icon-02.png">
-                                {{ $activity->price }} 元
-                            </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
@@ -305,6 +301,10 @@
                                     <div class="tooltip-arrow"></div>
                                     <div class="tooltip-inner"></div>
                                 </div>
+                            </div>
+                            <div class="new-activity-price">
+                                <img src="img/pics/money-icon-02.png">
+                                {{ $activity->price }} 元
                             </div>
                             <div class="new-activity-location word-indent-newact ">
                                 <img src="img/pics/location-icon-02.png">
