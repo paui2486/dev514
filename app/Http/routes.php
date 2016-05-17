@@ -72,7 +72,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('subscribes/add'             , 'PageController@addSubscribe'      );
     Route::post('purchase/result'           , 'PurchaseController@pay2GoResult'  );
-    Route::post('purchase/notify'           , 'PurchaseController@pay2GoNotify'  );
+    Route::post('purchase/notify'           , 'PurchaseController@pay2GoResult'  );
     Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );
     Route::post('purchase/{activity_id}'    , 'PurchaseController@postPurchase'  );
     Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
