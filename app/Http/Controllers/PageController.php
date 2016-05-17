@@ -90,7 +90,7 @@ class PageController extends Controller
         $tickets = (object) array(
             'TradeNo'           => $order->TradeNo,
             'TradeTime'         => $order->PayTime,
-            'TotalPrice'        => $order->Amt,
+            'TotalPrice'        => $order->TotalPrice,
             'MerchantOrderNo'   => $order->MerchantOrderNo,
             'ItemDesc'          => $order->ItemDesc,
             'user_name'         => $order->user_name,
@@ -105,7 +105,7 @@ class PageController extends Controller
 
         $hoster = DB::table('users')->find($act->hoster_id);
 
-        Mail::send('activity.confirm_mail', array('tickets' => $tickets), function($message) use ($tickets, $hoster) {
+        Mail::send('activity.confirm_text', array('tickets' => $tickets), function($message) use ($tickets, $hoster) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( $tickets->user_email, $tickets->user_name )
                     // ->bcc( $hoster->email, $hoster->name )

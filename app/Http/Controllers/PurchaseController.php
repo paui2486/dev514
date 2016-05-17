@@ -491,7 +491,7 @@ class PurchaseController extends controller
             curl_close($ch);
 
             // email customer
-            Mail::send('activity.confirm_mail', array('tickets' => $tickets), function($message) use ($tickets, $hoster) {
+            Mail::send('activity.confirm_text', array('tickets' => $tickets), function($message) use ($tickets, $hoster) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $tickets->user_email, $tickets->user_name )
                         // ->bcc( $hoster->email, $hoster->name )
@@ -721,7 +721,7 @@ class PurchaseController extends controller
         curl_close($ch);
 
         // email customer
-        Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info, $hoster) {
+        Mail::send('activity.confirm_text', array('tickets' => $orders), function($message) use ($info, $hoster) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( $info->user_email, $info->user_name )
                     // ->bcc( $hoster->email, $hoster->name )
