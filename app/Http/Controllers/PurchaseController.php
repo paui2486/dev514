@@ -478,7 +478,7 @@ class PurchaseController extends controller
             });
 
             // MSG  customer
-            $subject_msg = "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。 ". url('purchase/trade/'.$feedback->MerchantOrderNo);
+            $subject_msg = iconv("UTF-8","big5", "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。 ". url('purchase/trade/'.$feedback->MerchantOrderNo));
             $msg  = "username=coevo5311&password=coevo8909&dstaddr=". $tickets->user_phone ."&smbody=". $subject_msg;
             $host = "202.39.48.216";
             $url  = "http://".$host."/kotsmsapi-1.php?".$msg;
