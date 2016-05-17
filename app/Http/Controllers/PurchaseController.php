@@ -748,6 +748,17 @@ class PurchaseController extends controller
         }
 
         $orderDetail       = DB::table('orders_detail')->where('order_id', $orders->id);
+
+
+        $firstOrder = $orderDetail->first();
+        if (empty($firstOrder)) {
+            return Redirect::back('');
+        } else {
+            $act = DB::table('activities')
+                    ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
+                    ->where( 'activities.id', $orderDetail->first()->topic_id )->first();
+        }
+
         $ticket_ids     = $orderDetail->orderBy('id', 'ASC')->lists('sub_topic_id');
         $ticket_numbers = $orderDetail->orderBy('id', 'ASC')->lists('sub_topic_number');
 
@@ -767,10 +778,6 @@ class PurchaseController extends controller
             $ticket_target->quantity     = $ticket_numbers["$key"];
             array_push($ticket_infos, $ticket_target);
         }
-
-        $act = DB::table('activities')
-                ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
-                ->where( 'activities.id', $orderDetail->first()->topic_id )->first();
 
         $tickets = (object) array(
             'TradeNo'           => $orders->MerchantOrderNo,
