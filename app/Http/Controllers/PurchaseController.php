@@ -283,7 +283,7 @@ class PurchaseController extends controller
           $feedback   = (object) json_decode($request->JSONData, true);
         }
 
-        $feedback   = (object) json_decode($request->Result, true);
+        // $feedback   = (object) json_decode($request->Result, true);
         $order      = DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)->first();
 
         if ( $status == "SUCCESS" ) {
@@ -478,7 +478,7 @@ class PurchaseController extends controller
             });
 
             // MSG  customer
-            $subject_msg = "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。 ". url('purchase/trade/'.$feedback->MerchantOrderNo);
+            $subject_msg = iconv("UTF-8","big5", "【514生活頻道】感謝您報名了活動名稱，前往查看：票券連結。 ". url('purchase/trade/'.$feedback->MerchantOrderNo));
             $msg  = "username=coevo5311&password=coevo8909&dstaddr=". $tickets->user_phone ."&smbody=". $subject_msg;
             $host = "202.39.48.216";
             $url  = "http://".$host."/kotsmsapi-1.php?".$msg;
@@ -491,7 +491,7 @@ class PurchaseController extends controller
             curl_close($ch);
 
             // email customer
-            Mail::send('activity.confirm_mail', array('tickets' => $tickets), function($message) use ($tickets, $hoster) {
+            Mail::send('activity.confirm_text', array('tickets' => $tickets), function($message) use ($tickets, $hoster) {
                 $message->from('service@514.com.tw', '514 活動頻道');
                 $message->to( $tickets->user_email, $tickets->user_name )
                         // ->bcc( $hoster->email, $hoster->name )
@@ -721,7 +721,7 @@ class PurchaseController extends controller
         curl_close($ch);
 
         // email customer
-        Mail::send('activity.confirm_mail', array('tickets' => $orders), function($message) use ($info, $hoster) {
+        Mail::send('activity.confirm_text', array('tickets' => $orders), function($message) use ($info, $hoster) {
             $message->from('service@514.com.tw', '514 活動頻道');
             $message->to( $info->user_email, $info->user_name )
                     // ->bcc( $hoster->email, $hoster->name )

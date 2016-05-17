@@ -43,8 +43,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('Cooperation'    , 'PageController@Cooperation'  );
     Route::get('MediaReport'    , 'PageController@media-report' );
     Route::get('Partner'        , 'PageController@partner'      );
+<<<<<<< HEAD
     Route::get('MemberPage'     , 'PageController@memberpage'   );
 
+=======
+
+    Route::get('testMail'       , 'PageController@testMail'     );
+>>>>>>> 4c6dfa2f90d97cea1df7bff01eab507293be133c
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
@@ -74,7 +79,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('subscribes/add'             , 'PageController@addSubscribe'      );
     Route::post('purchase/result'           , 'PurchaseController@pay2GoResult'  );
-    Route::post('purchase/notify'           , 'PurchaseController@pay2GoNotify'  );
+    Route::post('purchase/notify'           , 'PurchaseController@pay2GoResult'  );
     Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );
     Route::post('purchase/{activity_id}'    , 'PurchaseController@postPurchase'  );
     Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
