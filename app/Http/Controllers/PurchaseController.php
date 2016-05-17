@@ -283,7 +283,7 @@ class PurchaseController extends controller
           $feedback   = (object) json_decode($request->JSONData, true);
         }
 
-        $feedback   = (object) json_decode($request->Result, true);
+        // $feedback   = (object) json_decode($request->Result, true);
         $order      = DB::table('orders')->where('MerchantOrderNo', $feedback->MerchantOrderNo)->first();
 
         if ( $status == "SUCCESS" ) {

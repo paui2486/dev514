@@ -43,6 +43,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('Cooperation'    , 'PageController@Cooperation'  );
     Route::get('MediaReport'    , 'PageController@media-report' );
     Route::get('Partner'        , 'PageController@partner'      );
+
+    Route::get('testMail'       , 'PageController@testMail'     );
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
