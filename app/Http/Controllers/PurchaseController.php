@@ -280,7 +280,9 @@ class PurchaseController extends controller
         if ($comURL == 'result') {
           $feedback   = (object) json_decode($request->Result, true);
         } else {
-          $feedback   = (object) json_decode($request->JSONData, true);
+          $jsonData   = iconv("UTF-8","BIG5", $request->JSONData);
+          $decodeJsonData   = (object) json_decode($jsonData, true);
+          $feedback   = (object) json_decode($decodeJsonData->Result, true);
         }
 
         // $feedback   = (object) json_decode($request->Result, true);
@@ -752,7 +754,7 @@ class PurchaseController extends controller
 
         $firstOrder = $orderDetail->first();
         if (empty($firstOrder)) {
-            return Redirect::back('');
+            return Redirect::back();
         } else {
             $act = DB::table('activities')
                     ->leftJoin('categories', 'activities.location_id', '=', 'categories.id')
