@@ -53,9 +53,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group {{{ $errors->has('name') ? 'has-error' : '' }}}">
+                <div class="form-group {{{ $errors->has('CompanyName') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
-                        <label class="control-label col-sm-3" for="name">
+                        <label class="control-label col-sm-3" for="CompanyName">
                             <span>*</span> 公司名稱
                         </label>
                         <div class="col-sm-9">
@@ -172,17 +172,17 @@ $(document).ready(function () {
     $(document).on("keypress", "form", function(event) {
         return event.keyCode != 13;
     });
-    
+
     $.validator.addMethod("phone", function(value, element) {
         return this.optional(element) || /\d{4}-\d{3}-\d{3}/.test(value);
     }, "請輸入完手機號碼");
-    
+
     $(".form-horizontal").validate( {
         rules: {
               name: {
                   required: true,
               },
-              
+
               email: {
                   email: true,
                   required: true,
@@ -202,6 +202,6 @@ $(document).ready(function () {
                   email: "*請輸入正確的 email 格式"
               },
           },
-    
+
 });
 </script>

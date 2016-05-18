@@ -558,7 +558,7 @@ class ActivityController extends Controller
     {
         $count = 0;
         $storeArray = array(
-          'name'    => $request->name,
+          'name'    => $request->CompanyName,
           'TaxID'   => $request->TaxID,
           'address' => $request->address,
           'phone'   => $request->phone,
@@ -738,7 +738,7 @@ class ActivityController extends Controller
         $price = 0;
 
         // $orders_ids = $orders->distinct('orders.id')->lists('orders.id');
-        $orders_list = $orders->lists('orders_detail.id');
+        $orders_list    = $orders->lists('orders_detail.id');
         $checkout_price = $orders->sum('InstFirst');
 
         return $orders->get();
