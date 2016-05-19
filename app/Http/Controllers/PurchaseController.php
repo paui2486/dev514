@@ -151,6 +151,11 @@ class PurchaseController extends controller
                       ->where('activities.status', '=', '4')
                       ->first();
 
+        if (empty($activity)) {
+           Session::flash('message', '抱歉！查無無此活動票卷');
+           return Redirect::to($url);
+        }
+
         $expireDate = date('Ymd', strtotime ( '+1 day') );
 
         $tickets  = DB::table('act_tickets')
@@ -180,10 +185,7 @@ class PurchaseController extends controller
             }
         }
 
-        if (empty($activity)) {
-            Session::flash('message', '抱歉！查無無此活動票卷');
-            return Redirect::to($url);
-        } elseif (!empty($misCatch)) {
+        if (!empty($misCatch)) {
             Session::flash('message', '抱歉！目前 '. $misTarget .' 的剩餘票卷，無法滿足您的需求');
             return Redirect::to($url);
         } elseif ($total_price != $request->price) {
