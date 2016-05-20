@@ -2704,23 +2704,28 @@ input[type='checkbox']:checked {
 
 .Member-container {
     padding: 20px;
+    background-image: url(/img/pics/bg-wood.jpg);
+    background-repeat: repeat-y;
 }
 
 .Member-TopContent {
     width: 80%;
     margin: auto;
-    padding: 15px;
     background: #fff;
     box-shadow: 1px 1px 10px #ccc;
 }
 
-.Member-TopContent img {
-    width: 150px;
-    border-radius: 150px;
+.Member-owner {
+    padding: 0;
+}
+
+.Member-owner img {
+    width: 240px;
 }
 
 .Member-introduce {
-    padding: 15px 0;
+    padding: 15px;
+    min-height: 180px;
 }
 
 .Member-introduce p {
@@ -2759,6 +2764,7 @@ input[type='checkbox']:checked {
     cursor: pointer;
     letter-spacing: 2px;
     z-index: 1000;
+    width: 200px;
 }
 
 .contact-dropcontent a {
@@ -2766,6 +2772,15 @@ input[type='checkbox']:checked {
     padding:10px;
     text-decoration: none;
     display: block;
+    word-break: break-all;
+    line-height: 30px;
+}
+
+.contact-dropcontent img {
+    width: 18px;
+    opacity: 0.5;
+    display: inline-block;
+    margin-right: 5px;
 }
 
 .contact-dropcontent a:hover {
@@ -2775,23 +2790,62 @@ input[type='checkbox']:checked {
     display: block;
 }
 
-.Member-InfoBar {
+.Member-Tab {
     width: 80%;
     margin: 15px auto;
     font-size: 16px;
 }
 
-.Member-InfoBar span {
-    padding: 10px;
-    background: #ccc;
-    display: inline-block;
+ul.Tabs {
+    width: 100%;
+	height: 32px;
+	border-bottom: 1px solid #999;
+	border-left: 1px solid #999;
 }
 
-.Member-MainContent {
-    width: 80%;
-    margin: 20px auto;
-    background-color: rgba(255,255,255,0.6);
-    padding: 5px 10px;
+ul.Tabs li {
+    float: left;
+	height: 31px;
+	line-height: 31px;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: -1px;
+	border: 1px solid #999;
+	border-left: none;
+	background: #e1e1e1;
+}
+
+ul.Tabs li a {
+    display: block;
+	padding: 0 20px;
+	color: #000;
+	border: 1px solid #fff;
+	text-decoration: none;
+}
+
+ul.Tabs li a :hover {
+    background: #f2f2f2;
+}
+
+.Member-active {
+    background: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.Member-active a:hover {
+    background: #fff;
+}
+
+.Tab-Container {
+    margin: 0;
+	width: 100%;
+	border: 1px solid #999;
+	border-top: none;
+	background: #fff;
+}
+
+.Tab-Container .Member-content {
+    padding: 20px;
 }
 
 .Member-panel {
@@ -2812,12 +2866,16 @@ input[type='checkbox']:checked {
 
 .MemberAct-text {
     padding:5px 10px;
-    font-size: 15px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    background: #fff;
+    border-radius: 0 0 10px 10px;
 }
 
 .MemberAct-info {
     color: #998d7e;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 30px;
 }
 
 .MemberAct-info img {

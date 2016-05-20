@@ -74,7 +74,7 @@
                                                     value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
                                             </span>
                                             <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 移除圖片 </a>
-                                            <span style="color:red;">(建議尺寸 1,200 x 675 像素)</span>
+                                            <span style="color:red;">(建議以人物為主題，尺寸 1,200 x 675 像素)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@
                         <div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="content">
-                                    活動內容
+                                    活動內容<br><span>（建議以人物故事為描述主題）</span>
                                 </label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control ckeditor" id="content" name="content" rows="6">{{{ Input::old('content', isset($activity) ? $activity->content : null) }}}</textarea>
@@ -447,8 +447,10 @@
 <script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cropper.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.mu.image.resize.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
+        $('.resize').muImageResize({width: 150, height:150});
         // CKFinder.setupCKEditor();
 
         // $('#image').cropper({
