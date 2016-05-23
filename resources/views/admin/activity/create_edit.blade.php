@@ -58,7 +58,7 @@
                         <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}} ">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="thumbnail">
-                                    活動縮圖
+                                    <p>1</p>活動縮圖
                                 </label>
                                 <div class="col-sm-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -83,7 +83,7 @@
                         <div class="form-group {{{ $errors->has('title') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="title">
-                                    活動名稱
+                                    <p>2</p>活動名稱
                                 </label>
                                 <div class="col-sm-10 errorbox">
                                     <input class="form-control " type="text" name="title" id="title"value="{{{ Input::old('title', isset($activity) ? $activity->title : null) }}}" />
@@ -94,7 +94,7 @@
                         <div class="form-group {{{ $errors->has('hoster_id') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="hoster_id">
-                                    主辦單位
+                                    <p>3</p>主辦單位
                                 </label>
                                 <div class="col-sm-10">
                                     <select style="width: 100%" name="hoster_id" id="hoster_id" class="form-control">
@@ -115,7 +115,7 @@
                         <div class="form-group {{{ $errors->has('soWhat') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="soWhat">
-                                    活動分類
+                                    <p>4</p>活動分類
                                 </label>
                                 <div class="col-sm-10">
                                     <select style="width: 100%" name="soWhat" class="form-control">
@@ -137,7 +137,7 @@
                         <div class="form-group {{{ $errors->has('activity_range') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="activity_start">
-                                    活動期間
+                                    <p>5</p>活動期間
                                 </label>
                                 <div class="errorbox col-sm-6 col-md-5">
                                     <div class="col-md-2 table-cell">
@@ -200,7 +200,7 @@
                         <div class="form-group {{{ $errors->has('location') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="goWhere">
-                                    活動地點
+                                    <p>6</p>活動地點
                                 </label>
                                 <div class="col-sm-2">
                                     <select style="width: 100%" name="goWhere" class="form-control">
@@ -222,7 +222,7 @@
                         <div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}"  style="display:none">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="description">
-                                    活動摘要
+                                    <p>9</p>活動摘要
                                 </label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="description" id="description" placeholder="為活動顯示使用，請簡單描述一下您的活動吧！" value="{{{ Input::old('description', isset($activity) ? $activity->description : null) }}}" />
@@ -232,7 +232,7 @@
                         <div class="form-group {{{ $errors->has('ticket_description') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="ticket_description">
-                                    購票說明
+                                    <p>7</p>購票說明
                                 </label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control ckeditor" id="ticket_description" name="ticket_description" rows="6">{{{ Input::old('ticket_description', isset($activity) ? $activity->ticket_description : null) }}}</textarea>
@@ -242,7 +242,7 @@
                         <div class="form-group {{{ $errors->has('tag_ids') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="tag_ids">
-                                    活動標籤
+                                    <p>8</p>活動標籤
                                 </label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="tag_ids" id="tag_ids" placeholder="輸入後按Enter，或使用小寫逗號區隔"
@@ -253,7 +253,7 @@
                         <div class="form-group {{{ $errors->has('content') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="content">
-                                    活動內容<br><span>（建議以人物故事為描述主題）</span>
+                                    <p>9</p>活動內容<br><span>（建議以人物故事為描述主題）</span>
                                 </label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control ckeditor" id="content" name="content" rows="6">{{{ Input::old('content', isset($activity) ? $activity->content : null) }}}</textarea>
@@ -276,7 +276,7 @@
                         <div class="form-group {{{ $errors->has('status') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="status">
-                                    活動狀態
+                                    <p>10</p>活動狀態
                                 </label>
                                 <div class="radio login-info checkbox col-sm-10">
                                     <label class="col-xs-3">
@@ -449,8 +449,6 @@
 <script type="text/javascript" src="{{ asset('js/cropper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.mu.image.resize.js') }}"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('.resize').muImageResize({width: 150, height:150});
         // CKFinder.setupCKEditor();
 
         // $('#image').cropper({

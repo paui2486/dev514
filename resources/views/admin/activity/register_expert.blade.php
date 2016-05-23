@@ -25,7 +25,7 @@
                  <div class="form-group {{{ $errors->has('contact_name') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="contact_name">
-                           <span>*</span> 聯絡人姓名
+                            <p>1</p> 聯絡人姓名<span>*</span>
                         </label>
                         <div class="col-sm-9">
                             <input class="form-control" type="text" name="contact_name" id="contact_name" placeholder="" value="{{ Auth::user()->name }}" />
@@ -35,7 +35,7 @@
                 <div class="form-group {{{ $errors->has('contact_phone') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="contact_phone">
-                            <span>*</span> 聯絡人電話
+                             <p>2</p>聯絡人電話<span>*</span> 
                         </label>
                         <div class="col-sm-9">
                             <input placeholder="請輸入聯絡人手機號碼" class="form-control" type="text" name="contact_phone" id="contact_phone"
@@ -46,7 +46,7 @@
                 <div class="form-group {{{ $errors->has('contact_email') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="contact_email">
-                            <span>*</span> 聯絡人信箱
+                           <p>3</p>聯絡人信箱<span>*</span> 
                         </label>
                         <div class="col-sm-9">
                             <input class="form-control" type="text" name="contact_email" id="contact_email" placeholder="" value="{{ Auth::user()->email }}" />
@@ -56,7 +56,7 @@
                 <div class="form-group {{{ $errors->has('CompanyName') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="CompanyName">
-                            <span>*</span> 公司名稱
+                            <p>4</p> 公司名稱<span>*</span>
                         </label>
                         <div class="col-sm-9">
                             <input placeholder="請輸入公司全名" class="form-control" type="text" name="CompanyName" id="CompanyName" value="" />
@@ -66,7 +66,7 @@
                 <div class="form-group {{{ $errors->has('TaxID') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="TaxID">
-                            公司統編/身分證字號
+                            <p>5</p>公司統編/身分證字號
                         </label>
                         <div class="col-sm-9">
                             <input class="form-control" type="text" name="TaxID" id="TaxID" value="" placeholder="請輸入公司統一編號 或 聯絡人身分證字號" />
@@ -76,7 +76,7 @@
                 <div class="form-group {{{ $errors->has('address') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="address">
-                            公司地址
+                            <p>6</p>公司地址
                         </label>
                         <div class="col-sm-9">
                             <input class="form-control time-picker" type="text" name="address" id="address" value=""/>
@@ -86,7 +86,7 @@
                 <div class="form-group {{{ $errors->has('phone') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-3" for="phone">
-                            公司電話
+                            <p>7</p>公司電話
                         </label>
                         <div class="col-sm-9">
                             <input class="form-control" type="text" name="phone" id="phone" placeholder="例：(02)1234-5678" value="" />
@@ -97,7 +97,7 @@
                 <div class="form-group {{{ $errors->has('ID_path') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-2" for="thumbnail">
-                            公司行號登記表
+                            <p>8</p>公司行號登記表
                         </label>
                         <div class="col-sm-10">
                             <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -120,7 +120,7 @@
                 <div class="form-group {{{ $errors->has('Bank_path') ? 'has-error' : '' }}}">
                     <div class="col-md-12">
                         <label class="control-label col-sm-2" for="thumbnail">
-                            銀行存摺
+                            <p>9</p>銀行存摺
                         </label>
                         <div class="col-sm-10">
                             <div class="fileupload fileupload-new" data-provides="fileupload">
