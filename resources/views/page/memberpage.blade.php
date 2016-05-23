@@ -23,36 +23,14 @@
         </div>
     </div>
     <div class="row Member-Tab">
-        <ul class="Tabs" style="margin:0;">
+        <ul class="row Tabs" style="margin:0;">
             <li><a href="#Mtab-1">職人經歷</a></li>
             <li><a href="#Mtab-2">參加中活動</a></li>
             <li><a href="#Mtab-3">參加中活動</a></li>
         </ul>
         <div class="row Tab-Container">
             <div class="row Member-content" id="Mtab-1">
-                <div class="col-md-4 Member-panel">
-                    <div class="MemberAct-id">
-                    </div>
-                    <div class="MemberAct-thumbnail" style=" background-image: url(/img/pics/table-690892_1280.jpg)">
-                    </div>
-                    <div class="MemberAct-text">
-                        <div class="MemberAct-title word-indent-01">活動標題
-                        </div>
-                        <div class="MemberAct-info">
-                            <img src="img/pics/calendar-icon-02.png">06-18（六）
-                        </div>
-                        <div class="MemberAct-info">
-                            <img src="img/pics/money-icon-02.png">$1,200元
-                        </div>
-                        <div class="MemberAct-info">
-                            <img src="img/pics/location-icon-02.png">台北市信義區
-                        </div>
-                        <div class="MemberAct-pro">
-                            <img src="/img/icons/holder.png">
-                            <span> 514頻道 </span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="row Member-content" id="Mtab-2">
                 <div class="col-md-4 Member-panel">

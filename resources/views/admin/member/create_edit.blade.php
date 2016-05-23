@@ -20,8 +20,8 @@
               </div>
             @endif
             <div class="form-group {{{ $errors->has('avatar') ? 'has-error' : '' }}}">
-      					<div class="col-md-12">
-        						<label class="control-label col-sm-2" for="avatar">
+                <div class="col-md-12">
+                    <label class="control-label col-sm-2" for="avatar">
                         個人頭像
                     </label>
                     <div class="col-sm-10">

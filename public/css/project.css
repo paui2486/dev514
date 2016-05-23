@@ -2796,30 +2796,18 @@ input[type='checkbox']:checked {
     font-size: 16px;
 }
 
-ul.Tabs {
-    width: 100%;
-	height: 32px;
-	border-bottom: 1px solid #999;
-	border-left: 1px solid #999;
-}
-
 ul.Tabs li {
     float: left;
-	height: 31px;
-	line-height: 31px;
-	overflow: hidden;
-	position: relative;
-	margin-bottom: -1px;
-	border: 1px solid #999;
-	border-left: none;
-	background: #e1e1e1;
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 5px 5px 0 0;
+    background: #f2f2f2;
+    box-shadow: 2px -3px 8px #ccc;
 }
 
 ul.Tabs li a {
-    display: block;
 	padding: 0 20px;
-	color: #000;
-	border: 1px solid #fff;
+	color: #666;
 	text-decoration: none;
 }
 
@@ -2828,8 +2816,8 @@ ul.Tabs li a :hover {
 }
 
 .Member-active {
-    background: #fff;
-	border-bottom: 1px solid #fff;
+    background: #fff!important;
+	border: 1px solid #fff!important;
 }
 
 .Member-active a:hover {
@@ -2839,9 +2827,10 @@ ul.Tabs li a :hover {
 .Tab-Container {
     margin: 0;
 	width: 100%;
-	border: 1px solid #999;
 	border-top: none;
 	background: #fff;
+    margin-top: -2px;
+    box-shadow: 1px -1px 15px #ccc;
 }
 
 .Tab-Container .Member-content {
@@ -2868,7 +2857,7 @@ ul.Tabs li a :hover {
     padding:5px 10px;
     font-size: 16px;
     letter-spacing: 1px;
-    background: #fff;
+    border: 1px solid #ccc;
     border-radius: 0 0 10px 10px;
 }
 
