@@ -7,8 +7,8 @@
             <img src="/img/pics/default-02.png">
         </div>
         <div class="Member-introduce col-md-9">
-            <p>會員/廠商姓名</p><br>
-            <span>尚未輸入任何相關資訊</span>
+            <p>職人姓名</p><br>
+            <span>職人介紹 —— 尚未輸入任何相關資訊</span>
             
         </div>
         <div class="contact-dropdown">
@@ -30,7 +30,7 @@
         </ul>
         <div class="row Tab-Container">
             <div class="row Member-content" id="Mtab-1">
-                
+                <p></p>
             </div>
             <div class="row Member-content" id="Mtab-2">
                 <div class="col-md-4 Member-panel">
