@@ -8,17 +8,16 @@
         </div>
         <div class="Member-introduce col-md-9">
             <p>{{ $member->name }}</p><br>
-            <span>職人介紹 —— 尚未輸入任何相關資訊</span>
+            <span>職人介紹 —— {{ $member->description }}</span>
 
         </div>
         <div class="contact-dropdown">
-            <span class="contact-dropbtn">聯絡我</span>
+            <a href="mailto:{{ $member->email }}"><span class="contact-dropbtn">聯絡我</span></a>
             <div class="contact-dropcontent">
                 <a><img src="/img/icons/envelope.png">
-                    grace@514.com.tw</a>
-                <a><img src="/img/icons/phone-call.png">02-2767-5146</a>
-                <a><img src="/img/icons/smartphone-call.png">0912-345678</a>
-                <a><img src="/img/icons/address.png">台北市信義區基隆路一段155號</a>
+                    {{ $member->email }}</a>
+                <a><img src="/img/icons/smartphone-call.png">{{ $member->phone }}</a>
+                <a><img src="/img/icons/address.png">{{ $member->address }}</a>
             </div>
         </div>
     </div>
@@ -28,7 +27,7 @@
             <li><a href="#Mtab-2">參加中活動</a></li>
             <li><a href="#Mtab-3">參加中活動</a></li>
         </ul>
-        <div class="row Tab-Container">
+        <div class="row Tab-Container" style="min-height:200px">
             <div class="row Member-content" id="Mtab-1">
                 <p></p>
             </div>
@@ -42,13 +41,13 @@
                         <div class="MemberAct-title word-indent-01">活動標題
                         </div>
                         <div class="MemberAct-info">
-                            <img src="img/pics/calendar-icon-02.png">06-18（六）
+                            <img src="/img/pics/calendar-icon-02.png">06-18（六）
                         </div>
                         <div class="MemberAct-info">
-                            <img src="img/pics/money-icon-02.png">$1,200元
+                            <img src="/img/pics/money-icon-02.png">$1,200元
                         </div>
                         <div class="MemberAct-info">
-                            <img src="img/pics/location-icon-02.png">台北市信義區
+                            <img src="/img/pics/location-icon-02.png">台北市信義區
                         </div>
                         <div class="MemberAct-pro">
                             <img src="/img/icons/holder.png">
@@ -67,13 +66,13 @@
                         <div class="MemberAct-title word-indent-01">活動標題
                         </div>
                         <div class="MemberAct-info">
-                            <img src="img/pics/calendar-icon-02.png">06-18（六）
+                            <img src="/img/pics/calendar-icon-02.png">06-18（六）
                         </div>
                         <div class="MemberAct-info">
-                            <img src="img/pics/money-icon-02.png">$1,200元
+                            <img src="/img/pics/money-icon-02.png">$1,200元
                         </div>
                         <div class="MemberAct-info">
-                            <img src="img/pics/location-icon-02.png">台北市信義區
+                            <img src="/img/pics/location-icon-02.png">台北市信義區
                         </div>
                         <div class="MemberAct-pro">
                             <img src="/img/icons/holder.png">

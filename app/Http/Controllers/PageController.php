@@ -57,7 +57,14 @@ class PageController extends Controller
     {
         return view("page.cowork");
     }
-    
+
+    public function showMember($id)
+    {
+        $member = DB::table('users')->where('id', $id)->first();
+
+        return view("page.member", compact('member'));
+    }
+
     public function memberpage()
     {
         return view("page.memberpage");
