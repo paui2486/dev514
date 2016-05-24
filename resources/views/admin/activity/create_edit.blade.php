@@ -447,8 +447,10 @@
 <script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cropper.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/jquery.mu.image.resize.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('js/jquery.mu.image.resize.js') }}"></script> -->
 <script type="text/javascript">
+$(document).ready(function () {
+    // $('.resize').muImageResize({width: 150, height:150});
         // CKFinder.setupCKEditor();
 
         // $('#image').cropper({
