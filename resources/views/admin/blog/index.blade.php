@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}"/>
+<link rel="stylesheet" href="{{ asset('css/colorbox.css') }}"/>
+@stop
+
 @section('content')
 <!--main content start-->
 <section id="main-content">
@@ -36,6 +41,9 @@
 {{-- Scripts --}}
 @section('scripts')
     @parent
+    <script type="text/javascript" src="{{ asset('js/datatables.min.js' ) }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.colorbox.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             var oTable;

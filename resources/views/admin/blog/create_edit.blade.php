@@ -244,6 +244,8 @@
     <script type="text/javascript" src="{{asset('assets/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/bootstrap-fileupload/bootstrap-fileupload.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/bootstrap-tagsinput.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

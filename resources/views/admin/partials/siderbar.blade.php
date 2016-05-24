@@ -22,12 +22,12 @@
             </li>
             @endif
             @if ( Auth::user()->adminer || Auth::user()->author )
-            <!-- <li>
+            <li>
                 <a href="{{URL::to('dashboard/blog')}}">
                     <i class="fa fa-book"></i>
                     <span>文章管理</span>
                 </a>
-            </li> -->
+            </li>
             @endif
             <li>
                 <a href="{{URL::to('dashboard/activity')}}">
