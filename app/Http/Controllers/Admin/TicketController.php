@@ -255,7 +255,7 @@ class TicketController extends Controller
         $solds = DB::table('orders')
                   ->leftJoin('orders_detail', 'orders_detail.order_id', '=', 'orders.id')
                   ->select(array(
-                      'orders.user_name', 'orders.user_email', 'orders.user_phone',
+                      'orders.MerchantOrderNo', 'orders.user_name', 'orders.user_email', 'orders.user_phone',
                       'orders_detail.sub_topic_name',  'orders_detail.sub_topic_number', 'orders_detail.sub_topic_price', 'orders.PayTime', 'orders.status'
                   ))
                   ->where('orders_detail.topic_id', $id)
@@ -263,6 +263,7 @@ class TicketController extends Controller
 
         return Datatables::of($solds)
             ->add_column('event','')
+            ->edit_column('MerchantOrderNo', "<a style='width:100%' href='@if(\$status == 2) {{ url(\"purchase/trade/\$MerchantOrderNo\") }} @else # @endif'>{{ \$MerchantOrderNo }}</a>")
             ->edit_column('status', '{{-- */
                                         $orderStatus = array(
                                             0 => "<span class=\"label label-success\">正選擇交易中</span>",

@@ -33,6 +33,7 @@
         <table id="ticket_table" class="table table-striped table-hover">
            <thead>
                <tr>
+                   <th>訂單編號</th>
                    <th>購買人</th>
                    <th>連絡信箱</th>
                    <th>聯絡電話</th>
@@ -76,7 +77,7 @@
                     },
                     'csvHtml5',
                 ],
-                "aaSorting": [[7, 'desc'], [6, 'desc'], [5, 'desc'], ],
+                "aaSorting": [[8, 'desc'], [7, 'desc'], [6, 'desc'], ],
                 "processing": true,
                 "responsive": true,
                 "ajax": "{{ URL::current('') . 'Data' }}",
