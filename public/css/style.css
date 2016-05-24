@@ -6305,8 +6305,7 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 }
 
 .form-ticket .control-label {
-    padding-left: 0;
-    text-align: right;
+    padding-left: 15px;
 }
 
 .form-ticket > .row > div {
