@@ -5,7 +5,7 @@
         <div class="media_title">媒體報導</div>
     </div>
 -->
-        
+
 <!--
             <div class="col-md-6 bottom-linkout">
                 <a href="https://www.instagram.com/"><img src="{{asset('img/pics/igicon.png')}}"></a>
@@ -14,8 +14,8 @@
             </div>
 -->
 <!--            <iframe class="col-md-6" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fiwinetodayshop%2F&tabs&width=300&height=200&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="300" height="150" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>-->
-            
-             
+
+
     <div class="row footer-info">
             <div class="row footer-center">
                 <div class="book-us col-md-5 col-xs-12">
@@ -29,7 +29,7 @@
                 <div class="col-md-2 funtion-intro">
                     <p>功能介紹</p>
                     <div class="funtion-intro-content">
-                        <a href="/"><li>514 部落格</li></a>
+                        <a href="/blog"><li>514 部落格</li></a>
                         <a href="/FAQ"><li>常見問題</li></a>
                         <a href="/HostGuide"><li>如何舉辦活動</li></a>
                         <a href="/PlayGuide"><li>如何報名活動</li></a>
@@ -65,7 +65,7 @@
                         </span>線上客服小秘書</p>
                     </div>
                 </div>
-                
+
             </div>
     </div>
     <div class="gotop"><img src="/img/pics/backtotop.png"></div>

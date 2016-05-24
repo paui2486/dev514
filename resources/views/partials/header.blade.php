@@ -13,7 +13,7 @@
         <nav>
             <a href="javascript:void(0)" class="smobitrigger ion-navicon-round"></a>
             <ul class="mobimenu">
-<!--            <li><a href="{{ url('blog') }}">部落格</a></li>-->
+            <li><a href="{{ url('blog') }}">部落格</a></li>
                 <li class="navbar-host"><a href="{{ url('dashboard/activity#tab-0') }}">辦活動</a></li>
                 @if (Auth::guest())
                 <li class="drawer"><a href="{{ url('login') }}">登入</a></li>
