@@ -642,7 +642,8 @@ class ActivityController extends Controller
         return Datatables::of($check)
             ->edit_column('id','<div style="white-space: nowrap;">
                   <a class="btn btn-info btn-sm iframe" href="{{{ url("dashboard/activity/".$id. "/priview") }}}" >預覽<a>
-                  <div class="btn btn-success btn-sm" onclick="passActivity({{$id}})"><span class="glyphicon glyphicon-pencil"></span> 通過</div>
+                  <div class="btn btn-success btn-sm" onclick="passActivity({{$id}})">通過</div>
+                  <div class="btn btn-danger btn-sm iframe" href="{{{ url("dashboard/activity/".$id."/reject") }}}"><span class="glyphicon glyphicon-pencil"></span> 退回</div>
                 </div>')
             ->make();
     }
@@ -801,5 +802,40 @@ class ActivityController extends Controller
 
         Session::flash('message', '申請完成，請靜待系統進行結清匯款');
         return Redirect::to('dashboard');
+    }
+
+    public function getRejectForm($id)
+    {
+        $provider = DB::table('activities')
+                      ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
+                      ->select(array(
+                        'activities.title as activity', 'users.id as provider_id', 'users.name', 'users.email', 'users.phone'
+                      ))
+                      ->where('activities.id', $id)
+                      ->first();
+        return view('admin.dashboard.reject', compact('provider')) ;
+    }
+
+    public function mailToReject(Request $request, $id)
+    {
+        DB::table('activities')->update(array(
+            'status'         => 1,
+            'updated_at'     => date("Y-m-d H:i:s"),
+            'activity_start' => DB::raw('activity_start'),
+        ));
+
+        $msg = '<p>活動：'. $request->activity . ', </p><p>回應：' . $request->comment . '</p>';
+        DB::table('support_history')
+            ->insert(array(
+              'customer_id' => $request->provider_id,
+              'handler_id'  => Auth::id(),
+              'content'     => $msg,
+              'position'    => 2,
+            ));
+
+        Mail::send('auth.emails.checkout', array('msg' => $msg),  function($message) use ($request) {
+            $message->from('service@514.com.tw', '514 活動頻道');
+            $message->to($request->email)->subject('【514活動審核通知】'. $request->activity .' 活動審核未過，可以修改或重新編輯後再送審');
+        });
     }
 }
