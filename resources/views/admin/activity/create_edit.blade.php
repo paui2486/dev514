@@ -309,11 +309,11 @@
                             <div class="col-sm-12 ticket_area">
                                 <div id="ticket1" class="form-ticket">
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket_name">票券名稱</label>
+                                        <label class="control-label col-sm-2" for="ticket_name"><p>11</p>票券名稱</label>
                                         <div class="errorbox col-sm-2">
                                             <input class="form-control" placeholder="例：早鳥票" type="text" name="ticket[0][name]"/>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket_price">票券單價</label>
+                                        <label class="control-label col-sm-2" for="ticket_price"><p>12</p>票券單價</label>
                                         <div class="col-sm-4">
                                             <div class="input-group">
                                               <span class="input-group-btn">
@@ -328,11 +328,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket_numbers">票券張數</label>
+                                        <label class="control-label col-sm-2" for="ticket_numbers"><p>13</p>票券張數</label>
                                         <div class="col-sm-2">
                                             <input class="form-control" type="number" name="ticket[0][numbers]" min="0"/>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket_time">票券使用時間</label>
+                                        <label class="control-label col-sm-2" for="ticket_time"><p>14</p>票券使用時間</label>
                                         <div class="col-sm-6">
                                             <div class="col-xs-2 table-cell">
                                                 <label class="control-label">
@@ -359,14 +359,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket_time">售票狀態</label>
+                                        <label class="control-label col-sm-2" for="ticket_time"><p>15</p>售票狀態</label>
                                         <div class="col-sm-2">
                                             <select style="width: 100%" name="ticket[0][ticket_status]" class="form-control">
                                                 <option value="1">發售</option>
                                                 <option value="2">停售</option>
                                             </select>
                                         </div>
-                                        <label class="control-label col-sm-2" for="ticket_time">售票區間</label>
+                                        <label class="control-label col-sm-2" for="ticket_time"><p>16</p>售票區間</label>
                                         <div class="col-sm-6">
                                             <div class="col-xs-2">
                                                 <label class="control-label">
@@ -393,7 +393,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <label class="control-label col-sm-2" for="ticket_description">票種說明</label>
+                                        <label class="control-label col-sm-2" for="ticket_description"><p>17</p>票種說明</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="text" name="ticket[0][description]"/>
                                         </div>
