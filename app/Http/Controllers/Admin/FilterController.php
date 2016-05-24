@@ -172,13 +172,13 @@ class FilterController extends Controller
                         ->select(array(
                           'id', 'name', 'type', 'public', 'priority',
                         ))
-                        ->whereIn('type', array(1,3,4,5,6))
+                        ->whereIn('type', array(1,2,3,4,5,6))
                         ->orderBy('priority', 'ASC')
                         ->orderBy('name',     'ASC');
 
        return Datatables::of($categories)
                 ->remove_column('id')
-                ->edit_column('type', '@if($type == 1) 活動類別 @elseif($type == 3 ) 對象類別 @elseif($type == 4) 地區類別 @elseif($type == 5) 時間類別 @elseif($type == 6) 金額類別 @else 蝦咪類別 @endif')
+                ->edit_column('type', '@if($type == 1) 活動類別 @elseif($type == 3 ) 對象類別 @elseif($type == 4) 地區類別 @elseif($type == 5) 時間類別 @elseif($type == 6) 金額類別 @else 文章類別 @endif')
                 ->edit_column('public', '@if($public == 1) 顯示 @elseif($public == 0 ) 隱藏 @else 已刪除 @endif')
                 ->edit_column('priority', '
                      <div style="white-space: nowrap;">
