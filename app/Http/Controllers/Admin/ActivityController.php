@@ -634,7 +634,7 @@ class ActivityController extends Controller
                       ->leftJoin('users', 'users.id', '=', 'activities.hoster_id')
                       ->leftJoin('categories', 'categories.id', '=', 'activities.category_id')
                       ->select(array(
-                        'users.name', 'activities.title', 'activities.created_at',
+                        'users.name', 'activities.title', 'activities.updated_at',
                         'categories.name as cat_name', 'activities.id',
                       ))
                       ->where('activities.status', 3);
