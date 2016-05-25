@@ -2708,19 +2708,18 @@ input[type='checkbox']:checked {
     background-repeat: repeat-y;
 }
 
-.Member-TopContent {
-    width: 80%;
-    margin: auto;
+.Member-left {
+    margin: 0;
+    text-align: center;
+}
+
+.Member-left-bg {
     background: #fff;
-    box-shadow: 1px 1px 10px #ccc;
 }
 
-.Member-owner {
-    padding: 0;
-}
-
-.Member-owner img {
-    width: 240px;
+.Member-left img {
+    width: 200px;
+    border-radius: 100px;
 }
 
 .Member-introduce {
@@ -2791,8 +2790,7 @@ input[type='checkbox']:checked {
 }
 
 .Member-Tab {
-    width: 80%;
-    margin: 15px auto;
+    margin:0;
     font-size: 16px;
 }
 

@@ -1,15 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="Member-container">
-    <div class="row Member-TopContent">
-        <div class="Member-owner col-md-3">
-            <img src="/img/pics/default-02.png">
-        </div>
-        <div class="Member-introduce col-md-9">
-            <p>職人姓名</p><br>
-            <span>職人介紹 —— 尚未輸入任何相關資訊</span>
-            
+<div class="row Member-container">
+    <div class="row Member-left col-md-4 col-xs-12">
+        <div class="Member-left-bg">
+        <img src="/img/pics/default-02.png">
+        <div class="Member-introduce">
+            <p>職人介紹</p><br>
         </div>
         <div class="contact-dropdown">
             <span class="contact-dropbtn">聯絡我</span>
@@ -21,12 +18,13 @@
                 <a><img src="/img/icons/address.png">台北市信義區基隆路一段155號</a>
             </div>
         </div>
+        </div>
     </div>
-    <div class="row Member-Tab">
+    <div class="row Member-Tab col-md-8">
         <ul class="row Tabs" style="margin:0;">
             <li><a href="#Mtab-1">職人經歷</a></li>
-            <li><a href="#Mtab-2">參加中活動</a></li>
-            <li><a href="#Mtab-3">參加中活動</a></li>
+            <li><a href="#Mtab-2">進行中活動</a></li>
+            <li><a href="#Mtab-3">已結束活動</a></li>
         </ul>
         <div class="row Tab-Container">
             <div class="row Member-content" id="Mtab-1">
