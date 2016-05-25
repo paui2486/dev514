@@ -9,7 +9,7 @@
         <div style="border: 1px solid #ccc;padding: 10px 15px;line-height: 26px;font-size: 15px;  margin: 15px;">
             <div class="row">
                 <label style="width: 50%;float: left;"> 交易序號 </label>
-                <div class="col-md-8">{{ $tickets->TradeNo }}</div>
+                <div class="col-md-8">{{ $tickets->MerchantOrderNo }}</div>
             </div>
             <div class="row">
                 <label style="width: 50%;float: left;">  交易時間 </label>

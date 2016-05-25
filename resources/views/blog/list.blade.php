@@ -5,7 +5,7 @@
     <div class="row blog-category-content">
         <div class="row blog-category-logo">
             <p>{{ $category->name }}</p>
-            <img src="{{ asset($category->logo) }}">
+            <!-- <img src="{{ asset($category->logo) }}"> -->
         </div>
         @foreach( $blogList as $blog )
         <div class="row blog-category-panel">

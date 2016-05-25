@@ -136,6 +136,8 @@ Route::group(['middleware' => 'web'], function () {
         // Route::get('blog/expert/data'               , 'BlogController@getExpert'          );
 
         Route::get('activity/{id}/priview'          , 'ActivityController@showPriview'    );
+        Route::get('activity/{id}/reject'           , 'ActivityController@getRejectForm'  );
+        Route::post('activity/{id}/reject'          , 'ActivityController@mailToReject'   );
 
         Route::get('activity/check'                 , 'ActivityController@showCheckAct'   );
         Route::get('activity/check/data'            , 'ActivityController@getCheckAct'    );

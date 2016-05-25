@@ -11,7 +11,7 @@
         <div class="col-md-5 confirm-left">
             <div class="row">
                 <label class="col-md-4 control-label"> 交易序號 </label>
-                <div class="col-md-8">{{ $tickets->TradeNo }}</div>
+                <div class="col-md-8">{{ $tickets->MerchantOrderNo }}</div>
             </div>
             <div class="row">
                 <label class="col-md-4 control-label"> 交易時間 </label>
