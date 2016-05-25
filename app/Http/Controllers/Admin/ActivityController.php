@@ -12,6 +12,7 @@ use Auth;
 use Mail;
 use View;
 use Input;
+use Zipper;
 use Session;
 use Response;
 use Redirect;
@@ -533,20 +534,50 @@ class ActivityController extends Controller
      */
     public function getExpert()
     {
-        $articles = DB::table('users')
-                     ->leftJoin('articles', 'articles.author_id', '=', 'users.id')
-                     ->select(array(
-                       'users.id', 'users.name',
-                       DB::raw('count(*) as articles_cnt'),
-                       DB::raw('sum(articles.counter) as view_cnt'),
-                     ))
-                     ->where('users.author', 1)
-                     ->groupBy('users.id')
-                     ->orderBy('users.created_at', 'ASC');
+        $hosters = DB::table('users')
+                      ->leftJoin('activities', 'activities.hoster_id', '=', 'users.id')
+                      ->leftJoin('companys',   'companys.user_id',     '=', 'users.id')
+                      ->select(array(
+                         'companys.id as company_id', 'companys.name as company_name', 'companys.TaxID as TaxID',
+                         'users.name', 'companys.contact_name', 'companys.contact_phone', 'companys.contact_email',
+                         'companys.ID_path', 'companys.Bank_path',
+                         DB::raw('count(*) as activity_cnt'),
+                         DB::raw('sum(activities.counter) as view_cnt'), 'users.id',
+                      ))
+                      ->where('users.hoster', '>=', 1)
+                      ->groupBy('users.id');
 
-        return Datatables::of($articles)
-            ->add_column('setting','相關設定？')
+        return Datatables::of($hosters)
+            ->remove_column('company_id')
+            ->edit_column('id','<div style="white-space: nowrap;">
+                  <!--<a class="btn btn-info btn-sm iframe" href="{{{ url("dashboard/member/".$id) }}}?view=backend" >會員設定<a>-->
+                  <a class="btn btn-danger btn-sm" href="{{{ url("dashboard/activity/hoster/".$company_id."/data") }}}">下載資料</a>
+                </div>')
             ->make();
+    }
+
+    public function getExpertData($id)
+    {
+        $file = $id . "-" . time(). ".zip";
+        $data = DB::table('companys')
+                    ->where('id', $id)
+                    ->select(array('ID_path', 'Bank_path'))
+                    ->first();
+
+        $files = array();
+        if(!empty($data->ID_path)) {
+            array_push($files, $data->ID_path);
+        }
+
+        if(!empty($data->Bank_path)) {
+            array_push($files, $data->Bank_path);
+        }
+
+        $zipper = new \Chumper\Zipper\Zipper;
+        $zipper->make(storage_path($file))->folder('HosterID_'.$id)
+            ->add($files)->close();
+
+        return response()->download(storage_path($file));
     }
 
     public function askExpert()

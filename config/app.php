@@ -160,6 +160,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
 
+        'Chumper\Zipper\ZipperServiceProvider',
         // SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * for develop
@@ -219,6 +220,8 @@ return [
         'Datatables' => Yajra\Datatables\Datatables::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class,
+
+        'Zipper' => 'Chumper\Zipper\Zipper',
         // 'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         // for develop
         'Debugbar'   => Barryvdh\Debugbar\Facade::class,

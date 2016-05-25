@@ -153,6 +153,7 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('activity/category/create'       , 'ActivityController@createCategory' );
         Route::get('activity/hoster'                , 'ActivityController@showExpert'     );
         Route::get('activity/hoster/data'           , 'ActivityController@getExpert'      );
+        Route::get('activity/hoster/{id}/data'      , 'ActivityController@getExpertData'  );
 
         // no yet
         Route::get('ad'                     , 'AdminController@showMember'    );
