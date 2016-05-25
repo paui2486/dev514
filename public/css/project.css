@@ -2704,6 +2704,7 @@ input[type='checkbox']:checked {
 
 .Member-container {
     padding: 20px;
+    margin: 0;
     background-image: url(/img/pics/bg-wood.jpg);
     background-repeat: repeat-y;
 }
@@ -2715,16 +2716,24 @@ input[type='checkbox']:checked {
 
 .Member-left-bg {
     background: #fff;
+    width: 85%;
+    margin: auto;
+    padding: 20px 15px;
+    box-shadow: 1px 1px 10px #ccc;
 }
 
-.Member-left img {
+.Member-left-bg > img {
     width: 200px;
     border-radius: 100px;
 }
 
 .Member-introduce {
     padding: 15px;
-    min-height: 180px;
+}
+
+.Member-introduce > img {
+    width: 150px;
+    margin-top: 15px;
 }
 
 .Member-introduce p {
@@ -2733,25 +2742,42 @@ input[type='checkbox']:checked {
 }
 
 .Member-introduce span {
-    font-size: 15px;
-    letter-spacing: 1px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #b3b3b3;
 }
 
-.contact-dropdown {
+
+.Member-button {
     position: relative;
-    display: inline-block;
-    float: right;
-    margin-right: 30px;
+    margin: 10px auto;
+    width: 80%;
+}
+
+.trace-button,
+.contact-dropdown {
+    width: calc(100%/2);
+    float: left;
+}
+
+.teaced-me {
+    background: #00bcd4;
+    color: #fff;
 }
 
 .contact-dropbtn {
-    color: #fff;
+    border: 1px solid #ccc;
     padding: 10px 20px;
-    font-size: 15px;
-    border: none;
-    cursor: pointer;
-    background: #00bcd4;
+    font-size: 14px;
     letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.Member-button img {
+    width: 110px;
 }
 
 .contact-dropcontent {
@@ -2764,6 +2790,7 @@ input[type='checkbox']:checked {
     letter-spacing: 2px;
     z-index: 1000;
     width: 200px;
+    text-align: left;
 }
 
 .contact-dropcontent a {
@@ -2831,12 +2858,50 @@ ul.Tabs li a :hover {
     box-shadow: 1px -1px 15px #ccc;
 }
 
-.Tab-Container .Member-content {
-    padding: 20px;
+.Member-content {
+    padding: 0px 40px;
+    letter-spacing: 2px;
+    min-height: 366px;
+}
+
+.Member-content p {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #00bcd4;
+}
+
+.Member-content p > span {
+    font-size: 15px;
+}
+
+.Member-About,
+.Member-experience,
+.Member-activity {
+    padding: 20px 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.Member-activity {
+    border-bottom: none;
+}
+
+.Member-experience li {
+    list-style:square;
+    line-height: 30px;
 }
 
 .Member-panel {
-    margin: 15px 0px;
+    margin-right: 20px;
+    padding: 0;
+    width: calc(100%/2 - 20px);
+    float: left;
+}
+
+.Member-panel:hover {
+    box-shadow: 1px 1px 10px #ccc;
+    border-radius: 10px;
 }
 
 .Member-panel-bg {
@@ -2845,24 +2910,34 @@ ul.Tabs li a :hover {
 }
 
 .MemberAct-thumbnail {
-    height: 200px;
+    height: 250px;
     background-size: cover;
     background-position: top;
     border-radius: 10px 10px 0 0;
 }
 
+.MemberAct-title {
+    margin: 10px 0;
+}
+
 .MemberAct-text {
-    padding:5px 10px;
-    font-size: 16px;
-    letter-spacing: 1px;
+    padding: 0 10px;
+    padding-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 0 0 10px 10px;
 }
 
+.MemberAct-text span{
+    border: 1px solid #b3b3b3;
+    padding: 7px;
+    font-size: 14px;
+    border-radius: 10px;
+    color: #b3b3b3;
+}
+
 .MemberAct-info {
-    color: #998d7e;
-    font-size: 15px;
-    line-height: 30px;
+    word-break:keep-all;
+    margin-bottom: 10px;
 }
 
 .MemberAct-info img {
