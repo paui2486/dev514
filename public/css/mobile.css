@@ -476,7 +476,8 @@
         letter-spacing: 2px;
     }
 
-    .Cart-mb-purchase {
+    .Cart-mb-purchase,
+    .actpage-mb-purchase{
         background-color: #ff5a5f;
         border-radius: 5px;
         text-align: center;
@@ -484,8 +485,9 @@
         margin: 0px auto;
         width:90%;
         cursor: pointer;
+        color: #fff;
     }
-
+    
     .Cart-mb-purchase p ,
     .Cart-mb-purchase {
         color: white;
@@ -515,6 +517,7 @@
         font-size: 15px;
         letter-spacing: 2px;
     }
+
 
     /*訂購頁面*/
     .purchase-content {
