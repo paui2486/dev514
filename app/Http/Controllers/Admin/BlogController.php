@@ -91,7 +91,8 @@ class BlogController extends Controller
     {
         $article = DB::table('articles')->find($id);
         $authors = DB::table('users')
-                    ->where('author', 1)
+                    ->where('author', '>=', 1)
+                    ->orWhere('adminer', '>=', 1)
                     ->select('id', 'name')
                     ->get();
         $categories = DB::table('categories')
@@ -139,7 +140,7 @@ class BlogController extends Controller
         $params['data']    = $updateArray;
         $params['filed']   = ['thumbnail'];
         $params['infix']   = 'articles/';
-        $params['suffix']  = "$id-";
+        $params['suffix']  = "$id/";
 
         $update            = Library::upload($params);
         $articles          = DB::table('articles')->where('id', $id);

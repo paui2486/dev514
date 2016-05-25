@@ -91,8 +91,8 @@
                                     <select style="width: 100%" name="author_id" id="author_id" class="form-control">
                                     @foreach($authors as $author)
                                         <option value="{{$author->id}}"
-                                        @if(!empty($articles))
-                                            @if($articles->author_id==$author->id)
+                                        @if(!empty($article))
+                                            @if($article->author_id==$author->id)
                                         selected="selected"
                                             @endif
                                         @endif >{{$author->name}}
@@ -111,8 +111,8 @@
                                     <select style="width: 100%" name="category_id" id="category_id" class="form-control">
                                       @foreach($categories as $category)
                                         <option value="{{$category->id}}"
-                                        @if(!empty($articles))
-                                            @if($articles->category_id==$category->id)
+                                        @if(!empty($article))
+                                            @if($article->category_id==$category->id)
                                                 selected="selected"
                                             @endif
                                         @endif >{{$category->name}}

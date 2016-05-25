@@ -75,7 +75,7 @@
 
     @section('content')
 
-    
+
 
     <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 1280px; height:480px; overflow: hidden; ">
 
@@ -129,9 +129,9 @@
                     <div style="display:none;">
                         {{ $category->cat_id }}
                     </div>
-                    <div class="blog-cat-logo">
+                    <!-- <div class="blog-cat-logo">
                         <img src="{{ $category->cat_logo }}">
-                    </div>
+                    </div> -->
                     <div class="blog-readmore"><a href="{{asset ('blog/' . $category->cat_title)}}">閱讀更多</a></div>
                 </div>
                 <div class="row blog-cat-article">
