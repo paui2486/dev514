@@ -566,11 +566,11 @@ class ActivityController extends Controller
 
         $files = array();
         if(!empty($data->ID_path)) {
-            array_push($files, $data->ID_path);
+            array_push($files, public_path($data->ID_path));
         }
 
         if(!empty($data->Bank_path)) {
-            array_push($files, $data->Bank_path);
+            array_push($files, public_path($data->Bank_path));
         }
 
         $zipper = new \Chumper\Zipper\Zipper;
