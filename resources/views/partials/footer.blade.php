@@ -61,7 +61,7 @@
                     <span>週一到週日10:00~18:00</span>
                 </p>
                 <div onclick="window.open('https://m.me/iwine')">
-                    <p><span class="glyphicon glyphicon-headphones" aria-hidden="true">
+                    <p class="online-server"><span class="glyphicon glyphicon-headphones" aria-hidden="true">
                     </span> 線上客服小秘書</p>
                 </div>
         </div>

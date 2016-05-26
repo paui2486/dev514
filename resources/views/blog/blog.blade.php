@@ -6,7 +6,6 @@
         <div class="article-left">
            <div class="row article-left-header">
                 <div class="article-left-title">
-                    <!-- 下午茶時間到囉～一起吃點心！ -->
                     {{ $article -> title }}
                 </div>
                 <div class="article-share">
@@ -33,10 +32,6 @@
             </div>
             <div class="article-left-content">
                 {!! $article -> content !!}
-                <!-- 下午茶時間就是要吃點心啊，不然要幹麻？
-                <div class="article-thumnail">
-                </div>
-                吃完下午茶以後就下班啦 -->
             </div>
             <div class="article-left-tag">
             </div>
