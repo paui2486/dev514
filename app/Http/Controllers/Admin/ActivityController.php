@@ -849,11 +849,13 @@ class ActivityController extends Controller
 
     public function mailToReject(Request $request, $id)
     {
-        DB::table('activities')->update(array(
-            'status'         => 1,
-            'updated_at'     => date("Y-m-d H:i:s"),
-            'activity_start' => DB::raw('activity_start'),
-        ));
+        DB::table('activities')
+          ->where('id', $id)
+          ->update(array(
+              'status'         => 1,
+              'updated_at'     => date("Y-m-d H:i:s"),
+              'activity_start' => DB::raw('activity_start'),
+          ));
 
         $msg = '<p>活動：'. $request->activity . ', </p><p>回應：' . $request->comment . '</p>';
         DB::table('support_history')
