@@ -385,7 +385,7 @@
                 break;
 
             case 'Line':
-                window.location = "http://line.me/R/msg/{{ $activity->title }}/?{{ URL::current() }}";
+                window.location = "http://line.me/R/msg/text/{{ urlencode($activity->title . ' ' . URL::current()) }}";
                 break;
 
             case 'WeChat':
@@ -430,8 +430,8 @@
             } else {
                 RightFixed.removeClass("Cart-fixed-bottom");
             }
-            
-          
+
+
             $(".inline").colorbox({
                 fixed : true,
                 inline : true,
