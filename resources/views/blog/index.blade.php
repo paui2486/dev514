@@ -148,7 +148,7 @@
                              style="background-image:url('{{ $article->thumbnail }}')">
                                 <div class="blog-mb-text">
                                     <div class="blog-panel-title word-indent-02 ">
-                                        <a href="{{asset ('blog/article')}}">{{ $article->title }}</a>
+                                        {{ $article->title }}
                                     </div>
                                     <div class="blog-panel-time">
                                         {{ preg_replace("/(.*)\s(.*)/", "$1", $article->time)  }}

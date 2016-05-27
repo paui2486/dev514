@@ -172,7 +172,7 @@ class ArticleController extends Controller
                       ->where('articles.status', 2)
                       ->where('category_id', $category->id)
                       ->orderBy('time', 'ASC')
-                      ->take(4)
+//                      ->take(4)
                       ->get();
 
             if(!count($blogs)) {
