@@ -138,11 +138,12 @@
                 </div>
                 <div class="row blog-cat-article">
                     @foreach ( $category->cat_content as $article )
+                    <a href="{{asset ('blog/' . $category->cat_title . '/' . $article->title )}}">
                     <div class="col-sm-3 blog-cat-panel">
                         <div style="display:none;">
                             {{ $article->id }}
                         </div>
-                        <a href="{{asset ('blog/' . $category->cat_title . '/' . $article->title )}}">
+                        
                             <div class="blog-thumbnail"
                              style="background-image:url('{{ $article->thumbnail }}')">
                                 <div class="blog-mb-text">
@@ -160,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                       
                         <div class="blog-panel-text">
                             <div class="blog-panel-title word-indent-02">
                                 <a href="{{asset ('blog/article')}}">{{ $article->title }}</a>
@@ -176,6 +177,7 @@
                             </div>
                         </div>
                     </div>
+                     </a>
                     @endforeach
                 </div>
 <!--                <div class="mobile-blog-readmore">閱讀更多</div>-->
