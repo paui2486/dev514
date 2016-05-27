@@ -180,7 +180,7 @@ li.blog-right-text a {
 
 .navbar-blog-category {
     position: absolute;
-    top: 21px;
+    top: 26px;
     left:25%;
 }
 
@@ -1115,7 +1115,7 @@ li.collapse-blog-category {
     background-repeat: no-repeat;
 }
 
-.bolg-banner-text {
+.blog-banner-text {
     z-index: 200;
     position: relative;
     float: left;

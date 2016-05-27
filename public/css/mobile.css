@@ -19,7 +19,8 @@
     .list-mb-activities,
     .list-result,
     .actpage-mb-dashboard,
-    .actpage-thum-mb-title {
+    .actpage-thum-mb-title,
+    .blog-mb-text {
         display: none!important ;
     }
 }
@@ -55,7 +56,10 @@
     .actpage-dashboard,
     .bottom-linkout,
     .order-time,
-    .contact-p{
+    .contact-p,
+    .blog-panel-text,
+    .blog-banner-date,
+    .blog-banner-auth {
         display: none!important;
     }
 
@@ -780,4 +784,60 @@
     .inter-panel-thumbnail {
         height: 300px;
     }
+    
+    /*--------------blogblogblogblog--------------*/
+    .blog-container {
+        padding: 0px;
+    }
+    
+    .blog-cat-title {
+        font-size: 25px;
+        letter-spacing: 2px;
+        padding-left: 14px;
+    }
+    
+    .blog-banner-title {
+        font-size: 70px;
+    }
+    
+    .blog-cat-article {
+        display: block;
+        margin: 0;
+    }
+    
+    .blog-cat-panel {
+        height: auto;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .blog-thumbnail {
+        height: 300px;
+        position: relative;
+    }
+    
+    .blog-mb-text {
+        background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8));
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        padding: 10px;
+        letter-spacing: 1px;
+    }
+    
+    .blog-mb-text  > div {
+        color: #fff;
+        font-size: 15px;
+    }
+    
+    .blog-panel-title a {
+        color: #fff;
+        font-size: 16px;
+        text-shadow: 1px 1px 5px #666;
+    }
+    
+    
+    
+    
+    
 }
