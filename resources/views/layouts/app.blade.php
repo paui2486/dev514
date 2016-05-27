@@ -110,8 +110,8 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <script type="text/javascript">
+    $('.smobitrigger').smplmnu();
     $(function(){
-        $('.smobitrigger').smplmnu();
         $.slidebars();
 
         $(".gotop").click(function(){
