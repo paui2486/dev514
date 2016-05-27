@@ -59,15 +59,9 @@
 
 @section('banner')
     <div id="jssor_1" class="banner-1">
-        <div class="searchbar-mobile">
-            <img src="/img/pics/banner_title-02.png">
-        </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
             @foreach( $home->banner as $banner )
                 <div data-p="225.00" style="display: none;">
-                    <div class="home_bntitle">
-                        <img src="/img/pics/banner_title-02.png" />
-                    </div>
                     <a href="{{ $banner->caption }}">
                         <div class="home_banner1" style="background-image:url({{ $banner->image }});" data-u="image"></div>
                     </a>

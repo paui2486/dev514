@@ -1,8 +1,8 @@
 @extends('layouts.blog')
 
 @section('content')
-<div class="article-container">
-    <div class="article-content">
+<div class="row article-container">
+    <div class="row article-content">
         <div class="article-left">
            <div class="row article-left-header">
                 <div class="article-left-title">
@@ -26,10 +26,10 @@
                 </p>
                 <p class="article-count">
 <!--                    閱覽次數：394-->
-                    <span><img src="/img/icons/eye-02.png"></span> {{ $article -> counter }}人
+                    {{ $article -> counter }}人看過
                 </p>
             </div>
-            <div class="article-left-content">
+            <div class="col-xs-12 article-left-content">
                 {!! $article -> content !!}
 
             </div>
@@ -39,7 +39,7 @@
             </div>
             <div id="disqus_thread"></div>
         </div>
-        <div class="article-right">
+        <div class="col-xs-12 article-right">
             <div class="row relative-art">
                 <p>相關文章</p>
                 @if (count($relate_articles) == 0)

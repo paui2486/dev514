@@ -35,7 +35,7 @@ html {
 }
 
 .navbar-brand img {
-    height:70px;
+    width:230px;
     z-index: 200;
     margin:auto;
 }
@@ -60,11 +60,11 @@ html {
 .page-navbar-brand {
     padding: 0;
     margin-left: 20px;
-    margin-top: 2px;
+    margin-top: 12px;
 }
 
 .page-navbar-brand img {
-    height: 65px;
+    width: 230px;
 }
 
 .navbar-collapse {
@@ -1255,14 +1255,14 @@ li.collapse-blog-category {
 /*blog-rticle（文章內容頁）*/
 
 .article-container {
-    background-color: #f4f4f4;
+    background-color: #f2f2f2;
 }
 
 .article-content {
     max-width: 1050px;
     margin: auto;
-    display: table;
     line-height: 25px;
+    display: block;
 }
 
 .article-left {
@@ -1306,16 +1306,12 @@ li.collapse-blog-category {
 .article-left-info > p {
     float: left;
     padding: 0px 10px;
-    border: 1px solid #c7b299;
-    color: #c7b299;
+    border: 1px solid #666;
+    color: #666;
     margin: 5px 5px 5px 0px;
     border-radius: 20px;
     font-size: 13px;
     letter-spacing: 1px;
-}
-
-.article-count > span img {
-    height: 15px;
 }
 
 .article-left-content {
@@ -2952,7 +2948,11 @@ ul.Tabs li a :hover {
     padding-bottom: 5px;
 }
 
+/*blog*/
 
+.article-left-content img {
+    max-width: 100%;
+}
 
 
 

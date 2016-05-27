@@ -836,7 +836,9 @@
         text-shadow: 1px 1px 5px #666;
     }
     
-    
+    .article-left-content  img {
+        max-width: 100%;
+    }
     
     
     
