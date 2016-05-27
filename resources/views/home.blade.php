@@ -4,7 +4,7 @@
     @foreach($meta as $key => $value)
         <meta {{ $key }} content="{{ $value }}">
     @endforeach
-    <title>514活動頻道 - 讓生活更有意思</title>
+    <title>514-有意思的人＆故事</title>
 @endsection
 
 @section('style')
