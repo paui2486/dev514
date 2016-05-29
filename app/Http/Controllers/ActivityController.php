@@ -33,7 +33,7 @@ class ActivityController extends Controller
                           'activities.min_price', 'activities.remark',          'activities.time_range',
                           'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
                           'users.avatar as host_photo',    'users.description as host_destricption',
-                          'activities.ticket_description'
+                          'activities.ticket_description', 'activities.hoster_id',
                       ))
                       ->where('activities.id', $id)
                       ->first();

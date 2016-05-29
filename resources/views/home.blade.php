@@ -231,10 +231,12 @@
                                 <img src="img/pics/location-icon-02.png">
                                 {{ $newActivity->locat_name . $newActivity->location }}
                             </div>
-                            <div class="new-activity-orginizer">
-                                <img src="/img/icons/holder.png">
-                                <span> {{ $newActivity->orginizer }} </span>
-                            </div>
+                            <a href="{{ URL('member/'. $newActivity->hoster_id ) }}">
+                                <div class="new-activity-orginizer">
+                                    <img src="/img/icons/holder.png">
+                                    <span> {{ $newActivity->orginizer }} </span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -304,10 +306,12 @@
                                 <img src="img/pics/location-icon-02.png">
                                 <span>{{ $activity->locat_name . $activity->location }}</span>
                             </div>
-                            <div class="new-activity-orginizer">
-                               <img src="/img/icons/holder.png">
-                               <span> {{ $activity->orginizer }} </span>
-                            </div>
+                            <a href="{{ URL('member/'. $activity->hoster_id ) }}">
+                                <div class="new-activity-orginizer">
+                                   <img src="/img/icons/holder.png">
+                                   <span> {{ $activity->orginizer }} </span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     @endforeach

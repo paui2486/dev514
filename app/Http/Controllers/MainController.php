@@ -134,6 +134,7 @@ class MainController extends controller
                             'activities.description',       'activities.counter as count', 'activities.location',
                             'activities.location_id', 'activities.activity_start as date', 'activities.min_price as price',
                             'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
+                            'activities.hoster_id',
                         ))
                         ->orderBy('activities.created_at', 'desc')
                         ->groupBy('activities.id')
@@ -179,7 +180,7 @@ class MainController extends controller
                         'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
                         'activities.description',       'activities.counter as count',       'activities.min_price as price',
                         'activities.location',          'activities.activity_start as date', 'users.nick as orginizer',
-                        'categories.name as locat_name', 'activities.activity_end as date_end',
+                        'activities.hoster_id',         'categories.name as locat_name', 'activities.activity_end as date_end',
                     ))
                     ->orderBy('activities.created_at', 'desc')
                     // ->take(3)
@@ -221,7 +222,7 @@ class MainController extends controller
                               'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
                               'activities.description',       'activities.counter as count',    'activities.min_price as price',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
-                              'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name',
+                              'activities.hoster_id',         'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name', 
                           ))
                           ->where('activities.activity_end', '>=', date('Y-m-d'))
                           ->orderBy('activities.activity_start', 'asc')

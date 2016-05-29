@@ -159,13 +159,13 @@
         <div class="row actpage-dashboard">
             <div class="col-md-2 col-sm-2">
                 <div class="actpage-holder">
-<!--                    <a href="{{ URL('member/'. $activity->hoster ) }}">-->
+                     <a href="{{ URL('member/'. $activity->hoster_id ) }}">
                         <div class="actpage-holder-thumnail" style="background-image:url('{{ $activity->host_photo }}')">
                         </div>
                         <div class="actpage-holder-name">
                             @if($activity->nick) {{$activity->nick}} @else {{$activity->hoster}} @endif
                         </div>
-<!--                    </a>-->
+                     </a>
                 </div>
             </div>
             <div class="col-md-6 col-sm-4 actpage-dashboard-info">
