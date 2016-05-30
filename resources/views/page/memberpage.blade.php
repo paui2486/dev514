@@ -45,8 +45,8 @@
                         <li>B123擔任專職小編</li>
                     </ul>
                 </div>
+                <p>我的活動<span> My Activies</span></p>
                 <div class="row Member-activity">
-                    <p>我的活動<span> My Activies</span></p>
                     <a href="#">
                     <div class="Member-panel">
                         <div class="MemberAct-id">

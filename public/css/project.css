@@ -2861,7 +2861,7 @@ ul.Tabs li a :hover {
 .Member-content p {
     font-size: 20px;
     font-weight: 500;
-    margin-bottom: 15px;
+    margin: 20px 0;
     color: #00bcd4;
 }
 
@@ -2872,13 +2872,21 @@ ul.Tabs li a :hover {
 .Member-About,
 .Member-experience,
 .Member-activity {
-    padding: 20px 0;
+    padding-bottom: 20px;
     margin: 0;
     border-bottom: 1px solid #ccc;
 }
 
 .Member-activity {
     border-bottom: none;
+    -moz-column-count: 2;
+    -moz-column-gap: 10px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    column-count: 2;
+    column-gap: 10px;
+    width:734px; 
+	margin:0 auto;
 }
 
 .Member-experience li {
@@ -2887,10 +2895,18 @@ ul.Tabs li a :hover {
 }
 
 .Member-panel {
-    margin-right: 20px;
-    padding: 0;
-    width: calc(100%/2 - 20px);
-    float: left;
+    width:337px;
+	display: inline-block;
+	font-size:12px;
+	margin: 5px 5px 5px 0;
+	overflow:hidden;
+	font-size:15px;
+	line-height: 1.5em;
+	letter-spacing: 1pt;
+	color:#353535;
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;	
 }
 
 .Member-panel:hover {
@@ -2916,7 +2932,6 @@ ul.Tabs li a :hover {
 
 .MemberAct-text {
     padding: 0 10px;
-    padding-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 0 0 10px 10px;
 }
@@ -2927,6 +2942,7 @@ ul.Tabs li a :hover {
     font-size: 14px;
     border-radius: 10px;
     color: #b3b3b3;
+    line-height: 40px;
 }
 
 .MemberAct-info {

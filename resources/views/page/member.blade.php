@@ -34,19 +34,21 @@
         </ul>
         <div class="row Tab-Container">
             <div class="Member-content" id="Mtab-1">
+                <p>關於我<span> About Me</span></p>
                 <div class="Member-About">
-                    <p>關於我<span> About Me</span></p>
                     <span>還沒輸入相關介紹哦！</span>
                 </div>
+                <p>我的經歷<span> My Experience</span></p>
                 <div class="Member-experience">
-                    <p>我的經歷<span> My Experience</span></p>
+                    
                     <ul style="margin-left: 20px;">
-                        <!-- <li>真理大學畢業</li>
-                        <li>B123擔任專職小編</li> -->
+                         <li>真理大學畢業</li>
+                        <li>B123擔任專職小編</li> 
                     </ul>
                 </div>
+                <p>我的活動<span> My Activies</span></p>
                 <div class="row Member-activity">
-                    <p>我的活動<span> My Activies</span></p>
+                    
                     @foreach ( $activitys as $activity )
                     <a href="/activity/{{ $activity->id }}">
                         <div class="Member-panel">
