@@ -840,6 +840,18 @@
         max-width: 100%;
     }
     
+    .article-left {
+        width: auto;
+        padding: 30px;
+        margin: 0;
+        float: left;
+    }
+    
+    .article-right {
+         width: auto; 
+         padding: 0 20px; 
+         margin:0; 
+    }
     
     
 }
