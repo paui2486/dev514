@@ -36,7 +36,43 @@
         min-height: 260px;
     }
     </style>
+    <style>
+         #ad_root {
+            font-size: 14px;
+            height: 250px;
+            line-height: 16px;
+            position: relative;
+            width: 300px;
+          }
 
+          .thirdPartyMediaClass {
+            height: 157px;
+            width: 300px;
+          }
+
+          .thirdPartyTitleClass {
+            font-weight: 600;
+            font-size: 16px;
+            margin: 8px 0 4px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .thirdPartyBodyClass {
+            display: -webkit-box;
+            height: 32px;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+          }
+
+          .thirdPartyCallToActionClass {
+            color: #326891;
+            font-family: sans-serif;
+            font-weight: 600;
+            margin-top: 8px;
+          }
+    </style>
     {{-- <link rel="stylesheet" href="{{ elixir('css/app.css') }}"> --}}
 </head>
 <body id="app-layout">
@@ -57,10 +93,21 @@
     @include($header)
 
     @yield('banner')
+    <fb:ad placementid="[PLACEMENT_ID]" format="native" testmode="true"></fb:ad>
 
     @yield('content')
 
     @include('partials.footer')
+
+    <fb:ad placementid="53118909" format="native" nativeadid="ad_root"></fb:ad>
+  	<div id="ad_root">
+        <a class="fbAdLink">
+          <div class="fbAdMedia thirdPartyMediaClass"></div>
+          <div class="fbAdTitle thirdPartyTitleClass"></div>
+          <div class="fbAdBody thirdPartyBodyClass"></div>
+          <div class="fbAdCallToAction thirdPartyCallToActionClass"></div>
+        </a>
+    </div>
 
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -94,18 +141,32 @@
         ga('send', 'pageview');
 
         window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '{{ env("FACEBOOK_CLIENT_ID") }}',
-            xfbml      : true,
-            version    : 'v2.6'
+            FB.init({
+                appId      : '{{ env("FACEBOOK_CLIENT_ID") }}',
+                xfbml      : true,
+                version    : 'v2.6'
             });
+
+            FB.Event.subscribe(
+                'ad.loaded',
+                function(53118909) {
+                  console.log('ad loaded');
+                }
+            );
+
+            FB.Event.subscribe(
+                'ad.error',
+                function(errorCode, errorMessage, 53118909) {
+                  console.log('ad error ' + errorCode + ': ' + errorMessage);
+                }
+            );
         };
 
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
             js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/zh_TW/sdk.js";
+            js.src = "//connect.facebook.net/zh_TW/all.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
