@@ -70,12 +70,16 @@
                     @endforeach
             </div>
             <div class="purchase-block">
-                @if(count($tickets)>0)
-                <div class="row Cart-purchase">
-                    <p><img src="/img/icons/playicon.png">訂 購</p>
-                </div>
+                @if( $activity->hoster_id === 101)
+                    <div class="row Cart-purchase" onclick="window.open('{{ $activity->fkul }}')">訂 購</div>
                 @else
-                <div class="row Cart-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
+                    @if(count($tickets)>0)
+                    <div class="row Cart-purchase">
+                        <p><img src="/img/icons/playicon.png">訂 購</p>
+                    </div>
+                    @else
+                    <div class="row Cart-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完！</div>
+                    @endif
                 @endif
 
                 <div class="actpage-share">
@@ -97,62 +101,66 @@
         </div>
 <!--------------mobile colorbox start--------------->
         <div class="cart purchase-mb-btn">
-            @if(count($tickets)>0)
-            <a class='inline' href="#inline_content">
-            <div class="row Cart-mb-purchase">
-                 <p><img src="/img/icons/playicon.png">訂購</p>
-            </div>
-            </a>
-            <div style='display:none'>
-                <div id='inline_content' style='padding:10px; background:#fff;'>
-                    <div class="row Cart-content">
-                        <p>{{ $activity->title }}</p>
-
-                        {!! csrf_field() !!}
-                        {{--*/
-                            $count = 0;
-                            $cnt = count($tickets);
-                        /*--}}
-                        @foreach($tickets as $key => $ticket)
-                        {{--*/ $count += $ticket->left_over; /*--}}
-                        <div style="position:relative">
-                        <div class="row Cart-mb-ticket @if($cnt == 1) Cart-ticket-checked @endif">
-                            <div class="Cart-ticket-surplus">
-                               剩 {{ $ticket->left_over }} 張
-                            </div>
-    <!--
-                            <div class="col-md-12">
-                                <label class="checkbox-inline">
-                                <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $key }}" @if($cnt == 1) checked="checked" @endif >                       </label>
-                            </div>
-    -->
-
-                            <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
-                            <div id="OneClick" class="row Cart-detail">
-                                <ul>
-                                    <li><span>票券名稱</span>{{ $ticket->name }}</li>
-                                    <li><span>票券價格</span>$ {{ $ticket->price }} 元</li>
-                                    <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
-
-                                    <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="Cart-number">請選擇數量
-                            <select name="ticket-{{$key}}-number">
-                            @for ($i = 1; $i <= 10; $i++)
-                                <option value="{{$i}}">{{$i}}</option>
-                            @endfor
-                            </select>
-                        </div>
-                        </div>
-                        @endforeach
-                    </div>
-                <div class="Cart-mb-nextstep">下一步</div>
-                </div>
-            </div>
+            @if( $activity->hoster_id === 101)
+                <div class="row Cart-purchase" onclick="window.open('{{ $activity->fkul }}')">訂 購</div>
             @else
-            <div class="row actpage-mb-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完</div>
+                @if(count($tickets)>0)
+                <a class='inline' href="#inline_content">
+                <div class="row Cart-mb-purchase">
+                     <p><img src="/img/icons/playicon.png">訂購</p>
+                </div>
+                </a>
+                <div style='display:none'>
+                    <div id='inline_content' style='padding:10px; background:#fff;'>
+                        <div class="row Cart-content">
+                            <p>{{ $activity->title }}</p>
+
+                            {!! csrf_field() !!}
+                            {{--*/
+                                $count = 0;
+                                $cnt = count($tickets);
+                            /*--}}
+                            @foreach($tickets as $key => $ticket)
+                            {{--*/ $count += $ticket->left_over; /*--}}
+                            <div style="position:relative">
+                            <div class="row Cart-mb-ticket @if($cnt == 1) Cart-ticket-checked @endif">
+                                <div class="Cart-ticket-surplus">
+                                   剩 {{ $ticket->left_over }} 張
+                                </div>
+        <!--
+                                <div class="col-md-12">
+                                    <label class="checkbox-inline">
+                                    <input name="ticket_id" type="checkbox" class="checkbox" id="inlineCheckbox1" value="{{ $key }}" @if($cnt == 1) checked="checked" @endif >                       </label>
+                                </div>
+        -->
+
+                                <input type="hidden" name="ticket-{{$key}}-id" value="{{ $ticket->id }}">
+                                <div id="OneClick" class="row Cart-detail">
+                                    <ul>
+                                        <li><span>票券名稱</span>{{ $ticket->name }}</li>
+                                        <li><span>票券價格</span>$ {{ $ticket->price }} 元</li>
+                                        <li><span>活動開始</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_start) /*--}} </li>
+
+                                        <li><span>活動結束</span> {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($ticket->ticket_end))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $ticket->ticket_end) /*--}} </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="Cart-number">請選擇數量
+                                <select name="ticket-{{$key}}-number">
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor
+                                </select>
+                            </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    <div class="Cart-mb-nextstep">下一步</div>
+                    </div>
+                </div>
+                @else
+                <div class="row actpage-mb-purchase" onclick="alert('抱歉！目前已無票券可供您訂購')">sorry！票券已售完</div>
+                @endif
             @endif
         </div>
 <!--------------mobile colorbox end--------------->
@@ -459,6 +467,10 @@
         $(".Cart-mb-nextstep").on('click', mbpurchase);
 
         function purchase(){
+            if( {{ $activity->hoster_id }} === 101) {
+                return true;
+            }
+
             var ticketIds = [];
             var ticketNumbers = [];
             $('.Cart-ticket').each(function() {

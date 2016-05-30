@@ -112,6 +112,19 @@
                             </div>
                         </div>
                         @endif
+                        <!-- 幹！什麼爛東西 -->
+                        @if( Auth::id() === 101 )
+                        <div class="form-group {{{ $errors->has('fkul') ? 'has-error' : '' }}}">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="fkul">
+                                    <p>*</p>導購網址
+                                </label>
+                                <div class="col-sm-10 errorbox">
+                                    <input class="form-control " type="text" name="fkul" id="fkul" value="{{{ Input::old('fkul', isset($activity) ? $activity->fkul : null) }}}" />
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="form-group {{{ $errors->has('soWhat') ? 'has-error' : '' }}}">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="soWhat">

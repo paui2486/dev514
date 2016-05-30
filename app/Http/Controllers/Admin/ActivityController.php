@@ -91,6 +91,12 @@ class ActivityController extends Controller
             'updated_at'          => date("Y-m-d H:i:s"),
         );
 
+        // 幹！什麼爛東西
+        if( Auth::id() === 101 )
+        {
+            $storeArray['fkul'] = $request->fkul;
+        }
+
         if( Auth::user()->adminer )
         {
             $storeArray['hoster_id'] = $request->hoster_id;
@@ -221,6 +227,12 @@ class ActivityController extends Controller
             'activity_end'  => $request->activity_end_date.   " " . $request->activity_end_time,
             'updated_at'    => date("Y-m-d H:i:s"),
         );
+
+        // 幹！什麼爛東西
+        if( Auth::id() === 101 )
+        {
+            $updateArray['fkul'] = $request->fkul;
+        }
 
         if( Auth::user()->adminer )
         {

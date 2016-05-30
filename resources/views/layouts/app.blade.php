@@ -85,7 +85,64 @@
     '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5ZKFLX');</script>
     <!-- End Google Tag Manager -->
-
+    <script>
+        window.fbAsyncInit = function() {
+            FB.Event.subscribe(
+              'ad.loaded',
+              function(placementId) {
+                  console.log('Audience Network ad loaded');
+                  document.getElementById('ad_root').style.display = 'block';
+              }
+            );
+            FB.Event.subscribe(
+                'ad.error',
+                function(errorCode, errorMessage, placementId) {
+                    console.log('Audience Network error (' + errorCode + ') ' + errorMessage);
+                }
+            );
+        };
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk/xfbml.ad.js#xfbml=1&version=v2.5&appId={{ env('FACEBOOK_CLIENT_ID') }}";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <style>
+       #ad_root {
+          display: none;
+          font-size: 14px;
+          height: 250px;
+          line-height: 16px;
+          position: relative;
+          width: 300px;
+        }
+        .thirdPartyMediaClass {
+          height: 157px;
+          width: 300px;
+        }
+        .thirdPartyTitleClass {
+          font-weight: 600;
+          font-size: 16px;
+          margin: 8px 0 4px 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .thirdPartyBodyClass {
+          display: -webkit-box;
+          height: 32px;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+        .thirdPartyCallToActionClass {
+          color: #326891;
+          font-family: sans-serif;
+          font-weight: 600;
+          margin-top: 8px;
+        }
+      </style>
     {{--*/
         $header = (Request::is('/')) ? 'partials.header' : 'partials.page-header';
     /*--}}
@@ -93,21 +150,19 @@
     @include($header)
 
     @yield('banner')
-    <fb:ad placementid="[PLACEMENT_ID]" format="native" testmode="true"></fb:ad>
+    <fb:ad placementid="{{ env('FACEBOOK_PLACEMENT_ID','509598299165169_540528149405517') }}" format="native" testmode="false"></fb:ad>
 
     @yield('content')
-
-    @include('partials.footer')
-
-    <fb:ad placementid="53118909" format="native" nativeadid="ad_root"></fb:ad>
-  	<div id="ad_root">
-        <a class="fbAdLink">
-          <div class="fbAdMedia thirdPartyMediaClass"></div>
-          <div class="fbAdTitle thirdPartyTitleClass"></div>
-          <div class="fbAdBody thirdPartyBodyClass"></div>
-          <div class="fbAdCallToAction thirdPartyCallToActionClass"></div>
-        </a>
+    <div class="fb-ad" data-placementid="{{ env('FACEBOOK_PLACEMENT_ID','509598299165169_540528149405517') }}" data-format="native" data-nativeadid="ad_root" data-testmode="false"></div>
+    <div id="ad_root">
+      <a class="fbAdLink">
+        <div class="fbAdMedia thirdPartyMediaClass"></div>
+        <div class="fbAdTitle thirdPartyTitleClass"></div>
+        <div class="fbAdBody thirdPartyBodyClass"></div>
+        <div class="fbAdCallToAction thirdPartyCallToActionClass"></div>
+      </a>
     </div>
+    @include('partials.footer')
 
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -146,20 +201,6 @@
                 xfbml      : true,
                 version    : 'v2.6'
             });
-
-            FB.Event.subscribe(
-                'ad.loaded',
-                function(53118909) {
-                  console.log('ad loaded');
-                }
-            );
-
-            FB.Event.subscribe(
-                'ad.error',
-                function(errorCode, errorMessage, 53118909) {
-                  console.log('ad error ' + errorCode + ': ' + errorMessage);
-                }
-            );
         };
 
         (function(d, s, id){
