@@ -6,7 +6,7 @@
             <meta {{ $key }} content="{{ $value }}">
         @endforeach
     @endif
-    <title>514活動頻道 - {{ $activity->title }}</title>
+    <title>514 - {{ $activity->title }}</title>
 @endsection
 
 @section('style')

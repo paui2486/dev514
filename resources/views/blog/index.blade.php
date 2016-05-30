@@ -1,6 +1,6 @@
 @extends('layouts.blog')
 @section('meta')
-    <title>514-有意思的人＆故事</title>
+    <title>514文章專區</title>
 @endsection
 @section('script')
 <!-- #region Jssor Slider Begin -->
@@ -100,7 +100,7 @@
 
 
                         <div class="blog-banner-date">{{ preg_replace("/(.*)\s(.*)/", "$1", $banner->time)  }}</div>
-                        <div class="blog-banner-auth">by {{ $banner->author }}</div>
+<!--                        <div class="blog-banner-auth">by {{ $banner->author }}</div>-->
                     </div>
                     <div class="blog-banner-image" style="background-image:url('{{ $banner->image }}');">
                     </div>
@@ -153,9 +153,11 @@
                                     <div class="blog-panel-time">
                                         {{ preg_replace("/(.*)\s(.*)/", "$1", $article->time)  }}
                                     </div>
+<!--
                                     <div class="blog-panel-author">
                                         by {{ $article->author }}
                                     </div>
+-->
                                     <div class="blog-panel-info word-indent-02 ">
                                         {{ $article->info }}
                                     </div>
@@ -169,9 +171,11 @@
                             <div class="blog-panel-time">
                                 {{ preg_replace("/(.*)\s(.*)/", "$1", $article->time)  }}
                             </div>
+<!--
                             <div class="blog-panel-author">
                                 by {{ $article->author }}
                             </div>
+-->
                             <div class="blog-panel-info word-indent">
                                 {{ $article->info }}
                             </div>
