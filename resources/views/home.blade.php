@@ -4,7 +4,7 @@
     @foreach($meta as $key => $value)
         <meta {{ $key }} content="{{ $value }}">
     @endforeach
-    <title>514-有意思的人＆故事</title>
+    <title>514-有意思的人</title>
 @endsection
 
 @section('style')
@@ -109,13 +109,13 @@
                         <img src="/img/icons/mb-date.png">
                             {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
                     </div>
-                    <div class="home-mb-info">
-                        <img src="/img/icons/mb-price.png">
-                        {{ $mbActivity->price }} 元
-                    </div>
                     <div class="home-mb-info word-indent-newact">
                         <img src="/img/icons/mb-location.png">
                         {{ $mbActivity->locat_name . $mbActivity->location }}
+                    </div>
+                    <div class="home-mb-info">
+                        <img src="/img/icons/mb-price.png">
+                        {{ $mbActivity->price }} 元
                     </div>
                     <div class="home-mb-info">
                         <img src="/img/icons/mb-category.png">
@@ -141,7 +141,7 @@
                 <div class="pure-g panel-filter">
                     <div class="filter-select pure-u-4-24">
                         <select name="playWhat" class="filter-select dropdown">
-                            <option value="" class="label">想玩什麼</option>
+                            <option value="" class="label">職人類別</option>
                             @foreach( $home->filter->what as $play_what )
                             <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
                             @endforeach
@@ -149,7 +149,7 @@
                     </div>
                     <div class="pure-u-4-24">
                         <select name="goWhere" class="dropdown">
-                            <option value="" class="label">想去哪兒</option>
+                            <option value="" class="label">位置/地點</option>
                             @foreach( $home->filter->where as $key_where => $go_where )
                             <option value="{{ $go_where->id }}"> {{ $go_where->name }} </option>
                             @endforeach
@@ -158,7 +158,7 @@
 
                     <div class="pure-u-4-24">
                         <select name="atWhen" class="dropdown">
-                            <option value="" class="label">什麼時候</option>
+                            <option value="" class="label">活動時間</option>
                             @foreach( $home->filter->when as $key_when => $at_when )
                             <option value="{{ $at_when->id }}"> {{ $at_when->name }} </option>
                             @endforeach
@@ -174,7 +174,7 @@
                         </select>
                     </div>
                     <div class="pure-u-6-24">
-                        <input name="keySearch" class="search-bar" type="text" placeholder="輸入關鍵字搜尋" />
+                        <input name="keySearch" class="search-bar" type="text" placeholder="輸入關鍵字 尋找職人活動" />
                     </div>
                     <div class="pure-u-2-24">
                         <button type="submit" class="search-button btn">
@@ -184,6 +184,49 @@
                 </div>
             </div>
         </form>
+        
+                <div class="home-blog">
+            <div class="row home-title">
+                <img src="/img/pics/new_articles-02.png">
+            </div>
+            <div class="row home-blog-content">
+                @foreach( $home->newBlog as $blog )
+                <div class="row home-blog-panel">
+                    <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
+                        <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
+                        </div>
+                    </a>
+                    <div class="home-blog-panel-right">
+                        <div class="home-blog-title">
+                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
+                        </div>
+                        <div class="row home-blog-info">
+                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                                <div class="home-blog-created_at">
+                                    <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
+                                </div>
+                            </a>
+                            <a href="{{ url('/blog/'. $blog->category) }}">
+                                <div class="home-blog-category">
+                                    <li>{{ $blog->category }}</li>
+                                </div>
+                            </a>
+                            <a href="{{ url('/member/'. $blog->author)}}">
+                                <div class="home-blog-author">
+                                    <li> By {{ $blog->author }}</li>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="home-blog-description word-indent-04">
+                            {{ $blog->description }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="row home-read-more">
+                <a href="blog"> 閱讀更多 </a>
+            </div>
+        </div>
 
         <div class="new-activity">
             <div class="row home-title">
@@ -315,50 +358,6 @@
                 @endforeach
             </div>
         </div>
-<!--
-        <div class="home-blog">
-            <div class="row home-title">
-                <img src="/img/pics/new_articles-02.png">
-            </div>
-            <div class="row home-blog-content">
-                @foreach( $home->newBlog as $blog )
-                <div class="row home-blog-panel">
-                    <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
-                        <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
-                        </div>
-                    </a>
-                    <div class="home-blog-panel-right">
-                        <div class="home-blog-title">
-                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
-                        </div>
-                        <div class="row home-blog-info">
-                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                                <div class="home-blog-created_at">
-                                    <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
-                                </div>
-                            </a>
-                            <a href="{{ url('/blog/'. $blog->category) }}">
-                                <div class="home-blog-category">
-                                    <li>{{ $blog->category }}</li>
-                                </div>
-                            </a>
-                            <a href="{{ url('/member/'. $blog->author)}}">
-                                <div class="home-blog-author">
-                                    <li> By {{ $blog->author }}</li>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="home-blog-description word-indent-04">
-                            {{ $blog->description }}
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="row home-read-more">
-                <a href="blog"> 閱讀更多 </a>
-            </div>
-        </div>
--->
       </div>
     </div>
 @endsection
