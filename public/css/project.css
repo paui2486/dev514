@@ -486,38 +486,41 @@ li.collapse-blog-category {
 }
 
 .home-blog-content {
-    max-width: 1050px;
+    width: 85%;
     margin: auto;
 }
 
 .home-blog-panel {
-    max-width: 500px;
-    padding: 0;
-    margin: 10px;
-    float: left;
+    
 }
 
-.home-blog-panel-right {
+.Hblog-panel-text {
     background-color:white;
-    float: right;
-    width: 325px;
-    height: 180px;
-    padding:5px 20px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
 }
 
 .home-blog-thumbnail {
     height: 180px;
-    width: 175px;
-    float: left;
+    width: 100%;
     background-size: cover;
     background-position: top;
-    -webkit-filter: sepia(0.5);
-    filter: sepia(0.5);
+    position: relative;
 }
 
-.home-blog-thumbnail:hover{
-    -webkit-filter: none;
-    filter: none;
+.home-blog-count {
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.home-blog-count img {
+    width: 20px;
+    margin-right: 5px;
 }
 
 .home-blog-title {
@@ -551,12 +554,14 @@ li.collapse-blog-category {
 .home-blog-author,
 .home-blog-created_at {
     margin-right: 5px;
-    font-size: 13px;
+    font-size: 14px;
     color:#998675;
     line-height: 22px;
     float: left;
-    padding: 0px 5px;
-    border-radius: 5px;
+    padding: 0 10px;
+    border-radius: 10px;
+    list-style: none;
+    border: 1px solid #ccc;
 }
 
 .home-blog-category:hover,
@@ -569,16 +574,15 @@ li.collapse-blog-category {
     overflow: hidden;
     text-overflow: ellipsis;
     position: relative;
-    height: 22px;
 }
 
 .home-blog-description {
     max-width: 295px;
     font-size: 14px;
     color: #82766c;
-    margin-top:10px;
-    margin-bottom: 10px;
     letter-spacing: 1px;
+    margin: 5px 0;
+    margin-bottom: 12px;
 }
 
 .home-read-more {
@@ -831,7 +835,6 @@ li.collapse-blog-category {
     -webkit-box-orient: vertical;
     position:relative;
     line-height:1.5em;
-    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
     height:4.5em;
 }
 
@@ -854,8 +857,6 @@ li.collapse-blog-category {
     -webkit-box-orient: vertical;
     position:relative;
     line-height:1.5em;
-    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
-    height:3em;
 }
 
 .word-indent-04 {
@@ -866,7 +867,6 @@ li.collapse-blog-category {
     -webkit-box-orient: vertical;
     position:relative;
     line-height:1.5em;
-    /* 高度为需要显示的行数*行高，比如这里我们显示两行，则为3 */
     height:6em;
 }
 

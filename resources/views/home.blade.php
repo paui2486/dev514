@@ -191,20 +191,26 @@
             </div>
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
-                <div class="row home-blog-panel">
+                <div class="row col-md-3 home-blog-panel">
                     <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
+                            <div class="home-blog-count">
+                                <img src="/img/icons/eye-03.png">0 人
+                            </div>
                         </div>
                     </a>
-                    <div class="home-blog-panel-right">
+                    
+                    <div class="Hblog-panel-text">
                         <div class="home-blog-title">
                              <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
                         </div>
                         <div class="row home-blog-info">
-                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                                <div class="home-blog-created_at">
+<!--
+                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                    <div class="home-blog-created_at">
                                     <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
                                 </div>
                             </a>
+-->
                             <a href="{{ url('/blog/'. $blog->category) }}">
                                 <div class="home-blog-category">
                                     <li>{{ $blog->category }}</li>
@@ -212,11 +218,11 @@
                             </a>
                             <a href="{{ url('/member/'. $blog->author)}}">
                                 <div class="home-blog-author">
-                                    <li> By {{ $blog->author }}</li>
+                                    <li> 由 {{ $blog->author }} 發表</li>
                                 </div>
                             </a>
                         </div>
-                        <div class="home-blog-description word-indent-04">
+                        <div class="home-blog-description word-indent-02">
                             {{ $blog->description }}
                         </div>
                     </div>
