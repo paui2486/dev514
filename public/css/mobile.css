@@ -160,26 +160,52 @@
         width: 100%;
         background-color: #fff;
     }
-
+    
+    .home-mb-title {
+        font-size: 17px;
+        margin: 10px 25px;
+    }
+    
+    .mobile-panel {
+        margin: 0;
+        padding: 0 15px;
+    }
+    
     .mobile-panel a {
         color: #666;
     }
-
+    
+    .home-blog-panel {
+        padding: 0;
+        margin:12px;
+    }
+    
     .mobile_panel_bg {
         background-color: white;
         border: 1px solid #ccc;
-        border-radius: 5px;
         height: 150px;
         display: flex;
         margin: 15px
     }
-
+    
+    .home-blog-thumbnail {
+        width: 50%;
+    }
+    
+    .Hblog-panel-text {
+        height: 180px;
+    }
+    
+    .home-blog-category, 
+    .home-blog-author {
+        margin-bottom: 5px;
+    }
+    
     .mobile_panel_bg:hover {
         background-color: #f2f2f2;
     }
 
     .mobile-activity-thumbnail {
-        border-radius: 5px 0 0 5px;
         position: relative;
         background-size: cover;
     }

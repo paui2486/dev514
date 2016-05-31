@@ -92,18 +92,18 @@
         </div>
 -->     
         <p class="home-mb-title">最新文章</p>
-        <div class="mobile-panel">
+        <div class="col-xs-12 mobile-panel">
              @foreach( $home->newBlog as $blog )
                 <div class="row home-blog-panel">
                     <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
-                        <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
+                        <div class="col-xs-6 home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
                                 <img src="/img/icons/eye-03.png">0 人
                             </div>
                         </div>
                     </a>
                     
-                    <div class="Hblog-panel-text">
+                    <div class="col-xs-6 Hblog-panel-text">
                         <div class="home-blog-title">
                              <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
                         </div>
