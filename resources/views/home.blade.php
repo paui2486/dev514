@@ -90,7 +90,43 @@
                 <li data-type="price" ><a href="#">優惠排序</a></li>
             </ul>
         </div>
--->
+-->     
+        <p class="home-mb-title">最新文章</p>
+        <div class="mobile-panel">
+             @foreach( $home->newBlog as $blog )
+                <div class="row home-blog-panel">
+                    <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
+                        <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
+                            <div class="home-blog-count">
+                                <img src="/img/icons/eye-03.png">0 人
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <div class="Hblog-panel-text">
+                        <div class="home-blog-title">
+                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
+                        </div>
+                        <div class="row home-blog-info">
+                            <a href="{{ url('/blog/'. $blog->category) }}">
+                                <div class="home-blog-category">
+                                    <li>{{ $blog->category }}</li>
+                                </div>
+                            </a>
+                            <a href="{{ url('/member/'. $blog->author)}}">
+                                <div class="home-blog-author">
+                                    <li> 由 {{ $blog->author }} 發表</li>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="home-blog-description word-indent-02">
+                            {{ $blog->description }}
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <p class="home-mb-title">最新活動</p>
         <div class="mobile-panel">
             @foreach( $home->allActivity as $mbActivity )
             <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">
@@ -184,8 +220,7 @@
                 </div>
             </div>
         </form>
-        
-                <div class="home-blog">
+        <div class="home-blog">
             <div class="row home-title">
                 <img src="/img/pics/new_articles-02.png">
             </div>
@@ -233,7 +268,6 @@
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
-
         <div class="new-activity">
             <div class="row home-title">
                 <img src="/img/pics/new_activities-02.png">

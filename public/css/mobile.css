@@ -20,7 +20,7 @@
     .list-result,
     .actpage-mb-dashboard,
     .actpage-thum-mb-title,
-    .blog-mb-text {
+    .blog-mb-text{
         display: none!important ;
     }
 }
@@ -59,7 +59,8 @@
     .contact-p,
     .blog-panel-text,
     .blog-banner-date,
-    .blog-banner-auth {
+    .blog-banner-auth,
+    .online-server{
         display: none!important;
     }
 

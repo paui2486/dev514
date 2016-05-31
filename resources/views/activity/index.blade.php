@@ -71,7 +71,7 @@
             </div>
             <div class="purchase-block">
                 @if( $activity->hoster_id === 101)
-                    <div class="row Cart-purchase" onclick="window.open('{{ $activity->fkul }}')">訂 購</div>
+                    <div class="row Cart-purchase" onclick="window.open('{{ $activity->fkul }}')">前往官網訂購</div>
                 @else
                     @if(count($tickets)>0)
                     <div class="row Cart-purchase">

@@ -20,7 +20,7 @@
                 </div>
                 <div class="category-info">
                     <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        by {{ $blog->author }}
+                        由 {{ $blog->author }} 發表
                     </p>
                     <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                         {{ preg_replace("/(.*)\s(.*)/", "$1", $blog->created_at)  }}

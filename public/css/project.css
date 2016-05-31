@@ -35,7 +35,7 @@ html {
 }
 
 .navbar-brand img {
-    width:225px;
+    width:200px;
     z-index: 200;
     margin:auto;
 }
@@ -54,16 +54,15 @@ html {
 }
 
 .navbar-brand {
-    padding: 5px 10px;
+    padding:0;
 }
 
 .page-navbar-brand {
     padding: 0;
-    margin-top: -4px;
 }
 
 .page-navbar-brand img {
-    width: 200px;
+    width: 210px;
 }
 
 .navbar-collapse {
@@ -482,7 +481,6 @@ li.collapse-blog-category {
 
 .home-blog {
     padding:20px;
-    background-color: #fcfbfa;
 }
 
 .home-blog-content {
@@ -1638,11 +1636,12 @@ li.collapse-blog-category {
 
 .actpage-main-image {
     height: 500px;
-    background-size:100% auto;
+    background-size: cover;
     width: 80%;
     position: absolute;
     left: 10%;
-    top:90px;
+    top: 90px;
+    background-position: top;
 }
 
 .actpage-content {
