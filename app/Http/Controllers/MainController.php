@@ -110,7 +110,7 @@ class MainController extends controller
     private function getNewBlog()
     {
         $newBlogs = DB::table('articles')
-                        ->where('articles.status', 3)
+                        ->where('articles.status', 2)
                         ->leftJoin('users',             'users.id',      '=',   'articles.author_id')
                         ->leftJoin('categories',        'categories.id', '=',   'articles.category_id')
                         ->select(
@@ -222,7 +222,7 @@ class MainController extends controller
                               'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
                               'activities.description',       'activities.counter as count',    'activities.min_price as price',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
-                              'activities.hoster_id',         'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name', 
+                              'activities.hoster_id',         'users.nick as orginizer',      'activities.activity_end as date_end', 'cat.name as cat_name',
                           ))
                           ->where('activities.activity_end', '>=', date('Y-m-d'))
                           ->orderBy('activities.activity_start', 'asc')
