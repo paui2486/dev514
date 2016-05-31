@@ -41,8 +41,7 @@ html {
 }
 
 .navigation {
-    padding:10px;
-    margin-top: 10px;
+    padding:8px;
 }
 
 .navigation nav ul li a {
@@ -65,7 +64,6 @@ html {
 
 .page-navbar-brand img {
     width: 200px;
-    
 }
 
 .navbar-collapse {
