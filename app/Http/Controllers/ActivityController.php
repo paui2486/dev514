@@ -96,7 +96,6 @@ class ActivityController extends Controller
                 'property = og:image'       => asset($activity->thumbnail),
                 'property = fb:page_id'     => '514 Life',
                 'property = fb:app_id'      => '509584332499899',
-                'property = fb:admins'      => '1910444804523',
             );
         }
         return view("activity.index", compact('meta', 'activity', 'tickets', 'suggests'));
