@@ -63,8 +63,8 @@ class MainController extends controller
             'property = og:description' => '514生活頻道想要提供最有意思的活動資訊，集結DIY動手作、講座、課程、體驗等各式各樣的活動，無論您想找活動或是辦活動，方便的線上報名與售票，514生活頻道絕對是您最好的活動寶貝，讓大家可以簡單找到，並且輕鬆享受你喜愛的生活，體驗514「有意思」的活動。',
             'property = og:site_name'   => '514 活動頻道',
             'property = og:image'       => asset('/img/pics/activity-photo.jpg'),
-            'property = fb:page_id'     => '514 Life',
-            'property = fb:app_id'      => '509584332499899',
+            // 'property = fb:page_id'     => '514 Life',
+            'property = fb:app_id'      => env("FACEBOOK_CLIENT_ID"),
         );
         return $meta;
     }

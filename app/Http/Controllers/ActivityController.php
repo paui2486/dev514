@@ -94,8 +94,8 @@ class ActivityController extends Controller
                 'property = og:site_name'   => '514 活動頻道',
                 'property = og:locale'      => 'zh_TW',
                 'property = og:image'       => asset($activity->thumbnail),
-                'property = fb:page_id'     => '514 Life',
-                'property = fb:app_id'      => '509584332499899',
+                // 'property = fb:page_id'     => '514 Life',
+                'property = fb:app_id'      => env("FACEBOOK_CLIENT_ID"),
             );
         }
         return view("activity.index", compact('meta', 'activity', 'tickets', 'suggests'));
