@@ -497,6 +497,7 @@ li.collapse-blog-category {
     background-color:white;
     border: 1px solid #ccc;
     padding: 0 10px;
+    min-height: 120px;
 }
 
 .home-blog-thumbnail {
@@ -1188,6 +1189,7 @@ li.collapse-blog-category {
 
 .blog-thumbnail {
     height: 150px;
+    position: relative;
     width: auto;
     background-size:cover;
     background-repeat: no-repeat;
@@ -1202,12 +1204,6 @@ li.collapse-blog-category {
     display: inline-block;
     margin: 0;
 }
-
-/*
-.blog-cat-panel:hover{
-    box-shadow: 0px 0px 8px #000;
-}
-*/
 
 .blog-cat-panel {
     height: auto;
@@ -1245,6 +1241,7 @@ li.collapse-blog-category {
 .blog-panel-info {
     font-size: 14px;
     color: #998675;
+    margin: 5px 0;
 }
 
 

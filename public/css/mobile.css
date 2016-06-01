@@ -190,10 +190,11 @@
     
     .home-blog-thumbnail {
         width: 50%;
+        height: 150px;
     }
     
     .Hblog-panel-text {
-        height: 180px;
+        height: 150px;
     }
     
     .home-blog-category, 

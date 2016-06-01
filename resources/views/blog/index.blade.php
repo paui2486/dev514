@@ -153,14 +153,12 @@
                                     <div class="blog-panel-time">
                                         {{ preg_replace("/(.*)\s(.*)/", "$1", $article->time)  }}
                                     </div>
-<!--
-                                    <div class="blog-panel-author">
-                                        by {{ $article->author }}
-                                    </div>
--->
                                     <div class="blog-panel-info word-indent-02 ">
                                         {{ $article->info }}
                                     </div>
+                                </div>
+                                <div class="home-blog-count">
+                                    <img src="/img/icons/eye-03.png">0 人
                                 </div>
                             </div>
                        
@@ -171,11 +169,9 @@
                             <div class="blog-panel-time">
                                 {{ preg_replace("/(.*)\s(.*)/", "$1", $article->time)  }}
                             </div>
-<!--
                             <div class="blog-panel-author">
-                                by {{ $article->author }}
+                                由 {{ $article->author }} 發表
                             </div>
--->
                             <div class="blog-panel-info word-indent">
                                 {{ $article->info }}
                             </div>
