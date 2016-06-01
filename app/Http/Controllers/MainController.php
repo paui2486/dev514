@@ -117,7 +117,7 @@ class MainController extends controller
                             'articles.description',     'articles.created_at',  'users.name as author',
                             'categories.name as category')
                         ->orderBy('articles.created_at', 'desc')
-                        ->take(3)
+                        ->take(10)
                         ->get();
         return $newBlogs;
     }
