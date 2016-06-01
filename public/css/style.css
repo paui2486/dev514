@@ -6407,7 +6407,7 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 @media screen and (max-width: 767px) {
     .r-tabs-state-active .r-tabs-anchor {
     background-color: #00bcd4;
-    color: #fff!important; 
+    color: #fff!important;
     text-shadow: none;
     border: none!important;
 }
@@ -6466,8 +6466,7 @@ textarea.form-control {
     font-weight: 600;
 }
 
-
-
-
-
-
+.fileupload-exists .fileupload-new,
+.fileupload-new .fileupload-exists {
+    display: inline;
+}

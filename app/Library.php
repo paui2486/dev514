@@ -8,6 +8,7 @@ use DB;
 use Log;
 use Auth;
 use Input;
+use Image;
 use Response;
 use Redirect;
 use Datatables;
@@ -44,6 +45,8 @@ class Library
 
     public static function upload( $params )
     {
+        Log::error('gg');
+
         foreach ($params['filed'] as $filed) {
             if ( $params['request']->hasFile($filed) ) {
                 $file                    = $params['request']->file($filed);
@@ -51,9 +54,19 @@ class Library
                 $file_ext                = $file->getClientOriginalExtension();
                 $file_name               = $filed . '-' . time() . '.' . $file_ext ;
                 $dest_path               = public_path() . $file_path;
-                $move_result             = $file->move($dest_path, $file_name);
+                // $move_result             = $file->move($dest_path, $file_name);
+
+                $img = Image::make($file);
+                $img -> crop($params['dataWidth'], $params['dataHeight'], $params['dataX'], $params['dataY'] );
+                $img->save($dest_path.$file_name);
+
+                Log::error($file_name);
+
                 $params['data'][$filed]  = $file_path . $file_name;
+            } else {
+                Log::error('empty');
             }
+
         }
         return $params;
     }
