@@ -6468,5 +6468,5 @@ textarea.form-control {
 
 .fileupload-exists .fileupload-new,
 .fileupload-new .fileupload-exists {
-    display: inline;
+    display: inline !important;
 }

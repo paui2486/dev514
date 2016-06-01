@@ -55,6 +55,9 @@ class Library
                 $file_name               = $filed . '-' . time() . '.' . $file_ext ;
                 $dest_path               = public_path() . $file_path;
                 // $move_result             = $file->move($dest_path, $file_name);
+                if (!file_exists($dest_path)) {
+                    mkdir($dest_path, 0777);
+                }
 
                 $img = Image::make($file);
                 $img -> crop($params['dataWidth'], $params['dataHeight'], $params['dataX'], $params['dataY'] );
