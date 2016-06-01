@@ -230,7 +230,7 @@
                     <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
-                                <img src="/img/icons/eye-03.png">0 人
+                                <img src="/img/icons/eye-03.png">{{ $blog->counter }} 人
                             </div>
                         </div>
                     </a>
