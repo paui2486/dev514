@@ -177,7 +177,7 @@
                 <div class="pure-g panel-filter">
                     <div class="filter-select pure-u-4-24">
                         <select name="playWhat" class="filter-select dropdown">
-                            <option value="" class="label">職人類別</option>
+                            <option value="" class="label">專長類別</option>
                             @foreach( $home->filter->what as $play_what )
                             <option value="{{ $play_what->id }}"> {{ $play_what->name }} </option>
                             @endforeach
@@ -226,7 +226,7 @@
             </div>
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
-                <div class="row col-md-3 home-blog-panel">
+                <div class="row col-md-2 home-blog-panel">
                     <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
@@ -251,11 +251,13 @@
                                     <li>{{ $blog->category }}</li>
                                 </div>
                             </a>
+<!--
                             <a href="{{ url('/member/'. $blog->author)}}">
                                 <div class="home-blog-author">
                                     <li> 由 {{ $blog->author }} 發表</li>
                                 </div>
                             </a>
+-->
                         </div>
                         <div class="home-blog-description word-indent-02">
                             {{ $blog->description }}
