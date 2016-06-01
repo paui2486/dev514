@@ -71,6 +71,11 @@
                                                 <input id="inputImage" class="file"  name="thumbnail" type="file"
                                                     value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
                                             </span>
+                                            <button id="reset" type="button" class="btn btn-primary" data-method="reset" title="Reset" style="display:none;">
+                                                <span class="docs-tooltip" data-toggle="tooltip">
+                                                    <span class="fa fa-refresh"></span>
+                                                </span>
+                                            </button>
                                             <span style="color:red;">(建議以人物為主題，尺寸 1,200 x 675 像素)</span>
                                         </div>
                                         <input class="form-control " type="hidden" name="dataX" id="dataX" value="" />
@@ -471,7 +476,7 @@
         var $dataX = $('#dataX');
         var $dataY = $('#dataY');
         var $dataHeight = $('#dataHeight');
-        var $dataWidth = $('#dataWidth');
+        var $dataWidth  = $('#dataWidth');
         var $dataRotate = $('#dataRotate');
         var $dataScaleX = $('#dataScaleX');
         var $dataScaleY = $('#dataScaleY');
@@ -486,7 +491,7 @@
                 var files = this.files;
                 var file;
 
-                $('#image').cropper({
+                $image.cropper({
                     aspectRatio: 16 / 9,
                     crop: function(e) {
                         $dataX.val(Math.round(e.x));
@@ -497,6 +502,11 @@
                         $dataScaleX.val(e.scaleX);
                         $dataScaleY.val(e.scaleY);
                     }
+                });
+
+                $('#reset').show();
+                $('#reset').click(function () {
+                    $image.cropper('reset');
                 });
 
                 if (!$image.data('cropper')) {
