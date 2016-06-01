@@ -10,11 +10,11 @@
         @foreach( $blogList as $blog )
         <div class="row blog-category-panel">
             <a href="{{ URL::to( 'blog/' . $category->name . '/' . $blog->title ) }}">
-                <div class="blog-category-thumnail"
-                     style="background-image:url( {{ asset($blog->thumbnail) }} )">
-                </div>
+            <div class="col-md-5 blog-category-thumnail"
+            style="background-image:url( {{ asset($blog->thumbnail) }} )">
+            </div>
             </a>
-            <div class="blog-category-text">
+            <div class="col-md-7 blog-category-text">
                 <div class="category-title">
                     <a href="{{ URL::to( 'blog/' . $category->name . '/' . $blog->title ) }}">{{ $blog->title }}</a>
                 </div>
