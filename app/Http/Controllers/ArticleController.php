@@ -41,7 +41,7 @@ class ArticleController extends Controller
                           ->rightJoin('users', 'users.id', '=', 'articles.author_id')
                           ->select(array(
                             'articles.id',  'articles.title',   'articles.thumbnail',
-                            'users.name as author', 'articles.description', 'articles.created_at',
+                            'users.nick as author', 'articles.description', 'articles.created_at',
                           ))
                           ->where('articles.category_id', '=' , $category->id )
                           ->paginate(5);
@@ -57,7 +57,7 @@ class ArticleController extends Controller
                   ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
                   ->select(array(
                     'articles.id',    'articles.title',    'articles.thumbnail',
-                    'users.name', 'articles.description',  'articles.content',
+                    'users.nick as name', 'articles.description',  'articles.content',
                     'categories.name as category_name',    'articles.created_at',
                     'articles.counter',
                   ))
@@ -140,7 +140,7 @@ class ArticleController extends Controller
                         ->join('users', 'users.id', '=', 'articles.author_id')
                         ->select(array(
                           'articles.id',    'articles.thumbnail as image',
-                          'articles.title', 'users.name as author', 'articles.created_at as time'
+                          'articles.title', 'users.nick as author', 'articles.created_at as time'
                         ))
                         ->where('articles.status', 2)
                         ->orderBy('time', 'ASC')
@@ -166,7 +166,7 @@ class ArticleController extends Controller
                       ->leftJoin('users', 'users.id', '=', 'articles.author_id')
                       ->select(array(
                         'articles.id',    'articles.thumbnail',   'articles.counter',
-                        'articles.title', 'users.name as author', 'articles.created_at as time',
+                        'articles.title', 'users.nick as author', 'articles.created_at as time',
                         'articles.description as info'
                       ))
                       ->where('articles.status', 2)
