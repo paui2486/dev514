@@ -152,7 +152,7 @@ class ArticleController extends Controller
     {
         $blogCategories = DB::table('categories')
                           ->select(array(
-                            'id', 'name', 'logo', 'thumbnail'
+                            'id', 'name', 'logo', 'thumbnail',
                           ))
                           ->where('public', 1)
                           ->where('type', 2)
@@ -165,7 +165,7 @@ class ArticleController extends Controller
             $blogs = DB::table('articles')
                       ->leftJoin('users', 'users.id', '=', 'articles.author_id')
                       ->select(array(
-                        'articles.id',    'articles.thumbnail',
+                        'articles.id',    'articles.thumbnail',   'articles.counter',
                         'articles.title', 'users.name as author', 'articles.created_at as time',
                         'articles.description as info'
                       ))

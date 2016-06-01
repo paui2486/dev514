@@ -90,7 +90,7 @@
                 <li data-type="price" ><a href="#">優惠排序</a></li>
             </ul>
         </div>
--->     
+-->
         <p class="home-mb-title">最新文章</p>
         <div class="col-xs-12 mobile-panel">
              @foreach( $home->newBlog as $blog )
@@ -98,11 +98,11 @@
                     <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="col-xs-6 home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
-                                <img src="/img/icons/eye-03.png">0 人
+                                <img src="/img/icons/eye-03.png">{{ $blog->counter }} 人
                             </div>
                         </div>
                     </a>
-                    
+
                     <div class="col-xs-6 Hblog-panel-text">
                         <div class="home-blog-title">
                              <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
@@ -230,11 +230,11 @@
                     <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
                         <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
-                                <img src="/img/icons/eye-03.png">0 人
+                                <img src="/img/icons/eye-03.png">{{ $blog->counter }} 人
                             </div>
                         </div>
                     </a>
-                    
+
                     <div class="Hblog-panel-text">
                         <div class="home-blog-title">
                              <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>

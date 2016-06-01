@@ -115,7 +115,8 @@ class MainController extends controller
                         ->select(
                             'articles.thumbnail',       'articles.title',       'articles.content',
                             'articles.description',     'articles.created_at',  'users.name as author',
-                            'categories.name as category')
+                            'categories.name as category', 'articles.counter'
+                            )
                         ->orderBy('articles.created_at', 'desc')
                         ->take(10)
                         ->get();
