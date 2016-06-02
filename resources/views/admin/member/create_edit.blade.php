@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+
 <form class="form-horizontal" enctype="multipart/form-data"
   	method="post" autocomplete="off" role="form"
   	action="@if(isset($member)){{ URL::to('dashboard/member/'.$member->id.'/update') }}
@@ -97,6 +99,17 @@
                     </div>
                 </div>
     				</div>
+            <div class="form-group {{{ $errors->has('tag_ids') ? 'has-error' : '' }}}">
+                <div class="col-md-12">
+                    <label class="control-label col-sm-2" for="tag_ids">
+                        個人標籤
+                    </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="tag_ids" id="tag_ids" placeholder="輸入後按Enter，或使用小寫逗號區隔"
+                            value="{{{ Input::old('tag_ids', isset($member) ? $member->tag_ids : null) }}}"  data-role="tagsinput"/>
+                    </div>
+                </div>
+            </div>
             <div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
                 <div class="col-md-12">
                     <label class="control-label col-sm-2" for="description">
@@ -223,6 +236,7 @@
 <script type="text/javascript" src="{{ asset('assets/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-tagsinput.min.js') }}"></script>
 <script>
 $(document).ready(function () {
     $.validator.addMethod("phone", function(value, element) {

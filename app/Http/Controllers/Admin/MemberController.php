@@ -36,6 +36,8 @@ class MemberController extends Controller
     public function profile()
     {
         $member = Auth::user();
+        $tag_ids = DB::table('users_capacity')->where('user_id', Auth::id())->lists('capacity');
+        $member->tag_ids = implode(',', $tag_ids);
         return view('admin.member.create_edit', compact('member'));
     }
 
@@ -94,10 +96,21 @@ class MemberController extends Controller
             $params['filed']   = ['avatar'];
             $params['infix']   = 'avatar/';
             $update            = Library::upload($params);
-            $result            = DB::table('users')->insert($update['data']);
+            $id            = DB::table('users')->insertGetId($update['data']);
         } else {
-            $result            = DB::table('users')->insert($storeArray);
+            $id            = DB::table('users')->insertGetId($storeArray);
         }
+
+        // update Capacity
+        $users_capacity         = DB::table('users_capacity');
+        $capacities = explode(',', $request->tag_ids);
+        $updateCapacity = array();
+        foreach ($capacities as $capacity) {
+            array_push($updateCapacity, array('user_id'=>$id, 'capacity'=>$capacity ));
+        }
+        $users_capacity->where('user_id',$id)->delete();
+        $users_capacity->insert($updateCapacity);
+
         return Redirect::to('dashboard/member');
     }
 
@@ -110,6 +123,8 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = DB::table('users')->find($id);
+        $tag_ids = DB::table('users_capacity')->where('user_id', Auth::id())->lists('capacity');
+        $member->tag_ids = implode(',', $tag_ids);
         return view('admin.member.create_edit', compact('member'));
     }
 
@@ -160,6 +175,16 @@ class MemberController extends Controller
             } else {
                 $result            = $user->update($updateArray);
             }
+
+            // update Capacity
+            $users_capacity         = DB::table('users_capacity');
+            $capacities = explode(',', $request->tag_ids);
+            $updateCapacity = array();
+            foreach ($capacities as $capacity) {
+                array_push($updateCapacity, array('user_id'=>$id, 'capacity'=>$capacity ));
+            }
+            $users_capacity->where('user_id',$id)->delete();
+            $users_capacity->insert($updateCapacity);
 
             return Redirect::back();
         } else {
