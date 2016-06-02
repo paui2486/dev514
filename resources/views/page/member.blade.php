@@ -7,6 +7,9 @@
             <img src="{{ $member->avatar }}">
             <div class="Member-introduce">
                 <p>{{ $member->nick }}</p>
+                @foreach ( $member->tag_ids as $capacity )
+                    <span>{{ $capacity }}</span>
+                @endforeach
                 <span>最佳職人</span><span>多項技能</span>
                 <div class="Member-Stars">
                     <select id="Stars">
@@ -46,11 +49,11 @@
             <div class="Member-content" id="Mtab-1">
                 <p>關於我<span> About Me</span></p>
                 <div class="Member-About">
-                    <span>還沒輸入相關介紹哦！</span>
+                    {!! $member->description !!}
                 </div>
                 <p>我的活動<span> My Activies</span></p>
                 <div class="row Member-activity">
-                    
+
                     @foreach ( $activitys as $activity )
                     <a href="/activity/{{ $activity->id }}">
                         <div class="Member-panel">
@@ -99,7 +102,7 @@ $(function(){
 		});
 	});
 });
-    
+
 $(function() {
       $('#Stars').barrating({
         theme: 'fontawesome-stars'

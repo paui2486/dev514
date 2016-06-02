@@ -61,6 +61,7 @@ class PageController extends Controller
     public function showMember($id)
     {
         $member = DB::table('users')->where('id', $id)->first();
+        $member->tag_ids = DB::table('users_capacity')->where('user_id', $id)->lists('capacity');
         $activitys = DB::table('activities')->where('hoster_id', $id)
                       ->where('status', 4)->get();
         return view("page.member", compact('member', 'activitys'));
