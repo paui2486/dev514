@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="{{asset('assets/jquery-selectize/dist/css/selectize.default.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 <link rel="stylesheet" href="{{asset('css/cropper.min.css')}}">
+<style>
+.fileupload-exists .fileupload-new,
+.fileupload-new .fileupload-exists {
+    display: inline !important;
+}
+</style>
 @stop
 
 {{-- Content --}}
