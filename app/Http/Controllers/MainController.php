@@ -112,11 +112,11 @@ class MainController extends controller
                         ->where('articles.status', 2)
                         ->leftJoin('users',             'users.id',      '=',   'articles.author_id')
                         ->leftJoin('categories',        'categories.id', '=',   'articles.category_id')
-                        ->select(
+                        ->select(array(
                             'articles.thumbnail',       'articles.title',       'articles.content',
-                            'articles.description',     'articles.created_at',  'users.name as author',
-                            'categories.name as category', 'articles.counter'
-                            )
+                            'articles.description',     'articles.created_at',  'users.nick as author',
+                            'categories.name as category', 'articles.counter',  
+                          ))
                         ->orderBy('articles.created_at', 'desc')
                         ->take(10)
                         ->get();

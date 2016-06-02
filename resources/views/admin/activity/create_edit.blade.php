@@ -62,20 +62,29 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="max-width: 500px; max-height: 300px;">
-                                            <img id="image" src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
+                                        <div class="img-preview preview-lg" style="max-width: 500px; max-height: 300px;">
+                                            <img id="image" width="100%" src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
                                         </div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 100%; max-height: 300px; line-height: 20px;"></div>
                                         <div>
                                             <span class="btn btn-white btn-file">
                                                 <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
-                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> 更改 </span>
-                                                <input id="thumbnail" class="file"  name="thumbnail" type="file"
+                                                <input id="inputImage" class="file"  name="thumbnail" type="file"
                                                     value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
                                             </span>
-                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 移除圖片 </a>
+                                            <button id="reset" type="button" class="btn btn-primary" data-method="reset" title="Reset" style="display:none;">
+                                                <span class="docs-tooltip" data-toggle="tooltip">
+                                                    <span class="fa fa-refresh"></span>
+                                                </span>
+                                            </button>
                                             <span style="color:red;">(建議以人物為主題，尺寸 1,200 x 675 像素)</span>
                                         </div>
+                                        <input class="form-control " type="hidden" name="dataX" id="dataX" value="" />
+                                        <input class="form-control " type="hidden" name="dataY" id="dataY" value="" />
+                                        <input class="form-control " type="hidden" name="dataHeight" id="dataHeight" value="" />
+                                        <input class="form-control " type="hidden" name="dataWidth" id="dataWidth" value="" />
+                                        <input class="form-control " type="hidden" name="dataRotate" id="dataRotate" value="" />
+                                        <input class="form-control " type="hidden" name="dataScaleX" id="dataScaleX" value="" />
+                                        <input class="form-control " type="hidden" name="dataScaleY" id="dataScaleY" value="" />
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +95,7 @@
                                     <p>2</p>活動名稱
                                 </label>
                                 <div class="col-sm-10 errorbox">
-                                    <input class="form-control " type="text" name="title" id="title"value="{{{ Input::old('title', isset($activity) ? $activity->title : null) }}}" />
+                                    <input class="form-control " type="text" name="title" id="title" value="{{{ Input::old('title', isset($activity) ? $activity->title : null) }}}" />
                                 </div>
                             </div>
                         </div>
@@ -462,27 +471,65 @@
 <script type="text/javascript" src="{{ asset('js/cropper.min.js') }}"></script>
 <!-- <script type="text/javascript" src="{{ asset('js/jquery.mu.image.resize.js') }}"></script> -->
 <script type="text/javascript">
-$(document).ready(function () {
-    // $('.resize').muImageResize({width: 150, height:150});
-        // CKFinder.setupCKEditor();
+    $(document).ready(function () {
+        var $image = $('#image');
+        var $dataX = $('#dataX');
+        var $dataY = $('#dataY');
+        var $dataHeight = $('#dataHeight');
+        var $dataWidth  = $('#dataWidth');
+        var $dataRotate = $('#dataRotate');
+        var $dataScaleX = $('#dataScaleX');
+        var $dataScaleY = $('#dataScaleY');
+        var $inputImage = $('#inputImage');
+        var URL = window.URL || window.webkitURL;
+        var blobURL;
 
-        // $('#image').cropper({
-        //   aspectRatio: 16 / 9,
-        //   crop: function(e) {
-        //     // Output the result data for cropping image.
-        //     console.log(e.x);
-        //     console.log(e.y);
-        //     console.log(e.width);
-        //     console.log(e.height);
-        //     console.log(e.rotate);
-        //     console.log(e.scaleX);
-        //     console.log(e.scaleY);
-        //   }
-        // });
+        $('[data-toggle="tooltip"]').tooltip();
 
-        // $('#image').Fileupload().on('fileuploaded', function(event, data) {
-            // console.log
-        // });
+        if (URL) {
+            $inputImage.change(function () {
+                var files = this.files;
+                var file;
+
+                $image.cropper({
+                    aspectRatio: 16 / 9,
+                    crop: function(e) {
+                        $dataX.val(Math.round(e.x));
+                        $dataY.val(Math.round(e.y));
+                        $dataHeight.val(Math.round(e.height));
+                        $dataWidth.val(Math.round(e.width));
+                        $dataRotate.val(e.rotate);
+                        $dataScaleX.val(e.scaleX);
+                        $dataScaleY.val(e.scaleY);
+                    }
+                });
+
+                $('#reset').show();
+                $('#reset').click(function () {
+                    $image.cropper('reset');
+                });
+
+                if (!$image.data('cropper')) {
+                    return;
+                }
+
+                if (files && files.length) {
+                    file = files[0];
+                    if (/^image\/\w+$/.test(file.type)) {
+                        blobURL = URL.createObjectURL(file);
+                        $image.one('built.cropper', function () {
+                            // Revoke when load complete
+                            URL.revokeObjectURL(blobURL);
+                        }).cropper('reset').cropper('replace', blobURL);
+                        // $inputImage.val('');
+                  } else {
+                      window.alert('Please choose an image file.');
+                  }
+                }
+            });
+        } else {
+            $inputImage.prop('disabled', true).parent().addClass('disabled');
+        }
 
         $.fn.modal.Constructor.prototype.enforceFocus = function() {
             modal_this = this

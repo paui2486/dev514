@@ -37,11 +37,12 @@ html {
 .navbar-brand img {
     width:200px;
     z-index: 200;
-    margin:auto;
+    margin:0 5px;
 }
 
 .navigation {
     padding:8px;
+    padding-top: 9px;
 }
 
 .navigation nav ul li a {
@@ -59,10 +60,11 @@ html {
 
 .page-navbar-brand {
     padding: 0;
+    margin-top: -8px;
 }
 
 .page-navbar-brand img {
-    width: 210px;
+    width: 180px;
 }
 
 .navbar-collapse {

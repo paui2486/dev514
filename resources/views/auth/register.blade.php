@@ -35,6 +35,20 @@
                         @endif
                     </div>
                 </div>
+                
+                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                    <label class="col-md-5 control-label"> <span>*</span>電話號碼 Phone Number</label>
+
+                    <div class="col-md-7">
+                        <input type="phone" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="09xx-xxxxxx">
+
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
+                                <p>{{ $errors->first('phone') }}</p>
+                            </span>
+                        @endif
+                    </div>
+                </div>
 
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label class="col-md-5 control-label">

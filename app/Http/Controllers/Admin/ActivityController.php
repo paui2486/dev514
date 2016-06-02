@@ -112,7 +112,13 @@ class ActivityController extends Controller
         $params['filed']    = ['thumbnail'];
         $params['infix']    = 'activities/';
         $params['suffix']   = "$activity_id/";
-
+        $params['dataX']      = $request->dataX;
+        $params['dataY']      = $request->dataY;
+        $params['dataHeight'] = $request->dataHeight;
+        $params['dataWidth']  = $request->dataWidth;
+        $params['dataRotate'] = $request->dataRotate;
+        $params['dataScaleX'] = $request->dataScaleX;
+        $params['dataScaleY'] = $request->dataScaleY;
         $update             = Library::upload($params);
         $activity           = DB::table('activities')->where('id', $activity_id);
         $result             = $activity->update($update['data']);
@@ -266,6 +272,13 @@ class ActivityController extends Controller
         $params['filed']    = ['thumbnail'];
         $params['infix']    = 'activities/';
         $params['suffix']   = "$activity_id/";
+        $params['dataX']      = $request->dataX;
+        $params['dataY']      = $request->dataY;
+        $params['dataHeight'] = $request->dataHeight;
+        $params['dataWidth']  = $request->dataWidth;
+        $params['dataRotate'] = $request->dataRotate;
+        $params['dataScaleX'] = $request->dataScaleX;
+        $params['dataScaleY'] = $request->dataScaleY;
 
         $update             = Library::upload($params);
         $activity           = DB::table('activities')->where('id', $activity_id);
