@@ -6465,8 +6465,3 @@ textarea.form-control {
     font-size: 15px;
     font-weight: 600;
 }
-
-.fileupload-exists .fileupload-new,
-.fileupload-new .fileupload-exists {
-    display: inline !important;
-}
