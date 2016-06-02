@@ -2715,7 +2715,7 @@ input[type='checkbox']:checked {
 }
 
 .Member-introduce {
-    padding: 15px;
+    padding: 10px 15px;
 }
 
 .Member-introduce > img {
@@ -2737,6 +2737,9 @@ input[type='checkbox']:checked {
     color: #b3b3b3;
 }
 
+.Member-Stars {
+    margin-top: 20px;
+}
 
 .Member-button {
     position: relative;
@@ -2744,11 +2747,13 @@ input[type='checkbox']:checked {
     width: 80%;
 }
 
+/*
 .trace-button,
 .contact-dropdown {
     width: calc(100%/2);
     float: left;
 }
+*/
 
 .teaced-me {
     background: #00bcd4;
@@ -2846,60 +2851,38 @@ ul.Tabs li a :hover {
 }
 
 .Member-content {
-    padding: 0px 40px;
+    padding: 10px 40px;
     letter-spacing: 2px;
     min-height: 366px;
 }
 
-.Member-content p {
+.Member-content > p {
     font-size: 20px;
     font-weight: 500;
     margin: 20px 0;
-    color: #00bcd4;
+    color: #666;
 }
 
 .Member-content p > span {
     font-size: 15px;
 }
 
+.Member-About {
+    color: #b3b3b3;
+}
+
 .Member-About,
-.Member-experience,
 .Member-activity {
     padding-bottom: 20px;
     margin: 0;
     border-bottom: 1px solid #ccc;
 }
 
-.Member-activity {
-    border-bottom: none;
-    -moz-column-count: 2;
-    -moz-column-gap: 10px;
-    -webkit-column-count: 2;
-    -webkit-column-gap: 10px;
-    column-count: 2;
-    column-gap: 10px;
-    width:734px; 
-	margin:0 auto;
-}
-
-.Member-experience li {
-    list-style:square;
-    line-height: 30px;
-}
-
 .Member-panel {
-    width:337px;
 	display: inline-block;
-	font-size:12px;
-	margin: 5px 5px 5px 0;
-	overflow:hidden;
-	font-size:15px;
-	line-height: 1.5em;
-	letter-spacing: 1pt;
-	color:#353535;
-	-webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
     border-radius: 5px;	
+    width: calc(100%/2 - 20px);
+    margin: 10px 5px;
 }
 
 .Member-panel:hover {
@@ -2909,42 +2892,42 @@ ul.Tabs li a :hover {
 
 .Member-panel-bg {
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .MemberAct-thumbnail {
-    height: 250px;
+    height: 200px;
+    position: relative;
     background-size: cover;
     background-position: top;
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
 }
 
 .MemberAct-title {
-    margin: 10px 0;
+    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8));
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
 }
 
 .MemberAct-text {
     padding: 0 10px;
     border: 1px solid #ccc;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 5px 5px;
 }
 
-.MemberAct-text span{
-    border: 1px solid #b3b3b3;
-    padding: 7px;
-    font-size: 14px;
+.MemberAct-text p {
+    margin: 5px 0;
+    font-size: 15px;
     border-radius: 10px;
-    color: #b3b3b3;
-    line-height: 40px;
+    color: #666;
 }
 
-.MemberAct-info {
-    word-break:keep-all;
-    margin-bottom: 10px;
-}
-
-.MemberAct-info img {
-    width: 28px;
+.MemberAct-text img {
+    width: 26px;
 }
 
 .MemberAct-pro {

@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="/css/style-responsive.css"/>
     <link rel="stylesheet" href="/css/project.css"/>
     <link rel="stylesheet" href="/css/mobile.css"/>
+    <!--STARS-->
+    <link rel="stylesheet" href="/css/fontawesome-stars.css">
     <style>
     .actpage-introduce {
         position: relative;

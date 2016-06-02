@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+
 <form class="form-horizontal" enctype="multipart/form-data"
   	method="post" autocomplete="off" role="form"
   	action="@if(isset($member)){{ URL::to('dashboard/member/'.$member->id.'/update') }}
@@ -97,6 +99,27 @@
                     </div>
                 </div>
     				</div>
+            <div class="form-group {{{ $errors->has('tag_ids') ? 'has-error' : '' }}}">
+                <div class="col-md-12">
+                    <label class="control-label col-sm-2" for="tag_ids">
+                        個人標籤
+                    </label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="tag_ids" id="tag_ids" placeholder="輸入後按Enter，或使用小寫逗號區隔"
+                            value="{{{ Input::old('tag_ids', isset($member) ? $member->tag_ids : null) }}}"  data-role="tagsinput"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group {{{ $errors->has('description') ? 'has-error' : '' }}}">
+                <div class="col-md-12">
+                    <label class="control-label col-sm-2" for="description">
+                        個人描述
+                    </label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control ckeditor" id="description" name="description" rows="6">{{{ Input::old('description', isset($member) ? $member->description : null) }}}</textarea>
+                    </div>
+                </div>
+            </div>
             <div class="form-group {{{ $errors->has('bank_name') ? 'has-error' : '' }}}">
       					<div class="col-md-12">
         						<label class="control-label col-sm-2" for="bank_name">
@@ -211,6 +234,9 @@
 <script type="text/javascript" src="{{ asset('js/jquery.masked-input.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/additional-methods.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/ckfinder/ckfinder.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-tagsinput.min.js') }}"></script>
 <script>
 $(document).ready(function () {
     $.validator.addMethod("phone", function(value, element) {
@@ -220,6 +246,34 @@ $(document).ready(function () {
     $.validator.addMethod("credit_card", function(value, element) {
         return this.optional(element) || /\d{4}-\d{4}-\d{4}-\d{4}/.test(value);
     }, "請輸入正確銀行帳號");
+
+    var description = CKEDITOR.replace( 'description', {
+        language : 'zh',
+        height : 100,
+        autosave_SaveKey: 'autosaveKey',
+        autosave_NotOlderThen : 10,
+        filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Images',
+        filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+        toolbar: [
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            ['TextColor', 'BGColor']
+        ],
+        uiColor : '#9AB8F3'
+    });
+
+    @if($member->description == '')
+      $('#description').val('<br>514 真正有意思～<br>');
+    @endif
+
+    $(document).on("keypress", "form", function(event) {
+        return event.keyCode != 13;
+    });
+
+    $('form').on('submit', function() {
+        CKEDITOR.instances.content.updateElement();
+    });
 
     $(".form-horizontal").validate( {
         rules: {
