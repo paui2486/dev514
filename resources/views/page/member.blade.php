@@ -7,8 +7,16 @@
             <img src="{{ $member->avatar }}">
             <div class="Member-introduce">
                 <p>{{ $member->nick }}</p>
-                <span>專業美甲師</span><span>超強小編</span>
-                <img src="/img/pics/inline-star.png">
+                <span>最佳職人</span><span>多項技能</span>
+                <div class="Member-Stars">
+                    <select id="Stars">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                </div>
             </div>
             <div class="row Member-button">
                 <div class="contact-dropdown">
@@ -21,9 +29,11 @@
                         <a><img src="/img/icons/address.png">{{ $member->address }}</a>
                     </div>
                 </div>
+<!--
                 <div class="trace-button">
                     <span class="contact-dropbtn">＋追蹤我</span>
                 </div>
+-->
             </div>
         </div>
     </div>
@@ -38,14 +48,6 @@
                 <div class="Member-About">
                     <span>還沒輸入相關介紹哦！</span>
                 </div>
-                <p>我的經歷<span> My Experience</span></p>
-                <div class="Member-experience">
-                    
-                    <ul style="margin-left: 20px;">
-                         <li>真理大學畢業</li>
-                        <li>B123擔任專職小編</li> 
-                    </ul>
-                </div>
                 <p>我的活動<span> My Activies</span></p>
                 <div class="row Member-activity">
                     
@@ -55,15 +57,13 @@
                             <div class="MemberAct-id">
                             </div>
                             <div class="MemberAct-thumbnail" style=" background-image: url({{ $activity->thumbnail }})">
-                            </div>
-                            <div class="MemberAct-text">
                                 <div class="MemberAct-title ">{{ $activity->title }}
                                 </div>
-                                <div class="MemberAct-info">
-                                    <span>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}</span>
-                                    <span>${{ $activity->min_price }}元</span>
-                                    <span>{{ $activity->location }}</span>
-                                </div>
+                            </div>
+                            <div class="MemberAct-text">
+                                <p><img src="/img/pics/calendar-icon-02.png">{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->activity_start))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday ) $2", $activity->activity_start) /*--}}</p>
+                                <p><img src="/img/pics/money-icon-02.png">${{ $activity->min_price }}元</p>
+                                <p class="word-indent-01"><img src="/img/pics/location-icon-02.png">{{ $activity->location }}</p>
                             </div>
                         </div>
                     </a>
@@ -78,6 +78,7 @@
 </div>
 @endsection
 @section('script')
+<script src="/js/jquery.barrating.min.js"></script>
 <script>
 $(function(){
 	var _showTab = 0;
@@ -98,6 +99,12 @@ $(function(){
 		});
 	});
 });
+    
+$(function() {
+      $('#Stars').barrating({
+        theme: 'fontawesome-stars'
+      });
+   });
 
 $(".trace-button > span").on("click", function () {
         if ($(this).hasClass('teaced-me')) {
