@@ -10,7 +10,6 @@
                 @foreach ( $member->tag_ids as $capacity )
                     <span>{{ $capacity }}</span>
                 @endforeach
-                <span>最佳職人</span><span>多項技能</span>
                 <div class="Member-Stars">
                     <select id="Stars">
                       <option value="1">1</option>
