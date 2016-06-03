@@ -8,9 +8,9 @@
 
 <!--
             <div class="col-md-6 bottom-linkout">
-                <a href="https://www.instagram.com/"><img src="{{asset('img/pics/igicon.png')}}"></a>
-                <a href="https://www.facebook.com/iwinetodayshop/?fref=ts"><img src="{{asset('img/pics/fbicon.png')}}">
-                    <a href="https://www.youtube.com/?gl=TW&hl=zh-TW&noredirect=1"><img src="{{asset('img/pics/youtubeicon.png')}}"></a>
+                <a href="https://www.instagram.com/"><img src="/img/pics/igicon.png"></a>
+                <a href="https://www.facebook.com/iwinetodayshop/?fref=ts"><img src="/img/pics/fbicon.png">
+                    <a href="https://www.youtube.com/?gl=TW&hl=zh-TW&noredirect=1"><img src="/img/pics/youtubeicon.png"></a>
             </div>
 -->
 <!--            <iframe class="col-md-6" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fiwinetodayshop%2F&tabs&width=300&height=200&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="300" height="150" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>-->

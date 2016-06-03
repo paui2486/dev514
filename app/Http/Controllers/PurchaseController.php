@@ -224,7 +224,7 @@ class PurchaseController extends controller
             } else {
                 // go pay2go
                 $Pay2go     = new Pay2go();
-                $PayEnvDev  = (Auth::id() != env('DemoID', 1))? env('Pay2go_DEV', TRUE) : TRUE;
+                $PayEnvDev  = ($user_id != env('DemoID', 1))? env('Pay2go_DEV', TRUE) : TRUE;
                 $merID      = (!$PayEnvDev) ? env('Pay2go_ID') : 11606075 ;
                 $merKey     = (!$PayEnvDev) ? env('Pay2go_Key'): "7CPtmx1zm86jpLfWndymKbPmlyqP7oye";
                 $merIV      = (!$PayEnvDev) ? env('Pay2go_IV') : "1oInVJXhR3BhOQeb";

@@ -95,7 +95,7 @@
         <div class="col-xs-12 mobile-panel">
              @foreach( $home->newBlog as $blog )
                 <div class="row home-blog-panel">
-                    <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
+                    <a href="{{ '/blog/' . $blog->category . '/' . $blog->title }}">
                         <div class="col-xs-6 home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
                                 <img src="/img/icons/eye-03.png">{{ $blog->counter }} 人
@@ -105,15 +105,15 @@
 
                     <div class="col-xs-6 Hblog-panel-text">
                         <div class="home-blog-title">
-                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
+                             <a href="{{ '/blog/' . $blog->category . '/' . $blog->title }}">{{ $blog->title }} </a>
                         </div>
                         <div class="row home-blog-info">
-                            <a href="{{ url('/blog/'. $blog->category) }}">
+                            <a href="{{ '/blog/'. $blog->category }}">
                                 <div class="home-blog-category">
                                     <li>{{ $blog->category }}</li>
                                 </div>
                             </a>
-                            <a href="{{ url('/member/'. $blog->author)}}">
+                            <a href="{{ '/member/'. $blog->author }}">
                                 <div class="home-blog-author">
                                     <li> 由 {{ $blog->author }} 發表</li>
                                 </div>
@@ -129,7 +129,7 @@
         <p class="home-mb-title">最新活動</p>
         <div class="mobile-panel">
             @foreach( $home->allActivity as $mbActivity )
-            <a href="{{ URL::to('activity/' . $mbActivity->activity_id ) }}">
+            <a href="{{ 'activity/' . $mbActivity->activity_id }}">
             <div class="mobile_panel_bg">
                 <div class="col-xs-6 mobile-activity-thumbnail"
                          style="background-image:url('{{ $mbActivity->thumbnail }}')">
@@ -171,7 +171,7 @@
     <!-- mobile view end-->
 
     <div class="home-container">
-        <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url('activity') }}">
+        <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ '/activity' }}">
             {!! csrf_field() !!}
             <div class="filter-bg" id="FilterFixed">
                 <div class="pure-g panel-filter">
@@ -227,7 +227,7 @@
             <div class="row home-blog-content">
                 @foreach( $home->newBlog as $blog )
                 <div class="row col-md-2 home-blog-panel">
-                    <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">
+                    <a href="{{ '/blog/' . $blog->category . '/' . $blog->title }}">
                         <div class="home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
                             <div class="home-blog-count">
                                 <img src="/img/icons/eye-03.png">{{ $blog->counter }} 人
@@ -237,22 +237,22 @@
 
                     <div class="Hblog-panel-text">
                         <div class="home-blog-title">
-                             <a href="{{ URL::to('blog/' . $blog->category . '/' . $blog->title ) }}">{{ $blog->title }} </a>
+                             <a href="{{ '/blog/' . $blog->category . '/' . $blog->title }}">{{ $blog->title }} </a>
                         </div>
                         <div class="row home-blog-info">
 <!--
-                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                    <div class="home-blog-created_at">
+                            <a href="https://www.google.com/calendar/event?action=TEMPLATE&text=[event-title]&dates=[start-custom format='Ymd\\THi00\\Z']/[end-custom format='Ymd\\THi00\\Z']&details=[description]&location=[location]&trp=false&sprop=&sprop=name:" target="_blank" rel="nofollow">                    <div class="home-blog-created_at">
                                     <li>{{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($blog->created_at))]; echo preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday )", $blog->created_at); /*--}}</li>
                                 </div>
                             </a>
 -->
-                            <a href="{{ url('/blog/'. $blog->category) }}">
+                            <a href="{{ '/blog/'. $blog->category }}">
                                 <div class="home-blog-category">
                                     <li>{{ $blog->category }}</li>
                                 </div>
                             </a>
 <!--
-                            <a href="{{ url('/member/'. $blog->author)}}">
+                            <a href="{{ '/member/'. $blog->author }}">
                                 <div class="home-blog-author">
                                     <li> 由 {{ $blog->author }} 發表</li>
                                 </div>
@@ -281,7 +281,7 @@
                         <div class="new-activity-id">
                             {{ $newActivity->activity_id }}
                         </div>
-                        <a href="{{ URL::to('activity/' . $newActivity->activity_id ) }}">
+                        <a href="{{ '/activity/' . $newActivity->activity_id }}">
                         <div class="new-activity-thumbnail"
                              style="background-image:url({{ $newActivity->thumbnail }})">
                             <div class="home-mb-count">
@@ -291,7 +291,7 @@
                         </a>
                         <div class="new-activity-right">
                             <div class="new-activity-title word-indent-01">
-                                 <a href="{{ URL::to('activity/' . $newActivity->activity_id ) }}">{{ $newActivity->title }} </a>
+                                 <a href="{{ '/activity/' . $newActivity->activity_id }}">{{ $newActivity->title }} </a>
                             </div>
                             <div class="new-activity-count">
                                 <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
@@ -301,7 +301,7 @@
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ url('activity'). '/' . $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
+                                <a href="https://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ '/activity/'. $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
                                 <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom:2px;"></a>
                                 <div class="tooltip top" role="tooltip">
                                     <div class="tooltip-arrow"></div>
@@ -316,7 +316,7 @@
                                 <img src="img/pics/location-icon-02.png">
                                 {{ $newActivity->locat_name . $newActivity->location }}
                             </div>
-                            <a href="{{ URL('member/'. $newActivity->hoster_id ) }}">
+                            <a href="{{ '/member/'. $newActivity->hoster_id }}">
                                 <div class="new-activity-orginizer">
                                     <img src="/img/icons/holder.png">
                                     <span> {{ $newActivity->orginizer }} </span>
@@ -339,7 +339,7 @@
                         {{ $eachTypeActivity->cat_id }}
                     </div>
                      <div class="row Act-category-title">
-                        <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
+                        <a href="{{ '/activity?cat_id='. $eachTypeActivity->cat_id }}">
                             <p class="col-md-2 col-sm-4 col-xs-4">
                                 <img src="/img/icons/icon_arrowicon.png">
                                 {{ $eachTypeActivity->cat_title }}
@@ -348,7 +348,7 @@
                         <div class="col-md-8 col-sm-6 col-xs-5 home-dashed"></div>
                            <!-- <img src="{{ $eachTypeActivity->cat_logo }}"> -->
                         <div class="col-md-2 col-sm-2 col-xs-3 category-readmore">
-                            <a href="{{ URL::to('activity?cat_id='. $eachTypeActivity->cat_id ) }}">
+                            <a href="{{ '/activity?cat_id='. $eachTypeActivity->cat_id }}">
                             <!-- <a href="{{ $eachTypeActivity->affinity }}"> -->
                                 Read More
                             </a>
@@ -356,7 +356,7 @@
                     </div>
                     @foreach( $eachTypeActivity->cat_content as $activity )
                     <div class="col-md-4 col-sm-4 inter-panel">
-                        <a href="{{ URL::to('activity/' . $activity->activity_id ) }}">
+                        <a href="{{ '/activity/' . $activity->activity_id }}">
                             <div class="inter-panel-thumbnail"
                                  style="background-image:url({{ $activity->thumbnail }})">
                             </div>
@@ -369,14 +369,14 @@
                         </div>
                         <div class="inter-panel-info">
                             <div class="new-activity-title word-indent-01">
-                                <a href="{{ URL::to('activity/' . $activity->activity_id ) }}">
+                                <a href="{{ '/activity/' . $activity->activity_id }}">
                                     {{ $activity->title }}
                                 </a>
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
                                 {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($activity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $activity->date); /*--}}
-                                <a href="http://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
+                                <a href="https://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details={{ $newActivity->description }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
                                 <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom: 2px;"></a>
                                 <div class="tooltip top" role="tooltip">
                                     <div class="tooltip-arrow"></div>
@@ -391,7 +391,7 @@
                                 <img src="img/pics/location-icon-02.png">
                                 <span>{{ $activity->locat_name . $activity->location }}</span>
                             </div>
-                            <a href="{{ URL('member/'. $activity->hoster_id ) }}">
+                            <a href="{{ '/member/' .$activity->hoster_id }}">
                                 <div class="new-activity-orginizer">
                                    <img src="/img/icons/holder.png">
                                    <span> {{ $activity->orginizer }} </span>
