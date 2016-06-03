@@ -152,18 +152,9 @@
     @include($header)
 
     @yield('banner')
-    <fb:ad placementid="{{ env('FACEBOOK_PLACEMENT_ID','509598299165169_540528149405517') }}" format="native" testmode="false"></fb:ad>
 
     @yield('content')
-    <div class="fb-ad" data-placementid="{{ env('FACEBOOK_PLACEMENT_ID','509598299165169_540528149405517') }}" data-format="native" data-nativeadid="ad_root" data-testmode="false"></div>
-    <div id="ad_root">
-      <a class="fbAdLink">
-        <div class="fbAdMedia thirdPartyMediaClass"></div>
-        <div class="fbAdTitle thirdPartyTitleClass"></div>
-        <div class="fbAdBody thirdPartyBodyClass"></div>
-        <div class="fbAdCallToAction thirdPartyCallToActionClass"></div>
-      </a>
-    </div>
+
     @include('partials.footer')
 
     <script type="text/javascript" src="/js/jquery.js"></script>
@@ -240,7 +231,7 @@
         $("#subscribe").click(function(){
             $.ajax({
                  type: "get",
-                 url: "{{ URL('subscribes/add') }}",
+                 url: "/subscribes/add",
                  data: {
                     'email' : $('input[name=email]').val()
                  },

@@ -247,34 +247,18 @@ $(document).ready(function () {
         return this.optional(element) || /\d{4}-\d{4}-\d{4}-\d{4}/.test(value);
     }, "請輸入正確銀行帳號");
 
-    var description = CKEDITOR.replace( 'description', {
-        language : 'zh',
-        height : 100,
-        autosave_SaveKey: 'autosaveKey',
-        autosave_NotOlderThen : 10,
-        filebrowserBrowseUrl : '/assets/ckfinder/ckfinder.html',
-        filebrowserImageBrowseUrl : '/assets/ckfinder/ckfinder.html?Type=Images',
-        filebrowserUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-        filebrowserImageUploadUrl : '/assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-        toolbar: [
-            ['Styles', 'Format', 'Font', 'FontSize'],
-            ['TextColor', 'BGColor']
-        ],
-        uiColor : '#9AB8F3'
-    });
-
-
-    @if(isset($member) || $member->description == '')
-      $('#description').val(
-          '<p>1. 個人標籤 → 個人專長標籤： </p>\
-           <p>米其林三星推薦主廚、明星御用健身教練等等 </p><br> \
-           <p>2. 個人描述： </p> \
-           <p>你的個人介紹還沒填寫，不要偷懶了，快來告訴大家你有多厲害 </p> \
-           <p>我們知道這個很難寫，建議可以從這些方面入手 </p> \
-           <p>  1. 個人的經歷或者是職業經歷 </p> \
-           <p>  2. 正在做什麼，曾經做什麼 </p> \
-           <p>  3. 你想分享什麼給大家，比如說熱情或是態度 </p> \
-          ');
+    @if (isset($member) && $member->description != '')
+    @else
+        $('textarea[name=description]').val(
+            '<p>1. 個人標籤 → 個人專長標籤： </p>\
+             <p>米其林三星推薦主廚、明星御用健身教練等等 </p><br> \
+             <p>2. 個人描述： </p> \
+             <p>你的個人介紹還沒填寫，不要偷懶了，快來告訴大家你有多厲害 </p> \
+             <p>我們知道這個很難寫，建議可以從這些方面入手 </p> \
+             <p>  1. 個人的經歷或者是職業經歷 </p> \
+             <p>  2. 正在做什麼，曾經做什麼 </p> \
+             <p>  3. 你想分享什麼給大家，比如說熱情或是態度 </p> \
+            ');
     @endif
 
     $(document).on("keypress", "form", function(event) {

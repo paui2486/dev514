@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
         $slideCategory = Library::getSlideCategory();
         View()->share('slideCategory', $slideCategory);
 
+        $this->app['request']->server->set('HTTPS', $this->app->environment() != 'local');
+
         view()->share('copyright', '2016 &copy; 514 活動頻道.');
     }
 
