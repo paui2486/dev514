@@ -2731,10 +2731,11 @@ input[type='checkbox']:checked {
 .Member-introduce span {
     border: 1px solid #ccc;
     border-radius: 10px;
-    margin-right: 10px;
+    margin-right: 5px;
     padding: 5px 10px;
     font-size: 14px;
     color: #b3b3b3;
+    line-height: 35px;
 }
 
 .Member-Stars {
