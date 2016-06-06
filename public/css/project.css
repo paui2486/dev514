@@ -1047,8 +1047,8 @@ li.collapse-blog-category {
 
 .panel-heading {
     border-bottom: 1px dashed #998675;
-    margin-bottom: 10px;
     text-align: center;
+    letter-spacing: 1px;
 }
 
 .login-button {
@@ -1089,22 +1089,64 @@ li.collapse-blog-category {
 .register-container {
     background-image: url(/img/pics/258216-151001212S870.jpg);
     background-repeat: repeat;
-    padding: 70px 0;
+    padding: 50px;
+    margin: 0;
 }
 
-.register-panel {
-    width: 60%;
+.register-panel,
+.expert-panel{
     margin: auto;
-    float: none;
-    border: 1px solid #736357;
+    border: 1px solid #ccc;
     background-color:rgba(255,255,255,0.4);
     border-radius: 10px;
+    width: calc(100%/2 - 20px);
+    margin: 0 10px;
 }
 
 .register-button {
     margin:0 auto;
     margin-top: 30px;
 }
+
+.expert-content {
+    padding: 10px;
+}
+
+.expert-content p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    margin: 0;
+}
+
+.expert-content span {
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    color: #808080;
+}
+
+.expert-alert {
+    font-size: 14px;
+    color: #ff5a5f;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0;
+}
+
+.expert-button {
+    background-color: #00bcd4;
+    padding: 10px;
+    text-align: center;
+    width: 50%;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    margin: 10px auto;
+    margin-bottom: 20px;
+}
+
 
 /*------blog------blog------blog------*/
 
