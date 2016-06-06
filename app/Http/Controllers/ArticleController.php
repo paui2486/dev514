@@ -96,7 +96,7 @@ class ArticleController extends Controller
                       'activities.thumbnail'
                     ))
                     ->where('activities.id', '!=', $from_id)
-                    ->where('activities.status', 3)
+                    ->where('activities.status', 4)
                     ->orderBy('activities.created_at', 'ASC')
                     ->take($number)->get();
         return $relate;

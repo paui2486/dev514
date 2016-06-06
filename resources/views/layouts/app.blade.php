@@ -88,28 +88,38 @@
     })(window,document,'script','dataLayer','GTM-5ZKFLX');</script>
     <!-- End Google Tag Manager -->
     <script>
-        window.fbAsyncInit = function() {
-            FB.Event.subscribe(
-              'ad.loaded',
-              function(placementId) {
-                  console.log('Audience Network ad loaded');
-                  document.getElementById('ad_root').style.display = 'block';
-              }
-            );
-            FB.Event.subscribe(
-                'ad.error',
-                function(errorCode, errorMessage, placementId) {
-                    console.log('Audience Network error (' + errorCode + ') ' + errorMessage);
-                }
-            );
-        };
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk/xfbml.ad.js#xfbml=1&version=v2.5&appId={{ env('FACEBOOK_CLIENT_ID') }}";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        var _prum = [['id', '57522fc2abe53d4337173f16'],
+                     ['mark', 'firstbyte', (new Date()).getTime()]];
+        (function() {
+            var s = document.getElementsByTagName('script')[0]
+              , p = document.createElement('script');
+            p.async = 'async';
+            p.src = '//rum-static.pingdom.net/prum.min.js';
+            s.parentNode.insertBefore(p, s);
+        })();
+
+        // window.fbAsyncInit = function() {
+        //     FB.Event.subscribe(
+        //       'ad.loaded',
+        //       function(placementId) {
+        //           console.log('Audience Network ad loaded');
+        //           document.getElementById('ad_root').style.display = 'block';
+        //       }
+        //     );
+        //     FB.Event.subscribe(
+        //         'ad.error',
+        //         function(errorCode, errorMessage, placementId) {
+        //             console.log('Audience Network error (' + errorCode + ') ' + errorMessage);
+        //         }
+        //     );
+        // };
+        // (function(d, s, id) {
+        //     var js, fjs = d.getElementsByTagName(s)[0];
+        //     if (d.getElementById(id)) return;
+        //     js = d.createElement(s); js.id = id;
+        //     js.src = "//connect.facebook.net/en_US/sdk/xfbml.ad.js#xfbml=1&version=v2.5&appId={{ env('FACEBOOK_CLIENT_ID') }}";
+        //     fjs.parentNode.insertBefore(js, fjs);
+        // }(document, 'script', 'facebook-jssdk'));
     </script>
     <style>
        #ad_root {

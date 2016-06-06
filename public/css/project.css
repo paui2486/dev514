@@ -599,6 +599,8 @@ li.collapse-blog-category {
     padding: 10px 15px;
     font-size: 14px;
     letter-spacing: 1px;
+    display: --moz-box;
+    *display: inline;
 }
 
 .home-read-more a:hover {
@@ -2923,7 +2925,7 @@ ul.Tabs li a :hover {
 
 .Member-panel {
 	display: inline-block;
-    border-radius: 5px;	
+    border-radius: 5px;
     width: calc(100%/2 - 20px);
     margin: 10px 5px;
 }
@@ -2990,6 +2992,3 @@ ul.Tabs li a :hover {
 .article-left-content img {
     max-width: 100%;
 }
-
-
-
