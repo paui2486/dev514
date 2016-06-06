@@ -63,7 +63,11 @@ class Library
 
                     $img = Image::make($file);
                     $img -> crop($params['dataWidth'], $params['dataHeight'], $params['dataX'], $params['dataY'] );
-                    $img->save($dest_path.$file_name);
+                    $img->resize(1080, null, function($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    $img->save($dest_path.$file_name, 60);
 
                     Log::error($file_name);
                 }
