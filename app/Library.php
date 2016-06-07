@@ -67,7 +67,7 @@ class Library
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     });
-                    $img->save($dest_path.$file_name, 60);
+                    $img->save($dest_path.$file_name, 80);
 
                     Log::error($file_name);
                 }
