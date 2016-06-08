@@ -10,17 +10,17 @@
               @endif
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                 {!! csrf_field() !!}
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">
                         <span>*</span>
-                        電子郵件 E-mail
+                        手機號碼
                     </label>
                     <div class="col-md-8">
-                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="請輸入您的 E-mail">
+                        <input type="text" class="form-control" name="phone" value="@if(isset($_COOKIE['phone'])) {!! $_COOKIE['phone'] !!} @endif" placeholder="請輸入您的 手機號碼">
 
-                        @if ($errors->has('email'))
+                        @if ($errors->has('phone'))
                             <span class="help-block">
-                                <p>{{ $errors->first('email') }}</p>
+                                <p>{{ $errors->first('phone') }}</p>
                             </span>
                         @endif
                     </div>
@@ -32,8 +32,7 @@
                         密碼 Password
                     </label>
                     <div class="col-md-8">
-                        <input type="password" class="form-control" name="password" placeholder="請輸入您的密碼">
-
+                        <input type="password" class="form-control" value="" name="password" placeholder="請輸入您的密碼">
                         @if ($errors->has('password'))
                             <span class="help-block">
                                 <p>{{ $errors->first('password') }}</p>
@@ -45,12 +44,11 @@
                 <div class="form-group">
                         <div class="login-info checkbox">
                             <label>
-                                <input type="checkbox" name="remember"> 記住我
+                                <input type="checkbox" name="remember" @if(isset($_COOKIE['remember']) && ($_COOKIE['remember'] = 'on')) checked @endif > 記住我
                             </label>
                              <span>
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">忘記密碼？</a>
                             </span>
-
                         </div>
                 </div>
                 <div class="login-button col-md-offset-4">
