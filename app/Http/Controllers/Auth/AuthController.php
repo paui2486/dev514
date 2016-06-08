@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -29,6 +31,8 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    protected $username = 'phone';
+
 
     /**
      * Create a new authentication controller instance.
@@ -50,9 +54,28 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'phone' => 'required|max:255',
             'password' => 'required|confirmed|min:6',
         ]);
+    }
+
+    public function postLogin(Request $request)
+    {
+        // $this->validate($request, [
+        //     'phone' => 'required|phone', 'password' => 'required',
+        // ]);
+        setcookie("phone",    $request->phone,    time()+60*60*24*30); // retire one month later;
+        setcookie("remember", $request->remember, time()+60*60*24*30);
+
+        $credentials = $this->getCredentials($request);
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($request->url())
+            ->withInput($request->only('phone', 'remember'))
+            ->withFlashmessage($this->getFailedLoginMessage());
     }
 
     /**

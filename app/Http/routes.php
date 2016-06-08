@@ -46,13 +46,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('MemberPage'     , 'PageController@memberpage'   );
     Route::get('testMail'       , 'PageController@testMail'     );
     Route::get('Expert'         , 'PageController@expert'     );
-    
+
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
 |--------------------------------------------------------------------------
 */
     Route::auth();
+
+    Route::post('login'                     , 'Auth\AuthController@postLogin'         );
+
     Route::get('register/verify/{confirm}'  , 'MainController@confirm'           );
 
     Route::get('activity'                   , 'ActivityController@showResult'    );
