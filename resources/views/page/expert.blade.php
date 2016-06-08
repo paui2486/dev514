@@ -7,12 +7,11 @@
 @section('content')
 <form class="form-horizontal expert-container" role="form">
     <div class="form-group">
-        <div class="col-md-12">
             <label class="control-label col-md-2" for="avatar">
                  個人頭像<span>*</span>
             </label>
             <div class="col-sm-10">
-                <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="col-md-4 fileupload fileupload-new" data-provides="fileupload">
                     <div class="fileupload-new thumbnail" style="width: 200px; height: 200px;    background-image: url('/img/no-image.png');background-size: cover;background-position: center;">
                         
                     </div>
@@ -24,8 +23,20 @@
                         <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> 移除圖片 </a>
                     </div>
                 </div>
+                <div class="expert-ex-image col-md-8">
+                    <p>1. 建議上傳您在職場上的照片，並以個人為主 。
+                    <br>2. 背景勿過於雜亂，請在光線充足的地方拍照，以高解析度為佳。</p>
+                    <div>
+                        <img src="/img/pics/correct-example.jpg">
+                        <p>O 建議以您的專長為主題，展現專業度</p>
+                    </div>
+                    <div>
+                        <img src="/img/pics/error-example.jpg">
+                        <p>X 背景勿過於複雜，人物以個人為主</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        
     </div>
     <div class="form-group">
         <label class="col-md-2 control-label">職人名稱 <span>*</span> </label>
@@ -125,7 +136,7 @@
 </form>
 <div class="expert-text">
     <p>請填寫以下相關資料，以便日後您舉辦活動或使用金流服務。</p>
-    <label for="skip"><input type="checkbox" name="skip" id="skip">先略過，日後再填寫</label>
+    <label for="skip"><input type="checkbox" name="skip" id="skip"><span>先略過，日後再填寫</span></label>
 </div>
 <div class="row expert-Tab">
     <ul class="row Tabs" style="margin:0;">
@@ -152,18 +163,30 @@
                     <input type="text" class="form-control">
                 </div>
             </div>
-            <div class="row expert-tab-row">
-                <label class="col-md-2 control-label">身份證影本</label>
-                <div class="col-md-10">
+            <div class="row expert-tab-bottom">
+                <div class="col-md-6 expert-tab-row">
+                    <label class="control-label">身份證影本</label>
+                    <div class="">
+                        <div class="fileupload-new thumbnail" style="width:100%; height:240px;    background-image: url('/img/no-image.png');background-size: cover;background-position: center;">
+                        </div>
+                        <div class="btn btn-white btn-file">
+                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row expert-tab-row">
-                <label class="col-md-2 control-label">存摺影本（匯款用）</label>
-                <div class="col-md-10">
+                <div class="col-md-6 expert-tab-row">
+                    <label class="control-label">存摺影本（匯款用）</label>
+                    <div class="">
+                        <div class="fileupload-new thumbnail" style="width:100%; height:240px;    background-image: url('/img/no-image.png');background-size: cover;background-position: center;">
+                        </div>
+                        <div class="btn btn-white btn-file">
+                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="expert-content" id="Etab-2">
+        <div class="expert-tab-content" id="Etab-2">
             <div class="row expert-tab-row">
                 <label class="col-md-2 control-label">公司名稱</label>
                 <div class="col-md-10">
@@ -194,28 +217,38 @@
                     <input type="text" class="form-control">
                 </div>
             </div>
-            <div class="row expert-tab-row">
-                <label class="col-md-2 control-label">公司營業登記表影本</label>
-                <div class="col-md-10">
+            <div class="row expert-tab-bottom">
+                <div class="col-md-6 expert-tab-row">
+                    <label class="control-label">公司營業登記表影本</label>
+                    <div class="">
+                        <div class="fileupload-new thumbnail" style="width:100%; height:240px;    background-image: url('/img/no-image.png');background-size: cover;background-position: center;">
+                        </div>
+                        <div class="btn btn-white btn-file">
+                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row expert-tab-row">
-                <label class="col-md-2 control-label">公司存摺影本（匯款用）</label>
-                <div class="col-md-10">
+                <div class="col-md-6 expert-tab-row">
+                    <label class="control-label">公司存摺影本（匯款用）</label>
+                    <div class="">
+                        <div class="fileupload-new thumbnail" style="width:100%; height:240px;    background-image: url('/img/no-image.png');background-size: cover;background-position: center;">
+                        </div>
+                        <div class="btn btn-white btn-file">
+                            <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         
         </div>
     </div>
 </div>
-
-<div class="row register-button">
-    <div class="login-button col-md-offset-4">
-        <button type="submit" class="btn btn-primary">
-            確認送出
-        </button>
-    </div>
+<div class="expert-confirm">
+    <button type="submit">
+        確 認 送 出
+    </button>
 </div>
+
 @endsection
 
 @section('script')
@@ -240,12 +273,24 @@ $('.expert-Tab').each(function(){
 });
     
 });
-    
-$(document).ready(function () {
+
+$(function() {
+       // handle if a or b is not a number -->  isNaN(a) || isNaN(b)
     $('#skip').click(function(){
-        $('.expert-Tab').hide();
+        $skipvalue = $('#skip').prop('checked');
+        if( $skipvalue ) {
+            $('.expert-Tab').hide('fast');
+        } else {
+            $('.expert-Tab').show('fast');
+        }
     });
 });
+    
+//$(document).ready(function () {
+//    $('#skip').click(function(){
+//        $('.expert-Tab').hide();
+//    });
+//});
    
 var txtId = 1;
 

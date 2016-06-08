@@ -3016,6 +3016,26 @@ ul.Tabs li a :hover {
     line-height: 35px;
 }
 
+.expert-ex-image img {
+    width: 256px;
+    height: 180px;
+}
+
+.expert-ex-image > div {
+    width: 50%;
+    float: left;
+}
+
+.expert-ex-image > div > p {
+    color: #ff5a5f;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.expert-ex-image > P {
+    font-size: 15px;
+}
+
 .contact-display span {
     padding-right: 10px;
     font-size: 14px;
@@ -3050,11 +3070,12 @@ ul.Tabs li a :hover {
     margin: 0 auto;
     text-align: center;
     background: rgba(122,233,233,0.3);
-    padding: 15px 10px;
+    padding: 20px;
 }
 
 .expert-text > p {
     font-size: 15px;
+    margin-bottom: 20px;
 }
 
 .expert-Tab {
@@ -3064,10 +3085,56 @@ ul.Tabs li a :hover {
 }
 
 .expert-tab-content {
-    padding: 15px 10px;
+    padding: 20px 30px;
 }
 
 .expert-tab-row {
     margin: 10px 0;
 }
+
+.expert-text > label > input {
+    display: none;
+}
+
+.expert-text > label > span {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 5px;
+    color: #00bcd4;
+    cursor: pointer;
+    padding: 5px 10px ;
+    border: 1px solid #00bcd4;
+}
+
+.expert-text > label > span:hover {
+    background-color: #00bcd4;
+    color: #fff;
+}
+
+.expert-tab-content label {
+    font-size: 15px;
+    font-weight: 100;
+    line-height: 33px;
+}
+
+.expert-tab-bottom {
+    margin: 10px;
+}
+
+.expert-confirm {
+    margin: 10px auto;
+    width: 15%;
+    text-align: center;
+}
+
+.expert-confirm > button {
+    background-color: #00bcd4;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+
+}
+
 
