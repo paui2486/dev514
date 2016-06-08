@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => '此電子郵件尚未被註冊',
+    'failed' => '輸入的帳號與密碼不符，請重新輸入',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];
