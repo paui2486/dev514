@@ -149,4 +149,9 @@ class PageController extends Controller
             }
         }
     }
+    
+    public function Expert()
+    {
+        return view("page.expert");
+    }
 }

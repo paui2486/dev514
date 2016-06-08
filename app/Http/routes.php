@@ -45,6 +45,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('Partner'        , 'PageController@partner'      );
     Route::get('MemberPage'     , 'PageController@memberpage'   );
     Route::get('testMail'       , 'PageController@testMail'     );
+    Route::get('Expert'         , 'PageController@expert'     );
+    
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
