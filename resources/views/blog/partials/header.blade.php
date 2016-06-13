@@ -1,11 +1,11 @@
 <nav class="Navbar page-Navbar">
     <div class="navbar-brand page-navbar-brand">
-        <a href="{{ url('/') }}">
+        <a href="{{ url('blog') }}">
             <img src="/img/pics/514logobrown.png">
         </a>
     </div>
     <div class="col-xs-8 navbar-mb-brand">
-        <a href="{{ url('/') }}">
+        <a href="{{ url('blog') }}">
             <img src="/img/pics/514mobile-logo.png">
         </a>
     </div>

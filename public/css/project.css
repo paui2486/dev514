@@ -2997,11 +2997,27 @@ ul.Tabs li a :hover {
 
 /*----------職人頁面----------*/
 
+.expert-container-title {
+    width: 85%;
+    margin: auto;
+    text-align: center;
+    background: #00bcd4;
+    padding: 10px;
+    margin-top: 30px;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 10px #ccc;
+    border-radius: 10px 10px 0 0;
+}
+
 .expert-container {
-    padding: 10px 15px;
+    padding: 35px;
     width: 85%;
     margin: 0px auto;
-    margin-top: 15px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 0 0 10px 10px ;
+    box-shadow: 1px 1px 10px #ccc;
 }
 
 .expert-contact {
@@ -3016,24 +3032,40 @@ ul.Tabs li a :hover {
     line-height: 35px;
 }
 
-.expert-ex-image img {
+.expert-eg-image img {
     width: 256px;
     height: 180px;
 }
 
-.expert-ex-image > div {
+.expert-eg-image > div {
     width: 50%;
     float: left;
 }
 
-.expert-ex-image > div > p {
+.expert-eg-image > div > p {
     color: #ff5a5f;
     margin: 5px 0;
     font-size: 14px;
 }
 
-.expert-ex-image > P {
+.expert-eg-image > P {
     font-size: 15px;
+}
+
+.expert-contact-title h5 {
+    color: #ff5a5f;
+    font-style: italic;
+}
+
+.exper-contact-content {
+    background: #f3f3f3;
+    border-radius: 10px;
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.expert-contact-input {
+    width: 85%;
 }
 
 .contact-display span {
@@ -3054,20 +3086,34 @@ ul.Tabs li a :hover {
     margin: 10px 0;
 }
 
+.new-url-text {
+    width: 85%;
+    float: left;
+}
+
 .remove-url {
     padding: 7px 10px;
     width: 12%;
     margin-left: 2%;
+    background: #ff5a5f;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
 }
 
 .button-url {
     margin: 5px 0;
-    padding: 5px 15px;
+    padding: 8px 15px;
+    background: #00bcd4;
+    border: none;
+    color: #fff;
+    letter-spacing: 1px;
+    border-radius: 5px;
 }
 
 .expert-text {
-    width: 80%;
-    margin: 0 auto;
+    width: 85%;
+    margin: 20px auto;
     text-align: center;
     background: rgba(122,233,233,0.3);
     padding: 20px;
@@ -3081,7 +3127,7 @@ ul.Tabs li a :hover {
 .expert-Tab {
     margin: 15px auto;
     padding: 0;
-    width: 80%;
+    width: 85%;
 }
 
 .expert-tab-content {
@@ -3113,7 +3159,7 @@ ul.Tabs li a :hover {
 
 .expert-tab-content label {
     font-size: 15px;
-    font-weight: 100;
+    font-weight: 500;
     line-height: 33px;
 }
 
@@ -3129,11 +3175,12 @@ ul.Tabs li a :hover {
 
 .expert-confirm > button {
     background-color: #00bcd4;
-    padding: 5px 15px;
+    padding: 10px 15px;
     border-radius: 5px;
     border: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
+    margin: 30px;
 
 }
 

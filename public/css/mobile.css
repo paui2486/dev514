@@ -60,7 +60,8 @@
     .blog-panel-text,
     .blog-banner-date,
     .blog-banner-auth,
-    .online-server{
+    .online-server,
+    .expert-eg-image > div{
         display: none!important;
     }
 
@@ -881,5 +882,80 @@
          margin:0; 
     }
     
+/*---------職人頁面---------*/
+    .expert-container {
+        width: 100%;
+    }
     
+    .expert-eg-image > p {
+        color: #ff5a5f;
+        text-align: center;
+    }
+    
+    .expert-uploadimg {
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .fileupload .thumbnail {
+        margin: auto;
+    }
+    
+    .expert-contact-title h5 {
+        color: #ff5a5f;
+        font-style: italic;
+        margin: 0;
+        display: inline;
+    }
+    
+    .expert-contact p {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .expert-contact-input {
+        width: 100%;
+    }
+    
+    .contact-display {
+        float: right;
+    }
+    
+    .new-url-text {
+        width: 70%;
+        float: left;
+    }
+
+    .remove-url {
+        padding: 7px 10px;
+        width: 28%;
+        margin-left: 2%;
+        background: #ff5a5f;
+        border: none;
+        color: #fff;
+    }
+    
+    ul.Tabs li {
+        float: left;
+        padding: 10px 5px;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        background: #f2f2f2;
+        box-shadow: 2px -3px 8px #ccc;
+        display: inline;
+        width: 50%;
+        margin: 0;
+    }
+    
+    .expert-tab-content {
+        padding: 5px;
+    }
+    
+    .expert-confirm {
+        width: 100%;
+    }
+    
+    .expert-confirm > button {
+        padding: 10px 50px;
+    }
 }
