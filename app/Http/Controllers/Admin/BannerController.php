@@ -70,6 +70,8 @@ class BannerController extends Controller
         $params['filed']    = ['source'];
         $params['infix']    = 'galleries/';
         $params['suffix']   = $request->position . "/";
+        $params['height']   = 1260;
+        $params['width']    = 500;
 
         $update             = Library::upload($params);
         $banner             = DB::table('galleries')->where('id', $id);

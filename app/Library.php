@@ -47,30 +47,36 @@ class Library
     {
         foreach ($params['filed'] as $filed) {
             if ( $params['request']->hasFile($filed) ) {
-                $file                    = $params['request']->file($filed);
-                $file_path               = $params['path'] . $params['infix'] . $params['suffix'];
-                $file_ext                = $file->getClientOriginalExtension();
-                $file_name               = $filed . '-' . time() . '.' . $file_ext ;
-                $dest_path               = public_path() . $file_path;
+                $file       = $params['request']->file($filed);
+                $file_path  = $params['path'] . $params['infix'] . $params['suffix'];
+                $file_ext   = $file->getClientOriginalExtension();
+                $file_name  = $filed . '-' . time() . '.' . $file_ext ;
+                $dest_path  = public_path() . $file_path;
+                $height     = 1080;
+                $width      = null;
+                $quality    = 90;
 
-                if (!isset($params['dataWidth'])) {
-                    $move_result             = $file->move($dest_path, $file_name);
-                } else {
-                    if (!file_exists($dest_path)) {
-                        mkdir($dest_path, 0777);
-                    }
-
-
-                    $img = Image::make($file);
-                    $img -> crop($params['dataWidth'], $params['dataHeight'], $params['dataX'], $params['dataY'] );
-                    $img->resize(1080, null, function($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    });
-                    $img->save($dest_path.$file_name, 80);
-
-                    Log::error($file_name);
+                if (!file_exists($dest_path)) {
+                    mkdir($dest_path, 0777);
                 }
+
+                if (isset($params['height'])) {
+                      $height = $params['height'];
+                      $width  = $params['width'];
+                }
+
+                $img = Image::make($file);
+
+                if (isset($params['dataWidth'])) {
+                    $img -> crop($params['dataWidth'], $params['dataHeight'], $params['dataX'], $params['dataY'] );
+                }
+
+                $img -> resize($height, $width, function($constraint) {
+                    $constraint -> aspectRatio();
+                    $constraint -> upsize();
+                });
+                $img -> save($dest_path.$file_name, $quality);
+
                 $params['data'][$filed]  = $file_path . $file_name;
             } else {
                 Log::error('empty');
