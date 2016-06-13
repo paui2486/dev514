@@ -123,7 +123,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $member = DB::table('users')->find($id);
-        $tag_ids = DB::table('users_capacity')->where('user_id', Auth::id())->lists('capacity');
+        $tag_ids = DB::table('users_capacity')->where('user_id', $id)->lists('capacity');
         $member->tag_ids = implode(',', $tag_ids);
         return view('admin.member.create_edit', compact('member'));
     }
@@ -149,7 +149,7 @@ class MemberController extends Controller
               'bank_name'     => $request->bank_name,
               'bank_account'  => $request->bank_account,
               'status'        => $request->status,
-              'last_update_by'=> Auth::id(),
+              'last_update_by'=> $id,
               'updated_at'    => date("Y-m-d H:i:s"),
             );
 
