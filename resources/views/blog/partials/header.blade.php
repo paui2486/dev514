@@ -57,15 +57,4 @@
             </ul>
         </nav>
     </div>
-
-        <div class="row navbar-blog-category">
-            @foreach ($header_categories as $header_category)
-                <li class="top-line-category" >
-                    <a href="{{ URL('blog/'.$header_category->name ) }}">
-                        {{ $header_category->name }}
-                    </a>
-                </li>
-            @endforeach
-        </div>
-    </div>
 </nav>
