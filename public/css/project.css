@@ -179,9 +179,7 @@ li.blog-right-text a {
 }
 
 .navbar-blog-category {
-    position: absolute;
-    top: 26px;
-    left:25%;
+    
 }
 
 li.collapse-blog-category {
@@ -1108,18 +1106,18 @@ li.collapse-blog-category {
     margin-top: 30px;
 }
 
-.expert-content {
+.expert-reg-content {
     padding: 10px;
 }
 
-.expert-content p {
+.expert-reg-content p {
     font-size: 18px;
     letter-spacing: 1px;
     padding: 10px 0;
     margin: 0;
 }
 
-.expert-content span {
+.expert-reg-content span {
     font-size: 15px;
     letter-spacing: 1px;
     line-height: 24px;
@@ -2757,6 +2755,7 @@ input[type='checkbox']:checked {
 .Member-left-bg > img {
     width: 200px;
     border-radius: 100px;
+    border: 1px solid #ccc;
 }
 
 .Member-introduce {
@@ -2997,13 +2996,17 @@ ul.Tabs li a :hover {
 
 /*----------職人頁面----------*/
 
+.Expert-container {
+    background-image: url(/img/pics/258216-151001212S870.jpg);
+    padding: 30px 0;
+}
+
 .expert-container-title {
     width: 85%;
     margin: auto;
     text-align: center;
-    background: #00bcd4;
+    background: #b3b3b3;
     padding: 10px;
-    margin-top: 30px;
     color: #fff;
     font-size: 18px;
     letter-spacing: 1px;
@@ -3011,7 +3014,7 @@ ul.Tabs li a :hover {
     border-radius: 10px 10px 0 0;
 }
 
-.expert-container {
+.expert-content {
     padding: 35px;
     width: 85%;
     margin: 0px auto;

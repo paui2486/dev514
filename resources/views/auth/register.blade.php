@@ -97,14 +97,14 @@
     </div>
     <div class="col-md-6 expert-panel">
         <div class="panel-heading">成為職人</div>
-        <div class="expert-content">
+        <div class="expert-reg-content">
             <p>什麼是職人？</p>
             <span>想成為不同領域的職業人士嗎？除了現在職場上的專業才能，您還有其他專長嗎？514提供您一個平台，讓您可以在閒暇時間，利用您的一技之長賺取經歷或金錢，開拓您另一塊領域的職業才能，建立您下班後的夢想平台！</span>
             <p>成為職人有什麼好處？</p>
             <span>成為514職人，您將可以在514平台上，刊登您擅長領域的活動或課程，讓他人分享您的技能之餘，您也可以藉此賺取外快或是磨練技術！且現階段不需收取任何上架費，在您開設活動並販售出票券後，我們才會收取您一張票10%的手續費，長期合作職人還能享其他優惠方案。</span>
         </div>
         <p class="expert-alert">＊尚未成為514會員請先於左方註冊</p>
-        <a href="#"><div class="expert-button">已是會員，馬上成為職人</div></a>
+        <a href="{{ url('Expert') }}"><div class="expert-button">已是會員，馬上成為職人</div></a>
     </div>
 </div>
 @endsection
