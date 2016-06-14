@@ -6,7 +6,7 @@
         <div class="row Member-left-bg">
             <img src="{{ $member->avatar }}">
             <div class="Member-introduce">
-                <p>{{ $member->nick }}</p>
+                <p>@if($member->nick == '') {{ $member->name }} @else {{ $member->nick }} @endif</p>
                 @foreach ( $member->tag_ids as $capacity )
                     <span>{{ $capacity }}</span>
                 @endforeach

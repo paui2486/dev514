@@ -283,17 +283,18 @@ class TicketController extends Controller
 
     private function priceCompare($act_info, $request)
     {
-        $max = $act_info->max_price;
-        $min = $act_info->min_price;
-        $price = $request->price;
-        if ( $price > $max ) {
+        $prices = DB::table('act_tickets')->where('activity_id', $act_info->id)->lists('price');
+        $max    = max($prices);
+        $min    = min($prices);
+        $price  = $request->price;
+        if ( $price != $max ) {
             DB::table('activities')->where('id', $act_info->id)
                 ->update(Array(
                         'activity_start' => $act_info->activity_start,
                         'max_price'      => $price,
                 ));
         }
-        if ( $price < $min ) {
+        if ( $price != $min ) {
             DB::table('activities')->where('id', $act_info->id)
                 ->update(Array(
                         'activity_start' => $act_info->activity_start,
