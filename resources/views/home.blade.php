@@ -358,12 +358,7 @@
                             <!-- HTML to write -->
                             
                                 <div class="new-activity-orginizer">
-<<<<<<< HEAD
                                      由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦 
-=======
-                                    <img src="/img/icons/holder.png">
-                                    <span>@if($newActivity->orginizer == '') {{ $newActivity->name }} @else {{ $newActivity->orginizer }} @endif</span>
->>>>>>> c1a52ead2f6aaecc51e8cb2281ff1f4c58c91d39
                                 </div>
                            
                             <div style="padding-bottom:10px;">
@@ -466,15 +461,6 @@
                                 <img src="img/pics/location-icon-02.png">
                                 <span>{{ $activity->locat_name . $activity->location }}</span>
                             </div>
-<<<<<<< HEAD
-=======
-                            <a href="{{ '/member/' .$activity->hoster_id }}">
-                                <div class="new-activity-orginizer">
-                                   <img src="/img/icons/holder.png">
-                                   <span>@if($activity->orginizer == '') {{ $activity->name }} @else {{ $activity->orginizer }} @endif</span>
-                                </div>
-                            </a>
->>>>>>> c1a52ead2f6aaecc51e8cb2281ff1f4c58c91d39
                         </div>
                     </div>
                     @endforeach
