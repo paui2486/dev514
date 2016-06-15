@@ -10,9 +10,17 @@
 @section('style')
     <link rel="stylesheet" href="/css/pure-min.css"/>
     <link rel="stylesheet" href="/css/easydropdown.css"/>
+    <link rel="stylesheet" href="/css/jquery.jscrollpane.css"/>
+    <link rel="stylesheet" href="/css/crollpane-style.css"/>
 @endsection
 
 @section('script')
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="../js/jquery.contentcarousel.js"></script>
+<script type="text/javascript">
+    $('#expert-container').contentcarousel();
+</script>
 <script>
     $(function(){
         var SlideoTransitions = [
@@ -270,6 +278,57 @@
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
+        
+        <div class="hot-expert">
+            <div class="row home-title">
+                <img src="/img/pics/hot-profession-02.png">
+            </div>
+            <div class="row hot-expert-content">
+                <div id="expert-container" class="ca-container">
+				<div class="ca-wrapper">
+				<div class="ca-wrapper">
+					<div class="ca-item ca-item-1">
+                        <a href="#">
+						<div class="ca-item-main">
+							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+							<h3>職人姓名</h3>
+                            <p class="ca-tag">特殊經歷tag</p>
+							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
+						</div>
+                        </a>
+					</div>
+					<div class="ca-item ca-item-1">
+                        <a href="#">
+						<div class="ca-item-main">
+							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+							<h3>職人姓名</h3>
+                            <p class="ca-tag">特殊經歷tag</p>
+							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
+						</div>
+                        </a>
+					</div><div class="ca-item ca-item-1">
+                        <a href="#">
+						<div class="ca-item-main">
+							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+							<h3>職人姓名</h3>
+                            <p class="ca-tag">特殊經歷tag</p>
+							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
+						</div>
+                        </a>
+					</div><div class="ca-item ca-item-1">
+                        <a href="#">
+						<div class="ca-item-main">
+							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+							<h3>職人姓名</h3>
+                            <p class="ca-tag">特殊經歷tag</p>
+							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
+						</div>
+                        </a>
+					</div>
+					</div>
+				</div>
+            </div>
+        </div>
         <div class="new-activity">
             <div class="row home-title">
                 <img src="/img/pics/new_activities-02.png">
@@ -297,31 +356,35 @@
                                 <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                             </div>
                             <!-- HTML to write -->
-
-                            <div class="new-activity-date">
-                                <img src="img/pics/calendar-icon-02.png">
-                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
-                                <a href="https://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ '/activity/'. $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
-                                <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom:2px;"></a>
-                                <div class="tooltip top" role="tooltip">
-                                    <div class="tooltip-arrow"></div>
-                                    <div class="tooltip-inner"></div>
-                                </div>
-                            </div>
-                            <div class="new-activity-price">
-                                <img src="img/pics/money-icon-02.png">
-                                {{ $newActivity->price }} 元
-                            </div>
-                            <div class="new-activity-location word-indent-newact ">
-                                <img src="img/pics/location-icon-02.png">
-                                {{ $newActivity->locat_name . $newActivity->location }}
-                            </div>
-                            <a href="{{ '/member/'. $newActivity->hoster_id }}">
+                            
                                 <div class="new-activity-orginizer">
-                                    <img src="/img/icons/holder.png">
-                                    <span> {{ $newActivity->orginizer }} </span>
+                                     由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦 
                                 </div>
-                            </a>
+                           
+                            <div style="padding-bottom:10px;">
+                                <a href="{{ '/member/'. $newActivity->hoster_id }}">
+                                    <div class="new-activity-expert" style="background-image:url('/img/pics/_MG_5609.jpg')">
+                                    </div>
+                                </a>
+                                <div class="new-activity-date">
+                                    <img src="img/pics/calendar-icon-02.png">
+                                    {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($newActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $newActivity->date) /*--}}
+                                    <a href="https://www.google.com/calendar/event?action=TEMPLATE&text={{ $newActivity->title }}&dates={{ date('Ymd\\THi00\\Z', strtotime($newActivity->date)) }}/{{ date('Ymd\\THi00\\Z', strtotime($newActivity->date_end)) }}&details=活動名稱：{{ $newActivity->title }}%0A活動描述：{{ $newActivity->description }}%0A活動網址：{{ '/activity/'. $newActivity->activity_id }}&location={{ $newActivity->locat_name . $newActivity->location }}&trp=true" target="_blank" rel="nofollow"  data-toggle="tooltip"data-placement="right "title="加到日曆">
+                                    <img src="/img/icons/arrow-calendar.png" style="width:27px;padding-bottom:2px;"></a>
+                                    <div class="tooltip top" role="tooltip">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-inner"></div>
+                                    </div>
+                                </div>
+                                <div class="new-activity-price">
+                                    <img src="img/pics/money-icon-02.png">
+                                    {{ $newActivity->price }} 元
+                                </div>
+                                <div class="new-activity-location word-indent-newact ">
+                                    <img src="img/pics/location-icon-02.png">
+                                    {{ $newActivity->locat_name . $newActivity->location }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -368,10 +431,17 @@
                              <img src="/img/icons/eye-03.png">{{ $activity->count }} 人
                         </div>
                         <div class="inter-panel-info">
+                            <a href="{{ '/member/'. $newActivity->hoster_id }}">
+                                <div class="new-activity-expert" style="background-image:url('/img/pics/_MG_5609.jpg')">
+                                </div>
+                            </a>
                             <div class="new-activity-title word-indent-01">
                                 <a href="{{ '/activity/' . $activity->activity_id }}">
                                     {{ $activity->title }}
                                 </a>
+                            </div>
+                            <div class="new-activity-orginizer">
+                                 由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦 
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">
@@ -391,12 +461,6 @@
                                 <img src="img/pics/location-icon-02.png">
                                 <span>{{ $activity->locat_name . $activity->location }}</span>
                             </div>
-                            <a href="{{ '/member/' .$activity->hoster_id }}">
-                                <div class="new-activity-orginizer">
-                                   <img src="/img/icons/holder.png">
-                                   <span> {{ $activity->orginizer }} </span>
-                                </div>
-                            </a>
                         </div>
                     </div>
                     @endforeach

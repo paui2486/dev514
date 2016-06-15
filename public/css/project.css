@@ -481,6 +481,7 @@ li.collapse-blog-category {
 
 .home-blog {
     padding:20px;
+    background: #f4f4f4;
 }
 
 .home-blog-content {
@@ -606,10 +607,19 @@ li.collapse-blog-category {
     color: white;
 }
 
+.hot-expert {
+    padding-top: 20px;
+    background: #fff;
+}
+
+.hot-expert-content {
+    margin: 0;
+}
+
 /* New Activities 最新活動*/
 
 .new-activity {
-    background-color: #fcfbfa;
+    background-color: #f4f4f4;
     padding: 30px 0;
 }
 
@@ -665,11 +675,12 @@ li.collapse-blog-category {
 
 .new-activity-title {
     margin: 10px 0px;
-    padding: 0px 15px
+    padding: 0px 15px;
+    width: 70%;
 }
 
 .new-activity-title a {
-    font-size: 20px;
+    font-size: 18px;
     color: #60574e;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -712,13 +723,28 @@ li.collapse-blog-category {
 }
 
 .new-activity-orginizer {
-    text-align: right;
-    color: #666666;
-    font-size: 15px;
-    padding: 0px 20px;
-    color: black;
-    opacity: 0.5;
-    padding-bottom: 10px;
+    letter-spacing: 1px;
+    font-size: 17px;
+    padding: 0 15px;
+    padding-bottom: 5px;
+    color: #666;
+    opacity: 0.8;
+    width: 70%;
+}
+
+.new-activity-orginizer span {
+    text-decoration: underline;
+}
+
+.new-activity-expert {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background-size: cover;
+    position: absolute;
+    top: 220px;
+    right: 20px;
+    box-shadow: -1px -1px 5px #ccc;
 }
 
 .new-activity-orginizer img {
@@ -729,7 +755,7 @@ li.collapse-blog-category {
 
 .Act-category {
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #fff;
 }
 
 .Act-category-panel {
@@ -824,8 +850,11 @@ li.collapse-blog-category {
 }
 
 .inter-panel-info {
-    padding:5px;
+    padding: 10px 0;
+    padding-top: 0;
     background-color: rgba(255,255,255,0.6);
+    border: 1px solid #ccc;
+    border-radius: 0 0 10px 10px;
 }
 
 .word-indent {

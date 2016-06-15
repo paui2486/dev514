@@ -106,7 +106,6 @@ $(function() {
       $('#Stars').barrating({
         theme: 'fontawesome-stars'
       });
-      $('#Stars option').prop('selected', true);
    });
 
 $(".trace-button > span").on("click", function () {
