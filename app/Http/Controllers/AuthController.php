@@ -47,4 +47,9 @@ class AuthController extends Controller
     {
         return view('admin.dashboard.index');
     }
+
+    public function registerExp()
+    {
+      return view("page.expert");
+    }
 }

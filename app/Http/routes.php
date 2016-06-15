@@ -45,7 +45,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('Partner'        , 'PageController@partner'      );
     Route::get('MemberPage'     , 'PageController@memberpage'   );
     Route::get('testMail'       , 'PageController@testMail'     );
-    Route::get('Expert'         , 'PageController@expert'     );
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +86,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
 
     Route::group(['middleware' => 'auth'], function() {
+        Route::get('Expert'         , 'PageController@expert'     );
+        Route::get('expert/register'                  , 'AuthController@registerExp'            );
 
         // Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
         // Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );

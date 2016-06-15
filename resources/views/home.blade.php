@@ -319,7 +319,7 @@
                             <a href="{{ '/member/'. $newActivity->hoster_id }}">
                                 <div class="new-activity-orginizer">
                                     <img src="/img/icons/holder.png">
-                                    <span> {{ $newActivity->orginizer }} </span>
+                                    <span>@if($newActivity->orginizer == '') {{ $newActivity->name }} @else {{ $newActivity->orginizer }} @endif</span>
                                 </div>
                             </a>
                         </div>
@@ -394,7 +394,7 @@
                             <a href="{{ '/member/' .$activity->hoster_id }}">
                                 <div class="new-activity-orginizer">
                                    <img src="/img/icons/holder.png">
-                                   <span> {{ $activity->orginizer }} </span>
+                                   <span>@if($activity->orginizer == '') {{ $activity->name }} @else {{ $activity->orginizer }} @endif</span>
                                 </div>
                             </a>
                         </div>
