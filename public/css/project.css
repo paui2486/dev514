@@ -2783,6 +2783,7 @@ input[type='checkbox']:checked {
 
 .Member-left-bg > img {
     width: 200px;
+    height: 200px;
     border-radius: 100px;
     border: 1px solid #ccc;
 }
