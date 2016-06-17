@@ -89,7 +89,7 @@
 
 @section('content')
     <!-- mobile view -->
-    <div class="mobile-container">
+<div class="mobile-container">
 <!--
         <div class="mobile-navbar">
             <ul class="nav nav-tabs">
@@ -99,48 +99,78 @@
             </ul>
         </div>
 -->
-        <p class="home-mb-title">最新文章</p>
-        <div class="col-xs-12 mobile-panel">
-             @foreach( $home->newBlog as $blog )
-                <div class="row home-blog-panel">
-                    <a href="{{ '/blog/' . $blog->category . '/' . $blog->title }}">
-                        <div class="col-xs-6 home-blog-thumbnail" style="background-image:url({{ $blog->thumbnail }})">
-                            <div class="home-blog-count">
-                                <img src="/img/icons/eye-03.png">{{ $blog->counter }} 人
-                            </div>
-                        </div>
-                    </a>
-
-                    <div class="col-xs-6 Hblog-panel-text">
-                        <div class="home-blog-title">
-                             <a href="{{ '/blog/' . $blog->category . '/' . $blog->title }}">{{ $blog->title }} </a>
-                        </div>
-                        <div class="row home-blog-info">
-                            <a href="{{ '/blog/'. $blog->category }}">
-                                <div class="home-blog-category">
-                                    <li>{{ $blog->category }}</li>
-                                </div>
-                            </a>
-                            <a href="{{ '/member/'. $blog->author }}">
-                                <div class="home-blog-author">
-                                    <li> 由 {{ $blog->author }} 發表</li>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="home-blog-description word-indent-02">
-                            {{ $blog->description }}
-                        </div>
+        <div class="mobile-recommend">
+            <div class="mobile-recom-image"></div>
+            <div class="mobile-recom-text">
+                <p><img src="/img/pics/comma.png">職人名字</p>
+                <div>514之我們在做什麼～？</div>
+                <div class="mobile-recom-blue"></div>
+            </div>
+        </div>
+    
+        <p class="home-mb-title">▼ 熱門職人 ▼</p>
+        <div class="row mobile-expert">
+            <a href="#">
+                <div class="mobile-expert-panel">
+                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                    <div class="mb-expert-text">
+                        <p>職人姓名</p>
+                        <img src="/img/pics/yellow-stars.png">
+                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
+                            <span class="mb-expert-tag">職人tag</span>
+                            <span class="mb-expert-tag">職人tag</span>
+                        </p>
                     </div>
                 </div>
-            @endforeach
+            </a>
+            <a href="#">
+                <div class="mobile-expert-panel">
+                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                    <div class="mb-expert-text">
+                        <p>職人姓名</p>
+                        <img src="/img/pics/yellow-stars.png">
+                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
+                            <span class="mb-expert-tag">米其林三星推薦</span>
+                            <span class="mb-expert-tag">世界調酒比賽冠軍</span>
+                            <span class="mb-expert-tag">職人tag123123123123123</span>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="mobile-expert-panel">
+                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                    <div class="mb-expert-text">
+                        <p>職人姓名</p>
+                        <img src="/img/pics/yellow-stars.png">
+                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
+                            <span class="mb-expert-tag">米其林三星推薦</span>
+                            <span class="mb-expert-tag">世界調酒比賽冠軍</span>
+                            <span class="mb-expert-tag">職人tag123123123123123</span>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="#">
+                <div class="mobile-expert-panel">
+                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                    <div class="mb-expert-text">
+                        <p>職人姓名</p>
+                        <img src="/img/pics/yellow-stars.png">
+                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
+                            <span class="mb-expert-tag">米其林三星推薦</span>
+                            <span class="mb-expert-tag">職人tag123123123123123</span>
+                        </p>
+                    </div>
+                </div>
+            </a>
         </div>
-        <p class="home-mb-title">最新活動</p>
+        <p class="home-mb-title">▼ 熱門活動 ▼</p>
         <div class="mobile-panel">
             @foreach( $home->allActivity as $mbActivity )
             <a href="{{ 'activity/' . $mbActivity->activity_id }}">
             <div class="mobile_panel_bg">
-                <div class="col-xs-6 mobile-activity-thumbnail"
-                         style="background-image:url('{{ $mbActivity->thumbnail }}')">
+                <div class="col-xs-6 mobile-activity-thumbnail" style="background-image:url('{{ $mbActivity->thumbnail }}')">
                         <div class="home-mb-count">
                             <img src="/img/icons/eye-03.png">{{ $mbActivity->count }} 人
                         </div>
@@ -170,12 +200,15 @@
             </a>
             @endforeach
         </div>
+<!--
         <a href="/activity">
         <div class="more-activity">
             <div>進階搜尋</div>
         </div>
         </a>
+-->
     </div>
+</div>
     <!-- mobile view end-->
 
     <div class="home-container">
