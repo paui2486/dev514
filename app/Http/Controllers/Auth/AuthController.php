@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Log;
 use Auth;
 use App\User;
 use Validator;
@@ -65,12 +66,12 @@ class AuthController extends Controller
         // $this->validate($request, [
         //     'phone' => 'required|phone', 'password' => 'required',
         // ]);
-        setcookie("phone",    $request->phone,    time()+60*60*24*30); // retire one month later;
+        setcookie("account",  $request->account,  time()+60*60*24*30); // retire one month later;
         setcookie("remember", $request->remember, time()+60*60*24*30);
+        // $credentials = $this->getCredentials($request);
 
-        $credentials = $this->getCredentials($request);
-
-        if (Auth::attempt($credentials, $request->has('remember'))) {
+        if (Auth::attempt(['email' => $request->account, 'password' => $request->password], $request->has('remember')) ||
+              Auth::attempt(['phone' => $request->account, 'password' => $request->password], $request->has('remember'))) {
             return redirect()->intended($this->redirectPath());
         }
 

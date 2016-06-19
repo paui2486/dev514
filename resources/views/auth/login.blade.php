@@ -10,17 +10,17 @@
               @endif
               <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                 {!! csrf_field() !!}
-                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('account') ? ' has-error' : '' }}">
                     <label class="col-md-4 control-label">
                         <span>*</span>
-                        手機號碼
+                        帳號 Account
                     </label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="phone" value="@if(isset($_COOKIE['phone'])) {!! $_COOKIE['phone'] !!} @endif" placeholder="請輸入您的 手機號碼">
+                        <input type="text" class="form-control" name="account" value="@if(isset($_COOKIE['account'])){!! $_COOKIE['account']!!} @endif" placeholder="請輸入您的 手機號碼 或 電子信箱">
 
-                        @if ($errors->has('phone'))
+                        @if ($errors->has('account'))
                             <span class="help-block">
-                                <p>{{ $errors->first('phone') }}</p>
+                                <p>{{ $errors->first('account') }}</p>
                             </span>
                         @endif
                     </div>
