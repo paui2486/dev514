@@ -86,8 +86,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('purchase/trade/{OrderNo}'   , 'PurchaseController@getTradeInfo'  );
 
     Route::group(['middleware' => 'auth'], function() {
-        Route::get('Expert'         , 'PageController@expert'     );
+        Route::get('Expert'                           , 'PageController@expert'     );
         Route::get('expert/register'                  , 'AuthController@registerExp'            );
+        Route::post('expert/register'                 , 'AuthController@submitRegister'         );
 
         // Route::get('purchase/{category}/{slug}' , 'PurchaseController@showPurchase'  );
         // Route::post('purchase/{category}/{slug}', 'PurchaseController@postPurchase'  );

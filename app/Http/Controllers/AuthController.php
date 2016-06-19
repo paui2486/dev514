@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Input;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,11 @@ class AuthController extends Controller
 
     public function registerExp()
     {
-      return view("page.expert");
+        return view("page.reg_expert");
+    }
+
+    public function submitRegister(Request $request)
+    {
+        return Input::all();
     }
 }
