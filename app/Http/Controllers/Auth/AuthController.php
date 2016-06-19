@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use Log;
 use Auth;
+use Input;
+use Response;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -54,9 +56,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'phone' => 'required|max:255',
-            'email' => 'required|max:255',
+            'name'     => 'required|max:255',
+            'phone'    => 'required|unique:users,phone|max:255',
+            'email'    => 'required|unique:users,email|max:255',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -80,6 +82,11 @@ class AuthController extends Controller
             ->withFlashmessage($this->getFailedLoginMessage());
     }
 
+    public function postRegister(Request $request)
+    {
+        return Input::all();
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -88,10 +95,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        // Log::error($data);
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'name'      => $data['name'],
+            'email'     => $data['email'],
+            'phone'     => $data['phone'],
+            'password'  => bcrypt($data['password']),
         ]);
     }
 }
