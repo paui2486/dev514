@@ -53,19 +53,19 @@ Route::group(['middleware' => 'web'], function () {
 */
     Route::auth();
 
-    Route::post('login'                     , 'Auth\AuthController@postLogin'         );
+    Route::post('login'                     , 'Auth\AuthController@postLogin'     );
+    // Route::post('register'                  , 'Auth\AuthController@postRegister'  );
+    Route::get('register/verify/{confirm}'  , 'MainController@confirm'            );
 
-    Route::get('register/verify/{confirm}'  , 'MainController@confirm'           );
-
-    Route::get('activity'                   , 'ActivityController@showResult'    );
+    Route::get('activity'                   , 'ActivityController@showResult'     );
     Route::post('activity'                   , 'ActivityController@showResult'    );
-    Route::post('activity/data'             , 'ActivityController@showResult'    );
-    Route::get('activity/{id}'              , 'ActivityController@index'         );
+    Route::post('activity/data'             , 'ActivityController@showResult'     );
+    Route::get('activity/{id}'              , 'ActivityController@index'          );
     // Route::get('activity/{category}'        , 'ActivityController@showCategory'  );
     // Route::get('activity/{category}/{slug}' , 'ActivityController@showActivity'  );
     // Route::get('purchase'                   , 'ActivityController@purchase'      );
     // Route::get('purchase/confirm'           , 'ActivityController@confirm'       );
-    Route::get('member/{id}'                , 'PageController@showMember');
+    Route::get('member/{id}'                , 'PageController@showMember'         );
 
 
     Route::get('blog'                       , 'ArticleController@index'          );
