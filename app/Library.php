@@ -43,18 +43,24 @@ class Library
         return $template;
     }
 
-    public static function upload( $params )
+    public static function upload( $params, $name = null )
     {
-        foreach ($params['filed'] as $filed) {
-            if ( $params['request']->hasFile($filed) ) {
-                $file       = $params['request']->file($filed);
+        $data = ['dataX', 'dataY', 'dataH', 'dataW', 'dataR', 'dataSX', 'dataSY'];
+        foreach ($params['filed'] as $field) {
+            if ( $params['request']->hasFile($field) ) {
+                $file       = $params['request']->file($field);
                 $file_path  = $params['path'] . $params['infix'] . $params['suffix'];
                 $file_ext   = $file->getClientOriginalExtension();
-                $file_name  = $filed . '-' . time() . '.' . $file_ext ;
+                $file_name  = $field . '-' . time() . '.' . $file_ext ;
                 $dest_path  = public_path() . $file_path;
                 $height     = 1080;
                 $width      = null;
                 $quality    = 90;
+
+                foreach ($data as $name) {
+                    $$name = $name."_".$field;
+                    $params[$name] = $params['request']->$$name;
+                }
 
                 if (!file_exists($dest_path)) {
                     mkdir($dest_path, 0777);
@@ -67,8 +73,8 @@ class Library
 
                 $img = Image::make($file);
 
-                if (isset($params['dataWidth'])) {
-                    $img -> crop($params['dataWidth'], $params['dataHeight'], $params['dataX'], $params['dataY'] );
+                if (isset($params['dataW'])) {
+                    $img -> crop($params['dataW'], $params['dataH'], $params['dataX'], $params['dataY'] );
                 }
 
                 $img -> resize($height, $width, function($constraint) {
@@ -76,12 +82,9 @@ class Library
                     $constraint -> upsize();
                 });
                 $img -> save($dest_path.$file_name, $quality);
-
-                $params['data'][$filed]  = $file_path . $file_name;
-            } else {
-                Log::error('empty');
+                $params['data'][$field]  = $file_path . $file_name;
+            // } else {
             }
-
         }
         return $params;
     }
