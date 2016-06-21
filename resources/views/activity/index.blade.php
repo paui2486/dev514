@@ -15,10 +15,10 @@
 
 @section('content')
 <div class="act-page-container">
-    <div class="act-page-blur" style="background-image:url('{{ $activity->thumbnail }}')">
+    <div class="act-page-blur" style="background-image:url('{{ $activity->banner }}')">
         <!--            <img src="/img/pics/activity-photo.jpg">-->
     </div>
-    <div class="actpage-main-image" style="background-image:url('{{ $activity->thumbnail }}')">
+    <div class="actpage-main-image" style="background-image:url('{{ $activity->banner }}')">
     </div>
     <div class="actpage-content">
         <div id="RightFixed" class="col-md-4 col-sm-4 cart actpage-Cart">

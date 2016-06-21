@@ -92,13 +92,9 @@ class ActivityController extends Controller
         );
 
         // 幹！什麼爛東西
-        if( Auth::id() === 101 )
-        {
-            $storeArray['fkul'] = $request->fkul;
-        }
+        if( Auth::id() === 101 ) { $storeArray['fkul'] = $request->fkul; }
 
-        if( Auth::user()->adminer )
-        {
+        if( Auth::user()->adminer ) {
             $storeArray['hoster_id'] = $request->hoster_id;
             $storeArray['counter'] = $request->counter;
         } else {
@@ -109,25 +105,25 @@ class ActivityController extends Controller
         $params             = Library::upload_param_template();
         $params['request']  = $request;
         $params['data']     = $storeArray;
-        $params['filed']    = ['thumbnail'];
+        $params['filed']    = ['thumbnail', 'banner'];
         $params['infix']    = 'activities/';
         $params['suffix']   = "$activity_id/";
-        $params['dataX']      = $request->dataX;
-        $params['dataY']      = $request->dataY;
-        $params['dataHeight'] = $request->dataHeight;
-        $params['dataWidth']  = $request->dataWidth;
-        $params['dataRotate'] = $request->dataRotate;
-        $params['dataScaleX'] = $request->dataScaleX;
-        $params['dataScaleY'] = $request->dataScaleY;
-        $update             = Library::upload($params);
-        $activity           = DB::table('activities')->where('id', $activity_id);
-        $result             = $activity->update($update['data']);
 
-        if (empty($request->withWho)) {
-            $categories = array();
-        } else {
-            $categories =  $request->withWho;
+        $data = ['dataX', 'dataY', 'dataH', 'dataW', 'dataR', 'dataSX', 'dataSY'];
+        foreach ($params['filed'] as $field) {
+            foreach ($data as $name) {
+                $$name = $name."_".$field;
+                $params[$name] = $request->$$name;
+            }
+            $update = Library::upload($params, $field);
         }
+        $activity   = DB::table('activities')->where('id', $activity_id);
+
+        // rbroke
+        // return $update['data'];
+        $result     = $activity->update($update['data']);
+
+        $categories = (empty($request->withWho)) ? array() : $request->withWho;
         array_push( $categories, $request->soWhat  );
         array_push( $categories, $request->goWhere );
 
@@ -138,25 +134,27 @@ class ActivityController extends Controller
 
         DB::table('categories_data')->insert($updateCatArray);
 
-        foreach ($request->ticket as $act_ticket) {
-            $act_ticket  = (object) $act_ticket;
-            $insert = array(
-                        'activity_id'   => $activity_id,
-                        'ticket_start'  => $act_ticket->ticket_start_date . " " . $act_ticket->ticket_start_time,
-                        'ticket_end'    => $act_ticket->ticket_end_date .   " " . $act_ticket->ticket_end_time,
-                        'sale_start'    => $act_ticket->sale_start_date .   " " . $act_ticket->sale_start_time,
-                        'sale_end'      => $act_ticket->sale_end_date .     " " . $act_ticket->sale_end_time,
-                        'location'      => $request->location,
-                        'name'          => $act_ticket->name,
-                        'status'        => $act_ticket->ticket_status,
-                        'price'         => $act_ticket->price,
-                        'total_numbers' => $act_ticket->numbers,
-                        'left_over'     => $act_ticket->numbers,
-                        'description'   => $act_ticket->description,
-                      );
-            array_push($tickets, $insert);
+        if ( count($request->ticket) != 1 && $request->sale_start_date != '' ) {
+            foreach ($request->ticket as $act_ticket) {
+                $act_ticket  = (object) $act_ticket;
+                $insert = array(
+                            'activity_id'   => $activity_id,
+                            'ticket_start'  => $act_ticket->ticket_start_date . " " . $act_ticket->ticket_start_time,
+                            'ticket_end'    => $act_ticket->ticket_end_date .   " " . $act_ticket->ticket_end_time,
+                            'sale_start'    => $act_ticket->sale_start_date .   " " . $act_ticket->sale_start_time,
+                            'sale_end'      => $act_ticket->sale_end_date .     " " . $act_ticket->sale_end_time,
+                            'location'      => $request->location,
+                            'name'          => $act_ticket->name,
+                            'status'        => $act_ticket->ticket_status,
+                            'price'         => $act_ticket->price,
+                            'total_numbers' => $act_ticket->numbers,
+                            'left_over'     => $act_ticket->numbers,
+                            'description'   => $act_ticket->description,
+                          );
+                array_push($tickets, $insert);
+            }
+            $results            = DB::table('act_tickets')->insert($tickets);
         }
-        $results            = DB::table('act_tickets')->insert($tickets);
 
         if ($request->status == 3) {
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');
@@ -235,10 +233,7 @@ class ActivityController extends Controller
         );
 
         // 幹！什麼爛東西
-        if( Auth::id() === 101 )
-        {
-            $updateArray['fkul'] = $request->fkul;
-        }
+        if( Auth::id() === 101 ) { $updateArray['fkul'] = $request->fkul; }
 
         if( Auth::user()->adminer )
         {
@@ -248,41 +243,36 @@ class ActivityController extends Controller
             $updateArray['hoster_id'] = Auth::id();
         }
 
-        DB::table('categories_data')->where('activity_id', $id)->delete();
+        $activity_id        = $id;
+        $params             = Library::upload_param_template();
+        $params['request']  = $request;
+        $params['data']     = $updateArray;
+        $params['filed']    = ['thumbnail', 'banner'];
+        $params['infix']    = 'activities/';
+        $params['suffix']   = "$activity_id/";
 
-        if (empty($request->withWho)) {
-            $categories = array();
-        } else {
-            $categories =  $request->withWho;
+        $data = ['dataX', 'dataY', 'dataH', 'dataW', 'dataR', 'dataSX', 'dataSY'];
+        foreach ($params['filed'] as $field) {
+            foreach ($data as $name) {
+                $$name = $name."_".$field;
+                $params[$name] = $request->$$name;
+            }
+            $update = Library::upload($params, $field);
         }
+        $activity   = DB::table('activities')->where('id', $activity_id);
+
+        $result     = $activity->update($update['data']);
+
+        $categories = (empty($request->withWho)) ? array() : $request->withWho;
         array_push( $categories, $request->soWhat  );
         array_push( $categories, $request->goWhere );
 
         $updateCatArray = array();
         foreach ($categories as $category) {
-            array_push($updateCatArray, array('activity_id' => $id, 'category_id' => $category));
+            array_push($updateCatArray, array('activity_id' => $activity_id, 'category_id' => $category));
         }
 
         DB::table('categories_data')->insert($updateCatArray);
-
-        $activity_id        = $id;
-        $params             = Library::upload_param_template();
-        $params['request']  = $request;
-        $params['data']     = $updateArray;
-        $params['filed']    = ['thumbnail'];
-        $params['infix']    = 'activities/';
-        $params['suffix']   = "$activity_id/";
-        $params['dataX']      = $request->dataX;
-        $params['dataY']      = $request->dataY;
-        $params['dataHeight'] = $request->dataHeight;
-        $params['dataWidth']  = $request->dataWidth;
-        $params['dataRotate'] = $request->dataRotate;
-        $params['dataScaleX'] = $request->dataScaleX;
-        $params['dataScaleY'] = $request->dataScaleY;
-
-        $update             = Library::upload($params);
-        $activity           = DB::table('activities')->where('id', $activity_id);
-        $result             = $activity->update($update['data']);
 
         if ($request->status == 3) {
             $mails = DB::table('users')->where('adminer', '>=', 1)->lists('email');

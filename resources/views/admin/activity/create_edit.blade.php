@@ -61,6 +61,42 @@
                       </div>
                     @endif
                     <div class="col-md-12">
+                        <div class="form-group {{{ $errors->has('banner') ? 'has-error' : '' }}} ">
+                            <div class="col-md-12">
+                                <label class="control-label col-sm-2" for="banner">
+                                    <p>0</p>活動內頁 Banner
+                                </label>
+                                <div class="col-sm-10">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="img-preview preview-lg" style="max-width: 500px; max-height: 300px;">
+                                            <img id="banner" width="100%" src="{{{ ( isset($activity) && !empty($activity->banner) ? asset($activity->banner) : asset('img/no-image.png')) }}}" alt="" />
+                                        </div>
+                                        <div>
+                                            <span class="btn btn-white btn-file">
+                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
+                                                <input class="file input"  name="banner" type="file" accept="image/*"
+                                                    value="{{{ Input::old('banner', isset($activity) ? $activity->banner : null) }}}"/>
+                                            </span>
+                                            <button id="reset_banner" type="button" class="btn btn-primary" data-method="reset" title="Reset" style="display:none;">
+                                                <span class="docs-tooltip" data-toggle="tooltip">
+                                                    <span class="fa fa-refresh"></span>
+                                                </span>
+                                            </button>
+                                            <span style="color:red;">(建議以人物為主題，尺寸 1,260 x 500 像素)</span>
+                                        </div>
+                                        <input class="form-control " type="hidden" name="dataX_banner"  id="dataX_banner"  value="" />
+                                        <input class="form-control " type="hidden" name="dataY_banner"  id="dataY_banner"  value="" />
+                                        <input class="form-control " type="hidden" name="dataH_banner"  id="dataH_banner"  value="" />
+                                        <input class="form-control " type="hidden" name="dataW_banner"  id="dataW_banner"  value="" />
+                                        <input class="form-control " type="hidden" name="dataR_banner"  id="dataR_banner"  value="" />
+                                        <input class="form-control " type="hidden" name="dataSX_banner" id="dataSX_banner" value="" />
+                                        <input class="form-control " type="hidden" name="dataSY_banner" id="dataSY_banner" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group {{{ $errors->has('thumbnail') ? 'has-error' : '' }}} ">
                             <div class="col-md-12">
                                 <label class="control-label col-sm-2" for="thumbnail">
@@ -69,28 +105,28 @@
                                 <div class="col-sm-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="img-preview preview-lg" style="max-width: 500px; max-height: 300px;">
-                                            <img id="image" width="100%" src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
+                                            <img id="thumbnail" width="100%" src="{{{ ( isset($activity) && !empty($activity->thumbnail) ? asset($activity->thumbnail) : asset('img/no-image.png')) }}}" alt="" />
                                         </div>
                                         <div>
                                             <span class="btn btn-white btn-file">
                                                 <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
-                                                <input id="inputImage" class="file"  name="thumbnail" type="file"
+                                                <input class="file input"  name="thumbnail" type="file" accept="image/*"
                                                     value="{{{ Input::old('thumbnail', isset($activity) ? $activity->thumbnail : null) }}}"/>
                                             </span>
-                                            <button id="reset" type="button" class="btn btn-primary" data-method="reset" title="Reset" style="display:none;">
+                                            <button id="reset_thumbnail" type="button" class="btn btn-primary" data-method="reset" title="Reset" style="display:none;">
                                                 <span class="docs-tooltip" data-toggle="tooltip">
                                                     <span class="fa fa-refresh"></span>
                                                 </span>
                                             </button>
-                                            <span style="color:red;">(建議以人物為主題，尺寸 1,200 x 675 像素)</span>
+                                            <span style="color:red;">(建議以人物為主題，尺寸 360 x 240 像素)</span>
                                         </div>
-                                        <input class="form-control " type="hidden" name="dataX" id="dataX" value="" />
-                                        <input class="form-control " type="hidden" name="dataY" id="dataY" value="" />
-                                        <input class="form-control " type="hidden" name="dataHeight" id="dataHeight" value="" />
-                                        <input class="form-control " type="hidden" name="dataWidth" id="dataWidth" value="" />
-                                        <input class="form-control " type="hidden" name="dataRotate" id="dataRotate" value="" />
-                                        <input class="form-control " type="hidden" name="dataScaleX" id="dataScaleX" value="" />
-                                        <input class="form-control " type="hidden" name="dataScaleY" id="dataScaleY" value="" />
+                                        <input class="form-control " type="hidden" name="dataX_thumbnail"  id="dataX_thumbnail"  value="" />
+                                        <input class="form-control " type="hidden" name="dataY_thumbnail"  id="dataY_thumbnail"  value="" />
+                                        <input class="form-control " type="hidden" name="dataH_thumbnail"  id="dataH_thumbnail"  value="" />
+                                        <input class="form-control " type="hidden" name="dataW_thumbnail"  id="dataW_thumbnail"  value="" />
+                                        <input class="form-control " type="hidden" name="dataR_thumbnail"  id="dataR_thumbnail"  value="" />
+                                        <input class="form-control " type="hidden" name="dataSX_thumbnail" id="dataSX_thumbnail" value="" />
+                                        <input class="form-control " type="hidden" name="dataSY_thumbnail" id="dataSY_thumbnail" value="" />
                                     </div>
                                 </div>
                             </div>
@@ -478,15 +514,7 @@
 <!-- <script type="text/javascript" src="{{ asset('js/jquery.mu.image.resize.js') }}"></script> -->
 <script type="text/javascript">
     $(document).ready(function () {
-        var $image = $('#image');
-        var $dataX = $('#dataX');
-        var $dataY = $('#dataY');
-        var $dataHeight = $('#dataHeight');
-        var $dataWidth  = $('#dataWidth');
-        var $dataRotate = $('#dataRotate');
-        var $dataScaleX = $('#dataScaleX');
-        var $dataScaleY = $('#dataScaleY');
-        var $inputImage = $('#inputImage');
+        var $inputImage = $('.input');
         var URL = window.URL || window.webkitURL;
         var blobURL;
 
@@ -494,11 +522,33 @@
 
         if (URL) {
             $inputImage.change(function () {
-                var files = this.files;
                 var file;
+                var $ratio;
+                var files   = this.files;
+                var $name   = $(this).attr('name');
+                var $image  = $('#'.concat($name));
+                var $reset  = $('#reset_'.concat($name));
+                var $dataX  = $('#dataX_'.concat($name));
+                var $dataY  = $('#dataY_'.concat($name));
+                var $dataHeight = $('#dataH_'.concat($name));
+                var $dataWidth  = $('#dataW_'.concat($name));
+                var $dataRotate = $('#dataR_'.concat($name));
+                var $dataScaleX = $('#dataSX_'.concat($name));
+                var $dataScaleY = $('#dataSY_'.concat($name));
+
+                $reset.show();
+                $reset.click(function () {
+                    $image.cropper('reset');
+                });
+
+                if ( $name == 'thumbnail' ) {
+                    $ratio = 6 / 4 ;
+                } else {
+                    $ratio = 5 / 2 ;
+                }
 
                 $image.cropper({
-                    aspectRatio: 16 / 9,
+                    aspectRatio: $ratio,
                     crop: function(e) {
                         $dataX.val(Math.round(e.x));
                         $dataY.val(Math.round(e.y));
@@ -508,11 +558,6 @@
                         $dataScaleX.val(e.scaleX);
                         $dataScaleY.val(e.scaleY);
                     }
-                });
-
-                $('#reset').show();
-                $('#reset').click(function () {
-                    $image.cropper('reset');
                 });
 
                 if (!$image.data('cropper')) {
@@ -528,9 +573,9 @@
                             URL.revokeObjectURL(blobURL);
                         }).cropper('reset').cropper('replace', blobURL);
                         // $inputImage.val('');
-                  } else {
-                      window.alert('Please choose an image file.');
-                  }
+                    } else {
+                        window.alert('Please choose an image file.');
+                    }
                 }
             });
         } else {
