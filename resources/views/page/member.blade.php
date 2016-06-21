@@ -41,10 +41,15 @@
     </div>
     <div class="row Member-Tab col-md-8">
         <ul class="row Tabs" style="margin:0;">
+          @if(Auth::check() && (Auth::id() ==  $member->id ))
+          <li><a href="#Mtab-0" data-url="/expert/register">個人設定</a></li>
+          @endif
             <li><a href="#Mtab-1">認識職人</a></li>
             <li><a href="#Mtab-2">相關文章</a></li>
         </ul>
         <div class="row Tab-Container">
+            <div class="Member-content" id="Mtab-0">
+            </div>
             <div class="Member-content" id="Mtab-1">
                 <p>關於我<span> About Me</span></p>
                 <div class="Member-About">
