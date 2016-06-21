@@ -32,8 +32,8 @@ class MainController extends controller
             'newActivity'   => (object) $this->getNewActivity(),
             'totalActivity' => (object) $this->getTotalActivity(),
             'allActivity'   => (object) $this->getAllActivity(),
+            'hotExpert'     => (object) $this->getHotExpert(),
         );
-
         return view('home', compact('home', 'meta', 'slideCategory'));
     }
 
@@ -123,6 +123,36 @@ class MainController extends controller
         return $newBlogs;
     }
 
+    private function getHotExpert()
+    {
+        $experts = DB::table('users')
+                        // ->Join('users_extend', 'users.id', '=','users_extend.user_id')
+                        ->where('users.hoster', '>=', 1)
+                        ->select(array(
+                            'users.id', 'users.name', 'users.nick', 'users.description', 'users.avatar',
+                            // DB::raw('SELECT (users_extend.attribute) as extend'),
+                            // DB::raw('sum(articles.counter) as view_cnt'),
+                          ))
+                        ->groupBy('users.id')
+                        ->orderByRaw("RAND()")
+                        ->take(6)
+                        ->get();
+
+        foreach ($experts as $expert) {
+            $users_extend = DB::table('users_extend')
+                          ->where('user_id', $expert->id)
+                          ->where('status', 1);
+            $content = array();
+            $content['capacity']    = DB::table('users_capacity')->where('user_id', $expert->id)->lists('capacity');
+            $content['experience']  = $users_extend->where('attribute', '_ExpExp')    ->value('value');
+            $content['name']        = $users_extend->where('attribute', '_ExpName')   ->value('value');
+            $content['avatar']      = $users_extend->where('attribute', '_ExpAvatar') ->value('value');
+            $content['description'] = $users_extend->where('attribute', '_ExpDesc')   ->value('value');
+            $expert->content        = $content;
+        }
+        return $experts;
+    }
+
     private function getNewActivity()
     {
         $newActivity = DB::table('activities')
@@ -134,7 +164,7 @@ class MainController extends controller
                             'activities.description',       'activities.counter as count', 'activities.location',
                             'activities.location_id', 'activities.activity_start as date', 'activities.min_price as price',
                             'users.name', 'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
-                            'activities.hoster_id',
+                            'activities.hoster_id', 'users.avatar'
                         ))
                         ->orderBy('activities.created_at', 'desc')
                         ->groupBy('activities.id')
@@ -180,7 +210,7 @@ class MainController extends controller
                         'activities.id as activity_id', 'activities.thumbnail',              'activities.title',
                         'activities.description',       'activities.counter as count',       'activities.min_price as price',
                         'activities.location',          'activities.activity_start as date', 'users.nick as orginizer',  'users.name',
-                        'activities.hoster_id',         'categories.name as locat_name', 'activities.activity_end as date_end',
+                        'activities.hoster_id',         'categories.name as locat_name', 'activities.activity_end as date_end', 'users.avatar',
                     ))
                     ->orderBy('activities.created_at', 'desc')
                     // ->take(3)
@@ -222,8 +252,8 @@ class MainController extends controller
                               'activities.id as activity_id', 'activities.thumbnail',           'activities.title',
                               'activities.description',       'activities.counter as count',    'activities.min_price as price',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
-                              'activities.hoster_id',         'users.nick as orginizer',        'users.name',
-                              'activities.activity_end as date_end', 'cat.name as cat_name',
+                              'activities.hoster_id',         'users.nick as orginizer',        'users.name',  'users.avatar',
+                              'activities.activity_end as date_end', 'cat.name as cat_name',    'users.nick',
                           ))
                           ->where('activities.activity_end', '>=', date('Y-m-d'))
                           ->orderBy('activities.activity_start', 'asc')
