@@ -6394,7 +6394,8 @@ table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.
 }
 
 .bootstrap-tagsinput input {
-    width: 30%!important;
+    width: 100%!important;
+    font-size: 14px;
 }
 
 .t-function > button {

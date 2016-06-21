@@ -2959,11 +2959,13 @@ ul.Tabs li a :hover {
     width: calc(100%/2 - 20px);
     margin: 10px 5px;
 }
+/*
 
 .Member-panel:hover {
     box-shadow: 1px 1px 10px #ccc;
     border-radius: 10px;
 }
+*/
 
 .Member-panel-bg {
     border: 1px solid #ccc;
@@ -3027,30 +3029,33 @@ ul.Tabs li a :hover {
 /*----------職人頁面----------*/
 
 .Expert-container {
-    background-image: url(/img/pics/258216-151001212S870.jpg);
-    padding: 30px 0;
-}
-
-.expert-container-title {
-    width: 85%;
-    margin: auto;
-    text-align: center;
-    background: #b3b3b3;
-    padding: 10px;
-    color: #fff;
-    font-size: 18px;
-    letter-spacing: 1px;
-    box-shadow: 1px 1px 10px #ccc;
-    border-radius: 10px 10px 0 0;
+    padding:0;
 }
 
 .expert-content {
-    padding: 35px;
-    width: 85%;
+    padding: 35px 0;
     margin: 0px auto;
-    background: rgba(255,255,255,0.8);
-    border-radius: 0 0 10px 10px ;
-    box-shadow: 1px 1px 10px #ccc;
+    padding-bottom: 0;
+}
+
+.img-preview {
+    text-align: center;
+}
+
+.img-preview img {
+    width:240px;
+    border-radius: 0;
+}
+
+.expert-uploadimg {
+    text-align: center;
+    margin: 10px;
+}
+
+.expert-uploadimg > p {
+    text-align: center;
+    font-size: 14px;
+    color:#ff5a5f;
 }
 
 .expert-contact {
@@ -3059,30 +3064,25 @@ ul.Tabs li a :hover {
 
 .expert-contact p {
     font-size: 14px;
-    width: 15%;
+    width: 20%;
     float: left;
     letter-spacing: 1px;
     line-height: 35px;
 }
 
-.expert-eg-image img {
-    width: 256px;
-    height: 180px;
+.expert-contact-input {
+    width: 80%;
 }
 
-.expert-eg-image > div {
-    width: 50%;
-    float: left;
+.expert-eg-image img {
+    width: 240px;
+    height: 150px;
 }
 
 .expert-eg-image > div > p {
-    color: #ff5a5f;
+    color: #666;
     margin: 5px 0;
-    font-size: 14px;
-}
-
-.expert-eg-image > P {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .expert-contact-title h5 {
@@ -3097,9 +3097,6 @@ ul.Tabs li a :hover {
     text-align: center;
 }
 
-.expert-contact-input {
-    width: 85%;
-}
 
 .form-group textarea {
     width: 100%;
@@ -3115,11 +3112,22 @@ ul.Tabs li a :hover {
 
 .contact-display {
     line-height: 35px;
+    font-size: 14px;
 }
 
 .showBlock {
     margin:0;
     padding: 0;
+}
+
+.btn-white {
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 5px 12px;
+    border-radius: 5px;
+    background: #00bcd4;
+    color: #fff;
+
 }
 
 .new-url {
@@ -3152,7 +3160,6 @@ ul.Tabs li a :hover {
 }
 
 .expert-text {
-    width: 85%;
     margin: 20px auto;
     text-align: center;
     background: rgba(122,233,233,0.3);
@@ -3167,7 +3174,6 @@ ul.Tabs li a :hover {
 .expert-Tab {
     margin: 15px auto;
     padding: 0;
-    width: 85%;
 }
 
 .expert-tab-content {
