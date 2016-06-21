@@ -95,7 +95,7 @@
             </form>
         </div>
     </div>
-    <div class="col-md-6 expert-panel">
+    <div class="col-md-6 col-xs-12 expert-panel">
         <div class="panel-heading">成為職人</div>
         <div class="expert-reg-content">
             <p>什麼是職人？</p>

@@ -55,7 +55,7 @@
 
                     @foreach ( $activitys as $activity )
                     <a href="/activity/{{ $activity->id }}">
-                        <div class="Member-panel">
+                        <div class="col-xs-12 Member-panel">
                             <div class="MemberAct-id">
                             </div>
                             <div class="MemberAct-thumbnail" style=" background-image: url({{ $activity->thumbnail }})">

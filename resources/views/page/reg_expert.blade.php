@@ -72,7 +72,13 @@
                       placeholder="例：米其林三星推薦、世界調酒師大賽冠軍" value=""  data-role="tagsinput"/>
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-md-2 control-label">自我介紹</label>
+                <div class="col-md-10">
+                    <textarea>
+                    </textarea>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-md-2 col-xs-12 control-label expert-contact-title">聯絡方式 <span>*</span>
                     <h5>( 請至少選填一項 )</h5>

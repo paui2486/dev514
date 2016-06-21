@@ -3101,6 +3101,13 @@ ul.Tabs li a :hover {
     width: 85%;
 }
 
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
 .contact-display span {
     padding-right: 10px;
     font-size: 14px;

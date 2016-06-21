@@ -166,34 +166,42 @@
             </a>
         </div>
         <p class="home-mb-title">▼ 熱門活動 ▼</p>
-        <div class="mobile-panel">
+        <div class="mobile-activity">
             @foreach( $home->allActivity as $mbActivity )
             <a href="{{ 'activity/' . $mbActivity->activity_id }}">
-            <div class="mobile_panel_bg">
-                <div class="col-xs-6 mobile-activity-thumbnail" style="background-image:url('{{ $mbActivity->thumbnail }}')">
-                        <div class="home-mb-count">
+            <div class="act-mb-panel">
+                <div class="col-xs-12 act-mb-thumb" style="background-image:url('{{ $mbActivity->thumbnail }}')">
+                    <div class="act-mb-title-bg">
+                        <div class="act-mb-count">
                             <img src="/img/icons/eye-03.png">{{ $mbActivity->count }} 人
                         </div>
+                        <div class="act-mb-title word-indent-01">
+                             {{ $mbActivity->title }}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-6 mobile-activity-info">
-                    <div class="home-mb-activity-title word-indent-01">
-                         {{ $mbActivity->title }}
+                <div class="row" style="margin:0;">
+                    <div class="col-xs-5 act-mb-expert">
+                        <div class="act-mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                        <p>職人名字</p>
                     </div>
-                    <div class="word-indent-newact home-mb-info home-mb-calendar">
-                        <img src="/img/icons/mb-date.png">
-                            {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
-                    </div>
-                    <div class="home-mb-info word-indent-newact">
-                        <img src="/img/icons/mb-location.png">
-                        {{ $mbActivity->locat_name . $mbActivity->location }}
-                    </div>
-                    <div class="home-mb-info">
-                        <img src="/img/icons/mb-price.png">
-                        {{ $mbActivity->price }} 元
-                    </div>
-                    <div class="home-mb-info">
-                        <img src="/img/icons/mb-category.png">
-                        {{ $mbActivity->cat_name }}
+                    <div class="col-xs-7 act-mb-text">
+                        <div class=" act-mb-info word-indent-newact">
+                            <img src="/img/icons/mb-date.png">
+                                {{--*/ $weekday=['日', '一', '二', '三', '四', '五', '六'][date('w', strtotime($mbActivity->date))]; echo preg_replace("/\d{4}-(.*)\s(.*):(.*)/", "$1 ( $weekday )", $mbActivity->date) /*--}}
+                        </div>
+                        <div class="act-mb-info word-indent-newact">
+                            <img src="/img/icons/mb-location.png">
+                            {{ $mbActivity->locat_name . $mbActivity->location }}
+                        </div>
+                        <div class="act-mb-info">
+                            <img src="/img/icons/mb-price.png">
+                            {{ $mbActivity->price }} 元
+                        </div>
+                        <div class="act-mb-info">
+                            <img src="/img/icons/mb-category.png">
+                            {{ $mbActivity->cat_name }}
+                        </div>
                     </div>
                 </div>
             </div>
