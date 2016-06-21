@@ -253,7 +253,7 @@ class MainController extends controller
                               'activities.description',       'activities.counter as count',    'activities.min_price as price',
                               'activities.location',          'categories.name as locat_name',  'activities.activity_start as date',
                               'activities.hoster_id',         'users.nick as orginizer',        'users.name',  'users.avatar',
-                              'activities.activity_end as date_end', 'cat.name as cat_name',
+                              'activities.activity_end as date_end', 'cat.name as cat_name',    'users.nick',
                           ))
                           ->where('activities.activity_end', '>=', date('Y-m-d'))
                           ->orderBy('activities.activity_start', 'asc')
