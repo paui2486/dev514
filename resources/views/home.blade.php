@@ -107,63 +107,23 @@
                 <div class="mobile-recom-blue"></div>
             </div>
         </div>
-    
+
         <p class="home-mb-title">▼ 熱門職人 ▼</p>
         <div class="row mobile-expert">
-            <a href="#">
+            @foreach( $home->hotExpert as $expert )
+            <a href="/member/{{ $expert->id }}">
                 <div class="mobile-expert-panel">
-                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                    <div class="mb-expert-thumb" style="background-image:url('{{ $expert->avatar }}')"></div>
                     <div class="mb-expert-text">
-                        <p>職人姓名</p>
+                        <p>{{ ($expert->content['name'])? $expert->content['name'] : $expert->name }}</p>
                         <img src="/img/pics/yellow-stars.png">
                         <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
-                            <span class="mb-expert-tag">職人tag</span>
-                            <span class="mb-expert-tag">職人tag</span>
+                            <span class="mb-expert-tag">{{ ($expert->content['experience'] == '' )? implode(',', $expert->content['capacity']) : $expert->content['experience'] }}</span>
                         </p>
                     </div>
                 </div>
             </a>
-            <a href="#">
-                <div class="mobile-expert-panel">
-                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-                    <div class="mb-expert-text">
-                        <p>職人姓名</p>
-                        <img src="/img/pics/yellow-stars.png">
-                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
-                            <span class="mb-expert-tag">米其林三星推薦</span>
-                            <span class="mb-expert-tag">世界調酒比賽冠軍</span>
-                            <span class="mb-expert-tag">職人tag123123123123123</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="mobile-expert-panel">
-                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-                    <div class="mb-expert-text">
-                        <p>職人姓名</p>
-                        <img src="/img/pics/yellow-stars.png">
-                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
-                            <span class="mb-expert-tag">米其林三星推薦</span>
-                            <span class="mb-expert-tag">世界調酒比賽冠軍</span>
-                            <span class="mb-expert-tag">職人tag123123123123123</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="mobile-expert-panel">
-                    <div class="mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-                    <div class="mb-expert-text">
-                        <p>職人姓名</p>
-                        <img src="/img/pics/yellow-stars.png">
-                        <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
-                            <span class="mb-expert-tag">米其林三星推薦</span>
-                            <span class="mb-expert-tag">職人tag123123123123123</span>
-                        </p>
-                    </div>
-                </div>
-            </a>
+            @endforeach
         </div>
         <p class="home-mb-title">▼ 熱門活動 ▼</p>
         <div class="mobile-activity">
@@ -182,7 +142,7 @@
                 </div>
                 <div class="row" style="margin:0;">
                     <div class="col-xs-5 act-mb-expert">
-                        <div class="act-mb-expert-thumb" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
+                        <div class="act-mb-expert-thumb" style="background-image:url('{{ $mbActivity->avatar }}')"></div>
                         <p>職人名字</p>
                     </div>
                     <div class="col-xs-7 act-mb-text">
@@ -319,55 +279,27 @@
                 <a href="blog"> 閱讀更多 </a>
             </div>
         </div>
-        
         <div class="hot-expert">
             <div class="row home-title">
                 <img src="/img/pics/hot-profession-02.png">
             </div>
             <div class="row hot-expert-content">
                 <div id="expert-container" class="ca-container">
-				<div class="ca-wrapper">
-				<div class="ca-wrapper">
-					<div class="ca-item ca-item-1">
-                        <a href="#">
-						<div class="ca-item-main">
-							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-							<h3>職人姓名</h3>
-                            <p class="ca-tag">特殊經歷tag</p>
-							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
-						</div>
-                        </a>
-					</div>
-					<div class="ca-item ca-item-1">
-                        <a href="#">
-						<div class="ca-item-main">
-							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-							<h3>職人姓名</h3>
-                            <p class="ca-tag">特殊經歷tag</p>
-							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
-						</div>
-                        </a>
-					</div><div class="ca-item ca-item-1">
-                        <a href="#">
-						<div class="ca-item-main">
-							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-							<h3>職人姓名</h3>
-                            <p class="ca-tag">特殊經歷tag</p>
-							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
-						</div>
-                        </a>
-					</div><div class="ca-item ca-item-1">
-                        <a href="#">
-						<div class="ca-item-main">
-							<div class="ca-image" style="background-image:url('/img/pics/_MG_5609.jpg')"></div>
-							<h3>職人姓名</h3>
-                            <p class="ca-tag">特殊經歷tag</p>
-							<div class="ca-introduce">職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹職人介紹介紹介紹介紹</div>
-						</div>
-                        </a>
-					</div>
-					</div>
-				</div>
+            				<div class="ca-wrapper">
+                        @foreach( $home->hotExpert as $hotExpert )
+                        <div class="ca-item ca-item-1">
+                            <a href="/member/{{ $hotExpert->id }}">
+                                <div class="ca-item-main">
+                                    <div class="ca-image" style="background-image:url('{{ $hotExpert->avatar }}')"></div>
+                                    <h3>{{ ($hotExpert->content['name'])? $hotExpert->content['name'] : $hotExpert->name }}</h3>
+                                    <p class="ca-tag">{{ ($hotExpert->content['experience'] == '' )? implode(',', $hotExpert->content['capacity']) : $hotExpert->content['experience'] }}</p>
+                                    <div class="ca-introduce">{!! ($hotExpert->content['description'] == '')? $hotExpert->description : $hotExpert->content['description'] !!}</div>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+            				</div>
+                </div>
             </div>
         </div>
         <div class="new-activity">
@@ -397,14 +329,14 @@
                                 <img src="/img/icons/eye-03.png">{{ $newActivity->count }} 人
                             </div>
                             <!-- HTML to write -->
-                            
+
                                 <div class="new-activity-orginizer">
-                                     由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦 
+                                     由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦
                                 </div>
-                           
+
                             <div style="padding-bottom:10px;">
                                 <a href="{{ '/member/'. $newActivity->hoster_id }}">
-                                    <div class="new-activity-expert" style="background-image:url('/img/pics/_MG_5609.jpg')">
+                                    <div class="new-activity-expert" style="background-image:url('{{ $newActivity->avatar }}')">
                                     </div>
                                 </a>
                                 <div class="new-activity-date">
@@ -473,7 +405,7 @@
                         </div>
                         <div class="inter-panel-info">
                             <a href="{{ '/member/'. $newActivity->hoster_id }}">
-                                <div class="new-activity-expert" style="background-image:url('/img/pics/_MG_5609.jpg')">
+                                <div class="new-activity-expert" style="background-image:url('{{ $newActivity->avatar }}')">
                                 </div>
                             </a>
                             <div class="new-activity-title word-indent-01">
@@ -482,7 +414,7 @@
                                 </a>
                             </div>
                             <div class="new-activity-orginizer">
-                                 由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦 
+                                 由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">

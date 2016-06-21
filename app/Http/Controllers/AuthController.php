@@ -154,6 +154,7 @@ class AuthController extends Controller
 
             // hidden
             default:
+                $invisible = array();
                 break;
         }
 
