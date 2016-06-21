@@ -296,10 +296,10 @@
                                 <div class="ca-item-main">
                                     <div class="ca-image" style="background-image:url('{{ $hotExpert->avatar }}')"></div>
                                     <h3>{{ ($hotExpert->content['name'])? $hotExpert->content['name'] : $hotExpert->name }}</h3>
-                                    @if($expert->content['experience'] == '' && implode(',', $expert->content['capacity']) != '')
-                                        <p class="ca-tag">{{ implode(',', $expert->content['capacity']) }}</p>
-                                    @elseif ($expert->content['experience'] != '')
-                                        <p class="ca-tag">{{ $expert->content['experience'] }}</p>
+                                    @if($hotExpert->content['experience'] == '' && implode(',', $hotExpert->content['capacity']) != '')
+                                        <p class="ca-tag">{{ implode(',', $hotExpert->content['capacity']) }}</p>
+                                    @elseif ($hotExpert->content['experience'] != '')
+                                        <p class="ca-tag">{{ $hotExpert->content['experience'] }}</p>
                                     @endif
                                     <div class="ca-introduce">{!! ($hotExpert->content['description'] == '')? $hotExpert->description : $hotExpert->content['description'] !!}</div>
                                 </div>
