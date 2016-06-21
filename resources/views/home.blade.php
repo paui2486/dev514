@@ -119,7 +119,9 @@
                         <img src="/img/pics/yellow-stars.png">
                         <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
                             @if($expert->content['experience'] == '' && implode(',', $expert->content['capacity']) != '')
-                                <span class="mb-expert-tag">{{ implode(',', $expert->content['capacity']) }}</span>
+                                @foreach($expert->content['capacity'] as $capacity)
+                                <span class="mb-expert-tag">{{ $capacity }}</span>
+                                @endforeach
                             @elseif ($expert->content['experience'] != '')
                                 <span class="mb-expert-tag">{{ $expert->content['experience'] }}</span>
                             @endif
@@ -297,7 +299,9 @@
                                     <div class="ca-image" style="background-image:url('{{ $hotExpert->avatar }}')"></div>
                                     <h3>{{ ($hotExpert->content['name'])? $hotExpert->content['name'] : $hotExpert->name }}</h3>
                                     @if($hotExpert->content['experience'] == '' && implode(',', $hotExpert->content['capacity']) != '')
-                                        <p class="ca-tag">{{ implode(',', $hotExpert->content['capacity']) }}</p>
+                                        @foreach($hotExpert->content['capacity'] as $capacity)
+                                        <p class="ca-tag">{{ $capacity }}</p>
+                                        @endforeach
                                     @elseif ($hotExpert->content['experience'] != '')
                                         <p class="ca-tag">{{ $hotExpert->content['experience'] }}</p>
                                     @endif
