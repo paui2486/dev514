@@ -118,7 +118,11 @@
                         <p>{{ ($expert->content['name'])? $expert->content['name'] : $expert->name }}</p>
                         <img src="/img/pics/yellow-stars.png">
                         <p class="word-indent-02" style="word-break: break-all;color:#b3b3b3;">
-                            <span class="mb-expert-tag">{{ ($expert->content['experience'] == '' )? implode(',', $expert->content['capacity']) : $expert->content['experience'] }}</span>
+                            @if($expert->content['experience'] == '' && implode(',', $expert->content['capacity']) != '')
+                                <span class="mb-expert-tag">{{ implode(',', $expert->content['capacity']) }}</span>
+                            @elseif ($expert->content['experience'] != '')
+                                <span class="mb-expert-tag">{{ $expert->content['experience'] }}</span>
+                            @endif
                         </p>
                     </div>
                 </div>
@@ -143,7 +147,7 @@
                 <div class="row" style="margin:0;">
                     <div class="col-xs-5 act-mb-expert">
                         <div class="act-mb-expert-thumb" style="background-image:url('{{ $mbActivity->avatar }}')"></div>
-                        <p>職人名字</p>
+                        <p>{{ $mbActivity->nick }}</p>
                     </div>
                     <div class="col-xs-7 act-mb-text">
                         <div class=" act-mb-info word-indent-newact">
@@ -292,7 +296,11 @@
                                 <div class="ca-item-main">
                                     <div class="ca-image" style="background-image:url('{{ $hotExpert->avatar }}')"></div>
                                     <h3>{{ ($hotExpert->content['name'])? $hotExpert->content['name'] : $hotExpert->name }}</h3>
-                                    <p class="ca-tag">{{ ($hotExpert->content['experience'] == '' )? implode(',', $hotExpert->content['capacity']) : $hotExpert->content['experience'] }}</p>
+                                    @if($expert->content['experience'] == '' && implode(',', $expert->content['capacity']) != '')
+                                        <p class="ca-tag">{{ implode(',', $expert->content['capacity']) }}</p>
+                                    @elseif ($expert->content['experience'] != '')
+                                        <p class="ca-tag">{{ $expert->content['experience'] }}</p>
+                                    @endif
                                     <div class="ca-introduce">{!! ($hotExpert->content['description'] == '')? $hotExpert->description : $hotExpert->content['description'] !!}</div>
                                 </div>
                             </a>
@@ -331,7 +339,7 @@
                             <!-- HTML to write -->
 
                                 <div class="new-activity-orginizer">
-                                     由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦
+                                     由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ ($newActivity->orginizer)? $newActivity->orginizer: $newActivity->name }}</span> </a> 舉辦
                                 </div>
 
                             <div style="padding-bottom:10px;">
@@ -414,7 +422,7 @@
                                 </a>
                             </div>
                             <div class="new-activity-orginizer">
-                                 由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ $newActivity->orginizer }}</span> </a> 舉辦
+                                 由 <a href="{{ '/member/'. $newActivity->hoster_id }}"><span>{{ ($newActivity->orginizer)? $newActivity->orginizer : $newActivity->name }}</span> </a> 舉辦
                             </div>
                             <div class="new-activity-date">
                                 <img src="img/pics/calendar-icon-02.png">

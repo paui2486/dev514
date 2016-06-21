@@ -135,7 +135,7 @@ class MainController extends controller
                           ))
                         ->groupBy('users.id')
                         ->orderByRaw("RAND()")
-                        ->take(7)
+                        ->take(6)
                         ->get();
 
         foreach ($experts as $expert) {
