@@ -747,6 +747,11 @@ li.collapse-blog-category {
     box-shadow: -1px -1px 5px #ccc;
 }
 
+.home-exper-tag {
+    height: 34px;
+    overflow: hidden;
+}
+
 .new-activity-orginizer img {
     height: 18px;
 }

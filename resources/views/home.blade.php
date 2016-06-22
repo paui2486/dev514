@@ -297,15 +297,19 @@
                             <a href="/member/{{ $hotExpert->id }}">
                                 <div class="ca-item-main">
                                     <div class="ca-image" style="background-image:url('{{ $hotExpert->avatar }}')"></div>
-                                    <h3>{{ ($hotExpert->content['name'])? $hotExpert->content['name'] : $hotExpert->name }}</h3>
-                                    @if($hotExpert->content['experience'] == '' && implode(',', $hotExpert->content['capacity']) != '')
-                                        @foreach($hotExpert->content['capacity'] as $capacity)
-                                        <p class="ca-tag">{{ $capacity }}</p>
-                                        @endforeach
-                                    @elseif ($hotExpert->content['experience'] != '')
-                                        <p class="ca-tag">{{ $hotExpert->content['experience'] }}</p>
-                                    @endif
-                                    <div class="ca-introduce">{!! ($hotExpert->content['description'] == '')? $hotExpert->description : $hotExpert->content['description'] !!}</div>
+                                    <div class="ca-text">
+                                        <h3>{{ ($hotExpert->content['name'])? $hotExpert->content['name'] : $hotExpert->name }}</h3>
+                                        <div class="home-exper-tag">
+                                        @if($hotExpert->content['experience'] == '' && implode(',', $hotExpert->content['capacity']) != '')
+                                            @foreach($hotExpert->content['capacity'] as $capacity)
+                                            <p class="ca-tag">{{ $capacity }}</p>
+                                            @endforeach
+                                        @elseif ($hotExpert->content['experience'] != '')
+                                            <p class="ca-tag">{{ $hotExpert->content['experience'] }}</p>
+                                        @endif
+                                        </div>
+                                        <div class="ca-introduce">{!! ($hotExpert->content['description'] == '')? $hotExpert->description : $hotExpert->content['description'] !!}</div>
+                                    </div>
                                 </div>
                             </a>
                         </div>
