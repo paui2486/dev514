@@ -247,6 +247,7 @@
     
     .act-mb-text {
         padding: 5px 10px;
+        padding-bottom: 0;
     }
 
     .act-mb-info img {
@@ -267,6 +268,7 @@
     .act-mb-expert p {
         text-align: center;
         padding-top: 5px;
+        margin: 0;
     }
     
     .act-mb-expert-thumb {
@@ -275,6 +277,7 @@
         width: 80px;
         border-radius: 100px;
         margin: auto;
+        border: 1px solid #ccc;
     }
     
     .mobile-recommend {
@@ -337,16 +340,17 @@
     }
     
     .mobile-expert-panel {
-        padding: 5px 0;
         width: 100%;
         display: inline-block;
+        background: #fff;
+        box-shadow: 1px 1px 10px #ccc;
+        margin: 5px 0;
     }
     
     .mb-expert-text {
         text-align: center;
         background: #fff;
         padding: 8px 5px;
-        border: 1px solid #ccc;
     }
     
     .mb-expert-text p {
