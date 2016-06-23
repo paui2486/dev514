@@ -35,7 +35,7 @@
                                       <span class="fa fa-refresh"></span>
                                   </span>
                               </button>
-                              <p style="color:#ff5a5f;">( 建議以人物為主題，尺寸 200 x 200 像素 )</p>
+                              <p style="color:#ff5a5f;margin:10px 0;">( 建議以人物為主題，尺寸 200 x 200 像素 )</p>
                           </div>
                           <input class="form-control " type="hidden" name="dataX_avatar"  id="dataX_avatar"  value="" />
                           <input class="form-control " type="hidden" name="dataY_avatar"  id="dataY_avatar"  value="" />
@@ -80,11 +80,11 @@
             </div>
             <div class="expert-reg-title">填寫職人聯絡資訊</div>
             <div class="form-group">
-                <label class="col-md-12 col-xs-12 control-label expert-reg-contact-title">聯絡方式 <span>* ( 請至少選填一項 )</span>
+                <label class="col-xs-12 control-label expert-reg-contact-title">聯絡方式 <span>* ( 請至少選填一項 )</span>
                 </label>
-                <div class="col-md-12 col-xs-12 exper-contact-content">
+                <div class="col-xs-12 expert-reg-contact-content">
                     <div class="expert-reg-contact">
-                        <div class="col-md-9">
+                        <div class="col-md-9 contact-display-forward">
                             <p>聯絡電話</p>
                             <input type="number" class="form-control expert-reg-contact-input" name="phone" value="{{ Auth::user()->phone }}" placeholder="(02)2345-6789">
                         </div>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="expert-reg-contact">
-                        <div class="col-md-9">
+                        <div class="col-md-9 contact-display-forward">
                             <p>手機號碼</p>
                             <input type="number" class="form-control expert-reg-contact-input" name="mobile" value="{{ Auth::user()->phone }}" placeholder="0912-345-678">
                         </div>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="expert-reg-contact">
-                        <div class="col-md-9">
+                        <div class="col-md-9 contact-display-forward">
                             <p>E-mail</p>
                             <input type="email" class="form-control expert-reg-contact-input" name="email" value="{{ Auth::user()->email }}" placeholder="service@514.com.tw">
                         </div>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="expert-reg-contact">
-                        <div class="col-md-9">
+                        <div class="col-md-9 contact-display-forward">
                             <p>Line ID</p>
                             <input type="text" class="form-control expert-reg-contact-input" name="line" value="" placeholder="請輸入您的line ID">
                         </div>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="expert-reg-contact">
-                        <div class="col-md-9">
+                        <div class="col-md-9 contact-display-forward">
                             <p>聯絡地址</p>
                             <input type="text" class="form-control expert-reg-contact-input" name="address" value="{{ Auth::user()->address }}" placeholder="請輸入您的聯絡地址">
                         </div>
@@ -144,19 +144,20 @@
                 <label class="col-md-2 col-xs-12 control-label">
                     外部連結
                 </label>
-                <div class="col-md-10 col-xs-12">
-                     <input type="text" class="form-control" name='links[]' placeholder="請輸入外部連結網址（例：個人部落格網址）">
+                <div class="col-md-10 col-xs-12" style="padding-left:0">
+                     <input type="text" class="form-control" name='links[]' placeholder="請輸入外部連結網址" style="width: 85%;">
                     <div id="showBlock" class="row showBlock">
                     </div>
                     <input class="btn-white btn-file " type="button" id="btn" value="新增連結" />
                 </div>
             </div>
         </div>
-        <div class="expert-reg-title">填寫帳戶資料</div>
-        <div class="expert-reg-text">
-            <p>請填寫以下相關資料，以便日後您舉辦活動或使用金流服務。</p>
-            <label for="skip"><input type="checkbox" name="skip" id="skip"><span>先略過，日後再填寫</span></label>
-        </div>
+        <div class="expert-reg-account">
+            <div class="expert-reg-title">填寫帳戶資料</div>
+            <div class="expert-reg-text">
+                <p>請填寫以下相關資料，以便日後您舉辦活動或使用金流服務。</p>
+                <label for="skip"><input type="checkbox" name="skip" id="skip"><span>先略過，日後再填寫</span></label>
+            </div>
         <div class="row expert-reg-Tab">
             <ul class="row Tabs" style="margin:0;">
                 <li><a href="#Etab-1">以個人身份申請</a></li>
@@ -289,6 +290,7 @@
 
                 </div>
             </div>
+        </div>
         </div>
         {{ Form::hidden('invisible', 1) }}
         <div class="expert-reg-confirm">

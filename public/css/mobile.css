@@ -62,7 +62,8 @@
     .blog-banner-auth,
     .online-server,
     .expert-eg-image > div,
-    .Member-button{
+    .Member-button,
+    .expert-reg-eg{
         display: none!important;
     }
 
@@ -982,10 +983,6 @@
         text-align: center;
     }
     
-    .fileupload .thumbnail {
-        margin: auto;
-    }
-    
     .expert-contact-title h5 {
         color: #ff5a5f;
         font-style: italic;
@@ -1059,14 +1056,27 @@
         padding: 10px 20px;
     }
     
-    
+/*-------------職人註冊頁------------*/
 
+    .expert-reg-contact > div > p {
+        width: 100%;
+        text-align: left;
+    }
     
+    .contact-display-forward input {
+        width: 100%;
+    }
     
+    .expert-reg-tab-content {
+        padding: 10px 20px;
+    }
     
+    ul.Tabs li a {
+        padding: 0;
+    }
     
-    
-    
-    
-    
+    .fileupload .thumbnail {
+        height: auto!important;
+        margin: 10px 0;
+    }
 }

@@ -2899,7 +2899,7 @@ ul.Tabs li {
     margin-right: 10px;
     border-radius: 5px 5px 0 0;
     background: #f2f2f2;
-    box-shadow: 2px -3px 8px #ccc;
+    box-shadow: 0px -2px 10px #ccc;
 }
 
 ul.Tabs li a {
@@ -2927,7 +2927,7 @@ ul.Tabs li a :hover {
 	border-top: none;
 	background: #fff;
     margin-top: -2px;
-    box-shadow: 1px -1px 15px #ccc;
+    box-shadow: 1px -2px 10px #ccc;
 }
 
 .Member-content {
@@ -3096,10 +3096,11 @@ ul.Tabs li a :hover {
 }
 
 .exper-contact-content {
-    background: #f3f3f3;
     border-radius: 10px;
     padding: 15px 10px;
-    text-align: center;
+    border: 1px solid #ccc;
+    margin: 15px auto;
+    width: 90%;
 }
 
 
@@ -3127,12 +3128,11 @@ ul.Tabs li a :hover {
 
 .btn-white {
     font-size: 14px;
-    margin: 5px 0;
+    margin: 0;
     padding: 5px 12px;
     border-radius: 5px;
     background: #00bcd4;
     color: #fff;
-
 }
 
 .new-url {
@@ -3246,7 +3246,8 @@ ul.Tabs li a :hover {
     margin: auto;
 }
 
-.expert-regpage-content {
+.expert-regpage-content,
+.expert-reg-account{
     box-shadow: 1px 1px 10px #ccc;
     padding: 30px;
     background-color: #fff;
@@ -3267,21 +3268,98 @@ ul.Tabs li a :hover {
 }
 
 .expert-reg-eg img {
-    width: 300px;
-    height: 200px;
+    width: 216px;
+    height: 136px;
 }
 
 .expert-reg-eg p {
-    font-size: 14px;
+    font-size: 13px;
     padding: 0;
     margin: 5px 0;
 }
 
 .expert-reg-uploading {
     text-align: center;
+    margin: 10px 0;
 }
 
 .form-group {
     margin:10px  0;
 }
 
+.expert-reg-contact > div > p {
+    float: left;
+    width: 20%;
+}
+
+.contact-display-forward input {
+    width: 80%;
+}
+
+.contact-display-forward{
+    margin: 5px 0;
+}
+
+.expert-reg-contact-content {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.expert-reg-account {
+    background-color: #fff;
+    padding: 20px 30px;
+    margin: 20px 0;
+}
+
+.expert-reg-text {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin: 10px;
+}
+
+.expert-reg-text > p {
+    margin: 20px 0;
+}
+
+.expert-reg-text input {
+    display: none;
+}
+
+.expert-reg-text > label > span {
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 5px;
+    color: #00bcd4;
+    cursor: pointer;
+    padding: 5px 10px ;
+    border: 1px solid #00bcd4;
+}
+
+.expert-reg-text > label > span:hover {
+    background-color: #00bcd4;
+    color: #fff;
+}
+
+.expert-reg-tab-content {
+    padding: 40px;
+    box-shadow: 1px 1px 10px #ccc;
+}
+
+.expert-reg-Tab {
+    margin: 0;
+}
+
+.expert-reg-tab-row {
+    margin: 10px 0;
+}
+
+.expert-reg-confirm {
+    text-align: center;
+}
+
+.expert-reg-confirm button {
+    font-size: 16px;
+    color: #fff;
+    background-color: #00bcd4;
+}
