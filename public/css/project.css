@@ -3235,4 +3235,53 @@ ul.Tabs li a :hover {
 
 }
 
+/*--------------職人註冊頁---------------*/
+.expert-reg-container {
+    background-image: url(/img/pics/bg-wood.jpg);
+    padding: 30px 0;
+}
+
+.expert-reg-container > form {
+    width: 80%;
+    margin: auto;
+}
+
+.expert-regpage-content {
+    box-shadow: 1px 1px 10px #ccc;
+    padding: 30px;
+    background-color: #fff;
+}
+
+.expert-reg-title {
+    padding: 10px 20px;
+    color: #00bcd4;
+    font-size: 16px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    background: rgba(122,233,233,0.3);
+}
+
+.expert-reg-form {
+    padding: 20px 10px;
+    padding-bottom: 0;
+}
+
+.expert-reg-eg img {
+    width: 300px;
+    height: 200px;
+}
+
+.expert-reg-eg p {
+    font-size: 14px;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.expert-reg-uploading {
+    text-align: center;
+}
+
+.form-group {
+    margin:10px  0;
+}
 

@@ -8,23 +8,24 @@
 @endsection
 
 @section('content')
-<div class="Expert-container">
-    <div class="expert-container-title">成為514職人</div>
+<div class="expert-reg-container">
+
     <form class="form-horizontal" enctype="multipart/form-data"
             method="post" autocomplete="off" role="form"
             action="{{ Request::url() }}">
         {!! csrf_field() !!}
-        <div class="expert-content">
-            <div class="form-group">
+        <div class="expert-regpage-content">
+            <div class="expert-reg-title">填寫職人基本資料</div>
+            <div class="expert-reg-form form-group">
                   <label class="control-label col-md-2" for="avatar">
                        個人頭像<span>*</span>
                   </label>
                   <div class="col-sm-10">
-                      <div class="col-md-4 fileupload fileupload-new" data-provides="fileupload">
+                      <div class="col-md-6 fileupload fileupload-new" data-provides="fileupload">
                           <div class="img-preview preview-lg" style="max-width: 500px; max-height: 300px;">
                               <img id="avatar" width="100%" src="{{ Auth::user()->avatar }}" alt="" />
                           </div>
-                          <div class="expert-uploadimg">
+                          <div class="expert-reg-uploading">
                               <span class="btn btn-white btn-file">
                                   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> 上傳圖片 </span>
                                   <input class="file input"  name="avatar" type="file" accept="image/*" value="{{ Auth::user()->avatar }}"/>
@@ -34,7 +35,7 @@
                                       <span class="fa fa-refresh"></span>
                                   </span>
                               </button>
-                              <p style="color:#ff5a5f;">(建議以人物為主題，尺寸 200 x 200 像素)</p>
+                              <p style="color:#ff5a5f;">( 建議以人物為主題，尺寸 200 x 200 像素 )</p>
                           </div>
                           <input class="form-control " type="hidden" name="dataX_avatar"  id="dataX_avatar"  value="" />
                           <input class="form-control " type="hidden" name="dataY_avatar"  id="dataY_avatar"  value="" />
@@ -44,9 +45,7 @@
                           <input class="form-control " type="hidden" name="dataSX_avatar" id="dataSX_avatar" value="" />
                           <input class="form-control " type="hidden" name="dataSY_avatar" id="dataSY_avatar" value="" />
                       </div>
-                      <div class="expert-eg-image col-md-8">
-                          <p>1. 建議上傳與您的專業相關之個人照片 。
-                          <br>2. 背景勿過於雜亂，光線充足為佳。</p>
+                      <div class="expert-reg-eg col-md-6">
                           <div>
                               <img src="/img/pics/correct-example.jpg">
                               <p>O 建議以您的專長為主題，展現專業度</p>
@@ -69,7 +68,7 @@
                 <label class="col-md-2 control-label">特殊經歷</label>
                 <div class="col-md-10">
                     <input class="form-control" type="text" name="experience" id="experience"
-                      placeholder="例：米其林三星推薦、世界調酒師大賽冠軍" value=""  data-role="tagsinput"/>
+                      placeholder="請輸入特殊經歷標籤 （ 例：米其林三星推薦 ），輸入完文字後按enter鍵" value=""  data-role="tagsinput"/>
                 </div>
             </div>
             <div class="form-group">
@@ -79,15 +78,15 @@
                     </textarea>
                 </div>
             </div>
+            <div class="expert-reg-title">填寫職人聯絡資訊</div>
             <div class="form-group">
-                <label class="col-md-2 col-xs-12 control-label expert-contact-title">聯絡方式 <span>*</span>
-                    <h5>( 請至少選填一項 )</h5>
+                <label class="col-md-12 col-xs-12 control-label expert-reg-contact-title">聯絡方式 <span>* ( 請至少選填一項 )</span>
                 </label>
-                <div class="col-md-10 col-xs-12 exper-contact-content">
-                    <div class="expert-contact">
+                <div class="col-md-12 col-xs-12 exper-contact-content">
+                    <div class="expert-reg-contact">
                         <div class="col-md-9">
                             <p>聯絡電話</p>
-                            <input type="number" class="form-control expert-contact-input" name="phone" value="{{ Auth::user()->phone }}" placeholder="(02)2345-6789">
+                            <input type="number" class="form-control expert-reg-contact-input" name="phone" value="{{ Auth::user()->phone }}" placeholder="(02)2345-6789">
                         </div>
                         <div class="col-md-3 contact-display">
                             <span>是否公開</span>
@@ -95,10 +94,10 @@
                             <input type="radio" name="phone_s" value=0> 否
                         </div>
                     </div>
-                    <div class="expert-contact">
+                    <div class="expert-reg-contact">
                         <div class="col-md-9">
                             <p>手機號碼</p>
-                            <input type="number" class="form-control expert-contact-input" name="mobile" value="{{ Auth::user()->phone }}" placeholder="0912-345-678">
+                            <input type="number" class="form-control expert-reg-contact-input" name="mobile" value="{{ Auth::user()->phone }}" placeholder="0912-345-678">
                         </div>
                         <div class="col-md-3 contact-display">
                             <span>是否公開</span>
@@ -106,10 +105,10 @@
                             <input type="radio" name="mobile_s" value=0> 否
                         </div>
                     </div>
-                    <div class="expert-contact">
+                    <div class="expert-reg-contact">
                         <div class="col-md-9">
                             <p>E-mail</p>
-                            <input type="email" class="form-control expert-contact-input" name="email" value="{{ Auth::user()->email }}" placeholder="service@514.com.tw">
+                            <input type="email" class="form-control expert-reg-contact-input" name="email" value="{{ Auth::user()->email }}" placeholder="service@514.com.tw">
                         </div>
                         <div class="col-md-3 contact-display">
                             <span>是否公開</span>
@@ -117,10 +116,10 @@
                             <input type="radio" name="email_s" value=0> 否
                         </div>
                     </div>
-                    <div class="expert-contact">
+                    <div class="expert-reg-contact">
                         <div class="col-md-9">
                             <p>Line ID</p>
-                            <input type="text" class="form-control expert-contact-input" name="line" value="" placeholder="請輸入您的line ID">
+                            <input type="text" class="form-control expert-reg-contact-input" name="line" value="" placeholder="請輸入您的line ID">
                         </div>
                         <div class="col-md-3 contact-display">
                             <span>是否公開</span>
@@ -128,10 +127,10 @@
                             <input type="radio" name="line_s" value=0> 否
                         </div>
                     </div>
-                    <div class="expert-contact">
+                    <div class="expert-reg-contact">
                         <div class="col-md-9">
                             <p>聯絡地址</p>
-                            <input type="text" class="form-control expert-contact-input" name="address" value="{{ Auth::user()->address }}" placeholder="請輸入您的聯絡地址">
+                            <input type="text" class="form-control expert-reg-contact-input" name="address" value="{{ Auth::user()->address }}" placeholder="請輸入您的聯絡地址">
                         </div>
                         <div class="col-md-3 contact-display">
                             <span>是否公開</span>
@@ -153,37 +152,38 @@
                 </div>
             </div>
         </div>
-        <div class="expert-text">
+        <div class="expert-reg-title">填寫帳戶資料</div>
+        <div class="expert-reg-text">
             <p>請填寫以下相關資料，以便日後您舉辦活動或使用金流服務。</p>
             <label for="skip"><input type="checkbox" name="skip" id="skip"><span>先略過，日後再填寫</span></label>
         </div>
-        <div class="row expert-Tab">
+        <div class="row expert-reg-Tab">
             <ul class="row Tabs" style="margin:0;">
                 <li><a href="#Etab-1">以個人身份申請</a></li>
                 <li><a href="#Etab-2">以公司行號申請</a></li>
             </ul>
             <div class="row Tab-Container">
-                <div class="expert-tab-content" id="Etab-1">
-                    <div class="row expert-tab-row">
+                <div class="expert-reg-tab-content" id="Etab-1">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">申請人姓名<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="reg_name" value="{{ Auth::user()->name }}" placeholder="請輸入您的本名">
                         </div>
                     </div>
-                    <div class="row expert-tab-row">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">申請人電話<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="reg_phone" value"{{ Auth::user()->phone }}">
                         </div>
                     </div>
-                    <div class="row expert-tab-row">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">通訊地址<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="reg_address" value="{{ Auth::user()->address }}">
                         </div>
                     </div>
-                    <div class="row expert-tab-bottom">
-                        <div class="col-md-6 expert-tab-row">
+                    <div class="row expert-reg-tab-bottom">
+                        <div class="col-md-6 expert-reg-tab-row">
                             <label class="control-label">身份證影本<span>*</span></label>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <div class="fileupload-new thumbnail" style="width: 100%; height: 240px;">
@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 expert-tab-row">
+                        <div class="col-md-6 expert-reg-tab-row">
                             <label class="control-label">存摺影本（匯款用）<span>*</span></label>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <div class="fileupload-new thumbnail" style="width: 100%; height: 240px;">
@@ -219,39 +219,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="expert-tab-content" id="Etab-2">
-                    <div class="row expert-tab-row">
+                <div class="expert-reg-tab-content" id="Etab-2">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">公司名稱<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" nane="company_name" value="{{ Auth::user()->nick }}" placeholder="">
                         </div>
                     </div>
-                    <div class="row expert-tab-row">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">公司統一編號<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="company_VAT">
                         </div>
                     </div>
-                    <div class="row expert-tab-row">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">公司地址<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="company_address" value="{{ Auth::user()->address }}">
                         </div>
                     </div>
-                    <div class="row expert-tab-row">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">聯絡人姓名<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="contact_name" value="{{ Auth::user()->name }}">
                         </div>
                     </div>
-                    <div class="row expert-tab-row">
+                    <div class="row expert-reg-tab-row">
                         <label class="col-md-2 control-label">聯絡人電話<span>*</span></label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="contact_phone" value="{{ Auth::user()->phone }}">
                         </div>
                     </div>
-                    <div class="row expert-tab-bottom">
-                        <div class="col-md-6 expert-tab-row">
+                    <div class="row expert-reg-tab-bottom">
+                        <div class="col-md-6 expert-reg-tab-row">
                             <label class="control-label">公司營業登記表影本<span>*</span></label>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <div class="fileupload-new thumbnail" style="width: 100%; height: 240px;">
@@ -268,7 +268,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 expert-tab-row">
+                        <div class="col-md-6 expert-reg-tab-row">
                             <label class="control-label">公司存摺影本（匯款用）<span>*</span></label>
                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                 <div class="fileupload-new thumbnail" style="width: 100%; height: 240px;">
@@ -291,7 +291,7 @@
             </div>
         </div>
         {{ Form::hidden('invisible', 1) }}
-        <div class="expert-confirm">
+        <div class="expert-reg-confirm">
             <button type="submit" class="btn btn-sm">
                 確認送出
             </button>
@@ -309,7 +309,7 @@
 $(function(){
     var _showTab  = 0;
     var invisible = 1;
-    $('.expert-Tab').each(function(){
+    $('.expert-reg-Tab').each(function(){
         var $tab = $(this);
         var $defaultLi = $('ul.Tabs li', $tab).eq(_showTab).addClass('Member-active');
         $($defaultLi.find('a').attr('href')).siblings().hide();
@@ -388,10 +388,10 @@ $(function(){
     $('#skip').click(function(){
        $skipvalue = $('#skip').prop('checked');
        if( $skipvalue ) {
-           $('.expert-Tab').hide('fast');
+           $('.expert-reg-Tab').hide('fast');
            $('input[name=invisible]').val(0);
        } else {
-           $('.expert-Tab').show('fast');
+           $('.expert-reg-Tab').show('fast');
            $('input[name=invisible]').val(invisible);
        }
     });
@@ -411,7 +411,7 @@ $(function(){
 
 //$(document).ready(function () {
 //    $('#skip').click(function(){
-//        $('.expert-Tab').hide();
+//        $('.expert-reg-Tab').hide();
 //    });
 //});
 
