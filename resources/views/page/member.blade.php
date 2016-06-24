@@ -85,11 +85,12 @@
             <div class="Member-content" id="Mtab-2" style="padding: 30px;">
                 <p style="color:#ccc;">尚無相關內容，敬請期待</p>
             </div>
+            @if(Auth::check())
             <div class="Member-content" id="Mtab-3">
                 <div class="Expert-container">
                 <form class="form-horizontal" enctype="multipart/form-data"
                         method="post" autocomplete="off" role="form"
-                        action="{{ Request::url() }}">
+                        action="/expert/register">
                     {!! csrf_field() !!}
                     <div class="expert-content">
                         <div class="form-group">
@@ -373,6 +374,7 @@
                 </form>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -389,11 +391,11 @@ $(function(){
 		var $tab = $(this);
         var _showTab = 0;
         var invisible = 1;
-	
+
 		var $defaultLi = $('ul.Tabs li', $tab).eq(_showTab).addClass('Member-active');
-		
+
         $($defaultLi.find('a').attr('href')).siblings().hide();
-        
+
 		$('ul.Tabs li', $tab).click(function() {
 			var $this = $(this),
 				_clickTab = $this.find('a').attr('href');
@@ -404,14 +406,14 @@ $(function(){
 			this.blur();
 		});
 	});
-    
+
     $('.expert-Tab').each(function(){
 		var $tab = $(this);
         var _showTab = 0;
         var invisible = 1;
-	
+
 		var $subDefaultLi = $('ul.subTabs li', $tab).eq(_showTab).addClass('Member-active');
-		
+
         $($subDefaultLi.find('a').attr('href')).siblings().hide();
 
 		$('ul.subTabs li', $tab).click(function() {
