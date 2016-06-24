@@ -177,6 +177,11 @@ class MainController extends controller
                           ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
                           ->lists('price');
 
+            $expert = DB::table('users_extend')->where('user_id', $activity->hoster_id)->lists('value','attribute');
+            if (!empty($expert)) {
+                  $activity->nick    = $expert['_ExpName'];
+                  $activity->avatar  = $expert['_ExpAvatar'];
+            }
             // $activity->price = min($tickets_price);
         }
         return $newActivity;
@@ -222,7 +227,11 @@ class MainController extends controller
                                   ->where('act_tickets.sale_start', '<=', date('Y-m-d H:i:s'))
                                   ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
                                   ->lists('price');
-
+                    $expert = DB::table('users_extend')->where('user_id', $activity->hoster_id)->lists('value','attribute');
+                    if (!empty($expert)) {
+                          $activity->nick    = $expert['_ExpName'];
+                          $activity->avatar  = $expert['_ExpAvatar'];
+                    }
                     // $activity->price = min($tickets_price);
                 }
 
@@ -265,7 +274,11 @@ class MainController extends controller
                           ->where('act_tickets.sale_start', '<=', date('Y-m-d H:i:s'))
                           ->where('act_tickets.sale_end',   '>=', date('Y-m-d H:i:s'))
                           ->lists('price');
-
+            $expert = DB::table('users_extend')->where('user_id', $activity->hoster_id)->lists('value','attribute');
+            if (!empty($expert)) {
+                  $activity->nick    = $expert['_ExpName'];
+                  $activity->avatar  = $expert['_ExpAvatar'];
+            }
             // $activity->price = min($tickets_price);
         }
 

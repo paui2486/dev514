@@ -31,12 +31,19 @@ class ActivityController extends Controller
                           'activities.content',   'activities.activity_start',  'activities.activity_end',
                           'activities.counter',   'activities.category_id',     'activities.max_price',
                           'activities.min_price', 'activities.remark',          'activities.time_range',
-                          'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick',
+                          'categories.name as locat_name',  'users.name as hoster', 'users.nick as nick', 'activities.hoster_id',
                           'users.avatar as host_photo',    'users.description as host_destricption',
                           'activities.ticket_description', 'activities.hoster_id', 'activities.fkul', 'activities.banner',
                       ))
                       ->where('activities.id', $id)
                       ->first();
+        $expert = DB::table('users_extend')->where('user_id', $activity->hoster_id)->lists('value','attribute');
+        if (!empty($expert)) {
+              $activity->nick        = $expert['_ExpName'];
+              $activity->host_photo  = $expert['_ExpAvatar'];
+              $activity->description = $expert['_ExpDisp'];
+        }
+
         if (empty($activity)){
             return Redirect::to('');
         } else {
@@ -181,7 +188,13 @@ class ActivityController extends Controller
                       ))
                       ->where('activities.status', '>=', 4)
                       ->first();
-
+        $expert = DB::table('users_extend')->where('user_id', $activity->hoster_id)->lists('value','attribute');
+        if (!empty($expert)) {
+              $activity->nick        = $expert['_ExpName'];
+              $activity->host_photo  = $expert['_ExpAvatar'];
+              $activity->description = $expert['_ExpDisp'];
+        }
+        
         if (empty($activity)){
             return Redirect::to('');
         } else {
