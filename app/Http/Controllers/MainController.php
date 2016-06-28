@@ -166,7 +166,7 @@ class MainController extends controller
                             'users.name', 'users.nick as orginizer', 'categories.name as locat_name', 'activities.activity_end as date_end',
                             'activities.hoster_id', 'users.avatar'
                         ))
-                        ->orderBy('activities.created_at', 'desc')
+                        ->orderBy('activities.updated_at', 'desc')
                         ->groupBy('activities.id')
                         ->take(3)->get();
 
