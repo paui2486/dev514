@@ -60,10 +60,32 @@ class PageController extends Controller
 
     public function showMember($id)
     {
-        $member = DB::table('users')->where('id', $id)->first();
+        $member    = DB::table('users')->where('id', $id)->first();
         $member->tag_ids = DB::table('users_capacity')->where('user_id', $id)->lists('capacity');
         $activitys = DB::table('activities')->where('hoster_id', $id)
                       ->where('status', 4)->get();
+
+        $extend    = DB::table('users_extend')->where('user_id', $id)->where('status', 1)->lists('value', 'attribute');
+
+        $contact   = array();
+
+        // dd($extend);
+        // $contact = array(
+        //     'Line' => (isset($extend['']))
+        //     'Address'
+        //     'Email'
+        //     'Phone'
+        //     'Mobile'
+        // );
+
+        // (isset($extend['_ExpLine']))? $contact['line'] = $member['']: '' ;
+        // return $contact;
+
+        // $member->nick = $member['_ExpName'];
+        // $member->avatar = $member['_'];
+        // $member->tag_ids =
+        // $member->description = $member['_'];
+
         return view("page.member", compact('member', 'activitys'));
     }
 
@@ -149,7 +171,7 @@ class PageController extends Controller
             }
         }
     }
-    
+
     public function Expert()
     {
         return view("page.expert");
