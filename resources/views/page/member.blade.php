@@ -49,7 +49,12 @@
     <div class="row Member-Tab col-md-8">
         <ul class="row Tabs" style="margin:0;">
             <li><a href="#Mtab-1">詳細資料</a></li>
-            <li><a href="#Mtab-2">相關文章</a></li>
+            <li><a href="#Mtab-2">相關文章</a>
+                
+            
+            
+            
+            </li>
             @if(Auth::check() && (Auth::id() ==  $member->id ))
             <li><a href="#Mtab-3" data-url="/expert/register">個人設定</a></li>
             @endif
@@ -155,14 +160,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 col-xs-12 control-label expert-contact-title">聯絡方式 <span>*</span>
-                                <h5>( 請至少選填一項 )</h5>
+                            <label class="col-md-12 col-xs-12 control-label expert-contact-title">聯絡方式 <span>*( 請至少選填一項 )</span>
+                                
                             </label>
-                            <div class="col-md-10 col-xs-12 exper-contact-content">
+                            <div class="col-md-12 col-xs-12 exper-contact-content">
                                 <div class="expert-contact">
                                     <div class="col-md-8">
                                         <p>聯絡電話</p>
-                                        <input type="number" class="form-control expert-contact-input" name="phone" value="{{ Auth::user()->phone }}" placeholder="(02)2345-6789">
+                                        <input type="text" class="form-control expert-contact-input" name="phone" value="{{ Auth::user()->phone }}" placeholder="(02)2345-6789">
                                     </div>
                                     <div class="col-md-4 contact-display">
                                         <span>是否公開</span>
@@ -173,7 +178,7 @@
                                 <div class="expert-contact">
                                     <div class="col-md-8">
                                         <p>手機號碼</p>
-                                        <input type="number" class="form-control expert-contact-input" name="mobile" value="{{ Auth::user()->phone }}" placeholder="0912-345-678">
+                                        <input type="text" class="form-control expert-contact-input" name="mobile" value="{{ Auth::user()->phone }}" placeholder="0912-345678">
                                     </div>
                                     <div class="col-md-4 contact-display">
                                         <span>是否公開</span>
