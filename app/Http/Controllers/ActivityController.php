@@ -194,7 +194,7 @@ class ActivityController extends Controller
               $activity->host_photo  = $expert['_ExpAvatar'];
               $activity->description = $expert['_ExpDisp'];
         }
-        
+
         if (empty($activity)){
             return Redirect::to('');
         } else {
@@ -257,7 +257,6 @@ class ActivityController extends Controller
 
     public function showResult(Request $request)
     {
-        // return Input::all();
         $slideCategory = Library::getSlideCategory();
         // Log::error(Input::all());
         // Log::error(URL::previous());
@@ -273,13 +272,13 @@ class ActivityController extends Controller
                         ->leftJoin('categories', 'categories.id', '=', 'activities.location_id')
                         ->where('activities.status', '>=', 4)
                         ->select(array(
-                          'activities.id',        'activities.title' ,           'activities.description',
-                          'activities.min_price', 'activities.activity_start',   'activities.activity_end',
+                          'activities.id',        'activities.title' ,             'activities.description',
+                          'activities.min_price', 'activities.activity_start',     'activities.activity_end',
                           'activities.location',  'categories.name as locat_name', 'activities.thumbnail',
-                          'activities.max_price', 'cat.name as cat_name'
+                          'activities.max_price', 'cat.name as cat_name',          'activities.updated_at'
                         ))
-                        ->orderBy('activities.activity_start');
-
+                        ->orderBy(DB::raw('ABS(NOW() - activities.updated_at)'));
+                        // ->orderBy('activities.activity_start');
         if (!isset($request->showOld)) {
             $query = $query->where('activities.activity_end', '>=', date('Y-m-d'));
         }
