@@ -47,7 +47,10 @@ class PageController extends Controller
     {
         return view("page.faq");
     }
-
+	public function testUpload()
+    {
+        return view("page.testUpload");
+    }
     public function PlayGuide()
     {
         return view("page.play-guide");
