@@ -45,7 +45,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('Partner'        , 'PageController@partner'      );//根目錄Http先到Controllers再到底下找PageController裡面 partner
     Route::get('MemberPage'     , 'PageController@memberpage'   );//根目錄Http先到Controllers再到底下找PageController裡面 memberpage
     Route::get('testMail'       , 'PageController@testMail'     );//根目錄Http先到Controllers再到底下找PageController裡面 testMail
-
+	Route::get('testUpload'     , 'PageController@testUpload'   );
 /*
 |--------------------------------------------------------------------------
 | Dynamic Routes
