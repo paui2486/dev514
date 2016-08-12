@@ -68,7 +68,7 @@
 @section('banner')
     <div id="jssor_1" class="banner-1">
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1300px; height: 500px; overflow: hidden;">
-            @foreach( $home->banner as $banner )
+            @foreach( $home->banner as $banner )<?//banner 區塊 用foreach 把DB裡的圖片輪播?>
                 <div data-p="225.00" style="display: none;">
                     <a href="{{ $banner->caption }}">
                         <div class="home_banner1" style="background-image:url({{ $banner->image }});" data-u="image"></div>

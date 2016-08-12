@@ -19,25 +19,25 @@ use App\Http\Controllers\Controller;
 
 class MainController extends controller
 {
-    public function index()
+    public function index()//主頁面的方法 可以說這個方法所撈到的資料 都是主頁面需要的
     {
-        $meta   = (object) $this->getMeta();
+        $meta   = (object) $this->getMeta();//meta的方法
 
-        $slideCategory = Library::getSlideCategory();
+        $slideCategory = Library::getSlideCategory(); //這個Library的方法 在App 底下的Library.php 裡面的方法 getSlideCategory
 
         $home   = (object)array(
-            'banner'        => (object) $this->getBanner(),
-            'filter'        => (object) $this->getFilter(),
-            'newBlog'       => (object) $this->getNewBlog(),
-            'newActivity'   => (object) $this->getNewActivity(),
-            'totalActivity' => (object) $this->getTotalActivity(),
-            'allActivity'   => (object) $this->getAllActivity(),
-            'hotExpert'     => (object) $this->getHotExpert(),
+            'banner'        => (object) $this->getBanner(),//getBanner 主頁的輪播圖 this代表方法在下方 請參照下方getBanner方法
+            'filter'        => (object) $this->getFilter(),//getFilter 主頁的下拉式橫槓 this代表方法在下方 請參照下方getFilter方法
+            'newBlog'       => (object) $this->getNewBlog(),//getNewBlog 主頁的最新文章 this代表方法在下方 請參照下方getNewBlog方法
+            'newActivity'   => (object) $this->getNewActivity(),//getNewActivity 主頁的最新活動 this代表方法在下方 請參照下方getNewActivity方法
+            'totalActivity' => (object) $this->getTotalActivity(),//
+            'allActivity'   => (object) $this->getAllActivity(),//
+            'hotExpert'     => (object) $this->getHotExpert(),//
         );
         return view('home', compact('home', 'meta', 'slideCategory'));
     }
 
-    private function getMeta()
+    private function getMeta()//每個頁面都要寫 把它包起來 每個頁面都引用就可以
     {
         $meta   = array(
             'charset = UTF-8'           => 'text/html',
@@ -71,20 +71,19 @@ class MainController extends controller
 
     private function getBanner()
     {
-        $home_banner = DB::table('galleries')
-                        ->where('position', 1)
-                        ->select(
+        $home_banner = DB::table('galleries')//到DB galleries 撈資料
+                        ->where('position', 1) //當position欄位 = 1 就要
+                        ->select(// 需要的欄位 title source caption  source as image 來源AS圖片 因為圖片不能直接存在sql 只能存路徑
                             'title', 'source as image', 'caption'
                         )
-                        ->orderBy('priority', 'desc')
-                        ->get();
-        return $home_banner;
+                        ->orderBy('priority', 'desc')//按造priority 降冪
+                        ->get(); //取出來
+        return $home_banner; //回傳
     }
 
     public function getFilter()
     {
-        $filters = array();
-
+        $filters = array();//filters 以陣列形式 儲存資料
         // its match categories tables type
         $data_match = array(
             'who'   => 3,
@@ -96,31 +95,31 @@ class MainController extends controller
 
         foreach ($data_match as $key => $value)
         {
-            $filters[$key] = DB::table('categories')
-                                ->where('type', $value)
+            $filters[$key] = DB::table('categories')//到DB categories 撈資料
+                                ->where('type', $value) //這個設計的很棒每個屬性都是獨立 先利用type決定屬性name決定內容 可以得到交集
                                 ->select(array(
-                                  'id', 'name'
+                                  'id', 'name' //抓ID根name
                                 ))
                                 ->get();
         }
         return $filters;
     }
 
-    private function getNewBlog()
+    private function getNewBlog()//
     {
-        $newBlogs = DB::table('articles')
-                        ->where('articles.status', 2)
-                        ->leftJoin('users',             'users.id',      '=',   'articles.author_id')
-                        ->leftJoin('categories',        'categories.id', '=',   'articles.category_id')
+        $newBlogs = DB::table('articles')//到DB articles 撈資料
+                        ->where('articles.status', 2)//當articles.status = 2
+                        ->leftJoin('users',             'users.id',      '=',   'articles.author_id')//LEFT JOIN 可以用來建立左外部連接，查詢的 SQL 敘述句 LEFT JOIN 左側資料表 (table_name1) 的所有記錄都會加入到查詢結果中，即使右側資料表 (table_name2) 中的連接欄位沒有符合的值也一樣。
+                        ->leftJoin('categories',        'categories.id', '=',   'articles.category_id')//http://www.fooish.com/sql/left-outer-join.html
                         ->select(array(
                             'articles.thumbnail',       'articles.title',       'articles.content',
                             'articles.description',     'articles.created_at',  'users.nick as author', 'users.name',
                             'categories.name as category', 'articles.counter',
                           ))
-                        ->orderBy('articles.created_at', 'desc')
-                        ->take(10)
-                        ->get();
-        return $newBlogs;
+                        ->orderBy('articles.created_at', 'desc')//降冪
+                        ->take(10)//取十筆
+                        ->get();//取得
+        return $newBlogs;//回傳
     }
 
     private function getHotExpert()

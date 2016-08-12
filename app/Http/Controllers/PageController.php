@@ -89,42 +89,42 @@ class PageController extends Controller
         return view("page.member", compact('member', 'activitys'));
     }
 
-    public function memberpage()
+    public function memberpage()//這個方法 將頁面導引到 view>page>memberpage.blade
     {
         return view("page.memberpage");
     }
 
-    public function testMail()
+    public function testMail()//測試郵件功能
     {
-        $order = DB::table('orders')->where('MerchantOrderNo', '20160515092216')->first();
+        $order = DB::table('orders')->where('MerchantOrderNo', '20160515092216')->first();//到orders表 當MerchantOrderNo = 20160515092216 first()取第一筆
+
+        $ticket_infos = array();//$ticket_infos 為一個陣列變數
+        $ticket_ids     = DB::table('orders_detail')// $ticket_ids 這個指令 到DB orders_detail
+            ->where('order_id', $order->id)//當 order_id等於傳入的 order_id
+            ->orderBy('id', 'ASC')->lists('sub_topic_id');//以ID做升冪排列 轉存入list>sub_topic_id  list也是array 儲存形式	ASC升冪 DES降冪
+        $ticket_numbers = DB::table('orders_detail')//
+            ->where('order_id', $order->id)//
+            ->orderBy('id', 'ASC')->lists('sub_topic_number');//
 
         $ticket_infos = array();
-        $ticket_ids     = DB::table('orders_detail')
-            ->where('order_id', $order->id)
-            ->orderBy('id', 'ASC')->lists('sub_topic_id');
-        $ticket_numbers = DB::table('orders_detail')
-            ->where('order_id', $order->id)
-            ->orderBy('id', 'ASC')->lists('sub_topic_number');
-
-        $ticket_infos = array();
-        foreach ($ticket_ids as $key => $id) {
+        foreach ($ticket_ids as $key => $id) {//$ticket_ids 給一個別名 $key 參考資料http://www.1keydata.com/tw/sql/sql-as.html
             $ticket_target = DB::table('act_tickets')
                               ->where('id', $id)
-                              ->select(array(
+                              ->select(array(//以陣列形式 一般是一筆一筆 他是包成一個陣列 參考資料 http://www.w3schools.com/php/func_mysqli_fetch_array.asp
                                 'id', 'name', 'price', 'ticket_start', 'ticket_end', 'activity_id'
-                              ))->first();
-            $weekday   = ['日', '一', '二', '三', '四', '五', '六'];
-            $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];
-            $weekday_end    = $weekday[date('w', strtotime($ticket_target->ticket_end))];
-            $ticket_target->ticket_start = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_start ) $2", $ticket_target->ticket_start);
-            $ticket_target->ticket_end   = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_end ) $2", $ticket_target->ticket_end);
-            $ticket_target->quantity     = $ticket_numbers["$key"];
-            array_push($ticket_infos, $ticket_target);
+                              ))->first();//取第一筆
+            $weekday   = ['日', '一', '二', '三', '四', '五', '六'];// 參考資料 http://php.net/manual/en/function.date.php http://www.wibibi.com/info.php?tid=PHP_strtotime_%E5%87%BD%E6%95%B8
+            $weekday_start  = $weekday[date('w', strtotime($ticket_target->ticket_start))];//開始 從ticket_target這個 array date 抽取出 ticket_start 利用strtotime函式 算出UNIX 戳記時間 在用date(w) 轉換出該時間代表星期幾
+            $weekday_end    = $weekday[date('w', strtotime($ticket_target->ticket_end))];//結束 同上意涵
+            $ticket_target->ticket_start = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_start ) $2", $ticket_target->ticket_start);//preg_replace 可以過濾特殊字元 只剩下 $weekday_start
+            $ticket_target->ticket_end   = preg_replace("/(.*)\s(.*):(.*)/", "$1 ( $weekday_end ) $2", $ticket_target->ticket_end); //參考資料 http://help.i2yes.com/?q=node/46
+            $ticket_target->quantity     = $ticket_numbers["$key"];//票的數量 等於 $ticket_numbers["$key"]
+            array_push($ticket_infos, $ticket_target);//把array$ticket_infos 加入$ticket_target 成為新的array$ticket_infos 參考資料:http://www.w3school.com.cn/php/func_array_push.asp
         }
 
-        $act = DB::table('activities')->find( DB::table('orders_detail')->where('order_id', $order->id)->first()->topic_id );
+        $act = DB::table('activities')->find( DB::table('orders_detail')->where('order_id', $order->id)->first()->topic_id );// ??? 當 order_id等於傳入的 order_id 取第一筆 轉存 topic_id
         $tickets = (object) array(
-            'TradeNo'           => $order->TradeNo,
+            'TradeNo'           => $order->TradeNo,//這裡都是 orders 資料表的欄位 有點奇怪
             'TradeTime'         => $order->PayTime,
             'TotalPrice'        => $order->TotalPrice,
             'MerchantOrderNo'   => $order->MerchantOrderNo,
@@ -150,18 +150,18 @@ class PageController extends Controller
         return 'Mail sended';
     }
 
-    public function addSubscribe(Request $request)
+    public function addSubscribe(Request $request) //request為EMAIL變數
     {
-        if ($request->email == "") {
-            return Response::json([
+        if ($request->email == "") {//如果變數內容為空白
+            return Response::json([// 回傳至Response 以json格式
                   'result' => '請勿輸入空白資訊！'
               ], 201);
-        } else {
-            $subscribes = DB::table('subscribes');
-            $sub = $subscribes->where('email', $request->email)->get();
-            if ( empty($sub) ) {
+        } else {//如果變數內容不為空白
+            $subscribes = DB::table('subscribes');//變數subscribes 為選擇DB的指令
+            $sub = $subscribes->where('email', $request->email)->get();//sub變數 利用subscribes選DB 當EMAIL = $request->email get出結果
+            if ( empty($sub) ) {//empty 用於判斷 內容是否為空 在此則是確認 $sub有無內容
                 $subscribes->insert(array('email' => $request->email));
-                return Response::json([
+                return Response::json([// 回應以json格式  參考資料:https://laravel.com/docs/5.2/responses#json-responses
                       'result' => '感謝您！您已訂閱成功，有新的活動我們會第一時間通知您！'
                   ], 201);
             } else {
@@ -172,7 +172,7 @@ class PageController extends Controller
         }
     }
 
-    public function Expert()
+    public function Expert()// 這個方法 將頁面導引到 view>page>expert.blade
     {
         return view("page.expert");
     }

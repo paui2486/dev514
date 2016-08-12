@@ -125,10 +125,10 @@ class Library
 
     public static function getSlideCategory()
     {
-        $slideCategory = DB::table('categories')
-                          ->where('public', 1)
-                          ->get();
-        return $slideCategory;
+        $slideCategory = DB::table('categories')//變數 slideCategory 有點像SQL 到DB 514_dev底下這張表categories
+                          ->where('public', 1)//當public = 1
+                          ->get(); //抓出來
+        return $slideCategory; //傳送回$slideCategory
     }
 
     public static function getPositionTab( $position, $level = 0 )

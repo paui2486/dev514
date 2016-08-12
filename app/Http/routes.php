@@ -32,19 +32,19 @@ Route::group(['middleware' => 'web'], function () {
 | Static Page
 |--------------------------------------------------------------------------
 */
-    Route::get('/'              , 'MainController@index'        );
-    Route::get('About'          , 'PageController@About'        );
-    Route::get('Join'           , 'PageController@Joinus'       );
-    Route::get('Advertising'    , 'PageController@Advertising'  );
-    Route::get('Privacy'        , 'PageController@Privacy'      );
-    Route::get('FAQ'            , 'PageController@FAQ'          );
-    Route::get('HostGuide'      , 'PageController@HostGuide'    );
-    Route::get('PlayGuide'      , 'PageController@PlayGuide'    );
-    Route::get('Cooperation'    , 'PageController@Cooperation'  );
-    Route::get('MediaReport'    , 'PageController@media-report' );
-    Route::get('Partner'        , 'PageController@partner'      );
-    Route::get('MemberPage'     , 'PageController@memberpage'   );
-    Route::get('testMail'       , 'PageController@testMail'     );
+    Route::get('/'              , 'MainController@index'        );//根目錄Http先到Controllers再到底下找MainController裡面 index的方法
+    Route::get('About'          , 'PageController@About'        );//根目錄Http先到Controllers再到底下找PageController裡面 About的方法
+    Route::get('Join'           , 'PageController@Joinus'       );//根目錄Http先到Controllers再到底下找PageController裡面 Joinus
+    Route::get('Advertising'    , 'PageController@Advertising'  );//根目錄Http先到Controllers再到底下找PageController裡面 Advertising
+    Route::get('Privacy'        , 'PageController@Privacy'      );//根目錄Http先到Controllers再到底下找PageController裡面 Privacy
+    Route::get('FAQ'            , 'PageController@FAQ'          );//根目錄Http先到Controllers再到底下找PageController裡面 FAQ
+    Route::get('HostGuide'      , 'PageController@HostGuide'    );//根目錄Http先到Controllers再到底下找PageController裡面 HostGuide
+    Route::get('PlayGuide'      , 'PageController@PlayGuide'    );//根目錄Http先到Controllers再到底下找PageController裡面 PlayGuide
+    Route::get('Cooperation'    , 'PageController@Cooperation'  );//根目錄Http先到Controllers再到底下找PageController裡面 Cooperation
+    Route::get('MediaReport'    , 'PageController@media-report' );//根目錄Http先到Controllers再到底下找PageController裡面 media-report
+    Route::get('Partner'        , 'PageController@partner'      );//根目錄Http先到Controllers再到底下找PageController裡面 partner
+    Route::get('MemberPage'     , 'PageController@memberpage'   );//根目錄Http先到Controllers再到底下找PageController裡面 memberpage
+    Route::get('testMail'       , 'PageController@testMail'     );//根目錄Http先到Controllers再到底下找PageController裡面 testMail
 
 /*
 |--------------------------------------------------------------------------
@@ -53,11 +53,11 @@ Route::group(['middleware' => 'web'], function () {
 */
     Route::auth();
 
-    Route::post('login'                     , 'Auth\AuthController@postLogin'     );
+    Route::post('login'                     , 'Auth\AuthController@postLogin'     );//login頁面 Http>Controllers>Auth再到底下找AuthController裡面 postLogin的方法
     // Route::post('register'                  , 'Auth\AuthController@postRegister'  );
     Route::get('register/verify/{confirm}'  , 'MainController@confirm'            );
 
-    Route::get('activity'                   , 'ActivityController@showResult'     );
+    Route::get('activity'                   , 'ActivityController@showResult'     );//網頁activity(通常加上ID)Controllers>ActivityController 裡面 showResult的方法
     Route::post('activity'                  , 'ActivityController@showResult'     );
     Route::get('activity/data'              , 'ActivityController@showResult'     );
     Route::post('activity/data'             , 'ActivityController@showResult'     );
@@ -69,9 +69,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('member/{id}'                , 'PageController@showMember'         );
 
 
-    Route::get('blog'                       , 'ArticleController@index'          );
-    Route::get('blog/{category}'            , 'ArticleController@showCategory'   );
-    Route::get('blog/{category}/{slug}'     , 'ArticleController@showArticle'    );
+    Route::get('blog'                       , 'ArticleController@index'          );//blog(通常加上category)Controllers>ArticleController 裡面 index的方法
+    Route::get('blog/{category}'            , 'ArticleController@showCategory'   );//blog(通常加上category)Controllers>ArticleController 裡面 showCategory的方法
+    Route::get('blog/{category}/{slug}'     , 'ArticleController@showArticle'    );//blog(通常加上category)Controllers>ArticleController 裡面 showArticle的方法
 
     Route::get('redirect'                   , 'SocialAuthController@redirect'    );
     Route::get('callback'                   , 'SocialAuthController@fbCallback'  );
@@ -79,7 +79,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('friends'                    , 'AuthController@friends'           );
     Route::get('activitys'                  , 'AuthController@activitys'         );
 
-    Route::get('subscribes/add'             , 'PageController@addSubscribe'      );
+    Route::get('subscribes/add'             , 'PageController@addSubscribe'      );//這邊都是功能 先到PageController 底下找addSubscribe方法
     Route::post('purchase/result'           , 'PurchaseController@pay2GoResult'  );
     Route::post('purchase/notify'           , 'PurchaseController@pay2GoResult'  );
     Route::get('purchase/{activity_id}'     , 'PurchaseController@showPurchase'  );

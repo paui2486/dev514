@@ -20,12 +20,12 @@ class ArticleController extends Controller
             'banner'        => $this->getBlogBanner(),
             'categories'    => $this->getBlogCategories(),
         );
-        return view('blog.index', compact('blogHome', 'meta', 'header_categories'));
+        return view('blog.index', compact('blogHome', 'meta', 'header_categories'));// 這個view 在view>blog>index  
     }
 
     public function showCategory($category)
     {
-        $meta     = (object) $this->getBlogMeta();
+        $meta     = (object) $this->getBlogMeta();// 
         $header_categories  = $this->getCategory();
         $category = DB::table('categories')
                       ->where('name', $category)
@@ -49,7 +49,7 @@ class ArticleController extends Controller
         }
     }
 
-    public function showArticle($category, $title)
+    public function showArticle($category, $title)// 
     {
         $header_categories  = $this->getCategory();
         $article = DB::table('articles')
@@ -68,8 +68,8 @@ class ArticleController extends Controller
             return Redirect::to('blog');
         } else {
             DB::table('articles')->where('id', $article->id)->increment('counter');
-            $relate_articles = $this->getRelateArticle(3, $article->id);
-            $relate_activities = $this->getRelateActivity(3, $article->id);
+            $relate_articles = $this->getRelateArticle(3, $article->id);//相關文章
+            $relate_activities = $this->getRelateActivity(3, $article->id);//相關活動
             return view( "blog.article", [
                             'article'           => $article,
                             'relate_articles'   => $relate_articles,
